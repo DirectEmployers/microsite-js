@@ -1,8 +1,9 @@
 import Vue from 'vue'
-import App from './App.vue'
+import LocalDevApp from './LocalDevApp.vue'
 
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App),
+  render: h => h(LocalDevApp),
 }).$mount('#app')
+

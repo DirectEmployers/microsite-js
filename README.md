@@ -1,4 +1,7 @@
-# microsite-vue-components
+# microsite-js
+
+Support javascript and vue components for building a gridsome microsite.
+
 
 ## Project setup
 ```
@@ -10,7 +13,7 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compiles and minifies components for production
 ```
 npm run build
 ```
@@ -19,6 +22,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

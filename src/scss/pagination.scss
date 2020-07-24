@@ -1,0 +1,23 @@
+.pagination {
+    @apply list-none flex mt-4;
+
+    &__item {
+        .pagination__link {
+            @apply relative block px-3 py-2 border border-solid border-gray-400;
+            margin-left: -1px;
+            line-height: 1.25;
+
+            &--disabled {
+                @apply cursor-not-allowed bg-gray-500;
+            }
+
+            &--active {
+                @apply bg-black text-white;
+            }
+
+            &--hidden {
+                @apply hidden;
+            }
+        }
+    }
+}

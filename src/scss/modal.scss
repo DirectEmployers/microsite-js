@@ -1,0 +1,28 @@
+.page--overlay {
+    @apply z-50 fixed left-0 top-0 mx-auto w-full h-full flex items-center justify-center bg-black bg-opacity-50;
+}
+
+.modal {
+    @apply relative w-11/12 w-4/5 bg-white rounded flex flex-col items-center p-4;
+
+    @screen md {
+         @apply max-w-4xl;
+    }
+
+    &__header {
+        @apply flex items-center w-full p-2;
+        &-title {
+            @apply font-medium text-lg;
+        }
+        &-close {
+            @apply ml-auto text-4xl fill-current text-gray-700  cursor-pointer;
+        }
+    }
+    &__body {
+        @apply w-full;
+    }
+
+    &__footer {
+        @apply p-1;
+    }
+}

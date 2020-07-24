@@ -1,0 +1,63 @@
+.search-form {
+    &__wrapper {
+        @apply flex flex-wrap -mx-3 mb-6 w-full;
+    }
+
+    &__section {
+        @apply w-full font-medium mx-auto text-sm px-3 mb-6;
+
+        @screen lg {
+            @apply w-2/5 mb-0;
+        }
+    }
+
+    &__button-wrapper {
+        @apply flex items-start justify-start w-full ml-4;
+        margin-top: 1.6rem;
+
+        @screen lg {
+            @apply w-1/5 pl-2 ml-0;
+        }
+    }
+
+    &__user-location {
+        @apply bg-gold;
+    }
+
+    &__location-input {
+        @apply mt-2 w-1/2 float-right relative;
+    }
+
+    &__miles {
+        @apply pr-2;
+    }
+
+    &__radius {
+        @apply float-right;
+    }
+
+    &__down-arrow {
+        @apply pointer-events-none text-xs absolute;
+        bottom: .5rem;
+        right: .5rem;
+    }
+
+    &__compressed {
+        .search-form__wrapper {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+
+        .search-form__section {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .search-form__button-wrapper {
+            @screen lg {
+                width: max-content;
+                margin-top: 1rem;
+            }
+        }
+    }
+}
