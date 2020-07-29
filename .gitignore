@@ -21,4 +21,6 @@ pnpm-debug.log*
 
 dist/*.gz
 dist/*.map
+dist/demo.html
 src/tests
+.temp

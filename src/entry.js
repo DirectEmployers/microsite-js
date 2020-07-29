@@ -1,5 +1,6 @@
+//this file is what is used as our entry point for our modules.
 import Vue from "vue"
-//components
+
 const components = require.context("./components", true, /\.vue$/i)
 
 // Declare install function executed by Vue.use()
@@ -8,7 +9,6 @@ export function install(Vue) {
 
     install.installed = true
     //globally register components
-
     components.keys().map((key) => {
         let name = key.split("/").pop().split(".")[0]
         Vue.component(name, files(key).default)

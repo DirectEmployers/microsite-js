@@ -1,0 +1,6 @@
+[
+  {
+    "source": "/:location/:title/:guid/job",
+    "destination": "/_location/_title/_guid/job.html"
+  }
+]

@@ -5,12 +5,12 @@ Support javascript and vue components for building a gridsome microsite.
 
 ## Project setup
 ```
-npm install
+npm ci
 ```
 
-### Compiles and hot-reloads for development
+### Playground for development
 ```
-npm run serve
+npm run develop
 ```
 
 ### Compiles and minifies components for production

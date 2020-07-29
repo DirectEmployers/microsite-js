@@ -5,7 +5,10 @@
   "description": "Support javascript and vue components to be used in microsites 2.0 gridsome applications.",
   "main": "dist/microsite-js.common.js",
   "scripts": {
-    "serve": "vue-cli-service serve src/local-dev.js",
+    "serve": "node serve-build.js",
+    "develop": "gridsome develop",
+    "explore": "gridsome explore",
+    "build-gridsome": "gridsome build",
     "build": "vue-cli-service build --target lib --name microsite-js ./src/entry.js",
     "lint": "vue-cli-service lint",
     "test": "jest --no-cache"
@@ -20,6 +23,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
+    "serve": "^11.3.2",
+    "gridsome": "^0.7.19",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.10.2",
     "@vue/cli-plugin-babel": "~4.4.0",
@@ -40,13 +45,14 @@
     "vue-template-compiler": "^2.6.11"
   },
   "files": [
-    "*.js",
-    "*.json",
-    "dist/*",
-    "src/*",
-    "!dist/*.html",
-    "!src/LocalDevApp.vue",
-    "!src/local-dev.js"
+    "dist/microsite-js.common.js",
+    "dist/microsite-js.umd.js",
+    "dist/microsite-js.umd.min.js",
+    "dist/microsite-js.css",
+    "src/components/*",
+    "src/services/*",
+    "src/scss/*",
+    "!dist/*.html"
   ],
   "eslintConfig": {
     "root": true,
