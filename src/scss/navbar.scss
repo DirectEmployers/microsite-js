@@ -1,103 +1,60 @@
 .navbar {
-    display: flex;
-    align-items: center;
-    background: white;
-    border-bottom: 1px solid #eee;
-    padding: 0.5rem;
-    flex-wrap: wrap;
-    position: relative;
+    @apply flex items-center bg-white border-b border-gray-400 p-3 flex-wrap relative;
+
     &__toggler {
-        display: inline-flex;
-        padding: 0.75rem;
-        border-radius: 0.25rem;
-        margin-left: auto;
-        outline: none;
-        border: 1px solid #eee;
+        @apply inline-flex p-3 rounded ml-auto outline-none;
+
         svg {
             fill: black;
-            height: 1rem;
+            @apply h-4;
         }
         svg,
         img {
             max-height: 70px;
         }
-        @media (min-width: 1024px) {
-            display: none;
+        @screen lg {
+            @apply hidden;
         }
     }
     &__brand {
-        padding: 0.5rem;
-        display: inline-flex;
-        align-items: center;
+        @apply p-2 inline-flex items-center;
         &-text {
-            font-size: 1.25rem;
-            font-weight: bold;
+            @apply text-xl text-white font-bold;
         }
     }
     &__items {
-        display: flex;
-        width: 100%;
-        list-style: none;
-        margin-bottom: 0;
-        align-items: center;
-        flex-direction: column;
+        z-index: 99;
         max-height: 0;
-        opacity: 0;
-        margin:0;
-        @media (min-width: 1024px) {
-            position: static;
-            flex-direction: row;
-            margin-left: auto;
-            width: auto;
-            opacity: 1;
+        @apply flex w-full list-none mb-0 items-center;
+        @apply flex-col opacity-0 m-0;
+        @screen lg {
+            @apply static flex-row ml-auto opacity-100 w-auto;
         }
         &--toggled {
-            position: absolute;
-            left: 0;
-            right: 0;
-            opacity: 1;
+            @apply absolute right-0 left-0 opacity-100;
+            @apply text-center px-3 py-2 bg-white border-b border-t border-gray-400;
             top: 100%;
-            padding-right: 0.75rem;
-            padding-left: 0.75rem;
-            transition: max-height 0.2s ease-out;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-            background: white;
-            border-bottom: 1px solid #eee;
-            border-top: 1px solid #eee;
+            transition: max-height 0.5s ease-out;
             max-height: 500px;
-            z-index: 99;
-            text-align: center;
             .navbar__item {
-                width: 100%;
-                opacity: 1;
+                @apply w-full opacity-100;
             }
-
         }
 
         .navbar__item {
-            padding-right: 0.75rem;
-            padding-left: 0.75rem;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
+            @apply px-3 py-2;
             &:hover {
-                border-radius: 0.25rem;
-                background-color: #eee;
+                @apply rounded bg-gray-200;
             }
             .navbar__item-link {
-                width: 100%;
-                align-items: center;
-                justify-content: center;
-                border-radius: 0.25rem;
-                text-decoration: none;
+                @apply w-full items-center justify-center no-underline;
                 &,
                 &:active,
                 &:focus {
-                    color: black;
+                    @apply text-black;
                 }
                 &--active {
-                    color: gray;
-                    text-decoration: none;
+                    @apply text-gray-600 no-underline;
                 }
             }
         }

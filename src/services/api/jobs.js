@@ -1,4 +1,4 @@
-import api from "./api"
+import api from "./search"
 // import config from "~/config"
 import { trim, trimEnd, isArray, get, kebabCase } from "lodash"
 

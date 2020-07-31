@@ -1,6 +1,9 @@
 //this file is what is used as our entry point for our modules.
 import Vue from "vue"
 
+//import styles
+require('./scss/microsite-js.scss')
+
 const components = require.context("./components", true, /\.vue$/i)
 
 // Declare install function executed by Vue.use()

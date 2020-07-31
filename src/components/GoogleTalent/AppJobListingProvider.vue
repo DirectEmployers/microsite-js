@@ -57,7 +57,9 @@ export default {
         },
         async search() {
             this.jobs = []
+
             let query = this.getRouteQuery()
+
             query = this.addForceFilters(query)
 
             this.status.loading = true
