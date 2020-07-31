@@ -1,13 +1,12 @@
 <template>
     <Layout>
-        Hello
+        <p>
+            Hello
+        </p>
     </Layout>
 </template>
 <script>
-
 export default {
-    components: {
-    },
     metaInfo: {
         title: "Home",
         meta: [

@@ -5,7 +5,7 @@
 export function blank(value) {
     let isBlank = false
 
-    if([undefined, null, NaN, 'undefined'].includes(value)){
+    if([undefined, null, NaN, ''].includes(value)){
         isBlank = true;
     }
     else if(typeof value === 'string' && value.trim().length === 0){
