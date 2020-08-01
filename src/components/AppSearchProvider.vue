@@ -1,19 +1,38 @@
+<template>
+    <component :is="tag">
+        <slot
+            :jobs="jobs"
+            :input="input"
+            :filters="filters"
+            :hasInput="hasInput"
+            :pagination="pagination"
+            :supported="supported"
+            :submitSearchForm="submitSearchForm"
+            :getUserCoordinates="getUserCoordinates"
+        />
+    </component>
+</template>
 <script>
 import { blank } from "../services/helpers"
 import { cleanLocation } from "../services/api/jobs"
 import { omitBy, clone, merge, trim } from "lodash"
+import { JobSearchService } from "../services/api/search"
 
 export default {
     props: {
-        searchType: {
-            type: String,
-            default: "location",
-            validator: (prop) => ["location", "commute"].includes(prop),
+        siteConfig: {
+            required: true,
+            type: Object,
         },
         geoLocationInputText: {
             required: false,
             type: String,
             default: "Your Location",
+        },
+        tag: {
+            required: false,
+            type: String,
+            default: "div",
         },
         submitUrl: {
             required: false,
@@ -24,6 +43,8 @@ export default {
     data() {
         return {
             jobs: [],
+            filters: [],
+            pagination: {},
             supported: {
                 geolocation: false,
             },
@@ -33,7 +54,7 @@ export default {
                 location: "",
                 coords: null,
                 sort: "relevance",
-                searchType: this.searchType,
+                searchType: "location",
                 commuteMethod: "",
                 travelDuration: "",
                 roadTraffic: "",
@@ -44,8 +65,8 @@ export default {
     created() {
         this.syncInputFromParams()
 
-        if(this.isResultsPage){
-
+        if (this.isResultsPage) {
+            this.search()
         }
     },
     mounted() {
@@ -53,14 +74,21 @@ export default {
             this.supported["geolocation"] = "geolocation" in window.navigator
         }
     },
-    computed:{
-        isResultsPage(){
-            let submitUrl = trim(this.submitUrl, '/');
+    computed: {
 
-            let current = trim(this.$route.path, '/');
+        hasJobs () {
+            return (this.jobs || []).length > 0
+        },
+
+        isResultsPage() {
+
+            let submitUrl = trim(this.submitUrl, "/")
+
+            let current = trim(this.$route.path, "/")
 
             return `/${submitUrl}` == `/${current}`
-        }
+
+        },
     },
     watch: {
         //any time query string changes, update component input.
@@ -75,7 +103,11 @@ export default {
                     newIput.coords = ""
                 }
 
-                this.$router.app.$emit("form.updated", newIput)
+                this.$router.app.$emit(
+                    "search.input.updated",
+                    newIput,
+                    oldInput
+                )
             },
             deep: true,
         },
@@ -98,6 +130,19 @@ export default {
                 }
             })
         },
+
+        async search() {
+            const response = await JobSearchService.get(this.input, this.siteConfig)
+
+            const { jobs, pagination, filters }  = response.data
+
+            this.jobs = jobs
+
+            this.pagination = pagination
+
+            this.filters = filters
+        },
+
 
         getUserCoordinates() {
             this.getGeoLocation((coords) => {
@@ -129,15 +174,6 @@ export default {
                 })
                 .catch((err) => {})
         },
-    },
-    render() {
-        return this.$scopedSlots.default({
-            hasInput: this.hasInput,
-            input: this.input,
-            submitSearchForm: this.submitSearchForm,
-            supported: this.supported,
-            getUserCoordinates: this.getUserCoordinates,
-        })
     },
 }
 </script>

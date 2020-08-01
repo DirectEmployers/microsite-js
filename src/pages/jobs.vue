@@ -1,6 +1,7 @@
 <template>
     <Layout>
         <AppSearchProvider
+            :site-config="$siteConfig"
             v-slot="{
                 input,
                 submitSearchForm,
@@ -18,6 +19,9 @@
                     :getUserCoordinates="getUserCoordinates"
 
                 />
+            </div>
+            <div id="job-listing">
+
             </div>
         </AppSearchProvider>
     </Layout>

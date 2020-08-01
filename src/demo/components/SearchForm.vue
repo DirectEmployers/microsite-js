@@ -75,9 +75,6 @@
                             {{ option.display }}
                         </option>
                     </select>
-                    <div class="search-form__down-arrow form__input-addon">
-                        &#9660;
-                    </div>
                 </div>
             </div>
             <div

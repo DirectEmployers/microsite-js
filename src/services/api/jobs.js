@@ -65,14 +65,6 @@ export let states = {
     WY: "Wyoming",
 }
 
-export function searchJobs(params = {}) {
-    return api()
-        .get("search", { params })
-        .then(response => {
-            return response.data
-        })
-}
-
 export function commuteSearch(params = {}) {
     return api()
         .get("commute", { params })
