@@ -23,6 +23,29 @@ export class JobSearchService {
 
             return response
         } catch (error) {
+            if(Object.prototype.hasOwnProperty.call(error, 'response')){
+                return error
+            }
+            throw new Error(error)
+        }
+    }
+}
+
+export class CommuteSearchService {
+    static async get(input, siteConfig) {
+        try {
+            const response = await api().get("commute", {
+                params: {
+                    data: input,
+                    config: siteConfig
+                }
+            })
+
+            return response
+        } catch (error) {
+            if(Object.prototype.hasOwnProperty.call(error, 'response')){
+                return error
+            }
             throw new Error(error)
         }
     }
@@ -31,13 +54,20 @@ export class JobSearchService {
 export class TitleCompleteService {
     static async get(q, siteConfig) {
         try {
-            const response = await completeTitles({
-                config: siteConfig,
-                data: { q: q },
+
+            const response = await api().get("complete", {
+                params: {
+                    data: { q: q },
+                    config: siteConfig
+                }
             })
             return response
+
         } catch (error) {
-            return error
+            if(Object.prototype.hasOwnProperty.call(error, 'response')){
+                return error
+            }
+            throw new Error(error)
         }
     }
 }

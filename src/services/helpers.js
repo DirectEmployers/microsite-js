@@ -20,11 +20,3 @@ export function blank(value) {
 
     return  isBlank
 }
-/**
- * Check if the given url is absolute.
- */
-export function isAbsoluteUrl(href) {
-   const absolute = /^https?:\/\//i
-
-   return absolute.test(href)
-}

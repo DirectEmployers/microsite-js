@@ -1,6 +1,7 @@
 export default {
     buids: [27396],
     sources: {
+        // search: "solr",
         search: "google-talent",
         complete: "google-talent",
         commute: "google-talent",

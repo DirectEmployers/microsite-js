@@ -1,6 +1,7 @@
 <template>
     <Layout>
         <AppSearchProvider
+           :site-config="$siteConfig"
             v-slot="{
                 input,
                 submitSearchForm,

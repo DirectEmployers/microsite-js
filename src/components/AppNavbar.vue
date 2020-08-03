@@ -67,8 +67,6 @@
 </template>
 
 <script>
-import { isAbsoluteUrl } from "../services/helpers"
-
 export default {
     props: {
         links: {
@@ -115,8 +113,8 @@ export default {
         },
 
         getLinkType(item) {
-            if (isAbsoluteUrl(item.href)) {
-                return "a"
+            if (Object.prototype.hasOwnProperty.call(item, 'tag')) {
+                return item.tag
             }
 
             return "g-link"

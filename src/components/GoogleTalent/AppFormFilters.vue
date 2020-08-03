@@ -99,7 +99,7 @@
 <script>
 import AppFormFilter from "./AppFormFilter"
 import AppAccordion from "../AppAccordion.vue"
-import { cleanLocation } from "../../services/api/jobs"
+import { cleanLocation } from "../../services/api/location"
 import { toLower, startCase } from "lodash"
 
 export default {
@@ -136,14 +136,16 @@ export default {
                 }
             })
         },
-        hasSearchCriteria() {
+        currentCriteriaParams(){
             const query = { ...this.$route.query }
 
-            const params = Object.keys(query).filter(param => {
+            return Object.keys(query).filter(param => {
                 return this.shouldBeCriteria(param)
             })
+        },
+        hasSearchCriteria() {
 
-            return params.length > 0
+            return this.currentCriteriaParams.length > 0
         },
         paramsList() {
             return this.configFilters.map((filter) => {
@@ -180,7 +182,7 @@ export default {
 
         cleanDisplay(param, display) {
             if (param == "location") {
-                display = cleanLocation(display)
+                return cleanLocation(display)
             }
 
             return display
@@ -252,7 +254,14 @@ export default {
         },
 
         clearSearchCriteria() {
-            this.$router.replace({})
+            const query = { ...this.$route.query }
+
+            this.currentCriteriaParams.forEach((param)=>{
+                delete query[param]
+
+            })
+
+            this.$router.replace({ query })
         },
     },
 }
