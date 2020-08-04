@@ -36,7 +36,7 @@ export default class BaseJob{
         return false
     }
 
-    getCommuteInfo() {
+    getCommuteTime() {
         return null
     }
 
