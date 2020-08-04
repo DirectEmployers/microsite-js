@@ -3,8 +3,6 @@
         <slot
             :filters="filters"
             :getUserCoordinates="getUserCoordinates"
-            :hasInput="hasInput"
-            :setInput="setInput"
             :blank="blank"
             :input="input"
             :jobs="jobs"
@@ -73,12 +71,15 @@ export default {
         }
     },
     created() {
-        this.syncInputFromParams()
-
         //allow other components to update input via global event.
-        this.$router.app.$on('search.input.update', this.setInput)
+        this.$router.app.$on("search.input.update", this.setInput)
 
         if (this.isResultsPage) {
+
+            this.input = merge(this.input, clone(this.$route.query))
+
+            this.cleanInput()
+
             this.search()
         }
     },
@@ -110,20 +111,24 @@ export default {
     watch: {
         //any time query string changes, update component input and search.
         "$route.query"() {
-            this.syncInputFromParams()
+            this.setInputFromQuery()
             this.search()
         },
 
         input: {
-            handler(newIput, oldInput) {
+            handler(newInput, oldInput) {
                 //clear coords when user changes location value.
-                if (newIput.location != oldInput.location) {
-                    newIput.coords = ""
+                if (newInput.location != oldInput.location) {
+                    newInput.coords = ""
+                }
+
+                if(newInput.searchType == 'location'){
+                    // newInput.commuteLocation = ''
                 }
 
                 this.$router.app.$emit(
                     "search.input.updated",
-                    newIput,
+                    newInput,
                     oldInput
                 )
             },
@@ -143,7 +148,6 @@ export default {
             if (blank(commuteInfo)) {
                 return false
             }
-
 
             const has = Object.prototype.hasOwnProperty.call(
                 commuteInfo,
@@ -183,7 +187,7 @@ export default {
             }
         },
 
-        getService(){
+        getService() {
             const searchType = this.input.searchType
             switch (searchType) {
                 case "commute":
@@ -249,15 +253,20 @@ export default {
             })
         },
 
-        syncInputFromParams() {
-            this.input = merge(clone(this.$route.query), this.input)
-
+        cleanInput(){
             if (!blank(this.input.location)) {
                 this.input.location = cleanLocation(this.input.location)
             }
         },
 
-        blank(value){
+        setInputFromQuery() {
+
+            this.input = clone(this.$route.query)
+
+            this.cleanInput()
+        },
+
+        blank(value) {
             return blank(value)
         },
 

@@ -66,7 +66,6 @@
                 </div>
             </div>
             <button
-                type="button"
                 :class="{
                     'bg-gray-300 text-gray-600 cursor-not-allowed': !input.coords,
                 }"
@@ -81,16 +80,15 @@
 </template>
 
 <script>
+import {  retry } from '~/services/helpers'
 export default {
     name: "CommuteSearchForm",
     props: ["submitSearchForm", "input"],
     updated() {
         this.initAutoComplete()
     },
-    created() {
-        window.addEventListener("load", (event) => {
-            this.initAutoComplete()
-        })
+    mounted() {
+        retry(this.initAutoComplete)
     },
     methods: {
         initAutoComplete() {
