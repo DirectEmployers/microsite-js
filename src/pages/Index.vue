@@ -1,12 +1,33 @@
 <template>
     <Layout>
-        Hello
+        <AppSearchProvider
+           :site-config="$siteConfig"
+            v-slot="{
+                input,
+                submitSearchForm,
+                supported,
+                getUserCoordinates,
+            }"
+        >
+            <div class="mx-4">
+                <SearchForm
+                    :input="input"
+                    :submitSearchForm="submitSearchForm"
+                    :supported="supported"
+                    :getUserCoordinates="getUserCoordinates"
+
+                />
+            </div>
+        </AppSearchProvider>
     </Layout>
 </template>
 <script>
-
+import AppSearchProvider from "~/components/AppSearchProvider"
+import SearchForm from "~/demo/components/SearchForm"
 export default {
-    components: {
+    components:{
+        AppSearchProvider,
+        SearchForm,
     },
     metaInfo: {
         title: "Home",

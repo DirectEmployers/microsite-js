@@ -1,12 +1,15 @@
 .navbar {
     @apply flex items-center bg-white border-b border-gray-400 p-3 flex-wrap relative;
+
     &__toggler {
         @apply inline-flex p-3 rounded ml-auto outline-none;
-        svg{
+
+        svg {
             fill: black;
             @apply h-4;
         }
-        svg,img{
+        svg,
+        img {
             max-height: 70px;
         }
         @screen lg {
@@ -16,67 +19,42 @@
     &__brand {
         @apply p-2 inline-flex items-center;
         &-text {
-            @apply text-xl text-white font-bold uppercase tracking-wide;
+            @apply text-xl text-white font-bold;
         }
     }
     &__items {
-        @apply w-full static;
+        z-index: 99;
         max-height: 0;
-
+        @apply flex w-full list-none mb-0 items-center;
+        @apply flex-col opacity-0 m-0;
         @screen lg {
-            @apply inline-flex flex-grow w-auto;
+            @apply static flex-row ml-auto opacity-100 w-auto;
         }
-
         &--toggled {
-            @apply bg-white right-0 absolute px-3 py-2;
-
-            @media (max-width: 1024px) {
-                @apply border-b border-t border-gray-400;
-            }
+            @apply absolute right-0 left-0 opacity-100;
+            @apply text-center px-3 py-2 bg-white border-b border-t border-gray-400;
+            top: 100%;
             transition: max-height 0.5s ease-out;
             max-height: 500px;
-            z-index: 99;
-            top: 100%;
-            left:0;
-            @screen lg {
-                position: static;
-            }
-            .navbar__links {
-                @apply list-none flex flex-col items-center;
-                opacity: 1;
-                transition: opacity 0.3s ease-in;
-                .navbar__item{
-                    pointer-events: all;
-                }
+            .navbar__item {
+                @apply w-full opacity-100;
             }
         }
 
-        .navbar__links {
-            @apply hidden mb-0 w-full items-center flex flex-col list-none;
-
-            @screen lg {
-                @apply inline-flex flex-row ml-auto w-auto items-center h-auto;
+        .navbar__item {
+            @apply px-3 py-2;
+            &:hover {
+                @apply rounded bg-gray-200;
             }
-            @media (max-width: 1024px) {
-                opacity: 0;
-                pointer-events: none;
-            }
-            .navbar__item {
-
-                @apply px-3 py-2;
-
-                &:hover {
-                    @apply bg-gray-400 py-2 rounded px-3 text-gray-800;
+            .navbar__item-link {
+                @apply w-full items-center justify-center no-underline;
+                &,
+                &:active,
+                &:focus {
+                    @apply text-black;
                 }
-                .navbar__link {
-                    &--active{
-                        @apply text-gray-600;
-                    }
-                    @apply w-full rounded items-center justify-center;
-
-                    @screen lg {
-                        @apply inline-flex w-auto;
-                    }
+                &--active {
+                    @apply text-gray-600 no-underline;
                 }
             }
         }

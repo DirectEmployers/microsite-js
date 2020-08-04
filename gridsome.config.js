@@ -6,6 +6,13 @@
 
 module.exports = {
   siteName: 'Microsite JS',
-  plugins: [],
+  plugins: [
+    {
+      use: 'gridsome-plugin-tailwindcss',
+      options: {
+        tailwindConfig: './tailwind.config.js'
+      }
+    }
+  ],
   pathPrefix: '/demo/src'
 }

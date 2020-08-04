@@ -24,7 +24,7 @@
         }
     }
     .form__input-addon {
-        @apply flex mr-px p-2 rounded rounded-l-none;
+        @apply flex mr-px p-2 rounded rounded-l-none border px-3;
 
         &:focus {
             @apply rounded-none;

@@ -35,40 +35,38 @@
                 </svg>
             </button>
         </slot>
-        <div
-            :class="{ 'navbar__items--toggled': toggled, 'navbar__items': !toggled}"
+
+        <ul
+            class="navbar__items"
+            :class="{
+                'navbar__items--toggled': toggled,
+            }"
         >
-            <ul class="navbar__links">
-                <li
-                    :key="index"
-                    class="navbar__item"
-                    v-for="(item, index) in links"
-                >
-                    <slot :name="item.key" :item="item">
-                        <component
-                            :is="getLinkType(item)"
-                            v-bind="item.attributes"
-                            :href="item.href"
-                            :to="item.href"
-                            class=""
-                            :class="[
-                                isActive(item.href) ? 'navbar__link--active' : 'navbar__link'
-                            ]
-                            "
-                        >
-                            {{ item.display }}
-                        </component>
-                    </slot>
-                </li>
-            </ul>
-        </div>
+            <li
+                :key="index"
+                class="navbar__item"
+                v-for="(item, index) in links"
+            >
+                <slot :name="item.key" :item="item">
+                    <component
+                        :is="getLinkType(item)"
+                        v-bind="item.attributes"
+                        :href="item.href"
+                        :to="item.href"
+                        class="navbar__item-link"
+                        :class="{
+                            'navbar__item-link--active': linkIsActive(item.href)
+                        }"
+                    >
+                        {{ item.display }}
+                    </component>
+                </slot>
+            </li>
+        </ul>
     </nav>
 </template>
 
 <script>
-
-import { isAbsoluteUrl } from '../services/helpers';
-
 export default {
     props: {
         links: {
@@ -77,13 +75,13 @@ export default {
         },
     },
     created() {
-        if(process.isClient){
-            window.addEventListener('resize', this.toggleResize)
+        if (process.isClient) {
+            window.addEventListener("resize", this.close)
         }
     },
     destroyed() {
-        if(process.isClient){
-            window.removeEventListener('resize', this.toggleResize)
+        if (process.isClient) {
+            window.removeEventListener("resize", this.close)
         }
     },
     data() {
@@ -92,31 +90,34 @@ export default {
         }
     },
     methods: {
-        toggleResize() {
+        close() {
             this.toggled = false
-            this.$emit('navbar-toggled', this.toggled)
+            this.$emit("navbar-toggled", this.toggled)
+        },
+
+        open() {
+            this.toggled = true
+            this.$emit("navbar-toggled", this.toggled)
         },
 
         toggle() {
             this.toggled = !this.toggled
-
-            this.$emit('navbar-toggled', this.toggled)
+            this.$emit("navbar-toggled", this.toggled)
         },
 
-        isActive(href){
-            if(process.isClient){
-                return href == window.location.pathname;
+        linkIsActive(href) {
+            if (process.isClient) {
+                return href == window.location.pathname
             }
-            return false;
+            return false
         },
 
         getLinkType(item) {
-
-            if (isAbsoluteUrl(item.href)){
-                return  "a";
+            if (Object.prototype.hasOwnProperty.call(item, 'tag')) {
+                return item.tag
             }
 
-            return 'g-link'
+            return "g-link"
         },
     },
 }
