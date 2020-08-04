@@ -103,13 +103,12 @@ export default {
     props: [
         "submitSearchForm",
         "input",
-        "hasInput",
         "supported",
         "getUserCoordinates",
     ],
     computed: {
         hasLocationInput() {
-            return this.hasInput("coords") || this.hasInput("location")
+            return this.input.coords || this.input.location
         },
     },
     data: () => ({

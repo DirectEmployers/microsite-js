@@ -20,7 +20,7 @@
 import { blank } from "../services/helpers"
 import { cleanLocation } from "../services/api/location"
 import { omitBy, clone, merge, trim } from "lodash"
-import { JobSearchService, CommuteSearchService } from "../services/api/search"
+import { SearchService, CommuteSearchService } from "../services/api/search"
 import GoogleTalentJob from "../services/api/drivers/job/google-talent"
 import SolrJob from "../services/api/drivers/job/solr"
 
@@ -74,6 +74,9 @@ export default {
     },
     created() {
         this.syncInputFromParams()
+
+        //allow other components to update input via global event.
+        this.$router.app.$on('search.input.update', this.setInput)
 
         if (this.isResultsPage) {
             this.search()
@@ -133,7 +136,7 @@ export default {
         },
 
         setInput(key, value) {
-            this.input[key] = value
+            this.$set(this.input, key, value)
         },
 
         hasCommuteInfo(commuteInfo) {
@@ -187,7 +190,7 @@ export default {
                     return CommuteSearchService
                 case "location":
                 default:
-                    return JobSearchService
+                    return SearchService
             }
         },
 
@@ -247,7 +250,7 @@ export default {
         },
 
         syncInputFromParams() {
-            this.input = clone(this.$route.query)
+            this.input = merge(clone(this.$route.query), this.input)
 
             if (!blank(this.input.location)) {
                 this.input.location = cleanLocation(this.input.location)

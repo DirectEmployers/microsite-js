@@ -8,8 +8,6 @@
                 filters,
                 input,
                 submitSearchForm,
-                hasInput,
-                setInput,
                 supported,
                 getUserCoordinates,
                 status,
@@ -23,7 +21,6 @@
                     :input="input"
                     :submitSearchForm="submitSearchForm"
                     :supported="supported"
-                    :hasInput="hasInput"
                     :getUserCoordinates="getUserCoordinates"
 
                 />
@@ -89,8 +86,6 @@
                     <CommuteSearchForm
                         :input="input"
                         :submitSearchForm="submitSearchForm"
-                        :hasInput="hasInput"
-                        :setInput="setInput"
                         :getUserCoordinates="getUserCoordinates"
                     />
                 </div>

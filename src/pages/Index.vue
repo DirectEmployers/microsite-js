@@ -5,7 +5,6 @@
             v-slot="{
                 input,
                 submitSearchForm,
-                hasInput,
                 supported,
                 getUserCoordinates,
             }"
@@ -15,7 +14,6 @@
                     :input="input"
                     :submitSearchForm="submitSearchForm"
                     :supported="supported"
-                    :hasInput="hasInput"
                     :getUserCoordinates="getUserCoordinates"
 
                 />

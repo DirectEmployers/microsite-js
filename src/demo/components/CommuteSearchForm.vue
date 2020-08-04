@@ -65,8 +65,16 @@
                     ▼
                 </div>
             </div>
-            <button :class="{ 'bg-gray-300': !hasCoords }" :disabled="!hasCoords" aria-label="Submit Commute Search" class="button">
-                {{ hasCoords ? "Search" : "Select Location To Search "}}
+            <button
+                type="button"
+                :class="{
+                    'bg-gray-300 text-gray-600 cursor-not-allowed': !input.coords,
+                }"
+                :disabled="!input.coords"
+                aria-label="Submit Commute Search"
+                class="button"
+            >
+                Search
             </button>
         </div>
     </form>
@@ -75,14 +83,17 @@
 <script>
 export default {
     name: "CommuteSearchForm",
-    props: ["submitSearchForm", "input", "hasInput", "setInput"],
-    computed:{
-        hasCoords(){
-            return this.hasInput('coords')
-        }
+    props: ["submitSearchForm", "input"],
+    updated() {
+        this.initAutoComplete()
     },
     created() {
-        window.addEventListener("load", (event)=> {
+        window.addEventListener("load", (event) => {
+            this.initAutoComplete()
+        })
+    },
+    methods: {
+        initAutoComplete() {
             const placeAutoComplete = new google.maps.places.Autocomplete(
                 this.$refs.commuteLocationInput
             )
@@ -95,14 +106,19 @@ export default {
                     const lat = geo.location.lat()
 
                     const lon = geo.location.lng()
-
-                    this.setInput('coords', lat + "," + lon)
-
-                    this.setInput('commuteLocation', place.formatted_address)
+                    this.$router.app.$emit(
+                        "search.input.update",
+                        "coords",
+                        lat + "," + lon
+                    )
+                    this.$router.app.$emit(
+                        "search.input.update",
+                        "commuteLocation",
+                        place.formatted_address
+                    )
                 }
             })
-        })
+        },
     },
-
 }
 </script>

@@ -11,7 +11,7 @@ export default function api() {
     })
 }
 
-export class JobSearchService {
+export class SearchService {
     static async get(input, siteConfig) {
         try {
             const response = await api().get("search", {
