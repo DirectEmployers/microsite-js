@@ -85,13 +85,13 @@ export default {
     name: "CommuteSearchForm",
     props: ["submitSearchForm", "input"],
     updated() {
-        this.initAutoComplete()
+        this.initAutocomplete()
     },
     mounted() {
-        retry(this.initAutoComplete)
+        retry(this.initAutocomplete)
     },
     methods: {
-        initAutoComplete() {
+        initAutocomplete() {
             const placeAutoComplete = new google.maps.places.Autocomplete(
                 this.$refs.commuteLocationInput
             )
