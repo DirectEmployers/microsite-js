@@ -1,0 +1,62 @@
+.search__filter {
+
+    &-chip {
+        max-width: 200px;
+        @apply cursor-pointer block break-words w-auto border rounded flex items-center m-2 text-lg p-2 relative;
+        &::before {
+            @apply w-6 h-6 p-2 text-white bg-black rounded-full leading-none;
+            @apply flex items-center justify-center mr-2 font-bold;
+            content: "\00d7";
+
+        }
+    }
+
+    &-display{
+        @apply font-bold text-xl py-3;
+        &-text {
+            @apply font-semibold;
+        }
+
+        &::after {
+            @apply float-right font-bold rounded-full h-6 w-6;
+            @apply flex items-center justify-center;
+            content: "\002B";
+        }
+        &--active::after {
+            @apply font-normal text-4xl relative;
+            content: "\002D";
+            top: -2px;
+        }
+
+    }
+    &-options {
+        @apply list-none;
+        &-item {
+            @apply cursor-pointer border-b border-solid p-3 my-2;
+            &-button {
+                @apply block border-b border-solid py-2 text-sm flex flex-row w-full text-left;
+            }
+        }
+    }
+    &-limiter {
+        @apply m-0 p-0 items-center py-2 text-sm flex flex-row w-full text-left;
+        &-more {
+            @apply flex flex-row border-0 ml-2;
+            &::after {
+                content: "\002B";
+                background: #ededed;
+                @apply font-bold rounded-full h-5 w-5 flex ml-1 items-center justify-center;
+            }
+        }
+        &-less {
+            @apply flex flex-row border-0 ml-2;
+            &::after {
+                content: "\002D";
+                background: #ededed;
+                @apply font-normal rounded-full h-5 w-5 flex ml-1 items-center justify-center;
+                font-size: 2rem;
+                padding-bottom: 0.2rem;
+            }
+        }
+    }
+}
