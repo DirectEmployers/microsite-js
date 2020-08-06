@@ -22,7 +22,7 @@
     </Layout>
 </template>
 <script>
-import AppSearchProvider from "~/components/AppSearchProvider"
+import AppSearchProvider from "~/components/Search/AppSearchProvider"
 import SearchForm from "~/demo/components/SearchForm"
 export default {
     components:{

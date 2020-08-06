@@ -68,35 +68,40 @@ export let countries = {
     CAN: "Canada"
 }
 
-
-export function removeCountry(location) {
+/**
+ * Remove country abbreviation from given value.
+ */
+export function removeCountry(value) {
 
     let i
     let keys = Object.keys(countries)
     let total = keys.length
-    let value = trim(location.toString())
+    let result = trim(value.toString())
 
     for (i = 0; i < total; i++) {
-        if (value.endsWith(keys[i])) {
-            value = trimEnd(value, keys[i])
+        if (result.endsWith(keys[i])) {
+            result = trimEnd(result, keys[i])
             break
         }
     }
-
-    return trimEnd(trim(value), ",")
+    return trimEnd(trim(result), ",")
 }
 
-export function cleanLocation(value) {
-    let clean = trim(removeCountry(value))
+/**
+ * Format a location value for search query/filters.
+ */
+export function format(value) {
+    let formatted = trim(removeCountry(value))
 
-
-    const code = clean.toUpperCase()
+    const code = formatted.toUpperCase()
 
     if (Object.prototype.hasOwnProperty.call(states,code)) {
-        clean = states[code]
+        formatted = states[code]
     }
 
     //todo provinces?
 
-    return clean
+    return formatted
 }
+
+

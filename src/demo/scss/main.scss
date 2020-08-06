@@ -1,8 +1,20 @@
 @import '~/scss/navbar';
 @import '~/scss/form';
 @import '~/scss/pagination';
-@import '~/scss/filters';
+@import '~/scss/search-filter';
+@import '~/scss/accordion';
 
+.commute-search {
+    &__header {
+        @apply text-lg py-2;
+        font-family: Montserrat, sans-serif;
+        margin-bottom: 1rem;
+    }
+
+    &__location-error {
+        @apply text-red-800 mt-0 p-2 text-sm;
+    }
+}
 .button{
     @apply border rounded p-2;
     &:hover{

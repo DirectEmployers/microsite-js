@@ -12,7 +12,7 @@
             @click="isOpen = !isOpen"
             @keyup.enter="isOpen = !isOpen"
         >
-            <slot name="header">
+            <slot name="header" :isOpen="isOpen">
                 <h3 v-if="header" class="accordion__header-text">
                     {{ header }}
                 </h3>
@@ -38,8 +38,7 @@ export default {
     },
     props: {
         open: {
-            // no type enforced as this allows strings/truthy
-            // values to determine accordion toggle status.
+            type: Boolean,
             required: false,
             default: false
         },

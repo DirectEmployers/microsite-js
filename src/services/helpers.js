@@ -21,16 +21,15 @@ export function blank(value) {
  * Run the given function and keep trying if it fails
  * until the max retries are exceeded and return a promise.
  */
-export function retry(callback, max = 5, delay = 100) {
+export function retry(callback, args = [], max = 5, delay = 100) {
     return new Promise((resolve, reject) => {
         try {
-            let result = callback()
-
+            let result = callback(...args)
             return resolve(result)
         } catch (e) {
             if (max > 0) {
                 setTimeout(function () {
-                    return retry(callback, --max, delay * 2)
+                    return retry(callback, args, --max, delay * 2)
                         .then(resolve)
                         .catch((err) => {
                             return reject(err)
@@ -41,4 +40,13 @@ export function retry(callback, max = 5, delay = 100) {
             }
         }
     })
+}
+
+/**
+ * Log to console only when env is development.
+ */
+export function log(message, context = "log") {
+    if (process.env.NODE_ENV == "development") {
+        console[context](message)
+    }
 }

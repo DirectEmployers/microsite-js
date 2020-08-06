@@ -9,18 +9,19 @@
             :meta="meta"
             :pagination="pagination"
             :status="status"
+            :source="source"
             :submitSearchForm="submitSearchForm"
             :supported="supported"
         />
     </component>
 </template>
 <script>
-import { blank } from "../services/helpers"
-import { cleanLocation } from "../services/api/location"
+import { blank, log } from "../../services/helpers"
+import { format as formatLocation } from "../../services/api/location"
 import { omitBy, clone, merge, trim } from "lodash"
-import { SearchService, CommuteSearchService } from "../services/api/search"
-import GoogleTalentJob from "../services/api/drivers/job/google-talent"
-import SolrJob from "../services/api/drivers/job/solr"
+import { SearchService, CommuteSearchService } from "../../services/api/search"
+import GoogleTalentJob from "../../services/api/drivers/job/google-talent"
+import SolrJob from "../../services/api/drivers/job/solr"
 
 export default {
     props: {
@@ -47,6 +48,7 @@ export default {
     data() {
         return {
             jobs: [],
+            source: this.siteConfig.sources.search,
             filters: [],
             pagination: {},
             status: {
@@ -55,6 +57,15 @@ export default {
             },
             supported: {
                 geolocation: false,
+            },
+            meta: {
+                hasJobs: this.hasJobs,
+                selectedFilters: [],
+                isResultsPage: this.isResultsPage,
+                sort: {
+                    active: "relevance",
+                    options: ["relevance", "distance", "title", "date"],
+                },
             },
             input: {
                 q: "",
@@ -74,11 +85,13 @@ export default {
         //allow other components to update input via global event.
         this.$router.app.$on("search.input.update", this.setInput)
 
-        if (this.isResultsPage) {
+        //filter/breadcrumb removal
+        this.$router.app.$on("search.filter.remove", this.removeFilter)
 
+        if (this.isResultsPage) {
             this.input = merge(this.input, clone(this.$route.query))
 
-            this.cleanInput()
+            this.formatInput()
 
             this.search()
         }
@@ -89,15 +102,38 @@ export default {
         }
     },
     computed: {
-        meta() {
-            return {
-                hasJobs: this.hasJobs,
-                isResultsPage: this.isResultsPage,
-            }
-        },
-
         hasJobs() {
             return (this.jobs || []).length > 0
+        },
+
+        selectedFilters() {
+            let value, param = null
+            let duplicates = []
+            let filters = []
+
+            this.siteConfig.filters.forEach((filter) => {
+                param = filter.query_param
+
+                value = this.$route.query[param]
+
+                if (!this.blank(value) &&  !duplicates.includes(param)) {
+
+                    duplicates.push(param)
+
+                    filters.push({
+                        display: value,
+                        parameter: param
+                    })
+                }
+            })
+
+            return filters
+        },
+
+        filterParamList(){
+            return this.siteConfig.filters.map((filter) => {
+                return filter.query_param
+            })
         },
 
         isResultsPage() {
@@ -122,8 +158,8 @@ export default {
                     newInput.coords = ""
                 }
 
-                if(newInput.searchType == 'location'){
-                    // newInput.commuteLocation = ''
+                if (newInput.searchType == "location") {
+                    newInput.commuteLocation = ''
                 }
 
                 this.$router.app.$emit(
@@ -136,6 +172,23 @@ export default {
         },
     },
     methods: {
+        removeFilter(param){
+            let toRemove = [ param ];
+
+            if(param == "*"){
+                toRemove = this.filterParamList
+            }
+
+            const query = { ...this.$route.query }
+
+            toRemove.forEach((param)=>{
+                delete query[param]
+
+            })
+
+            this.$router.replace({ query })
+        },
+
         hasInput(key) {
             return !blank(this.input[key])
         },
@@ -199,17 +252,24 @@ export default {
         },
 
         getPayload() {
-            const query = clone(omitBy(this.input, blank))
+            const payload = clone(omitBy(this.input, blank))
 
             this.siteConfig.filters.map((filter) => {
-                if (filter.hasOwnProperty("force_filters")) {
-                    query[filter.query_param] = filter.force_filters
+                if (Object.prototype.hasOwnProperty.call(filter, "force_filters")) {
+                    payload[filter.query_param] = filter.force_filters
                 }
             })
 
-            return query
+            return payload
         },
-
+        setMeta(meta) {
+            this.meta = {
+                ...meta,
+                hasJobs: this.hasJobs,
+                isResultsPage: this.isResultsPage,
+                selectedFilters: this.selectedFilters,
+            }
+        },
         async search() {
             this.status.loading = true
 
@@ -234,13 +294,16 @@ export default {
                 this.pagination = pagination
 
                 this.filters = filters
+
+                this.setMeta(data.meta)
                 // emit once DOM/other components are ready
                 this.$nextTick(() => {
                     this.$router.app.$emit("search.completed", this.input)
                 })
             } catch (error) {
-                console.error(error)
                 this.status.error = error
+
+                log(error, "error")
             } finally {
                 this.status.loading = false
             }
@@ -253,17 +316,16 @@ export default {
             })
         },
 
-        cleanInput(){
+        formatInput() {
             if (!blank(this.input.location)) {
-                this.input.location = cleanLocation(this.input.location)
+                this.input.location = formatLocation(this.input.location)
             }
         },
 
         setInputFromQuery() {
-
             this.input = clone(this.$route.query)
 
-            this.cleanInput()
+            this.formatInput()
         },
 
         blank(value) {
@@ -301,7 +363,9 @@ export default {
                     path: this.submitUrl,
                     query: omitBy(this.input, blank),
                 })
-                .catch((err) => {})
+                .catch((err) => {
+                    log(err, "error")
+                })
         },
     },
 }
