@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './button';
 @import './form';
 @import './accordion';
 @import './search-filter';
+@import './video';

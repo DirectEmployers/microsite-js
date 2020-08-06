@@ -43,6 +43,7 @@
     }
 
     &__compressed {
+
         .search-form__wrapper {
             display: flex;
             flex-flow: column nowrap;
@@ -54,6 +55,7 @@
         }
 
         .search-form__button-wrapper {
+            
             @screen lg {
                 width: max-content;
                 margin-top: 1rem;

@@ -67,7 +67,7 @@
             </div>
             <button
                 :class="{
-                    'bg-gray-300 text-gray-600 cursor-not-allowed': !input.coords,
+                    'button--disabled': !input.coords,
                 }"
                 :disabled="!input.coords"
                 aria-label="Submit Commute Search"

@@ -1,5 +1,6 @@
 .dropdown{
     @apply inline-block select-none;
+    
     &__display{
         @apply bg-white appearance-none flex items-center inline-block;
         @apply px-3 py-2 border rounded border-gray-400;
