@@ -31,8 +31,6 @@ const html2json = require("html2json").html2json
 
 import AppJsonToHtml from "./AppJsonToHtml"
 
-import { removeEndOfLine } from "../../services/helpers"
-
 export default {
     name: "AppHtmlToJson",
     props: {
@@ -79,7 +77,7 @@ export default {
             this.json = json
         },
         cleanHtml() {
-            return removeEndOfLine(this.html)
+            return this.html.replace(/(\r\n|\n|\r)/gm, "")
         },
         linkifyHtml() {
             return linkify(this.cleanHtml(), {

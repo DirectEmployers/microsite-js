@@ -11,7 +11,7 @@ export default class BaseJob {
         return this.data.reqid
     }
 
-    getAttribute(attribute){
+    getAttribute(attribute) {
         return get(this.data, attribute)
     }
 
@@ -28,7 +28,7 @@ export default class BaseJob {
     }
 
     getCleanHtmlDescription() {
-        return removeEndOfLine(this.getHtmlDescription())
+        return this.getHtmlDescription().replace(/(\r\n|\n|\r)/gm, "")
     }
 
     getGuid() {
@@ -42,11 +42,7 @@ export default class BaseJob {
     getCustomAttribute(attribute, defaultValue = null) {
         const customAttr = `customAttributes.${attribute}.stringValues`
 
-        const value = get(
-            this.data,
-            customAttr,
-            defaultValue
-        )
+        const value = get(this.data, customAttr, defaultValue)
 
         return isArray(value) ? value.join(" ") : value
     }
@@ -59,27 +55,27 @@ export default class BaseJob {
         return null
     }
 
-    getCity(){
+    getCity() {
         return this.data.city
     }
 
-    getState(){
+    getState() {
         return this.data.state
     }
 
-    getCompany(){
+    getCompany() {
         return this.data.company
     }
 
-    getCountry(){
+    getCountry() {
         return this.data.country
     }
 
-    getDateAdded(){
+    getDateAdded() {
         return this.data.date_added
     }
 
-    getDeletedAt(){
+    getDeletedAt() {
         return this.data.deleted_at
     }
 
@@ -97,28 +93,28 @@ export default class BaseJob {
         return {
             "@context": "http://schema.org",
             "@type": "JobPosting",
-            "employmentType": "Paid Work",
-            "title": this.getTitle(),
-            "datePosted": this.getDateAdded(),
-            "description": this.getCompany(),
-            "identifier": {
+            employmentType: "Paid Work",
+            title: this.getTitle(),
+            datePosted: this.getDateAdded(),
+            description: this.getCompany(),
+            identifier: {
                 "@type": "PropertyValue",
-                "name": this.getCompany(),
-                "value": this.getReqId(),
+                name: this.getCompany(),
+                value: this.getReqId(),
             },
-            "hiringOrganization": {
+            hiringOrganization: {
                 "@type": "Organization",
-                "name": this.getCompany(),
+                name: this.getCompany(),
             },
-            "jobLocation": {
+            jobLocation: {
                 "@type": "Place",
-                "address": {
+                address: {
                     "@type": "PostalAddress",
-                    "addressLocality": this.getCity(),
-                    "addressRegion": this.getState(),
-                    "addressCountry": {
+                    addressLocality: this.getCity(),
+                    addressRegion: this.getState(),
+                    addressCountry: {
                         "@type": "Country",
-                        "name": this.getCountry(),
+                        name: this.getCountry(),
                     },
                 },
             },

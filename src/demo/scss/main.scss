@@ -40,7 +40,7 @@
         text-transform: uppercase;
 
         &:hover {
-            background: #f3b306;
+            @apply bg-gray-400;
         }
     }
 
