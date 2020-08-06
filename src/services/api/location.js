@@ -69,7 +69,7 @@ export let countries = {
 }
 
 /**
- * Remove country abbreviation from given value.
+ * Remove country abbreviation from end of given value.
  */
 export function removeCountry(value) {
 
@@ -88,18 +88,47 @@ export function removeCountry(value) {
 }
 
 /**
- * Format a location value for search query/filters.
+ * Remove state abbreviation from end of given value.
  */
-export function format(value) {
-    let formatted = trim(removeCountry(value))
+export function removeState(value) {
 
-    const code = formatted.toUpperCase()
+    let i
+    let keys = Object.keys(states)
+    let total = keys.length
+    let result = trim(value.toString())
 
-    if (Object.prototype.hasOwnProperty.call(states,code)) {
-        formatted = states[code]
+    for (i = 0; i < total; i++) {
+        if (result.endsWith(keys[i])) {
+            result = trimEnd(result, keys[i])
+            break
+        }
+    }
+    return trimEnd(trim(result), ",")
+}
+
+
+export function fullState(code){
+
+    code = trim(code)
+
+    if (Object.prototype.hasOwnProperty.call(states, code)) {
+        return states[code]
     }
 
-    //todo provinces?
+    return code
+}
+/**
+ * Format a location value for search query/filters.
+ * Removes country and tries to expand any province
+ * code to its full value.
+ */
+export function format(value) {
+
+    let formatted = trim(removeCountry(value))
+
+    let code = formatted.toUpperCase()
+
+    code = fullState(code)
 
     return formatted
 }

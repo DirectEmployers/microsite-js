@@ -43,7 +43,14 @@ export function retry(callback, args = [], max = 5, delay = 100) {
 }
 
 /**
- * Log to console only when env is development.
+ * Remove end of line and carriage return characters \n \r from the given string.
+ */
+export function removeEndOfLine(string){
+     return string.replace(/(\r\n|\n|\r)/gm, "")
+}
+
+/**
+ * Log to console only when ENV is development.
  */
 export function log(message, context = "log") {
     if (process.env.NODE_ENV == "development") {

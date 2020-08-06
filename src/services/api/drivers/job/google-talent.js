@@ -1,5 +1,6 @@
 import BaseJob from './base';
 import { blank } from '../../../helpers'
+import { removeState, removeCountry, fullState } from '../../location'
 export default class GoogleTalentJob extends BaseJob{
 
     constructor(job) {
@@ -16,19 +17,49 @@ export default class GoogleTalentJob extends BaseJob{
     getGuid(){
         //the guid is stored as the "requistionId"
         //during imports to gurantee uniqueness.
-        return this.job.requisitionId
+        return this.data.requisitionId
     }
 
     getTitle(){
-        return this.job.title
+        return this.data.title
     }
 
     getLocation() {
         return this.getCustomAttribute("city_admin1_country")
     }
 
-    getDescription(){
-        return this.job.description
+    getHtmlDescription(){
+        return this.data.description
+    }
+
+    getCity(){
+        let location = this.getLocation()
+
+        return removeState(removeCountry(location))
+    }
+
+    getState(){
+        let location = this.getLocation()
+
+        location = location.split(",")
+
+        return fullState(location[1])
+    }
+
+    getDeletedAt(){
+        return null
+    }
+
+    getCompany(){
+        return this.data.companyDisplayName
+    }
+
+    getCountry(){
+        return this.getCustomAttribute("country")
+    }
+
+    getDateAdded(){
+        return this.data.postingCreateTime
     }
 
     hasCommuteInfo() {

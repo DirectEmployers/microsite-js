@@ -8,6 +8,7 @@
                 filters,
                 selectedFilters,
                 input,
+                sort,
                 submitSearchForm,
                 supported,
                 getUserCoordinates,
@@ -55,7 +56,7 @@
                                     </h3>
 
                                     <h3 class="font-bold text-lg">
-                                        Requistion ID: {{ job.getReqId() }}
+                                        Requisition ID: {{ job.getReqId() }}
                                     </h3>
 
                                     <h3 class="text-md">
@@ -85,19 +86,47 @@
                     </div>
                     <div class="lg:ml-4 mt-16 w-full lg:w-2/5">
                         <h3 class="font-bold text-4xl">Search Filters:</h3>
+
                         <div class="m-2" v-if="meta.selectedFilters.length">
-                            <h3 class="font-bold text-xl">Current Search Criteria</h3>
+                            <h3 class="font-bold text-xl">
+                                Current Search Criteria
+                            </h3>
+
                             <AppSearchFilterChip
                                 v-for="filter in meta.selectedFilters"
                                 :key="filter.parameter"
                                 :display="filter.display"
                                 :parameter="filter.parameter"
                             ></AppSearchFilterChip>
+
                             <AppSearchFilterChip
                                 display="Clear All"
                                 parameter="*"
                             ></AppSearchFilterChip>
                         </div>
+
+                        <AppAccordion>
+                            <template v-slot:header>
+                                <h3 class="font-bold text-xl">
+                                    Sorted By
+                                    <strong>
+                                        {{ titleCase(meta.sort.active) }}
+                                    </strong>
+                                </h3>
+                            </template>
+
+                            <ul>
+                                <li
+                                    v-if="shouldShowSortOption(option, input)"
+                                    class="cursor-pointer"
+                                    @click="sort(option)"
+                                    v-for="option in meta.sort.options"
+                                >
+                                    {{ titleCase(option) }}
+                                </li>
+                            </ul>
+                        </AppAccordion>
+
                         <AppSearchFilter
                             :key="configFilter.key"
                             :config-filter="configFilter"
@@ -137,21 +166,38 @@
 import AppSearchProvider from "~/components/Search/AppSearchProvider"
 import { blank } from "~/services/helpers"
 import AppPagination from "~/components/AppPagination"
+import AppAccordion from "~/components/AppAccordion"
 import CommuteSearchForm from "~/demo/components/CommuteSearchForm"
 import SearchForm from "~/demo/components/SearchForm"
 import Loader from "~/demo/components/Loader"
 import AppSearchFilter from "~/components/Search/AppSearchFilter"
 import AppSearchFilterChip from "~/components/Search/AppSearchFilterChip"
+import { toLower, startCase } from "lodash"
 
 export default {
     components: {
         AppSearchProvider,
         AppPagination,
         CommuteSearchForm,
+        AppAccordion,
         AppSearchFilterChip,
         SearchForm,
         AppSearchFilter,
         Loader,
+    },
+    methods: {
+        titleCase(str) {
+            return startCase(toLower(str))
+        },
+        shouldShowSortOption(option, input){
+            const hasLocation = input.location || input.coords;
+
+            if(option == 'distance' && !hasLocation){
+                return false;
+            }
+
+            return true;
+        }
     },
     metaInfo: {
         title: "Jobs",
