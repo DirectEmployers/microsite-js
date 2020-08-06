@@ -15,6 +15,52 @@
         @apply text-red-800 mt-0 p-2 text-sm;
     }
 }
+.similar-jobs {
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 4rem;
+
+    &__title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 1rem 0.3125rem;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        grid-gap: 1rem;
+    }
+
+    &__grid-item {
+        @apply border-gray-300 border-b;
+        padding: 1.25rem;
+        background: #ededed;
+        text-transform: uppercase;
+
+        &:hover {
+            background: #f3b306;
+        }
+    }
+
+    &__grid-item-title {
+        font-size: 1.1875rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    &__grid-item-location {
+        margin: 0;
+        padding: 0;
+    }
+
+    &__grid-item-area {
+        margin: 0;
+        padding: 0;
+    }
+}
+
 .button{
     @apply border rounded p-2;
     &:hover{

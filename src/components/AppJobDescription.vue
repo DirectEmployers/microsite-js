@@ -1,6 +1,6 @@
 <template>
     <div>
-        <AppHtmlToJson :html="cleanHtml" :lookupClass="lookupClass" >
+        <AppHtmlToJson :html="cleanHtml" :lookupClass="lookupClass">
             <slot />
         </AppHtmlToJson>
     </div>
@@ -8,9 +8,10 @@
 
 <script>
 import AppHtmlToJson from "./Parse/AppHtmlToJson"
+import { removeEndOfLine } from "../services/helpers"
 
 export default {
-    name: 'AppJobDescription',
+    name: "AppJobDescription",
     props: {
         html: {
             type: String,
@@ -19,7 +20,7 @@ export default {
         lookupClass: {
             type: String,
             required: false,
-        }
+        },
     },
     components: {
         AppHtmlToJson,
@@ -27,8 +28,8 @@ export default {
 
     computed: {
         cleanHtml() {
-            return this.html.replace(/(\r\n|\n|\r)/gm, "")
-        }
-    }
+            return removeEndOfLine(this.html)
+        },
+    },
 }
 </script>

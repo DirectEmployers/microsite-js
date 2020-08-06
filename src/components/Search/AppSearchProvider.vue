@@ -10,6 +10,7 @@
             :pagination="pagination"
             :status="status"
             :source="source"
+            :sort="sort"
             :submitSearchForm="submitSearchForm"
             :supported="supported"
         />
@@ -18,7 +19,7 @@
 <script>
 import { blank, log } from "../../services/helpers"
 import { format as formatLocation } from "../../services/api/location"
-import { omitBy, clone, merge, trim } from "lodash"
+import { omitBy, clone, merge } from "lodash"
 import { SearchService, CommuteSearchService } from "../../services/api/search"
 import GoogleTalentJob from "../../services/api/drivers/job/google-talent"
 import SolrJob from "../../services/api/drivers/job/solr"
@@ -38,6 +39,11 @@ export default {
             required: false,
             type: String,
             default: "div",
+        },
+        searchOnLoad:{
+            type: Boolean,
+            default: true,
+            required: false
         },
         submitUrl: {
             required: false,
@@ -61,7 +67,6 @@ export default {
             meta: {
                 hasJobs: this.hasJobs,
                 selectedFilters: [],
-                isResultsPage: this.isResultsPage,
                 sort: {
                     active: "relevance",
                     options: ["relevance", "distance", "title", "date"],
@@ -88,7 +93,7 @@ export default {
         //filter/breadcrumb removal
         this.$router.app.$on("search.filter.remove", this.removeFilter)
 
-        if (this.isResultsPage) {
+        if (this.searchOnLoad) {
             this.input = merge(this.input, clone(this.$route.query))
 
             this.formatInput()
@@ -107,7 +112,8 @@ export default {
         },
 
         selectedFilters() {
-            let value, param = null
+            let value,
+                param = null
             let duplicates = []
             let filters = []
 
@@ -116,13 +122,12 @@ export default {
 
                 value = this.$route.query[param]
 
-                if (!this.blank(value) &&  !duplicates.includes(param)) {
-
+                if (!this.blank(value) && !duplicates.includes(param)) {
                     duplicates.push(param)
 
                     filters.push({
                         display: value,
-                        parameter: param
+                        parameter: param,
                     })
                 }
             })
@@ -130,19 +135,11 @@ export default {
             return filters
         },
 
-        filterParamList(){
+        filterParamList() {
             return this.siteConfig.filters.map((filter) => {
                 return filter.query_param
             })
-        },
-
-        isResultsPage() {
-            let submitUrl = trim(this.submitUrl, "/")
-
-            let current = trim(this.$route.path, "/")
-
-            return `/${submitUrl}` == `/${current}`
-        },
+        }
     },
     watch: {
         //any time query string changes, update component input and search.
@@ -158,8 +155,9 @@ export default {
                     newInput.coords = ""
                 }
 
+                //clear out commute location when location search is done.
                 if (newInput.searchType == "location") {
-                    newInput.commuteLocation = ''
+                    newInput.commuteLocation = ""
                 }
 
                 this.$router.app.$emit(
@@ -172,19 +170,32 @@ export default {
         },
     },
     methods: {
-        removeFilter(param){
-            let toRemove = [ param ];
+        removeFilter(param) {
+            let toRemove = [param]
 
-            if(param == "*"){
+            if (param == "*") {
                 toRemove = this.filterParamList
             }
 
             const query = { ...this.$route.query }
 
-            toRemove.forEach((param)=>{
+            toRemove.forEach((param) => {
                 delete query[param]
-
             })
+
+            this.$router.replace({ query })
+        },
+
+        sort(field){
+
+            if(!this.meta.sort.options.includes(field)){
+                throw new Error(`Invalid sort option ${field}`)
+            }
+
+
+            const query = { ...this.$route.query }
+
+            query['sort'] = field
 
             this.$router.replace({ query })
         },
@@ -255,7 +266,12 @@ export default {
             const payload = clone(omitBy(this.input, blank))
 
             this.siteConfig.filters.map((filter) => {
-                if (Object.prototype.hasOwnProperty.call(filter, "force_filters")) {
+                if (
+                    Object.prototype.hasOwnProperty.call(
+                        filter,
+                        "force_filters"
+                    )
+                ) {
                     payload[filter.query_param] = filter.force_filters
                 }
             })
@@ -266,18 +282,19 @@ export default {
             this.meta = {
                 ...meta,
                 hasJobs: this.hasJobs,
-                isResultsPage: this.isResultsPage,
                 selectedFilters: this.selectedFilters,
             }
         },
-        async search() {
+        async search(input = null) {
             this.status.loading = true
 
             const Service = this.getService()
 
+            input = input === null ? this.getPayload(): input
+
             try {
                 const response = await Service.get(
-                    this.getPayload(),
+                    input,
                     this.siteConfig
                 )
 
@@ -333,7 +350,7 @@ export default {
         },
 
         parseSearchType(type) {
-            //if submitSearchForm is called in the template without args
+            //if submitSearchForm is called in the template without args,
             //the default first argument in vuejs is the event object,
             //if this is the case, be flexible and default to location
             //if this is the case

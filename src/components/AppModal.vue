@@ -31,13 +31,12 @@ export default {
         },
     },
     created() {
-        //"document" will not be defined when we run npm run build, this is a workaround
-        if (typeof document != "undefined") {
+        if (process.isClient) {
             document.addEventListener("click", this.nonModalClick)
         }
     },
     destroyed() {
-        if (typeof document != "undefined") {
+        if (process.isClient) {
             document.removeEventListener("click", this.nonModalClick)
         }
     },

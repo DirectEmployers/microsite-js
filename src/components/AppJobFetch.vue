@@ -1,6 +1,7 @@
 <script>
 import { kebabCase } from "lodash"
 import { getJob } from "../services/cdn/job"
+import SolrJob from "../services/api/drivers/job/solr"
 
 export default {
     data() {
@@ -26,10 +27,12 @@ export default {
 
                 // check if this is the proper url for the job
                 if (locationSlug !== location || data.title_slug !== title) {
-                    window.location.replace(`/${locationSlug}/${data.title_slug}/${guid}/job`)
+                    window.location.replace(
+                        `/${locationSlug}/${data.title_slug}/${guid}/job`
+                    )
                 } else {
-                    this.job = data
-                    this.status({ resolved: true });
+                    this.job = new SolrJob(data)
+                    this.status({ resolved: true })
                 }
             } catch (error) {
                 this.status({
@@ -38,11 +41,7 @@ export default {
                 })
             }
         },
-        status({
-            error = null,
-            pending = false,
-            resolved = null,
-        }) {
+        status({ error = null, pending = false, resolved = null }) {
             this.error = error
             this.pending = pending
             this.resolved = resolved
@@ -51,7 +50,7 @@ export default {
     watch: {
         "$route.params.guid"() {
             this.fetchJob()
-        }
+        },
     },
     render() {
         return this.$scopedSlots.default({
@@ -60,8 +59,8 @@ export default {
                 pending: this.pending,
                 resolved: this.resolved,
             },
-            job: this.job
+            job: this.job,
         })
-    }
+    },
 }
 </script>
