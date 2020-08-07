@@ -1,0 +1,10 @@
+.commute-search {
+    &__header {
+        @apply text-xl py-2;
+        font-weight: bolder;
+    }
+
+    &__location-error {
+        @apply text-red-800 mt-0 p-2 text-sm;
+    }
+}

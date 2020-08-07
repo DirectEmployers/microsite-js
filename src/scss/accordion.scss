@@ -1,9 +1,0 @@
-.accordion{
-    &__header{
-        @apply p-2 border p-5 px-6 cursor-pointer;
-    }
-    &__content{
-        @apply border p-5 px-6;
-    }
-}
-

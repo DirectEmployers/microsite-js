@@ -79,10 +79,6 @@
             </div>
             <div
                 class="search-form__button-wrapper"
-                :class="{
-                    'mt-0': hasLocationInput,
-                    'lg:mt-6': !hasLocationInput,
-                }"
             >
                 <button class="button">
                     Find Jobs

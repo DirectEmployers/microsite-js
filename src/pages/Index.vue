@@ -1,6 +1,7 @@
 <template>
     <Layout>
         <AppSearchProvider
+            class="mt-6"
             :search-on-load="false"
             :site-config="$siteConfig"
             v-slot="{

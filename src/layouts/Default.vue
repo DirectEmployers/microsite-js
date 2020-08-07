@@ -1,10 +1,12 @@
 <template>
     <div>
         <main id="content">
-            <AppNavbar :links="[
-                { href: '/', display: 'Home' },
-                { href: '/jobs', display: 'Jobs' },
-            ]">
+            <AppNavbar
+                :links="[
+                    { href: '/', display: 'Home' },
+                    { href: '/jobs', display: 'Jobs' },
+                ]"
+            >
                 <template v-slot:logo>
                     <g-link to="/">
                         <img

@@ -1,12 +1,11 @@
 <template>
     <Layout>
         <AppSearchProvider
-            class="mb-6"
+            class="my-6"
             :site-config="$siteConfig"
             v-slot="{
                 jobs,
                 filters,
-                selectedFilters,
                 input,
                 sort,
                 submitSearchForm,
@@ -14,7 +13,6 @@
                 getUserCoordinates,
                 status,
                 meta,
-                blank,
                 pagination,
             }"
         >
@@ -30,7 +28,7 @@
                     />
                 </div>
                 <div class="flex flex-col lg:flex-row">
-                    <div class="mx-4 mt-16 w-full lg:w-1/2">
+                    <div class="mx-4 w-full lg:w-1/2">
                         <h3 v-if="status.error">
                             Unable to load jobs...
                         </h3>
@@ -84,7 +82,7 @@
                             No results found...
                         </h3>
                     </div>
-                    <div class="lg:ml-4 mt-16 w-full lg:w-2/5">
+                    <div class="lg:ml-4 w-full lg:w-2/5">
                         <h3 class="font-bold text-4xl">Search Filters:</h3>
 
                         <div class="m-2" v-if="meta.selectedFilters.length">
@@ -117,12 +115,12 @@
 
                             <ul>
                                 <li
-                                    v-if="shouldShowSortOption(option, input)"
                                     class="cursor-pointer"
                                     @click="sort(option)"
-                                    v-for="option in meta.sort.options"
+                                    v-for="(option, index) in meta.sort.options"
+                                    :key="index"
                                 >
-                                    {{ titleCase(option) }}
+                                    <span v-if="shouldShowSortOption(option, input)">{ titleCase(option) }}</span>
                                 </li>
                             </ul>
                         </AppAccordion>

@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './form';
-@import './accordion';
-@import './search-filter';
+@import './components/accordion';
+@import './components/animation';
+@import './components/button';
+@import './components/dropdown';
+@import './components/form';
+@import './components/modal';
+@import './components/navbar';
+@import './components/pagination';
+@import './components/search-filter';
+@import './components/video';
