@@ -18,7 +18,7 @@
 
         <div class="bg-gray-300 mt-6 mb-8 mx-2 p-12">
             <div class="mx-w-sm mx-auto text-center">
-                <h1 class="montserrat text-4xl text-black font-bold">
+                <h1 class="text-4xl text-black font-bold">
                     {{ job.getTitle() }}
                 </h1>
 

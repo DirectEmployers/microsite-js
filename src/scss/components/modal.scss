@@ -15,7 +15,7 @@
             @apply font-medium text-lg;
         }
         &-close {
-            @apply ml-auto text-4xl fill-current text-gray-700  cursor-pointer;
+            @apply ml-auto text-4xl fill-current text-gray-700 cursor-pointer;
         }
     }
     &__body {

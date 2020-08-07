@@ -66,7 +66,7 @@ export default {
             toggled: false
         }
     },
-    methods:{
+    methods: {
         toggle(){
             this.toggled = !this.toggled
         },
@@ -97,7 +97,7 @@ export default {
             return this.interactionType == 'click'
         },
 
-        eventHandlers(){
+        eventHandlers() {
             const type = this.interactionType
             switch(type){
                 case 'click':

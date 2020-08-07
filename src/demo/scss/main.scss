@@ -1,111 +1,16 @@
-@import "~/scss/navbar";
-@import "~/scss/form";
-@import "~/scss/pagination";
-@import "~/scss/search-filter";
-@import "~/scss/accordion";
-@import "~/scss/button";
-@import "~/scss/video";
+@import '~/scss/components/accordion';
+@import '~/scss/components/animation/';
+@import '~/scss/components/button';
+@import '~/scss/components/dropdown';
+@import '~/scss/components/form';
+@import '~/scss/components/job-listing';
+@import '~/scss/components/modal';
+@import '~/scss/components/navbar';
+@import '~/scss/components/pagination';
+@import '~/scss/components/search-filter';
+@import '~/scss/components/video';
 
-@import "./commute-search";
-@import "./similar-jobs";
-
-
-
-.button {
-    @apply transition-colors duration-100 inline-block w-auto;
-    @apply text-black;
-    @apply px-8 py-2 block;
-    @apply border border-gray-300 bg-gray-200;
-
-    &:hover{
-        @apply bg-gray-300;
-    }
-
-    &--tall {
-        @apply py-3 mt-2
-    }
-
-    &--disabled {
-        @apply bg-gray-300 text-gray-600;
-    }
-}
-
-.hero {
-    &__content {
-        padding: 1.25rem;
-        background: rgba(255, 204, 0, 0.9);
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        margin: 0 2rem;
-        font-size: .8625rem;
-
-        @screen md {
-            font-size: 1rem;
-            left: 5rem;
-            width: 40%;
-            margin: 0;
-        }
-.similar-jobs {
-    font-family: Montserrat, sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    margin-bottom: 4rem;
-
-    &__title {
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin: 1rem 0.3125rem;
-    }
-
-    &__grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        grid-gap: 1rem;
-    }
-
-    &__grid-item {
-        @apply border-gray-300 border-b;
-        padding: 1.25rem;
-        background: #ededed;
-        text-transform: uppercase;
-
-        &:hover {
-            background: #f3b306;
-        }
-    }
-
-    &__grid-item-title {
-        font-size: 1.1875rem;
-        margin: 0;
-        padding: 0;
-    }
-
-    &__grid-item-location {
-        margin: 0;
-        padding: 0;
-    }
-
-    &__grid-item-area {
-        margin: 0;
-        padding: 0;
-    }
-}
-
-.button{
-    @apply border rounded p-2;
-    &:hover{
-        @apply bg-gray-300;
-    }
-
-    &__quote {
-        padding: 0;
-        margin: 0;
-    }
-
-    &__author {
-        padding: 1rem 0 0 0;
-        margin: 0;
-        font-weight: 600;
-    }
-}
+@import "./components/commute-search";
+@import "./components/similar-jobs";
+@import "./components/button";
+@import "./components/search-form";

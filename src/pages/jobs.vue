@@ -1,36 +1,24 @@
 <template>
     <Layout>
         <AppSearchProvider
-            class="my-6"
             :site-config="$siteConfig"
             v-slot="{
                 jobs,
                 filters,
-                selectedFilters,
                 input,
                 sort,
                 submitSearchForm,
-                supported,
                 getUserCoordinates,
                 status,
                 meta,
-                blank,
                 pagination,
             }"
         >
             <Loader v-if="status.loading" />
 
             <section v-else>
-                <div class="mx-4">
-                    <SearchForm
-                        :input="input"
-                        :submitSearchForm="submitSearchForm"
-                        :supported="supported"
-                        :getUserCoordinates="getUserCoordinates"
-                    />
-                </div>
                 <div class="flex flex-col lg:flex-row">
-                    <div class="mx-4 mt-16 w-full lg:w-1/2">
+                    <div class="mx-4 w-full lg:w-1/2">
                         <h3 v-if="status.error">
                             Unable to load jobs...
                         </h3>
@@ -84,7 +72,7 @@
                             No results found...
                         </h3>
                     </div>
-                    <div class="lg:ml-4 mt-16 w-full lg:w-2/5">
+                    <div class="lg:ml-4 w-full lg:w-2/5">
                         <h3 class="font-bold text-4xl">Search Filters:</h3>
 
                         <div class="m-2" v-if="meta.selectedFilters.length">

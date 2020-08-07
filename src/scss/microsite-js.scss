@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './button';
-@import './form';
-@import './accordion';
-@import './search-filter';
-@import './video';
+@import './components/accordion';
+@import './components/animation';
+@import './components/button';
+@import './components/dropdown';
+@import './components/form';
+@import './components/job-listing';
+@import './components/modal';
+@import './components/navbar';
+@import './components/pagination';
+@import './components/search-filter';
+@import './components/video';
