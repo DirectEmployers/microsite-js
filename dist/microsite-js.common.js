@@ -20557,6 +20557,10 @@ function removeState(value) {
 
   return Object(lodash__WEBPACK_IMPORTED_MODULE_4__["trimEnd"])(Object(lodash__WEBPACK_IMPORTED_MODULE_4__["trim"])(result), ",");
 }
+/**
+ * Expand a code value to full state name.
+ */
+
 function fullState(code) {
   var result = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["trim"])(code.toString());
 

@@ -106,7 +106,9 @@ export function removeState(value) {
     return trimEnd(trim(result), ",")
 }
 
-
+/**
+ * Expand a code value to full state name.
+ */
 export function fullState(code){
 
     let result = trim(code.toString())
