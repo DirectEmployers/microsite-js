@@ -1,6 +1,7 @@
 <template>
     <Layout>
         <AppSearchProvider
+            class="my-6"
             :site-config="$siteConfig"
             v-slot="{
                 jobs,
@@ -8,6 +9,7 @@
                 input,
                 sort,
                 submitSearchForm,
+                supported,
                 getUserCoordinates,
                 status,
                 meta,
@@ -17,6 +19,14 @@
             <Loader v-if="status.loading" />
 
             <section v-else>
+                <div class="mx-4">
+                    <SearchForm
+                        :input="input"
+                        :submitSearchForm="submitSearchForm"
+                        :supported="supported"
+                        :getUserCoordinates="getUserCoordinates"
+                    />
+                </div>
                 <div class="flex flex-col lg:flex-row">
                     <div class="mx-4 w-full lg:w-1/2">
                         <h3 v-if="status.error">
@@ -105,12 +115,12 @@
 
                             <ul>
                                 <li
-                                    v-if="shouldShowSortOption(option, input)"
                                     class="cursor-pointer"
                                     @click="sort(option)"
-                                    v-for="option in meta.sort.options"
+                                    v-for="(option, index) in meta.sort.options"
+                                    :key="index"
                                 >
-                                    {{ titleCase(option) }}
+                                    <span v-if="shouldShowSortOption(option, input)">{ titleCase(option) }}</span>
                                 </li>
                             </ul>
                         </AppAccordion>

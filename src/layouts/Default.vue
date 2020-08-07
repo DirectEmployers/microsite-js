@@ -19,40 +19,15 @@
                     </g-link>
                 </template>
             </AppNavbar>
-            <AppSearchProvider
-                class="my-6"
-                :search-on-load="false"
-                :site-config="$siteConfig"
-                v-slot="{
-                    input,
-                    submitSearchForm,
-                    supported,
-                    getUserCoordinates,
-                }"
-            >
-                <div class="mx-4">
-                    <SearchForm
-                        :input="input"
-                        :submitSearchForm="submitSearchForm"
-                        :supported="supported"
-                        :getUserCoordinates="getUserCoordinates"
-                    />
-                </div>
-            </AppSearchProvider>
             <slot />
         </main>
     </div>
 </template>
 <script>
 import AppNavbar from "~/components/AppNavbar"
-import AppSearchProvider from "~/components/Search/AppSearchProvider"
-import SearchForm from "~/demo/components/SearchForm"
-
 export default {
     components: {
         AppNavbar,
-        AppSearchProvider,
-        SearchForm,
     },
     metaInfo: {
         title: "Home",

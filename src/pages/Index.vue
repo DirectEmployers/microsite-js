@@ -1,48 +1,35 @@
 <template>
     <Layout>
-        <div class="container">
-            <AppAccordion :open="true">
-                <template v-slot:header>
-                    An Accordion Header
-                </template>
-                <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Iste suscipit a sint aspernatur libero alias deserunt
-                    accusantium, eveniet exercitationem totam tempora iure eaque
-                    repellendus cumque ab saepe. Quam, quis fugit.
-                </div>
-            </AppAccordion>
-            <AppAccordion>
-                <template v-slot:header>
-                    A Second Accordion Header
-                </template>
-                <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Iste suscipit a sint aspernatur libero alias deserunt
-                    accusantium, eveniet exercitationem totam tempora iure eaque
-                    repellendus cumque ab saepe. Quam, quis fugit.
-                </div>
-            </AppAccordion>
-            <AppAccordion>
-                <template v-slot:header>
-                    A Third Accordion Header
-                </template>
-                <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Iste suscipit a sint aspernatur libero alias deserunt
-                    accusantium, eveniet exercitationem totam tempora iure eaque
-                    repellendus cumque ab saepe. Quam, quis fugit.
-                </div>
-            </AppAccordion>
-        </div>
+        <AppSearchProvider
+            class="mt-6"
+            :search-on-load="false"
+            :site-config="$siteConfig"
+            v-slot="{
+                input,
+                submitSearchForm,
+                supported,
+                getUserCoordinates,
+            }"
+        >
+            <div class="mx-4">
+                <SearchForm
+                    :input="input"
+                    :submitSearchForm="submitSearchForm"
+                    :supported="supported"
+                    :getUserCoordinates="getUserCoordinates"
+
+                />
+            </div>
+        </AppSearchProvider>
     </Layout>
 </template>
 <script>
-import AppAccordion from "~/components/AppAccordion"
-
+import AppSearchProvider from "~/components/Search/AppSearchProvider"
+import SearchForm from "~/demo/components/SearchForm"
 export default {
-    components: {
-        AppAccordion
+    components:{
+        AppSearchProvider,
+        SearchForm,
     },
     metaInfo: {
         title: "Home",
@@ -50,9 +37,9 @@ export default {
             {
                 key: "description",
                 name: "description",
-                content: "only the best jobs",
-            },
-        ],
-    },
+                content: "only the best jobs"
+            }
+        ]
+    }
 }
 </script>
