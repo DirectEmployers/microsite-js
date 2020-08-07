@@ -2,9 +2,9 @@ export default {
     buids: [27396],
     sources: {
         // search: "solr",
-        search: "google-talent",
-        complete: "google-talent",
-        commute: "google-talent",
+        search: "google_talent",
+        complete: "google_talent",
+        commute: "google_talent",
     },
     project_id: "cloudjobsearch-256720",
     tenant_uuid: "bb9d54aa-b8d6-426b-927f-f9cb4b7e8ed1",
@@ -13,41 +13,55 @@ export default {
         {
             display: "Functional Area",
             query_param: "functionalarea",
-            key: "functionalarea",
+            attributes: {
+                google_talent: 'functionalarea'
+            },
             // force_filters: ["Sales","Retail"]
         },
         {
             display: "Business Unit",
             query_param: "businessunit",
-            key: "businessunit",
+            attributes: {
+                google_talent: "businessunit"
+            }
         },
         {
             display: "Position Type",
             query_param: "positiontype",
-            key: "positiontype",
             // force_filters: ["Full-Time"]
+            attributes: {
+                google_talent: "positiontype"
+            }
         },
         {
             display: "Remote Position",
             query_param: "remoteposition",
-            key: "remoteposition",
+            attributes: {
+                google_talent: "remoteposition"
+            }
             // force_filters: ["Yes"]
         },
         {
             display: "State",
             query_param: "location",
-            key: "state_country",
+            attributes: {
+                google_talent: "state_country"
+            }
             // force_filters: "California"
         },
         {
             display: "City",
             query_param: "location",
-            key: "city_admin1_country",
+            attributes: {
+                google_talent: "city_admin1_country"
+            }
         },
         {
             display: "Title",
             query_param: "q",
-            key: "job_title",
+            attributes: {
+                google_talent: "job_title"
+            }
         },
     ],
 }

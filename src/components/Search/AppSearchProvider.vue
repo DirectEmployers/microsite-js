@@ -5,6 +5,7 @@
             :getUserCoordinates="getUserCoordinates"
             :blank="blank"
             :input="input"
+            :getFilterOptions="getFilterOptions"
             :jobs="jobs"
             :meta="meta"
             :pagination="pagination"
@@ -241,10 +242,9 @@ export default {
 
         getJobDriver(source) {
             switch (source) {
-                case "solr":
+                case SolrJob.KEY:
                     return SolrJob
-
-                case "google-talent":
+                case GoogleTalentJob.KEY:
                     return GoogleTalentJob
                 default:
                     throw new Error(`Unsupported job driver/source ${source}`)
@@ -278,6 +278,13 @@ export default {
 
             return payload
         },
+
+        getFilterOptions(filter){
+            const attribute = filter.attributes[this.meta.source]
+
+            return this.filters[attribute] || []
+        },
+
         setMeta(meta) {
             this.meta = {
                 ...meta,

@@ -11,6 +11,7 @@
                 submitSearchForm,
                 supported,
                 getUserCoordinates,
+                getFilterOptions,
                 status,
                 meta,
                 pagination,
@@ -91,8 +92,8 @@
                             </h3>
 
                             <AppSearchFilterChip
-                                v-for="filter in meta.selectedFilters"
-                                :key="filter.parameter"
+                                v-for="(filter, index) in meta.selectedFilters"
+                                :key="index"
                                 :display="filter.display"
                                 :parameter="filter.parameter"
                             ></AppSearchFilterChip>
@@ -120,16 +121,16 @@
                                     v-for="(option, index) in meta.sort.options"
                                     :key="index"
                                 >
-                                    <span v-if="shouldShowSortOption(option, input)">{ titleCase(option) }}</span>
+                                    <span v-if="shouldShowSortOption(option, input)">{{ titleCase(option) }}</span>
                                 </li>
                             </ul>
                         </AppAccordion>
 
                         <AppSearchFilter
-                            :key="configFilter.key"
+                            :key="index"
                             :config-filter="configFilter"
-                            v-for="configFilter in $siteConfig.filters"
-                            :options="filters[configFilter.key]"
+                            v-for="(configFilter, index) in $siteConfig.filters"
+                            :options="getFilterOptions(configFilter)"
                         >
                             <template v-slot:display="{ isOpen }">
                                 <h3
