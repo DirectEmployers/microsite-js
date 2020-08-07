@@ -8,8 +8,6 @@
 
 <script>
 import AppHtmlToJson from "./Parse/AppHtmlToJson"
-import { removeEndOfLine } from "../services/helpers"
-
 export default {
     name: "AppJobDescription",
     props: {
@@ -28,7 +26,7 @@ export default {
 
     computed: {
         cleanHtml() {
-            return removeEndOfLine(this.html)
+            return this.html.replace(/(\r\n|\n|\r)/gm, "")
         },
     },
 }

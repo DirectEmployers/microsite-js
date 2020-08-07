@@ -41,7 +41,7 @@ export let states = {
     NY: "New York",
     NC: "North Carolina",
     ND: "North Dakota",
-    MP: "Northern mariana Islands",
+    MP: "Northern Mariana Islands",
     OH: "Ohio",
     OK: "Oklahoma",
     OR: "Oregon",
@@ -106,31 +106,18 @@ export function removeState(value) {
     return trimEnd(trim(result), ",")
 }
 
-
+/**
+ * Expand a code value to full state name.
+ */
 export function fullState(code){
 
-    code = trim(code)
+    let result = trim(code.toString())
 
-    if (Object.prototype.hasOwnProperty.call(states, code)) {
-        return states[code]
+    if (Object.prototype.hasOwnProperty.call(states, result.toUpperCase())) {
+        return states[result.toUpperCase()]
     }
 
-    return code
-}
-/**
- * Format a location value for search query/filters.
- * Removes country and tries to expand any province
- * code to its full value.
- */
-export function format(value) {
-
-    let formatted = trim(removeCountry(value))
-
-    let code = formatted.toUpperCase()
-
-    code = fullState(code)
-
-    return formatted
+    return result
 }
 
 

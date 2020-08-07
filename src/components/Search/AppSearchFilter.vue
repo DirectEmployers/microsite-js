@@ -22,7 +22,8 @@
             <li
                 @click="selectOption(option)"
                 class="search__filter-options-item"
-                v-for="option in displayedOptions"
+                :key="index"
+                v-for="(option, index) in displayedOptions"
             >
                 <slot name="option" :option="option">
                     {{ option.display }} ({{ option.value }})
@@ -57,7 +58,7 @@
 <script>
 import AppAccordion from "../AppAccordion"
 import { blank } from "../../services/helpers"
-import { format as formatLocation } from "../../services/api/location"
+import { removeCountry, fullState } from "../../services/api/location"
 
 export default {
     props: {
@@ -166,7 +167,11 @@ export default {
 
         formatDisplay(display) {
             if (this.queryParamName == "location") {
-                return formatLocation(display)
+                //strip of countries
+                display = removeCountry(display)
+                //and try to expand to a full value
+                display = fullState(display)
+
             }
 
             return display

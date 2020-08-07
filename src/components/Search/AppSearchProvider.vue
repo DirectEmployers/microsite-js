@@ -18,7 +18,7 @@
 </template>
 <script>
 import { blank, log } from "../../services/helpers"
-import { format as formatLocation } from "../../services/api/location"
+import { fullState, removeCountry } from "../../services/api/location"
 import { omitBy, clone, merge } from "lodash"
 import { SearchService, CommuteSearchService } from "../../services/api/search"
 import GoogleTalentJob from "../../services/api/drivers/job/google-talent"
@@ -120,7 +120,7 @@ export default {
             this.siteConfig.filters.forEach((filter) => {
                 param = filter.query_param
 
-                value = this.$route.query[param]
+                value = this.input[param]
 
                 if (!this.blank(value) && !duplicates.includes(param)) {
                     duplicates.push(param)
@@ -335,7 +335,7 @@ export default {
 
         formatInput() {
             if (!blank(this.input.location)) {
-                this.input.location = formatLocation(this.input.location)
+                this.input.location = fullState(removeCountry(this.input.location))
             }
         },
 
