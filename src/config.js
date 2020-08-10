@@ -1,8 +1,8 @@
 export default {
     buids: [27396],
     sources: {
-        // search: "solr",
-        search: "google_talent",
+        search: "solr",
+        // search: "google_talent",
         complete: "google_talent",
         commute: "google_talent",
     },
@@ -45,7 +45,8 @@ export default {
             display: "State",
             query_param: "location",
             attributes: {
-                google_talent: "state_country"
+                google_talent: "state_country",
+                solr: "state_short_exact"
             }
             // force_filters: "California"
         },
@@ -53,14 +54,16 @@ export default {
             display: "City",
             query_param: "location",
             attributes: {
-                google_talent: "city_admin1_country"
+                google_talent: "city_admin1_country",
+                solr: "location_exact"
             }
         },
         {
             display: "Title",
             query_param: "q",
             attributes: {
-                google_talent: "job_title"
+                google_talent: "job_title",
+                solr: "title_exact"
             }
         },
     ],
