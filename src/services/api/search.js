@@ -55,7 +55,7 @@ export class TitleCompleteService {
     static async get(q, siteConfig) {
         try {
 
-            const response = await api().get("complete", {
+            const response = await api().get("complete/title", {
                 params: {
                     data: { q: q },
                     config: siteConfig
