@@ -129,6 +129,7 @@
                         <AppSearchFilter
                             :key="index"
                             :config-filter="configFilter"
+                            :input="input"
                             v-for="(configFilter, index) in $siteConfig.filters"
                             :options="getFilterOptions(configFilter)"
                         >

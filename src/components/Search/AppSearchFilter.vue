@@ -71,6 +71,10 @@ export default {
             type: Array,
             default: () => [],
         },
+        input: {
+            required: true,
+            type: Object
+        },
         limit: {
             required: false,
             type: Number,
@@ -142,7 +146,7 @@ export default {
         },
 
         isExistingFilter(display) {
-            return this.$route.query[this.queryParamName] != display
+            return this.input[this.queryParamName] != display
         },
 
         filterOptions(options) {
