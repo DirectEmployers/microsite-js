@@ -20,7 +20,7 @@ export default {
             raw_query:{
                 google_talent: [
                     "(functionalarea=\"Sales\"",
-                    " OR ",
+                    "OR",
                     "functionalarea=\"Retail\")"
                 ]
             }
