@@ -1,8 +1,8 @@
 export default {
     buids: [27396],
     sources: {
-        search: "solr",
-        // search: "google_talent",
+        // search: "solr",
+        search: "google_talent",
         // complete: "google_talent",
         complete: "solr",
         commute: "google_talent",
@@ -17,7 +17,13 @@ export default {
             attributes: {
                 google_talent: 'functionalarea'
             },
-            // force_filters: ["Sales","Retail"]
+            raw_query:{
+                google_talent: [
+                    "(functionalarea=\"Sales\"",
+                    " OR ",
+                    "functionalarea=\"Retail\")"
+                ]
+            }
         },
         {
             display: "Business Unit",
@@ -29,7 +35,6 @@ export default {
         {
             display: "Position Type",
             query_param: "positiontype",
-            // force_filters: ["Full-Time"]
             attributes: {
                 google_talent: "positiontype"
             }
@@ -40,7 +45,6 @@ export default {
             attributes: {
                 google_talent: "remoteposition"
             }
-            // force_filters: ["Yes"]
         },
         {
             display: "State",
@@ -49,7 +53,6 @@ export default {
                 google_talent: "state_country",
                 solr: "state_short_exact"
             }
-            // force_filters: "California"
         },
         {
             display: "City",
