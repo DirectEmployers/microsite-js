@@ -13,6 +13,5 @@ module.exports = {
         tailwindConfig: './tailwind.config.js'
       }
     }
-  ],
-  pathPrefix: '/demo/src'
+  ]
 }
