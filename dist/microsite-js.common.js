@@ -140,12 +140,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=dfb903f2&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=5df5308c&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=dfb903f2&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=5df5308c&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
 var AppSearchProvidervue_type_script_lang_js_ = __webpack_require__("6651");
@@ -19906,12 +19906,10 @@ function typeToTarget(href, type) {
 /* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("d4ec");
 /* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("bee2");
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("ade3");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("2ef0");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _location__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("3fcc");
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("a74a");
-
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("2ef0");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _location__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("3fcc");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("a74a");
 
 
 
@@ -19939,7 +19937,7 @@ var BaseJob = /*#__PURE__*/function () {
   }, {
     key: "getAttribute",
     value: function getAttribute(attribute) {
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_9__["get"])(this.data, attribute);
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_8__["get"])(this.data, attribute);
     }
   }, {
     key: "getTitle",
@@ -19976,8 +19974,8 @@ var BaseJob = /*#__PURE__*/function () {
     value: function getCustomAttribute(attribute) {
       var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var customAttr = "customAttributes.".concat(attribute, ".stringValues");
-      var value = Object(lodash__WEBPACK_IMPORTED_MODULE_9__["get"])(this.data, customAttr, defaultValue);
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_9__["isArray"])(value) ? value.join(" ") : value;
+      var value = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["get"])(this.data, customAttr, defaultValue);
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_8__["isArray"])(value) ? value.join(" ") : value;
     }
   }, {
     key: "hasCommuteInfo",
@@ -20023,8 +20021,8 @@ var BaseJob = /*#__PURE__*/function () {
     key: "getDetailUrl",
     value: function getDetailUrl() {
       var guid = this.getGuid();
-      var locationSlug = Object(lodash__WEBPACK_IMPORTED_MODULE_9__["kebabCase"])(Object(_location__WEBPACK_IMPORTED_MODULE_10__[/* removeCountry */ "b"])(this.getLocation()));
-      var titleSlug = Object(lodash__WEBPACK_IMPORTED_MODULE_9__["kebabCase"])(this.getTitle());
+      var locationSlug = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["kebabCase"])(Object(_location__WEBPACK_IMPORTED_MODULE_9__[/* removeCountry */ "b"])(this.getLocation()));
+      var titleSlug = Object(lodash__WEBPACK_IMPORTED_MODULE_8__["kebabCase"])(this.getTitle());
       return "/".concat(locationSlug, "/").concat(titleSlug, "/").concat(guid, "/job/");
     }
   }, {
@@ -20064,8 +20062,6 @@ var BaseJob = /*#__PURE__*/function () {
 
   return BaseJob;
 }();
-
-Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"])(BaseJob, "KEY", null);
 
 
 
@@ -23042,10 +23038,10 @@ var component = Object(componentNormalizer["a" /* default */])(
     },
     getJobDriver: function getJobDriver(source) {
       switch (source) {
-        case _services_api_drivers_job_solr__WEBPACK_IMPORTED_MODULE_18__[/* default */ "a"].KEY:
+        case "solr":
           return _services_api_drivers_job_solr__WEBPACK_IMPORTED_MODULE_18__[/* default */ "a"];
 
-        case _services_api_drivers_job_google_talent__WEBPACK_IMPORTED_MODULE_17__[/* default */ "a"].KEY:
+        case "google_talent":
           return _services_api_drivers_job_google_talent__WEBPACK_IMPORTED_MODULE_17__[/* default */ "a"];
 
         default:
@@ -24625,9 +24621,7 @@ module.exports = DESCRIPTORS ? function (object, key, value) {
 /* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("d4ec");
 /* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("262e");
 /* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createSuper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("2caf");
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("ade3");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("3237");
-
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("3237");
 
 
 
@@ -24645,9 +24639,7 @@ var SolrJob = /*#__PURE__*/function (_BaseJob) {
   }
 
   return SolrJob;
-}(_base__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]);
-
-Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(SolrJob, "KEY", "solr");
+}(_base__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]);
 
 
 
@@ -31483,11 +31475,9 @@ module.exports = function (it) {
 /* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("bee2");
 /* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("262e");
 /* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createSuper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("2caf");
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("ade3");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("3237");
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("a74a");
-/* harmony import */ var _location__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("3fcc");
-
+/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("3237");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("a74a");
+/* harmony import */ var _location__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("3fcc");
 
 
 
@@ -31547,14 +31537,14 @@ var GoogleTalentJob = /*#__PURE__*/function (_BaseJob) {
     key: "getCity",
     value: function getCity() {
       var location = this.getLocation();
-      return Object(_location__WEBPACK_IMPORTED_MODULE_12__[/* removeState */ "c"])(Object(_location__WEBPACK_IMPORTED_MODULE_12__[/* removeCountry */ "b"])(location));
+      return Object(_location__WEBPACK_IMPORTED_MODULE_11__[/* removeState */ "c"])(Object(_location__WEBPACK_IMPORTED_MODULE_11__[/* removeCountry */ "b"])(location));
     }
   }, {
     key: "getState",
     value: function getState() {
       var location = this.getLocation();
       location = location.split(",");
-      return Object(_location__WEBPACK_IMPORTED_MODULE_12__[/* fullState */ "a"])(location[1]);
+      return Object(_location__WEBPACK_IMPORTED_MODULE_11__[/* fullState */ "a"])(location[1]);
     }
   }, {
     key: "getDeletedAt",
@@ -31579,7 +31569,7 @@ var GoogleTalentJob = /*#__PURE__*/function (_BaseJob) {
   }, {
     key: "hasCommuteInfo",
     value: function hasCommuteInfo() {
-      if (Object(_helpers__WEBPACK_IMPORTED_MODULE_11__[/* blank */ "a"])(this.commuteInfo)) {
+      if (Object(_helpers__WEBPACK_IMPORTED_MODULE_10__[/* blank */ "a"])(this.commuteInfo)) {
         return false;
       }
 
@@ -31604,9 +31594,7 @@ var GoogleTalentJob = /*#__PURE__*/function (_BaseJob) {
   }]);
 
   return GoogleTalentJob;
-}(_base__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"]);
-
-Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"])(GoogleTalentJob, "KEY", "google_talent");
+}(_base__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"]);
 
 
 

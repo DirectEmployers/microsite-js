@@ -4,8 +4,6 @@ import { removeEndOfLine } from "../../../helpers"
 
 export default class BaseJob {
 
-    static KEY = null;
-
     constructor(job) {
         this.data = job
     }
