@@ -9,7 +9,7 @@
     "develop": "gridsome develop",
     "explore": "gridsome explore",
     "build-gridsome": "gridsome build",
-    "build": "vue-cli-service build --target lib --name microsite-js ./src/entry.js",
+    "build": "vue-cli-service build --target lib --name microsite-js ./src/index.js",
     "lint": "vue-cli-service lint",
     "test": "jest --no-cache"
   },
@@ -26,7 +26,6 @@
     "@babel/core": "^7.10.2",
     "serve": "^11.3.2",
     "gridsome": "^0.7.19",
-    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.10.2",
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",

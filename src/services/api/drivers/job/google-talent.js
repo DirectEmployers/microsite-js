@@ -3,8 +3,6 @@ import { blank } from '../../../helpers'
 import { removeState, removeCountry, fullState } from '../../location'
 export default class GoogleTalentJob extends BaseJob{
 
-    static KEY = "google_talent";
-
     constructor(job) {
         super(job.job)
         this.commuteInfo = job.commuteInfo
