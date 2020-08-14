@@ -17,13 +17,11 @@ export default {
             attributes: {
                 google_talent: 'functionalarea'
             },
-            raw_query:{
+            raw_force_query:{
                 google_talent: [
-                    "(functionalarea=\"Sales\"",
-                    "OR",
-                    "functionalarea=\"Retail\")"
+                    "(functionalarea=\"Sales\" OR functionalarea=\"Retail\")",
                 ]
-            }
+            },
         },
         {
             display: "Business Unit",
