@@ -242,9 +242,9 @@ export default {
 
         getJobDriver(source) {
             switch (source) {
-                case SolrJob.KEY:
+                case "solr":
                     return SolrJob
-                case GoogleTalentJob.KEY:
+                case "google_talent":
                     return GoogleTalentJob
                 default:
                     throw new Error(`Unsupported job driver/source ${source}`)
