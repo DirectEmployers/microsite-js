@@ -1,5 +1,11 @@
 <template>
-<div class="form__autocomplete">
+<div 
+    class="form__autocomplete" 
+    role="combobox"
+    aria-haspopup="listbox"
+    :aria-owns="`form__autocomplete-items-${id}`"
+    :aria-expanded="isExpanded"
+>
     <label
         v-if="label"
         class="form__label"
@@ -22,11 +28,9 @@
         @keydown.down="keyDown"
         aria-autocomplete="list"
         aria-haspopup="listbox"
-        role="combobox"
         aria-controls="form__autocomplete-results"
         :aria-labelledby="`form__label-${id}`"
-        :aria-expanded="isExpanded"
-        :aria-activedescendant="activeDesendent"
+        :aria-activedescendant="activeDescendant"
     >
     <div
         v-if="loading"
@@ -49,9 +53,14 @@
                         :ref="`option-${index}`"
                         :key="index"
                         :id="`form__autocomplete--${id}-${index}`"
-                        :class="{'form__autocomplete-item--active': index === selectedIndex}"
+                        :class="{
+                            'form__autocomplete-item--active':
+                                index === selectedIndex,
+                        }"
                         @mouseover="selectedIndex = index"
                         @click="setValue(result)"
+                        role="option" 
+                        :aria-selected="activeDescendant"
                     >
                         {{ result[display] }}
                     </li>
@@ -168,7 +177,7 @@ export default {
         isExpanded () {
             return this.results.length ? "true" : "false"
         },
-        activeDesendent () {
+        activeDescendant () {
             return this.selectedIndex > -1 ? `form__autocomplete--${this.id}-${this.selectedIndex}` : ""
         }
     }
