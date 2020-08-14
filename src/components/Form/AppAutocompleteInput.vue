@@ -30,7 +30,7 @@
         aria-haspopup="listbox"
         aria-controls="form__autocomplete-results"
         :aria-labelledby="`form__label-${id}`"
-        :aria-activedescendant="activeDesendent"
+        :aria-activedescendant="activeDescendant"
     >
     <div
         v-if="loading"
@@ -60,7 +60,7 @@
                         @mouseover="selectedIndex = index"
                         @click="setValue(result)"
                         role="option" 
-                        :aria-selected="activeDesendent"
+                        :aria-selected="activeDescendant"
                     >
                         {{ result[display] }}
                     </li>
@@ -177,7 +177,7 @@ export default {
         isExpanded () {
             return this.results.length ? "true" : "false"
         },
-        activeDesendent () {
+        activeDescendant () {
             return this.selectedIndex > -1 ? `form__autocomplete--${this.id}-${this.selectedIndex}` : ""
         }
     }
