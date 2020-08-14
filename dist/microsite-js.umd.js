@@ -503,14 +503,14 @@ module.exports = ''.repeat || function repeat(count) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=53025b03&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=2fd86000&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (!_vm.blank(_vm.filteredOptions) && _vm.isVisible)?_c('AppAccordion',{key:(_vm.keyName + "-accordion"),staticClass:"search__filter",attrs:{"open":_vm.isActive,"name":(_vm.keyName + "-accordion")},scopedSlots:_vm._u([{key:"header",fn:function(ref){
 var isOpen = ref.isOpen;
 return [_vm._t("display",[(_vm.configFilter.display)?_c('h3',{staticClass:"search__filter-display",class:{ 'search__filter-display--active': _vm.isActive }},[_vm._v(" "+_vm._s(_vm.configFilter.display)+" ")]):_vm._e()],{"isOpen":isOpen})]}}],null,true)},[_c('ul',{staticClass:"search__filter-options"},_vm._l((_vm.displayedOptions),function(option,index){return _c('li',{key:index,staticClass:"search__filter-options-item",on:{"click":function($event){return _vm.selectOption(option)}}},[_vm._t("option",[_vm._v(" "+_vm._s(option.display)+" ("+_vm._s(option.value)+") ")],{"option":option})],2)}),0),(_vm.shouldShowLess || _vm.hasMoreItems)?_c('section',{staticClass:"search__filter-limiter"},[(_vm.hasMoreItems)?_c('button',{staticClass:"search__filter-limiter-more",attrs:{"aria-label":"Show more filters","rel":"nofollow"},on:{"click":function($event){return _vm.showMore()}}},[_vm._v(" More ")]):_vm._e(),(_vm.shouldShowLess)?_c('button',{staticClass:"search__filter-limiter-less",attrs:{"aria-label":"Show less filters","rel":"nofollow"},on:{"click":function($event){return _vm.showLess()}}},[_vm._v(" Less ")]):_vm._e()]):_vm._e()]):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=53025b03&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=2fd86000&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -619,6 +619,10 @@ var api_location = __webpack_require__("3fcc");
         return [];
       }
     },
+    input: {
+      required: true,
+      type: Object
+    },
     limit: {
       required: false,
       type: Number,
@@ -677,7 +681,7 @@ var api_location = __webpack_require__("3fcc");
       this.$emit("search.filter.selected", option);
     },
     isExistingFilter: function isExistingFilter(display) {
-      return this.$route.query[this.queryParamName] != display;
+      return this.input[this.queryParamName] != display;
     },
     filterOptions: function filterOptions(options) {
       var _this = this;
@@ -31952,7 +31956,7 @@ var TitleCompleteService = /*#__PURE__*/function () {
               case 0:
                 _context3.prev = 0;
                 _context3.next = 3;
-                return api().get("complete", {
+                return api().get("complete/title", {
                   params: {
                     data: {
                       q: q
@@ -32055,7 +32059,7 @@ var web_dom_collections_iterator = __webpack_require__("ddb0");
 // EXTERNAL MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 
-// CONCATENATED MODULE: ./src/entry.js
+// CONCATENATED MODULE: ./src/index.js
 
 
 
@@ -32080,13 +32084,13 @@ function install(Vue) {
   });
 } // Export the library as a plugin for Vue.use()
 
-/* harmony default export */ var entry = ({
+/* harmony default export */ var src_0 = ({
   install: install
 });
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 
 
-/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (entry);
+/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (src_0);
 
 
 
