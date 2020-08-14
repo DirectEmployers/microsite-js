@@ -1,72 +1,74 @@
 <template>
-    <div 
-        class="form__autocomplete" 
-        role="combobox"
-        aria-haspopup="listbox"
-        :aria-owns="`form__autocomplete-items-${id}`"
-        :aria-expanded="isExpanded"
-    >
-        <label
-            v-if="label"
-            class="form__label"
-            :id="`form__label-${id}`"
-            :for="`form__autocomplete-${id}`"
-        >
+<div 
+    class="form__autocomplete" 
+    role="combobox"
+    aria-haspopup="listbox"
+    :aria-owns="`form__autocomplete-items-${id}`"
+    :aria-expanded="isExpanded"
+>
+    <label
+        v-if="label"
+        class="form__label"
+        :id="`form__label-${id}`"
+        :for="`form__autocomplete-${id}`">
             {{ label }}
-        </label>
-        <input
-            :id="`form__autocomplete-${id}`"
-            ref="input"
-            v-bind="$attrs"
-            class="form__input"
-            type="text"
-            :value="value"
-            @input="changeValue($event.target.value)"
-            @blur="blur"
-            @keydown.enter.prevent="keyEnter"
-            @keydown.tab="keyEnter"
-            @keydown.up="keyUp"
-            @keydown.down="keyDown"
-            aria-autocomplete="list"
-            aria-haspopup="listbox"
-            aria-controls="form__autocomplete-results"
-            :aria-labelledby="`form__label-${id}`"
-            :aria-activedescendant="activeDesendent"
-        />
-        <div
-            v-if="loading"
-            class="form__autocomplete--loading spinner spinner--gray"
-        ></div>
+    </label>
+    <input
+        :id="`form__autocomplete-${id}`"
+        ref="input"
+        v-bind="$attrs"
+        class="form__input"
+        type="text"
+        :value="value"
+        @input="changeValue($event.target.value)"
+        @blur="blur"
+        @keydown.enter.prevent="keyEnter"
+        @keydown.tab="keyEnter"
+        @keydown.up="keyUp"
+        @keydown.down="keyDown"
+        aria-autocomplete="list"
+        aria-haspopup="listbox"
+        aria-controls="form__autocomplete-results"
+        :aria-labelledby="`form__label-${id}`"
+        :aria-activedescendant="activeDesendent"
+    >
+    <div
+        v-if="loading"
+        class="form__autocomplete--loading spinner spinner--gray"
+    ></div>
 
-        <div v-show="results.length" class="form__autocomplete-results">
-            <ul
-                class="form__autocomplete-items"
-                :id="`form__autocomplete-items-${id}`"
-                role="listbox"
-            >
-                <template v-for="(result, index) in results">
-                    <slot name="result" :result="result">
-                        <li
-                            class="form__autocomplete-item"
-                            :ref="`option-${index}`"
-                            :key="index"
-                            :id="`form__autocomplete--${id}-${index}`"
-                            :class="{
-                                'form__autocomplete-item--active':
-                                    index === selectedIndex,
-                            }"
-                            @mouseover="selectedIndex = index"
-                            @click="setValue(result)"
-                            role="option" 
-                            :aria-selected="activeDesendent"
-                        >
-                            {{ result[display] }}
-                        </li>
-                    </slot>
-                </template>
-            </ul>
-        </div>
+    <div
+        v-show="results.length"
+        class="form__autocomplete-results"
+    >
+        <ul
+            class="form__autocomplete-items"
+            id="`form__autocomplete-items-${id}`"
+            role="listbox"
+        >
+            <template v-for="(result, index) in results">
+                <slot name="result" :result="result">
+                    <li
+                        class="form__autocomplete-item"
+                        :ref="`option-${index}`"
+                        :key="index"
+                        :id="`form__autocomplete--${id}-${index}`"
+                        :class="{
+                            'form__autocomplete-item--active':
+                                index === selectedIndex,
+                        }"
+                        @mouseover="selectedIndex = index"
+                        @click="setValue(result)"
+                        role="option" 
+                        :aria-selected="activeDesendent"
+                    >
+                        {{ result[display] }}
+                    </li>
+                </slot>
+            </template>
+        </ul>
     </div>
+</div>
 </template>
 
 <script>
@@ -82,9 +84,10 @@ export default {
                 return `${this._uid}`
             },
         },
-        siteConfig: {
+        siteConfig:{
             type: Object,
-            required: true,
+            required: true
+
         },
         value: String,
         label: String,
@@ -92,8 +95,8 @@ export default {
         display: {
             type: String,
             required: false,
-            default: "display",
-        },
+            default: "display"
+        }
     },
     data() {
         return {
@@ -101,11 +104,11 @@ export default {
             results: [],
             result: null,
             loading: false,
-            error: null,
+            error: null
         }
     },
     methods: {
-        doSearch: debounce(async function(value) {
+        doSearch: debounce( async function (value) {
             this.loading = true
             if (value.length < 2) {
                 this.loading = false
@@ -120,22 +123,22 @@ export default {
                 this.loading = false
             }
         }, 200),
-        changeValue(value) {
+        changeValue (value) {
             this.$emit("input", value)
             this.selectedIndex = -1
             this.doSearch(value)
         },
-        blur(event) {
+        blur (event) {
             this.$emit("input", event.target.value)
-            setTimeout(() => (this.results = []), 200)
+            setTimeout( () => this.results = [], 200)
         },
-        setValue(result) {
+        setValue (result) {
             this.$emit("input", result[this.display])
             this.result = result
             this.$emit("setResult", result)
         },
-        keyEnter() {
-            if (this.selectedIndex !== -1) {
+        keyEnter () {
+            if(this.selectedIndex !== -1) {
                 this.setValue(this.results[this.selectedIndex])
                 this.results = []
                 this.selectedIndex = -1
@@ -145,7 +148,7 @@ export default {
                 this.$emit("setResult", null)
             }
         },
-        keyUp() {
+        keyUp () {
             if (this.selectedIndex > -1) {
                 this.selectedIndex--
             }
@@ -154,7 +157,7 @@ export default {
             }
             this.scroll()
         },
-        keyDown() {
+        keyDown () {
             if (this.selectedIndex <= this.results.length) {
                 this.selectedIndex++
             }
@@ -166,23 +169,17 @@ export default {
         scroll() {
             const option = this.$refs[`option-${this.selectedIndex}`]
             if (option) {
-                option[0].scrollIntoView({
-                    behavior: "smooth",
-                    block: "nearest",
-                    inline: "start",
-                })
+                option[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
             }
-        },
+        }
     },
     computed: {
-        isExpanded() {
+        isExpanded () {
             return this.results.length ? "true" : "false"
         },
-        activeDesendent() {
-            return this.selectedIndex > -1
-                ? `form__autocomplete--${this.id}-${this.selectedIndex}`
-                : ""
-        },
-    },
+        activeDesendent () {
+            return this.selectedIndex > -1 ? `form__autocomplete--${this.id}-${this.selectedIndex}` : ""
+        }
+    }
 }
 </script>
