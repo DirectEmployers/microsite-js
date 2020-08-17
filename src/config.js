@@ -10,18 +10,16 @@ export default {
     project_id: "cloudjobsearch-256720",
     tenant_uuid: "bb9d54aa-b8d6-426b-927f-f9cb4b7e8ed1",
     company_uuids: ["f3089179-7876-49f0-a80a-437b8f90924a"],
+    force_filters:{
+        google_talent:"(functionalarea=\"Sales\"  OR functionalarea=\"Retail\")"
+    },
     filters: [
         {
             display: "Functional Area",
             query_param: "functionalarea",
             attributes: {
                 google_talent: 'functionalarea'
-            },
-            raw_force_query:{
-                google_talent: [
-                    "(functionalarea=\"Sales\" OR functionalarea=\"Retail\")",
-                ]
-            },
+            }
         },
         {
             display: "Business Unit",
