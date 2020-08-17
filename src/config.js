@@ -1,8 +1,8 @@
 export default {
     buids: [27396],
     sources: {
-        search: "solr",
-        // search: "google_talent",
+        // search: "solr",
+        search: "google_talent",
         // complete: "google_talent",
         complete: "solr",
         commute: "google_talent",
@@ -10,14 +10,16 @@ export default {
     project_id: "cloudjobsearch-256720",
     tenant_uuid: "bb9d54aa-b8d6-426b-927f-f9cb4b7e8ed1",
     company_uuids: ["f3089179-7876-49f0-a80a-437b8f90924a"],
+    force_filters:{
+        google_talent:"(functionalarea=\"Sales\"  OR functionalarea=\"Retail\")"
+    },
     filters: [
         {
             display: "Functional Area",
             query_param: "functionalarea",
             attributes: {
                 google_talent: 'functionalarea'
-            },
-            // force_filters: ["Sales","Retail"]
+            }
         },
         {
             display: "Business Unit",
@@ -29,7 +31,6 @@ export default {
         {
             display: "Position Type",
             query_param: "positiontype",
-            // force_filters: ["Full-Time"]
             attributes: {
                 google_talent: "positiontype"
             }
@@ -40,7 +41,6 @@ export default {
             attributes: {
                 google_talent: "remoteposition"
             }
-            // force_filters: ["Yes"]
         },
         {
             display: "State",
@@ -49,7 +49,6 @@ export default {
                 google_talent: "state_country",
                 solr: "state_short_exact"
             }
-            // force_filters: "California"
         },
         {
             display: "City",

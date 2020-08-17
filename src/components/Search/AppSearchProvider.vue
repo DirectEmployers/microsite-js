@@ -263,20 +263,7 @@ export default {
         },
 
         getPayload() {
-            const payload = clone(omitBy(this.input, blank))
-
-            this.siteConfig.filters.map((filter) => {
-                if (
-                    Object.prototype.hasOwnProperty.call(
-                        filter,
-                        "force_filters"
-                    )
-                ) {
-                    payload[filter.query_param] = filter.force_filters
-                }
-            })
-
-            return payload
+            return clone(omitBy(this.input, blank))
         },
 
         getFilterOptions(filter){
