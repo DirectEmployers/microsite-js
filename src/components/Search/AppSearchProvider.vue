@@ -20,7 +20,7 @@
 <script>
 import { blank, log } from "../../services/helpers"
 import { fullState, removeCountry } from "../../services/api/location"
-import { omitBy, clone, merge } from "lodash"
+import { omitBy, clone, merge, get } from "lodash"
 import { SearchService, CommuteSearchService } from "../../services/api/search"
 import GoogleTalentJob from "../../services/api/drivers/job/google-talent"
 import SolrJob from "../../services/api/drivers/job/solr"
@@ -267,7 +267,14 @@ export default {
         },
 
         getFilterOptions(filter){
-            const attribute = filter.attributes[this.meta.source]
+            let attribute = null
+            const isSolr = this.meta.source == 'solr'
+
+            if(isSolr && Object.prototype.hasOwnProperty.call(filter, 'custom_facets')){
+                attribute = filter.query_param
+            }else{
+                attribute = filter.attributes[this.meta.source]
+            }
 
             return this.filters[attribute] || []
         },

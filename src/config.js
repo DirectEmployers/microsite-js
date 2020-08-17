@@ -1,8 +1,8 @@
 export default {
     buids: [27396],
     sources: {
-        // search: "solr",
-        search: "google_talent",
+        search: "solr",
+        // search: "google_talent",
         // complete: "google_talent",
         complete: "solr",
         commute: "google_talent",
@@ -11,7 +11,8 @@ export default {
     tenant_uuid: "bb9d54aa-b8d6-426b-927f-f9cb4b7e8ed1",
     company_uuids: ["f3089179-7876-49f0-a80a-437b8f90924a"],
     force_filters:{
-        google_talent:"(functionalarea=\"Sales\"  OR functionalarea=\"Retail\")"
+        // google_talent:"(functionalarea=\"Sales\"  OR functionalarea=\"Retail\")",
+        // solr:"title_exact:*Sales* OR title_exact:*Retail*"
     },
     filters: [
         {
@@ -38,6 +39,10 @@ export default {
         {
             display: "Remote Position",
             query_param: "remoteposition",
+            custom_facets: {
+                "Yes": 'text:"Remote Position? Yes"',
+                "No": 'text:"Remote Position? No"'
+            },
             attributes: {
                 google_talent: "remoteposition"
             }
