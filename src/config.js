@@ -20,11 +20,20 @@ export default {
             query_param: "functionalarea",
             attributes: {
                 google_talent: 'functionalarea'
+            },
+            custom_facets: {
+                "Warehouse": 'text:"Functional Area Warehouse" OR text:"Job Post Category Warehouse"',
+                "Transportation": 'text:"Functional Area Transportation" OR text:"Job Post Category Transportation"',
+                "Sales": 'text:"Functional Area Sales" OR text:"Job Post Category Sales"'
             }
         },
         {
             display: "Business Unit",
             query_param: "businessunit",
+            custom_facets:{
+                "Facilities Maintenance" :'text:"Business Unit Facilities Maintenance"',
+                "Construction Industrial WC" :'text:"Business Unit Construction Industrial WC"'
+            },
             attributes: {
                 google_talent: "businessunit"
             }
@@ -32,6 +41,10 @@ export default {
         {
             display: "Position Type",
             query_param: "positiontype",
+            custom_facets: {
+                "Full-Time": 'text:"Position Type Full-Time"',
+                "Part-Time": 'text:"Position Type Part-Time"'
+            },
             attributes: {
                 google_talent: "positiontype"
             }

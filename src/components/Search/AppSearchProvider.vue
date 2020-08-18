@@ -267,16 +267,17 @@ export default {
         },
 
         getFilterOptions(filter){
-            let attribute = null
-            const isSolr = this.meta.source == 'solr'
+            let attribute = filter.attributes[this.meta.source]
 
-            if(isSolr && Object.prototype.hasOwnProperty.call(filter, 'custom_facets')){
+            if(this.blank(attribute)){
                 attribute = filter.query_param
-            }else{
-                attribute = filter.attributes[this.meta.source]
             }
 
-            return this.filters[attribute] || []
+            if(Object.prototype.hasOwnProperty.call(this.filters, attribute)){
+                return this.filters[attribute]
+            }
+
+            return []
         },
 
         setMeta(meta) {
@@ -311,7 +312,7 @@ export default {
 
                 this.pagination = pagination
 
-                this.filters = filters
+                this.filters = filters || {}
 
                 this.setMeta(data.meta)
                 // emit once DOM/other components are ready
@@ -356,7 +357,7 @@ export default {
             //if this is the case, be flexible and default to location
             //if this is the case
             try {
-                const isString = typeof searchType != "string"
+                const isString = typeof type != "string"
 
                 if (isString && type.constructor.name == "SubmitEvent") {
                     type = "location"
