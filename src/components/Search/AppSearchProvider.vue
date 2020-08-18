@@ -20,7 +20,7 @@
 <script>
 import { blank, log } from "../../services/helpers"
 import { fullState, removeCountry } from "../../services/api/location"
-import { omitBy, clone, merge, get } from "lodash"
+import { omitBy, clone, merge } from "lodash"
 import { SearchService, CommuteSearchService } from "../../services/api/search"
 import GoogleTalentJob from "../../services/api/drivers/job/google-talent"
 import SolrJob from "../../services/api/drivers/job/solr"
