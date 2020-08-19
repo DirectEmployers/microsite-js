@@ -153,6 +153,7 @@
 
                         <CommuteSearchForm
                             :input="input"
+                            v-if="meta.source != 'solr'"
                             :submitSearchForm="submitSearchForm"
                             :getUserCoordinates="getUserCoordinates"
                         />
