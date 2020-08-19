@@ -137,9 +137,13 @@ export default {
         },
 
         filterParamList() {
-            return this.siteConfig.filters.map((filter) => {
+            let params = this.siteConfig.filters.map((filter) => {
                 return filter.query_param
             })
+
+            params.push("coords")
+
+            return params
         }
     },
     watch: {
@@ -176,6 +180,8 @@ export default {
 
             if (param == "*") {
                 toRemove = this.filterParamList
+            }else if(param == 'location'){
+                toRemove = [param, 'coords']
             }
 
             const query = { ...this.$route.query }
