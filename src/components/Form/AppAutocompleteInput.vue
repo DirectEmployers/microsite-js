@@ -1,71 +1,71 @@
 <template>
-    <div
-        class="form__autocomplete"
-        role="combobox"
+<div
+    class="form__autocomplete"
+    role="combobox"
+    aria-haspopup="listbox"
+    :aria-owns="`form__autocomplete-items-${id}`"
+    :aria-expanded="isExpanded"
+>
+    <label
+        v-if="label"
+        class="form__label"
+        :id="`form__label-${id}`"
+        :for="`form__autocomplete-${id}`">
+            {{ label }}
+    </label>
+    <input
+        :id="`form__autocomplete-${id}`"
+        ref="input"
+        v-bind="$attrs"
+        class="form__input"
+        type="text"
+        :value="value"
+        @input="changeValue($event.target.value)"
+        @blur="blur"
+        @keydown.enter.prevent="keyEnter"
+        @keydown.tab="keyEnter"
+        @keydown.up="keyUp"
+        @keydown.down="keyDown"
+        aria-autocomplete="list"
         aria-haspopup="listbox"
-        :aria-owns="`form__autocomplete-items-${id}`"
-        :aria-expanded="isExpanded"
+        aria-controls="form__autocomplete-results"
+        :aria-labelledby="`form__label-${id}`"
+        :aria-activedescendant="activeDescendant"
     >
-        <label
-            v-if="label"
-            class="form__label"
-            :id="`form__label-${id}`"
-            :for="`form__autocomplete-${id}`">
-                {{ label }}
-        </label>
-        <input
-            :id="`form__autocomplete-${id}`"
-            ref="input"
-            v-bind="$attrs"
-            class="form__input"
-            type="text"
-            :value="value"
-            @input="changeValue($event.target.value)"
-            @blur="blur"
-            @keydown.enter.prevent="keyEnter"
-            @keydown.tab="keyEnter"
-            @keydown.up="keyUp"
-            @keydown.down="keyDown"
-            aria-autocomplete="list"
-            aria-haspopup="listbox"
-            aria-controls="form__autocomplete-results"
-            :aria-labelledby="`form__label-${id}`"
-            :aria-activedescendant="activeDescendant"
-        >
-        <div
-            v-if="loading"
-            class="form__autocomplete--loading spinner spinner--gray"
-        ></div>
+    <div
+        v-if="loading"
+        class="form__autocomplete--loading spinner spinner--gray"
+    ></div>
 
-        <div
-            v-show="results.length"
-            class="form__autocomplete-results"
+    <div
+        v-show="results.length"
+        class="form__autocomplete-results"
+    >
+        <ul
+            class="form__autocomplete-items"
+            id="`form__autocomplete-items-${id}`"
+            role="listbox"
         >
-            <ul
-                class="form__autocomplete-items"
-                id="`form__autocomplete-items-${id}`"
-                role="listbox"
-            >
-                <template v-for="(result, index) in results">
-                    <slot name="result" :result="result">
-                        <li
-                            class="form__autocomplete-item"
-                            :ref="`option-${index}`"
-                            :key="index"
-                            :id="`form__autocomplete--${id}-${index}`"
-                            :class="{ 'form__autocomplete-item--active':index === selectedIndex }"
-                            @mouseover="selectedIndex = index"
-                            @click="setValue(result)"
-                            role="option"
-                            :aria-selected="activeDescendant"
-                        >
-                            {{ result[display] }}
-                        </li>
-                    </slot>
-                </template>
-            </ul>
-        </div>
+            <template v-for="(result, index) in results">
+                <slot name="result" :result="result">
+                    <li
+                        class="form__autocomplete-item"
+                        :ref="`option-${index}`"
+                        :key="index"
+                        :id="`form__autocomplete--${id}-${index}`"
+                        :class="{ 'form__autocomplete-item--active':index === selectedIndex }"
+                        @mouseover="selectedIndex = index"
+                        @click="setValue(result)"
+                        role="option"
+                        :aria-selected="activeDescendant"
+                    >
+                        {{ result[display] }}
+                    </li>
+                </slot>
+            </template>
+        </ul>
     </div>
+</div>
 </template>
 
 <script>
