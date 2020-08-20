@@ -191,6 +191,7 @@ export default {
             return startCase(toLower(str))
         },
         shouldShowSortOption(option, input){
+
             const hasLocation = input.location || input.coords;
 
             if(option == 'distance' && !hasLocation){

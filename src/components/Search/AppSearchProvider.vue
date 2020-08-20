@@ -72,13 +72,16 @@ export default {
                     options: ["relevance", "distance", "title", "date"],
                 },
             },
-            input: merge({
-                q: "",
-                r: 25,
-                location: "",
-                coords: null,
-                sort: "relevance",
-            }, this.getCommuteDefaults()),
+            input: merge(
+                {
+                    q: "",
+                    r: 25,
+                    location: "",
+                    coords: null,
+                    sort: "relevance",
+                },
+                this.getCommuteDefaults()
+            ),
         }
     },
     created() {
@@ -157,7 +160,6 @@ export default {
 
         input: {
             handler(newInput, oldInput) {
-                //clear coords when user changes location value.
                 this.$router.app.$emit(
                     "search.input.updated",
                     newInput,
@@ -168,7 +170,7 @@ export default {
         },
     },
     methods: {
-        getCommuteDefaults(){
+        getCommuteDefaults() {
             return {
                 searchType: "location",
                 commuteMethod: "DRIVING",
@@ -177,16 +179,36 @@ export default {
                 commuteLocation: "",
             }
         },
+        hasLocationInput(){
+
+            if(this.isLocationSearch && !this.blank(this.input.location)){
+                return true;
+            }
+
+            if(this.isCommuteSearch && !this.blank(this.input.coords)){
+                return true;
+            }
+
+            return false;
+        },
         removeFilter(param) {
+            const query = { ...this.$route.query }
+            const defaultSort = ()=>{
+                this.input.sort = 'relevance'
+                query['sort'] = this.input.sort
+            }
             let toRemove = [param]
 
             if (param == "*") {
                 toRemove = this.filterParamList
-            } else if (param == "location") {
-                toRemove = [param, "coords"]
-            }
 
-            const query = { ...this.$route.query }
+                if(!this.hasLocationInput()){
+                    defaultSort()
+                }
+            } else if (param == "location") {
+                defaultSort()
+                toRemove.push("coords")
+            }
 
             toRemove.forEach((param) => {
                 delete query[param]
@@ -303,6 +325,7 @@ export default {
                 hasJobs: this.hasJobs,
                 selectedFilters: this.selectedFilters,
             }
+
         },
         async search(input = null) {
             this.status.loading = true
@@ -320,7 +343,7 @@ export default {
 
                 const JobDriver = this.getJobDriver(data.meta.source)
 
-                this.jobs = jobs.map((job) => {
+                this.jobs = (jobs || []).map((job) => {
                     return new JobDriver(job)
                 })
 
@@ -331,6 +354,8 @@ export default {
                 this.setMeta(data.meta)
             } catch (error) {
                 this.status.error = error
+
+                this.meta.selectedFilters = []
 
                 log(error, "error")
             } finally {
@@ -348,9 +373,13 @@ export default {
 
         formatInput() {
             if (!blank(this.input.location)) {
-                this.input.location = fullState(
-                    removeCountry(this.input.location)
-                )
+                if(this.isLocationSearch){
+                    this.input.location = fullState(
+                        removeCountry(this.input.location)
+                    )
+                }else{
+                    this.input.location = ""
+                }
             }
         },
 
@@ -358,7 +387,7 @@ export default {
             this.input = clone(this.$route.query)
 
             //merge commute defaults so that we do not clear out v-model input values.
-            this.input = merge( this.getCommuteDefaults(), this.input)
+            this.input = merge(this.getCommuteDefaults(), this.input)
 
             this.formatInput()
         },
@@ -393,10 +422,7 @@ export default {
                 return true
             }
 
-            if (
-                this.isCommuteSearch &&
-                this.blank(this.input.commuteLocation)
-            ) {
+            if (this.isCommuteSearch && this.blank(this.input.commuteLocation)) {
                 return true
             }
 
@@ -406,6 +432,10 @@ export default {
             this.input.page = 1
 
             this.input.searchType = this.parseSearchType(searchType)
+
+            if(this.isCommuteSearch){
+                this.input.location = ""
+            }
 
             if (this.shouldClearCoords()) {
                 this.input.coords = ""
