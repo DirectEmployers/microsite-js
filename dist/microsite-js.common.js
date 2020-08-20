@@ -140,12 +140,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=01caf372&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=023ceb20&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=01caf372&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=023ceb20&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
 var AppSearchProvidervue_type_script_lang_js_ = __webpack_require__("6651");
@@ -494,20 +494,23 @@ module.exports = ''.repeat || function repeat(count) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=2fd86000&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=28da8b03&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (!_vm.blank(_vm.filteredOptions) && _vm.isVisible)?_c('AppAccordion',{key:(_vm.keyName + "-accordion"),staticClass:"search__filter",attrs:{"open":_vm.isActive,"name":(_vm.keyName + "-accordion")},scopedSlots:_vm._u([{key:"header",fn:function(ref){
 var isOpen = ref.isOpen;
 return [_vm._t("display",[(_vm.configFilter.display)?_c('h3',{staticClass:"search__filter-display",class:{ 'search__filter-display--active': _vm.isActive }},[_vm._v(" "+_vm._s(_vm.configFilter.display)+" ")]):_vm._e()],{"isOpen":isOpen})]}}],null,true)},[_c('ul',{staticClass:"search__filter-options"},_vm._l((_vm.displayedOptions),function(option,index){return _c('li',{key:index,staticClass:"search__filter-options-item",on:{"click":function($event){return _vm.selectOption(option)}}},[_vm._t("option",[_vm._v(" "+_vm._s(option.display)+" ("+_vm._s(option.value)+") ")],{"option":option})],2)}),0),(_vm.shouldShowLess || _vm.hasMoreItems)?_c('section',{staticClass:"search__filter-limiter"},[(_vm.hasMoreItems)?_c('button',{staticClass:"search__filter-limiter-more",attrs:{"aria-label":"Show more filters","rel":"nofollow"},on:{"click":function($event){return _vm.showMore()}}},[_vm._v(" More ")]):_vm._e(),(_vm.shouldShowLess)?_c('button',{staticClass:"search__filter-limiter-less",attrs:{"aria-label":"Show less filters","rel":"nofollow"},on:{"click":function($event){return _vm.showLess()}}},[_vm._v(" Less ")]):_vm._e()]):_vm._e()]):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=2fd86000&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=28da8b03&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
 var es_array_slice = __webpack_require__("fb6a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
+var es_function_name = __webpack_require__("b0c0");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
 var es_number_constructor = __webpack_require__("a9e3");
@@ -531,6 +534,7 @@ var helpers = __webpack_require__("a74a");
 var api_location = __webpack_require__("3fcc");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=script&lang=js&
+
 
 
 
@@ -639,7 +643,7 @@ var api_location = __webpack_require__("3fcc");
       return this.configFilter.visible !== false;
     },
     queryParamName: function queryParamName() {
-      return this.configFilter.query_param;
+      return this.configFilter.name;
     },
     keyName: function keyName() {
       return this.configFilter.key;
@@ -695,7 +699,7 @@ var api_location = __webpack_require__("3fcc");
     },
     formatDisplay: function formatDisplay(display) {
       if (this.queryParamName == "location") {
-        //strip of countries
+        //strip off countries
         display = Object(api_location["b" /* removeCountry */])(display); //and try to expand to a full value
 
         display = Object(api_location["a" /* fullState */])(display);
@@ -22886,24 +22890,18 @@ var component = Object(componentNormalizer["a" /* default */])(
       },
       meta: {
         hasJobs: this.hasJobs,
-        selectedFilters: [],
         sort: {
           active: "relevance",
           options: ["relevance", "distance", "title", "date"]
         }
       },
-      input: {
+      input: Object(lodash__WEBPACK_IMPORTED_MODULE_15__["merge"])({
         q: "",
         r: 25,
         location: "",
         coords: null,
-        sort: "relevance",
-        searchType: "location",
-        commuteMethod: "DRIVING",
-        travelDuration: "900",
-        roadTraffic: "TRAFFIC_FREE",
-        commuteLocation: ""
-      }
+        sort: "relevance"
+      }, this.getCommuteDefaults())
     };
   },
   created: function created() {
@@ -22927,22 +22925,28 @@ var component = Object(componentNormalizer["a" /* default */])(
     hasJobs: function hasJobs() {
       return (this.jobs || []).length > 0;
     },
+    isLocationSearch: function isLocationSearch() {
+      return this.input.searchType == "location";
+    },
+    isCommuteSearch: function isCommuteSearch() {
+      return this.input.searchType == "commute";
+    },
     selectedFilters: function selectedFilters() {
       var _this = this;
 
-      var value,
-          param = null;
+      var value = null;
+      var name = null;
       var duplicates = [];
       var filters = [];
       this.siteConfig.filters.forEach(function (filter) {
-        param = filter.query_param;
-        value = _this.input[param];
+        name = filter.name;
+        value = _this.input[name];
 
-        if (!_this.blank(value) && !duplicates.includes(param)) {
-          duplicates.push(param);
+        if (!_this.blank(value) && !duplicates.includes(name)) {
+          duplicates.push(name);
           filters.push({
             display: value,
-            parameter: param
+            parameter: name
           });
         }
       });
@@ -22950,7 +22954,7 @@ var component = Object(componentNormalizer["a" /* default */])(
     },
     filterParamList: function filterParamList() {
       var params = this.siteConfig.filters.map(function (filter) {
-        return filter.query_param;
+        return filter.name;
       });
       params.push("coords");
       return params;
@@ -22965,28 +22969,28 @@ var component = Object(componentNormalizer["a" /* default */])(
     input: {
       handler: function handler(newInput, oldInput) {
         //clear coords when user changes location value.
-        if (newInput.location != oldInput.location) {
-          newInput.coords = "";
-        } //clear out commute location when location search is done.
-
-
-        if (newInput.searchType == "location") {
-          newInput.commuteLocation = "";
-        }
-
         this.$router.app.$emit("search.input.updated", newInput, oldInput);
       },
       deep: true
     }
   },
   methods: {
+    getCommuteDefaults: function getCommuteDefaults() {
+      return {
+        searchType: "location",
+        commuteMethod: "DRIVING",
+        travelDuration: "900",
+        roadTraffic: "TRAFFIC_FREE",
+        commuteLocation: ""
+      };
+    },
     removeFilter: function removeFilter(param) {
       var toRemove = [param];
 
       if (param == "*") {
         toRemove = this.filterParamList;
-      } else if (param == 'location') {
-        toRemove = [param, 'coords'];
+      } else if (param == "location") {
+        toRemove = [param, "coords"];
       }
 
       var query = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_12__[/* default */ "a"])({}, this.$route.query);
@@ -23005,7 +23009,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
       var query = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_12__[/* default */ "a"])({}, this.$route.query);
 
-      query['sort'] = field;
+      query["sort"] = field;
       this.$router.replace({
         query: query
       });
@@ -23065,13 +23069,19 @@ var component = Object(componentNormalizer["a" /* default */])(
       }
     },
     getPayload: function getPayload() {
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_15__["clone"])(Object(lodash__WEBPACK_IMPORTED_MODULE_15__["omitBy"])(this.input, _services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* blank */ "a"]));
+      var data = Object(lodash__WEBPACK_IMPORTED_MODULE_15__["omitBy"])(Object(lodash__WEBPACK_IMPORTED_MODULE_15__["clone"])(this.input), _services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* blank */ "a"]);
+
+      if (this.input.searchType == "location") {
+        data = Object(lodash__WEBPACK_IMPORTED_MODULE_15__["omit"])(data, ["searchType", "commuteLocation", "roadTraffic", "travelDuration", "commuteMethod"]);
+      }
+
+      return data;
     },
     getFilterOptions: function getFilterOptions(filter) {
       var attribute = filter.attributes[this.meta.source];
 
       if (this.blank(attribute)) {
-        attribute = filter.query_param;
+        attribute = filter.name;
       }
 
       if (Object.prototype.hasOwnProperty.call(this.filters, attribute)) {
@@ -23099,7 +23109,7 @@ var component = Object(componentNormalizer["a" /* default */])(
                 input = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : null;
                 _this2.status.loading = true;
                 Service = _this2.getService();
-                input = input === null ? _this2.getPayload() : input;
+                input = _this2.blank(input) ? _this2.getPayload() : input;
                 _context.prev = 4;
                 _context.next = 7;
                 return Service.get(input, _this2.siteConfig);
@@ -23115,33 +23125,28 @@ var component = Object(componentNormalizer["a" /* default */])(
                 _this2.pagination = pagination;
                 _this2.filters = filters || {};
 
-                _this2.setMeta(data.meta); // emit once DOM/other components are ready
+                _this2.setMeta(data.meta);
 
-
-                _this2.$nextTick(function () {
-                  _this2.$router.app.$emit("search.completed", _this2.input);
-                });
-
-                _context.next = 22;
+                _context.next = 21;
                 break;
 
-              case 18:
-                _context.prev = 18;
+              case 17:
+                _context.prev = 17;
                 _context.t0 = _context["catch"](4);
                 _this2.status.error = _context.t0;
                 Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "b"])(_context.t0, "error");
 
-              case 22:
-                _context.prev = 22;
+              case 21:
+                _context.prev = 21;
                 _this2.status.loading = false;
-                return _context.finish(22);
+                return _context.finish(21);
 
-              case 25:
+              case 24:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[4, 18, 22, 25]]);
+        }, _callee, null, [[4, 17, 21, 24]]);
       }))();
     },
     getUserCoordinates: function getUserCoordinates() {
@@ -23150,6 +23155,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       this.getGeoLocation(function (coords) {
         _this3.input.coords = coords;
         _this3.input.location = _this3.geoLocationInputText;
+        _this3.input.sort = "distance";
       });
     },
     formatInput: function formatInput() {
@@ -23158,7 +23164,9 @@ var component = Object(componentNormalizer["a" /* default */])(
       }
     },
     setInputFromQuery: function setInputFromQuery() {
-      this.input = Object(lodash__WEBPACK_IMPORTED_MODULE_15__["clone"])(this.$route.query);
+      this.input = Object(lodash__WEBPACK_IMPORTED_MODULE_15__["clone"])(this.$route.query); //merge commute defaults so that we do not clear out v-model input values.
+
+      this.input = Object(lodash__WEBPACK_IMPORTED_MODULE_15__["merge"])(this.getCommuteDefaults(), this.input);
       this.formatInput();
     },
     blank: function blank(value) {
@@ -23185,13 +23193,30 @@ var component = Object(componentNormalizer["a" /* default */])(
 
       return type;
     },
+    shouldClearCoords: function shouldClearCoords() {
+      if (this.isLocationSearch && this.blank(this.input.location)) {
+        return true;
+      }
+
+      if (this.isCommuteSearch && this.blank(this.input.commuteLocation)) {
+        return true;
+      }
+
+      return false;
+    },
     submitSearchForm: function submitSearchForm() {
       var searchType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "location";
       this.input.page = 1;
       this.input.searchType = this.parseSearchType(searchType);
+
+      if (this.shouldClearCoords()) {
+        this.input.coords = "";
+        this.input.commuteLocation = "";
+      }
+
       this.$router.push({
         path: this.submitUrl,
-        query: Object(lodash__WEBPACK_IMPORTED_MODULE_15__["omitBy"])(this.input, _services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* blank */ "a"])
+        query: this.getPayload()
       }).catch(function (err) {
         Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "b"])(err, "error");
       });
@@ -28730,7 +28755,7 @@ module.exports = {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=3b4a33f1&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=5c367e62&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"form__autocomplete",attrs:{"role":"combobox","aria-haspopup":"listbox","aria-owns":("form__autocomplete-items-" + _vm.id),"aria-expanded":_vm.isExpanded}},[(_vm.label)?_c('label',{staticClass:"form__label",attrs:{"id":("form__label-" + _vm.id),"for":("form__autocomplete-" + _vm.id)}},[_vm._v(" "+_vm._s(_vm.label)+" ")]):_vm._e(),_c('input',_vm._b({ref:"input",staticClass:"form__input",attrs:{"id":("form__autocomplete-" + _vm.id),"type":"text","aria-autocomplete":"list","aria-haspopup":"listbox","aria-controls":"form__autocomplete-results","aria-labelledby":("form__label-" + _vm.id),"aria-activedescendant":_vm.activeDescendant},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.changeValue($event.target.value)},"blur":_vm.blur,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.keyEnter($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"tab",9,$event.key,"Tab")){ return null; }return _vm.keyEnter($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }return _vm.keyUp($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }return _vm.keyDown($event)}]}},'input',_vm.$attrs,false)),(_vm.loading)?_c('div',{staticClass:"form__autocomplete--loading spinner spinner--gray"}):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.results.length),expression:"results.length"}],staticClass:"form__autocomplete-results"},[_c('ul',{staticClass:"form__autocomplete-items",attrs:{"id":"`form__autocomplete-items-${id}`","role":"listbox"}},[_vm._l((_vm.results),function(result,index){return [_vm._t("result",[_c('li',{key:index,ref:("option-" + index),refInFor:true,staticClass:"form__autocomplete-item",class:{
                             'form__autocomplete-item--active':
                                 index === _vm.selectedIndex,
@@ -28738,7 +28763,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=3b4a33f1&
+// CONCATENATED MODULE: ./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=5c367e62&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -28889,7 +28914,7 @@ var lodash = __webpack_require__("2ef0");
               case 7:
                 _yield$this$query$get = _context.sent;
                 data = _yield$this$query$get.data;
-                this.results = data;
+                this.results = data || [];
                 _context.next = 15;
                 break;
 
@@ -31836,11 +31861,9 @@ var SearchService = /*#__PURE__*/function () {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return api().get("search", {
-                  params: {
-                    data: input,
-                    config: siteConfig
-                  }
+                return api().post("search", {
+                  data: input,
+                  config: siteConfig
                 });
 
               case 3:
@@ -31851,7 +31874,7 @@ var SearchService = /*#__PURE__*/function () {
                 _context.prev = 7;
                 _context.t0 = _context["catch"](0);
 
-                if (!Object.prototype.hasOwnProperty.call(_context.t0, 'response')) {
+                if (!Object.prototype.hasOwnProperty.call(_context.t0, "response")) {
                   _context.next = 11;
                   break;
                 }
@@ -31895,11 +31918,9 @@ var CommuteSearchService = /*#__PURE__*/function () {
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return api().get("commute", {
-                  params: {
-                    data: input,
-                    config: siteConfig
-                  }
+                return api().post("commute", {
+                  data: input,
+                  config: siteConfig
                 });
 
               case 3:
@@ -31910,7 +31931,7 @@ var CommuteSearchService = /*#__PURE__*/function () {
                 _context2.prev = 7;
                 _context2.t0 = _context2["catch"](0);
 
-                if (!Object.prototype.hasOwnProperty.call(_context2.t0, 'response')) {
+                if (!Object.prototype.hasOwnProperty.call(_context2.t0, "response")) {
                   _context2.next = 11;
                   break;
                 }
@@ -31959,7 +31980,15 @@ var TitleCompleteService = /*#__PURE__*/function () {
                     data: {
                       q: q
                     },
-                    config: siteConfig
+                    config: {
+                      sources: {
+                        complete: siteConfig.sources.complete
+                      },
+                      buids: siteConfig.buids,
+                      project_id: siteConfig.project_id,
+                      tenant_uuid: siteConfig.tenant_uuid,
+                      company_uuids: siteConfig.company_uuids
+                    }
                   }
                 });
 
@@ -31971,7 +32000,7 @@ var TitleCompleteService = /*#__PURE__*/function () {
                 _context3.prev = 7;
                 _context3.t0 = _context3["catch"](0);
 
-                if (!Object.prototype.hasOwnProperty.call(_context3.t0, 'response')) {
+                if (!Object.prototype.hasOwnProperty.call(_context3.t0, "response")) {
                   _context3.next = 11;
                   break;
                 }
