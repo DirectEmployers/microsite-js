@@ -16,8 +16,8 @@ export default {
     },
     filters: [
         {
+            name: "functionalarea",
             display: "Functional Area",
-            query_param: "functionalarea",
             attributes: {
                 google_talent: 'functionalarea'
             },
@@ -28,8 +28,8 @@ export default {
             }
         },
         {
+            name: "businessunit",
             display: "Business Unit",
-            query_param: "businessunit",
             custom_facets:{
                 "Facilities Maintenance" :'text:"Business Unit Facilities Maintenance"',
                 "Construction Industrial WC" :'text:"Business Unit Construction Industrial WC"'
@@ -39,8 +39,8 @@ export default {
             }
         },
         {
+            name: "positiontype",
             display: "Position Type",
-            query_param: "positiontype",
             custom_facets: {
                 "Full-Time": 'text:"Position Type Full-Time"',
                 "Part-Time": 'text:"Position Type Part-Time"'
@@ -50,8 +50,8 @@ export default {
             }
         },
         {
+            name: "remoteposition",
             display: "Remote Position",
-            query_param: "remoteposition",
             custom_facets: {
                 "Yes": 'text:"Remote Position? Yes"',
                 "No": 'text:"Remote Position? No"'
@@ -61,24 +61,24 @@ export default {
             }
         },
         {
+            name: "location",
             display: "State",
-            query_param: "location",
             attributes: {
                 google_talent: "state_country",
                 solr: "state_short_exact"
             }
         },
         {
+            name: "location",
             display: "City",
-            query_param: "location",
             attributes: {
                 google_talent: "city_admin1_country",
                 solr: "location_exact"
             }
         },
         {
+            name: "q",
             display: "Title",
-            query_param: "q",
             attributes: {
                 google_talent: "job_title",
                 solr: "title_exact"

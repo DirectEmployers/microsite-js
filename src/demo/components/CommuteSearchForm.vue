@@ -84,9 +84,6 @@ import {  retry } from '~/services/helpers'
 export default {
     name: "CommuteSearchForm",
     props: ["submitSearchForm", "input"],
-    updated() {
-        this.initAutocomplete()
-    },
     mounted() {
         retry(this.initAutocomplete)
     },
@@ -95,7 +92,6 @@ export default {
             const placeAutoComplete = new google.maps.places.Autocomplete(
                 this.$refs.commuteLocationInput
             )
-
             placeAutoComplete.addListener("place_changed", () => {
                 const place = placeAutoComplete.getPlace()
 

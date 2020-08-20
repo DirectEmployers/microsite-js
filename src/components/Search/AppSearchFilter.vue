@@ -102,7 +102,7 @@ export default {
         },
 
         queryParamName() {
-            return this.configFilter.query_param
+            return this.configFilter.name
         },
 
         keyName() {
@@ -171,7 +171,7 @@ export default {
 
         formatDisplay(display) {
             if (this.queryParamName == "location") {
-                //strip of countries
+                //strip off countries
                 display = removeCountry(display)
                 //and try to expand to a full value
                 display = fullState(display)

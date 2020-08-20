@@ -1,6 +1,6 @@
 <template>
-<div 
-    class="form__autocomplete" 
+<div
+    class="form__autocomplete"
     role="combobox"
     aria-haspopup="listbox"
     :aria-owns="`form__autocomplete-items-${id}`"
@@ -59,7 +59,7 @@
                         }"
                         @mouseover="selectedIndex = index"
                         @click="setValue(result)"
-                        role="option" 
+                        role="option"
                         :aria-selected="activeDescendant"
                     >
                         {{ result[display] }}
@@ -116,7 +116,7 @@ export default {
             }
             try {
                 const { data } = await this.query.get(value, this.siteConfig)
-                this.results = data
+                this.results = data || []
             } catch (error) {
                 this.error = error
             } finally {
