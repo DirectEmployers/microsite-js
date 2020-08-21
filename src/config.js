@@ -1,8 +1,8 @@
 export default {
     buids: [27396],
     sources: {
-        // search: "solr",
-        search: "google_talent",
+        search: "solr",
+        // search: "google_talent",
         // complete: "google_talent",
         complete: "solr",
         commute: "google_talent",
@@ -21,7 +21,7 @@ export default {
             attributes: {
                 google_talent: 'functionalarea'
             },
-            custom_facets: {
+            solr_facets: {
                 "Warehouse": 'text:"Functional Area Warehouse" OR text:"Job Post Category Warehouse"',
                 "Transportation": 'text:"Functional Area Transportation" OR text:"Job Post Category Transportation"',
                 "Sales": 'text:"Functional Area Sales" OR text:"Job Post Category Sales"'
@@ -30,7 +30,7 @@ export default {
         {
             name: "businessunit",
             display: "Business Unit",
-            custom_facets:{
+            solr_facets:{
                 "Facilities Maintenance" :'text:"Business Unit Facilities Maintenance"',
                 "Construction Industrial WC" :'text:"Business Unit Construction Industrial WC"'
             },
@@ -41,7 +41,7 @@ export default {
         {
             name: "positiontype",
             display: "Position Type",
-            custom_facets: {
+            solr_facets: {
                 "Full-Time": 'text:"Position Type Full-Time"',
                 "Part-Time": 'text:"Position Type Part-Time"'
             },
@@ -52,7 +52,7 @@ export default {
         {
             name: "remoteposition",
             display: "Remote Position",
-            custom_facets: {
+            solr_facets: {
                 "Yes": 'text:"Remote Position? Yes"',
                 "No": 'text:"Remote Position? No"'
             },
