@@ -306,14 +306,14 @@ export default {
         },
 
         getFilterOptions(filter) {
-            let attribute = filter.attributes[this.meta.source]
+            let key = filter.key
 
-            if (this.blank(attribute)) {
-                attribute = filter.name
+            if (this.blank(key)) {
+                key = filter.name
             }
 
-            if (Object.prototype.hasOwnProperty.call(this.filters, attribute)) {
-                return this.filters[attribute]
+            if (Object.prototype.hasOwnProperty.call(this.filters, key)) {
+                return this.filters[key]
             }
 
             return []
@@ -374,9 +374,15 @@ export default {
         formatInput() {
             if (!blank(this.input.location)) {
                 if(this.isLocationSearch){
-                    this.input.location = fullState(
-                        removeCountry(this.input.location)
-                    )
+                    let parts = []
+
+                    let locations = this.input.location.split(",")
+
+                    locations.forEach((location)=>{
+                        parts.push(fullState(location))
+                    })
+
+                    this.input.location = removeCountry(parts.join(","))
                 }else{
                     this.input.location = ""
                 }

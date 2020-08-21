@@ -1,5 +1,5 @@
 import { isArray, get, kebabCase } from "lodash"
-import { removeCountry } from "../../location"
+import { removeCountry, fullState } from "../../location"
 import { removeEndOfLine } from "../../../helpers"
 
 export default class BaseJob {
@@ -57,11 +57,11 @@ export default class BaseJob {
     }
 
     getCity() {
-        return this.data.city
+        return this.data.city_exact
     }
 
     getState() {
-        return this.data.state
+        return fullState(this.data.state_short_exact)
     }
 
     getCompany() {

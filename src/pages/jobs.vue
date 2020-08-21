@@ -59,7 +59,7 @@
                                     </h3>
 
                                     <h3 class="text-md">
-                                        {{ job.getLocation() }}
+                                        {{ job.getCity() + ', ' + job.getState() }}
                                     </h3>
                                     <div
                                         class="job-listing__commute-time"

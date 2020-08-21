@@ -1,10 +1,10 @@
 export default {
     buids: [27396],
     sources: {
-        search: "solr",
-        // search: "google_talent",
+        // search: "solr",
+        search: "google_talent",
         // complete: "google_talent",
-        complete: "solr",
+        complete: "google_talent",
         commute: "google_talent",
     },
     project_id: "cloudjobsearch-256720",
@@ -18,9 +18,6 @@ export default {
         {
             name: "functionalarea",
             display: "Functional Area",
-            attributes: {
-                google_talent: 'functionalarea'
-            },
             solr_facets: {
                 "Warehouse": 'text:"Functional Area Warehouse" OR text:"Job Post Category Warehouse"',
                 "Transportation": 'text:"Functional Area Transportation" OR text:"Job Post Category Transportation"',
@@ -33,9 +30,6 @@ export default {
             solr_facets:{
                 "Facilities Maintenance" :'text:"Business Unit Facilities Maintenance"',
                 "Construction Industrial WC" :'text:"Business Unit Construction Industrial WC"'
-            },
-            attributes: {
-                google_talent: "businessunit"
             }
         },
         {
@@ -44,9 +38,6 @@ export default {
             solr_facets: {
                 "Full-Time": 'text:"Position Type Full-Time"',
                 "Part-Time": 'text:"Position Type Part-Time"'
-            },
-            attributes: {
-                google_talent: "positiontype"
             }
         },
         {
@@ -56,33 +47,23 @@ export default {
                 "Yes": 'text:"Remote Position? Yes"',
                 "No": 'text:"Remote Position? No"'
             },
-            attributes: {
-                google_talent: "remoteposition"
-            }
         },
         {
+            key: 'state',
             name: "location",
             display: "State",
-            attributes: {
-                google_talent: "state_country",
-                solr: "state_short_exact"
-            }
         },
         {
+            key: 'city',
             name: "location",
             display: "City",
-            attributes: {
-                google_talent: "city_admin1_country",
-                solr: "location_exact"
-            }
         },
         {
             name: "q",
+            key: 'title',
             display: "Title",
-            attributes: {
-                google_talent: "job_title",
-                solr: "title_exact"
-            }
         },
     ],
 }
+
+

@@ -1,4 +1,5 @@
 import axios from "axios"
+import { kebabCase } from 'lodash'
 
 export default function api() {
     return axios.create({
@@ -13,8 +14,10 @@ export default function api() {
 
 export class SearchService {
     static async get(input, siteConfig) {
+        const source = kebabCase(siteConfig.sources.search)
+
         try {
-            const response = await api().post("search", {
+            const response = await api().post(`${source}/search`, {
                 data: input,
                 config: siteConfig,
             })
@@ -31,8 +34,11 @@ export class SearchService {
 
 export class CommuteSearchService {
     static async get(input, siteConfig) {
+
+        const source = kebabCase(siteConfig.sources.commute)
+
         try {
-            const response = await api().post("commute", {
+            const response = await api().post(`${source}/commute`, {
                 data: input,
                 config: siteConfig,
             })
@@ -49,8 +55,11 @@ export class CommuteSearchService {
 
 export class TitleCompleteService {
     static async get(q, siteConfig) {
+
+        const source = kebabCase(siteConfig.sources.complete)
+
         try {
-            const response = await api().get("complete/title", {
+            const response = await api().get(`${source}/complete/title`, {
                 params: {
                     data: { q: q },
                     config: {

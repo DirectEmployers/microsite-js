@@ -25,7 +25,7 @@ export default class GoogleTalentJob extends BaseJob{
     }
 
     getLocation() {
-        return this.getCustomAttribute("city_admin1_country")
+        return removeCountry(this.getCustomAttribute("city_admin1_country"))
     }
 
     getHtmlDescription(){
