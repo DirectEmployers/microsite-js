@@ -1,4 +1,5 @@
 import axios from "axios"
+import { kebabCase } from 'lodash'
 
 export default function api() {
     return axios.create({
@@ -13,17 +14,17 @@ export default function api() {
 
 export class SearchService {
     static async get(input, siteConfig) {
+        const source = kebabCase(siteConfig.sources.search)
+
         try {
-            const response = await api().get("search", {
-                params: {
-                    data: input,
-                    config: siteConfig
-                }
+            const response = await api().post(`${source}/search`, {
+                data: input,
+                config: siteConfig,
             })
 
             return response
         } catch (error) {
-            if(Object.prototype.hasOwnProperty.call(error, 'response')){
+            if (Object.prototype.hasOwnProperty.call(error, "response")) {
                 return error
             }
             throw new Error(error)
@@ -33,17 +34,18 @@ export class SearchService {
 
 export class CommuteSearchService {
     static async get(input, siteConfig) {
+
+        const source = kebabCase(siteConfig.sources.commute)
+
         try {
-            const response = await api().get("commute", {
-                params: {
-                    data: input,
-                    config: siteConfig
-                }
+            const response = await api().post(`${source}/commute`, {
+                data: input,
+                config: siteConfig,
             })
 
             return response
         } catch (error) {
-            if(Object.prototype.hasOwnProperty.call(error, 'response')){
+            if (Object.prototype.hasOwnProperty.call(error, "response")) {
                 return error
             }
             throw new Error(error)
@@ -53,18 +55,25 @@ export class CommuteSearchService {
 
 export class TitleCompleteService {
     static async get(q, siteConfig) {
-        try {
 
-            const response = await api().get("complete/title", {
+        const source = kebabCase(siteConfig.sources.complete)
+
+        try {
+            const response = await api().get(`${source}/complete/title`, {
                 params: {
                     data: { q: q },
-                    config: siteConfig
-                }
+                    config: {
+                        sources: { complete: siteConfig.sources.complete },
+                        buids:siteConfig.buids,
+                        project_id: siteConfig.project_id,
+                        tenant_uuid: siteConfig.tenant_uuid,
+                        company_uuids: siteConfig.company_uuids,
+                    },
+                },
             })
             return response
-
         } catch (error) {
-            if(Object.prototype.hasOwnProperty.call(error, 'response')){
+            if (Object.prototype.hasOwnProperty.call(error, "response")) {
                 return error
             }
             throw new Error(error)

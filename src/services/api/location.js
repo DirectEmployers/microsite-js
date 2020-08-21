@@ -63,10 +63,27 @@ export let states = {
     WY: "Wyoming",
 }
 
+export let provinces = {
+    "AB": "Alberta",
+    "BC": "British Columbia",
+    "MB": "Manitoba",
+    "NB": "New Brunswick",
+    "NL": "Newfoundland",
+    "NW": "Northwest Territories",
+    "NS": "Nova Scotia",
+    "NU": "Territory of Nunavut",
+    "ON": "Ontario",
+    "PE": "Prince Edward Island",
+    "QC": "Quebec",
+    "SK": "Saskatchewan",
+    "YT": "Yukon Territory",
+}
+
 export let countries = {
     USA: "United States",
     CAN: "Canada"
 }
+
 
 /**
  * Remove country abbreviation from end of given value.
@@ -117,7 +134,10 @@ export function fullState(code){
         return states[result.toUpperCase()]
     }
 
+
+    if (Object.prototype.hasOwnProperty.call(provinces, result.toUpperCase())) {
+        return provinces[result.toUpperCase()]
+    }
+
     return result
 }
-
-
