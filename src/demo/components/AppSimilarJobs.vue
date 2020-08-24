@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { SearchService } from "microsite-js/src/services/api/search"
+import { SearchService } from "~/services/api/search"
 
 export default {
     data() {

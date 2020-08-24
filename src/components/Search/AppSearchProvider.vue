@@ -155,7 +155,7 @@ export default {
         getInputDefaults() {
             let defaultInput = clone(this.defaultInput)
 
-            return merge(defaultInput, {
+            return merge({
                 searchType: "location",
                 commuteMethod: "DRIVING",
                 travelDuration: "900",
@@ -166,7 +166,7 @@ export default {
                 location: "",
                 coords: null,
                 sort: "relevance",
-            })
+            }, defaultInput)
         },
 
         hasLocationInput(){
