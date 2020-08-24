@@ -89,7 +89,7 @@ export default {
         this.$router.app.$on("search.input.update", this.setInput)
 
         //filter/breadcrumb removal
-        this.$router.app.$on("search.filter.remove", this.removeFilter)
+        this.$router.app.$on("searchFilterRemoved", this.removeFilter)
 
         if (this.searchOnLoad) {
             this.input = merge(this.input, clone(this.$route.query))
@@ -161,7 +161,7 @@ export default {
         input: {
             handler(newInput, oldInput) {
                 this.$router.app.$emit(
-                    "search.input.updated",
+                    "searchInputUpdated",
                     newInput,
                     oldInput
                 )
@@ -402,26 +402,13 @@ export default {
             return blank(value)
         },
 
-        parseSearchType(type) {
-            //if submitSearchForm is called in the template without args,
-            //the default first argument in vuejs is the event object,
-            //if this is the case, be flexible and default to location
-            //if this is the case
-            try {
-                const isString = typeof type != "string"
-
-                if (isString && type.constructor.name == "SubmitEvent") {
-                    type = "location"
-                }
-            } catch (error) {
-                type = "location"
-            }
+        setSearchType(type) {
 
             if (!["location", "commute"].includes(type)) {
-                throw new Error(`Unsupported search type '${type}'`)
+                this.input.searchType = "location"
             }
 
-            return type
+            return this.input.searchType
         },
         shouldClearCoords() {
             if (this.isLocationSearch && this.blank(this.input.location)) {
@@ -437,7 +424,7 @@ export default {
         submitSearchForm(searchType = "location") {
             this.input.page = 1
 
-            this.input.searchType = this.parseSearchType(searchType)
+            this.setSearchType(searchType)
 
             if(this.isCommuteSearch){
                 this.input.location = ""

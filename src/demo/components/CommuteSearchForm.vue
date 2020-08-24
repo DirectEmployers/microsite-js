@@ -96,20 +96,16 @@ export default {
                 const place = placeAutoComplete.getPlace()
 
                 const geo = place.geometry
+
                 if (geo) {
                     const lat = geo.location.lat()
 
                     const lon = geo.location.lng()
-                    this.$router.app.$emit(
-                        "search.input.update",
-                        "coords",
-                        lat + "," + lon
-                    )
-                    this.$router.app.$emit(
-                        "search.input.update",
-                        "commuteLocation",
-                        place.formatted_address
-                    )
+
+                    this.input.coords = lat + "," + lon
+
+                    this.input.commuteLocation = place.formatted_address
+
                 }
             })
         },

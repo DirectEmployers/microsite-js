@@ -142,7 +142,7 @@ export default {
                 },
             })
 
-            this.$emit("search.filter.selected", option)
+            this.$emit("searchFilterSelected", option)
         },
 
         isExistingFilter(display) {

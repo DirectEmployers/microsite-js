@@ -11,7 +11,7 @@
                     aria-label="Search by keyword"
                     autocapitalize="off"
                     :query="TitleCompleteService"
-                    @setResult="submitSearchForm('location')"
+                    @setResult="submitSearchForm"
                 />
             </div>
             <div class="search-form__section">

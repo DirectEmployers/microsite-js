@@ -24,7 +24,7 @@
         },
         methods:{
             removeFilter() {
-                this.$router.app.$emit('search.filter.remove', this.parameter)
+                this.$router.app.$emit('searchFilterRemoved', this.parameter)
             }
         }
     }
