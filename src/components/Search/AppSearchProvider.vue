@@ -80,10 +80,10 @@ export default {
         //filter/breadcrumb removal
         this.$router.app.$on("searchFilterRemoved", this.removeFilter)
 
+
+        this.setInputFromQuery()
+
         if (this.searchOnLoad) {
-
-            this.setInputFromQuery()
-
             this.search()
         }
     },
