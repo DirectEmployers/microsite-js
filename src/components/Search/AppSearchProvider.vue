@@ -71,13 +71,7 @@ export default {
                 },
             },
             input: merge(
-                {
-                    q: "",
-                    r: 25,
-                    location: "",
-                    coords: null,
-                    sort: "relevance",
-                },
+                this.getLocationSearchDefaults(),
                 this.getCommuteDefaults()
             ),
         }
@@ -163,6 +157,7 @@ export default {
                     newInput,
                     oldInput
                 )
+
             },
             deep: true,
         },
@@ -177,6 +172,17 @@ export default {
                 commuteLocation: "",
             }
         },
+
+        getLocationSearchDefaults() {
+            return {
+                q: "",
+                r: 25,
+                location: "",
+                coords: null,
+                sort: "relevance",
+            }
+        },
+
         hasLocationInput(){
 
             if(this.isLocationSearch && !this.blank(this.input.location)){
@@ -376,9 +382,10 @@ export default {
 
         setInputFromQuery() {
             this.input = clone(this.$route.query)
-
-            //merge commute defaults so that we do not clear out v-model input values.
+            //merge location & commute defaults so that we do not clear out v-model input values.
             this.input = merge(this.getCommuteDefaults(), this.input)
+
+            this.input = merge(this.getLocationSearchDefaults(), this.input)
 
             this.formatInput()
         },
