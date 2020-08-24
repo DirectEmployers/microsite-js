@@ -149,12 +149,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=794f3def&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=3b1ab5e8&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=794f3def&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=3b1ab5e8&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
 var AppSearchProvidervue_type_script_lang_js_ = __webpack_require__("6651");
@@ -22926,18 +22926,17 @@ var component = Object(componentNormalizer["a" /* default */])(
           options: ["relevance", "distance", "title", "date"]
         }
       },
-      input: Object(lodash__WEBPACK_IMPORTED_MODULE_17__["merge"])(this.getLocationSearchDefaults(), this.getCommuteDefaults())
+      input: this.getInputDefaults()
     };
   },
   created: function created() {
     //allow other components to update input via global event.
-    this.$router.app.$on("search.input.update", this.setInput); //filter/breadcrumb removal
+    this.$router.app.$on("searchInputUpdated", this.setInput); //filter/breadcrumb removal
 
     this.$router.app.$on("searchFilterRemoved", this.removeFilter);
 
     if (this.searchOnLoad) {
-      this.input = Object(lodash__WEBPACK_IMPORTED_MODULE_17__["merge"])(this.input, Object(lodash__WEBPACK_IMPORTED_MODULE_17__["clone"])(this.$route.query));
-      this.formatInput();
+      this.setInputFromQuery();
       this.search();
     }
   },
@@ -22990,32 +22989,22 @@ var component = Object(componentNormalizer["a" /* default */])(
     "$route.query": function $routeQuery() {
       this.setInputFromQuery();
       this.search();
-    },
-    input: {
-      handler: function handler(newInput, oldInput) {
-        this.$router.app.$emit("searchInputUpdated", newInput, oldInput);
-      },
-      deep: true
     }
   },
   methods: {
-    getCommuteDefaults: function getCommuteDefaults() {
-      return {
+    getInputDefaults: function getInputDefaults() {
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_17__["clone"])({
         searchType: "location",
         commuteMethod: "DRIVING",
         travelDuration: "900",
         roadTraffic: "TRAFFIC_FREE",
-        commuteLocation: ""
-      };
-    },
-    getLocationSearchDefaults: function getLocationSearchDefaults() {
-      return {
+        commuteLocation: "",
         q: "",
         r: 25,
         location: "",
         coords: null,
         sort: "relevance"
-      };
+      });
     },
     hasLocationInput: function hasLocationInput() {
       if (this.isLocationSearch && !this.blank(this.input.location)) {
@@ -23115,7 +23104,7 @@ var component = Object(componentNormalizer["a" /* default */])(
     getPayload: function getPayload() {
       var data = Object(lodash__WEBPACK_IMPORTED_MODULE_17__["omitBy"])(Object(lodash__WEBPACK_IMPORTED_MODULE_17__["clone"])(this.input), _services_helpers__WEBPACK_IMPORTED_MODULE_15__[/* blank */ "a"]);
 
-      if (this.input.searchType == "location") {
+      if (!this.isCommuteSearch) {
         data = Object(lodash__WEBPACK_IMPORTED_MODULE_17__["omit"])(data, ["searchType", "commuteLocation", "roadTraffic", "travelDuration", "commuteMethod"]);
       }
 
@@ -23212,10 +23201,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       }
     },
     setInputFromQuery: function setInputFromQuery() {
-      this.input = Object(lodash__WEBPACK_IMPORTED_MODULE_17__["clone"])(this.$route.query); //merge location & commute defaults so that we do not clear out v-model input values.
-
-      this.input = Object(lodash__WEBPACK_IMPORTED_MODULE_17__["merge"])(this.getCommuteDefaults(), this.input);
-      this.input = Object(lodash__WEBPACK_IMPORTED_MODULE_17__["merge"])(this.getLocationSearchDefaults(), this.input);
+      this.input = Object(lodash__WEBPACK_IMPORTED_MODULE_17__["merge"])(this.getInputDefaults(), this.$route.query);
       this.formatInput();
     },
     blank: function blank(value) {
@@ -23223,10 +23209,19 @@ var component = Object(componentNormalizer["a" /* default */])(
     },
     setSearchType: function setSearchType(type) {
       if (!["location", "commute"].includes(type)) {
-        this.input.searchType = "location";
+        type = "location";
       }
 
-      return this.input.searchType;
+      this.input.searchType = type;
+
+      if (this.isCommuteSearch) {
+        this.input.location = "";
+      }
+
+      if (this.shouldClearCoords()) {
+        this.input.coords = "";
+        this.input.commuteLocation = "";
+      }
     },
     shouldClearCoords: function shouldClearCoords() {
       if (this.isLocationSearch && this.blank(this.input.location)) {
@@ -23243,16 +23238,6 @@ var component = Object(componentNormalizer["a" /* default */])(
       var searchType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "location";
       this.input.page = 1;
       this.setSearchType(searchType);
-
-      if (this.isCommuteSearch) {
-        this.input.location = "";
-      }
-
-      if (this.shouldClearCoords()) {
-        this.input.coords = "";
-        this.input.commuteLocation = "";
-      }
-
       this.$router.push({
         path: this.submitUrl,
         query: this.getPayload()

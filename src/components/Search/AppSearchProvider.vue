@@ -20,7 +20,7 @@
 <script>
 import { blank, log } from "../../services/helpers"
 import { fullState, removeCountry } from "../../services/api/location"
-import { omitBy, omit, clone, merge } from "lodash"
+import { omitBy, omit, clone, merge, assign } from "lodash"
 import { SearchService, CommuteSearchService } from "../../services/api/search"
 
 export default {
@@ -70,23 +70,19 @@ export default {
                     options: ["relevance", "distance", "title", "date"],
                 },
             },
-            input: merge(
-                this.getLocationSearchDefaults(),
-                this.getCommuteDefaults()
-            ),
+            input: this.getInputDefaults(),
         }
     },
     created() {
         //allow other components to update input via global event.
-        this.$router.app.$on("search.input.update", this.setInput)
+        this.$router.app.$on("searchInputUpdated", this.setInput)
 
         //filter/breadcrumb removal
         this.$router.app.$on("searchFilterRemoved", this.removeFilter)
 
         if (this.searchOnLoad) {
-            this.input = merge(this.input, clone(this.$route.query))
 
-            this.formatInput()
+            this.setInputFromQuery()
 
             this.search()
         }
@@ -148,39 +144,22 @@ export default {
         "$route.query"() {
             this.setInputFromQuery()
             this.search()
-        },
-
-        input: {
-            handler(newInput, oldInput) {
-                this.$router.app.$emit(
-                    "searchInputUpdated",
-                    newInput,
-                    oldInput
-                )
-
-            },
-            deep: true,
-        },
+        }
     },
     methods: {
-        getCommuteDefaults() {
-            return {
+        getInputDefaults() {
+            return clone({
                 searchType: "location",
                 commuteMethod: "DRIVING",
                 travelDuration: "900",
                 roadTraffic: "TRAFFIC_FREE",
                 commuteLocation: "",
-            }
-        },
-
-        getLocationSearchDefaults() {
-            return {
                 q: "",
                 r: 25,
                 location: "",
                 coords: null,
                 sort: "relevance",
-            }
+            })
         },
 
         hasLocationInput(){
@@ -286,7 +265,7 @@ export default {
         getPayload() {
             let data = omitBy(clone(this.input), blank)
 
-            if (this.input.searchType == "location") {
+            if (!this.isCommuteSearch) {
                 data = omit(data, [
                     "searchType",
                     "commuteLocation",
@@ -381,11 +360,7 @@ export default {
         },
 
         setInputFromQuery() {
-            this.input = clone(this.$route.query)
-            //merge location & commute defaults so that we do not clear out v-model input values.
-            this.input = merge(this.getCommuteDefaults(), this.input)
-
-            this.input = merge(this.getLocationSearchDefaults(), this.input)
+            this.input = merge(this.getInputDefaults(),  this.$route.query)
 
             this.formatInput()
         },
@@ -397,10 +372,23 @@ export default {
         setSearchType(type) {
 
             if (!["location", "commute"].includes(type)) {
-                this.input.searchType = "location"
+                type = "location"
             }
 
-            return this.input.searchType
+            this.input.searchType = type
+
+
+            if(this.isCommuteSearch){
+                this.input.location = ""
+            }
+
+
+            if (this.shouldClearCoords()) {
+                this.input.coords = ""
+                this.input.commuteLocation = ""
+            }
+
+
         },
         shouldClearCoords() {
             if (this.isLocationSearch && this.blank(this.input.location)) {
@@ -417,15 +405,6 @@ export default {
             this.input.page = 1
 
             this.setSearchType(searchType)
-
-            if(this.isCommuteSearch){
-                this.input.location = ""
-            }
-
-            if (this.shouldClearCoords()) {
-                this.input.coords = ""
-                this.input.commuteLocation = ""
-            }
 
             this.$router
                 .push({
