@@ -49,6 +49,11 @@ export default {
             type: String,
             default: "/jobs",
         },
+        defaultInput:{
+            required: false,
+            type: Object,
+            default: ()=> {}
+        },
     },
     data() {
         return {
@@ -148,7 +153,9 @@ export default {
     },
     methods: {
         getInputDefaults() {
-            return clone({
+            let defaultInput = clone(this.defaultInput)
+
+            return merge(defaultInput, {
                 searchType: "location",
                 commuteMethod: "DRIVING",
                 travelDuration: "900",
