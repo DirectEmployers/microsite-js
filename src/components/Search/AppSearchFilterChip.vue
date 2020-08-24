@@ -1,5 +1,5 @@
 <template>
-    <component @click.prevent="removeFilter()" :is="tag" class="search__filter-chip">
+    <component @click.prevent="removeFilter()" :is="tag" class="search-filter-chip">
         <slot name="display">
             {{ display }}
         </slot>

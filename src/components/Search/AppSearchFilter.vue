@@ -2,7 +2,7 @@
     <AppAccordion
         v-if="!blank(filteredOptions) && isVisible"
         :open="isActive"
-        class="search__filter"
+        class="search-filter"
         :key="`${keyName}-accordion`"
         :name="`${keyName}-accordion`"
     >
@@ -10,18 +10,18 @@
             <slot name="display" :isOpen="isOpen">
                 <h3
                     v-if="configFilter.display"
-                    class="search__filter-display"
-                    :class="{ 'search__filter-display--active': isActive }"
+                    class="search-filter-display"
+                    :class="{ 'search-filter-display--active': isActive }"
                 >
                     {{ configFilter.display }}
                 </h3>
             </slot>
         </template>
 
-        <ul class="search__filter-options">
+        <ul class="search-filter-options">
             <li
                 @click="selectOption(option)"
-                class="search__filter-options-item"
+                class="search-filter-options-item"
                 :key="index"
                 v-for="(option, index) in displayedOptions"
             >
@@ -31,11 +31,11 @@
             </li>
         </ul>
         <section
-            class="search__filter-limiter"
+            class="search-filter-limiter"
             v-if="shouldShowLess || hasMoreItems"
         >
             <button
-                class="search__filter-limiter-more"
+                class="search-filter-limiter-more"
                 @click="showMore()"
                 v-if="hasMoreItems"
                 aria-label="Show more filters"
@@ -47,7 +47,7 @@
                 v-if="shouldShowLess"
                 @click="showLess()"
                 aria-label="Show less filters"
-                class="search__filter-limiter-less"
+                class="search-filter-limiter-less"
                 rel="nofollow"
             >
                 Less
