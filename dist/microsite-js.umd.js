@@ -149,12 +149,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=777ee404&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=2fd3f618&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=777ee404&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=2fd3f618&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
 var AppSearchProvidervue_type_script_lang_js_ = __webpack_require__("6651");
@@ -22841,8 +22841,6 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__("2ef0");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_17__);
 /* harmony import */ var _services_api_search__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__("f867");
-/* harmony import */ var _services_api_drivers_job_google_talent__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__("ed3b");
-/* harmony import */ var _services_api_drivers_job_solr__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__("9115");
 
 
 
@@ -22877,8 +22875,6 @@ var component = Object(componentNormalizer["a" /* default */])(
 //
 //
 //
-
-
 
 
 
@@ -23101,18 +23097,6 @@ var component = Object(componentNormalizer["a" /* default */])(
         }
       });
     },
-    getJobDriver: function getJobDriver(source) {
-      switch (source) {
-        case "solr":
-          return _services_api_drivers_job_solr__WEBPACK_IMPORTED_MODULE_20__[/* default */ "a"];
-
-        case "google_talent":
-          return _services_api_drivers_job_google_talent__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"];
-
-        default:
-          throw new Error("Unsupported job driver/source ".concat(source));
-      }
-    },
     getService: function getService() {
       var searchType = this.input.searchType;
 
@@ -23154,57 +23138,51 @@ var component = Object(componentNormalizer["a" /* default */])(
       });
     },
     search: function search() {
-      var _arguments = arguments,
-          _this3 = this;
+      var _this3 = this;
 
       return Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var input, Service, response, data, jobs, pagination, filters, JobDriver;
+        var Service, response, _response$data, jobs, pagination, filters, meta;
+
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                input = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : null;
                 _this3.status.loading = true;
                 Service = _this3.getService();
-                input = _this3.blank(input) ? _this3.getPayload() : input;
-                _context.prev = 4;
-                _context.next = 7;
-                return Service.get(input, _this3.siteConfig);
+                _context.prev = 2;
+                _context.next = 5;
+                return Service.get(_this3.getPayload(), _this3.siteConfig);
 
-              case 7:
+              case 5:
                 response = _context.sent;
-                data = response.data;
-                jobs = data.jobs, pagination = data.pagination, filters = data.filters;
-                JobDriver = _this3.getJobDriver(data.meta.source);
-                _this3.jobs = (jobs || []).map(function (job) {
-                  return new JobDriver(job);
-                });
+                _response$data = response.data, jobs = _response$data.jobs, pagination = _response$data.pagination, filters = _response$data.filters, meta = _response$data.meta;
+                _this3.jobs = jobs;
                 _this3.pagination = pagination;
                 _this3.filters = filters || {};
 
-                _this3.setMeta(data.meta);
+                _this3.setMeta(meta);
 
-                _context.next = 22;
-                break;
+                return _context.abrupt("return", response);
 
-              case 17:
-                _context.prev = 17;
-                _context.t0 = _context["catch"](4);
+              case 14:
+                _context.prev = 14;
+                _context.t0 = _context["catch"](2);
                 _this3.status.error = _context.t0;
                 _this3.meta.selectedFilters = [];
                 Object(_services_helpers__WEBPACK_IMPORTED_MODULE_15__[/* log */ "b"])(_context.t0, "error");
+                return _context.abrupt("return", _context.t0);
 
-              case 22:
-                _context.prev = 22;
+              case 20:
+                _context.prev = 20;
                 _this3.status.loading = false;
-                return _context.finish(22);
+                return _context.finish(20);
 
-              case 25:
+              case 23:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[4, 17, 22, 25]]);
+        }, _callee, null, [[2, 14, 20, 23]]);
       }))();
     },
     getUserCoordinates: function getUserCoordinates() {
@@ -31551,150 +31529,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "ed3b":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoogleTalentJob; });
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a4d3");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("e01a");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("ac1f");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("5319");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("1276");
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("d4ec");
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("bee2");
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("262e");
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createSuper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("2caf");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("3237");
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("a74a");
-/* harmony import */ var _location__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("3fcc");
-
-
-
-
-
-
-
-
-
-
-
-
-
-var GoogleTalentJob = /*#__PURE__*/function (_BaseJob) {
-  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"])(GoogleTalentJob, _BaseJob);
-
-  var _super = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createSuper__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"])(GoogleTalentJob);
-
-  function GoogleTalentJob(job) {
-    var _this;
-
-    Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(this, GoogleTalentJob);
-
-    _this = _super.call(this, job.job);
-    _this.commuteInfo = job.commuteInfo;
-    return _this;
-  }
-
-  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(GoogleTalentJob, [{
-    key: "getReqId",
-    value: function getReqId() {
-      return this.getCustomAttribute("reqid");
-    }
-  }, {
-    key: "getGuid",
-    value: function getGuid() {
-      //the guid is stored as the "requistionId"
-      //during imports to gurantee uniqueness.
-      return this.data.requisitionId;
-    }
-  }, {
-    key: "getTitle",
-    value: function getTitle() {
-      return this.data.title;
-    }
-  }, {
-    key: "getLocation",
-    value: function getLocation() {
-      return Object(_location__WEBPACK_IMPORTED_MODULE_11__[/* removeCountry */ "b"])(this.getCustomAttribute("city_admin1_country"));
-    }
-  }, {
-    key: "getHtmlDescription",
-    value: function getHtmlDescription() {
-      return this.data.description;
-    }
-  }, {
-    key: "getCity",
-    value: function getCity() {
-      var location = this.getLocation();
-      return Object(_location__WEBPACK_IMPORTED_MODULE_11__[/* removeState */ "c"])(Object(_location__WEBPACK_IMPORTED_MODULE_11__[/* removeCountry */ "b"])(location));
-    }
-  }, {
-    key: "getState",
-    value: function getState() {
-      var location = this.getLocation();
-      location = location.split(",");
-      return Object(_location__WEBPACK_IMPORTED_MODULE_11__[/* fullState */ "a"])(location[1]);
-    }
-  }, {
-    key: "getDeletedAt",
-    value: function getDeletedAt() {
-      return null;
-    }
-  }, {
-    key: "getCompany",
-    value: function getCompany() {
-      return this.data.companyDisplayName;
-    }
-  }, {
-    key: "getCountry",
-    value: function getCountry() {
-      return this.getCustomAttribute("country");
-    }
-  }, {
-    key: "getDateAdded",
-    value: function getDateAdded() {
-      return this.data.postingCreateTime;
-    }
-  }, {
-    key: "hasCommuteInfo",
-    value: function hasCommuteInfo() {
-      if (Object(_helpers__WEBPACK_IMPORTED_MODULE_10__[/* blank */ "a"])(this.commuteInfo)) {
-        return false;
-      }
-
-      if (!Object.prototype.hasOwnProperty.call(this.commuteInfo, "travelDuration")) {
-        return false;
-      }
-
-      return true;
-    }
-  }, {
-    key: "getCommuteTime",
-    value: function getCommuteTime() {
-      if (!this.hasCommuteInfo()) {
-        return "";
-      }
-
-      var seconds = parseInt(this.commuteInfo.travelDuration.replace("s", ""));
-      var hours = Math.floor(seconds / 60 / 60);
-      var minutes = Math.floor(seconds / 60) - hours * 60;
-      return minutes;
-    }
-  }]);
-
-  return GoogleTalentJob;
-}(_base__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"]);
-
-
-
-/***/ }),
-
 /***/ "f02d":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31870,23 +31704,197 @@ module.exports = function (key) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export default */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SearchService; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommuteSearchService; });
-/* unused harmony export TitleCompleteService */
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("ac1f");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("841c");
-/* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("96cf");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("1da1");
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("d4ec");
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("bee2");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("bc3a");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("2ef0");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ search_SearchService; });
+__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ search_CommuteSearchService; });
+
+// UNUSED EXPORTS: default, TitleCompleteService
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
+var es_array_map = __webpack_require__("d81d");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
+var es_regexp_exec = __webpack_require__("ac1f");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.search.js
+var es_string_search = __webpack_require__("841c");
+
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__("96cf");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
+var asyncToGenerator = __webpack_require__("1da1");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/inherits.js + 1 modules
+var inherits = __webpack_require__("262e");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/createSuper.js + 4 modules
+var createSuper = __webpack_require__("2caf");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
+var classCallCheck = __webpack_require__("d4ec");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/createClass.js
+var createClass = __webpack_require__("bee2");
+
+// EXTERNAL MODULE: ./node_modules/axios/index.js
+var axios = __webpack_require__("bc3a");
+var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
+
+// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
+var lodash = __webpack_require__("2ef0");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
+var es_symbol = __webpack_require__("a4d3");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
+var es_symbol_description = __webpack_require__("e01a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
+var es_string_replace = __webpack_require__("5319");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
+var es_string_split = __webpack_require__("1276");
+
+// EXTERNAL MODULE: ./src/services/api/drivers/job/base.js
+var base = __webpack_require__("3237");
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
+var helpers = __webpack_require__("a74a");
+
+// EXTERNAL MODULE: ./src/services/api/location.js
+var api_location = __webpack_require__("3fcc");
+
+// CONCATENATED MODULE: ./src/services/api/drivers/job/google-talent.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+var google_talent_GoogleTalentJob = /*#__PURE__*/function (_BaseJob) {
+  Object(inherits["a" /* default */])(GoogleTalentJob, _BaseJob);
+
+  var _super = Object(createSuper["a" /* default */])(GoogleTalentJob);
+
+  function GoogleTalentJob(job) {
+    var _this;
+
+    Object(classCallCheck["a" /* default */])(this, GoogleTalentJob);
+
+    _this = _super.call(this, job.job);
+    _this.commuteInfo = job.commuteInfo;
+    return _this;
+  }
+
+  Object(createClass["a" /* default */])(GoogleTalentJob, [{
+    key: "getReqId",
+    value: function getReqId() {
+      return this.getCustomAttribute("reqid");
+    }
+  }, {
+    key: "getGuid",
+    value: function getGuid() {
+      //the guid is stored as the "requistionId"
+      //during imports to gurantee uniqueness.
+      return this.data.requisitionId;
+    }
+  }, {
+    key: "getTitle",
+    value: function getTitle() {
+      return this.data.title;
+    }
+  }, {
+    key: "getLocation",
+    value: function getLocation() {
+      return Object(api_location["b" /* removeCountry */])(this.getCustomAttribute("city_admin1_country"));
+    }
+  }, {
+    key: "getHtmlDescription",
+    value: function getHtmlDescription() {
+      return this.data.description;
+    }
+  }, {
+    key: "getCity",
+    value: function getCity() {
+      var location = this.getLocation();
+      return Object(api_location["c" /* removeState */])(Object(api_location["b" /* removeCountry */])(location));
+    }
+  }, {
+    key: "getState",
+    value: function getState() {
+      var location = this.getLocation();
+      location = location.split(",");
+      return Object(api_location["a" /* fullState */])(location[1]);
+    }
+  }, {
+    key: "getDeletedAt",
+    value: function getDeletedAt() {
+      return null;
+    }
+  }, {
+    key: "getCompany",
+    value: function getCompany() {
+      return this.data.companyDisplayName;
+    }
+  }, {
+    key: "getCountry",
+    value: function getCountry() {
+      return this.getCustomAttribute("country");
+    }
+  }, {
+    key: "getDateAdded",
+    value: function getDateAdded() {
+      return this.data.postingCreateTime;
+    }
+  }, {
+    key: "hasCommuteInfo",
+    value: function hasCommuteInfo() {
+      if (Object(helpers["a" /* blank */])(this.commuteInfo)) {
+        return false;
+      }
+
+      if (!Object.prototype.hasOwnProperty.call(this.commuteInfo, "travelDuration")) {
+        return false;
+      }
+
+      return true;
+    }
+  }, {
+    key: "getCommuteTime",
+    value: function getCommuteTime() {
+      if (!this.hasCommuteInfo()) {
+        return "";
+      }
+
+      var seconds = parseInt(this.commuteInfo.travelDuration.replace("s", ""));
+      var hours = Math.floor(seconds / 60 / 60);
+      var minutes = Math.floor(seconds / 60) - hours * 60;
+      return minutes;
+    }
+  }]);
+
+  return GoogleTalentJob;
+}(base["a" /* default */]);
+
+
+// EXTERNAL MODULE: ./src/services/api/drivers/job/solr.js
+var solr = __webpack_require__("9115");
+
+// CONCATENATED MODULE: ./src/services/api/search.js
+
+
+
+
+
 
 
 
@@ -31896,30 +31904,70 @@ module.exports = function (key) {
 
 
 function api() {
-  return axios__WEBPACK_IMPORTED_MODULE_6___default.a.create({
+  return axios_default.a.create({
     baseURL: Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_API_URL,
     withCredentials: false,
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json"
     }
   });
 }
-var SearchService = /*#__PURE__*/function () {
-  function SearchService() {
-    Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(this, SearchService);
+
+var search_BaseSearchService = /*#__PURE__*/function () {
+  function BaseSearchService() {
+    Object(classCallCheck["a" /* default */])(this, BaseSearchService);
   }
 
-  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(SearchService, null, [{
+  Object(createClass["a" /* default */])(BaseSearchService, null, [{
+    key: "getJobDriver",
+    value: function getJobDriver(source) {
+      switch (source) {
+        case "solr":
+          return solr["a" /* default */];
+
+        case "google_talent":
+          return google_talent_GoogleTalentJob;
+
+        default:
+          throw new Error("Unsupported job driver/source ".concat(source));
+      }
+    }
+  }, {
+    key: "wrapJobDriver",
+    value: function wrapJobDriver(jobs, source) {
+      var JobDriver = BaseSearchService.getJobDriver(source);
+      jobs = (jobs || []).map(function (job) {
+        return new JobDriver(job);
+      });
+      return jobs;
+    }
+  }]);
+
+  return BaseSearchService;
+}();
+
+var search_SearchService = /*#__PURE__*/function (_BaseSearchService) {
+  Object(inherits["a" /* default */])(SearchService, _BaseSearchService);
+
+  var _super = Object(createSuper["a" /* default */])(SearchService);
+
+  function SearchService() {
+    Object(classCallCheck["a" /* default */])(this, SearchService);
+
+    return _super.apply(this, arguments);
+  }
+
+  Object(createClass["a" /* default */])(SearchService, null, [{
     key: "get",
     value: function () {
-      var _get = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(input, siteConfig) {
-        var source, response;
+      var _get = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(input, siteConfig) {
+        var source, response, data;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                source = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["kebabCase"])(siteConfig.sources.search);
+                source = Object(lodash["kebabCase"])(siteConfig.sources.search);
                 _context.prev = 1;
                 _context.next = 4;
                 return api().post("".concat(source, "/search"), {
@@ -31929,28 +31977,30 @@ var SearchService = /*#__PURE__*/function () {
 
               case 4:
                 response = _context.sent;
+                data = response.data;
+                response.data.jobs = SearchService.wrapJobDriver(data.jobs, data.meta.source);
                 return _context.abrupt("return", response);
 
-              case 8:
-                _context.prev = 8;
+              case 10:
+                _context.prev = 10;
                 _context.t0 = _context["catch"](1);
 
                 if (!Object.prototype.hasOwnProperty.call(_context.t0, "response")) {
-                  _context.next = 12;
+                  _context.next = 14;
                   break;
                 }
 
                 return _context.abrupt("return", _context.t0);
 
-              case 12:
+              case 14:
                 throw new Error(_context.t0);
 
-              case 13:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 8]]);
+        }, _callee, null, [[1, 10]]);
       }));
 
       function get(_x, _x2) {
@@ -31962,22 +32012,28 @@ var SearchService = /*#__PURE__*/function () {
   }]);
 
   return SearchService;
-}();
-var CommuteSearchService = /*#__PURE__*/function () {
+}(search_BaseSearchService);
+var search_CommuteSearchService = /*#__PURE__*/function (_BaseSearchService2) {
+  Object(inherits["a" /* default */])(CommuteSearchService, _BaseSearchService2);
+
+  var _super2 = Object(createSuper["a" /* default */])(CommuteSearchService);
+
   function CommuteSearchService() {
-    Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(this, CommuteSearchService);
+    Object(classCallCheck["a" /* default */])(this, CommuteSearchService);
+
+    return _super2.apply(this, arguments);
   }
 
-  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(CommuteSearchService, null, [{
+  Object(createClass["a" /* default */])(CommuteSearchService, null, [{
     key: "get",
     value: function () {
-      var _get2 = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(input, siteConfig) {
-        var source, response;
+      var _get2 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(input, siteConfig) {
+        var source, response, data;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                source = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["kebabCase"])(siteConfig.sources.commute);
+                source = Object(lodash["kebabCase"])(siteConfig.sources.commute);
                 _context2.prev = 1;
                 _context2.next = 4;
                 return api().post("".concat(source, "/commute"), {
@@ -31987,28 +32043,30 @@ var CommuteSearchService = /*#__PURE__*/function () {
 
               case 4:
                 response = _context2.sent;
+                data = response.data;
+                response.data.jobs = CommuteSearchService.wrapJobDriver(data.jobs, data.meta.source);
                 return _context2.abrupt("return", response);
 
-              case 8:
-                _context2.prev = 8;
+              case 10:
+                _context2.prev = 10;
                 _context2.t0 = _context2["catch"](1);
 
                 if (!Object.prototype.hasOwnProperty.call(_context2.t0, "response")) {
-                  _context2.next = 12;
+                  _context2.next = 14;
                   break;
                 }
 
                 return _context2.abrupt("return", _context2.t0);
 
-              case 12:
+              case 14:
                 throw new Error(_context2.t0);
 
-              case 13:
+              case 15:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[1, 8]]);
+        }, _callee2, null, [[1, 10]]);
       }));
 
       function get(_x3, _x4) {
@@ -32020,22 +32078,22 @@ var CommuteSearchService = /*#__PURE__*/function () {
   }]);
 
   return CommuteSearchService;
-}();
-var TitleCompleteService = /*#__PURE__*/function () {
+}(search_BaseSearchService);
+var search_TitleCompleteService = /*#__PURE__*/function () {
   function TitleCompleteService() {
-    Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(this, TitleCompleteService);
+    Object(classCallCheck["a" /* default */])(this, TitleCompleteService);
   }
 
-  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(TitleCompleteService, null, [{
+  Object(createClass["a" /* default */])(TitleCompleteService, null, [{
     key: "get",
     value: function () {
-      var _get3 = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(q, siteConfig) {
+      var _get3 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(q, siteConfig) {
         var source, response;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                source = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["kebabCase"])(siteConfig.sources.complete);
+                source = Object(lodash["kebabCase"])(siteConfig.sources.complete);
                 _context3.prev = 1;
                 _context3.next = 4;
                 return api().get("".concat(source, "/complete/title"), {

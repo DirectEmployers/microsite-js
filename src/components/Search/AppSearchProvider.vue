@@ -22,8 +22,6 @@ import { blank, log } from "../../services/helpers"
 import { fullState, removeCountry } from "../../services/api/location"
 import { omitBy, omit, clone, merge } from "lodash"
 import { SearchService, CommuteSearchService } from "../../services/api/search"
-import GoogleTalentJob from "../../services/api/drivers/job/google-talent"
-import SolrJob from "../../services/api/drivers/job/solr"
 
 export default {
     props: {
@@ -268,17 +266,6 @@ export default {
             })
         },
 
-        getJobDriver(source) {
-            switch (source) {
-                case "solr":
-                    return SolrJob
-                case "google_talent":
-                    return GoogleTalentJob
-                default:
-                    throw new Error(`Unsupported job driver/source ${source}`)
-            }
-        },
-
         getService() {
             const searchType = this.input.searchType
             switch (searchType) {
@@ -327,37 +314,35 @@ export default {
             }
 
         },
-        async search(input = null) {
+        async search() {
             this.status.loading = true
 
             const Service = this.getService()
 
-            input = this.blank(input) ? this.getPayload() : input
-
             try {
-                const response = await Service.get(input, this.siteConfig)
+                const response = await Service.get(this.getPayload(), this.siteConfig)
 
-                const data = response.data
+                let { jobs, pagination, filters, meta } = response.data
 
-                const { jobs, pagination, filters } = data
-
-                const JobDriver = this.getJobDriver(data.meta.source)
-
-                this.jobs = (jobs || []).map((job) => {
-                    return new JobDriver(job)
-                })
+                this.jobs = jobs
 
                 this.pagination = pagination
 
                 this.filters = filters || {}
 
-                this.setMeta(data.meta)
+                this.setMeta(meta)
+
+                return response
+
             } catch (error) {
                 this.status.error = error
 
                 this.meta.selectedFilters = []
 
                 log(error, "error")
+
+                return error
+
             } finally {
                 this.status.loading = false
             }

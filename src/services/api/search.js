@@ -1,26 +1,58 @@
 import axios from "axios"
-import { kebabCase } from 'lodash'
+import { kebabCase } from "lodash"
+import GoogleTalentJob from "../../services/api/drivers/job/google-talent"
+import SolrJob from "../../services/api/drivers/job/solr"
 
 export default function api() {
     return axios.create({
         baseURL: process.env.GRIDSOME_API_URL,
         withCredentials: false,
         headers: {
-            "Accept": "application/json",
+            Accept: "application/json",
             "Content-Type": "application/json",
         },
     })
 }
 
-export class SearchService {
+class BaseSearchService {
+    static getJobDriver(source) {
+        switch (source) {
+            case "solr":
+                return SolrJob
+            case "google_talent":
+                return GoogleTalentJob
+            default:
+                throw new Error(`Unsupported job driver/source ${source}`)
+        }
+    }
+
+    static wrapJobDriver(jobs, source) {
+        const JobDriver = BaseSearchService.getJobDriver(source)
+
+        jobs = (jobs || []).map((job) => {
+            return new JobDriver(job)
+        })
+
+        return jobs
+    }
+}
+
+export class SearchService extends BaseSearchService {
     static async get(input, siteConfig) {
         const source = kebabCase(siteConfig.sources.search)
 
         try {
-            const response = await api().post(`${source}/search`, {
+            let response = await api().post(`${source}/search`, {
                 data: input,
                 config: siteConfig,
             })
+
+            const data = response.data
+
+            response.data.jobs = SearchService.wrapJobDriver(
+                data.jobs,
+                data.meta.source
+            )
 
             return response
         } catch (error) {
@@ -32,16 +64,21 @@ export class SearchService {
     }
 }
 
-export class CommuteSearchService {
+export class CommuteSearchService extends BaseSearchService {
     static async get(input, siteConfig) {
-
         const source = kebabCase(siteConfig.sources.commute)
 
         try {
-            const response = await api().post(`${source}/commute`, {
+            let response = await api().post(`${source}/commute`, {
                 data: input,
                 config: siteConfig,
             })
+            const data = response.data
+
+            response.data.jobs = CommuteSearchService.wrapJobDriver(
+                data.jobs,
+                data.meta.source
+            )
 
             return response
         } catch (error) {
@@ -55,7 +92,6 @@ export class CommuteSearchService {
 
 export class TitleCompleteService {
     static async get(q, siteConfig) {
-
         const source = kebabCase(siteConfig.sources.complete)
 
         try {
@@ -64,7 +100,7 @@ export class TitleCompleteService {
                     data: { q: q },
                     config: {
                         sources: { complete: siteConfig.sources.complete },
-                        buids:siteConfig.buids,
+                        buids: siteConfig.buids,
                         project_id: siteConfig.project_id,
                         tenant_uuid: siteConfig.tenant_uuid,
                         company_uuids: siteConfig.company_uuids,
