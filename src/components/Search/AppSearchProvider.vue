@@ -186,26 +186,30 @@ export default {
             const query = { ...this.$route.query }
             const defaultInput = this.getInputDefaults()
 
-            const defaultSort = ()=>{
-                this.input.sort = defaultInput['sort']
-                query['sort'] = this.input.sort
-            }
             let toRemove = [param]
 
             if (param == "*") {
                 toRemove = this.filterParamList
+            }
+
+            if (toRemove.includes('location')) {
+
+                toRemove.push("coords")
 
                 if(!this.hasLocationInput()){
-                    defaultSort()
+
+                    this.input.sort = defaultInput['sort']
+
+                    query['sort'] = this.input.sort
                 }
-            } else if (param == "location") {
-                defaultSort()
-                toRemove.push("coords")
             }
+
 
             toRemove.forEach((param) => {
                 delete query[param]
             })
+
+            query['page'] = 1
 
             this.$router.replace({ query })
         },

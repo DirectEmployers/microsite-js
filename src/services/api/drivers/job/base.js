@@ -1,4 +1,4 @@
-import { isArray, get, kebabCase } from "lodash"
+import { get, kebabCase, has } from "lodash"
 import { removeCountry, fullState } from "../../location"
 import { removeEndOfLine } from "../../../helpers"
 
@@ -14,6 +14,10 @@ export default class BaseJob {
 
     getAttribute(attribute, defaultValue = null) {
         return get(this.data, attribute, defaultValue)
+    }
+
+    hasAttribute(attribute) {
+        return has(this.data, attribute)
     }
 
     getTitle() {
@@ -40,13 +44,6 @@ export default class BaseJob {
         return this.data.location_exact
     }
 
-    getCustomAttribute(attribute, defaultValue = null) {
-        const customAttr = `customAttributes.${attribute}.stringValues`
-
-        const value = get(this.data, customAttr, defaultValue)
-
-        return isArray(value) ? value.join(" ") : value
-    }
 
     hasCommuteInfo() {
         return false

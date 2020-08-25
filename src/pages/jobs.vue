@@ -2,7 +2,6 @@
     <Layout>
         <AppSearchProvider
             class="my-6"
-
             :site-config="$siteConfig"
             v-slot="{
                 jobs,
