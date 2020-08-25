@@ -12,8 +12,8 @@ export default class BaseJob {
         return this.data.reqid
     }
 
-    getAttribute(attribute) {
-        return get(this.data, attribute)
+    getAttribute(attribute, defaultValue = null) {
+        return get(this.data, attribute, defaultValue)
     }
 
     getTitle() {

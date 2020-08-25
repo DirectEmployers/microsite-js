@@ -56,6 +56,7 @@ export default {
         },
     },
     data() {
+        const defaultInput = this.getInputDefaults()
         return {
             jobs: [],
             source: this.siteConfig.sources.search,
@@ -71,11 +72,11 @@ export default {
             meta: {
                 hasJobs: this.hasJobs,
                 sort: {
-                    active: "relevance",
+                    active: defaultInput['sort'],
                     options: ["relevance", "distance", "title", "date"],
                 },
             },
-            input: this.getInputDefaults(),
+            input: defaultInput,
         }
     },
     created() {
@@ -85,10 +86,10 @@ export default {
         //filter/breadcrumb removal
         this.$router.app.$on("searchFilterRemoved", this.removeFilter)
 
-
         this.setInputFromQuery()
 
         if (this.searchOnLoad) {
+
             this.search()
         }
     },
@@ -155,7 +156,7 @@ export default {
         getInputDefaults() {
             let defaultInput = clone(this.defaultInput)
 
-            return merge(defaultInput, {
+            return merge({
                 searchType: "location",
                 commuteMethod: "DRIVING",
                 travelDuration: "900",
@@ -166,7 +167,7 @@ export default {
                 location: "",
                 coords: null,
                 sort: "relevance",
-            })
+            }, defaultInput)
         },
 
         hasLocationInput(){
@@ -183,8 +184,10 @@ export default {
         },
         removeFilter(param) {
             const query = { ...this.$route.query }
+            const defaultInput = this.getInputDefaults()
+
             const defaultSort = ()=>{
-                this.input.sort = 'relevance'
+                this.input.sort = defaultInput['sort']
                 query['sort'] = this.input.sort
             }
             let toRemove = [param]
@@ -270,6 +273,7 @@ export default {
         },
 
         getPayload() {
+
             let data = omitBy(clone(this.input), blank)
 
             if (!this.isCommuteSearch) {
