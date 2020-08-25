@@ -73,7 +73,7 @@ export default {
         },
         input: {
             required: true,
-            type: Object
+            type: Object,
         },
         limit: {
             required: false,
@@ -133,13 +133,16 @@ export default {
     },
     methods: {
         selectOption(option) {
+            let query = {
+                ...this.$route.query,
+                [this.queryParamName]: option.display,
+            }
+
+            query['page'] = 1
 
             this.$router.push({
                 path: this.$route.path,
-                query: {
-                    ...this.$route.query,
-                    [this.queryParamName]: option.display,
-                },
+                query: query,
             })
 
             this.$emit("searchFilterSelected", option)
@@ -175,7 +178,6 @@ export default {
                 display = removeCountry(display)
                 //and try to expand to a full value
                 display = fullState(display)
-
             }
 
             return display
