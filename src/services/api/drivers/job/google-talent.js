@@ -58,6 +58,7 @@ export default class GoogleTalentJob extends BaseJob{
         return this.getCustomAttribute("country")
     }
 
+
     getDateAdded(){
         return this.data.postingCreateTime
     }

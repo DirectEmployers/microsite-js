@@ -19950,7 +19950,8 @@ var BaseJob = /*#__PURE__*/function () {
   }, {
     key: "getAttribute",
     value: function getAttribute(attribute) {
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_8__["get"])(this.data, attribute);
+      var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_8__["get"])(this.data, attribute, defaultValue);
     }
   }, {
     key: "getTitle",
