@@ -28,7 +28,6 @@
         @keydown.down="keyDown"
         aria-autocomplete="list"
         aria-haspopup="listbox"
-        aria-controls="form__autocomplete-results"
         :aria-labelledby="`form__label-${id}`"
         :aria-activedescendant="activeDescendant"
     >
