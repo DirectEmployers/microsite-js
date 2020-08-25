@@ -135,9 +135,9 @@
                         >
                             <template v-slot:display="{ isOpen }">
                                 <h3
-                                    class="search__filter-display"
+                                    class="search-filter-display"
                                     :class="{
-                                        'search__filter-display--active': isOpen,
+                                        'search-filter-display--active': isOpen,
                                     }"
                                 >
                                     Filter By
