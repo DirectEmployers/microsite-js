@@ -49,7 +49,7 @@
                 </div>
 
                 <div
-                    v-if="hasLocationInput"
+                    v-if="shouldShowRadiusInput"
                     class="search-form__location-input"
                 >
                     <label for="r" class="search-form__miles form__label">
@@ -60,7 +60,7 @@
                         name="r"
                         v-model="input.r"
                         class="search-form__radius form__input"
-                        :disabled="!hasLocationInput"
+                        :disabled="!shouldShowRadiusInput"
                     >
                         <option
                             :key="option.value"
@@ -103,7 +103,11 @@ export default {
         "getUserCoordinates",
     ],
     computed: {
-        hasLocationInput() {
+        shouldShowRadiusInput() {
+            if(this.input.searchType == 'commute'){
+                return false;
+            }
+
             return this.input.coords || this.input.location
         },
     },
