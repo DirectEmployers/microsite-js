@@ -207,6 +207,8 @@ export default {
                 delete query[param]
             })
 
+            query['page'] = 1
+
             this.$router.replace({ query })
         },
 
