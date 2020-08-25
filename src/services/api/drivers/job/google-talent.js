@@ -1,6 +1,8 @@
 import BaseJob from './base';
 import { blank } from '../../../helpers'
+import { isArray, get, has } from "lodash"
 import { removeState, removeCountry, fullState } from '../../location'
+
 export default class GoogleTalentJob extends BaseJob{
 
     constructor(job) {
@@ -10,7 +12,7 @@ export default class GoogleTalentJob extends BaseJob{
     }
 
     getReqId(){
-        return this.getCustomAttribute("reqid")
+        return this.getAttribute("reqid")
     }
 
 
@@ -20,12 +22,26 @@ export default class GoogleTalentJob extends BaseJob{
         return this.data.requisitionId
     }
 
+    hasAttribute(attribute) {
+        const customAttr = `customAttributes.${attribute}.stringValues`
+
+        return has(this.data, customAttr)
+    }
+
+    getAttribute(attribute, defaultValue = null) {
+        const customAttr = `customAttributes.${attribute}.stringValues`
+
+        const value = get(this.data, customAttr, defaultValue)
+
+        return isArray(value) ? value.join(" ") : value
+    }
+
     getTitle(){
         return this.data.title
     }
 
     getLocation() {
-        return removeCountry(this.getCustomAttribute("city_admin1_country"))
+        return removeCountry(this.getAttribute("city_admin1_country"))
     }
 
     getHtmlDescription(){
@@ -55,7 +71,7 @@ export default class GoogleTalentJob extends BaseJob{
     }
 
     getCountry(){
-        return this.getCustomAttribute("country")
+        return this.getAttribute("country")
     }
 
 
