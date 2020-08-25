@@ -234,23 +234,6 @@ export default {
             this.$set(this.input, key, value)
         },
 
-        hasCommuteInfo(commuteInfo) {
-            if (blank(commuteInfo)) {
-                return false
-            }
-
-            const has = Object.prototype.hasOwnProperty.call(
-                commuteInfo,
-                "travelDuration"
-            )
-
-            if (!has) {
-                return false
-            }
-
-            return true
-        },
-
         getGeoLocation(done) {
             navigator.geolocation.getCurrentPosition((position) => {
                 let lat = position.coords.latitude.toFixed(6)
