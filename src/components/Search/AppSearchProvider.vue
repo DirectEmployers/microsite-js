@@ -340,20 +340,17 @@ export default {
         },
 
         formatInput() {
-            if (!blank(this.input.location)) {
-                if(this.isLocationSearch){
-                    let parts = []
 
-                    let locations = this.input.location.split(",")
+            if(this.isLocationSearch){
+                let parts = []
 
-                    locations.forEach((location)=>{
-                        parts.push(fullState(location))
-                    })
+                let locations = this.input.location.toString().split(",")
 
-                    this.input.location = removeCountry(parts.join(","))
-                }else{
-                    this.input.location = ""
-                }
+                locations.forEach((location)=>{
+                    parts.push(fullState(location))
+                })
+
+                this.input.location = removeCountry(parts.join(","))
             }
         },
 
