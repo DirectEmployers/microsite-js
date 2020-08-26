@@ -149,7 +149,7 @@ export default {
         },
 
         isExistingFilter(display) {
-            return this.input[this.queryParamName] != display
+            return this.input[this.queryParamName] == display
         },
 
         filterOptions(options) {
@@ -159,7 +159,7 @@ export default {
             options.forEach((option) => {
                 display = this.formatDisplay(option.display)
 
-                if (this.isExistingFilter(display)) {
+                if (!this.isExistingFilter(display)) {
                     filtered.push({
                         display: display,
                         value: option.value,
