@@ -211,8 +211,6 @@ export default {
 
             query['page'] = 1
 
-            console.log("Page change", query['page'])
-
             this.$router.replace({ query })
         },
 
