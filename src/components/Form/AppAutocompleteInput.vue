@@ -23,7 +23,7 @@
         @input="changeValue($event.target.value)"
         @blur="blur"
         @keydown.enter.prevent="keyEnter"
-        @keydown.tab="keyEnter"
+        
         @keydown.up="keyUp"
         @keydown.down="keyDown"
         aria-autocomplete="list"
