@@ -1,13 +1,13 @@
 <template>
-    <div class="page--overlay" v-if="toggled">
-        <div class="modal">
+    <div class="page--overlay" v-if="toggled" @keydown.tab="focusTrap">
+        <div class="modal" ref="modal" tabindex="0">
             <div class="modal__header">
                 <h3 class="modal__header-title" v-if="title">
                     {{ title }}
                 </h3>
-                <span class="modal__header-close" @click="toggle">
+                <button class="modal__header-close" @click="toggle" type="button">
                     &times;
-                </span>
+                </button>
             </div>
 
             <div class="modal__body">
@@ -33,11 +33,14 @@ export default {
     created() {
         if (process.isClient) {
             document.addEventListener("click", this.nonModalClick)
+            document.addEventListener("keyup", this.exitModal)
         }
     },
+
     destroyed() {
         if (process.isClient) {
             document.removeEventListener("click", this.nonModalClick)
+            document.removeEventListener("keyup", this.exitModal)
         }
     },
     data() {
@@ -46,7 +49,6 @@ export default {
         }
     },
     methods: {
-
         toggle() {
             this.toggled = !this.toggled
         },
@@ -56,11 +58,41 @@ export default {
 
             const containsTarget = this.$el.contains(e.target)
 
-            const wrapperContainsTarget = (modalWrapper && modalWrapper.contains(e.target))
+            const wrapperContainsTarget =
+                modalWrapper && modalWrapper.contains(e.target)
 
             if (containsTarget && !wrapperContainsTarget) {
                 this.toggled = false
             }
+        },
+
+        exitModal(e) {
+            // escape
+            if (e.keyCode === 27) {
+                this.toggled = false
+            }
+        },
+
+        focusTrap(e) {
+            const focusable = this.$refs.modal.querySelectorAll(
+                "button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
+            )
+
+            const firstFocusable = focusable[0]
+
+            const lastFocusable = focusable[focusable.length - 1]
+
+            if (e.shiftKey && document.activeElement === firstFocusable) {
+                lastFocusable.focus()
+                e.preventDefault()
+            }
+
+            if (!e.shiftKey && document.activeElement === lastFocusable) {
+                firstFocusable.focus()
+                e.preventDefault()
+            }
+
+            
         },
     },
 }
