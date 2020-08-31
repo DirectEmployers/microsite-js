@@ -20,22 +20,26 @@
                 />
             </div>
         </AppSearchProvider>
-        <a href="#" @click="toggleExampleModal()">
-            Modal
-        </a>
+        <div class="container mx-4">
+            <button @click="toggleExampleModal()" class="button">
+                Modal Example
+            </button>
+        </div>
         <AppModal id="example-modal" ref="example-modal" title="Example Modal">
             <template v-slot:content>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. In
                     ab quas animi expedita, doloribus, quod ratione, ut magnam
                     culpa eaque nostrum recusandae tempora dolorem soluta
-                    quibusdam nam cum nihil eum! <a href="#">test2</a>
+                    quibusdam nam cum nihil eum!
+                    <a href="#">test2</a>
                 </p>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Repudiandae ratione tenetur doloremque totam vel maiores ad
                     ducimus inventore autem voluptatibus modi quam eaque odit
-                    amet voluptas quibusdam porro, repellat obcaecati <a href="#">Test</a>
+                    amet voluptas quibusdam porro, repellat obcaecati
+                    <a href="#">Test</a>
                 </p>
             </template>
         </AppModal>
