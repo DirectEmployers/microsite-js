@@ -350,7 +350,7 @@ export default {
                     parts.push(fullState(location))
                 })
 
-                this.input.location = removeCountry(parts.join(","))
+                this.input.location = removeCountry(parts.join(", "))
             }
         },
 

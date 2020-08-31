@@ -3,8 +3,8 @@ export default {
     sources: {
         search: "solr",
         // search: "google_talent",
+        complete: "solr",
         // complete: "google_talent",
-        complete: "google_talent",
         commute: "google_talent",
     },
     project_id: "cloudjobsearch-256720",
