@@ -5,7 +5,7 @@
                 <h3 class="modal__header-title" v-if="title">
                     {{ title }}
                 </h3>
-                <button class="modal__header-close" @click="toggle">
+                <button class="modal__header-close" @click="toggle" type="button">
                     &times;
                 </button>
             </div>
