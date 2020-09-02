@@ -342,15 +342,7 @@ export default {
         formatInput() {
 
             if(this.isLocationSearch){
-                let parts = []
-
-                let locations = this.input.location.toString().split(",")
-
-                locations.forEach((location)=>{
-                    parts.push(fullState(location))
-                })
-
-                this.input.location = removeCountry(parts.join(", "))
+                this.input.location = fullState(this.input.location)
             }
         },
 
