@@ -70,6 +70,7 @@
 <script>
 import { debounce } from "lodash"
 import { TitleCompleteService, MOCCompleteService } from "../../services/api/search"
+import { blank } from "../../services/helpers"
 
 export default {
     name: "AppAutocompleteInput",
@@ -114,12 +115,15 @@ export default {
     methods: {
         doSearch: debounce( async function (value) {
             this.loading = true
+
+            const args = blank(this.siteConfig) ? [value] : [value, this.siteConfig]
+
             if (value.length < 2) {
                 this.loading = false
                 return
             }
             try {
-                const { data } = await this.getService().get(value, this.siteConfig)
+                const { data } = await this.getService().get(...args)
                 this.results = data || []
             } catch (error) {
                 this.error = error

@@ -28772,12 +28772,12 @@ module.exports = {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=87125142&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=3576f8d8&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"form__autocomplete",attrs:{"role":"combobox","aria-haspopup":"listbox","aria-owns":("form__autocomplete-items-" + _vm.id),"aria-expanded":_vm.isExpanded}},[(_vm.label)?_c('label',{staticClass:"form__label",attrs:{"id":("form__label-" + _vm.id),"for":("form__autocomplete-" + _vm.id)}},[_vm._v(" "+_vm._s(_vm.label)+" ")]):_vm._e(),_c('input',_vm._b({ref:"input",staticClass:"form__input",attrs:{"id":("form__autocomplete-" + _vm.id),"type":"text","aria-autocomplete":"list","aria-haspopup":"listbox","aria-labelledby":("form__label-" + _vm.id),"aria-activedescendant":_vm.activeDescendant},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.changeValue($event.target.value)},"blur":_vm.blur,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.keyEnter($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }return _vm.blur($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }return _vm.keyUp($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }return _vm.keyDown($event)}]}},'input',_vm.$attrs,false)),(_vm.loading)?_c('div',{staticClass:"form__autocomplete--loading spinner spinner--gray"}):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.results.length),expression:"results.length"}],staticClass:"form__autocomplete-results"},[_c('ul',{staticClass:"form__autocomplete-items",attrs:{"id":"`form__autocomplete-items-${id}`","role":"listbox"}},[_vm._l((_vm.results),function(result,index){return [_vm._t("result",[_c('li',{key:index,ref:("option-" + index),refInFor:true,staticClass:"form__autocomplete-item",class:{ 'form__autocomplete-item--active':index === _vm.selectedIndex },attrs:{"id":("form__autocomplete--" + _vm.id + "-" + index),"role":"option","aria-selected":_vm.activeDescendant},on:{"mouseover":function($event){_vm.selectedIndex = index},"click":function($event){return _vm.setValue(result)}}},[_vm._v(" "+_vm._s(result[_vm.display])+" ")])],{"result":result})]})],2)])])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=87125142&
+// CONCATENATED MODULE: ./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=3576f8d8&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -28796,6 +28796,9 @@ var lodash = __webpack_require__("2ef0");
 
 // EXTERNAL MODULE: ./src/services/api/search.js + 1 modules
 var search = __webpack_require__("f867");
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
+var helpers = __webpack_require__("a74a");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=script&lang=js&
 
@@ -28873,6 +28876,7 @@ var search = __webpack_require__("f867");
 //
 
 
+
 /* harmony default export */ var AppAutocompleteInputvue_type_script_lang_js_ = ({
   name: "AppAutocompleteInput",
   inheritAttrs: false,
@@ -28917,50 +28921,51 @@ var search = __webpack_require__("f867");
   methods: {
     doSearch: Object(lodash["debounce"])( /*#__PURE__*/function () {
       var _ref = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
-        var _yield$this$getServic, data;
+        var args, _this$getService, _yield$this$getServic, data;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 this.loading = true;
+                args = Object(helpers["a" /* blank */])(this.siteConfig) ? [value] : [value, this.siteConfig];
 
                 if (!(value.length < 2)) {
-                  _context.next = 4;
+                  _context.next = 5;
                   break;
                 }
 
                 this.loading = false;
                 return _context.abrupt("return");
 
-              case 4:
-                _context.prev = 4;
-                _context.next = 7;
-                return this.getService().get(value, this.siteConfig);
+              case 5:
+                _context.prev = 5;
+                _context.next = 8;
+                return (_this$getService = this.getService()).get.apply(_this$getService, args);
 
-              case 7:
+              case 8:
                 _yield$this$getServic = _context.sent;
                 data = _yield$this$getServic.data;
                 this.results = data || [];
-                _context.next = 15;
+                _context.next = 16;
                 break;
 
-              case 12:
-                _context.prev = 12;
-                _context.t0 = _context["catch"](4);
+              case 13:
+                _context.prev = 13;
+                _context.t0 = _context["catch"](5);
                 this.error = _context.t0;
 
-              case 15:
-                _context.prev = 15;
+              case 16:
+                _context.prev = 16;
                 this.loading = false;
-                return _context.finish(15);
+                return _context.finish(16);
 
-              case 18:
+              case 19:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[4, 12, 15, 18]]);
+        }, _callee, this, [[5, 13, 16, 19]]);
       }));
 
       return function (_x) {
