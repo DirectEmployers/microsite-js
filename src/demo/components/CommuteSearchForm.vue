@@ -1,7 +1,6 @@
 <template>
     <form @submit.prevent="submitSearchForm('commute')">
         <div class="commute-search">
-            <h2 class="commute-search__header">Commute Options</h2>
             <div class="form__input-group form__input-group--stacked">
                 <label for="commuteLocation" class="form__label">
                     Commute From
