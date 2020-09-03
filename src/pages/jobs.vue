@@ -59,7 +59,11 @@
                                     </h3>
 
                                     <h3 class="text-md">
-                                        {{ job.getCity() + ', ' + job.getState() }}
+                                        {{
+                                            job.getCity() +
+                                                ", " +
+                                                job.getState()
+                                        }}
                                     </h3>
                                     <div
                                         class="job-listing__commute-time"
@@ -121,7 +125,13 @@
                                     v-for="(option, index) in meta.sort.options"
                                     :key="index"
                                 >
-                                    <span v-if="shouldShowSortOption(option, input)">{{ titleCase(option) }}</span>
+                                    <span
+                                        v-if="
+                                            shouldShowSortOption(option, input)
+                                        "
+                                    >
+                                        {{ titleCase(option) }}
+                                    </span>
                                 </li>
                             </ul>
                         </AppAccordion>
@@ -151,12 +161,28 @@
                             </template>
                         </AppSearchFilter>
 
-                        <CommuteSearchForm
-                            :input="input"
-                            v-if="meta.source != 'solr'"
-                            :submitSearchForm="submitSearchForm"
-                            :getUserCoordinates="getUserCoordinates"
-                        />
+                        <div class="container">
+                            <button
+                                @click="toggleCommuteModal()"
+                                class="button"
+                            >
+                                Commute Search
+                            </button>
+                        </div>
+                        <AppModal
+                            id="commute-modal"
+                            ref="commute-modal"
+                            title="Commute Search"
+                        >
+                            <template v-slot:content>
+                                <CommuteSearchForm
+                                    :input="input"
+                                    v-if="meta.source != 'solr'"
+                                    :submitSearchForm="submitSearchForm"
+                                    :getUserCoordinates="getUserCoordinates"
+                                />
+                            </template>
+                        </AppModal>
                     </div>
                 </div>
             </section>
@@ -174,6 +200,7 @@ import Loader from "~/demo/components/Loader"
 import AppSearchFilter from "~/components/Search/AppSearchFilter"
 import AppSearchFilterChip from "~/components/Search/AppSearchFilterChip"
 import { toLower, startCase } from "lodash"
+import AppModal from "~/components/AppModal"
 
 export default {
     components: {
@@ -185,21 +212,24 @@ export default {
         SearchForm,
         AppSearchFilter,
         Loader,
+        AppModal,
     },
     methods: {
         titleCase(str) {
             return startCase(toLower(str))
         },
-        shouldShowSortOption(option, input){
+        shouldShowSortOption(option, input) {
+            const hasLocation = input.location || input.coords
 
-            const hasLocation = input.location || input.coords;
-
-            if(option == 'distance' && !hasLocation){
-                return false;
+            if (option == "distance" && !hasLocation) {
+                return false
             }
 
-            return true;
-        }
+            return true
+        },
+        toggleCommuteModal() {
+            this.$refs["commute-modal"].toggle()
+        },
     },
     metaInfo: {
         title: "Jobs",
