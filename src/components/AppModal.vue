@@ -78,8 +78,6 @@ export default {
                 "button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
             )
 
-            console.log(focusable, 'focusable')
-
             const firstFocusable = focusable[0]
 
             const lastFocusable = focusable[focusable.length - 1]
