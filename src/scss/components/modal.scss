@@ -10,7 +10,7 @@
     }
 
     &__header {
-        @apply flex items-center w-full p-2;
+        @apply flex items-center w-full py-2;
         &-title {
             @apply font-medium text-lg;
         }
