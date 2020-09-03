@@ -44,11 +44,6 @@ export default {
             default: true,
             required: false,
         },
-        submitUrl: {
-            required: false,
-            type: String,
-            default: "/jobs",
-        },
         defaultInput:{
             required: false,
             type: Object,
@@ -164,6 +159,7 @@ export default {
                 commuteLocation: "",
                 q: "",
                 r: 25,
+                moc: "",
                 location: "",
                 coords: null,
                 sort: "relevance",
@@ -395,7 +391,7 @@ export default {
 
             this.$router
                 .push({
-                    path: this.submitUrl,
+                    path: '/jobs',
                     query: this.getPayload(),
                 })
                 .catch((err) => {

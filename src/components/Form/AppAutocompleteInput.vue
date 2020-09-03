@@ -69,6 +69,7 @@
 
 <script>
 import { debounce } from "lodash"
+import { TitleCompleteService, MOCCompleteService } from "../../services/api/search"
 
 export default {
     name: "AppAutocompleteInput",
@@ -82,12 +83,19 @@ export default {
         },
         siteConfig:{
             type: Object,
-            required: true
+            required: false,
+            default: ()=>{ return {}}
 
         },
         value: String,
         label: String,
-        query: Function,
+        query: {
+            type: String,
+            required: true,
+            validator: function (value) {
+                return ['title', 'moc', 'location'].indexOf(value) !== -1
+            }
+        },
         display: {
             type: String,
             required: false,
@@ -111,7 +119,7 @@ export default {
                 return
             }
             try {
-                const { data } = await this.query.get(value, this.siteConfig)
+                const { data } = await this.getService().get(value, this.siteConfig)
                 this.results = data || []
             } catch (error) {
                 this.error = error
@@ -119,6 +127,18 @@ export default {
                 this.loading = false
             }
         }, 200),
+        getService(){
+            switch(this.query){
+                case 'location':
+                    //todo
+                    break;
+                case 'moc':
+                    return MOCCompleteService
+                    break;
+                default:
+                    return TitleCompleteService
+            }
+        },
         changeValue (value) {
             this.$emit("input", value)
             this.selectedIndex = -1
@@ -129,7 +149,13 @@ export default {
             setTimeout( () => this.results = [], 200)
         },
         setValue (result) {
-            this.$emit("input", result[this.display])
+            let value = result[this.display]
+
+            if(Object.prototype.hasOwnProperty.call(result, 'value')){
+                value = result.value
+            }
+
+            this.$emit("input", value)
             this.result = result
             this.$emit("setResult", result)
         },
