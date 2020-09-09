@@ -20,8 +20,15 @@
         }
     }
 
-    &__user-location {
-        @apply bg-gold;
+    &__location-autocomplete {
+        display: flex;
+        align-items: flex-end;
+        
+        .form__input {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-right: 0;
+        }
     }
 
     &__location-input {

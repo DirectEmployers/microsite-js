@@ -15,35 +15,37 @@
                 />
             </div>
             <div class="search-form__section">
-                <AppAutocompleteInput
-                    ref="location"
-                    v-model="input.location"
-                    label="Where"
-                    placeholder="Type city or state"
-                    aria-label="Type city or state"
-                    autocapitalize="off"
-                    :query="LocationCompleteService"
-                    @setResult="submitSearchForm"
-                />
-                <div :class="{ 'form__input-group': supported['geolocation'] }">
-                    <button
-                        @click="getUserCoordinates"
-                        v-show="supported['geolocation']"
-                        type="button"
-                        aria-label="Your location"
-                        style="background-color: black"
-                        class="search-form__user-location form__input-addon"
-                        :class="{
-                            hidden: !supported['geolocation'],
-                        }"
-                    >
-                        <img
-                            width="18px"
-                            src="https://dn9tckvz2rpxv.cloudfront.net/img/radius-search2.svg"
-                            alt="Radius Icon"
-                            :class="{ hidden: !supported['geolocation'] }"
-                        />
-                    </button>
+                <div class="search-form__location-autocomplete">
+                    <AppAutocompleteInput
+                        ref="location"
+                        v-model="input.location"
+                        label="Where"
+                        placeholder="Type city or state"
+                        aria-label="Type city or state"
+                        autocapitalize="off"
+                        :query="LocationCompleteService"
+                        @setResult="submitSearchForm"
+                    />
+                    <div :class="{ 'form__input-group': supported['geolocation'] }">
+                        <button
+                            @click="getUserCoordinates"
+                            v-show="supported['geolocation']"
+                            type="button"
+                            aria-label="Your location"
+                            style="background-color: black"
+                            class="search-form__user-location form__input-addon"
+                            :class="{
+                                hidden: !supported['geolocation'],
+                            }"
+                        >
+                            <img
+                                width="18px"
+                                src="https://dn9tckvz2rpxv.cloudfront.net/img/radius-search2.svg"
+                                alt="Radius Icon"
+                                :class="{ hidden: !supported['geolocation'] }"
+                            />
+                        </button>
+                    </div>
                 </div>
 
                 <div
