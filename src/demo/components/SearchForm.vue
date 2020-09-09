@@ -15,11 +15,19 @@
                 />
             </div>
             <div class="search-form__section">
-                <label for="location" class="form__label">
-                    Search by location
-                </label>
+                <AppAutocompleteInput
+                    ref="location"
+                    class="form__input"
+                    v-model="input.location"
+                    label="Where"
+                    placeholder="Type city or state"
+                    aria-label="Type city or state"
+                    autocapitalize="off"
+                    :query="LocationCompleteService"
+                    @setResult="submitSearchForm"
+                />
                 <div :class="{ 'form__input-group': supported['geolocation'] }">
-                    <input
+                    <!-- <input
                         id="location"
                         name="location"
                         type="text"
@@ -27,7 +35,8 @@
                         v-model="input.location"
                         placeholder="Type city or state"
                         class="form__input"
-                    />
+                    /> -->
+
                     <button
                         @click="getUserCoordinates"
                         v-show="supported['geolocation']"
@@ -85,7 +94,7 @@
                     placeholder="Enter MOC code"
                     aria-label="Search by MOC code"
                     autocapitalize="off"
-                    :query="MOCCompleteService"
+                    :query="LocationCompleteService"
                     @setResult="submitSearchForm"
                 />
             </div>
@@ -102,7 +111,8 @@
 
 <script>
 import AppAutocompleteInput from "~/components/Form/AppAutocompleteInput"
-import { TitleCompleteService, MOCCompleteService } from "~/services/api/search"
+import { TitleCompleteService, MOCCompleteService, LocationCompleteService } from "~/services/api/search"
+
 export default {
     name: "SearchForm",
     components: {
@@ -126,6 +136,7 @@ export default {
     data:()=>({
         TitleCompleteService,
         MOCCompleteService,
+        LocationCompleteService,
     })
 }
 </script>
