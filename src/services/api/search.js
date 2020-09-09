@@ -133,3 +133,21 @@ export class MOCCompleteService {
         }
     }
 }
+
+export class LocationCompleteService {
+    static async get(q) {
+        try {
+            const response = await api().get("/solr/complete/location", {
+                params: {
+                    q: q,
+                },
+            })
+            return response
+        } catch (error) {
+            if (Object.prototype.hasOwnProperty.call(error, "response")) {
+                return error
+            }
+            throw new Error(error)
+        }
+    }
+}

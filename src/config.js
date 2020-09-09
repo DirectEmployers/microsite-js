@@ -13,39 +13,39 @@ export default {
         // solr:"title_exact:*Sales* OR title_exact:*Retail*"
     },
     filters: [
-        {
-            name: "functionalarea",
-            display: "Functional Area",
-            solr_facets: {
-                "Warehouse": 'text:"Functional Area Warehouse" OR text:"Job Post Category Warehouse"',
-                "Transportation": 'text:"Functional Area Transportation" OR text:"Job Post Category Transportation"',
-                "Sales": 'text:"Functional Area Sales" OR text:"Job Post Category Sales"'
-            }
-        },
-        {
-            name: "businessunit",
-            display: "Business Unit",
-            solr_facets:{
-                "Facilities Maintenance" :'text:"Business Unit Facilities Maintenance"',
-                "Construction Industrial WC" :'text:"Business Unit Construction Industrial WC"'
-            }
-        },
-        {
-            name: "positiontype",
-            display: "Position Type",
-            solr_facets: {
-                "Full-Time": 'text:"Position Type Full-Time"',
-                "Part-Time": 'text:"Position Type Part-Time"'
-            }
-        },
-        {
-            name: "remoteposition",
-            display: "Remote Position",
-            solr_facets: {
-                "Yes": 'text:"Remote Position? Yes"',
-                "No": 'text:"Remote Position? No"'
-            },
-        },
+        // {
+        //     name: "functionalarea",
+        //     display: "Functional Area",
+        //     solr_facets: {
+        //         "Warehouse": 'text:"Functional Area Warehouse" OR text:"Job Post Category Warehouse"',
+        //         "Transportation": 'text:"Functional Area Transportation" OR text:"Job Post Category Transportation"',
+        //         "Sales": 'text:"Functional Area Sales" OR text:"Job Post Category Sales"'
+        //     }
+        // },
+        // {
+        //     name: "businessunit",
+        //     display: "Business Unit",
+        //     solr_facets:{
+        //         "Facilities Maintenance" :'text:"Business Unit Facilities Maintenance"',
+        //         "Construction Industrial WC" :'text:"Business Unit Construction Industrial WC"'
+        //     }
+        // },
+        // {
+        //     name: "positiontype",
+        //     display: "Position Type",
+        //     solr_facets: {
+        //         "Full-Time": 'text:"Position Type Full-Time"',
+        //         "Part-Time": 'text:"Position Type Part-Time"'
+        //     }
+        // },
+        // {
+        //     name: "remoteposition",
+        //     display: "Remote Position",
+        //     solr_facets: {
+        //         "Yes": 'text:"Remote Position? Yes"',
+        //         "No": 'text:"Remote Position? No"'
+        //     },
+        // },
         {
             key: 'state',
             name: "location",
