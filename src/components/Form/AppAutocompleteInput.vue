@@ -69,7 +69,6 @@
 
 <script>
 import { debounce } from "lodash"
-import { TitleCompleteService, MOCCompleteService } from "../../services/api/search"
 import { blank } from "../../services/helpers"
 
 export default {
@@ -90,13 +89,7 @@ export default {
         },
         value: String,
         label: String,
-        query: {
-            type: String,
-            required: true,
-            validator: function (value) {
-                return ['title', 'moc', 'location'].indexOf(value) !== -1
-            }
-        },
+        query: Function,
         display: {
             type: String,
             required: false,
@@ -123,7 +116,7 @@ export default {
                 return
             }
             try {
-                const { data } = await this.getService().get(...args)
+                const { data } = await this.query.get(...args)
                 this.results = data || []
             } catch (error) {
                 this.error = error
@@ -131,18 +124,6 @@ export default {
                 this.loading = false
             }
         }, 200),
-        getService(){
-            switch(this.query){
-                case 'location':
-                    //todo
-                    break;
-                case 'moc':
-                    return MOCCompleteService
-                    break;
-                default:
-                    return TitleCompleteService
-            }
-        },
         changeValue (value) {
             this.$emit("input", value)
             this.selectedIndex = -1

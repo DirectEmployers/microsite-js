@@ -10,7 +10,7 @@
                     placeholder="Enter keywords"
                     aria-label="Search by keyword"
                     autocapitalize="off"
-                    query="title"
+                    :query="TitleCompleteService"
                     @setResult="submitSearchForm"
                 />
             </div>
@@ -85,7 +85,7 @@
                     placeholder="Enter MOC code"
                     aria-label="Search by MOC code"
                     autocapitalize="off"
-                    query="moc"
+                    :query="MOCCompleteService"
                     @setResult="submitSearchForm"
                 />
             </div>
@@ -102,6 +102,7 @@
 
 <script>
 import AppAutocompleteInput from "~/components/Form/AppAutocompleteInput"
+import { TitleCompleteService, MOCCompleteService } from "~/services/api/search"
 export default {
     name: "SearchForm",
     components: {
@@ -121,6 +122,10 @@ export default {
 
             return this.input.coords || this.input.location
         },
-    }
+    },
+    data:()=>({
+        TitleCompleteService,
+        MOCCompleteService,
+    })
 }
 </script>
