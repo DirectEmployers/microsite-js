@@ -17,7 +17,6 @@
             <div class="search-form__section">
                 <AppAutocompleteInput
                     ref="location"
-                    class="form__input"
                     v-model="input.location"
                     label="Where"
                     placeholder="Type city or state"
@@ -27,16 +26,6 @@
                     @setResult="submitSearchForm"
                 />
                 <div :class="{ 'form__input-group': supported['geolocation'] }">
-                    <!-- <input
-                        id="location"
-                        name="location"
-                        type="text"
-                        @keyup.enter="submitSearchForm"
-                        v-model="input.location"
-                        placeholder="Type city or state"
-                        class="form__input"
-                    /> -->
-
                     <button
                         @click="getUserCoordinates"
                         v-show="supported['geolocation']"
