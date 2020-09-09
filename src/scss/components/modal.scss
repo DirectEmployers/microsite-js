@@ -3,7 +3,7 @@
 }
 
 .modal {
-    @apply relative w-11/12 w-4/5 bg-white rounded flex flex-col items-center p-4;
+    @apply relative w-11/12 w-4/5 bg-white rounded flex flex-col p-4;
 
     @screen md {
          @apply max-w-4xl;
