@@ -140,12 +140,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=8f9be4e6&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=4532a17e&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=8f9be4e6&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=4532a17e&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
 var AppSearchProvidervue_type_script_lang_js_ = __webpack_require__("6651");
@@ -22883,11 +22883,6 @@ var component = Object(componentNormalizer["a" /* default */])(
       default: true,
       required: false
     },
-    submitUrl: {
-      required: false,
-      type: String,
-      default: "/jobs"
-    },
     defaultInput: {
       required: false,
       type: Object,
@@ -22991,6 +22986,7 @@ var component = Object(componentNormalizer["a" /* default */])(
         commuteLocation: "",
         q: "",
         r: 25,
+        moc: "",
         location: "",
         coords: null,
         sort: "relevance"
@@ -23204,7 +23200,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       this.input.page = 1;
       this.setSearchType(searchType);
       this.$router.push({
-        path: this.submitUrl,
+        path: '/jobs',
         query: this.getPayload()
       }).catch(function (err) {
         Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "b"])(err, "error");
@@ -28767,12 +28763,12 @@ module.exports = {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=14281523&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=41fe3f41&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"form__autocomplete",attrs:{"role":"combobox","aria-haspopup":"listbox","aria-owns":("form__autocomplete-items-" + _vm.id),"aria-expanded":_vm.isExpanded}},[(_vm.label)?_c('label',{staticClass:"form__label",attrs:{"id":("form__label-" + _vm.id),"for":("form__autocomplete-" + _vm.id)}},[_vm._v(" "+_vm._s(_vm.label)+" ")]):_vm._e(),_c('input',_vm._b({ref:"input",staticClass:"form__input",attrs:{"id":("form__autocomplete-" + _vm.id),"type":"text","aria-autocomplete":"list","aria-haspopup":"listbox","aria-labelledby":("form__label-" + _vm.id),"aria-activedescendant":_vm.activeDescendant},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.changeValue($event.target.value)},"blur":_vm.blur,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.keyEnter($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }return _vm.blur($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }return _vm.keyUp($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }return _vm.keyDown($event)}]}},'input',_vm.$attrs,false)),(_vm.loading)?_c('div',{staticClass:"form__autocomplete--loading spinner spinner--gray"}):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.results.length),expression:"results.length"}],staticClass:"form__autocomplete-results"},[_c('ul',{staticClass:"form__autocomplete-items",attrs:{"id":"`form__autocomplete-items-${id}`","role":"listbox"}},[_vm._l((_vm.results),function(result,index){return [_vm._t("result",[_c('li',{key:index,ref:("option-" + index),refInFor:true,staticClass:"form__autocomplete-item",class:{ 'form__autocomplete-item--active':index === _vm.selectedIndex },attrs:{"id":("form__autocomplete--" + _vm.id + "-" + index),"role":"option","aria-selected":_vm.activeDescendant},on:{"mouseover":function($event){_vm.selectedIndex = index},"click":function($event){return _vm.setValue(result)}}},[_vm._v(" "+_vm._s(result[_vm.display])+" ")])],{"result":result})]})],2)])])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=14281523&
+// CONCATENATED MODULE: ./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=41fe3f41&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -28785,6 +28781,9 @@ var asyncToGenerator = __webpack_require__("1da1");
 
 // EXTERNAL MODULE: ./node_modules/lodash/lodash.js
 var lodash = __webpack_require__("2ef0");
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
+var helpers = __webpack_require__("a74a");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=script&lang=js&
 
@@ -28860,6 +28859,7 @@ var lodash = __webpack_require__("2ef0");
 //
 //
 
+
 /* harmony default export */ var AppAutocompleteInputvue_type_script_lang_js_ = ({
   name: "AppAutocompleteInput",
   inheritAttrs: false,
@@ -28872,7 +28872,10 @@ var lodash = __webpack_require__("2ef0");
     },
     siteConfig: {
       type: Object,
-      required: true
+      required: false,
+      default: function _default() {
+        return {};
+      }
     },
     value: String,
     label: String,
@@ -28895,50 +28898,51 @@ var lodash = __webpack_require__("2ef0");
   methods: {
     doSearch: Object(lodash["debounce"])( /*#__PURE__*/function () {
       var _ref = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
-        var _yield$this$query$get, data;
+        var args, _this$query, _yield$this$query$get, data;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 this.loading = true;
+                args = Object(helpers["a" /* blank */])(this.siteConfig) ? [value] : [value, this.siteConfig];
 
                 if (!(value.length < 2)) {
-                  _context.next = 4;
+                  _context.next = 5;
                   break;
                 }
 
                 this.loading = false;
                 return _context.abrupt("return");
 
-              case 4:
-                _context.prev = 4;
-                _context.next = 7;
-                return this.query.get(value, this.siteConfig);
+              case 5:
+                _context.prev = 5;
+                _context.next = 8;
+                return (_this$query = this.query).get.apply(_this$query, args);
 
-              case 7:
+              case 8:
                 _yield$this$query$get = _context.sent;
                 data = _yield$this$query$get.data;
                 this.results = data || [];
-                _context.next = 15;
+                _context.next = 16;
                 break;
 
-              case 12:
-                _context.prev = 12;
-                _context.t0 = _context["catch"](4);
+              case 13:
+                _context.prev = 13;
+                _context.t0 = _context["catch"](5);
                 this.error = _context.t0;
 
-              case 15:
-                _context.prev = 15;
+              case 16:
+                _context.prev = 16;
                 this.loading = false;
-                return _context.finish(15);
+                return _context.finish(16);
 
-              case 18:
+              case 19:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[4, 12, 15, 18]]);
+        }, _callee, this, [[5, 13, 16, 19]]);
       }));
 
       return function (_x) {
@@ -28959,7 +28963,13 @@ var lodash = __webpack_require__("2ef0");
       }, 200);
     },
     setValue: function setValue(result) {
-      this.$emit("input", result[this.display]);
+      var value = result[this.display];
+
+      if (Object.prototype.hasOwnProperty.call(result, 'value')) {
+        value = result.value;
+      }
+
+      this.$emit("input", value);
       this.result = result;
       this.$emit("setResult", result);
     },
@@ -31685,7 +31695,7 @@ module.exports = function (key) {
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ search_SearchService; });
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ search_CommuteSearchService; });
 
-// UNUSED EXPORTS: default, TitleCompleteService
+// UNUSED EXPORTS: default, TitleCompleteService, MOCCompleteService
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
@@ -32143,6 +32153,64 @@ var search_TitleCompleteService = /*#__PURE__*/function () {
   }]);
 
   return TitleCompleteService;
+}();
+var search_MOCCompleteService = /*#__PURE__*/function () {
+  function MOCCompleteService() {
+    Object(classCallCheck["a" /* default */])(this, MOCCompleteService);
+  }
+
+  Object(createClass["a" /* default */])(MOCCompleteService, null, [{
+    key: "get",
+    value: function () {
+      var _get4 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(q) {
+        var response;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return api().get("/complete/moc", {
+                  params: {
+                    q: q
+                  }
+                });
+
+              case 3:
+                response = _context4.sent;
+                return _context4.abrupt("return", response);
+
+              case 7:
+                _context4.prev = 7;
+                _context4.t0 = _context4["catch"](0);
+
+                if (!Object.prototype.hasOwnProperty.call(_context4.t0, "response")) {
+                  _context4.next = 11;
+                  break;
+                }
+
+                return _context4.abrupt("return", _context4.t0);
+
+              case 11:
+                throw new Error(_context4.t0);
+
+              case 12:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 7]]);
+      }));
+
+      function get(_x7) {
+        return _get4.apply(this, arguments);
+      }
+
+      return get;
+    }()
+  }]);
+
+  return MOCCompleteService;
 }();
 
 /***/ }),

@@ -77,6 +77,18 @@
                     </select>
                 </div>
             </div>
+            <div class="search-form__section">
+                <AppAutocompleteInput
+                    ref="moc"
+                    v-model="input.moc"
+                    label="Search by MOC code"
+                    placeholder="Enter MOC code"
+                    aria-label="Search by MOC code"
+                    autocapitalize="off"
+                    :query="MOCCompleteService"
+                    @setResult="submitSearchForm"
+                />
+            </div>
             <div
                 class="search-form__button-wrapper"
             >
@@ -90,7 +102,7 @@
 
 <script>
 import AppAutocompleteInput from "~/components/Form/AppAutocompleteInput"
-import { TitleCompleteService } from "~/services/api/search"
+import { TitleCompleteService, MOCCompleteService } from "~/services/api/search"
 export default {
     name: "SearchForm",
     components: {
@@ -111,8 +123,9 @@ export default {
             return this.input.coords || this.input.location
         },
     },
-    data: () => ({
+    data:()=>({
         TitleCompleteService,
-    }),
+        MOCCompleteService,
+    })
 }
 </script>

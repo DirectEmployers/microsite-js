@@ -69,6 +69,7 @@
 
 <script>
 import { debounce } from "lodash"
+import { blank } from "../../services/helpers"
 
 export default {
     name: "AppAutocompleteInput",
@@ -82,7 +83,8 @@ export default {
         },
         siteConfig:{
             type: Object,
-            required: true
+            required: false,
+            default: ()=>{ return {}}
 
         },
         value: String,
@@ -106,12 +108,15 @@ export default {
     methods: {
         doSearch: debounce( async function (value) {
             this.loading = true
+
+            const args = blank(this.siteConfig) ? [value] : [value, this.siteConfig]
+
             if (value.length < 2) {
                 this.loading = false
                 return
             }
             try {
-                const { data } = await this.query.get(value, this.siteConfig)
+                const { data } = await this.query.get(...args)
                 this.results = data || []
             } catch (error) {
                 this.error = error
@@ -129,7 +134,13 @@ export default {
             setTimeout( () => this.results = [], 200)
         },
         setValue (result) {
-            this.$emit("input", result[this.display])
+            let value = result[this.display]
+
+            if(Object.prototype.hasOwnProperty.call(result, 'value')){
+                value = result.value
+            }
+
+            this.$emit("input", value)
             this.result = result
             this.$emit("setResult", result)
         },

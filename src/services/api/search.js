@@ -116,3 +116,20 @@ export class TitleCompleteService {
         }
     }
 }
+export class MOCCompleteService {
+    static async get(q) {
+        try {
+            const response = await api().get("/complete/moc", {
+                params: {
+                    q: q,
+                },
+            })
+            return response
+        } catch (error) {
+            if (Object.prototype.hasOwnProperty.call(error, "response")) {
+                return error
+            }
+            throw new Error(error)
+        }
+    }
+}
