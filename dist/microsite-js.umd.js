@@ -23077,7 +23077,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
         case "location":
         default:
-          return _services_api_search__WEBPACK_IMPORTED_MODULE_16__[/* SearchService */ "c"];
+          return _services_api_search__WEBPACK_IMPORTED_MODULE_16__[/* SearchService */ "b"];
       }
     },
     getPayload: function getPayload() {
@@ -28772,18 +28772,15 @@ module.exports = {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=3576f8d8&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=41fe3f41&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"form__autocomplete",attrs:{"role":"combobox","aria-haspopup":"listbox","aria-owns":("form__autocomplete-items-" + _vm.id),"aria-expanded":_vm.isExpanded}},[(_vm.label)?_c('label',{staticClass:"form__label",attrs:{"id":("form__label-" + _vm.id),"for":("form__autocomplete-" + _vm.id)}},[_vm._v(" "+_vm._s(_vm.label)+" ")]):_vm._e(),_c('input',_vm._b({ref:"input",staticClass:"form__input",attrs:{"id":("form__autocomplete-" + _vm.id),"type":"text","aria-autocomplete":"list","aria-haspopup":"listbox","aria-labelledby":("form__label-" + _vm.id),"aria-activedescendant":_vm.activeDescendant},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.changeValue($event.target.value)},"blur":_vm.blur,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.keyEnter($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }return _vm.blur($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }return _vm.keyUp($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }return _vm.keyDown($event)}]}},'input',_vm.$attrs,false)),(_vm.loading)?_c('div',{staticClass:"form__autocomplete--loading spinner spinner--gray"}):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.results.length),expression:"results.length"}],staticClass:"form__autocomplete-results"},[_c('ul',{staticClass:"form__autocomplete-items",attrs:{"id":"`form__autocomplete-items-${id}`","role":"listbox"}},[_vm._l((_vm.results),function(result,index){return [_vm._t("result",[_c('li',{key:index,ref:("option-" + index),refInFor:true,staticClass:"form__autocomplete-item",class:{ 'form__autocomplete-item--active':index === _vm.selectedIndex },attrs:{"id":("form__autocomplete--" + _vm.id + "-" + index),"role":"option","aria-selected":_vm.activeDescendant},on:{"mouseover":function($event){_vm.selectedIndex = index},"click":function($event){return _vm.setValue(result)}}},[_vm._v(" "+_vm._s(result[_vm.display])+" ")])],{"result":result})]})],2)])])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=3576f8d8&
+// CONCATENATED MODULE: ./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=41fe3f41&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
-var es_array_index_of = __webpack_require__("c975");
 
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
 var runtime = __webpack_require__("96cf");
@@ -28794,9 +28791,6 @@ var asyncToGenerator = __webpack_require__("1da1");
 // EXTERNAL MODULE: ./node_modules/lodash/lodash.js
 var lodash = __webpack_require__("2ef0");
 
-// EXTERNAL MODULE: ./src/services/api/search.js + 1 modules
-var search = __webpack_require__("f867");
-
 // EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
 var helpers = __webpack_require__("a74a");
 
@@ -28804,7 +28798,6 @@ var helpers = __webpack_require__("a74a");
 
 
 
-
 //
 //
 //
@@ -28874,7 +28867,6 @@ var helpers = __webpack_require__("a74a");
 //
 //
 //
-
 
 
 /* harmony default export */ var AppAutocompleteInputvue_type_script_lang_js_ = ({
@@ -28896,13 +28888,7 @@ var helpers = __webpack_require__("a74a");
     },
     value: String,
     label: String,
-    query: {
-      type: String,
-      required: true,
-      validator: function validator(value) {
-        return ['title', 'moc', 'location'].indexOf(value) !== -1;
-      }
-    },
+    query: Function,
     display: {
       type: String,
       required: false,
@@ -28921,7 +28907,7 @@ var helpers = __webpack_require__("a74a");
   methods: {
     doSearch: Object(lodash["debounce"])( /*#__PURE__*/function () {
       var _ref = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
-        var args, _this$getService, _yield$this$getServic, data;
+        var args, _this$query, _yield$this$query$get, data;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -28941,11 +28927,11 @@ var helpers = __webpack_require__("a74a");
               case 5:
                 _context.prev = 5;
                 _context.next = 8;
-                return (_this$getService = this.getService()).get.apply(_this$getService, args);
+                return (_this$query = this.query).get.apply(_this$query, args);
 
               case 8:
-                _yield$this$getServic = _context.sent;
-                data = _yield$this$getServic.data;
+                _yield$this$query$get = _context.sent;
+                data = _yield$this$query$get.data;
                 this.results = data || [];
                 _context.next = 16;
                 break;
@@ -28972,20 +28958,6 @@ var helpers = __webpack_require__("a74a");
         return _ref.apply(this, arguments);
       };
     }(), 200),
-    getService: function getService() {
-      switch (this.query) {
-        case 'location':
-          //todo
-          break;
-
-        case 'moc':
-          return search["b" /* MOCCompleteService */];
-          break;
-
-        default:
-          return search["d" /* TitleCompleteService */];
-      }
-    },
     changeValue: function changeValue(value) {
       this.$emit("input", value);
       this.selectedIndex = -1;
@@ -29554,36 +29526,6 @@ module.exports = function (METHOD_NAME) {
     return !!whitespaces[METHOD_NAME]() || non[METHOD_NAME]() != non || whitespaces[METHOD_NAME].name !== METHOD_NAME;
   });
 };
-
-
-/***/ }),
-
-/***/ "c975":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $ = __webpack_require__("23e7");
-var $indexOf = __webpack_require__("4d64").indexOf;
-var arrayMethodIsStrict = __webpack_require__("a640");
-var arrayMethodUsesToLength = __webpack_require__("ae40");
-
-var nativeIndexOf = [].indexOf;
-
-var NEGATIVE_ZERO = !!nativeIndexOf && 1 / [1].indexOf(1, -0) < 0;
-var STRICT_METHOD = arrayMethodIsStrict('indexOf');
-var USES_TO_LENGTH = arrayMethodUsesToLength('indexOf', { ACCESSORS: true, 1: 0 });
-
-// `Array.prototype.indexOf` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.indexof
-$({ target: 'Array', proto: true, forced: NEGATIVE_ZERO || !STRICT_METHOD || !USES_TO_LENGTH }, {
-  indexOf: function indexOf(searchElement /* , fromIndex = 0 */) {
-    return NEGATIVE_ZERO
-      // convert -0 to +0
-      ? nativeIndexOf.apply(this, arguments) || 0
-      : $indexOf(this, searchElement, arguments.length > 1 ? arguments[1] : undefined);
-  }
-});
 
 
 /***/ }),
@@ -31759,12 +31701,10 @@ module.exports = function (key) {
 "use strict";
 
 // EXPORTS
-__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ search_SearchService; });
+__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ search_SearchService; });
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ search_CommuteSearchService; });
-__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ search_TitleCompleteService; });
-__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ search_MOCCompleteService; });
 
-// UNUSED EXPORTS: default
+// UNUSED EXPORTS: default, TitleCompleteService, MOCCompleteService
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
