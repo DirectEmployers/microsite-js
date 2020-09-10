@@ -85,7 +85,7 @@
                     placeholder="Enter MOC code"
                     aria-label="Search by MOC code"
                     autocapitalize="off"
-                    :query="LocationCompleteService"
+                    :query="MOCCompleteService"
                     @setResult="submitSearchForm"
                 />
             </div>
