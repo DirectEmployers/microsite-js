@@ -120,8 +120,6 @@ export default {
 
             const containsTarget = this.$el.contains(e.target)
 
-            console.log(containsTarget)
-
             const wrapperContainsTarget = menuWrapper.contains(e.target)
 
             if (!containsTarget && !wrapperContainsTarget) {
