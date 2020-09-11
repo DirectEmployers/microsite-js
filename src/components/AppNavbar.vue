@@ -95,23 +95,22 @@ export default {
     methods: {
         close() {
             this.toggled = false
-            this.$emit("navbarClosed", this.toggled)
+            this.$emit("navbarClosed")
         },
 
         open() {
             this.toggled = true
-            this.$emit("navbarOpened", this.toggled)
+            this.$emit("navbarOpened")
         },
 
         toggle() {
             this.toggled = !this.toggled
 
             if(this.toggled){
-                this.$emit("navbarOpened", this.toggled)
+                this.close()
             }else{
-                this.$emit("navbarClosed", this.toggled)
+                this.open()
             }
-            this.$emit("navbarToggled", this.toggled)
         },
 
         linkIsActive(href) {
