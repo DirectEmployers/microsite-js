@@ -47,6 +47,11 @@ export default {
         //     },
         // },
         {
+            key: 'moc',
+            name: "moc",
+            display: "Military Titles",
+        },
+        {
             key: 'state',
             name: "location",
             display: "State",

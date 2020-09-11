@@ -24326,14 +24326,14 @@ module.exports = function (it) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=08c3acb2&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=4babfc78&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g({tag:"component",staticClass:"dropdown"},_vm.eventHandlers),[_c('div',{staticClass:"dropdown__display",class:{
             'dropdown__display--active': this.toggled
         },attrs:{"role":"button","tabindex":"0","id":("dropdown-display-" + _vm.id),"aria-expanded":_vm.toggled},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.toggle()}}},[_vm._t("display",[_vm._v(" "+_vm._s(_vm.display)+" ")])],2),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.toggled),expression:"toggled"}],staticClass:"dropdown__content",attrs:{"id":("dropdown-content-" + _vm.id),"aria-labelledby":("dropdown-display-" + _vm.id)}},[_vm._t("default")],2)])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=08c3acb2&
+// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=4babfc78&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=script&lang=js&
 var AppDropdownvue_type_script_lang_js_ = __webpack_require__("e433");
@@ -30934,14 +30934,6 @@ module.exports = function (target, src, options) {
       type: String,
       required: false,
       default: 'Dropdown'
-    },
-    headerClasses: {
-      type: String,
-      required: false
-    },
-    contentClasses: {
-      type: String,
-      required: false
     }
   },
   data: function data() {
@@ -31695,7 +31687,7 @@ module.exports = function (key) {
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ search_SearchService; });
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ search_CommuteSearchService; });
 
-// UNUSED EXPORTS: default, TitleCompleteService, MOCCompleteService
+// UNUSED EXPORTS: default, TitleCompleteService, MOCCompleteService, LocationCompleteService
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
@@ -32211,6 +32203,64 @@ var search_MOCCompleteService = /*#__PURE__*/function () {
   }]);
 
   return MOCCompleteService;
+}();
+var search_LocationCompleteService = /*#__PURE__*/function () {
+  function LocationCompleteService() {
+    Object(classCallCheck["a" /* default */])(this, LocationCompleteService);
+  }
+
+  Object(createClass["a" /* default */])(LocationCompleteService, null, [{
+    key: "get",
+    value: function () {
+      var _get5 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(q) {
+        var response;
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _context5.next = 3;
+                return api().get("/solr/complete/location", {
+                  params: {
+                    q: q
+                  }
+                });
+
+              case 3:
+                response = _context5.sent;
+                return _context5.abrupt("return", response);
+
+              case 7:
+                _context5.prev = 7;
+                _context5.t0 = _context5["catch"](0);
+
+                if (!Object.prototype.hasOwnProperty.call(_context5.t0, "response")) {
+                  _context5.next = 11;
+                  break;
+                }
+
+                return _context5.abrupt("return", _context5.t0);
+
+              case 11:
+                throw new Error(_context5.t0);
+
+              case 12:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[0, 7]]);
+      }));
+
+      function get(_x8) {
+        return _get5.apply(this, arguments);
+      }
+
+      return get;
+    }()
+  }]);
+
+  return LocationCompleteService;
 }();
 
 /***/ }),

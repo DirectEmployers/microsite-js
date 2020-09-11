@@ -51,14 +51,6 @@ export default {
             type: String,
             required: false,
             default: 'Dropdown'
-        },
-        headerClasses: {
-            type: String,
-            required: false
-        },
-        contentClasses: {
-            type: String,
-            required: false
         }
     },
     data() {
