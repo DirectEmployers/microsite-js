@@ -38,6 +38,7 @@
 
         <ul
             class="navbar__items"
+            ref="navBarItems"
             :class="{
                 'navbar__items--toggled': toggled,
             }"
@@ -76,11 +77,13 @@ export default {
     },
     created() {
         if (process.isClient) {
+            document.addEventListener("click", this.nonMenuClick)
             window.addEventListener("resize", this.close)
         }
     },
     destroyed() {
         if (process.isClient) {
+            document.removeEventListener("click", this.nonMenuClick)
             window.removeEventListener("resize", this.close)
         }
     },
@@ -111,6 +114,21 @@ export default {
             }
             return false
         },
+
+        nonMenuClick(e) {
+            const menuWrapper = this.$refs["navBarItems"]
+
+            const containsTarget = this.$el.contains(e.target)
+
+            console.log(containsTarget)
+
+            const wrapperContainsTarget = menuWrapper.contains(e.target)
+
+            if (!containsTarget && !wrapperContainsTarget) {
+                this.close()
+            }
+        },
+
 
         getLinkType(item) {
             if (Object.prototype.hasOwnProperty.call(item, 'tag')) {
