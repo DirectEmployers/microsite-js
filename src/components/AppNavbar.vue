@@ -48,7 +48,7 @@
                 class="navbar__item"
                 v-for="(item, index) in links"
             >
-                <slot :name="getKey(item)" :item="item">
+                <slot :name="item.key" :item="item">
                     <component
                         :is="getLinkType(item)"
                         v-bind="item.attributes"
@@ -127,12 +127,6 @@ export default {
             }
         },
 
-        getKey(item){
-            if (Object.prototype.hasOwnProperty.call(item, 'key')) {
-                return item.key
-            }
-            return item.href
-        },
 
         getLinkType(item) {
             if (Object.prototype.hasOwnProperty.call(item, 'tag')) {
