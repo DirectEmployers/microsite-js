@@ -105,6 +105,12 @@ export default {
 
         toggle() {
             this.toggled = !this.toggled
+
+            if(this.toggled){
+                this.$emit("navbarOpened", this.toggled)
+            }else{
+                this.$emit("navbarClosed", this.toggled)
+            }
             this.$emit("navbarToggled", this.toggled)
         },
 

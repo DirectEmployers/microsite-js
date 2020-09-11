@@ -21720,7 +21720,7 @@ module.exports = function from(arrayLike /* , mapfn = undefined, thisArg = undef
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppNavbar.vue?vue&type=template&id=4022be1d&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppNavbar.vue?vue&type=template&id=2d1fd4e5&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{staticClass:"navbar"},[_c('section',{staticClass:"navbar__brand"},[_vm._t("logo"),_c('span',{staticClass:"navbar__brand-text"},[_vm._t("brand-text")],2)],2),_vm._t("toggler",[_c('button',{staticClass:"navbar__toggler",attrs:{"type":"button","aria-label":"navbar Toggle"},on:{"click":function($event){return _vm.toggle()}}},[(!_vm.toggled)?_c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 20 20"}},[_c('title',[_vm._v("Menu")]),_c('path',{attrs:{"d":"M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"}})]):_c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 96 96","enable-background":"new 0 0 96 96"}},[_c('polygon',{attrs:{"points":"96,14 82,0 48,34 14,0 0,14 34,48 0,82 14,96 48,62 82,96 96,82 62,48 "}})])])],{"toggled":_vm.toggled,"toggleNav":_vm.toggle}),_c('ul',{ref:"navBarItems",staticClass:"navbar__items",class:{
             'navbar__items--toggled': _vm.toggled,
         }},_vm._l((_vm.links),function(item,index){return _c('li',{key:index,staticClass:"navbar__item"},[_vm._t(item.key,[_c(_vm.getLinkType(item),_vm._b({tag:"component",staticClass:"navbar__item-link",class:{
@@ -21729,7 +21729,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppNavbar.vue?vue&type=template&id=4022be1d&
+// CONCATENATED MODULE: ./src/components/AppNavbar.vue?vue&type=template&id=2d1fd4e5&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppNavbar.vue?vue&type=script&lang=js&
 var AppNavbarvue_type_script_lang_js_ = __webpack_require__("5176");
@@ -21898,6 +21898,13 @@ module.exports = function (it, key) {
     },
     toggle: function toggle() {
       this.toggled = !this.toggled;
+
+      if (this.toggled) {
+        this.$emit("navbarOpened", this.toggled);
+      } else {
+        this.$emit("navbarClosed", this.toggled);
+      }
+
       this.$emit("navbarToggled", this.toggled);
     },
     linkIsActive: function linkIsActive(href) {
