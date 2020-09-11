@@ -48,7 +48,7 @@
                 class="navbar__item"
                 v-for="(item, index) in links"
             >
-                <slot :name="item.key" :item="item">
+                <slot :name="item.key" :link="item">
                     <component
                         :is="getLinkType(item)"
                         v-bind="item.attributes"
