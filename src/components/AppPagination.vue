@@ -144,15 +144,8 @@ export default {
                 return
             }
 
-            this.$router.push({
-                path: this.$route.path,
-                query: {
-                    ...this.$route.query,
-                    ...{ page: page },
-                },
-            })
+            this.$emit("pageSelected", page)
 
-            this.$parent.$el.scrollIntoView()
         },
 
         range(start, end) {

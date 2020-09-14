@@ -14,6 +14,7 @@
             :sort="sort"
             :submitSearchForm="submitSearchForm"
             :supported="supported"
+            :selectPage="selectPage"
         />
     </component>
 </template>
@@ -44,10 +45,10 @@ export default {
             default: true,
             required: false,
         },
-        defaultInput:{
+        defaultInput: {
             required: false,
             type: Object,
-            default: ()=> {}
+            default: () => {},
         },
     },
     data() {
@@ -67,7 +68,7 @@ export default {
             meta: {
                 hasJobs: this.hasJobs,
                 sort: {
-                    active: defaultInput['sort'],
+                    active: defaultInput["sort"],
                     options: ["relevance", "distance", "title", "date"],
                 },
             },
@@ -84,7 +85,6 @@ export default {
         this.setInputFromQuery()
 
         if (this.searchOnLoad) {
-
             this.search()
         }
     },
@@ -145,38 +145,52 @@ export default {
         "$route.query"() {
             this.setInputFromQuery()
             this.search()
-        }
+        },
     },
     methods: {
+        selectPage(page) {
+            this.$router.push({
+                path: this.$route.path,
+                query: {
+                    ...this.$route.query,
+                    ...{ page: page },
+                },
+            })
+
+            this.$el.scrollIntoView()
+        },
+
         getInputDefaults() {
             let defaultInput = clone(this.defaultInput)
 
-            return merge({
-                searchType: "location",
-                commuteMethod: "DRIVING",
-                travelDuration: "900",
-                roadTraffic: "TRAFFIC_FREE",
-                commuteLocation: "",
-                q: "",
-                r: 25,
-                moc: "",
-                location: "",
-                coords: null,
-                sort: "relevance",
-            }, defaultInput)
+            return merge(
+                {
+                    searchType: "location",
+                    commuteMethod: "DRIVING",
+                    travelDuration: "900",
+                    roadTraffic: "TRAFFIC_FREE",
+                    commuteLocation: "",
+                    q: "",
+                    r: 25,
+                    moc: "",
+                    location: "",
+                    coords: null,
+                    sort: "relevance",
+                },
+                defaultInput
+            )
         },
 
-        hasLocationInput(){
-
-            if(this.isLocationSearch && !this.blank(this.input.location)){
-                return true;
+        hasLocationInput() {
+            if (this.isLocationSearch && !this.blank(this.input.location)) {
+                return true
             }
 
-            if(this.isCommuteSearch && !this.blank(this.input.coords)){
-                return true;
+            if (this.isCommuteSearch && !this.blank(this.input.coords)) {
+                return true
             }
 
-            return false;
+            return false
         },
         removeFilter(param) {
             const query = { ...this.$route.query }
@@ -188,24 +202,21 @@ export default {
                 toRemove = this.filterParamList
             }
 
-            if (toRemove.includes('location')) {
-
+            if (toRemove.includes("location")) {
                 toRemove.push("coords")
 
-                if(!this.hasLocationInput()){
+                if (!this.hasLocationInput()) {
+                    this.input.sort = defaultInput["sort"]
 
-                    this.input.sort = defaultInput['sort']
-
-                    query['sort'] = this.input.sort
+                    query["sort"] = this.input.sort
                 }
             }
-
 
             toRemove.forEach((param) => {
                 delete query[param]
             })
 
-            query['page'] = 1
+            query["page"] = 1
 
             this.$router.replace({ query })
         },
@@ -256,7 +267,6 @@ export default {
         },
 
         getPayload() {
-
             let data = omitBy(clone(this.input), blank)
 
             if (!this.isCommuteSearch) {
@@ -291,7 +301,6 @@ export default {
                 hasJobs: this.hasJobs,
                 selectedFilters: this.selectedFilters,
             }
-
         },
         async search() {
             this.status.loading = true
@@ -299,7 +308,10 @@ export default {
             const Service = this.getService()
 
             try {
-                const response = await Service.get(this.getPayload(), this.siteConfig)
+                const response = await Service.get(
+                    this.getPayload(),
+                    this.siteConfig
+                )
 
                 let { jobs, pagination, filters, meta } = response.data
 
@@ -312,7 +324,6 @@ export default {
                 this.setMeta(meta)
 
                 return response
-
             } catch (error) {
                 this.status.error = error
 
@@ -321,7 +332,6 @@ export default {
                 log(error, "error")
 
                 return error
-
             } finally {
                 this.status.loading = false
             }
@@ -336,14 +346,13 @@ export default {
         },
 
         formatInput() {
-
-            if(this.isLocationSearch){
+            if (this.isLocationSearch) {
                 this.input.location = fullState(this.input.location)
             }
         },
 
         setInputFromQuery() {
-            this.input = merge(this.getInputDefaults(),  this.$route.query)
+            this.input = merge(this.getInputDefaults(), this.$route.query)
 
             this.formatInput()
         },
@@ -353,32 +362,32 @@ export default {
         },
 
         setSearchType(type) {
-
             if (!["location", "commute"].includes(type)) {
                 type = "location"
             }
 
             this.input.searchType = type
 
-
-            if(this.isCommuteSearch){
+            if (this.isCommuteSearch) {
                 this.input.location = ""
             }
-
 
             if (this.shouldClearCoords()) {
                 this.input.coords = ""
                 this.input.commuteLocation = ""
             }
-
-
         },
         shouldClearCoords() {
-            if (this.isLocationSearch && this.blank(this.input.location)) {
+            const loc = this.input.location
+            const commuteLoc = this.input.commuteLocation
+            const coords = this.input.coords
+            const geoText = this.geoLocationInputText
+
+            if (this.isLocationSearch && (this.blank(loc) || loc != geoText)) {
                 return true
             }
 
-            if (this.isCommuteSearch && this.blank(this.input.commuteLocation)) {
+            if (this.isCommuteSearch && this.blank(commuteLoc)) {
                 return true
             }
 
@@ -389,9 +398,13 @@ export default {
 
             this.setSearchType(searchType)
 
+            if (this.shouldClearCoords()) {
+                this.input.coords = ""
+            }
+
             this.$router
                 .push({
-                    path: '/jobs',
+                    path: "/jobs",
                     query: this.getPayload(),
                 })
                 .catch((err) => {
