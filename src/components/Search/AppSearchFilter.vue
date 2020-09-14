@@ -59,6 +59,7 @@
 import AppAccordion from "../AppAccordion"
 import { blank } from "../../services/helpers"
 import { removeCountry, fullState } from "../../services/api/location"
+import { truncate } from 'lodash'
 
 export default {
     props: {
@@ -178,6 +179,9 @@ export default {
                 display = removeCountry(display)
                 //and try to expand to a full value
                 display = fullState(display)
+            }
+            if(this.keyName == 'moc'){
+                display = truncate(display, { length: 32 })
             }
 
             return display

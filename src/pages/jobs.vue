@@ -14,6 +14,7 @@
                 getFilterOptions,
                 status,
                 meta,
+                selectPage,
                 pagination,
             }"
         >
@@ -77,6 +78,7 @@
                             </div>
                             <AppPagination
                                 v-if="!status.loading"
+                                @pageSelected="selectPage"
                                 :current-page="pagination.page"
                                 :total-records="pagination.total"
                                 :total-pages="pagination.total_pages"

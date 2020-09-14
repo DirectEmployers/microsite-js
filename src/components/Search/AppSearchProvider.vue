@@ -14,6 +14,7 @@
             :sort="sort"
             :submitSearchForm="submitSearchForm"
             :supported="supported"
+            :selectPage="selectPage"
         />
     </component>
 </template>
@@ -145,9 +146,23 @@ export default {
         "$route.query"() {
             this.setInputFromQuery()
             this.search()
-        }
+        },
     },
     methods: {
+
+        selectPage(page){
+            this.$router.push({
+                path: this.$route.path,
+                query: {
+                    ...this.$route.query,
+                    ...{page: page}
+                }
+            })
+
+
+            this.$el.scrollIntoView()
+        },
+
         getInputDefaults() {
             let defaultInput = clone(this.defaultInput)
 
@@ -374,11 +389,16 @@ export default {
 
         },
         shouldClearCoords() {
-            if (this.isLocationSearch && this.blank(this.input.location)) {
-                return true
+            const loc = this.input.location
+            const commuteLoc = this.input.commuteLocation
+            const coords = this.input.coords
+            const geoText = this.geoLocationInputText
+
+            if (this.isLocationSearch && (this.blank(loc) || loc != geoText)) {
+                return true;
             }
 
-            if (this.isCommuteSearch && this.blank(this.input.commuteLocation)) {
+            if (this.isCommuteSearch && this.blank(commuteLoc)) {
                 return true
             }
 
@@ -388,6 +408,10 @@ export default {
             this.input.page = 1
 
             this.setSearchType(searchType)
+
+            if(this.shouldClearCoords()){
+                this.input.coords = ""
+            }
 
             this.$router
                 .push({
