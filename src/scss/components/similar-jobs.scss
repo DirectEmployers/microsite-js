@@ -7,17 +7,20 @@
         font-size: 1.2rem;
         font-weight: bold;
         margin: 1rem 0.3125rem;
+        text-align: center;
     }
 
     &__grid {
         display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
     }
 
     &__grid-item {
         @apply border-gray-500 border-b bg-gray-200 mx-4;
         padding: 1.25rem;
-
         text-transform: uppercase;
+        margin-bottom: 1rem;
 
         &:hover {
             @apply bg-gray-400;
