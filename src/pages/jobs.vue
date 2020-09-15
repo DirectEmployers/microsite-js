@@ -16,6 +16,7 @@
                 meta,
                 selectPage,
                 pagination,
+                jobComponentType,
             }"
         >
             <Loader v-if="status.loading" />
@@ -31,13 +32,9 @@
                 </div>
                 <div class="flex flex-col lg:flex-row">
                     <div class="mx-4 w-full lg:w-1/2">
-                        <h3 v-if="status.error">
-                            Unable to load jobs...
-                        </h3>
+                        <h3 v-if="status.error">Unable to load jobs...</h3>
                         <section v-else-if="meta.hasJobs" class="jobs">
-                            <h3 class="text-3xl font-bold">
-                                Search Results
-                            </h3>
+                            <h3 class="text-3xl font-bold">Search Results</h3>
                             <div
                                 v-if="meta.hasJobs"
                                 id="total-jobs"
@@ -50,31 +47,34 @@
                                 :key="index"
                                 v-for="(job, index) in jobs"
                             >
-                                <g-link :to="job.getDetailUrl()" class="mb-2">
-                                    <h3 class="font-bold text-xl">
-                                        {{ job.getTitle() }}
-                                    </h3>
-
-                                    <h3 class="font-bold text-lg">
-                                        Requisition ID: {{ job.getReqId() }}
-                                    </h3>
-
-                                    <h3 class="text-md">
-                                        {{
-                                            job.getCity() +
-                                                ", " +
-                                                job.getState()
-                                        }}
-                                    </h3>
-                                    <div
-                                        class="job-listing__commute-time"
-                                        v-if="job.hasCommuteInfo()"
-                                    >
-                                        Estimated Travel:
-                                        {{ job.getCommuteTime() }} minutes.
-                                    </div>
-                                    <hr />
-                                </g-link>
+                                <component :is="jobComponentType" :job="job">
+                                    <template v-slot="jobData">
+                                        <g-link
+                                            :to="jobData.detailUrl"
+                                            class="mb-2"
+                                        >
+                                            <h3 class="font-bold text-xl">
+                                                {{ jobData.title }}
+                                            </h3>
+                                            <h3 class="font-bold text-lg">
+                                                Requisition ID:
+                                                {{ jobData.reqId }}
+                                            </h3>
+                                            <h3 class="text-md">
+                                                {{
+                                                    jobData.city + ", " + jobData.state
+                                                }}
+                                            </h3>
+                                            <div
+                                                class="job-listing__commute-time"
+                                                v-if="jobData.hasCommuteInfo"
+                                            >
+                                                Estimated Travel:
+                                                {{ jobData.commuteTime }} minutes.
+                                            </div>
+                                        </g-link>
+                                    </template>
+                                </component>
                             </div>
                             <AppPagination
                                 v-if="!status.loading"
@@ -203,18 +203,17 @@ import AppSearchFilter from "~/components/Search/AppSearchFilter"
 import AppSearchFilterChip from "~/components/Search/AppSearchFilterChip"
 import { toLower, startCase } from "lodash"
 import AppModal from "~/components/AppModal"
-
 export default {
     components: {
-        AppSearchProvider,
-        AppPagination,
-        CommuteSearchForm,
         AppAccordion,
-        AppSearchFilterChip,
-        SearchForm,
-        AppSearchFilter,
-        Loader,
         AppModal,
+        AppPagination,
+        AppSearchFilter,
+        AppSearchFilterChip,
+        AppSearchProvider,
+        CommuteSearchForm,
+        Loader,
+        SearchForm,
     },
     methods: {
         titleCase(str) {

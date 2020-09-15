@@ -1,3 +1,18 @@
+import { kebabCase } from "lodash"
+import { removeCountry } from "./api/location"
+import AppSolrJob from "../components/JobTypes/AppSolrJob"
+import AppGoogleTalentJob from "../components/JobTypes/AppGoogleTalentJob"
+
+
+/**Get the associated job component for the given source */
+export function getJobComponent(source){
+    switch(source){
+        case "google_talent":
+            return AppGoogleTalentJob
+        default: 
+            return AppSolrJob
+    }
+}
 /**
  * Check if the given value is "blank".
  */
@@ -28,10 +43,10 @@ export function retry(callback, args = [], max = 5, delay = 100) {
             return resolve(result)
         } catch (e) {
             if (max > 0) {
-                setTimeout(function () {
+                setTimeout(function() {
                     return retry(callback, args, --max, delay * 2)
                         .then(resolve)
-                        .catch((err) => {
+                        .catch(err => {
                             return reject(err)
                         })
                 }, delay)
@@ -50,3 +65,16 @@ export function log(message, context = "log") {
         console[context](message)
     }
 }
+
+/**
+ * Build a job detail url.
+ */
+export function buildJobDetailUrl(title, location, guid) {
+    const locationSlug = kebabCase(removeCountry(location))
+
+    const titleSlug = kebabCase(title)
+
+    return `/${locationSlug}/${titleSlug}/${guid}/job/`
+}
+
+

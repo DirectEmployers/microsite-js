@@ -1,7 +1,6 @@
 <script>
 import { kebabCase } from "lodash"
 import { getJob } from "../services/cdn/job"
-import SolrJob from "../services/api/drivers/job/solr"
 
 export default {
     data() {
@@ -31,7 +30,7 @@ export default {
                         `/${locationSlug}/${data.title_slug}/${guid}/job`
                     )
                 } else {
-                    this.job = new SolrJob(data)
+                    this.job = data
                     this.status({ resolved: true })
                 }
             } catch (error) {

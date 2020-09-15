@@ -15,11 +15,12 @@
             :submitSearchForm="submitSearchForm"
             :supported="supported"
             :selectPage="selectPage"
+            :jobComponentType="jobComponentType"
         />
     </component>
 </template>
 <script>
-import { blank, log } from "../../services/helpers"
+import { blank, getJobComponent, log } from "../../services/helpers"
 import { fullState, removeCountry } from "../../services/api/location"
 import { omitBy, omit, clone, merge, assign } from "lodash"
 import { SearchService, CommuteSearchService } from "../../services/api/search"
@@ -65,13 +66,7 @@ export default {
             supported: {
                 geolocation: false,
             },
-            meta: {
-                hasJobs: this.hasJobs,
-                sort: {
-                    active: defaultInput["sort"],
-                    options: ["relevance", "distance", "title", "date"],
-                },
-            },
+            meta: this.getDefaultMeta(),
             input: defaultInput,
         }
     },
@@ -94,18 +89,29 @@ export default {
         }
     },
     computed: {
+        jobComponentType() {
+            
+            return getJobComponent(this.meta.source)
+        },
         hasJobs() {
             return (this.jobs || []).length > 0
         },
-
         isLocationSearch() {
             return this.input.searchType == "location"
         },
-
         isCommuteSearch() {
             return this.input.searchType == "commute"
         },
-
+        searchService() {
+            const searchType = this.input.searchType
+            switch (searchType) {
+                case "commute":
+                    return CommuteSearchService
+                case "location":
+                default:
+                    return SearchService
+            }
+        },
         selectedFilters() {
             let value = null
             let name = null
@@ -255,17 +261,6 @@ export default {
             })
         },
 
-        getService() {
-            const searchType = this.input.searchType
-            switch (searchType) {
-                case "commute":
-                    return CommuteSearchService
-                case "location":
-                default:
-                    return SearchService
-            }
-        },
-
         getPayload() {
             let data = omitBy(clone(this.input), blank)
 
@@ -280,7 +275,6 @@ export default {
             }
             return data
         },
-
         getFilterOptions(filter) {
             let key = filter.key
 
@@ -294,18 +288,30 @@ export default {
 
             return []
         },
+        getDefaultMeta() {
+            let inputDefaults = this.getInputDefaults()
+            let source = this.siteConfig.sources.search
+            if(this.isCommuteSearch){
+                source = this.siteConfig.sources.commute
+            }
 
-        setMeta(meta) {
-            this.meta = {
-                ...meta,
+            return clone({
                 hasJobs: this.hasJobs,
                 selectedFilters: this.selectedFilters,
-            }
+                source: source,
+                sort: {
+                    active: inputDefaults["sort"],
+                    options: ["relevance", "distance", "title", "date"],
+                },
+            })
+        },
+        setMeta(meta) {
+            this.meta = merge(this.getDefaultMeta(), meta)
         },
         async search() {
             this.status.loading = true
 
-            const Service = this.getService()
+            const Service = this.searchService
 
             try {
                 const response = await Service.get(
@@ -313,7 +319,9 @@ export default {
                     this.siteConfig
                 )
 
-                let { jobs, pagination, filters, meta } = response.data
+                let data = response.data || {}
+
+                let { jobs, pagination, filters, meta } = data
 
                 this.jobs = jobs
 
@@ -322,6 +330,8 @@ export default {
                 this.filters = filters || {}
 
                 this.setMeta(meta)
+
+                this.status.loading = false
 
                 return response
             } catch (error) {
@@ -336,7 +346,6 @@ export default {
                 this.status.loading = false
             }
         },
-
         getUserCoordinates() {
             this.getGeoLocation((coords) => {
                 this.input.coords = coords
@@ -344,23 +353,19 @@ export default {
                 this.input.sort = "distance"
             })
         },
-
         formatInput() {
             if (this.isLocationSearch) {
                 this.input.location = fullState(this.input.location)
             }
         },
-
         setInputFromQuery() {
             this.input = merge(this.getInputDefaults(), this.$route.query)
 
             this.formatInput()
         },
-
         blank(value) {
             return blank(value)
         },
-
         setSearchType(type) {
             if (!["location", "commute"].includes(type)) {
                 type = "location"

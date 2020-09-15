@@ -149,12 +149,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=57862122&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported,"selectPage":_vm.selectPage})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=1badd68e&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported,"selectPage":_vm.selectPage,"jobComponentType":_vm.jobComponentType})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=57862122&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=1badd68e&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
 var AppSearchProvidervue_type_script_lang_js_ = __webpack_require__("6651");
@@ -184,41 +184,6 @@ var component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var AppSearchProvider = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "0538":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var aFunction = __webpack_require__("1c0b");
-var isObject = __webpack_require__("861d");
-
-var slice = [].slice;
-var factories = {};
-
-var construct = function (C, argsLength, args) {
-  if (!(argsLength in factories)) {
-    for (var list = [], i = 0; i < argsLength; i++) list[i] = 'a[' + i + ']';
-    // eslint-disable-next-line no-new-func
-    factories[argsLength] = Function('C,a', 'return new C(' + list.join(',') + ')');
-  } return factories[argsLength](C, args);
-};
-
-// `Function.prototype.bind` method implementation
-// https://tc39.github.io/ecma262/#sec-function.prototype.bind
-module.exports = Function.bind || function bind(that /* , ...args */) {
-  var fn = aFunction(this);
-  var partArgs = slice.call(arguments, 1);
-  var boundFunction = function bound(/* args... */) {
-    var args = partArgs.concat(slice.call(arguments));
-    return this instanceof boundFunction ? construct(fn, args.length, args) : fn.apply(that, args);
-  };
-  if (isObject(fn.prototype)) boundFunction.prototype = fn.prototype;
-  return boundFunction;
-};
-
 
 /***/ }),
 
@@ -380,6 +345,177 @@ module.exports = Axios;
 
 /***/ }),
 
+/***/ "0a22":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=bf339d5a&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h3',{staticClass:"similar-jobs__title text-center"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c(_vm.jobTypeComponent,{key:index,tag:"component",staticClass:"similar-jobs__grid-item",attrs:{"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_c('g-link',{attrs:{"to":_vm.buildJobDetailUrl(
+                            jobData.title,
+                            jobData.location,
+                            jobData.guid
+                        )}},[_vm._t("default",[_c('h4',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.location)+" ")])],{"jobData":jobData})],2)]}}],null,true)})}),1)]):_vm._e()}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=bf339d5a&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
+var es_array_filter = __webpack_require__("4de4");
+
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__("96cf");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
+var asyncToGenerator = __webpack_require__("1da1");
+
+// EXTERNAL MODULE: ./src/services/api/search.js + 2 modules
+var search = __webpack_require__("f867");
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 7 modules
+var helpers = __webpack_require__("a74a");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=script&lang=js&
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var AppSimilarJobsvue_type_script_lang_js_ = ({
+  data: function data() {
+    return {
+      buildJobDetailUrl: helpers["b" /* buildJobDetailUrl */],
+      meta: {},
+      similarJobs: []
+    };
+  },
+  props: {
+    job: {
+      type: Object,
+      required: true
+    },
+    header: {
+      type: String,
+      required: false,
+      default: "Other Jobs You Might Like"
+    }
+  },
+  mounted: function mounted() {
+    this.getJobs();
+  },
+  computed: {
+    jobTypeComponent: function jobTypeComponent() {
+      return Object(helpers["c" /* getJobComponent */])(this.meta.source);
+    },
+    hasSimilarJobs: function hasSimilarJobs() {
+      return this.similarJobs.length > 0;
+    }
+  },
+  methods: {
+    getJobs: function getJobs() {
+      var _this = this;
+
+      return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var response, data, jobs, meta;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return search["b" /* SearchService */].get({
+                  num_items: 10,
+                  q: _this.job.title,
+                  location: _this.job.location_exact
+                }, _this.$siteConfig);
+
+              case 2:
+                response = _context.sent;
+                data = response.data;
+                jobs = data.jobs, meta = data.meta;
+                _this.meta = meta;
+                _this.similarJobs = jobs;
+
+                _this.similarJobs.filter(function (job) {
+                  return job.guid !== _this.job.guid;
+                });
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_AppSimilarJobsvue_type_script_lang_js_ = (AppSimilarJobsvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_AppSimilarJobsvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var AppSimilarJobs = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
 /***/ "0cfb":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -536,7 +672,7 @@ var objectSpread2 = __webpack_require__("5530");
 // EXTERNAL MODULE: ./src/components/AppAccordion.vue + 4 modules
 var AppAccordion = __webpack_require__("32c7");
 
-// EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
+// EXTERNAL MODULE: ./src/services/helpers.js + 7 modules
 var helpers = __webpack_require__("a74a");
 
 // EXTERNAL MODULE: ./src/services/api/location.js
@@ -1409,6 +1545,164 @@ module.exports = function (exec, SKIP_CLOSING) {
 
 /***/ }),
 
+/***/ "1cbe":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/JobTypes/AppSolrJob.vue?vue&type=template&id=cb86f30e&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt})],2)}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/JobTypes/AppSolrJob.vue?vue&type=template&id=cb86f30e&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
+var es_symbol = __webpack_require__("a4d3");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
+var es_symbol_description = __webpack_require__("e01a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
+var es_regexp_exec = __webpack_require__("ac1f");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
+var es_string_replace = __webpack_require__("5319");
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 7 modules
+var helpers = __webpack_require__("a74a");
+
+// EXTERNAL MODULE: ./src/services/api/location.js
+var api_location = __webpack_require__("3fcc");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/JobTypes/AppSolrJob.vue?vue&type=script&lang=js&
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var AppSolrJobvue_type_script_lang_js_ = ({
+  props: {
+    job: {
+      type: Object,
+      required: true
+    },
+    tag: {
+      type: String,
+      required: false,
+      default: "section"
+    }
+  },
+  computed: {
+    reqId: function reqId() {
+      return this.job.reqid;
+    },
+    title: function title() {
+      return this.job.title_exact;
+    },
+    location: function location() {
+      return this.job.location_exact;
+    },
+    detailUrl: function detailUrl() {
+      return Object(helpers["b" /* buildJobDetailUrl */])(this.title, this.location, this.guid);
+    },
+    guid: function guid() {
+      return this.job.guid;
+    },
+    city: function city() {
+      return this.job.city_exact;
+    },
+    state: function state() {
+      return Object(api_location["a" /* fullState */])(this.job.state_short_exact);
+    },
+    country: function country() {
+      return this.job.country_short_exact;
+    },
+    company: function company() {
+      return this.job.company_exact;
+    },
+    hasCommuteInfo: function hasCommuteInfo() {
+      return false;
+    },
+    commuteTime: function commuteTime() {
+      return null;
+    },
+    htmlDescription: function htmlDescription() {
+      return this.job.html_description;
+    },
+    cleanHtmlDescription: function cleanHtmlDescription() {
+      // html description is not available on job detail pages?
+      if (!this.htmlDescription) {
+        return '';
+      }
+
+      return this.htmlDescription.replace(/(\r\n|\n|\r)/gm, "");
+    },
+    description: function description() {
+      return this.job.description;
+    },
+    dateAdded: function dateAdded() {
+      return this.job.date_added;
+    },
+    deletedAt: function deletedAt() {
+      return this.job.deleted_at;
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/JobTypes/AppSolrJob.vue?vue&type=script&lang=js&
+ /* harmony default export */ var JobTypes_AppSolrJobvue_type_script_lang_js_ = (AppSolrJobvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/components/JobTypes/AppSolrJob.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  JobTypes_AppSolrJobvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var AppSolrJob = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
 /***/ "1cdc":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1884,42 +2178,6 @@ module.exports = function (CONSTRUCTOR_NAME) {
 
 /***/ }),
 
-/***/ "262e":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ _inherits; });
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-
-  return _setPrototypeOf(o, p);
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/inherits.js
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) _setPrototypeOf(subClass, superClass);
-}
-
-/***/ }),
-
 /***/ "2877":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2175,95 +2433,6 @@ var component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var AppHtmlToJson = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "2caf":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ _createSuper; });
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.reflect.construct.js
-var es_reflect_construct = __webpack_require__("4ae1");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.get-prototype-of.js
-var es_object_get_prototype_of = __webpack_require__("3410");
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js
-
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
-var es_object_to_string = __webpack_require__("d3b7");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.to-string.js
-var es_regexp_to_string = __webpack_require__("25f0");
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/isNativeReflectConstruct.js
-
-
-
-function _isNativeReflectConstruct() {
-  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-  if (Reflect.construct.sham) return false;
-  if (typeof Proxy === "function") return true;
-
-  try {
-    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
-var esm_typeof = __webpack_require__("53ca");
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js
-
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (Object(esm_typeof["a" /* default */])(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/createSuper.js
-
-
-
-
-function _createSuper(Derived) {
-  var hasNativeReflectConstruct = _isNativeReflectConstruct();
-  return function _createSuperInternal() {
-    var Super = _getPrototypeOf(Derived),
-        result;
-
-    if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf(this).constructor;
-      result = Reflect.construct(Super, arguments, NewTarget);
-    } else {
-      result = Super.apply(this, arguments);
-    }
-
-    return _possibleConstructorReturn(this, result);
-  };
-}
 
 /***/ }),
 
@@ -19913,181 +20082,6 @@ function typeToTarget(href, type) {
 
 /***/ }),
 
-/***/ "3237":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BaseJob; });
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a4d3");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("e01a");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("99af");
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("ac1f");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("5319");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("d4ec");
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("bee2");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("2ef0");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _location__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("3fcc");
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("a74a");
-
-
-
-
-
-
-
-
-
-
-
-var BaseJob = /*#__PURE__*/function () {
-  function BaseJob(job) {
-    Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(this, BaseJob);
-
-    this.data = job;
-  }
-
-  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(BaseJob, [{
-    key: "getReqId",
-    value: function getReqId() {
-      return this.data.reqid;
-    }
-  }, {
-    key: "getAttribute",
-    value: function getAttribute(attribute) {
-      var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_7__["get"])(this.data, attribute, defaultValue);
-    }
-  }, {
-    key: "hasAttribute",
-    value: function hasAttribute(attribute) {
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_7__["has"])(this.data, attribute);
-    }
-  }, {
-    key: "getTitle",
-    value: function getTitle() {
-      return this.data.title_exact;
-    }
-  }, {
-    key: "getDescription",
-    value: function getDescription() {
-      return this.data.description;
-    }
-  }, {
-    key: "getHtmlDescription",
-    value: function getHtmlDescription() {
-      return this.data.html_description;
-    }
-  }, {
-    key: "getCleanHtmlDescription",
-    value: function getCleanHtmlDescription() {
-      return this.getHtmlDescription().replace(/(\r\n|\n|\r)/gm, "");
-    }
-  }, {
-    key: "getGuid",
-    value: function getGuid() {
-      return this.data.guid;
-    }
-  }, {
-    key: "getLocation",
-    value: function getLocation() {
-      return this.data.location_exact;
-    }
-  }, {
-    key: "hasCommuteInfo",
-    value: function hasCommuteInfo() {
-      return false;
-    }
-  }, {
-    key: "getCommuteTime",
-    value: function getCommuteTime() {
-      return null;
-    }
-  }, {
-    key: "getCity",
-    value: function getCity() {
-      return this.data.city_exact;
-    }
-  }, {
-    key: "getState",
-    value: function getState() {
-      return Object(_location__WEBPACK_IMPORTED_MODULE_8__[/* fullState */ "a"])(this.data.state_short_exact);
-    }
-  }, {
-    key: "getCompany",
-    value: function getCompany() {
-      return this.data.company;
-    }
-  }, {
-    key: "getCountry",
-    value: function getCountry() {
-      return this.data.country;
-    }
-  }, {
-    key: "getDateAdded",
-    value: function getDateAdded() {
-      return this.data.date_added;
-    }
-  }, {
-    key: "getDeletedAt",
-    value: function getDeletedAt() {
-      return this.data.deleted_at;
-    }
-  }, {
-    key: "getDetailUrl",
-    value: function getDetailUrl() {
-      var guid = this.getGuid();
-      var locationSlug = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["kebabCase"])(Object(_location__WEBPACK_IMPORTED_MODULE_8__[/* removeCountry */ "b"])(this.getLocation()));
-      var titleSlug = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["kebabCase"])(this.getTitle());
-      return "/".concat(locationSlug, "/").concat(titleSlug, "/").concat(guid, "/job/");
-    }
-  }, {
-    key: "jsonLd",
-    value: function jsonLd() {
-      return {
-        "@context": "http://schema.org",
-        "@type": "JobPosting",
-        employmentType: "Paid Work",
-        title: this.getTitle(),
-        datePosted: this.getDateAdded(),
-        description: this.getCompany(),
-        identifier: {
-          "@type": "PropertyValue",
-          name: this.getCompany(),
-          value: this.getReqId()
-        },
-        hiringOrganization: {
-          "@type": "Organization",
-          name: this.getCompany()
-        },
-        jobLocation: {
-          "@type": "Place",
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: this.getCity(),
-            addressRegion: this.getState(),
-            addressCountry: {
-              "@type": "Country",
-              name: this.getCountry()
-            }
-          }
-        }
-      };
-    }
-  }]);
-
-  return BaseJob;
-}();
-
-
-
-/***/ }),
-
 /***/ "32c7":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20192,29 +20186,6 @@ var component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var AppAccordion = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "3410":
-/***/ (function(module, exports, __webpack_require__) {
-
-var $ = __webpack_require__("23e7");
-var fails = __webpack_require__("d039");
-var toObject = __webpack_require__("7b0b");
-var nativeGetPrototypeOf = __webpack_require__("e163");
-var CORRECT_PROTOTYPE_GETTER = __webpack_require__("e177");
-
-var FAILS_ON_PRIMITIVES = fails(function () { nativeGetPrototypeOf(1); });
-
-// `Object.getPrototypeOf` method
-// https://tc39.github.io/ecma262/#sec-object.getprototypeof
-$({ target: 'Object', stat: true, forced: FAILS_ON_PRIMITIVES, sham: !CORRECT_PROTOTYPE_GETTER }, {
-  getPrototypeOf: function getPrototypeOf(it) {
-    return nativeGetPrototypeOf(toObject(it));
-  }
-});
-
-
 
 /***/ }),
 
@@ -21488,64 +21459,6 @@ module.exports = function mergeConfig(config1, config2) {
 
 /***/ }),
 
-/***/ "4ae1":
-/***/ (function(module, exports, __webpack_require__) {
-
-var $ = __webpack_require__("23e7");
-var getBuiltIn = __webpack_require__("d066");
-var aFunction = __webpack_require__("1c0b");
-var anObject = __webpack_require__("825a");
-var isObject = __webpack_require__("861d");
-var create = __webpack_require__("7c73");
-var bind = __webpack_require__("0538");
-var fails = __webpack_require__("d039");
-
-var nativeConstruct = getBuiltIn('Reflect', 'construct');
-
-// `Reflect.construct` method
-// https://tc39.github.io/ecma262/#sec-reflect.construct
-// MS Edge supports only 2 arguments and argumentsList argument is optional
-// FF Nightly sets third argument as `new.target`, but does not create `this` from it
-var NEW_TARGET_BUG = fails(function () {
-  function F() { /* empty */ }
-  return !(nativeConstruct(function () { /* empty */ }, [], F) instanceof F);
-});
-var ARGS_BUG = !fails(function () {
-  nativeConstruct(function () { /* empty */ });
-});
-var FORCED = NEW_TARGET_BUG || ARGS_BUG;
-
-$({ target: 'Reflect', stat: true, forced: FORCED, sham: FORCED }, {
-  construct: function construct(Target, args /* , newTarget */) {
-    aFunction(Target);
-    anObject(args);
-    var newTarget = arguments.length < 3 ? Target : aFunction(arguments[2]);
-    if (ARGS_BUG && !NEW_TARGET_BUG) return nativeConstruct(Target, args, newTarget);
-    if (Target == newTarget) {
-      // w/o altered newTarget, optimization for 0-4 arguments
-      switch (args.length) {
-        case 0: return new Target();
-        case 1: return new Target(args[0]);
-        case 2: return new Target(args[0], args[1]);
-        case 3: return new Target(args[0], args[1], args[2]);
-        case 4: return new Target(args[0], args[1], args[2], args[3]);
-      }
-      // w/o altered newTarget, lot of arguments case
-      var $args = [null];
-      $args.push.apply($args, args);
-      return new (bind.apply(Target, $args))();
-    }
-    // with altered newTarget, not support built-in constructors
-    var proto = newTarget.prototype;
-    var instance = create(isObject(proto) ? proto : Object.prototype);
-    var result = Function.apply.call(Target, instance, args);
-    return isObject(result) ? result : instance;
-  }
-});
-
-
-/***/ }),
-
 /***/ "4bfa":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22183,50 +22096,6 @@ fixRegExpWellKnownSymbolLogic('replace', 2, function (REPLACE, nativeReplace, ma
 
 /***/ }),
 
-/***/ "53ca":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _typeof; });
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a4d3");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("e01a");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("d28b");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("e260");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("d3b7");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("3ca3");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("ddb0");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_6__);
-
-
-
-
-
-
-
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
-}
-
-/***/ }),
-
 /***/ "5530":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22672,6 +22541,202 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "63c3":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/JobTypes/AppGoogleTalentJob.vue?vue&type=template&id=459cec86&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt})],2)}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/JobTypes/AppGoogleTalentJob.vue?vue&type=template&id=459cec86&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
+var es_symbol = __webpack_require__("a4d3");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
+var es_symbol_description = __webpack_require__("e01a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.join.js
+var es_array_join = __webpack_require__("a15b");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
+var es_regexp_exec = __webpack_require__("ac1f");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
+var es_string_replace = __webpack_require__("5319");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
+var es_string_split = __webpack_require__("1276");
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 7 modules
+var helpers = __webpack_require__("a74a");
+
+// EXTERNAL MODULE: ./src/services/api/location.js
+var api_location = __webpack_require__("3fcc");
+
+// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
+var lodash = __webpack_require__("2ef0");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/JobTypes/AppGoogleTalentJob.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ var AppGoogleTalentJobvue_type_script_lang_js_ = ({
+  props: {
+    job: {
+      type: Object,
+      required: true
+    },
+    tag: {
+      type: String,
+      required: false,
+      default: "section"
+    }
+  },
+  methods: {
+    getAttribute: function getAttribute(attribute) {
+      var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var customAttr = "customAttributes.".concat(attribute, ".stringValues");
+      var value = Object(lodash["get"])(this.job.job, customAttr, defaultValue);
+      return Object(lodash["isArray"])(value) ? value.join(" ") : value;
+    }
+  },
+  computed: {
+    reqId: function reqId() {
+      return this.getAttribute('reqid');
+    },
+    title: function title() {
+      return this.job.job.title;
+    },
+    location: function location() {
+      return Object(api_location["b" /* removeCountry */])(this.getAttribute("city_admin1_country"));
+    },
+    detailUrl: function detailUrl() {
+      return Object(helpers["b" /* buildJobDetailUrl */])(this.title, this.location, this.guid);
+    },
+    guid: function guid() {
+      return this.job.job.requisitionId;
+    },
+    city: function city() {
+      var location = this.location;
+      return Object(api_location["c" /* removeState */])(Object(api_location["b" /* removeCountry */])(location));
+    },
+    state: function state() {
+      var location = this.location;
+      location = location.split(",");
+      return Object(api_location["a" /* fullState */])(location[1]);
+    },
+    country: function country() {
+      return this.getAttribute("country");
+    },
+    company: function company() {
+      return this.job.job.companyDisplayName;
+    },
+    hasCommuteInfo: function hasCommuteInfo() {
+      if (Object(helpers["a" /* blank */])(this.job.commuteInfo)) {
+        return false;
+      }
+
+      if (!Object.prototype.hasOwnProperty.call(this.job.commuteInfo, "travelDuration")) {
+        return false;
+      }
+
+      return true;
+    },
+    commuteTime: function commuteTime() {
+      if (!this.hasCommuteInfo) {
+        return "";
+      }
+
+      var seconds = parseInt(this.job.commuteInfo.travelDuration.replace("s", ""));
+      var hours = Math.floor(seconds / 60 / 60);
+      var minutes = Math.floor(seconds / 60) - hours * 60;
+      return minutes;
+    },
+    cleanHtmlDescription: function cleanHtmlDescription() {
+      // html description is not available on job detail pages?
+      if (!this.htmlDescription) {
+        return "";
+      }
+
+      return this.htmlDescription.replace(/(\r\n|\n|\r)/gm, "");
+    },
+    description: function description() {
+      return this.job.job.description;
+    },
+    htmlDescription: function htmlDescription() {
+      return this.job.job.description;
+    },
+    dateAdded: function dateAdded() {
+      return this.job.job.postingCreateTime;
+    },
+    deletedAt: function deletedAt() {
+      return null;
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/JobTypes/AppGoogleTalentJob.vue?vue&type=script&lang=js&
+ /* harmony default export */ var JobTypes_AppGoogleTalentJobvue_type_script_lang_js_ = (AppGoogleTalentJobvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/components/JobTypes/AppGoogleTalentJob.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  JobTypes_AppGoogleTalentJobvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var AppGoogleTalentJob = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
 /***/ "6547":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22885,6 +22950,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 //
 //
 //
+//
 
 
 
@@ -22930,13 +22996,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       supported: {
         geolocation: false
       },
-      meta: {
-        hasJobs: this.hasJobs,
-        sort: {
-          active: defaultInput["sort"],
-          options: ["relevance", "distance", "title", "date"]
-        }
-      },
+      meta: this.getDefaultMeta(),
       input: defaultInput
     };
   },
@@ -22957,6 +23017,9 @@ var component = Object(componentNormalizer["a" /* default */])(
     }
   },
   computed: {
+    jobComponentType: function jobComponentType() {
+      return Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* getJobComponent */ "c"])(this.meta.source);
+    },
     hasJobs: function hasJobs() {
       return (this.jobs || []).length > 0;
     },
@@ -22965,6 +23028,18 @@ var component = Object(componentNormalizer["a" /* default */])(
     },
     isCommuteSearch: function isCommuteSearch() {
       return this.input.searchType == "commute";
+    },
+    searchService: function searchService() {
+      var searchType = this.input.searchType;
+
+      switch (searchType) {
+        case "commute":
+          return _services_api_search__WEBPACK_IMPORTED_MODULE_16__[/* CommuteSearchService */ "a"];
+
+        case "location":
+        default:
+          return _services_api_search__WEBPACK_IMPORTED_MODULE_16__[/* SearchService */ "b"];
+      }
     },
     selectedFilters: function selectedFilters() {
       var _this = this;
@@ -23095,18 +23170,6 @@ var component = Object(componentNormalizer["a" /* default */])(
         }
       });
     },
-    getService: function getService() {
-      var searchType = this.input.searchType;
-
-      switch (searchType) {
-        case "commute":
-          return _services_api_search__WEBPACK_IMPORTED_MODULE_16__[/* CommuteSearchService */ "a"];
-
-        case "location":
-        default:
-          return _services_api_search__WEBPACK_IMPORTED_MODULE_16__[/* SearchService */ "b"];
-      }
-    },
     getPayload: function getPayload() {
       var data = Object(lodash__WEBPACK_IMPORTED_MODULE_15__["omitBy"])(Object(lodash__WEBPACK_IMPORTED_MODULE_15__["clone"])(this.input), _services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* blank */ "a"]);
 
@@ -23129,58 +23192,74 @@ var component = Object(componentNormalizer["a" /* default */])(
 
       return [];
     },
-    setMeta: function setMeta(meta) {
-      this.meta = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_12__[/* default */ "a"])(Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_12__[/* default */ "a"])({}, meta), {}, {
+    getDefaultMeta: function getDefaultMeta() {
+      var inputDefaults = this.getInputDefaults();
+      var source = this.siteConfig.sources.search;
+
+      if (this.isCommuteSearch) {
+        source = this.siteConfig.sources.commute;
+      }
+
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_15__["clone"])({
         hasJobs: this.hasJobs,
-        selectedFilters: this.selectedFilters
+        selectedFilters: this.selectedFilters,
+        source: source,
+        sort: {
+          active: inputDefaults["sort"],
+          options: ["relevance", "distance", "title", "date"]
+        }
       });
+    },
+    setMeta: function setMeta(meta) {
+      this.meta = Object(lodash__WEBPACK_IMPORTED_MODULE_15__["merge"])(this.getDefaultMeta(), meta);
     },
     search: function search() {
       var _this2 = this;
 
       return Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var Service, response, _response$data, jobs, pagination, filters, meta;
-
+        var Service, response, data, jobs, pagination, filters, meta;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _this2.status.loading = true;
-                Service = _this2.getService();
+                Service = _this2.searchService;
                 _context.prev = 2;
                 _context.next = 5;
                 return Service.get(_this2.getPayload(), _this2.siteConfig);
 
               case 5:
                 response = _context.sent;
-                _response$data = response.data, jobs = _response$data.jobs, pagination = _response$data.pagination, filters = _response$data.filters, meta = _response$data.meta;
+                data = response.data || {};
+                jobs = data.jobs, pagination = data.pagination, filters = data.filters, meta = data.meta;
                 _this2.jobs = jobs;
                 _this2.pagination = pagination;
                 _this2.filters = filters || {};
 
                 _this2.setMeta(meta);
 
+                _this2.status.loading = false;
                 return _context.abrupt("return", response);
 
-              case 14:
-                _context.prev = 14;
+              case 16:
+                _context.prev = 16;
                 _context.t0 = _context["catch"](2);
                 _this2.status.error = _context.t0;
                 _this2.meta.selectedFilters = [];
-                Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "b"])(_context.t0, "error");
+                Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "d"])(_context.t0, "error");
                 return _context.abrupt("return", _context.t0);
 
-              case 20:
-                _context.prev = 20;
+              case 22:
+                _context.prev = 22;
                 _this2.status.loading = false;
-                return _context.finish(20);
+                return _context.finish(22);
 
-              case 23:
+              case 25:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 14, 20, 23]]);
+        }, _callee, null, [[2, 16, 22, 25]]);
       }))();
     },
     getUserCoordinates: function getUserCoordinates() {
@@ -23249,7 +23328,7 @@ var component = Object(componentNormalizer["a" /* default */])(
         path: "/jobs",
         query: this.getPayload()
       }).catch(function (err) {
-        Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "b"])(err, "error");
+        Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "d"])(err, "error");
       });
     }
   }
@@ -23337,8 +23416,11 @@ var map = {
 	"./AppModal.vue": "41df",
 	"./AppNavbar.vue": "4f50",
 	"./AppPagination.vue": "55b1",
+	"./AppSimilarJobs.vue": "0a22",
 	"./AppYoutube.vue": "65f4",
 	"./Form/AppAutocompleteInput.vue": "c5b3",
+	"./JobTypes/AppGoogleTalentJob.vue": "63c3",
+	"./JobTypes/AppSolrJob.vue": "1cbe",
 	"./Parse/AppHtmlToJson.vue": "2a36",
 	"./Parse/AppJsonToHtml.vue": "1764",
 	"./Search/AppSearchFilter.vue": "1249",
@@ -24672,38 +24754,6 @@ module.exports = DESCRIPTORS ? function (object, key, value) {
   object[key] = value;
   return object;
 };
-
-
-/***/ }),
-
-/***/ "9115":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SolrJob; });
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("d4ec");
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("262e");
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createSuper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("2caf");
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("3237");
-
-
-
-
-
-var SolrJob = /*#__PURE__*/function (_BaseJob) {
-  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(SolrJob, _BaseJob);
-
-  var _super = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createSuper__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(SolrJob);
-
-  function SolrJob(job) {
-    Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(this, SolrJob);
-
-    return _super.call(this, job);
-  }
-
-  return SolrJob;
-}(_base__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"]);
-
 
 
 /***/ }),
@@ -26895,10 +26945,15 @@ exports.default = Tokenizer;
 "use strict";
 
 // EXPORTS
+__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ getJobComponent; });
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ blank; });
-__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ log; });
+__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ log; });
+__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ buildJobDetailUrl; });
 
 // UNUSED EXPORTS: retry
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
+var es_array_concat = __webpack_require__("99af");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
 var es_array_includes = __webpack_require__("caad");
@@ -27000,8 +27055,40 @@ function _nonIterableSpread() {
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
-var esm_typeof = __webpack_require__("53ca");
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
+
+
+
+
+
+
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
+var lodash = __webpack_require__("2ef0");
+
+// EXTERNAL MODULE: ./src/services/api/location.js
+var api_location = __webpack_require__("3fcc");
+
+// EXTERNAL MODULE: ./src/components/JobTypes/AppSolrJob.vue + 4 modules
+var AppSolrJob = __webpack_require__("1cbe");
+
+// EXTERNAL MODULE: ./src/components/JobTypes/AppGoogleTalentJob.vue + 4 modules
+var AppGoogleTalentJob = __webpack_require__("63c3");
 
 // CONCATENATED MODULE: ./src/services/helpers.js
 
@@ -27012,9 +27099,25 @@ var esm_typeof = __webpack_require__("53ca");
 
 
 
+
+
+
+
+/**Get the associated job component for the given source */
+
+function getJobComponent(source) {
+  switch (source) {
+    case "google_talent":
+      return AppGoogleTalentJob["default"];
+
+    default:
+      return AppSolrJob["default"];
+  }
+}
 /**
  * Check if the given value is "blank".
  */
+
 function blank(value) {
   var isBlank = false;
 
@@ -27024,7 +27127,7 @@ function blank(value) {
     isBlank = true;
   } else if (Array.isArray(value) && value.length == 0) {
     isBlank = true;
-  } else if (Object(esm_typeof["a" /* default */])(value) === "object" && Object.keys(value).length === 0) {
+  } else if (_typeof(value) === "object" && Object.keys(value).length === 0) {
     isBlank = true;
   }
 
@@ -27064,6 +27167,15 @@ function log(message) {
   var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "log";
 
   if (false) {}
+}
+/**
+ * Build a job detail url.
+ */
+
+function buildJobDetailUrl(title, location, guid) {
+  var locationSlug = Object(lodash["kebabCase"])(Object(api_location["b" /* removeCountry */])(location));
+  var titleSlug = Object(lodash["kebabCase"])(title);
+  return "/".concat(locationSlug, "/").concat(titleSlug, "/").concat(guid, "/job/");
 }
 
 /***/ }),
@@ -28309,29 +28421,6 @@ exports.URL = URL;
 
 /***/ }),
 
-/***/ "bee2":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _createClass; });
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-/***/ }),
-
 /***/ "c04e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28828,7 +28917,7 @@ var asyncToGenerator = __webpack_require__("1da1");
 // EXTERNAL MODULE: ./node_modules/lodash/lodash.js
 var lodash = __webpack_require__("2ef0");
 
-// EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
+// EXTERNAL MODULE: ./src/services/helpers.js + 7 modules
 var helpers = __webpack_require__("a74a");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=script&lang=js&
@@ -29877,19 +29966,6 @@ module.exports = function (it, TAG, STATIC) {
 
 /***/ }),
 
-/***/ "d4ec":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _classCallCheck; });
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-/***/ }),
-
 /***/ "d669":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30253,11 +30329,7 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 function getJob(guid) {
   return cdn().get("".concat(guid.toUpperCase(), ".json"));
 }
-// EXTERNAL MODULE: ./src/services/api/drivers/job/solr.js
-var solr = __webpack_require__("9115");
-
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobFetch.vue?vue&type=script&lang=js&
-
 
 
 
@@ -30306,7 +30378,7 @@ var solr = __webpack_require__("9115");
                 if (locationSlug !== location || data.title_slug !== title) {
                   window.location.replace("/".concat(locationSlug, "/").concat(data.title_slug, "/").concat(guid, "/job"));
                 } else {
-                  _this.job = new solr["a" /* default */](data);
+                  _this.job = data;
 
                   _this.status({
                     resolved: true
@@ -31735,9 +31807,6 @@ __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding *
 
 // UNUSED EXPORTS: default, TitleCompleteService, MOCCompleteService, LocationCompleteService
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
-var es_array_map = __webpack_require__("d81d");
-
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
 var es_regexp_exec = __webpack_require__("ac1f");
 
@@ -31750,187 +31819,34 @@ var runtime = __webpack_require__("96cf");
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
 var asyncToGenerator = __webpack_require__("1da1");
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/inherits.js + 1 modules
-var inherits = __webpack_require__("262e");
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/createClass.js
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/createSuper.js + 4 modules
-var createSuper = __webpack_require__("2caf");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
-var classCallCheck = __webpack_require__("d4ec");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/createClass.js
-var createClass = __webpack_require__("bee2");
-
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
 // EXTERNAL MODULE: ./node_modules/axios/index.js
 var axios = __webpack_require__("bc3a");
 var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 
 // EXTERNAL MODULE: ./node_modules/lodash/lodash.js
 var lodash = __webpack_require__("2ef0");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
-var es_symbol = __webpack_require__("a4d3");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
-var es_symbol_description = __webpack_require__("e01a");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.join.js
-var es_array_join = __webpack_require__("a15b");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
-var es_string_replace = __webpack_require__("5319");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
-var es_string_split = __webpack_require__("1276");
-
-// EXTERNAL MODULE: ./src/services/api/drivers/job/base.js
-var base = __webpack_require__("3237");
-
-// EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
-var helpers = __webpack_require__("a74a");
-
-// EXTERNAL MODULE: ./src/services/api/location.js
-var api_location = __webpack_require__("3fcc");
-
-// CONCATENATED MODULE: ./src/services/api/drivers/job/google-talent.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var google_talent_GoogleTalentJob = /*#__PURE__*/function (_BaseJob) {
-  Object(inherits["a" /* default */])(GoogleTalentJob, _BaseJob);
-
-  var _super = Object(createSuper["a" /* default */])(GoogleTalentJob);
-
-  function GoogleTalentJob(job) {
-    var _this;
-
-    Object(classCallCheck["a" /* default */])(this, GoogleTalentJob);
-
-    _this = _super.call(this, job.job);
-    _this.commuteInfo = job.commuteInfo;
-    return _this;
-  }
-
-  Object(createClass["a" /* default */])(GoogleTalentJob, [{
-    key: "getReqId",
-    value: function getReqId() {
-      return this.getAttribute("reqid");
-    }
-  }, {
-    key: "getGuid",
-    value: function getGuid() {
-      //the guid is stored as the "requistionId"
-      //during imports to gurantee uniqueness.
-      return this.data.requisitionId;
-    }
-  }, {
-    key: "hasAttribute",
-    value: function hasAttribute(attribute) {
-      var customAttr = "customAttributes.".concat(attribute, ".stringValues");
-      return Object(lodash["has"])(this.data, customAttr);
-    }
-  }, {
-    key: "getAttribute",
-    value: function getAttribute(attribute) {
-      var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var customAttr = "customAttributes.".concat(attribute, ".stringValues");
-      var value = Object(lodash["get"])(this.data, customAttr, defaultValue);
-      return Object(lodash["isArray"])(value) ? value.join(" ") : value;
-    }
-  }, {
-    key: "getTitle",
-    value: function getTitle() {
-      return this.data.title;
-    }
-  }, {
-    key: "getLocation",
-    value: function getLocation() {
-      return Object(api_location["b" /* removeCountry */])(this.getAttribute("city_admin1_country"));
-    }
-  }, {
-    key: "getHtmlDescription",
-    value: function getHtmlDescription() {
-      return this.data.description;
-    }
-  }, {
-    key: "getCity",
-    value: function getCity() {
-      var location = this.getLocation();
-      return Object(api_location["c" /* removeState */])(Object(api_location["b" /* removeCountry */])(location));
-    }
-  }, {
-    key: "getState",
-    value: function getState() {
-      var location = this.getLocation();
-      location = location.split(",");
-      return Object(api_location["a" /* fullState */])(location[1]);
-    }
-  }, {
-    key: "getDeletedAt",
-    value: function getDeletedAt() {
-      return null;
-    }
-  }, {
-    key: "getCompany",
-    value: function getCompany() {
-      return this.data.companyDisplayName;
-    }
-  }, {
-    key: "getCountry",
-    value: function getCountry() {
-      return this.getAttribute("country");
-    }
-  }, {
-    key: "getDateAdded",
-    value: function getDateAdded() {
-      return this.data.postingCreateTime;
-    }
-  }, {
-    key: "hasCommuteInfo",
-    value: function hasCommuteInfo() {
-      if (Object(helpers["a" /* blank */])(this.commuteInfo)) {
-        return false;
-      }
-
-      if (!Object.prototype.hasOwnProperty.call(this.commuteInfo, "travelDuration")) {
-        return false;
-      }
-
-      return true;
-    }
-  }, {
-    key: "getCommuteTime",
-    value: function getCommuteTime() {
-      if (!this.hasCommuteInfo()) {
-        return "";
-      }
-
-      var seconds = parseInt(this.commuteInfo.travelDuration.replace("s", ""));
-      var hours = Math.floor(seconds / 60 / 60);
-      var minutes = Math.floor(seconds / 60) - hours * 60;
-      return minutes;
-    }
-  }]);
-
-  return GoogleTalentJob;
-}(base["a" /* default */]);
-
-
-// EXTERNAL MODULE: ./src/services/api/drivers/job/solr.js
-var solr = __webpack_require__("9115");
 
 // CONCATENATED MODULE: ./src/services/api/search.js
 
@@ -31941,11 +31857,7 @@ var solr = __webpack_require__("9115");
 
 
 
-
-
-
-
-
+var TIMEOUT_THRESHOLD = 5000;
 function api() {
   return axios_default.a.create({
     baseURL: Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_API_URL,
@@ -31956,56 +31868,16 @@ function api() {
     }
   });
 }
-
-var search_BaseSearchService = /*#__PURE__*/function () {
-  function BaseSearchService() {
-    Object(classCallCheck["a" /* default */])(this, BaseSearchService);
-  }
-
-  Object(createClass["a" /* default */])(BaseSearchService, null, [{
-    key: "getJobDriver",
-    value: function getJobDriver(source) {
-      switch (source) {
-        case "solr":
-          return solr["a" /* default */];
-
-        case "google_talent":
-          return google_talent_GoogleTalentJob;
-
-        default:
-          throw new Error("Unsupported job driver/source ".concat(source));
-      }
-    }
-  }, {
-    key: "wrapJobDriver",
-    value: function wrapJobDriver(jobs, source) {
-      var JobDriver = BaseSearchService.getJobDriver(source);
-      jobs = (jobs || []).map(function (job) {
-        return new JobDriver(job);
-      });
-      return jobs;
-    }
-  }]);
-
-  return BaseSearchService;
-}();
-
-var search_SearchService = /*#__PURE__*/function (_BaseSearchService) {
-  Object(inherits["a" /* default */])(SearchService, _BaseSearchService);
-
-  var _super = Object(createSuper["a" /* default */])(SearchService);
-
+var search_SearchService = /*#__PURE__*/function () {
   function SearchService() {
-    Object(classCallCheck["a" /* default */])(this, SearchService);
-
-    return _super.apply(this, arguments);
+    _classCallCheck(this, SearchService);
   }
 
-  Object(createClass["a" /* default */])(SearchService, null, [{
+  _createClass(SearchService, null, [{
     key: "get",
     value: function () {
       var _get = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(input, siteConfig) {
-        var source, response, data;
+        var source, response;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -32016,34 +31888,34 @@ var search_SearchService = /*#__PURE__*/function (_BaseSearchService) {
                 return api().post("".concat(source, "/search"), {
                   data: input,
                   config: siteConfig
+                }, {
+                  timeout: TIMEOUT_THRESHOLD
                 });
 
               case 4:
                 response = _context.sent;
-                data = response.data;
-                response.data.jobs = SearchService.wrapJobDriver(data.jobs, data.meta.source);
                 return _context.abrupt("return", response);
 
-              case 10:
-                _context.prev = 10;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](1);
 
                 if (!Object.prototype.hasOwnProperty.call(_context.t0, "response")) {
-                  _context.next = 14;
+                  _context.next = 12;
                   break;
                 }
 
                 return _context.abrupt("return", _context.t0);
 
-              case 14:
+              case 12:
                 throw new Error(_context.t0);
 
-              case 15:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 10]]);
+        }, _callee, null, [[1, 8]]);
       }));
 
       function get(_x, _x2) {
@@ -32055,23 +31927,17 @@ var search_SearchService = /*#__PURE__*/function (_BaseSearchService) {
   }]);
 
   return SearchService;
-}(search_BaseSearchService);
-var search_CommuteSearchService = /*#__PURE__*/function (_BaseSearchService2) {
-  Object(inherits["a" /* default */])(CommuteSearchService, _BaseSearchService2);
-
-  var _super2 = Object(createSuper["a" /* default */])(CommuteSearchService);
-
+}();
+var search_CommuteSearchService = /*#__PURE__*/function () {
   function CommuteSearchService() {
-    Object(classCallCheck["a" /* default */])(this, CommuteSearchService);
-
-    return _super2.apply(this, arguments);
+    _classCallCheck(this, CommuteSearchService);
   }
 
-  Object(createClass["a" /* default */])(CommuteSearchService, null, [{
+  _createClass(CommuteSearchService, null, [{
     key: "get",
     value: function () {
       var _get2 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(input, siteConfig) {
-        var source, response, data;
+        var source, response;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -32082,34 +31948,34 @@ var search_CommuteSearchService = /*#__PURE__*/function (_BaseSearchService2) {
                 return api().post("".concat(source, "/commute"), {
                   data: input,
                   config: siteConfig
+                }, {
+                  timeout: TIMEOUT_THRESHOLD
                 });
 
               case 4:
                 response = _context2.sent;
-                data = response.data;
-                response.data.jobs = CommuteSearchService.wrapJobDriver(data.jobs, data.meta.source);
                 return _context2.abrupt("return", response);
 
-              case 10:
-                _context2.prev = 10;
+              case 8:
+                _context2.prev = 8;
                 _context2.t0 = _context2["catch"](1);
 
                 if (!Object.prototype.hasOwnProperty.call(_context2.t0, "response")) {
-                  _context2.next = 14;
+                  _context2.next = 12;
                   break;
                 }
 
                 return _context2.abrupt("return", _context2.t0);
 
-              case 14:
+              case 12:
                 throw new Error(_context2.t0);
 
-              case 15:
+              case 13:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[1, 10]]);
+        }, _callee2, null, [[1, 8]]);
       }));
 
       function get(_x3, _x4) {
@@ -32121,13 +31987,13 @@ var search_CommuteSearchService = /*#__PURE__*/function (_BaseSearchService2) {
   }]);
 
   return CommuteSearchService;
-}(search_BaseSearchService);
+}();
 var search_TitleCompleteService = /*#__PURE__*/function () {
   function TitleCompleteService() {
-    Object(classCallCheck["a" /* default */])(this, TitleCompleteService);
+    _classCallCheck(this, TitleCompleteService);
   }
 
-  Object(createClass["a" /* default */])(TitleCompleteService, null, [{
+  _createClass(TitleCompleteService, null, [{
     key: "get",
     value: function () {
       var _get3 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(q, siteConfig) {
@@ -32153,7 +32019,8 @@ var search_TitleCompleteService = /*#__PURE__*/function () {
                       tenant_uuid: siteConfig.tenant_uuid,
                       company_uuids: siteConfig.company_uuids
                     }
-                  }
+                  },
+                  timeout: TIMEOUT_THRESHOLD
                 });
 
               case 4:
@@ -32194,10 +32061,10 @@ var search_TitleCompleteService = /*#__PURE__*/function () {
 }();
 var search_MOCCompleteService = /*#__PURE__*/function () {
   function MOCCompleteService() {
-    Object(classCallCheck["a" /* default */])(this, MOCCompleteService);
+    _classCallCheck(this, MOCCompleteService);
   }
 
-  Object(createClass["a" /* default */])(MOCCompleteService, null, [{
+  _createClass(MOCCompleteService, null, [{
     key: "get",
     value: function () {
       var _get4 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(q) {
@@ -32211,7 +32078,8 @@ var search_MOCCompleteService = /*#__PURE__*/function () {
                 return api().get("/complete/moc", {
                   params: {
                     q: q
-                  }
+                  },
+                  timeout: TIMEOUT_THRESHOLD
                 });
 
               case 3:
@@ -32252,10 +32120,10 @@ var search_MOCCompleteService = /*#__PURE__*/function () {
 }();
 var search_LocationCompleteService = /*#__PURE__*/function () {
   function LocationCompleteService() {
-    Object(classCallCheck["a" /* default */])(this, LocationCompleteService);
+    _classCallCheck(this, LocationCompleteService);
   }
 
-  Object(createClass["a" /* default */])(LocationCompleteService, null, [{
+  _createClass(LocationCompleteService, null, [{
     key: "get",
     value: function () {
       var _get5 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(q) {
@@ -32269,7 +32137,8 @@ var search_LocationCompleteService = /*#__PURE__*/function () {
                 return api().get("/solr/complete/location", {
                   params: {
                     q: q
-                  }
+                  },
+                  timeout: TIMEOUT_THRESHOLD
                 });
 
               case 3:

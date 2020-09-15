@@ -19,11 +19,11 @@
         <div class="bg-gray-300 mt-6 mb-8 mx-2 p-12">
             <div class="mx-w-sm mx-auto text-center">
                 <h1 class="font-bold text-4xl text-black font-bold">
-                    {{ job.getTitle() }} has expired.
+                    {{ job.title }} has expired.
                 </h1>
 
                 <div class="text-black text-base font-bold mb-2">
-                    {{ job.getLocation() }}
+                    {{ job.location_exact }}
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import AppSimilarJobs from "~/demo/components/AppSimilarJobs"
+import AppSimilarJobs from "~/components/AppSimilarJobs"
 
 export default {
     name: "AppJobExpired",
@@ -44,7 +44,7 @@ export default {
     },
     metaInfo() {
         return {
-            title: this.job ? this.job.getTitle() : null,
+            title: this.job ? this.job.title : null,
             meta: [
                 { name: "description", content: "only the best jobs" },
                 { rel: "preconnect", href: "https://microsites.dejobs.org/" }
@@ -59,11 +59,36 @@ export default {
     },
     computed:{
         jsonLd(){
-            let ldData = this.job.jsonLd();
-
-            ldData['validThrough'] = this.job.getDeletedAt()
-
-            return JSON.stringify(ldData)
+            return JSON.stringify({
+                "@context": "http://schema.org",
+                "@type": "JobPosting",
+                employmentType: "Paid Work",
+                title: this.job.title,
+                datePosted: this.job.date_added,
+                description: this.job.company_exact,
+                identifier: {
+                    "@type": "PropertyValue",
+                    name: this.job.company_exact,
+                    value: this.job.reqId
+                },
+                hiringOrganization: {
+                    "@type": "Organization",
+                    name: this.job.company_exact,
+                },
+                jobLocation: {
+                    "@type": "Place",
+                    address: {
+                        "@type": "PostalAddress",
+                        addressLocality: this.job.city,
+                        addressRegion: this.job.state,
+                        addressCountry: {
+                            "@type": "Country",
+                            name: this.job.country_short_exact,
+                        },
+                    },
+                },
+                validThrough: this.job.deleted_at
+            })
         }
     }
 }
