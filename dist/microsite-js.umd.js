@@ -22548,12 +22548,12 @@ module.exports = function(module) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/JobTypes/AppGoogleTalentJob.vue?vue&type=template&id=459cec86&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/JobTypes/AppGoogleTalentJob.vue?vue&type=template&id=7ac6cb80&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/JobTypes/AppGoogleTalentJob.vue?vue&type=template&id=459cec86&
+// CONCATENATED MODULE: ./src/components/JobTypes/AppGoogleTalentJob.vue?vue&type=template&id=7ac6cb80&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
 var es_symbol = __webpack_require__("a4d3");
@@ -22688,7 +22688,6 @@ var lodash = __webpack_require__("2ef0");
       return minutes;
     },
     cleanHtmlDescription: function cleanHtmlDescription() {
-      // html description is not available on job detail pages?
       if (!this.htmlDescription) {
         return "";
       }

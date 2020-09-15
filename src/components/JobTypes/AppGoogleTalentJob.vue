@@ -107,7 +107,6 @@ export default {
             return minutes
         },
         cleanHtmlDescription() {
-            // html description is not available on job detail pages?
             if (!this.htmlDescription) {
                 return ""
             }
