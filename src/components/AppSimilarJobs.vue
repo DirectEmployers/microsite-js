@@ -1,31 +1,32 @@
 <template>
     <section class="similar-jobs" v-if="hasSimilarJobs">
-        <h3 class="similar-jobs__title text-center">{{ header }}</h3>
+        <h3 class="similar-jobs__title">{{ header }}</h3>
         <div class="similar-jobs__grid">
             <AppJob
-                class="similar-jobs__grid-item"
                 :key="index"
                 :source="meta.source"
                 :job="similarJob"
                 v-for="(similarJob, index) in similarJobs"
             >
                 <template v-slot="jobData">
-                    <g-link
-                        :to="buildJobDetailUrl(
-                            jobData.title,
-                            jobData.location,
-                            jobData.guid
-                        )"
-                    >
-                        <slot :jobData="jobData">
-                            <h4 class="similar-jobs__grid-item-title">
-                                {{ jobData.title }}
-                            </h4>
-                            <p class="similar-jobs__grid-item-location">
-                                {{ jobData.location }}
-                            </p>
-                        </slot>
-                    </g-link>
+                    <section class="similar-jobs__grid-item"   v-if="job.guid != jobData.guid">
+                        <g-link
+                            :to="buildJobDetailUrl(
+                                jobData.title,
+                                jobData.location,
+                                jobData.guid
+                            )"
+                        >
+                            <slot :jobData="jobData">
+                                <h4 class="similar-jobs__grid-item-title">
+                                    {{ jobData.title }}
+                                </h4>
+                                <p class="similar-jobs__grid-item-location">
+                                    {{ jobData.location }}
+                                </p>
+                            </slot>
+                        </g-link>
+                    </section>
                 </template>
             </AppJob>
         </div>
@@ -39,7 +40,6 @@ import AppJob from './AppJob'
 export default {
     data() {
         return {
-            buildJobDetailUrl,
             meta: {},
             similarJobs: [],
         }
@@ -67,6 +67,9 @@ export default {
         },
     },
     methods: {
+        buildJobDetailUrl(title, location, guid){
+            return buildJobDetailUrl(title, location, guid)
+        },
         async getJobs() {
             const response = await SearchService.get(
                 {
@@ -85,10 +88,7 @@ export default {
 
             this.similarJobs = jobs
 
-            this.similarJobs.filter(job => {
-                return job.guid !== this.job.guid
-            })
-        },
+        }
     },
 }
 </script>
