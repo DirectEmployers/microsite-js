@@ -2,22 +2,20 @@
     <section class="similar-jobs" v-if="hasSimilarJobs">
         <h3 class="similar-jobs__title text-center">{{ header }}</h3>
         <div class="similar-jobs__grid">
-            <component
+            <AppJob
                 class="similar-jobs__grid-item"
                 :key="index"
-                :is="jobTypeComponent"
+                :source="meta.source"
                 :job="similarJob"
                 v-for="(similarJob, index) in similarJobs"
             >
                 <template v-slot="jobData">
                     <g-link
-                        :to="
-                            buildJobDetailUrl(
-                                jobData.title,
-                                jobData.location,
-                                jobData.guid
-                            )
-                        "
+                        :to="buildJobDetailUrl(
+                            jobData.title,
+                            jobData.location,
+                            jobData.guid
+                        )"
                     >
                         <slot :jobData="jobData">
                             <h4 class="similar-jobs__grid-item-title">
@@ -29,15 +27,15 @@
                         </slot>
                     </g-link>
                 </template>
-            </component>
+            </AppJob>
         </div>
     </section>
 </template>
 
 <script>
 import { SearchService } from "../services/api/search"
-import { buildJobDetailUrl, getJobComponent } from "../services/helpers"
-
+import { buildJobDetailUrl } from "../services/helpers"
+import AppJob from './AppJob'
 export default {
     data() {
         return {
@@ -45,6 +43,9 @@ export default {
             meta: {},
             similarJobs: [],
         }
+    },
+    components:{
+        AppJob
     },
     props: {
         job: {
@@ -57,14 +58,10 @@ export default {
             default: "Other Jobs You Might Like",
         },
     },
-
-    mounted() {
+    created() {
         this.getJobs()
     },
     computed: {
-        jobTypeComponent() {
-            return getJobComponent(this.meta.source)
-        },
         hasSimilarJobs() {
             return this.similarJobs.length > 0
         },

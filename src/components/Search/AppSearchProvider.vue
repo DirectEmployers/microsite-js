@@ -15,12 +15,11 @@
             :submitSearchForm="submitSearchForm"
             :supported="supported"
             :selectPage="selectPage"
-            :jobComponentType="jobComponentType"
         />
     </component>
 </template>
 <script>
-import { blank, getJobComponent, log } from "../../services/helpers"
+import { blank, log } from "../../services/helpers"
 import { fullState, removeCountry } from "../../services/api/location"
 import { omitBy, omit, clone, merge, assign } from "lodash"
 import { SearchService, CommuteSearchService } from "../../services/api/search"
@@ -89,10 +88,6 @@ export default {
         }
     },
     computed: {
-        jobComponentType() {
-            
-            return getJobComponent(this.meta.source)
-        },
         hasJobs() {
             return (this.jobs || []).length > 0
         },

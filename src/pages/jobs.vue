@@ -16,7 +16,6 @@
                 meta,
                 selectPage,
                 pagination,
-                jobComponentType,
             }"
         >
             <Loader v-if="status.loading" />
@@ -47,7 +46,7 @@
                                 :key="index"
                                 v-for="(job, index) in jobs"
                             >
-                                <component :is="jobComponentType" :job="job">
+                                <AppJob :source="meta.source" :job="job">
                                     <template v-slot="jobData">
                                         <g-link
                                             :to="jobData.detailUrl"
@@ -74,7 +73,7 @@
                                             </div>
                                         </g-link>
                                     </template>
-                                </component>
+                                </AppJob>
                             </div>
                             <AppPagination
                                 v-if="!status.loading"
@@ -203,10 +202,12 @@ import AppSearchFilter from "~/components/Search/AppSearchFilter"
 import AppSearchFilterChip from "~/components/Search/AppSearchFilterChip"
 import { toLower, startCase } from "lodash"
 import AppModal from "~/components/AppModal"
+import AppJob from "~/components/AppJob"
 export default {
     components: {
         AppAccordion,
         AppModal,
+        AppJob,
         AppPagination,
         AppSearchFilter,
         AppSearchFilterChip,

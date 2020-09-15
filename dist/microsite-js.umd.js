@@ -149,12 +149,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=1badd68e&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported,"selectPage":_vm.selectPage,"jobComponentType":_vm.jobComponentType})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=03846e0b&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported,"selectPage":_vm.selectPage})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=1badd68e&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=03846e0b&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
 var AppSearchProvidervue_type_script_lang_js_ = __webpack_require__("6651");
@@ -352,16 +352,16 @@ module.exports = Axios;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=bf339d5a&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h3',{staticClass:"similar-jobs__title text-center"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c(_vm.jobTypeComponent,{key:index,tag:"component",staticClass:"similar-jobs__grid-item",attrs:{"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_c('g-link',{attrs:{"to":_vm.buildJobDetailUrl(
-                            jobData.title,
-                            jobData.location,
-                            jobData.guid
-                        )}},[_vm._t("default",[_c('h4',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.location)+" ")])],{"jobData":jobData})],2)]}}],null,true)})}),1)]):_vm._e()}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=461f726e&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h3',{staticClass:"similar-jobs__title text-center"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppJob',{key:index,staticClass:"similar-jobs__grid-item",attrs:{"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_c('g-link',{attrs:{"to":_vm.buildJobDetailUrl(
+                        jobData.title,
+                        jobData.location,
+                        jobData.guid
+                    )}},[_vm._t("default",[_c('h4',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.location)+" ")])],{"jobData":jobData})],2)]}}],null,true)})}),1)]):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=bf339d5a&
+// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=461f726e&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
 var es_array_filter = __webpack_require__("4de4");
@@ -377,6 +377,9 @@ var search = __webpack_require__("f867");
 
 // EXTERNAL MODULE: ./src/services/helpers.js + 7 modules
 var helpers = __webpack_require__("a74a");
+
+// EXTERNAL MODULE: ./src/components/AppJob.vue + 4 modules
+var AppJob = __webpack_require__("9f80");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=script&lang=js&
 
@@ -416,8 +419,7 @@ var helpers = __webpack_require__("a74a");
 //
 //
 //
-//
-//
+
 
 
 /* harmony default export */ var AppSimilarJobsvue_type_script_lang_js_ = ({
@@ -427,6 +429,9 @@ var helpers = __webpack_require__("a74a");
       meta: {},
       similarJobs: []
     };
+  },
+  components: {
+    AppJob: AppJob["default"]
   },
   props: {
     job: {
@@ -439,13 +444,10 @@ var helpers = __webpack_require__("a74a");
       default: "Other Jobs You Might Like"
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     this.getJobs();
   },
   computed: {
-    jobTypeComponent: function jobTypeComponent() {
-      return Object(helpers["c" /* getJobComponent */])(this.meta.source);
-    },
     hasSimilarJobs: function hasSimilarJobs() {
       return this.similarJobs.length > 0;
     }
@@ -1542,164 +1544,6 @@ module.exports = function (exec, SKIP_CLOSING) {
   return ITERATION_SUPPORT;
 };
 
-
-/***/ }),
-
-/***/ "1cbe":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/JobTypes/AppSolrJob.vue?vue&type=template&id=cb86f30e&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt})],2)}
-var staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/JobTypes/AppSolrJob.vue?vue&type=template&id=cb86f30e&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
-var es_symbol = __webpack_require__("a4d3");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
-var es_symbol_description = __webpack_require__("e01a");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
-var es_regexp_exec = __webpack_require__("ac1f");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
-var es_string_replace = __webpack_require__("5319");
-
-// EXTERNAL MODULE: ./src/services/helpers.js + 7 modules
-var helpers = __webpack_require__("a74a");
-
-// EXTERNAL MODULE: ./src/services/api/location.js
-var api_location = __webpack_require__("3fcc");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/JobTypes/AppSolrJob.vue?vue&type=script&lang=js&
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ var AppSolrJobvue_type_script_lang_js_ = ({
-  props: {
-    job: {
-      type: Object,
-      required: true
-    },
-    tag: {
-      type: String,
-      required: false,
-      default: "section"
-    }
-  },
-  computed: {
-    reqId: function reqId() {
-      return this.job.reqid;
-    },
-    title: function title() {
-      return this.job.title_exact;
-    },
-    location: function location() {
-      return this.job.location_exact;
-    },
-    detailUrl: function detailUrl() {
-      return Object(helpers["b" /* buildJobDetailUrl */])(this.title, this.location, this.guid);
-    },
-    guid: function guid() {
-      return this.job.guid;
-    },
-    city: function city() {
-      return this.job.city_exact;
-    },
-    state: function state() {
-      return Object(api_location["a" /* fullState */])(this.job.state_short_exact);
-    },
-    country: function country() {
-      return this.job.country_short_exact;
-    },
-    company: function company() {
-      return this.job.company_exact;
-    },
-    hasCommuteInfo: function hasCommuteInfo() {
-      return false;
-    },
-    commuteTime: function commuteTime() {
-      return null;
-    },
-    htmlDescription: function htmlDescription() {
-      return this.job.html_description;
-    },
-    cleanHtmlDescription: function cleanHtmlDescription() {
-      // html description is not available on job detail pages?
-      if (!this.htmlDescription) {
-        return '';
-      }
-
-      return this.htmlDescription.replace(/(\r\n|\n|\r)/gm, "");
-    },
-    description: function description() {
-      return this.job.description;
-    },
-    dateAdded: function dateAdded() {
-      return this.job.date_added;
-    },
-    deletedAt: function deletedAt() {
-      return this.job.deleted_at;
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/components/JobTypes/AppSolrJob.vue?vue&type=script&lang=js&
- /* harmony default export */ var JobTypes_AppSolrJobvue_type_script_lang_js_ = (AppSolrJobvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__("2877");
-
-// CONCATENATED MODULE: ./src/components/JobTypes/AppSolrJob.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  JobTypes_AppSolrJobvue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var AppSolrJob = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -22541,201 +22385,6 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "63c3":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/JobTypes/AppGoogleTalentJob.vue?vue&type=template&id=7ac6cb80&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt})],2)}
-var staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/JobTypes/AppGoogleTalentJob.vue?vue&type=template&id=7ac6cb80&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
-var es_symbol = __webpack_require__("a4d3");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
-var es_symbol_description = __webpack_require__("e01a");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.join.js
-var es_array_join = __webpack_require__("a15b");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
-var es_regexp_exec = __webpack_require__("ac1f");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
-var es_string_replace = __webpack_require__("5319");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
-var es_string_split = __webpack_require__("1276");
-
-// EXTERNAL MODULE: ./src/services/helpers.js + 7 modules
-var helpers = __webpack_require__("a74a");
-
-// EXTERNAL MODULE: ./src/services/api/location.js
-var api_location = __webpack_require__("3fcc");
-
-// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
-var lodash = __webpack_require__("2ef0");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/JobTypes/AppGoogleTalentJob.vue?vue&type=script&lang=js&
-
-
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ var AppGoogleTalentJobvue_type_script_lang_js_ = ({
-  props: {
-    job: {
-      type: Object,
-      required: true
-    },
-    tag: {
-      type: String,
-      required: false,
-      default: "section"
-    }
-  },
-  methods: {
-    getAttribute: function getAttribute(attribute) {
-      var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var customAttr = "customAttributes.".concat(attribute, ".stringValues");
-      var value = Object(lodash["get"])(this.job.job, customAttr, defaultValue);
-      return Object(lodash["isArray"])(value) ? value.join(" ") : value;
-    }
-  },
-  computed: {
-    reqId: function reqId() {
-      return this.getAttribute('reqid');
-    },
-    title: function title() {
-      return this.job.job.title;
-    },
-    location: function location() {
-      return Object(api_location["b" /* removeCountry */])(this.getAttribute("city_admin1_country"));
-    },
-    detailUrl: function detailUrl() {
-      return Object(helpers["b" /* buildJobDetailUrl */])(this.title, this.location, this.guid);
-    },
-    guid: function guid() {
-      return this.job.job.requisitionId;
-    },
-    city: function city() {
-      var location = this.location;
-      return Object(api_location["c" /* removeState */])(Object(api_location["b" /* removeCountry */])(location));
-    },
-    state: function state() {
-      var location = this.location;
-      location = location.split(",");
-      return Object(api_location["a" /* fullState */])(location[1]);
-    },
-    country: function country() {
-      return this.getAttribute("country");
-    },
-    company: function company() {
-      return this.job.job.companyDisplayName;
-    },
-    hasCommuteInfo: function hasCommuteInfo() {
-      if (Object(helpers["a" /* blank */])(this.job.commuteInfo)) {
-        return false;
-      }
-
-      if (!Object.prototype.hasOwnProperty.call(this.job.commuteInfo, "travelDuration")) {
-        return false;
-      }
-
-      return true;
-    },
-    commuteTime: function commuteTime() {
-      if (!this.hasCommuteInfo) {
-        return "";
-      }
-
-      var seconds = parseInt(this.job.commuteInfo.travelDuration.replace("s", ""));
-      var hours = Math.floor(seconds / 60 / 60);
-      var minutes = Math.floor(seconds / 60) - hours * 60;
-      return minutes;
-    },
-    cleanHtmlDescription: function cleanHtmlDescription() {
-      if (!this.htmlDescription) {
-        return "";
-      }
-
-      return this.htmlDescription.replace(/(\r\n|\n|\r)/gm, "");
-    },
-    description: function description() {
-      return this.job.job.description;
-    },
-    htmlDescription: function htmlDescription() {
-      return this.job.job.description;
-    },
-    dateAdded: function dateAdded() {
-      return this.job.job.postingCreateTime;
-    },
-    deletedAt: function deletedAt() {
-      return null;
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/components/JobTypes/AppGoogleTalentJob.vue?vue&type=script&lang=js&
- /* harmony default export */ var JobTypes_AppGoogleTalentJobvue_type_script_lang_js_ = (AppGoogleTalentJobvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__("2877");
-
-// CONCATENATED MODULE: ./src/components/JobTypes/AppGoogleTalentJob.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  JobTypes_AppGoogleTalentJobvue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var AppGoogleTalentJob = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
 /***/ "6547":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22949,7 +22598,6 @@ var component = Object(componentNormalizer["a" /* default */])(
 //
 //
 //
-//
 
 
 
@@ -23016,9 +22664,6 @@ var component = Object(componentNormalizer["a" /* default */])(
     }
   },
   computed: {
-    jobComponentType: function jobComponentType() {
-      return Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* getJobComponent */ "c"])(this.meta.source);
-    },
     hasJobs: function hasJobs() {
       return (this.jobs || []).length > 0;
     },
@@ -23245,7 +22890,7 @@ var component = Object(componentNormalizer["a" /* default */])(
                 _context.t0 = _context["catch"](2);
                 _this2.status.error = _context.t0;
                 _this2.meta.selectedFilters = [];
-                Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "d"])(_context.t0, "error");
+                Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "c"])(_context.t0, "error");
                 return _context.abrupt("return", _context.t0);
 
               case 22:
@@ -23327,7 +22972,7 @@ var component = Object(componentNormalizer["a" /* default */])(
         path: "/jobs",
         query: this.getPayload()
       }).catch(function (err) {
-        Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "d"])(err, "error");
+        Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "c"])(err, "error");
       });
     }
   }
@@ -23410,6 +23055,7 @@ module.exports = {
 var map = {
 	"./AppAccordion.vue": "32c7",
 	"./AppDropdown.vue": "884f",
+	"./AppJob.vue": "9f80",
 	"./AppJobDescription.vue": "d669",
 	"./AppJobFetch.vue": "dd4b",
 	"./AppModal.vue": "41df",
@@ -23418,8 +23064,6 @@ var map = {
 	"./AppSimilarJobs.vue": "0a22",
 	"./AppYoutube.vue": "65f4",
 	"./Form/AppAutocompleteInput.vue": "c5b3",
-	"./JobTypes/AppGoogleTalentJob.vue": "63c3",
-	"./JobTypes/AppSolrJob.vue": "1cbe",
 	"./Parse/AppHtmlToJson.vue": "2a36",
 	"./Parse/AppJsonToHtml.vue": "1764",
 	"./Search/AppSearchFilter.vue": "1249",
@@ -26257,6 +25901,286 @@ exports.BROKEN_CARET = fails(function () {
 
 /***/ }),
 
+/***/ "9f80":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=00801e08&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt})],2)}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=00801e08&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
+var es_symbol = __webpack_require__("a4d3");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
+var es_symbol_description = __webpack_require__("e01a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
+var es_array_includes = __webpack_require__("caad");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.join.js
+var es_array_join = __webpack_require__("a15b");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
+var es_regexp_exec = __webpack_require__("ac1f");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
+var es_string_replace = __webpack_require__("5319");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
+var es_string_split = __webpack_require__("1276");
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 7 modules
+var helpers = __webpack_require__("a74a");
+
+// EXTERNAL MODULE: ./src/services/api/location.js
+var api_location = __webpack_require__("3fcc");
+
+// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
+var lodash = __webpack_require__("2ef0");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ var AppJobvue_type_script_lang_js_ = ({
+  props: {
+    job: {
+      type: Object,
+      required: true
+    },
+    tag: {
+      type: String,
+      required: false,
+      default: "section"
+    },
+    source: {
+      type: String,
+      required: true,
+      validator: function validator(value) {
+        return ["solr", "google_talent"].includes(value);
+      }
+    }
+  },
+  methods: {
+    getAttribute: function getAttribute(attribute) {
+      var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (this.isSolr) {
+        return Object(lodash["get"])(this.job, attribute, defaultValue);
+      }
+
+      var customAttr = "customAttributes.".concat(attribute, ".stringValues");
+      var value = Object(lodash["get"])(this.job.job, customAttr, defaultValue);
+      return Object(lodash["isArray"])(value) ? value.join(" ") : value;
+    }
+  },
+  computed: {
+    jobData: function jobData() {
+      if (this.isSolr) {
+        return this.job;
+      }
+
+      return this.job.job;
+    },
+    commuteData: function commuteData() {
+      if (this.isSolr) {
+        return {};
+      }
+
+      return this.job.commuteInfo;
+    },
+    isSolr: function isSolr() {
+      return this.source == "solr";
+    },
+    isGoogleTalent: function isGoogleTalent() {
+      return this.source == "google_talent";
+    },
+    reqId: function reqId() {
+      if (this.isGoogleTalent) {
+        return this.getAttribute("reqid");
+      }
+
+      return this.jobData.reqid;
+    },
+    title: function title() {
+      if (this.isGoogleTalent) {
+        return this.jobData.title;
+      }
+
+      return this.jobData.title_exact;
+    },
+    location: function location() {
+      if (this.isGoogleTalent) {
+        return Object(api_location["b" /* removeCountry */])(this.getAttribute("city_admin1_country"));
+      }
+
+      return this.jobData.location_exact;
+    },
+    detailUrl: function detailUrl() {
+      return Object(helpers["b" /* buildJobDetailUrl */])(this.title, this.location, this.guid);
+    },
+    guid: function guid() {
+      if (this.isGoogleTalent) {
+        return this.jobData.requisitionId;
+      }
+
+      return this.jobData.guid;
+    },
+    city: function city() {
+      if (this.isGoogleTalent) {
+        var loc = this.location;
+        return Object(api_location["c" /* removeState */])(Object(api_location["b" /* removeCountry */])(loc));
+      }
+
+      return this.jobData.city_exact;
+    },
+    state: function state() {
+      if (this.isGoogleTalent) {
+        var loc = this.location;
+        loc = loc.split(",");
+        return Object(api_location["a" /* fullState */])(loc[1]);
+      }
+
+      return Object(api_location["a" /* fullState */])(this.jobData.state_short_exact);
+    },
+    country: function country() {
+      if (this.isGoogleTalent) {
+        return this.getAttribute("country");
+      }
+
+      return this.jobData.country_short_exact;
+    },
+    company: function company() {
+      if (this.isGoogleTalent) {
+        return this.jobData.companyDisplayName;
+      }
+
+      return this.jobData.company_exact;
+    },
+    hasCommuteInfo: function hasCommuteInfo() {
+      if (this.isSolr) {
+        return false;
+      }
+
+      if (Object(helpers["a" /* blank */])(this.job.commuteInfo)) {
+        return false;
+      }
+
+      if (!Object.prototype.hasOwnProperty.call(this.job.commuteInfo, "travelDuration")) {
+        return false;
+      }
+
+      return false;
+    },
+    commuteTime: function commuteTime() {
+      if (Object(helpers["a" /* blank */])(this.commuteData)) {
+        return null;
+      }
+
+      var seconds = parseInt(this.commuteData.travelDuration.replace("s", ""));
+      var hours = Math.floor(seconds / 60 / 60);
+      var minutes = Math.floor(seconds / 60) - hours * 60;
+      return minutes;
+    },
+    htmlDescription: function htmlDescription() {
+      if (this.isGoogleTalent) {
+        return this.jobData.description;
+      }
+
+      return this.jobData.html_description;
+    },
+    cleanHtmlDescription: function cleanHtmlDescription() {
+      // html description is not available on job detail pages?
+      if (!this.htmlDescription) {
+        return "";
+      }
+
+      return this.htmlDescription.replace(/(\r\n|\n|\r)/gm, "");
+    },
+    description: function description() {
+      return this.jobData.description;
+    },
+    dateAdded: function dateAdded() {
+      if (this.isGoogleTalent) {
+        return this.jobData.postingCreateTime;
+      }
+
+      return this.jobData.date_added;
+    },
+    deletedAt: function deletedAt() {
+      if (this.isGoogleTalent) {
+        return null;
+      }
+
+      return this.jobData.deleted_at;
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_AppJobvue_type_script_lang_js_ = (AppJobvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/components/AppJob.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_AppJobvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var AppJob = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
 /***/ "a096":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26944,9 +26868,8 @@ exports.default = Tokenizer;
 "use strict";
 
 // EXPORTS
-__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ getJobComponent; });
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ blank; });
-__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ log; });
+__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ log; });
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ buildJobDetailUrl; });
 
 // UNUSED EXPORTS: retry
@@ -27083,12 +27006,6 @@ var lodash = __webpack_require__("2ef0");
 // EXTERNAL MODULE: ./src/services/api/location.js
 var api_location = __webpack_require__("3fcc");
 
-// EXTERNAL MODULE: ./src/components/JobTypes/AppSolrJob.vue + 4 modules
-var AppSolrJob = __webpack_require__("1cbe");
-
-// EXTERNAL MODULE: ./src/components/JobTypes/AppGoogleTalentJob.vue + 4 modules
-var AppGoogleTalentJob = __webpack_require__("63c3");
-
 // CONCATENATED MODULE: ./src/services/helpers.js
 
 
@@ -27100,19 +27017,6 @@ var AppGoogleTalentJob = __webpack_require__("63c3");
 
 
 
-
-
-/**Get the associated job component for the given source */
-
-function getJobComponent(source) {
-  switch (source) {
-    case "google_talent":
-      return AppGoogleTalentJob["default"];
-
-    default:
-      return AppSolrJob["default"];
-  }
-}
 /**
  * Check if the given value is "blank".
  */
