@@ -1,4 +1,5 @@
 import { trim, trimEnd } from "lodash"
+import { blank } from '../helpers'
 
 export let states = {
     AK: "Alaska",
@@ -127,7 +128,10 @@ export function removeState(value) {
  * Expand a code value to full state name.
  */
 export function fullState(code){
-
+    if(blank(code)){
+        console.log(code)
+        return code
+    }
     let result = trim(code.toString())
 
     if (Object.prototype.hasOwnProperty.call(states, result.toUpperCase())) {

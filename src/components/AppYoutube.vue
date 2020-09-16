@@ -8,6 +8,7 @@
                 loading="lazy"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
+                v-bind="$attrs"
             >
             </iframe>
         </div>

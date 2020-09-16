@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import { buildJobDetailUrl , blank } from "../services/helpers"
+import { buildJobDetailUrl, blank } from "../services/helpers"
 import { fullState, removeCountry, removeState } from "../services/api/location"
-import { get, isArray } from 'lodash'
+import { get, isArray } from "lodash"
 
 export default {
     props: {
@@ -40,7 +40,7 @@ export default {
         source: {
             type: String,
             required: true,
-            validator: value => {
+            validator: (value) => {
                 return ["solr", "google_talent"].includes(value)
             },
         },
@@ -108,21 +108,28 @@ export default {
         },
         city() {
             if (this.isGoogleTalent) {
-                let loc = this.location
-
-                return removeState(removeCountry(loc))
+                return get(
+                    this.jobData,
+                    "derivedInfo.locations[0].postalAddress.locality"
+                )
             }
             return this.jobData.city_exact
         },
         state() {
             if (this.isGoogleTalent) {
-                let loc = this.location
+                let loc = get(
+                    this.jobData,
+                    "derivedInfo.locations[0].postalAddress.administrativeArea"
+                )
 
-                loc = loc.split(",")
-
-                return fullState(loc[1])
+                return fullState(loc)
             }
-            return fullState(this.jobData.state_short_exact)
+            let state = this.jobData.state_short_exact
+            //handle missing state data
+            if (blank(state)) {
+                state = this.location.split(",")[1]
+            }
+            return fullState(state)
         },
         country() {
             if (this.isGoogleTalent) {
@@ -144,7 +151,12 @@ export default {
                 return false
             }
 
-            if (!Object.prototype.hasOwnProperty.call(this.job.commuteInfo, "travelDuration")) {
+            if (
+                !Object.prototype.hasOwnProperty.call(
+                    this.job.commuteInfo,
+                    "travelDuration"
+                )
+            ) {
                 return false
             }
             return false
@@ -165,7 +177,7 @@ export default {
             return minutes
         },
         htmlDescription() {
-            if(this.isGoogleTalent){
+            if (this.isGoogleTalent) {
                 return this.jobData.description
             }
             return this.jobData.html_description
@@ -181,15 +193,14 @@ export default {
             return this.jobData.description
         },
         dateAdded() {
-        
-            if(this.isGoogleTalent){
+            if (this.isGoogleTalent) {
                 return this.jobData.postingCreateTime
             }
-            
+
             return this.jobData.date_added
         },
         deletedAt() {
-            if(this.isGoogleTalent){
+            if (this.isGoogleTalent) {
                 return null
             }
             return this.jobData.deleted_at
