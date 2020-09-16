@@ -66,15 +66,20 @@ export default {
         pageLimit: { required: false, type: Number, default: 5 },
         currentPage: { required: false, type: Number, default: 1 },
     },
+    data(){
+        return {
+            current: this.currentPage
+        }
+    },
     computed: {
         nextPage() {
-            const next = this.currentPage + 1
+            const next = this.current + 1
 
             return next <= this.totalPages ? next : false
         },
 
         previousPage() {
-            const previous = this.currentPage - 1
+            const previous = this.current - 1
             return previous >= 1 ? previous : false
         },
 
@@ -84,7 +89,7 @@ export default {
             if (pages.length < this.pageLimit) {
                 let start = Math.max(
                     1,
-                    this.currentPage - Math.abs(this.pageLimit - pages.length)
+                    this.current - Math.abs(this.pageLimit - pages.length)
                 )
 
                 pages = this.range(start, this.totalPages)
@@ -96,7 +101,7 @@ export default {
         },
 
         pageIsInRange: function() {
-            const page = this.currentPage
+            const page = this.current
 
             return page >= 1 && page <= this.totalPages
         },
@@ -114,8 +119,8 @@ export default {
             }
 
             return this.range(
-                this.currentPage,
-                Math.min(this.currentPage + pageLimit, this.totalPages)
+                this.current,
+                Math.min(this.current + pageLimit, this.totalPages)
             )
         },
 
@@ -144,6 +149,8 @@ export default {
                 return
             }
 
+            this.current = page
+            
             this.$emit("pageSelected", page)
 
         },
@@ -158,7 +165,7 @@ export default {
         },
 
         disablePage(page) {
-            if (page === this.currentPage) {
+            if (page === this.current) {
                 return true
             }
 
@@ -170,7 +177,7 @@ export default {
         },
 
         ariaPageTitle(page) {
-            if (page === this.currentPage) {
+            if (page === this.current) {
                 return "Current Page"
             }
 
