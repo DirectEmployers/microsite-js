@@ -129,7 +129,6 @@ export function removeState(value) {
  */
 export function fullState(code){
     if(blank(code)){
-        console.log(code)
         return code
     }
     let result = trim(code.toString())
