@@ -7,8 +7,6 @@
             loading="lazy"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
-            :height="frameHeight"
-            :width="frameWidth"
         >
         </iframe>
     </div>
@@ -21,16 +19,6 @@ export default {
         src: {
             type: String,
             required: true,
-        },
-        frameWidth: {
-            type: String,
-            required: false,
-            default: "600px"
-        },
-        frameHeight: {
-            type: String,
-            required: false,
-            default: "400px"
         }
     },
     metaInfo() {

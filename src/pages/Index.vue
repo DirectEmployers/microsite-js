@@ -24,13 +24,9 @@
 </template>
 <script>
 import AppSearchProvider from "~/components/Search/AppSearchProvider"
-import AppYoutube from "~/components/AppYoutube"
-import AppModal from "~/components/AppModal"
 import SearchForm from "~/demo/components/SearchForm"
 export default {
     components: {
-        AppModal,
-        AppYoutube,
         AppSearchProvider,
         SearchForm,
     },
@@ -43,11 +39,6 @@ export default {
                 content: "only the best jobs",
             },
         ],
-    },
-    methods: {
-        toggleExampleModal() {
-            this.$refs["example-modal"].toggle()
-        },
-    },
+    }
 }
 </script>

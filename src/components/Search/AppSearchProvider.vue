@@ -65,11 +65,14 @@ export default {
             supported: {
                 geolocation: false,
             },
-            meta: this.getDefaultMeta(),
+            meta: {},
             input: defaultInput,
         }
     },
     created() {
+        // set meta in created because it references computed properties 
+        // which is not avilable during a gridsome build
+        this.meta = this.getDefaultMeta()
         //allow other components to update input via global event.
         this.$router.app.$on("searchInputUpdated", this.setInput)
 

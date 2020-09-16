@@ -45,7 +45,7 @@ export default {
     },
     data() {
         return {
-            toggled: true,
+            toggled: false,
         }
     },
     methods: {

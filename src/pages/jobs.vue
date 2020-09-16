@@ -166,19 +166,20 @@
                             <button
                                 @click="toggleCommuteModal()"
                                 class="button"
+                                v-if="meta.source=='google_talent'"
                             >
                                 Commute Search
                             </button>
                         </div>
                         <AppModal
                             id="commute-modal"
+                            v-if="meta.source=='google_talent'"
                             ref="commute-modal"
                             title="Commute Search"
                         >
                             <template v-slot:content>
                                 <CommuteSearchForm
                                     :input="input"
-                                    v-if="meta.source != 'solr'"
                                     :submitSearchForm="submitSearchForm"
                                     :getUserCoordinates="getUserCoordinates"
                                 />
