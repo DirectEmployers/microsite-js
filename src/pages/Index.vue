@@ -24,9 +24,13 @@
 </template>
 <script>
 import AppSearchProvider from "~/components/Search/AppSearchProvider"
+import AppYoutube from "~/components/AppYoutube"
+import AppModal from "~/components/AppModal"
 import SearchForm from "~/demo/components/SearchForm"
 export default {
     components: {
+        AppModal,
+        AppYoutube,
         AppSearchProvider,
         SearchForm,
     },

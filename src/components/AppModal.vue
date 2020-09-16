@@ -11,7 +11,7 @@
             </div>
 
             <div class="modal__body">
-                <slot name="content"></slot>
+                <slot></slot>
             </div>
 
             <div class="modal__footer">
@@ -45,7 +45,7 @@ export default {
     },
     data() {
         return {
-            toggled: false,
+            toggled: true,
         }
     },
     methods: {
