@@ -1,7 +1,7 @@
 import axios from "axios"
 import { kebabCase } from "lodash"
-import GoogleTalentJob from "../../services/api/drivers/job/google-talent"
-import SolrJob from "../../services/api/drivers/job/solr"
+
+const TIMEOUT_THRESHOLD = 5000
 
 export default function api() {
     return axios.create({
@@ -14,44 +14,18 @@ export default function api() {
     })
 }
 
-class BaseSearchService {
-    static getJobDriver(source) {
-        switch (source) {
-            case "solr":
-                return SolrJob
-            case "google_talent":
-                return GoogleTalentJob
-            default:
-                throw new Error(`Unsupported job driver/source ${source}`)
-        }
-    }
-
-    static wrapJobDriver(jobs, source) {
-        const JobDriver = BaseSearchService.getJobDriver(source)
-
-        jobs = (jobs || []).map((job) => {
-            return new JobDriver(job)
-        })
-
-        return jobs
-    }
-}
-
-export class SearchService extends BaseSearchService {
+export class SearchService {
     static async get(input, siteConfig) {
         const source = kebabCase(siteConfig.sources.search)
 
         try {
-            let response = await api().post(`${source}/search`, {
-                data: input,
-                config: siteConfig,
-            })
-
-            const data = response.data
-
-            response.data.jobs = SearchService.wrapJobDriver(
-                data.jobs,
-                data.meta.source
+            let response = await api().post(
+                `${source}/search`,
+                {
+                    data: input,
+                    config: siteConfig,
+                },
+                { timeout: TIMEOUT_THRESHOLD }
             )
 
             return response
@@ -64,22 +38,19 @@ export class SearchService extends BaseSearchService {
     }
 }
 
-export class CommuteSearchService extends BaseSearchService {
+export class CommuteSearchService {
     static async get(input, siteConfig) {
         const source = kebabCase(siteConfig.sources.commute)
 
         try {
-            let response = await api().post(`${source}/commute`, {
-                data: input,
-                config: siteConfig,
-            })
-            const data = response.data
-
-            response.data.jobs = CommuteSearchService.wrapJobDriver(
-                data.jobs,
-                data.meta.source
+            let response = await api().post(
+                `${source}/commute`,
+                {
+                    data: input,
+                    config: siteConfig,
+                },
+                { timeout: TIMEOUT_THRESHOLD }
             )
-
             return response
         } catch (error) {
             if (Object.prototype.hasOwnProperty.call(error, "response")) {
@@ -106,6 +77,7 @@ export class TitleCompleteService {
                         company_uuids: siteConfig.company_uuids,
                     },
                 },
+                timeout: TIMEOUT_THRESHOLD,
             })
             return response
         } catch (error) {
@@ -123,6 +95,7 @@ export class MOCCompleteService {
                 params: {
                     q: q,
                 },
+                timeout: TIMEOUT_THRESHOLD,
             })
             return response
         } catch (error) {
@@ -141,6 +114,7 @@ export class LocationCompleteService {
                 params: {
                     q: q,
                 },
+                timeout: TIMEOUT_THRESHOLD,
             })
             return response
         } catch (error) {

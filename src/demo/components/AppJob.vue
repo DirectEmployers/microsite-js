@@ -19,18 +19,18 @@
         <div class="bg-gray-300 mt-6 mb-8 mx-2 p-12">
             <div class="mx-w-sm mx-auto text-center">
                 <h1 class="text-4xl text-black font-bold">
-                    {{ job.getTitle() }}
+                    {{ job.title }}
                 </h1>
 
                 <div class="text-black text-base font-bold mb-2">
-                    {{ job.getLocation() }}
+                    {{ job.location }}
                 </div>
             </div>
         </div>
 
         <div class="min-h-screen max-w-screen-md mb-8 mx-4 md:mx-auto job-details-content">
             <AppJobDescription
-                :html="job.getHtmlDescription()"
+                :html="job.html_description"
                 :lookupClass="'job-description-amp-qualifications'"
             >
             </AppJobDescription>
@@ -49,13 +49,12 @@
 <script>
 import AppYoutube from "~/components/AppYoutube"
 import AppJobDescription from "~/components/AppJobDescription"
-import AppSimilarJobs from "~/demo/components/AppSimilarJobs"
-
+import AppSimilarJobs from "~/components/AppSimilarJobs"
 export default {
     name: "AppJob",
     metaInfo() {
         return {
-            title: this.job ? this.job.getTitle() : null,
+            title: this.job ? this.job.title : null,
             meta: [
                 { name: "description", content: "only the best jobs" },
                 { rel: "preconnect", href: "https://microsites.dejobs.org/" }
@@ -75,7 +74,35 @@ export default {
     },
     computed:{
         jsonLd(){
-            return JSON.stringify(this.job.jsonLd())
+            return JSON.stringify({
+                "@context": "http://schema.org",
+                "@type": "JobPosting",
+                employmentType: "Paid Work",
+                title: this.job.title,
+                datePosted: this.job.date_added,
+                description: this.job.company_exact,
+                identifier: {
+                    "@type": "PropertyValue",
+                    name: this.job.company_exact,
+                    value: this.job.reqId
+                },
+                hiringOrganization: {
+                    "@type": "Organization",
+                    name: this.job.company_exact,
+                },
+                jobLocation: {
+                    "@type": "Place",
+                    address: {
+                        "@type": "PostalAddress",
+                        addressLocality: this.job.city,
+                        addressRegion: this.job.state,
+                        addressCountry: {
+                            "@type": "Country",
+                            name: this.job.country_short_exact,
+                        },
+                    },
+                },
+            })
         }
     }
 }

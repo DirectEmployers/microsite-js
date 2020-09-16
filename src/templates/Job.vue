@@ -29,7 +29,7 @@ export default {
     },
     methods:{
         isExpired(job){
-            return job && !blank(job.getDeletedAt())
+            return job && !blank(job.deleted_at)
         }
     }
 }
