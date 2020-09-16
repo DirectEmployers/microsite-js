@@ -2,5 +2,7 @@
     "tabWidth": 4,
     "semi": false,
     "trailingComma": "es5",
-    "htmlWhitespaceSensitivity": "ignore"
+    "quoteProps": "consistent",
+    "htmlWhitespaceSensitivity": "ignore",
+    "bracketSpacing": false
 }

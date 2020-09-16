@@ -27,10 +27,14 @@
                 </div>
             </div>
         </div>
-        <div class="min-h-screen text-center max-w-screen-md mb-8 mx-4 md:mx-auto job-details-content">
-            <AppSimilarJobs :job="job"/>
+        <div
+            class="min-h-screen text-center max-w-screen-md mb-8 mx-4 md:mx-auto job-details-content"
+        >
+            <AppSimilarJobs :job="job" />
         </div>
-        <script type="application/ld+json">{{ jsonLd }}</script>
+        <script type="application/ld+json">
+            {{ jsonLd }}
+        </script>
     </div>
 </template>
 
@@ -46,8 +50,8 @@ export default {
         return {
             title: this.job ? this.job.title : null,
             meta: [
-                { name: "description", content: "only the best jobs" },
-                { rel: "preconnect", href: "https://microsites.dejobs.org/" }
+                {name: "description", content: "only the best jobs"},
+                {rel: "preconnect", href: "https://microsites.dejobs.org/"},
             ],
         }
     },
@@ -57,39 +61,39 @@ export default {
             required: true,
         },
     },
-    computed:{
-        jsonLd(){
+    computed: {
+        jsonLd() {
             return JSON.stringify({
                 "@context": "http://schema.org",
                 "@type": "JobPosting",
-                employmentType: "Paid Work",
-                title: this.job.title,
-                datePosted: this.job.date_added,
-                description: this.job.company_exact,
-                identifier: {
+                "employmentType": "Paid Work",
+                "title": this.job.title,
+                "datePosted": this.job.date_added,
+                "description": this.job.company_exact,
+                "identifier": {
                     "@type": "PropertyValue",
-                    name: this.job.company_exact,
-                    value: this.job.reqId
+                    "name": this.job.company_exact,
+                    "value": this.job.reqId,
                 },
-                hiringOrganization: {
+                "hiringOrganization": {
                     "@type": "Organization",
-                    name: this.job.company_exact,
+                    "name": this.job.company_exact,
                 },
-                jobLocation: {
+                "jobLocation": {
                     "@type": "Place",
-                    address: {
+                    "address": {
                         "@type": "PostalAddress",
-                        addressLocality: this.job.city,
-                        addressRegion: this.job.state,
-                        addressCountry: {
+                        "addressLocality": this.job.city,
+                        "addressRegion": this.job.state,
+                        "addressCountry": {
                             "@type": "Country",
-                            name: this.job.country_short_exact,
+                            "name": this.job.country_short_exact,
                         },
                     },
                 },
-                validThrough: this.job.deleted_at
+                "validThrough": this.job.deleted_at,
             })
-        }
-    }
+        },
+    },
 }
 </script>
