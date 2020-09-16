@@ -22004,20 +22004,20 @@ function _objectSpread2(target) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppPagination.vue?vue&type=template&id=4a24b4b4&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppPagination.vue?vue&type=template&id=8cb3f958&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{attrs:{"aria-label":"pagination"}},[(_vm.totalPages > 1)?_c('ul',{staticClass:"pagination"},[_c('li',{staticClass:"pagination__item"},[_c('button',{staticClass:"pagination__link",class:{
                     'pagination__link--hidden': !_vm.previousPage,
                 },attrs:{"type":"button","aria-label":"Previous Page"},on:{"click":function($event){$event.preventDefault();return _vm.selectPage(_vm.previousPage)}}},[_vm._t("previous-text",[_vm._v(" « ")])],2)]),_vm._l((_vm.pages),function(page,key){return _c('li',{key:key,staticClass:"pagination__item"},[_c('button',{staticClass:"pagination__link",class:{
-                    'pagination__link--active': page == _vm.currentPage,
+                    'pagination__link--active': page == _vm.current,
                     'pagination__link--disabled': _vm.disablePage(page),
                     'cursor-not-allowed': _vm.disablePage(page),
-                },attrs:{"type":"button","aria-label":_vm.ariaPageTitle(page),"aria-current":page == _vm.currentPage,"aria-disabled":_vm.disablePage(page),"disabled":_vm.disablePage(page)},on:{"click":function($event){$event.preventDefault();return _vm.selectPage(page)}}},[_vm._v(" "+_vm._s(page)+" ")])])}),_c('li'),_c('li',{staticClass:"pagination__item"},[_c('button',{staticClass:"pagination__link",class:{
+                },attrs:{"type":"button","aria-label":_vm.ariaPageTitle(page),"aria-current":page == _vm.current,"aria-disabled":_vm.disablePage(page),"disabled":_vm.disablePage(page)},on:{"click":function($event){$event.preventDefault();return _vm.selectPage(page)}}},[_vm._v(" "+_vm._s(page)+" ")])])}),_c('li'),_c('li',{staticClass:"pagination__item"},[_c('button',{staticClass:"pagination__link",class:{
                     'pagination__link--hidden': !_vm.nextPage,
                 },attrs:{"type":"button","aria-label":"Next Page"},on:{"click":function($event){$event.preventDefault();return _vm.selectPage(_vm.nextPage)}}},[_vm._t("next-text",[_vm._v(" » ")])],2)])],2):_vm._e()])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppPagination.vue?vue&type=template&id=4a24b4b4&
+// CONCATENATED MODULE: ./src/components/AppPagination.vue?vue&type=template&id=8cb3f958&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");

@@ -25,12 +25,12 @@
                     type="button"
                     class="pagination__link"
                     :class="{
-                        'pagination__link--active': page == currentPage,
+                        'pagination__link--active': page == current,
                         'pagination__link--disabled': disablePage(page),
                         'cursor-not-allowed': disablePage(page),
                     }"
                     :aria-label="ariaPageTitle(page)"
-                    :aria-current="page == currentPage"
+                    :aria-current="page == current"
                     :aria-disabled="disablePage(page)"
                     :disabled="disablePage(page)"
                     @click.prevent="selectPage(page)"
