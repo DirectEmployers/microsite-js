@@ -140,12 +140,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=45ae3f78&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=6253d111&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported,"selectPage":_vm.selectPage})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=45ae3f78&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=6253d111&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
 var AppSearchProvidervue_type_script_lang_js_ = __webpack_require__("6651");
@@ -22629,7 +22629,7 @@ var component = Object(componentNormalizer["a" /* default */])(
     var defaultInput = this.getInputDefaults();
     return {
       jobs: [],
-      source: this.siteConfig.sources.search,
+      source: this.siteConfig.source,
       filters: [],
       pagination: {},
       status: {
@@ -22644,7 +22644,7 @@ var component = Object(componentNormalizer["a" /* default */])(
     };
   },
   created: function created() {
-    // set meta in created because it references computed properties 
+    // set meta in created because it references computed properties
     // which is not avilable during a gridsome build
     this.meta = this.getDefaultMeta(); //allow other components to update input via global event.
 
@@ -22837,12 +22837,7 @@ var component = Object(componentNormalizer["a" /* default */])(
     },
     getDefaultMeta: function getDefaultMeta() {
       var inputDefaults = this.getInputDefaults();
-      var source = this.siteConfig.sources.search;
-
-      if (this.isCommuteSearch) {
-        source = this.siteConfig.sources.commute;
-      }
-
+      var source = this.siteConfig.source;
       return Object(lodash__WEBPACK_IMPORTED_MODULE_15__["clone"])({
         hasJobs: this.hasJobs,
         selectedFilters: this.selectedFilters,
@@ -31713,12 +31708,6 @@ __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding *
 
 // UNUSED EXPORTS: default, TitleCompleteService, MOCCompleteService, LocationCompleteService
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
-var es_regexp_exec = __webpack_require__("ac1f");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.search.js
-var es_string_search = __webpack_require__("841c");
-
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
 var runtime = __webpack_require__("96cf");
 
@@ -31761,15 +31750,13 @@ var lodash = __webpack_require__("2ef0");
 
 
 
-
-
 var TIMEOUT_THRESHOLD = 5000;
 function api() {
   return axios_default.a.create({
     baseURL: Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_API_URL,
     withCredentials: false,
     headers: {
-      Accept: "application/json",
+      "Accept": "application/json",
       "Content-Type": "application/json"
     }
   });
@@ -31788,7 +31775,7 @@ var search_SearchService = /*#__PURE__*/function () {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                source = Object(lodash["kebabCase"])(siteConfig.sources.search);
+                source = Object(lodash["kebabCase"])(siteConfig.source);
                 _context.prev = 1;
                 _context.next = 4;
                 return api().post("".concat(source, "/search"), {
@@ -31848,7 +31835,7 @@ var search_CommuteSearchService = /*#__PURE__*/function () {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                source = Object(lodash["kebabCase"])(siteConfig.sources.commute);
+                source = Object(lodash["kebabCase"])(siteConfig.source);
                 _context2.prev = 1;
                 _context2.next = 4;
                 return api().post("".concat(source, "/commute"), {
@@ -31908,7 +31895,7 @@ var search_TitleCompleteService = /*#__PURE__*/function () {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                source = Object(lodash["kebabCase"])(siteConfig.sources.complete);
+                source = Object(lodash["kebabCase"])(siteConfig.source);
                 _context3.prev = 1;
                 _context3.next = 4;
                 return api().get("".concat(source, "/complete/title"), {
@@ -31917,9 +31904,6 @@ var search_TitleCompleteService = /*#__PURE__*/function () {
                       q: q
                     },
                     config: {
-                      sources: {
-                        complete: siteConfig.sources.complete
-                      },
                       buids: siteConfig.buids,
                       project_id: siteConfig.project_id,
                       tenant_uuid: siteConfig.tenant_uuid,

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { kebabCase } from "lodash"
+import {kebabCase} from "lodash"
 
 const TIMEOUT_THRESHOLD = 5000
 
@@ -8,7 +8,7 @@ export default function api() {
         baseURL: process.env.GRIDSOME_API_URL,
         withCredentials: false,
         headers: {
-            Accept: "application/json",
+            "Accept": "application/json",
             "Content-Type": "application/json",
         },
     })
@@ -16,7 +16,7 @@ export default function api() {
 
 export class SearchService {
     static async get(input, siteConfig) {
-        const source = kebabCase(siteConfig.sources.search)
+        const source = kebabCase(siteConfig.source)
 
         try {
             let response = await api().post(
@@ -25,7 +25,7 @@ export class SearchService {
                     data: input,
                     config: siteConfig,
                 },
-                { timeout: TIMEOUT_THRESHOLD }
+                {timeout: TIMEOUT_THRESHOLD}
             )
 
             return response
@@ -40,7 +40,7 @@ export class SearchService {
 
 export class CommuteSearchService {
     static async get(input, siteConfig) {
-        const source = kebabCase(siteConfig.sources.commute)
+        const source = kebabCase(siteConfig.source)
 
         try {
             let response = await api().post(
@@ -49,7 +49,7 @@ export class CommuteSearchService {
                     data: input,
                     config: siteConfig,
                 },
-                { timeout: TIMEOUT_THRESHOLD }
+                {timeout: TIMEOUT_THRESHOLD}
             )
             return response
         } catch (error) {
@@ -63,14 +63,13 @@ export class CommuteSearchService {
 
 export class TitleCompleteService {
     static async get(q, siteConfig) {
-        const source = kebabCase(siteConfig.sources.complete)
+        const source = kebabCase(siteConfig.source)
 
         try {
             const response = await api().get(`${source}/complete/title`, {
                 params: {
-                    data: { q: q },
+                    data: {q: q},
                     config: {
-                        sources: { complete: siteConfig.sources.complete },
                         buids: siteConfig.buids,
                         project_id: siteConfig.project_id,
                         tenant_uuid: siteConfig.tenant_uuid,

@@ -19,10 +19,10 @@
     </component>
 </template>
 <script>
-import { blank, log } from "../../services/helpers"
-import { fullState, removeCountry } from "../../services/api/location"
-import { omitBy, omit, clone, merge, assign } from "lodash"
-import { SearchService, CommuteSearchService } from "../../services/api/search"
+import {blank, log} from "../../services/helpers"
+import {fullState, removeCountry} from "../../services/api/location"
+import {omitBy, omit, clone, merge, assign} from "lodash"
+import {SearchService, CommuteSearchService} from "../../services/api/search"
 
 export default {
     props: {
@@ -55,7 +55,7 @@ export default {
         const defaultInput = this.getInputDefaults()
         return {
             jobs: [],
-            source: this.siteConfig.sources.search,
+            source: this.siteConfig.source,
             filters: [],
             pagination: {},
             status: {
@@ -70,7 +70,7 @@ export default {
         }
     },
     created() {
-        // set meta in created because it references computed properties 
+        // set meta in created because it references computed properties
         // which is not avilable during a gridsome build
         this.meta = this.getDefaultMeta()
         //allow other components to update input via global event.
@@ -157,7 +157,7 @@ export default {
                 path: this.$route.path,
                 query: {
                     ...this.$route.query,
-                    ...{ page: page },
+                    ...{page: page},
                 },
             })
 
@@ -197,7 +197,7 @@ export default {
             return false
         },
         removeFilter(param) {
-            const query = { ...this.$route.query }
+            const query = {...this.$route.query}
             const defaultInput = this.getInputDefaults()
 
             let toRemove = [param]
@@ -222,7 +222,7 @@ export default {
 
             query["page"] = 1
 
-            this.$router.replace({ query })
+            this.$router.replace({query})
         },
 
         sort(field) {
@@ -230,11 +230,11 @@ export default {
                 throw new Error(`Invalid sort option ${field}`)
             }
 
-            const query = { ...this.$route.query }
+            const query = {...this.$route.query}
 
             query["sort"] = field
 
-            this.$router.replace({ query })
+            this.$router.replace({query})
         },
 
         hasInput(key) {
@@ -288,10 +288,8 @@ export default {
         },
         getDefaultMeta() {
             let inputDefaults = this.getInputDefaults()
-            let source = this.siteConfig.sources.search
-            if(this.isCommuteSearch){
-                source = this.siteConfig.sources.commute
-            }
+
+            let source = this.siteConfig.source
 
             return clone({
                 hasJobs: this.hasJobs,
@@ -319,7 +317,7 @@ export default {
 
                 let data = response.data || {}
 
-                let { jobs, pagination, filters, meta } = data
+                let {jobs, pagination, filters, meta} = data
 
                 this.jobs = jobs
 

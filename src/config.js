@@ -1,14 +1,10 @@
 export default {
     buids: [50611, 50613],
-    sources: {
-        search: "solr",
-        complete: "solr",
-        // commute: "google_talent",
-    },
-    // project_id: "cloudjobsearch-256720",
-    // tenant_uuid: "bb9d54aa-b8d6-426b-927f-f9cb4b7e8ed1",
-    // company_uuids: ["f3089179-7876-49f0-a80a-437b8f90924a"],
-    force_filters:{
+    source: "google_talent",
+    project_id: "cloudjobsearch-256720",
+    tenant_uuid: "bb9d54aa-b8d6-426b-927f-f9cb4b7e8ed1",
+    company_uuids: ["f3089179-7876-49f0-a80a-437b8f90924a"],
+    force_filters: {
         // google_talent:"(functionalarea=\"Sales\"  OR functionalarea=\"Retail\")",
         // solr:"title_exact:*Sales* OR title_exact:*Retail*"
     },
@@ -47,23 +43,23 @@ export default {
         //     },
         // },
         {
-            key: 'moc',
+            key: "moc",
             name: "moc",
             display: "Military Titles",
         },
         {
-            key: 'state',
+            key: "state",
             name: "location",
             display: "State",
         },
         {
-            key: 'city',
+            key: "city",
             name: "location",
             display: "City",
         },
         {
             name: "q",
-            key: 'title',
+            key: "title",
             display: "Title",
         },
     ],
