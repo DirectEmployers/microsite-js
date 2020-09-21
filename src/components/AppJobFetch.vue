@@ -3,6 +3,13 @@ import { kebabCase } from "lodash"
 import { getJob } from "../services/cdn/job"
 
 export default {
+    props:{
+        guid: {
+            type: String,
+            required: false,
+            default: null
+        }
+    },
     data() {
         return {
             job: null,
@@ -12,9 +19,29 @@ export default {
         }
     },
     created() {
-        this.fetchJob()
+        //if a guid was specified, fetch that
+        if(this.guid){
+            this.fetchByGuid(this.guid)
+        //otherwise assume we are on the job detail.
+        }else{
+            this.fetchJob()
+        }
     },
     methods: {
+        async fetchByGuid(guid){
+            this.status({ error: false, pending: true })
+            try {
+                const { data } = await getJob(guid)
+                this.job = data
+                this.status({ resolved: true })
+            } catch (error) {
+                this.status({
+                    error,
+                    resolved: false,
+                })
+            }
+
+        },
         async fetchJob() {
             this.status({ error: false, pending: true })
 

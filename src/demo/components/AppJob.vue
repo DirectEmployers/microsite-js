@@ -36,7 +36,7 @@
             </AppJobDescription>
         </div>
 
-        <AppSimilarJobs :guid="job.guid" :title="job.title" :location="job.location_exact"/>
+        <AppSimilarJobs :siteConfig="$siteConfig" :guid="job.guid" :title="job.title" :location="job.location_exact"/>
 
         <script type="application/ld+json">{{ jsonLd }}</script>
     </div>

@@ -30,7 +30,7 @@
         <div
             class="min-h-screen text-center max-w-screen-md mb-8 mx-4 md:mx-auto job-details-content"
         >
-            <AppSimilarJobs :guid="job.guid" :title="job.title" :location="job.location_exact"/>
+            <AppSimilarJobs :siteConfig="$siteConfig" :guid="job.guid" :title="job.title" :location="job.location_exact"/>
 
         </div>
         <script type="application/ld+json">

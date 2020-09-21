@@ -352,7 +352,7 @@ module.exports = Axios;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=30b14a71&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=075e4608&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h3',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppJob',{key:index,attrs:{"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [(_vm.guid != jobData.guid)?_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":_vm.buildJobDetailUrl(
                             jobData.title,
                             jobData.location,
@@ -361,7 +361,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=30b14a71&
+// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=075e4608&
 
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
 var runtime = __webpack_require__("96cf");
@@ -444,6 +444,10 @@ var AppJob = __webpack_require__("9f80");
       required: false,
       default: ""
     },
+    siteConfig: {
+      type: Object,
+      required: true
+    },
     header: {
       type: String,
       required: false,
@@ -476,7 +480,7 @@ var AppJob = __webpack_require__("9f80");
                   num_items: 10,
                   q: _this.title,
                   location: _this.location
-                }, _this.$siteConfig);
+                }, _this.siteConfig);
 
               case 2:
                 response = _context.sent;
@@ -30258,6 +30262,13 @@ function getJob(guid) {
 
 
 /* harmony default export */ var AppJobFetchvue_type_script_lang_js_ = ({
+  props: {
+    guid: {
+      type: String,
+      required: false,
+      default: null
+    }
+  },
   data: function data() {
     return {
       job: null,
@@ -30267,14 +30278,19 @@ function getJob(guid) {
     };
   },
   created: function created() {
-    this.fetchJob();
+    //if a guid was specified, fetch that
+    if (this.guid) {
+      this.fetchByGuid(this.guid); //otherwise assume we are on the job detail.
+    } else {
+      this.fetchJob();
+    }
   },
   methods: {
-    fetchJob: function fetchJob() {
+    fetchByGuid: function fetchByGuid(guid) {
       var _this = this;
 
       return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var _this$$route$params, location, title, guid, _yield$getJob, data, locationSlug;
+        var _yield$getJob, data;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -30285,44 +30301,92 @@ function getJob(guid) {
                   pending: true
                 });
 
-                _this$$route$params = _this.$route.params, location = _this$$route$params.location, title = _this$$route$params.title, guid = _this$$route$params.guid;
-                _context.prev = 2;
-                _context.next = 5;
+                _context.prev = 1;
+                _context.next = 4;
                 return getJob(guid);
 
-              case 5:
+              case 4:
                 _yield$getJob = _context.sent;
                 data = _yield$getJob.data;
-                locationSlug = Object(lodash["kebabCase"])(data.location); // check if this is the proper url for the job
+                _this.job = data;
 
-                if (locationSlug !== location || data.title_slug !== title) {
-                  window.location.replace("/".concat(locationSlug, "/").concat(data.title_slug, "/").concat(guid, "/job"));
-                } else {
-                  _this.job = data;
+                _this.status({
+                  resolved: true
+                });
 
-                  _this.status({
-                    resolved: true
-                  });
-                }
-
-                _context.next = 14;
+                _context.next = 13;
                 break;
 
-              case 11:
-                _context.prev = 11;
-                _context.t0 = _context["catch"](2);
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](1);
 
                 _this.status({
                   error: _context.t0,
                   resolved: false
                 });
 
-              case 14:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 11]]);
+        }, _callee, null, [[1, 10]]);
+      }))();
+    },
+    fetchJob: function fetchJob() {
+      var _this2 = this;
+
+      return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+        var _this2$$route$params, location, title, guid, _yield$getJob2, data, locationSlug;
+
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this2.status({
+                  error: false,
+                  pending: true
+                });
+
+                _this2$$route$params = _this2.$route.params, location = _this2$$route$params.location, title = _this2$$route$params.title, guid = _this2$$route$params.guid;
+                _context2.prev = 2;
+                _context2.next = 5;
+                return getJob(guid);
+
+              case 5:
+                _yield$getJob2 = _context2.sent;
+                data = _yield$getJob2.data;
+                locationSlug = Object(lodash["kebabCase"])(data.location); // check if this is the proper url for the job
+
+                if (locationSlug !== location || data.title_slug !== title) {
+                  window.location.replace("/".concat(locationSlug, "/").concat(data.title_slug, "/").concat(guid, "/job"));
+                } else {
+                  _this2.job = data;
+
+                  _this2.status({
+                    resolved: true
+                  });
+                }
+
+                _context2.next = 14;
+                break;
+
+              case 11:
+                _context2.prev = 11;
+                _context2.t0 = _context2["catch"](2);
+
+                _this2.status({
+                  error: _context2.t0,
+                  resolved: false
+                });
+
+              case 14:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[2, 11]]);
       }))();
     },
     status: function status(_ref) {

@@ -62,6 +62,10 @@ export default {
             required: false,
             default: ""
         },
+        siteConfig: {
+            type: Object,
+            required: true,
+        },
         header: {
             type: String,
             required: false,
@@ -87,7 +91,7 @@ export default {
                     q: this.title,
                     location: this.location,
                 },
-                this.$siteConfig
+                this.siteConfig
             )
 
             const data = response.data
