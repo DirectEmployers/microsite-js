@@ -9,7 +9,7 @@
                 v-for="(similarJob, index) in similarJobs"
             >
                 <template v-slot="jobData">
-                    <section class="similar-jobs__grid-item"   v-if="job.guid != jobData.guid">
+                    <section class="similar-jobs__grid-item"  v-if="guid != jobData.guid">
                         <g-link
                             :to="buildJobDetailUrl(
                                 jobData.title,
@@ -48,7 +48,21 @@ export default {
         AppJob
     },
     props: {
-        job: {
+        title: {
+            type: String,
+            required: true,
+        },
+        guid: {
+            type: String,
+            required: false,
+            default: ""
+        },
+        location: {
+            type: String,
+            required: false,
+            default: ""
+        },
+        siteConfig: {
             type: Object,
             required: true,
         },
@@ -74,10 +88,10 @@ export default {
             const response = await SearchService.get(
                 {
                     num_items: 10,
-                    q: this.job.title,
-                    location: this.job.location_exact,
+                    q: this.title,
+                    location: this.location,
                 },
-                this.$siteConfig
+                this.siteConfig
             )
 
             const data = response.data
