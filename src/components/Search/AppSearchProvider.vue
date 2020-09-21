@@ -15,6 +15,9 @@
             :submitSearchForm="submitSearchForm"
             :supported="supported"
             :selectPage="selectPage"
+            :featuredJobs="featuredJobs"
+            :isGoogleTalent="meta.source=='google_talent'"
+            :isSolr="meta.source=='solr'"
         />
     </component>
 </template>
@@ -55,6 +58,7 @@ export default {
         const defaultInput = this.getInputDefaults()
         return {
             jobs: [],
+            featuredJobs: [],
             source: this.siteConfig.source,
             filters: [],
             pagination: {},
@@ -317,11 +321,13 @@ export default {
 
                 let data = response.data || {}
 
-                let {jobs, pagination, filters, meta} = data
+                let {jobs, pagination, filters, meta, featured_jobs } = data
 
                 this.jobs = jobs
 
                 this.pagination = pagination
+
+                this.featuredJobs = featured_jobs
 
                 this.filters = filters || {}
 

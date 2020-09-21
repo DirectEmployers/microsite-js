@@ -5,7 +5,6 @@
             :site-config="$siteConfig"
             v-slot="{
                 jobs,
-                filters,
                 input,
                 sort,
                 submitSearchForm,
@@ -16,6 +15,8 @@
                 meta,
                 selectPage,
                 pagination,
+                featuredJobs,
+                isGoogleTalent,
             }"
         >
             <Loader v-if="status.loading" />
@@ -88,6 +89,7 @@
                             No results found...
                         </h3>
                     </div>
+                    
                     <div class="lg:ml-4 w-full lg:w-2/5">
                         <h3 class="font-bold text-4xl">Search Filters:</h3>
 
@@ -166,14 +168,14 @@
                             <button
                                 @click="toggleCommuteModal()"
                                 class="button"
-                                v-if="meta.source=='google_talent'"
+                                v-if="isGoogleTalent"
                             >
                                 Commute Search
                             </button>
                         </div>
                         <AppModal
                             id="commute-modal"
-                            v-if="meta.source=='google_talent'"
+                            v-if="isGoogleTalent"
                             ref="commute-modal"
                             title="Commute Search"
                         >
@@ -185,6 +187,43 @@
                                 />
                             </template>
                         </AppModal>
+                        <div class="bg-gray-100 rounded py-3">
+                            <h3 class="font-bold text-4xl">Featured Jobs:</h3>
+                            <div
+                                class="hover:bg-gray-300"
+                                :key="index"
+                                v-for="(job, index) in featuredJobs"
+                            >
+                                <AppJob :source="meta.source" :job="job">
+                                    <template v-slot="jobData">
+                                        <g-link
+                                            :to="jobData.detailUrl"
+                                            class="mb-2"
+                                        >
+                                            <h3 class="font-bold text-xl">
+                                                {{ jobData.title }}
+                                            </h3>
+                                            <h3 class="font-bold text-lg">
+                                                Requisition ID:
+                                                {{ jobData.reqId }}
+                                            </h3>
+                                            <h3 class="text-md">
+                                                {{
+                                                    jobData.city + ", " + jobData.state
+                                                }}
+                                            </h3>
+                                            <div
+                                                class="job-listing__commute-time"
+                                                v-if="jobData.hasCommuteInfo"
+                                            >
+                                                Estimated Travel:
+                                                {{ jobData.commuteTime }} minutes.
+                                            </div>
+                                        </g-link>
+                                    </template>
+                                </AppJob>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
