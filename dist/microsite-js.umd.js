@@ -352,8 +352,8 @@ module.exports = Axios;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=67a44765&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h3',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppJob',{key:index,attrs:{"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [(_vm.job.guid != jobData.guid)?_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":_vm.buildJobDetailUrl(
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"25739eff-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=30b14a71&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h3',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppJob',{key:index,attrs:{"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [(_vm.guid != jobData.guid)?_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":_vm.buildJobDetailUrl(
                             jobData.title,
                             jobData.location,
                             jobData.guid
@@ -361,7 +361,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=67a44765&
+// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=30b14a71&
 
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
 var runtime = __webpack_require__("96cf");
@@ -430,9 +430,19 @@ var AppJob = __webpack_require__("9f80");
     AppJob: AppJob["default"]
   },
   props: {
-    job: {
-      type: Object,
+    title: {
+      type: String,
       required: true
+    },
+    guid: {
+      type: String,
+      required: false,
+      default: ""
+    },
+    location: {
+      type: String,
+      required: false,
+      default: ""
     },
     header: {
       type: String,
@@ -464,8 +474,8 @@ var AppJob = __webpack_require__("9f80");
                 _context.next = 2;
                 return search["b" /* SearchService */].get({
                   num_items: 10,
-                  q: _this.job.title,
-                  location: _this.job.location_exact
+                  q: _this.title,
+                  location: _this.location
                 }, _this.$siteConfig);
 
               case 2:
