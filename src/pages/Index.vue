@@ -23,10 +23,12 @@
     </Layout>
 </template>
 <script>
+import AppDropdown from "~/components/AppDropdown"
 import AppSearchProvider from "~/components/Search/AppSearchProvider"
 import SearchForm from "~/demo/components/SearchForm"
 export default {
     components: {
+        AppDropdown,
         AppSearchProvider,
         SearchForm,
     },
