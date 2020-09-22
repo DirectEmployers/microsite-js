@@ -10,7 +10,7 @@
         >
             <span class="dropdown__display-text">{{ display }}</span>
         </div>
-        <ul
+        <div
             class="dropdown__content"
             :aria-labelledby="`dropdown-display-${id}`"
             :class="{
@@ -18,7 +18,7 @@
             }"
         >
             <slot></slot>
-        </ul>
+        </div>
     </component>
 </template>
 
