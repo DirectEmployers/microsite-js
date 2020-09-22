@@ -11,6 +11,13 @@
         @apply absolute transition duration-150 ease-in-out z-50 origin-top;
         opacity: 0;
 
+        &-item{
+            @apply rounded-sm px-8 py-1;
+            
+            &:hover{
+                @apply bg-gray-100;
+            }
+        }
         &--toggled{
             opacity: 1;
         }
