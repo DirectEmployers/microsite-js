@@ -8,7 +8,9 @@
             :aria-expanded="toggled"
 
         >
-            <span class="dropdown__display-text">{{ display }}</span>
+            <slot name="display">
+                <span class="dropdown__display-text">{{ display }}</span>
+            </slot>
         </div>
         <div
             class="dropdown__content"
