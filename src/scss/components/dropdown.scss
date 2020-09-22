@@ -7,7 +7,7 @@
     }
     &__content {
         opacity: 0;
-        @apply absolute right-0 left-0 border-gray-500 w-56 rounded-md shadow-lg;
+        @apply absolute bg-white right-0 left-0 border-gray-500 w-56 rounded-md shadow-lg;
         transition: opacity 0.1s;
         &-item {
             @apply block px-4 py-2 text-sm leading-5 text-gray-700;

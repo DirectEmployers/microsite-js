@@ -20,6 +20,7 @@
                 />
             </div>
         </AppSearchProvider>
+        </div>
     </Layout>
 </template>
 <script>
