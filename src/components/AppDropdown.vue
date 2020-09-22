@@ -1,27 +1,24 @@
 <template>
-    <component class="dropdown" :is="tag" v-on="eventHandlers">
-        <div 
-            role="button"
-            tabindex="0"
-            :id="`dropdown-display-${id}`"
-            class="dropdown__display"
-            :aria-expanded="toggled"
-
-        >
-            <slot name="display">
-                <span class="dropdown__display-text">{{ display }}</span>
-            </slot>
-        </div>
+    <div class="dropdown" v-on="eventHandlers">
         <div
+            role="button"
+            class="dropdown__display"
+            :aria-haspopup="toggled"
+            :aria-expanded="toggled"
+        >
+            {{ display }}
+        </div>
+
+        <div
+            :id="`dropdown-content-${id}`"
             class="dropdown__content"
+            v-show="toggled"
             :aria-labelledby="`dropdown-display-${id}`"
-            :class="{
-                'dropdown__content--toggled': toggled
-            }"
+            :class="{'dropdown__content--active': toggled}"
         >
             <slot></slot>
         </div>
-    </component>
+    </div>
 </template>
 
 <script>
@@ -32,73 +29,82 @@ export default {
             required: false,
             default() {
                 return `${this._uid}`
-            }
+            },
         },
         interactionType: {
             type: String,
             required: false,
-            default: "click"
+            default: "click",
         },
         tag: {
             type: String,
             required: false,
-            default: "div"
+            default: "div",
         },
         display: {
             type: String,
             required: false,
-            default: 'Dropdown'
-        }
+            default: "Dropdown",
+        },
+        headerClasses: {
+            type: String,
+            required: false,
+        },
+        contentClasses: {
+            type: String,
+            required: false,
+        },
     },
     data() {
         return {
-            toggled: false
-        }
-    },
-    created() {
-        if(this.isClick && process.isClient){
-            document.addEventListener('click', this.nonMenuClick)
-        }
-    },
-    destroyed() {
-        if(this.isClick && process.isClient){
-            document.removeEventListener('click', this.nonMenuClick)
-        }
-    },
-    computed: {
-        isClick(){
-            return this.interactionType == 'click'
-        },
-        eventHandlers() {
-            const type = this.interactionType
-            switch(type){
-                case 'click':
-                    return { click: this.toggle }
-                    break;
-                case 'hover':
-                    return {mouseover: this.open, mouseleave: this.close}
-                    break;
-                default:
-                    throw new Error(`Unsupported interaction type '${type}'`)
-                    break;
-            }
+            toggled: false,
         }
     },
     methods: {
-        toggle(){
+        toggle() {
             this.toggled = !this.toggled
         },
-        open(){
+        open() {
             this.toggled = true
         },
-        close(){
+        close() {
             this.toggled = false
         },
         nonMenuClick(e) {
             if (this.$el !== e.target && !this.$el.contains(e.target)) {
                 this.toggled = false
             }
+        },
+    },
+    created() {
+        if (this.isClick && process.isClient) {
+            document.addEventListener("click", this.nonMenuClick)
         }
-    }
+    },
+    destroyed() {
+        if (this.isClick && process.isClient) {
+            document.removeEventListener("click", this.nonMenuClick)
+        }
+    },
+    computed: {
+        isClick() {
+            return this.interactionType == "click"
+        },
+
+        eventHandlers() {
+            const type = this.interactionType
+            switch (type) {
+                case "click":
+                    return {click: this.toggle}
+                    break
+                case "hover":
+                    return {mouseover: this.open, mouseleave: this.close}
+                    break
+                default:
+                    throw new Error(`Unsupported interaction type '${type}'`)
+                    break
+            }
+        },
+    },
 }
 </script>
