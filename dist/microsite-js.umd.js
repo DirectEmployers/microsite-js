@@ -24123,14 +24123,12 @@ module.exports = function (it) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=b6a35e58&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g({tag:"component",staticClass:"dropdown"},_vm.eventHandlers),[_c('div',{staticClass:"dropdown__display",attrs:{"role":"button","tabindex":"0","id":("dropdown-display-" + _vm.id),"aria-expanded":_vm.toggled}},[_vm._t("display",[_c('span',{staticClass:"dropdown__display-text"},[_vm._v(_vm._s(_vm.display))])])],2),_c('div',{staticClass:"dropdown__content",class:{
-            'dropdown__content--toggled': _vm.toggled
-        },attrs:{"aria-labelledby":("dropdown-display-" + _vm.id)}},[_vm._t("default")],2)])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=c757f7ee&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',_vm._g({staticClass:"dropdown"},_vm.eventHandlers),[_c('div',{staticClass:"dropdown__display",attrs:{"role":"button","aria-haspopup":_vm.toggled,"aria-expanded":_vm.toggled}},[_vm._v(" "+_vm._s(_vm.display)+" ")]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.toggled),expression:"toggled"}],staticClass:"dropdown__content",class:{'dropdown__content--active': _vm.toggled},attrs:{"id":("dropdown-content-" + _vm.id),"aria-labelledby":("dropdown-display-" + _vm.id)}},[_vm._t("default")],2)])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=b6a35e58&
+// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=c757f7ee&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=script&lang=js&
 var AppDropdownvue_type_script_lang_js_ = __webpack_require__("e433");
@@ -31016,9 +31014,6 @@ module.exports = function (target, src, options) {
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["a"] = ({
   props: {
     id: {
@@ -31041,50 +31036,21 @@ module.exports = function (target, src, options) {
     display: {
       type: String,
       required: false,
-      default: 'Dropdown'
+      default: "Dropdown"
+    },
+    headerClasses: {
+      type: String,
+      required: false
+    },
+    contentClasses: {
+      type: String,
+      required: false
     }
   },
   data: function data() {
     return {
       toggled: false
     };
-  },
-  created: function created() {
-    if (this.isClick && process.isClient) {
-      document.addEventListener('click', this.nonMenuClick);
-    }
-  },
-  destroyed: function destroyed() {
-    if (this.isClick && process.isClient) {
-      document.removeEventListener('click', this.nonMenuClick);
-    }
-  },
-  computed: {
-    isClick: function isClick() {
-      return this.interactionType == 'click';
-    },
-    eventHandlers: function eventHandlers() {
-      var type = this.interactionType;
-
-      switch (type) {
-        case 'click':
-          return {
-            click: this.toggle
-          };
-          break;
-
-        case 'hover':
-          return {
-            mouseover: this.open,
-            mouseleave: this.close
-          };
-          break;
-
-        default:
-          throw new Error("Unsupported interaction type '".concat(type, "'"));
-          break;
-      }
-    }
   },
   methods: {
     toggle: function toggle() {
@@ -31099,6 +31065,43 @@ module.exports = function (target, src, options) {
     nonMenuClick: function nonMenuClick(e) {
       if (this.$el !== e.target && !this.$el.contains(e.target)) {
         this.toggled = false;
+      }
+    }
+  },
+  created: function created() {
+    if (this.isClick && process.isClient) {
+      document.addEventListener("click", this.nonMenuClick);
+    }
+  },
+  destroyed: function destroyed() {
+    if (this.isClick && process.isClient) {
+      document.removeEventListener("click", this.nonMenuClick);
+    }
+  },
+  computed: {
+    isClick: function isClick() {
+      return this.interactionType == "click";
+    },
+    eventHandlers: function eventHandlers() {
+      var type = this.interactionType;
+
+      switch (type) {
+        case "click":
+          return {
+            click: this.toggle
+          };
+          break;
+
+        case "hover":
+          return {
+            mouseover: this.open,
+            mouseleave: this.close
+          };
+          break;
+
+        default:
+          throw new Error("Unsupported interaction type '".concat(type, "'"));
+          break;
       }
     }
   }
