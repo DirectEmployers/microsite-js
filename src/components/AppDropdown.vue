@@ -1,29 +1,24 @@
 <template>
     <component class="dropdown" :is="tag" v-on="eventHandlers">
-        <div
+        <div 
             role="button"
             tabindex="0"
             :id="`dropdown-display-${id}`"
             class="dropdown__display"
-            :class="{
-                'dropdown__display--active': this.toggled
-            }"
             :aria-expanded="toggled"
-            @keyup.enter="toggle()"
-        >
-            <slot name="display">
-                {{ display }}
-            </slot>
-        </div>
 
-        <div
-            :id="`dropdown-content-${id}`"
-            class="dropdown__content"
-            v-show="toggled"
-            :aria-labelledby="`dropdown-display-${id}`"
         >
-            <slot />
+            <span class="dropdown__display-text">{{ display }}</span>
         </div>
+        <ul
+            class="dropdown__content"
+            :aria-labelledby="`dropdown-display-${id}`"
+            :class="{
+                'dropdown__content--toggled': toggled
+            }"
+        >
+            <slot></slot>
+        </ul>
     </component>
 </template>
 
@@ -58,6 +53,35 @@ export default {
             toggled: false
         }
     },
+    created() {
+        if(this.isClick && process.isClient){
+            document.addEventListener('click', this.nonMenuClick)
+        }
+    },
+    destroyed() {
+        if(this.isClick && process.isClient){
+            document.removeEventListener('click', this.nonMenuClick)
+        }
+    },
+    computed: {
+        isClick(){
+            return this.interactionType == 'click'
+        },
+        eventHandlers() {
+            const type = this.interactionType
+            switch(type){
+                case 'click':
+                    return { click: this.toggle }
+                    break;
+                case 'hover':
+                    return {mouseover: this.open, mouseleave: this.close}
+                    break;
+                default:
+                    throw new Error(`Unsupported interaction type '${type}'`)
+                    break;
+            }
+        }
+    },
     methods: {
         toggle(){
             this.toggled = !this.toggled
@@ -73,37 +97,6 @@ export default {
                 this.toggled = false
             }
         }
-    },
-    created() {
-        if(this.isClick && process.isClient){
-            document.addEventListener('click', this.nonMenuClick)
-        }
-    },
-    destroyed() {
-        if(this.isClick && process.isClient){
-            document.removeEventListener('click', this.nonMenuClick)
-        }
-    },
-    computed: {
-        isClick(){
-            return this.interactionType == 'click'
-        },
-
-        eventHandlers() {
-            const type = this.interactionType
-            switch(type){
-                case 'click':
-                    return { click: this.toggle }
-                    break;
-                case 'hover':
-                    return {mouseover: this.open, mouseleave: this.close}
-                    break;
-                default:
-                    throw new Error(`Unsupported interaction type '${type}'`)
-                    break;
-            }
-
-        }
-    },
+    }
 }
 </script>
