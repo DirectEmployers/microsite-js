@@ -12,7 +12,7 @@
         opacity: 0;
 
         &-item{
-            @apply rounded-sm px-8 py-1;
+            @apply rounded-sm px-8 py-1 block;
             
             &:hover{
                 @apply bg-gray-100;
