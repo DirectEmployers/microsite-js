@@ -16,8 +16,8 @@
             :supported="supported"
             :selectPage="selectPage"
             :featuredJobs="featuredJobs"
-            :isGoogleTalent="meta.source=='google_talent'"
-            :isSolr="meta.source=='solr'"
+            :isGoogleTalent="meta.source == 'google_talent'"
+            :isSolr="meta.source == 'solr'"
         />
     </component>
 </template>
@@ -98,6 +98,9 @@ export default {
         hasJobs() {
             return (this.jobs || []).length > 0
         },
+        hasFeaturedJobs() {
+            return (this.featuredJobs || []).length > 0
+        },
         isLocationSearch() {
             return this.input.searchType == "location"
         },
@@ -120,7 +123,7 @@ export default {
             let duplicates = []
             let filters = []
 
-            this.siteConfig.filters.forEach((filter) => {
+            this.siteConfig.filters.forEach(filter => {
                 name = filter.name
 
                 value = this.input[name]
@@ -139,7 +142,7 @@ export default {
         },
 
         filterParamList() {
-            let params = this.siteConfig.filters.map((filter) => {
+            let params = this.siteConfig.filters.map(filter => {
                 return filter.name
             })
 
@@ -220,7 +223,7 @@ export default {
                 }
             }
 
-            toRemove.forEach((param) => {
+            toRemove.forEach(param => {
                 delete query[param]
             })
 
@@ -250,7 +253,7 @@ export default {
         },
 
         getGeoLocation(done) {
-            navigator.geolocation.getCurrentPosition((position) => {
+            navigator.geolocation.getCurrentPosition(position => {
                 let lat = position.coords.latitude.toFixed(6)
 
                 let lon = position.coords.longitude.toFixed(6)
@@ -297,6 +300,7 @@ export default {
 
             return clone({
                 hasJobs: this.hasJobs,
+                hasFeaturedJobs: this.hasFeaturedJobs,
                 selectedFilters: this.selectedFilters,
                 source: source,
                 sort: {
@@ -321,7 +325,7 @@ export default {
 
                 let data = response.data || {}
 
-                let {jobs, pagination, filters, meta, featured_jobs } = data
+                let {jobs, pagination, filters, meta, featured_jobs} = data
 
                 this.jobs = jobs
 
@@ -349,7 +353,7 @@ export default {
             }
         },
         getUserCoordinates() {
-            this.getGeoLocation((coords) => {
+            this.getGeoLocation(coords => {
                 this.input.coords = coords
                 this.input.location = this.geoLocationInputText
                 this.input.sort = "distance"
@@ -414,7 +418,7 @@ export default {
                     path: "/jobs",
                     query: this.getPayload(),
                 })
-                .catch((err) => {
+                .catch(err => {
                     log(err, "error")
                 })
         },

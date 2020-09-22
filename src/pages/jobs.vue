@@ -33,7 +33,44 @@
                 <div class="flex flex-col lg:flex-row">
                     <div class="mx-4 w-full lg:w-1/2">
                         <h3 v-if="status.error">Unable to load jobs...</h3>
-                        <section v-else-if="meta.hasJobs" class="jobs">
+                        <div class="bg-gray-100 rounded py-3" v-if="featuredJobs.length > 0">
+                            <h3 class="font-bold text-4xl">Featured Jobs:</h3>
+                            <div
+                                class="hover:bg-gray-300"
+                                :key="index"
+                                v-for="(job, index) in featuredJobs"
+                            >
+                                <AppJob :source="meta.source" :job="job">
+                                    <template v-slot="jobData">
+                                        <g-link
+                                            :to="jobData.detailUrl"
+                                            class="mb-2"
+                                        >
+                                            <h3 class="font-bold text-xl">
+                                                {{ jobData.title }}
+                                            </h3>
+                                            <h3 class="font-bold text-lg">
+                                                Requisition ID:
+                                                {{ jobData.reqId }}
+                                            </h3>
+                                            <h3 class="text-md">
+                                                {{
+                                                    jobData.city + ", " + jobData.state
+                                                }}
+                                            </h3>
+                                            <div
+                                                class="job-listing__commute-time"
+                                                v-if="jobData.hasCommuteInfo"
+                                            >
+                                                Estimated Travel:
+                                                {{ jobData.commuteTime }} minutes.
+                                            </div>
+                                        </g-link>
+                                    </template>
+                                </AppJob>
+                            </div>
+                        </div>
+                        <section v-if="meta.hasJobs" class="jobs">
                             <h3 class="text-3xl font-bold">Search Results</h3>
                             <div
                                 v-if="meta.hasJobs"
@@ -85,7 +122,7 @@
                             />
                         </section>
 
-                        <h3 class="font-bold text-lg" v-else-if="!meta.hasJobs">
+                        <h3 class="font-bold text-lg" v-else-if="!meta.hasJobs && !meta.hasFeaturedJobs">
                             No results found...
                         </h3>
                     </div>
@@ -187,43 +224,7 @@
                                 />
                             </template>
                         </AppModal>
-                        <div class="bg-gray-100 rounded py-3">
-                            <h3 class="font-bold text-4xl">Featured Jobs:</h3>
-                            <div
-                                class="hover:bg-gray-300"
-                                :key="index"
-                                v-for="(job, index) in featuredJobs"
-                            >
-                                <AppJob :source="meta.source" :job="job">
-                                    <template v-slot="jobData">
-                                        <g-link
-                                            :to="jobData.detailUrl"
-                                            class="mb-2"
-                                        >
-                                            <h3 class="font-bold text-xl">
-                                                {{ jobData.title }}
-                                            </h3>
-                                            <h3 class="font-bold text-lg">
-                                                Requisition ID:
-                                                {{ jobData.reqId }}
-                                            </h3>
-                                            <h3 class="text-md">
-                                                {{
-                                                    jobData.city + ", " + jobData.state
-                                                }}
-                                            </h3>
-                                            <div
-                                                class="job-listing__commute-time"
-                                                v-if="jobData.hasCommuteInfo"
-                                            >
-                                                Estimated Travel:
-                                                {{ jobData.commuteTime }} minutes.
-                                            </div>
-                                        </g-link>
-                                    </template>
-                                </AppJob>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </section>
