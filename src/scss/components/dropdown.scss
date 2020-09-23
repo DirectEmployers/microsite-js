@@ -14,7 +14,7 @@
             &:focus {
                 @apply bg-gray-100 outline-none text-gray-900;
             }
-            &:hover {
+            &:hover, &--active {
                 @apply bg-gray-100 text-gray-900;
             }
         }

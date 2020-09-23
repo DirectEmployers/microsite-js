@@ -42,7 +42,7 @@
     >
         <ul
             class="form__autocomplete-items"
-            id="`form__autocomplete-items-${id}`"
+            :id="`form__autocomplete-items-${id}`"
             role="listbox"
         >
             <template v-for="(result, index) in results">

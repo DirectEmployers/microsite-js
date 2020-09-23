@@ -2,9 +2,11 @@
     <component :is="tag" class="dropdown" v-on="eventHandlers">
         <div
             role="button"
+            ref="display"
             class="dropdown__display"
-            :aria-haspopup="toggled"
+            tabindex="0"
             :aria-expanded="toggled"
+            :id="`dropdown-display-${id}`"
         >
             {{ display }}
         </div>
@@ -16,7 +18,22 @@
             :aria-labelledby="`dropdown-display-${id}`"
             :class="{'dropdown__content--active': toggled}"
         >
-            <slot></slot>
+            <div :key="index" v-for="(link, index) in links"  @mouseover="selectedIndex = index">
+                <slot :name="link.key" :isSelected="index==selectedIndex">
+                    <component
+                        :is="link.tag || 'g-link'"
+                        :to="link.href"
+                        :href="link.href"
+                        class="dropdown__content-item"
+                        :class="{
+                            'dropdown__content-item--active':
+                                index === selectedIndex,
+                        }"
+                    >
+                        {{ link.display }}
+                    </component>
+                </slot>
+            </div>
         </div>
     </component>
 </template>
@@ -36,6 +53,11 @@ export default {
             required: false,
             default: "click",
         },
+        links: {
+            type: Array,
+            required: false,
+            default: () => [],
+        },
         tag: {
             type: String,
             required: false,
@@ -45,11 +67,12 @@ export default {
             type: String,
             required: false,
             default: "Dropdown",
-        }
+        },
     },
     data() {
         return {
             toggled: false,
+            selectedIndex: 0,
         }
     },
     methods: {
@@ -61,21 +84,58 @@ export default {
         },
         close() {
             this.toggled = false
+            this.selectedIndex = 0
         },
-        nonMenuClick(e) {
+        keyUp(e) {
+            const code = e.keyCode
+            //if enter is pressed on the display button make sure dropdown is open.
+            if(!this.toggled && code == 13 && document.activeElement == this.$refs['display']){
+                this.open()
+                this.$refs["item-0"][0].focus()
+            }   
+
+            //escape
+            if (code == 27) {
+                return this.close()
+            }
+            //tab or up arrrow
+            if (this.toggled && [38, 9].includes(code)) {
+                if(code == 38 && this.selectedIndex == 0){
+                    this.selectedIndex = this.links.length - 1
+                }else{
+                    this.selectedIndex--
+                }
+            }
+
+        },
+        keyDown(e) {
+            if (this.toggled && e.keyCode == 40) {
+                if (this.selectedIndex <= this.links.length) {
+                    this.selectedIndex++
+                }
+                if (this.selectedIndex >= this.links.length) {
+                    this.selectedIndex = 0
+                }
+            }
+        },
+        exitDropdown(e) {
             if (this.$el !== e.target && !this.$el.contains(e.target)) {
-                this.toggled = false
+                this.close()
             }
         },
     },
     created() {
         if (this.isClick && process.isClient) {
-            document.addEventListener("click", this.nonMenuClick)
+            document.addEventListener("click", this.exitDropdown)
+            document.addEventListener("keyup", this.keyUp)
+            document.addEventListener("keydown", this.keyDown)
         }
     },
     destroyed() {
         if (this.isClick && process.isClient) {
-            document.removeEventListener("click", this.nonMenuClick)
+            document.removeEventListener("click", this.exitDropdown)
+            document.removeEventListener("keyup", this.keyUp)
+            document.removeEventListener("keydown", this.keyDown)
         }
     },
     computed: {
@@ -84,7 +144,7 @@ export default {
         },
 
         eventHandlers() {
-            const type = this.interactionType
+            const type = this.interactionType   
             switch (type) {
                 case "click":
                     return {click: this.toggle}
