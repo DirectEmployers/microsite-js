@@ -91,7 +91,6 @@ export default {
             //if enter is pressed on the display button make sure dropdown is open.
             if(!this.toggled && code == 13 && document.activeElement == this.$refs['display']){
                 this.open()
-                this.$refs["item-0"][0].focus()
             }   
 
             //escape

@@ -8,6 +8,17 @@ export default {
         // google_talent:"(functionalarea=\"Sales\"  OR functionalarea=\"Retail\")",
         // solr:"title_exact:*Sales* OR title_exact:*Retail*"
     },
+    featured_jobs: {
+        num_items: 10,
+        solr: "reqid:(" +
+            [
+                "90832BR",
+                "90748BR",
+                "90747BR",
+                "90802BR",
+            ].join(" OR ") +
+        ")",
+    },
     filters: [
         // {
         //     name: "functionalarea",
