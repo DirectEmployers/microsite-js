@@ -149,12 +149,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=6253d111&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported,"selectPage":_vm.selectPage})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=2ae4c24a&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported,"selectPage":_vm.selectPage,"featuredJobs":_vm.featuredJobs,"isGoogleTalent":_vm.meta.source == 'google_talent',"isSolr":_vm.meta.source == 'solr'})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=6253d111&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=2ae4c24a&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
 var AppSearchProvidervue_type_script_lang_js_ = __webpack_require__("6651");
@@ -22617,6 +22617,9 @@ var component = Object(componentNormalizer["a" /* default */])(
 //
 //
 //
+//
+//
+//
 
 
 
@@ -22652,6 +22655,7 @@ var component = Object(componentNormalizer["a" /* default */])(
     var defaultInput = this.getInputDefaults();
     return {
       jobs: [],
+      featuredJobs: [],
       source: this.siteConfig.source,
       filters: [],
       pagination: {},
@@ -22688,6 +22692,9 @@ var component = Object(componentNormalizer["a" /* default */])(
   computed: {
     hasJobs: function hasJobs() {
       return (this.jobs || []).length > 0;
+    },
+    hasFeaturedJobs: function hasFeaturedJobs() {
+      return (this.featuredJobs || []).length > 0;
     },
     isLocationSearch: function isLocationSearch() {
       return this.input.searchType == "location";
@@ -22863,6 +22870,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       var source = this.siteConfig.source;
       return Object(lodash__WEBPACK_IMPORTED_MODULE_15__["clone"])({
         hasJobs: this.hasJobs,
+        hasFeaturedJobs: this.hasFeaturedJobs,
         selectedFilters: this.selectedFilters,
         source: source,
         sort: {
@@ -22878,7 +22886,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       var _this2 = this;
 
       return Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var Service, response, data, jobs, pagination, filters, meta;
+        var Service, response, data, jobs, pagination, filters, meta, featured_jobs;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -22892,9 +22900,10 @@ var component = Object(componentNormalizer["a" /* default */])(
               case 5:
                 response = _context.sent;
                 data = response.data || {};
-                jobs = data.jobs, pagination = data.pagination, filters = data.filters, meta = data.meta;
+                jobs = data.jobs, pagination = data.pagination, filters = data.filters, meta = data.meta, featured_jobs = data.featured_jobs;
                 _this2.jobs = jobs;
                 _this2.pagination = pagination;
+                _this2.featuredJobs = featured_jobs;
                 _this2.filters = filters || {};
 
                 _this2.setMeta(meta);
@@ -22902,25 +22911,25 @@ var component = Object(componentNormalizer["a" /* default */])(
                 _this2.status.loading = false;
                 return _context.abrupt("return", response);
 
-              case 16:
-                _context.prev = 16;
+              case 17:
+                _context.prev = 17;
                 _context.t0 = _context["catch"](2);
                 _this2.status.error = _context.t0;
                 _this2.meta.selectedFilters = [];
                 Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "c"])(_context.t0, "error");
                 return _context.abrupt("return", _context.t0);
 
-              case 22:
-                _context.prev = 22;
+              case 23:
+                _context.prev = 23;
                 _this2.status.loading = false;
-                return _context.finish(22);
+                return _context.finish(23);
 
-              case 25:
+              case 26:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 16, 22, 25]]);
+        }, _callee, null, [[2, 17, 23, 26]]);
       }))();
     },
     getUserCoordinates: function getUserCoordinates() {
