@@ -20,7 +20,7 @@
         >
             <slot>
                 <div :key="index" v-for="(link, index) in links"  @mouseover="selectedIndex = index">
-                    <slot :name="link.key" :isSelected="index==selectedIndex">
+                    <slot :name="link.key" :link="link" :isSelected="index==selectedIndex">
                         <component
                             :is="link.tag || 'g-link'"
                             :to="link.href"
