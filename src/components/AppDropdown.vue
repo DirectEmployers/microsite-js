@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown" v-on="eventHandlers">
+    <component :is="tag" class="dropdown" v-on="eventHandlers">
         <div
             role="button"
             class="dropdown__display"
@@ -18,7 +18,7 @@
         >
             <slot></slot>
         </div>
-    </div>
+    </component>
 </template>
 
 <script>
@@ -45,15 +45,7 @@ export default {
             type: String,
             required: false,
             default: "Dropdown",
-        },
-        headerClasses: {
-            type: String,
-            required: false,
-        },
-        contentClasses: {
-            type: String,
-            required: false,
-        },
+        }
     },
     data() {
         return {
