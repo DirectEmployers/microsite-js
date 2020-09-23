@@ -18,22 +18,24 @@
             :aria-labelledby="`dropdown-display-${id}`"
             :class="{'dropdown__content--active': toggled}"
         >
-            <div :key="index" v-for="(link, index) in links"  @mouseover="selectedIndex = index">
-                <slot :name="link.key" :isSelected="index==selectedIndex">
-                    <component
-                        :is="link.tag || 'g-link'"
-                        :to="link.href"
-                        :href="link.href"
-                        class="dropdown__content-item"
-                        :class="{
-                            'dropdown__content-item--active':
-                                index === selectedIndex,
-                        }"
-                    >
-                        {{ link.display }}
-                    </component>
-                </slot>
-            </div>
+            <slot>
+                <div :key="index" v-for="(link, index) in links"  @mouseover="selectedIndex = index">
+                    <slot :name="link.key" :isSelected="index==selectedIndex">
+                        <component
+                            :is="link.tag || 'g-link'"
+                            :to="link.href"
+                            :href="link.href"
+                            class="dropdown__content-item"
+                            :class="{
+                                'dropdown__content-item--active':
+                                    index === selectedIndex,
+                            }"
+                        >
+                            {{ link.display }}
+                        </component>
+                    </slot>
+                </div>
+            </slot>
         </div>
     </component>
 </template>
@@ -99,7 +101,7 @@ export default {
             }
             //tab or up arrrow
             if (this.toggled && [38, 9].includes(code)) {
-                if(code == 38 && this.selectedIndex == 0){
+                if(code == 38 && this.selectedIndex <= 0){
                     this.selectedIndex = this.links.length - 1
                 }else{
                     this.selectedIndex--
@@ -126,15 +128,19 @@ export default {
     created() {
         if (this.isClick && process.isClient) {
             document.addEventListener("click", this.exitDropdown)
-            document.addEventListener("keyup", this.keyUp)
-            document.addEventListener("keydown", this.keyDown)
+            if(this.links.length){
+                document.addEventListener("keyup", this.keyUp)
+                document.addEventListener("keydown", this.keyDown)
+            }
         }
     },
     destroyed() {
         if (this.isClick && process.isClient) {
             document.removeEventListener("click", this.exitDropdown)
-            document.removeEventListener("keyup", this.keyUp)
-            document.removeEventListener("keydown", this.keyDown)
+            if(this.links.length){
+                document.removeEventListener("keyup", this.keyUp)
+                document.removeEventListener("keydown", this.keyDown)
+            }
         }
     },
     computed: {
