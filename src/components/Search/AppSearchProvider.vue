@@ -327,11 +327,11 @@ export default {
 
                 let {jobs, pagination, filters, meta, featured_jobs} = data
 
-                this.jobs = jobs
+                this.jobs = jobs || []
 
-                this.pagination = pagination
+                this.pagination = pagination || {}
 
-                this.featuredJobs = featured_jobs
+                this.featuredJobs = featured_jobs || []
 
                 this.filters = filters || {}
 

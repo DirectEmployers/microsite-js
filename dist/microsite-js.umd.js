@@ -149,12 +149,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=2ae4c24a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=4fe61fa8&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported,"selectPage":_vm.selectPage,"featuredJobs":_vm.featuredJobs,"isGoogleTalent":_vm.meta.source == 'google_talent',"isSolr":_vm.meta.source == 'solr'})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=2ae4c24a&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=4fe61fa8&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
 var AppSearchProvidervue_type_script_lang_js_ = __webpack_require__("6651");
@@ -22901,9 +22901,9 @@ var component = Object(componentNormalizer["a" /* default */])(
                 response = _context.sent;
                 data = response.data || {};
                 jobs = data.jobs, pagination = data.pagination, filters = data.filters, meta = data.meta, featured_jobs = data.featured_jobs;
-                _this2.jobs = jobs;
-                _this2.pagination = pagination;
-                _this2.featuredJobs = featured_jobs;
+                _this2.jobs = jobs || [];
+                _this2.pagination = pagination || {};
+                _this2.featuredJobs = featured_jobs || [];
                 _this2.filters = filters || {};
 
                 _this2.setMeta(meta);
@@ -24123,15 +24123,15 @@ module.exports = function (it) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=5cb7ceec&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g({tag:"component",staticClass:"dropdown"},_vm.eventHandlers),[_c('div',{ref:"display",staticClass:"dropdown__display",attrs:{"role":"button","tabindex":"0","aria-expanded":_vm.toggled,"id":("dropdown-display-" + _vm.id)}},[_vm._v(" "+_vm._s(_vm.display)+" ")]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.toggled),expression:"toggled"}],staticClass:"dropdown__content",class:{'dropdown__content--active': _vm.toggled},attrs:{"id":("dropdown-content-" + _vm.id),"aria-labelledby":("dropdown-display-" + _vm.id)}},[_vm._t("default",_vm._l((_vm.links),function(link,index){return _c('div',{key:index,on:{"mouseover":function($event){_vm.selectedIndex = index}}},[_vm._t(link.key,[_c(link.tag || 'g-link',{tag:"component",staticClass:"dropdown__content-item",class:{
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=1346fa06&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g({tag:"component",staticClass:"dropdown"},_vm.eventHandlers),[_c('div',{ref:"display",staticClass:"dropdown__display",attrs:{"role":"button","tabindex":"0","aria-expanded":_vm.toggled,"id":("dropdown-display-" + _vm.id)}},[_vm._v(" "+_vm._s(_vm.display)+" ")]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.toggled),expression:"toggled"}],staticClass:"dropdown__content",class:{ 'dropdown__content--active': _vm.toggled },attrs:{"id":("dropdown-content-" + _vm.id),"aria-labelledby":("dropdown-display-" + _vm.id)}},[_vm._t("default",_vm._l((_vm.links),function(link,index){return _c('div',{key:index,on:{"mouseover":function($event){_vm.selectedIndex = index}}},[_vm._t(link.key,[_c('a',{ref:("link-" + index),refInFor:true,staticClass:"dropdown__content-item",class:{
                             'dropdown__content-item--active':
-                                index === _vm.selectedIndex,
-                        },attrs:{"to":link.href,"href":link.href}},[_vm._v(" "+_vm._s(link.display)+" ")])],{"link":link,"isSelected":index==_vm.selectedIndex})],2)}))],2)])}
+                                index === _vm.selectedIndex
+                        },attrs:{"tabindex":"0","href":link.href}},[_vm._v(" "+_vm._s(link.display)+" ")])],{"link":link,"isSelected":index == _vm.selectedIndex})],2)}))],2)])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=5cb7ceec&
+// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=1346fa06&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=script&lang=js&
 var AppDropdownvue_type_script_lang_js_ = __webpack_require__("e433");
@@ -31039,6 +31039,19 @@ module.exports = function (target, src, options) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+var TAB_KEY = 9;
+var UP_KEY = 38;
+var DOWN_KEY = 40;
+var ESC_KEY = 27;
+var ENTER_KEY = 13;
 /* harmony default export */ __webpack_exports__["a"] = ({
   props: {
     id: {
@@ -31051,7 +31064,7 @@ module.exports = function (target, src, options) {
     interactionType: {
       type: String,
       required: false,
-      default: "click"
+      default: 'click'
     },
     links: {
       type: Array,
@@ -31063,18 +31076,18 @@ module.exports = function (target, src, options) {
     tag: {
       type: String,
       required: false,
-      default: "div"
+      default: 'div'
     },
     display: {
       type: String,
       required: false,
-      default: "Dropdown"
+      default: 'Dropdown'
     }
   },
   data: function data() {
     return {
       toggled: false,
-      selectedIndex: 0
+      selectedIndex: -1
     };
   },
   methods: {
@@ -31083,34 +31096,44 @@ module.exports = function (target, src, options) {
     },
     open: function open() {
       this.toggled = true;
+      this.selectedIndex = 0;
     },
     close: function close() {
       this.toggled = false;
-      this.selectedIndex = 0;
+      this.selectedIndex = -1;
     },
     keyUp: function keyUp(e) {
+      var _this = this;
+
       var code = e.keyCode; //if enter is pressed on the display button make sure dropdown is open.
 
-      if (!this.toggled && code == 13 && document.activeElement == this.$refs['display']) {
+      if (!this.toggled && code == ENTER_KEY && document.activeElement == this.$refs['display']) {
         this.open();
+        this.$nextTick(function () {
+          _this.$refs['link-0'][0].focus();
+        });
       } //escape
 
 
-      if (code == 27) {
+      if (code == ESC_KEY) {
         return this.close();
       } //tab or up arrrow
 
 
-      if (this.toggled && [38, 9].includes(code)) {
-        if (code == 38 && this.selectedIndex <= 0) {
+      if (this.toggled && [UP_KEY].includes(code)) {
+        if (this.selectedIndex <= 0) {
           this.selectedIndex = this.links.length - 1;
         } else {
           this.selectedIndex--;
         }
+
+        this.setLinkFocus(this.selectedIndex);
       }
     },
     keyDown: function keyDown(e) {
-      if (this.toggled && e.keyCode == 40) {
+      var code = e.keyCode;
+
+      if (this.toggled && [DOWN_KEY, TAB_KEY].includes(code)) {
         if (this.selectedIndex <= this.links.length) {
           this.selectedIndex++;
         }
@@ -31118,7 +31141,25 @@ module.exports = function (target, src, options) {
         if (this.selectedIndex >= this.links.length) {
           this.selectedIndex = 0;
         }
+
+        this.setLinkFocus(this.selectedIndex);
       }
+
+      if (this.toggled && code == TAB_KEY) {
+        if (this.selectedIndex == 0) {
+          return this.close();
+        } //odd bug where tab doesnt focus the right index :/
+
+
+        this.setLinkFocus(this.selectedIndex - 1);
+      }
+    },
+    setLinkFocus: function setLinkFocus(index) {
+      var _this2 = this;
+
+      this.$nextTick(function () {
+        _this2.$refs["link-".concat(index)][0].focus();
+      });
     },
     exitDropdown: function exitDropdown(e) {
       if (this.$el !== e.target && !this.$el.contains(e.target)) {
@@ -31127,40 +31168,41 @@ module.exports = function (target, src, options) {
     }
   },
   created: function created() {
-    if (this.isClick && process.isClient) {
-      document.addEventListener("click", this.exitDropdown);
+    if (process.isClient && this.isClick) {
+      document.addEventListener('click', this.exitDropdown);
 
       if (this.links.length) {
-        document.addEventListener("keyup", this.keyUp);
-        document.addEventListener("keydown", this.keyDown);
+        document.addEventListener('keyup', this.keyUp);
+        document.addEventListener('keydown', this.keyDown);
       }
     }
   },
   destroyed: function destroyed() {
-    if (this.isClick && process.isClient) {
-      document.removeEventListener("click", this.exitDropdown);
+    if (process.isClient && this.isClick) {
+      document.removeEventListener('click', this.exitDropdown);
 
       if (this.links.length) {
-        document.removeEventListener("keyup", this.keyUp);
-        document.removeEventListener("keydown", this.keyDown);
+        document.removeEventListener('keyup', this.keyUp);
+        document.removeEventListener('keydown', this.keyDown);
       }
     }
   },
   computed: {
     isClick: function isClick() {
-      return this.interactionType == "click";
+      return this.interactionType == 'click';
     },
     eventHandlers: function eventHandlers() {
       var type = this.interactionType;
 
       switch (type) {
-        case "click":
+        case 'click':
           return {
-            click: this.toggle
+            click: this.toggle,
+            mouseleave: this.close
           };
           break;
 
-        case "hover":
+        case 'hover':
           return {
             mouseover: this.open,
             mouseleave: this.close
