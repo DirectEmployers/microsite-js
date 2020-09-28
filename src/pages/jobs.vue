@@ -17,6 +17,7 @@
                 pagination,
                 featuredJobs,
                 isGoogleTalent,
+                isSolr,
             }"
         >
             <Loader v-if="status.loading" />
@@ -27,6 +28,7 @@
                         :input="input"
                         :submitSearchForm="submitSearchForm"
                         :supported="supported"
+                        :isSolr="isSolr"
                         :getUserCoordinates="getUserCoordinates"
                     />
                 </div>
@@ -216,13 +218,11 @@
                             ref="commute-modal"
                             title="Commute Search"
                         >
-                            <template v-slot:content>
-                                <CommuteSearchForm
-                                    :input="input"
-                                    :submitSearchForm="submitSearchForm"
-                                    :getUserCoordinates="getUserCoordinates"
-                                />
-                            </template>
+                            <CommuteSearchForm
+                                :input="input"
+                                :submitSearchForm="submitSearchForm"
+                                :getUserCoordinates="getUserCoordinates"
+                            />
                         </AppModal>
                         
                     </div>

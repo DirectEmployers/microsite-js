@@ -149,12 +149,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=4fe61fa8&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=1ed1d598&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"filters":_vm.filters,"getUserCoordinates":_vm.getUserCoordinates,"blank":_vm.blank,"input":_vm.input,"getFilterOptions":_vm.getFilterOptions,"jobs":_vm.jobs,"meta":_vm.meta,"pagination":_vm.pagination,"status":_vm.status,"source":_vm.source,"sort":_vm.sort,"submitSearchForm":_vm.submitSearchForm,"supported":_vm.supported,"selectPage":_vm.selectPage,"featuredJobs":_vm.featuredJobs,"isGoogleTalent":_vm.meta.source == 'google_talent',"isSolr":_vm.meta.source == 'solr'})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=4fe61fa8&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=1ed1d598&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
 var AppSearchProvidervue_type_script_lang_js_ = __webpack_require__("6651");
@@ -22555,35 +22555,41 @@ var component = Object(componentNormalizer["a" /* default */])(
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4160");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("caad");
-/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("d81d");
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("b0c0");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_number_to_fixed__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("b680");
-/* harmony import */ var core_js_modules_es_number_to_fixed__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_to_fixed__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("ac1f");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("2532");
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("5319");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("841c");
-/* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("159b");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("96cf");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("1da1");
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("5530");
-/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("a74a");
-/* harmony import */ var _services_api_location__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("3fcc");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__("2ef0");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _services_api_search__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__("f867");
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("99af");
+/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("4160");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("caad");
+/* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("d81d");
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("b0c0");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_number_to_fixed__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("b680");
+/* harmony import */ var core_js_modules_es_number_to_fixed__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_to_fixed__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("b64b");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("ac1f");
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("2532");
+/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("5319");
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("841c");
+/* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("159b");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("96cf");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("1da1");
+/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("5530");
+/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__("a74a");
+/* harmony import */ var _services_api_location__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__("3fcc");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__("2ef0");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _services_api_search__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__("f867");
+
+
 
 
 
@@ -22707,12 +22713,15 @@ var component = Object(componentNormalizer["a" /* default */])(
 
       switch (searchType) {
         case "commute":
-          return _services_api_search__WEBPACK_IMPORTED_MODULE_16__[/* CommuteSearchService */ "a"];
+          return _services_api_search__WEBPACK_IMPORTED_MODULE_18__[/* CommuteSearchService */ "a"];
 
         case "location":
         default:
-          return _services_api_search__WEBPACK_IMPORTED_MODULE_16__[/* SearchService */ "b"];
+          return _services_api_search__WEBPACK_IMPORTED_MODULE_18__[/* SearchService */ "b"];
       }
+    },
+    configFilters: function configFilters() {
+      return this.siteConfig.filters || [];
     },
     selectedFilters: function selectedFilters() {
       var _this = this;
@@ -22721,7 +22730,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       var name = null;
       var duplicates = [];
       var filters = [];
-      this.siteConfig.filters.forEach(function (filter) {
+      this.configFilters.forEach(function (filter) {
         name = filter.name;
         value = _this.input[name];
 
@@ -22736,11 +22745,10 @@ var component = Object(componentNormalizer["a" /* default */])(
       return filters;
     },
     filterParamList: function filterParamList() {
-      var params = this.siteConfig.filters.map(function (filter) {
+      var params = this.configFilters.map(function (filter) {
         return filter.name;
       });
-      params.push("coords");
-      return params;
+      return params.concat(Object.keys(this.getInputDefaults()));
     }
   },
   watch: {
@@ -22754,22 +22762,22 @@ var component = Object(componentNormalizer["a" /* default */])(
     selectPage: function selectPage(page) {
       this.$router.push({
         path: this.$route.path,
-        query: Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_12__[/* default */ "a"])(Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_12__[/* default */ "a"])({}, this.$route.query), {
+        query: Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"])(Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"])({}, this.$route.query), {
           page: page
         })
       });
       this.$el.scrollIntoView();
     },
     getInputDefaults: function getInputDefaults() {
-      var defaultInput = Object(lodash__WEBPACK_IMPORTED_MODULE_15__["clone"])(this.defaultInput);
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_15__["merge"])({
+      var defaultInput = Object(lodash__WEBPACK_IMPORTED_MODULE_17__["clone"])(this.defaultInput);
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_17__["merge"])({
         searchType: "location",
         commuteMethod: "DRIVING",
         travelDuration: "900",
         roadTraffic: "TRAFFIC_FREE",
         commuteLocation: "",
         q: "",
-        r: 25,
+        r: "",
         moc: "",
         location: "",
         coords: null,
@@ -22788,7 +22796,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       return false;
     },
     removeFilter: function removeFilter(param) {
-      var query = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_12__[/* default */ "a"])({}, this.$route.query);
+      var query = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"])({}, this.$route.query);
 
       var defaultInput = this.getInputDefaults();
       var toRemove = [param];
@@ -22819,7 +22827,7 @@ var component = Object(componentNormalizer["a" /* default */])(
         throw new Error("Invalid sort option ".concat(field));
       }
 
-      var query = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_12__[/* default */ "a"])({}, this.$route.query);
+      var query = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"])({}, this.$route.query);
 
       query["sort"] = field;
       this.$router.replace({
@@ -22827,7 +22835,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       });
     },
     hasInput: function hasInput(key) {
-      return !Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* blank */ "a"])(this.input[key]);
+      return !Object(_services_helpers__WEBPACK_IMPORTED_MODULE_15__[/* blank */ "a"])(this.input[key]);
     },
     setInput: function setInput(key, value) {
       this.$set(this.input, key, value);
@@ -22844,10 +22852,10 @@ var component = Object(componentNormalizer["a" /* default */])(
       });
     },
     getPayload: function getPayload() {
-      var data = Object(lodash__WEBPACK_IMPORTED_MODULE_15__["omitBy"])(Object(lodash__WEBPACK_IMPORTED_MODULE_15__["clone"])(this.input), _services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* blank */ "a"]);
+      var data = Object(lodash__WEBPACK_IMPORTED_MODULE_17__["omitBy"])(Object(lodash__WEBPACK_IMPORTED_MODULE_17__["clone"])(this.input), _services_helpers__WEBPACK_IMPORTED_MODULE_15__[/* blank */ "a"]);
 
       if (!this.isCommuteSearch) {
-        data = Object(lodash__WEBPACK_IMPORTED_MODULE_15__["omit"])(data, ["searchType", "commuteLocation", "roadTraffic", "travelDuration", "commuteMethod"]);
+        data = Object(lodash__WEBPACK_IMPORTED_MODULE_17__["omit"])(data, ["searchType", "commuteLocation", "roadTraffic", "travelDuration", "commuteMethod"]);
       }
 
       return data;
@@ -22868,7 +22876,7 @@ var component = Object(componentNormalizer["a" /* default */])(
     getDefaultMeta: function getDefaultMeta() {
       var inputDefaults = this.getInputDefaults();
       var source = this.siteConfig.source;
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_15__["clone"])({
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_17__["clone"])({
         hasJobs: this.hasJobs,
         hasFeaturedJobs: this.hasFeaturedJobs,
         selectedFilters: this.selectedFilters,
@@ -22880,12 +22888,12 @@ var component = Object(componentNormalizer["a" /* default */])(
       });
     },
     setMeta: function setMeta(meta) {
-      this.meta = Object(lodash__WEBPACK_IMPORTED_MODULE_15__["merge"])(this.getDefaultMeta(), meta);
+      this.meta = Object(lodash__WEBPACK_IMPORTED_MODULE_17__["merge"])(this.getDefaultMeta(), meta);
     },
     search: function search() {
       var _this2 = this;
 
-      return Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var Service, response, data, jobs, pagination, filters, meta, featured_jobs;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -22916,7 +22924,7 @@ var component = Object(componentNormalizer["a" /* default */])(
                 _context.t0 = _context["catch"](2);
                 _this2.status.error = _context.t0;
                 _this2.meta.selectedFilters = [];
-                Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "c"])(_context.t0, "error");
+                Object(_services_helpers__WEBPACK_IMPORTED_MODULE_15__[/* log */ "c"])(_context.t0, "error");
                 return _context.abrupt("return", _context.t0);
 
               case 23:
@@ -22943,15 +22951,15 @@ var component = Object(componentNormalizer["a" /* default */])(
     },
     formatInput: function formatInput() {
       if (this.isLocationSearch) {
-        this.input.location = Object(_services_api_location__WEBPACK_IMPORTED_MODULE_14__[/* fullState */ "a"])(this.input.location);
+        this.input.location = Object(_services_api_location__WEBPACK_IMPORTED_MODULE_16__[/* fullState */ "a"])(this.input.location);
       }
     },
     setInputFromQuery: function setInputFromQuery() {
-      this.input = Object(lodash__WEBPACK_IMPORTED_MODULE_15__["merge"])(this.getInputDefaults(), this.$route.query);
+      this.input = Object(lodash__WEBPACK_IMPORTED_MODULE_17__["merge"])(this.getInputDefaults(), this.$route.query);
       this.formatInput();
     },
     blank: function blank(value) {
-      return Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* blank */ "a"])(value);
+      return Object(_services_helpers__WEBPACK_IMPORTED_MODULE_15__[/* blank */ "a"])(value);
     },
     setSearchType: function setSearchType(type) {
       if (!["location", "commute"].includes(type)) {
@@ -22998,7 +23006,7 @@ var component = Object(componentNormalizer["a" /* default */])(
         path: "/jobs",
         query: this.getPayload()
       }).catch(function (err) {
-        Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* log */ "c"])(err, "error");
+        Object(_services_helpers__WEBPACK_IMPORTED_MODULE_15__[/* log */ "c"])(err, "error");
       });
     }
   }
@@ -25935,12 +25943,12 @@ exports.BROKEN_CARET = fails(function () {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=ef938dee&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=30f521c8&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=ef938dee&
+// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=30f521c8&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
 var es_symbol = __webpack_require__("a4d3");
@@ -26130,15 +26138,15 @@ var lodash = __webpack_require__("2ef0");
         return false;
       }
 
-      if (Object(helpers["a" /* blank */])(this.job.commuteInfo)) {
+      if (Object(helpers["a" /* blank */])(this.commuteData)) {
         return false;
       }
 
-      if (!Object.prototype.hasOwnProperty.call(this.job.commuteInfo, "travelDuration")) {
+      if (!Object.prototype.hasOwnProperty.call(this.commuteData, "travelDuration")) {
         return false;
       }
 
-      return false;
+      return true;
     },
     commuteTime: function commuteTime() {
       if (Object(helpers["a" /* blank */])(this.commuteData)) {
@@ -31953,6 +31961,8 @@ var lodash = __webpack_require__("2ef0");
 
 
 var TIMEOUT_THRESHOLD = 5000;
+var SOLR = 'solr';
+var GOOGLE_TALENT = 'google_talent';
 function api() {
   return axios_default.a.create({
     baseURL: Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_API_URL,
@@ -32092,53 +32102,54 @@ var search_TitleCompleteService = /*#__PURE__*/function () {
     key: "get",
     value: function () {
       var _get3 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(q, siteConfig) {
-        var source, response;
+        var slug, params, response;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                source = Object(lodash["kebabCase"])(siteConfig.source);
-                _context3.prev = 1;
-                _context3.next = 4;
-                return api().get("".concat(source, "/complete/title"), {
-                  params: {
-                    data: {
-                      q: q
-                    },
-                    config: {
-                      buids: siteConfig.buids,
-                      project_id: siteConfig.project_id,
-                      tenant_uuid: siteConfig.tenant_uuid,
-                      company_uuids: siteConfig.company_uuids
-                    }
-                  },
+                slug = Object(lodash["kebabCase"])(siteConfig.source);
+                params = {
+                  q: q,
+                  buids: siteConfig.buids
+                };
+
+                if (siteConfig.source == GOOGLE_TALENT) {
+                  params["project_id"] = siteConfig.project_id;
+                  params["tenant_uuid"] = siteConfig.tenant_uuid;
+                  params["company_uuids"] = siteConfig.company_uuids;
+                }
+
+                _context3.prev = 3;
+                _context3.next = 6;
+                return api().get("".concat(slug, "/complete/title"), {
+                  params: params,
                   timeout: TIMEOUT_THRESHOLD
                 });
 
-              case 4:
+              case 6:
                 response = _context3.sent;
                 return _context3.abrupt("return", response);
 
-              case 8:
-                _context3.prev = 8;
-                _context3.t0 = _context3["catch"](1);
+              case 10:
+                _context3.prev = 10;
+                _context3.t0 = _context3["catch"](3);
 
                 if (!Object.prototype.hasOwnProperty.call(_context3.t0, "response")) {
-                  _context3.next = 12;
+                  _context3.next = 14;
                   break;
                 }
 
                 return _context3.abrupt("return", _context3.t0);
 
-              case 12:
+              case 14:
                 throw new Error(_context3.t0);
 
-              case 13:
+              case 15:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[1, 8]]);
+        }, _callee3, null, [[3, 10]]);
       }));
 
       function get(_x5, _x6) {

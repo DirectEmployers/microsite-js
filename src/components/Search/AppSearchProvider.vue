@@ -117,13 +117,16 @@ export default {
                     return SearchService
             }
         },
+        configFilters(){
+            return this.siteConfig.filters || []
+        },
         selectedFilters() {
             let value = null
             let name = null
             let duplicates = []
             let filters = []
 
-            this.siteConfig.filters.forEach(filter => {
+            this.configFilters.forEach(filter => {
                 name = filter.name
 
                 value = this.input[name]
@@ -142,13 +145,11 @@ export default {
         },
 
         filterParamList() {
-            let params = this.siteConfig.filters.map(filter => {
+            let params = this.configFilters.map(filter => {
                 return filter.name
             })
 
-            params.push("coords")
-
-            return params
+            return params.concat(Object.keys(this.getInputDefaults()))
         },
     },
     watch: {
@@ -182,7 +183,7 @@ export default {
                     roadTraffic: "TRAFFIC_FREE",
                     commuteLocation: "",
                     q: "",
-                    r: 25,
+                    r: "",
                     moc: "",
                     location: "",
                     coords: null,
