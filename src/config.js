@@ -21,23 +21,23 @@ export default {
         ")",
     },
     filters: [
-        {
-            name: "functionalarea",
-            display: "Functional Area",
-            solr_facets: {
-                "Warehouse": 'text:"Functional Area Warehouse" OR text:"Job Post Category Warehouse"',
-                "Transportation": 'text:"Functional Area Transportation" OR text:"Job Post Category Transportation"',
-                "Sales": 'text:"Functional Area Sales" OR text:"Job Post Category Sales"'
-            }
-        },
-        {
-            name: "businessunit",
-            display: "Business Unit",
-            solr_facets:{
-                "Facilities Maintenance" :'text:"Business Unit Facilities Maintenance"',
-                "Construction Industrial WC" :'text:"Business Unit Construction Industrial WC"'
-            }
-        },
+        // {
+        //     name: "functionalarea",
+        //     display: "Functional Area",
+        //     solr_facets: {
+        //         "Warehouse": 'text:"Functional Area Warehouse" OR text:"Job Post Category Warehouse"',
+        //         "Transportation": 'text:"Functional Area Transportation" OR text:"Job Post Category Transportation"',
+        //         "Sales": 'text:"Functional Area Sales" OR text:"Job Post Category Sales"'
+        //     }
+        // },
+        // {
+        //     name: "businessunit",
+        //     display: "Business Unit",
+        //     solr_facets:{
+        //         "Facilities Maintenance" :'text:"Business Unit Facilities Maintenance"',
+        //         "Construction Industrial WC" :'text:"Business Unit Construction Industrial WC"'
+        //     }
+        // },
         // {
         //     name: "positiontype",
         //     display: "Position Type",
