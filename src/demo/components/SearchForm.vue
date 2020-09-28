@@ -66,6 +66,7 @@
                             :key="option.value"
                             :value="option.value"
                             v-for="option in [
+                                { display: 'No Radius Limit', value: '' },
                                 { display: 'Within 25 miles', value: 25 },
                                 { display: 'Within 35 miles', value: 35 },
                                 { display: 'Within 50 miles', value: 50 },
@@ -77,7 +78,7 @@
                     </select>
                 </div>
             </div>
-            <div class="search-form__section">
+            <div class="search-form__section" v-if="isSolr">
                 <AppAutocompleteInput
                     ref="moc"
                     v-model="input.moc"
@@ -113,6 +114,7 @@ export default {
         "submitSearchForm",
         "input",
         "supported",
+        "isSolr",
         "getUserCoordinates",
     ],
     computed: {

@@ -147,19 +147,20 @@ export default {
             if (this.isSolr) {
                 return false
             }
-            if (blank(this.job.commuteInfo)) {
+            if (blank(this.commuteData)) {
                 return false
             }
 
             if (
                 !Object.prototype.hasOwnProperty.call(
-                    this.job.commuteInfo,
+                    this.commuteData,
                     "travelDuration"
                 )
             ) {
                 return false
             }
-            return false
+            
+            return true
         },
         commuteTime() {
             if (blank(this.commuteData)) {
