@@ -123,11 +123,12 @@ export default {
         appliedFilters() {
             let filters = []
             let added = []
+            let input = this.$route.query
 
             this.configFilters.forEach(filter => {
-                if (!blank(this.input[filter.name]) && !added.includes(filter.name)) {
+                if (!blank(input[filter.name]) && !added.includes(filter.name)) {
                     filters.push({
-                        display: this.input[filter.name],
+                        display: input[filter.name],
                         parameter: filter.name,
                     })
                     added.push(filter.name)
@@ -142,7 +143,7 @@ export default {
         "$route.query"() {
             this.setInputFromQuery()
             this.search()
-        },
+        }
     },
     methods: {
         formatInput() {
@@ -200,25 +201,11 @@ export default {
             }
         },
 
-        shouldClearCoords() {
-            const loc = this.input.location
-            const coords = this.input.coords
-            // this should be a watcher?
-            if (blank(loc) || blank(coords)) {
-                return true
-            }
-
-            return false
-        },
         getPayload() {
             return omitBy(this.input, blank)
         },
 
         submitSearchForm() {
-
-            if (this.shouldClearCoords()) {
-                this.input.coords = ""
-            }
 
             this.$router
                 .push({
@@ -229,6 +216,7 @@ export default {
         },
         removeFilter(name) {
             const defaultInput = this.getInputDefaults()
+            
             if (name == "*") {
                 this.input = defaultInput
             }

@@ -19,6 +19,7 @@
                     <AppAutocompleteInput
                         ref="location"
                         v-model="input.location"
+                        @input="input.coords=''"
                         label="Where"
                         placeholder="Type city or state"
                         aria-label="Type city or state"
@@ -103,7 +104,7 @@ export default {
         input: {
             type: Object,
             required: false,
-            default: ()=>{ {} }
+            default: ()=>{ return {} }
         },
         submitSearchForm: {
             type: Function,
@@ -117,7 +118,7 @@ export default {
     },
     methods:{
         setLocationFromGeo(coords){
-            this.input.location ="Your Location"
+            this.input.location = "Your Location"
             this.input.coords = coords
         }
     },
