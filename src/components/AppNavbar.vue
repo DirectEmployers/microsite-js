@@ -13,26 +13,11 @@
                 aria-label="navbar Toggle"
                 class="navbar__toggler"
             >
-                <!-- menu -->
-                <svg
+                <AppHamburgerMenuIcon         
                     v-if="!toggled"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                >
-                    <title>Menu</title>
-                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-                </svg>
-                <!-- x -->
-                <svg
-                    v-else
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 96 96"
-                    enable-background="new 0 0 96 96"
-                >
-                    <polygon
-                        points="96,14 82,0 48,34 14,0 0,14 34,48 0,82 14,96 48,62 82,96 96,82 62,48 "
-                    />
-                </svg>
+                    class="pointer-events-none"
+                />
+                <AppXIcon v-else class="pointer-events-none" />
             </button>
         </slot>
 
@@ -68,12 +53,18 @@
 </template>
 
 <script>
+import AppHamburgerMenuIcon from './Icons/AppHamburgerMenuIcon'
+import AppXIcon from './Icons/AppXIcon'
 export default {
     props: {
         links: {
             type: Array,
             required: true,
         },
+    },
+    components:{
+        AppXIcon,
+        AppHamburgerMenuIcon,
     },
     created() {
         if (process.isClient) {
@@ -94,18 +85,20 @@ export default {
     },
     methods: {
         close() {
+            if(this.toggled){
+                this.$emit("navbarClosed")
+            }
             this.toggled = false
-            this.$emit("navbarClosed")
         },
 
         open() {
+            if(!this.toggled){
+                this.$emit("navbarOpened")
+            }
             this.toggled = true
-            this.$emit("navbarOpened")
         },
 
         toggle() {
-            this.toggled = !this.toggled
-
             if(this.toggled){
                 this.close()
             }else{
@@ -126,7 +119,6 @@ export default {
             const containsTarget = this.$el.contains(e.target)
 
             const wrapperContainsTarget = menuWrapper.contains(e.target)
-
             if (!containsTarget && !wrapperContainsTarget) {
                 this.close()
             }

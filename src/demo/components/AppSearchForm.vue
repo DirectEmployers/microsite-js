@@ -26,25 +26,8 @@
                         :query="LocationCompleteService"
                         @setResult="submitSearchForm"
                     />
-                    <div :class="{ 'form__input-group': supported['geolocation'] }">
-                        <button
-                            @click="getUserCoordinates"
-                            v-show="supported['geolocation']"
-                            type="button"
-                            aria-label="Your location"
-                            style="background-color: black"
-                            class="search-form__user-location form__input-addon"
-                            :class="{
-                                hidden: !supported['geolocation'],
-                            }"
-                        >
-                            <img
-                                width="18px"
-                                src="https://dn9tckvz2rpxv.cloudfront.net/img/radius-search2.svg"
-                                alt="Radius Icon"
-                                :class="{ hidden: !supported['geolocation'] }"
-                            />
-                        </button>
+                    <div class="form__input-group">
+                        <AppGeoLocation class="form__input-addon" @getCoords="setLocationFromGeo"/>
                     </div>
                 </div>
 
@@ -78,10 +61,11 @@
                     </select>
                 </div>
             </div>
-            <div class="search-form__section" v-if="isSolr">
+            <!-- v-if="isSolr" -->
+            <div class="search-form__section" >
                 <AppAutocompleteInput
-                    ref="moc"
                     v-model="input.moc"
+                    ref="moc"
                     label="Search by MOC code"
                     placeholder="Enter MOC code"
                     aria-label="Search by MOC code"
@@ -90,9 +74,7 @@
                     @setResult="submitSearchForm"
                 />
             </div>
-            <div
-                class="search-form__button-wrapper"
-            >
+            <div class="search-form__button-wrapper">
                 <button class="button">
                     Find Jobs
                 </button>
@@ -103,33 +85,46 @@
 
 <script>
 import AppAutocompleteInput from "~/components/Form/AppAutocompleteInput"
-import { TitleCompleteService, MOCCompleteService, LocationCompleteService } from "~/services/api/search"
+import AppSearchProvider from "~/components/Search/AppSearchProvider"
+import AppGeoLocation from "~/components/Search/AppGeoLocation"
+import {
+    TitleCompleteService,
+    MOCCompleteService,
+    LocationCompleteService,
+} from "~/services/search"
 
 export default {
     name: "SearchForm",
     components: {
         AppAutocompleteInput,
+        AppGeoLocation
     },
-    props: [
-        "submitSearchForm",
-        "input",
-        "supported",
-        "isSolr",
-        "getUserCoordinates",
-    ],
+    props:{
+        input: {
+            type: Object,
+            required: false,
+            default: ()=>{ {} }
+        },
+        submitSearchForm: {
+            type: Function,
+            required: true
+        }
+    },
     computed: {
         shouldShowRadiusInput() {
-            if(this.input.searchType == 'commute'){
-                return false;
-            }
-
             return this.input.coords || this.input.location
         },
     },
-    data:()=>({
+    methods:{
+        setLocationFromGeo(coords){
+            this.input.location ="Your Location"
+            this.input.coords = coords
+        }
+    },
+    data: () => ({
         TitleCompleteService,
         MOCCompleteService,
         LocationCompleteService,
-    })
+    }),
 }
 </script>

@@ -7,30 +7,24 @@
             v-slot="{
                 input,
                 submitSearchForm,
-                supported,
-                getUserCoordinates,
             }"
         >
             <div class="mx-4">
-                <SearchForm
+                <AppSearchForm
                     :input="input"
                     :submitSearchForm="submitSearchForm"
-                    :supported="supported"
-                    :getUserCoordinates="getUserCoordinates"
                 />
             </div>
         </AppSearchProvider>
     </Layout>
 </template>
 <script>
-import AppDropdown from "~/components/AppDropdown"
 import AppSearchProvider from "~/components/Search/AppSearchProvider"
-import SearchForm from "~/demo/components/SearchForm"
+import AppSearchForm from "~/demo/components/AppSearchForm"
 export default {
     components: {
-        AppDropdown,
         AppSearchProvider,
-        SearchForm,
+        AppSearchForm,
     },
     metaInfo: {
         title: "Home",

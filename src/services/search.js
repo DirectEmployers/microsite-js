@@ -2,8 +2,8 @@ import axios from "axios"
 import {kebabCase} from "lodash"
 
 const TIMEOUT_THRESHOLD = 5000
-const SOLR = 'solr'
-const GOOGLE_TALENT = 'google_talent'
+const SOLR = "solr"
+const GOOGLE_TALENT = "google_talent"
 export default function api() {
     return axios.create({
         baseURL: process.env.GRIDSOME_API_URL,
@@ -64,7 +64,6 @@ export class CommuteSearchService {
 
 export class TitleCompleteService {
     static async get(q, siteConfig) {
-
         const slug = kebabCase(siteConfig.source)
         let params = {q: q, buids: siteConfig.buids}
 
@@ -73,7 +72,6 @@ export class TitleCompleteService {
             params["tenant_uuid"] = siteConfig.tenant_uuid
             params["company_uuids"] = siteConfig.company_uuids
         }
-
 
         try {
             const response = await api().get(`${slug}/complete/title`, {

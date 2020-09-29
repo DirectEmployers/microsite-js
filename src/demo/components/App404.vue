@@ -13,7 +13,7 @@
                     }"
                 >
                     <div class="mx-4">
-                        <SearchForm
+                        <AppSearchForm
                             :input="input"
                             :submitSearchForm="submitSearchForm"
                             :supported="supported"
@@ -46,12 +46,12 @@
 </div>
 </template>
 <script>
-import SearchForm from "~/demo/components/SearchForm"
+import AppSearchForm from "~/demo/components/AppSearchForm"
 import AppSearchProvider from "~/components/Search/AppSearchProvider"
 
 export default {
     components: {
-        SearchForm,
+        AppSearchForm,
         AppSearchProvider,
     }
 }
