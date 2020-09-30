@@ -7,11 +7,13 @@
             v-slot="{
                 input,
                 submitSearchForm,
+                source
             }"
         >
             <div class="mx-4">
                 <AppSearchForm
                     :input="input"
+                    :source="source"
                     :submitSearchForm="submitSearchForm"
                 />
             </div>

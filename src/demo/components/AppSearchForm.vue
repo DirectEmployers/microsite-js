@@ -62,8 +62,7 @@
                     </select>
                 </div>
             </div>
-            <!-- v-if="isSolr" -->
-            <div class="search-form__section" >
+            <div class="search-form__section" v-if="source == 'solr'">
                 <AppAutocompleteInput
                     v-model="input.moc"
                     ref="moc"
@@ -106,6 +105,10 @@ export default {
             required: false,
             default: ()=>{ return {} }
         },
+        source:{
+            type: String,
+            required: true
+        }, 
         submitSearchForm: {
             type: Function,
             required: true

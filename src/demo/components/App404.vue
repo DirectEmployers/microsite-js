@@ -8,17 +8,12 @@
                     v-slot="{
                         input,
                         submitSearchForm,
-                        supported,
-                        getUserCoordinates,
                     }"
                 >
                     <div class="mx-4">
                         <AppSearchForm
                             :input="input"
                             :submitSearchForm="submitSearchForm"
-                            :supported="supported"
-                            :getUserCoordinates="getUserCoordinates"
-
                         />
                     </div>
                 </AppSearchProvider>

@@ -49,8 +49,20 @@ export default {
         }
     },
     methods: {
+        close(){
+            this.toggled = false
+            this.$emit('modalClosed')
+        },
+        open(){
+            this.toggled = true
+            this.$emit('modalOpened')
+        },
         toggle() {
-            this.toggled = !this.toggled
+            if(this.toggled){
+                this.close()
+            }else{
+                this.open()
+            }
         },
 
         nonModalClick(e) {
@@ -61,15 +73,15 @@ export default {
             const wrapperContainsTarget =
                 modalWrapper && modalWrapper.contains(e.target)
 
-            if (containsTarget && !wrapperContainsTarget) {
-                this.toggled = false
+            if (this.toggled && containsTarget && !wrapperContainsTarget) {
+                this.close()
             }
         },
 
         exitModal(e) {
             // escape
-            if (e.keyCode === 27) {
-                this.toggled = false
+            if (this.toggled && e.keyCode === 27) {
+                this.close()
             }
         },
 

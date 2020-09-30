@@ -17,6 +17,7 @@
                     featuredJobs,
                     appliedFilters,
                     submitSearchForm,
+                    isGoogleTalent,
                 }"
             >
                 <AppLoader v-if="status.loading" />
@@ -25,6 +26,7 @@
                     <div class="mx-4">
                         <AppSearchForm
                             :input="input"
+                            :source="source"
                             :submitSearchForm="submitSearchForm"
                         />
                     </div>
@@ -100,7 +102,7 @@
                                         v-for="(option, index) in sortOptions"
                                         name="sort"
                                     >
-                                        {{ titleCase(option) }}
+                                        {{ option }}
                                     </li>
                                 </ul>
                             </AppAccordion>
@@ -108,7 +110,8 @@
                                 :key="index"
                                 :config-filter="configFilter"
                                 :input="input"
-                                v-for="(configFilter, index) in $siteConfig.filters"
+                                v-for="(configFilter,
+                                index) in $siteConfig.filters"
                                 :options="getFilterOptions(configFilter)"
                             >
                                 <template v-slot:display="{isOpen}">
@@ -125,6 +128,26 @@
                                     </h3>
                                 </template>
                             </AppSearchFilter>
+                            <div class="container">
+                                <button
+                                    @click="toggleCommuteModal()"
+                                    class="button"
+                                    v-if="isGoogleTalent"
+                                >
+                                    Commute Search
+                                </button>
+                            </div>
+                            <AppModal
+                                id="commute-modal"
+                                v-if="isGoogleTalent"
+                                ref="commute-modal"
+                                title="Commute Search"
+                            >
+                                <AppCommuteSearchForm
+                                    :input="input"
+                                    :submitSearchForm="submitSearchForm"
+                                />
+                            </AppModal>
                         </section>
                     </section>
                 </section>
@@ -137,15 +160,15 @@ import AppSearchProvider from "~/components/Search/AppSearchProvider"
 import {blank} from "~/services/helpers"
 import AppPagination from "~/components/AppPagination"
 import AppAccordion from "~/components/AppAccordion"
-import CommuteSearchForm from "~/demo/components/CommuteSearchForm"
+import AppModal from "~/components/AppModal"
 import AppSearchForm from "~/demo/components/AppSearchForm"
+import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppLoader from "~/demo/components/AppLoader"
 import AppSearchFilter from "~/components/Search/AppSearchFilter"
 import AppChip from "~/components/AppChip"
 import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppXIcon from "~/components/Icons/AppXIcon"
-import {startCase} from "lodash"
 
 export default {
     components: {
@@ -154,17 +177,13 @@ export default {
         AppSearchFilter,
         AppJobSearchResults,
         AppXIcon,
+        AppModal,
         AppChip,
         AppSearchProvider,
-        CommuteSearchForm,
         AppLoader,
         AppFeaturedJobs,
         AppSearchForm,
-    },
-    methods: {
-        titleCase(value) {
-            return startCase(value)
-        },
+        AppCommuteSearchForm,
     },
     metaInfo: {
         title: "Jobs",
@@ -176,5 +195,10 @@ export default {
             },
         ],
     },
+    methods:{
+        toggleCommuteModal() {
+            this.$refs["commute-modal"].toggle()
+        }
+    }
 }
 </script>

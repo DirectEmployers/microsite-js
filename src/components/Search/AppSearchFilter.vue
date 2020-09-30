@@ -58,7 +58,7 @@
 <script>
 import AppAccordion from "../AppAccordion"
 import {blank} from "../../services/helpers"
-import {fullState} from "../../services/location"
+import {fullState, removeCountry} from "../../services/location"
 import {omitBy, truncate, trim} from "lodash"
 export default {
     props: {
@@ -166,7 +166,7 @@ export default {
             let submitValue = option.display
 
             if (this.keyName == "state") {
-                display = fullState(option.display)
+                display = fullState(removeCountry(option.display))
                 submitValue = display
             } else if (this.keyName == "moc") {
                 display = truncate(option.display, {length: 32})

@@ -10,26 +10,25 @@
         }"
     >
         <slot>
-            <img
-                width="18px"
-                src="https://dn9tckvz2rpxv.cloudfront.net/img/radius-search2.svg"
-                alt="Radius Icon"
-                :class="{ hidden: !isSupported }"
-            />
+            <AppRadiusIcon width="18px" />
         </slot>
     </button>
 </template>
 <script>
+import AppRadiusIcon from "../Icons/AppRadiusIcon"
 export default {
-    computed:{
-        isSupported(){
+    computed: {
+        isSupported() {
             if (process.isClient) {
                 return "geolocation" in window.navigator
             }
             return false
-        }
+        },
     },
-    methods:{
+    components:{
+        AppRadiusIcon
+    },
+    methods: {
         getGeoLocation() {
             if (process.isClient && this.isSupported) {
                 navigator.geolocation.getCurrentPosition(position => {
@@ -42,8 +41,7 @@ export default {
                     this.$emit("getCoords", coords)
                 })
             }
-        }
-
-    }
+        },
+    },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="submitSearchForm('commute')">
+    <form @submit.prevent="submitSearchForm">
         <div class="commute-search">
             <div class="form__input-group form__input-group--stacked">
                 <label for="commuteLocation" class="form__label">
@@ -80,9 +80,19 @@
 
 <script>
 import {  retry } from '~/services/helpers'
+
 export default {
     name: "CommuteSearchForm",
-    props: ["submitSearchForm", "input"],
+    props: {
+        input: {
+            required: false,
+            default: ()=>{}
+        },
+        submitSearchForm:{
+            type: Function,
+            required:true
+        }
+    },
     mounted() {
         retry(this.initAutocomplete)
     },

@@ -1,6 +1,6 @@
 export default {
-    // buids: [50611, 50613], //military home depot
-    buids: [27396], //hdsupply
+    buids: [50611, 50613], //military home depot
+    // buids: [27396], //hdsupply
     source: "solr",
     project_id: "cloudjobsearch-256720",
     tenant_uuid: "bb9d54aa-b8d6-426b-927f-f9cb4b7e8ed1",
