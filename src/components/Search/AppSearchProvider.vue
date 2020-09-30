@@ -133,7 +133,6 @@ export default {
             let filters = []
             let added = []
             let input = this.$route.query
-
             this.configFilters.forEach(filter => {
                 if (
                     !blank(input[filter.name]) &&
@@ -148,13 +147,12 @@ export default {
             })
 
             if (this.isCommuteSearch) {
-                let commuteLocation = this.input.commuteLocation || ''
+                let commuteLocation = input.commuteLocation 
                 filters.push({
                     display: `Commute:${commuteLocation}`,
-                    parameter: "searchType",
+                    parameter: "commuteLocation",
                 })
             }
-
             return filters
         },
     },
@@ -167,13 +165,19 @@ export default {
     },
     methods: {
         formatInput() {
-            this.input.location = fullState(this.input.location)
+            if(!this.isCommuteSearch){
+                this.input.location = fullState(this.input.location)
+            }else{
+                this.input.location = ""
+            }
         },
 
         setInputFromQuery() {
             this.input = merge(this.getInputDefaults(), this.$route.query)
 
             this.formatInput()
+
+            console.log(this.input)
         },
         getFilterOptions(filter) {
             let key = filter.key
@@ -192,6 +196,7 @@ export default {
             return clone({
                 commuteMethod: "DRIVING",
                 travelDuration: "900",
+                commuteLocation: "",
                 roadTraffic: "TRAFFIC_FREE",
             })
         },
@@ -237,7 +242,7 @@ export default {
                 exclude = Object.keys(this.getCommuteDefaults())
             }
 
-            return omitBy(this.input, (v, k) => {
+            return omitBy(clone(this.input), (v, k) => {
                 return blank(v) || exclude.includes(k)
             })
         },
@@ -254,13 +259,13 @@ export default {
         removeFilter(name) {
             const defaultInput = this.getInputDefaults()
 
-            if (name == "*" || name == "searchType") {
+            if (name == "*") {
                 this.input = defaultInput
             }
 
             this.input[name] = defaultInput[name] || ""
 
-            if (name == "location") {
+            if (['location', 'commuteLocation'].includes(name)) {
                 this.input.coords = ""
             }
 

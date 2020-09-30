@@ -20,7 +20,6 @@
 
         <ul class="search-filter-options">
             <li
-                @click="selectOption(option)"
                 class="search-filter-options-item"
                 :key="index"
                 v-for="(option, index) in displayedOptions"
@@ -165,7 +164,7 @@ export default {
             let display = option.display
             let submitValue = option.display
 
-            if (this.keyName == "state") {
+            if (this.queryParamName == "location") {
                 display = fullState(removeCountry(option.display))
                 submitValue = display
             } else if (this.keyName == "moc") {
