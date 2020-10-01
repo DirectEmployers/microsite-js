@@ -102,17 +102,19 @@ export default {
             if (!blank(sort)) {
                 options = sort.options
             }
-           
+
             return options.map(o => startCase(o))
         },
-        isGoogleTalent(){
-            return this.meta.source == 'google_talent'
+        isGoogleTalent() {
+            return this.meta.source == "google_talent"
         },
-        isSolr(){
-            return this.meta.source == 'solr'
+        isSolr() {
+            return this.meta.source == "solr"
         },
         isCommuteSearch() {
-            return !blank(this.input.coords) && !blank(this.input.commuteLocation)
+            return (
+                !blank(this.input.coords) && !blank(this.input.commuteLocation)
+            )
         },
         configFilters() {
             return this.siteConfig.filters || []
@@ -142,7 +144,7 @@ export default {
             })
 
             if (this.isCommuteSearch) {
-                let commuteLocation = input.commuteLocation 
+                let commuteLocation = input.commuteLocation
                 filters.push({
                     display: `Commute:${commuteLocation}`,
                     parameter: "commuteLocation",
@@ -160,9 +162,9 @@ export default {
     },
     methods: {
         formatInput() {
-            if(!this.isCommuteSearch){
+            if (!this.isCommuteSearch) {
                 this.input.location = fullState(this.input.location)
-            }else{
+            } else {
                 this.input.location = ""
             }
         },
@@ -171,14 +173,12 @@ export default {
             this.input = merge(this.getInputDefaults(), this.$route.query)
 
             this.formatInput()
-
         },
         getFilterOptions(filter) {
-
-            if(!blank(filter.options)){
+            if (!blank(filter.options)) {
                 return filter.options
             }
-            
+
             let key = filter.key
 
             if (blank(key)) {
@@ -216,16 +216,18 @@ export default {
                 defaultInput
             )
         },
-
-        selectPage(page) {
-            this.input["page"] = page
-
+        pushPayload() {
             this.$router
                 .push({
                     path: "/jobs",
                     query: this.getPayload(),
                 })
                 .catch(err => {})
+        },
+        selectPage(page) {
+            this.input["page"] = page
+
+            this.pushPayload()
 
             this.$el.scrollIntoView()
         },
@@ -253,12 +255,7 @@ export default {
 
         submitSearchForm() {
             this.input.page = 1
-            this.$router
-                .push({
-                    path: "/jobs",
-                    query: this.getPayload(),
-                })
-                .catch(err => {})
+            this.pushPayload()
         },
 
         removeFilter(name) {
@@ -270,7 +267,7 @@ export default {
 
             this.input[name] = defaultInput[name] || ""
 
-            if (['location', 'commuteLocation'].includes(name)) {
+            if (["location", "commuteLocation"].includes(name)) {
                 this.input.coords = ""
             }
 

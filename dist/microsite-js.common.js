@@ -140,12 +140,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=7e1fecc6&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=4a214c64&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"input":_vm.input,"filteredInput":_vm.getPayload(),"status":_vm.status,"filters":_vm.filters,"sort":_vm.sort,"sortedBy":_vm.sortedBy,"sortOptions":_vm.sortOptions,"source":_vm.source,"isSolr":_vm.isSolr,"isGoogleTalent":_vm.isGoogleTalent,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"removeFilter":_vm.removeFilter,"featuredJobs":_vm.featuredJobs,"appliedFilters":_vm.appliedFilters,"getFilterOptions":_vm.getFilterOptions,"submitSearchForm":_vm.submitSearchForm,"isCommuteSearch":_vm.isCommuteSearch})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=7e1fecc6&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=4a214c64&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -314,10 +314,10 @@ var services_search = __webpack_require__("e73b");
       });
     },
     isGoogleTalent: function isGoogleTalent() {
-      return this.meta.source == 'google_talent';
+      return this.meta.source == "google_talent";
     },
     isSolr: function isSolr() {
-      return this.meta.source == 'solr';
+      return this.meta.source == "solr";
     },
     isCommuteSearch: function isCommuteSearch() {
       return !Object(helpers["a" /* blank */])(this.input.coords) && !Object(helpers["a" /* blank */])(this.input.commuteLocation);
@@ -412,12 +412,15 @@ var services_search = __webpack_require__("e73b");
         sort: "relevance"
       }, this.getCommuteDefaults(), defaultInput);
     },
-    selectPage: function selectPage(page) {
-      this.input["page"] = page;
+    pushPayload: function pushPayload() {
       this.$router.push({
         path: "/jobs",
         query: this.getPayload()
       }).catch(function (err) {});
+    },
+    selectPage: function selectPage(page) {
+      this.input["page"] = page;
+      this.pushPayload();
       this.$el.scrollIntoView();
     },
     sort: function sort(field) {
@@ -441,10 +444,7 @@ var services_search = __webpack_require__("e73b");
     },
     submitSearchForm: function submitSearchForm() {
       this.input.page = 1;
-      this.$router.push({
-        path: "/jobs",
-        query: this.getPayload()
-      }).catch(function (err) {});
+      this.pushPayload();
     },
     removeFilter: function removeFilter(name) {
       var defaultInput = this.getInputDefaults();
@@ -455,7 +455,7 @@ var services_search = __webpack_require__("e73b");
 
       this.input[name] = defaultInput[name] || "";
 
-      if (['location', 'commuteLocation'].includes(name)) {
+      if (["location", "commuteLocation"].includes(name)) {
         this.input.coords = "";
       }
 
