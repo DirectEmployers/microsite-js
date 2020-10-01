@@ -220,7 +220,12 @@ export default {
         selectPage(page) {
             this.input["page"] = page
 
-            this.submitSearchForm()
+            this.$router
+                .push({
+                    path: "/jobs",
+                    query: this.getPayload(),
+                })
+                .catch(err => {})
 
             this.$el.scrollIntoView()
         },
