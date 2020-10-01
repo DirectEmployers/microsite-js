@@ -95,22 +95,14 @@ export default {
             return !blank(this.input.coords) || !blank(this.input.location)
         },
         sortOptions() {
-            let options = ["date", "relevance", "title"]
-            let sort = this.meta.sort || {}
+            let options = []
 
+            let sort = clone(this.meta.sort || {})
+            
             if (!blank(sort)) {
                 options = sort.options
             }
-
-            const distanceIndex = options.indexOf("distance")
-
-            if (this.hasLocationInput && distanceIndex == -1 && sort.active != 'distance') {
-                options.push("distance")
-            } else if (distanceIndex != -1){
-                if(!this.hasLocationInput || (blank(this.input.r) && this.isSolr)) {
-                    options.splice(distanceIndex, 1)
-                }
-            }
+           
             return options.map(o => startCase(o))
         },
         isGoogleTalent(){
