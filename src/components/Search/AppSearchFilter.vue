@@ -9,11 +9,11 @@
         <template v-slot:header="{isOpen}">
             <slot name="display" :isOpen="isOpen">
                 <h3
-                    v-if="configFilter.display"
+                    v-if="display"
                     class="search-filter-display"
                     :class="{'search-filter-display--active': isActive}"
                 >
-                    {{ configFilter.display }}
+                    Filter By {{ display }}
                 </h3>
             </slot>
         </template>
@@ -25,7 +25,7 @@
                 v-for="(option, index) in displayedOptions"
             >
                 <g-link :to="option.href">
-                    {{ option.display }} ({{ option.value }})
+                    {{ option.display }} <span v-if="option.value">({{ option.value }})</span>
                 </g-link>
             </li>
         </ul>
@@ -61,9 +61,23 @@ import {fullState, removeCountry} from "../../services/location"
 import {omitBy, truncate, trim} from "lodash"
 export default {
     props: {
-        configFilter: {
+        display: {
             required: true,
-            type: Object,
+            type: String,
+        },
+        keyName: {
+            required: false,
+            default() {
+                return this._uid
+            }
+        },
+        name: {
+            required: true,
+            type: String,
+        },
+        visibile:{
+            type: Boolean,
+            default: true
         },
         options: {
             required: false,
@@ -97,17 +111,9 @@ export default {
     },
     computed: {
         isVisible() {
-            return this.configFilter.visible !== false
+            return this.visible !== false
         },
-
-        queryParamName() {
-            return this.configFilter.name
-        },
-
-        keyName() {
-            return this.configFilter.key
-        },
-
+        
         shouldShowLess() {
             const numberOfItemsToAdd = 10
 
@@ -136,9 +142,9 @@ export default {
     methods: {
         buildFilterHref(option) {
             let params = this.cleanedInput
-
-            params[this.queryParamName] = option.submitValue
+            
             params['page'] = 1
+            params[this.name] = option.submitValue
 
             let qs = []
 
@@ -154,7 +160,7 @@ export default {
         },
 
         isExistingFilter(value) {
-            let inputValue = this.input[this.queryParamName]
+            let inputValue = this.input[this.name]
 
             let isExisting = inputValue == value
 
@@ -164,7 +170,11 @@ export default {
             let display = option.display
             let submitValue = option.display
 
-            if (this.queryParamName == "location") {
+            if(Object.prototype.hasOwnProperty.call(option, 'submitValue')){
+                submitValue = option.submitValue
+            }
+
+            if (this.name == "location") {
                 display = fullState(removeCountry(option.display))
                 submitValue = display
             } else if (this.keyName == "moc") {

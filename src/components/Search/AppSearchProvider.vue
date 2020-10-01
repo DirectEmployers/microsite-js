@@ -3,6 +3,7 @@
         <slot
             :jobs="jobs"
             :input="input"
+            :filteredInput="getPayload()"
             :status="status"
             :filters="filters"
             :sort="sort"
@@ -179,6 +180,11 @@ export default {
 
         },
         getFilterOptions(filter) {
+
+            if(!blank(filter.options)){
+                return filter.options
+            }
+            
             let key = filter.key
 
             if (blank(key)) {

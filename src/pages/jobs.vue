@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <AppSearchProvider class="my-6" :site-config="$siteConfig">
+        <AppSearchProvider ref="provider" class="my-6" :site-config="$siteConfig">
             <template
                 v-slot="{
                     jobs,
@@ -10,6 +10,7 @@
                     sort,
                     getFilterOptions,
                     sortedBy,
+                    filteredInput,
                     sortOptions,
                     removeFilter,
                     pagination,
@@ -108,26 +109,15 @@
                             </AppAccordion>
                             <AppSearchFilter
                                 :key="index"
-                                :config-filter="configFilter"
-                                :input="input"
-                                v-for="(configFilter,
-                                index) in $siteConfig.filters"
+                                :name="configFilter.name"
+                                :display="configFilter.display"
+                                :key-name="configFilter.key"
+                                :visible="configFilter.visible"
+                                :input="filteredInput"
+                                v-for="(configFilter, index) in $siteConfig.filters"
                                 :options="getFilterOptions(configFilter)"
-                            >
-                                <template v-slot:display="{isOpen}">
-                                    <h3
-                                        class="search-filter-display"
-                                        :class="{
-                                            'search-filter-display--active': isOpen,
-                                        }"
-                                    >
-                                        Filter By
-                                        <strong>
-                                            {{ configFilter.display }}
-                                        </strong>
-                                    </h3>
-                                </template>
-                            </AppSearchFilter>
+                            />
+                            
                             <div class="container">
                                 <button
                                     @click="toggleCommuteModal()"

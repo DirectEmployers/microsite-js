@@ -140,12 +140,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=20ba9e0a&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"input":_vm.input,"status":_vm.status,"filters":_vm.filters,"sort":_vm.sort,"sortedBy":_vm.sortedBy,"sortOptions":_vm.sortOptions,"source":_vm.source,"isSolr":_vm.isSolr,"isGoogleTalent":_vm.isGoogleTalent,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"removeFilter":_vm.removeFilter,"featuredJobs":_vm.featuredJobs,"appliedFilters":_vm.appliedFilters,"getFilterOptions":_vm.getFilterOptions,"submitSearchForm":_vm.submitSearchForm,"isCommuteSearch":_vm.isCommuteSearch})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=779ef149&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"input":_vm.input,"filteredInput":_vm.getPayload(),"status":_vm.status,"filters":_vm.filters,"sort":_vm.sort,"sortedBy":_vm.sortedBy,"sortOptions":_vm.sortOptions,"source":_vm.source,"isSolr":_vm.isSolr,"isGoogleTalent":_vm.isGoogleTalent,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"removeFilter":_vm.removeFilter,"featuredJobs":_vm.featuredJobs,"appliedFilters":_vm.appliedFilters,"getFilterOptions":_vm.getFilterOptions,"submitSearchForm":_vm.submitSearchForm,"isCommuteSearch":_vm.isCommuteSearch})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=20ba9e0a&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=779ef149&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -212,6 +212,7 @@ var services_search = __webpack_require__("e73b");
 
 
 
+//
 //
 //
 //
@@ -390,6 +391,10 @@ var services_search = __webpack_require__("e73b");
       this.formatInput();
     },
     getFilterOptions: function getFilterOptions(filter) {
+      if (!Object(helpers["a" /* blank */])(filter.options)) {
+        return filter.options;
+      }
+
       var key = filter.key;
 
       if (Object(helpers["a" /* blank */])(key)) {
@@ -1014,14 +1019,14 @@ module.exports = ''.repeat || function repeat(count) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=59632106&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=6b708536&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.displayedOptions.length && _vm.isVisible)?_c('AppAccordion',{key:(_vm.keyName + "-accordion"),staticClass:"search-filter",attrs:{"open":_vm.isActive,"name":(_vm.keyName + "-accordion")},scopedSlots:_vm._u([{key:"header",fn:function(ref){
 var isOpen = ref.isOpen;
-return [_vm._t("display",[(_vm.configFilter.display)?_c('h3',{staticClass:"search-filter-display",class:{'search-filter-display--active': _vm.isActive}},[_vm._v(" "+_vm._s(_vm.configFilter.display)+" ")]):_vm._e()],{"isOpen":isOpen})]}}],null,true)},[_c('ul',{staticClass:"search-filter-options"},_vm._l((_vm.displayedOptions),function(option,index){return _c('li',{key:index,staticClass:"search-filter-options-item"},[_c('g-link',{attrs:{"to":option.href}},[_vm._v(" "+_vm._s(option.display)+" ("+_vm._s(option.value)+") ")])],1)}),0),(_vm.shouldShowLess || _vm.hasMoreItems)?_c('section',{staticClass:"search-filter-limiter"},[(_vm.hasMoreItems)?_c('button',{staticClass:"search-filter-limiter-more",attrs:{"aria-label":"Show more filters","rel":"nofollow"},on:{"click":function($event){return _vm.showMore()}}},[_vm._v(" More ")]):_vm._e(),(_vm.shouldShowLess)?_c('button',{staticClass:"search-filter-limiter-less",attrs:{"aria-label":"Show less filters","rel":"nofollow"},on:{"click":function($event){return _vm.showLess()}}},[_vm._v(" Less ")]):_vm._e()]):_vm._e()]):_vm._e()}
+return [_vm._t("display",[(_vm.display)?_c('h3',{staticClass:"search-filter-display",class:{'search-filter-display--active': _vm.isActive}},[_vm._v(" Filter By "+_vm._s(_vm.display)+" ")]):_vm._e()],{"isOpen":isOpen})]}}],null,true)},[_c('ul',{staticClass:"search-filter-options"},_vm._l((_vm.displayedOptions),function(option,index){return _c('li',{key:index,staticClass:"search-filter-options-item"},[_c('g-link',{attrs:{"to":option.href}},[_vm._v(" "+_vm._s(option.display)+" "),(option.value)?_c('span',[_vm._v("("+_vm._s(option.value)+")")]):_vm._e()])],1)}),0),(_vm.shouldShowLess || _vm.hasMoreItems)?_c('section',{staticClass:"search-filter-limiter"},[(_vm.hasMoreItems)?_c('button',{staticClass:"search-filter-limiter-more",attrs:{"aria-label":"Show more filters","rel":"nofollow"},on:{"click":function($event){return _vm.showMore()}}},[_vm._v(" More ")]):_vm._e(),(_vm.shouldShowLess)?_c('button',{staticClass:"search-filter-limiter-less",attrs:{"aria-label":"Show less filters","rel":"nofollow"},on:{"click":function($event){return _vm.showLess()}}},[_vm._v(" Less ")]):_vm._e()]):_vm._e()]):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=59632106&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=6b708536&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -1209,9 +1214,23 @@ var lodash = __webpack_require__("2ef0");
 
 /* harmony default export */ var AppSearchFiltervue_type_script_lang_js_ = ({
   props: {
-    configFilter: {
+    display: {
       required: true,
-      type: Object
+      type: String
+    },
+    keyName: {
+      required: false,
+      default: function _default() {
+        return this._uid;
+      }
+    },
+    name: {
+      required: true,
+      type: String
+    },
+    visibile: {
+      type: Boolean,
+      default: true
     },
     options: {
       required: false,
@@ -1246,13 +1265,7 @@ var lodash = __webpack_require__("2ef0");
   },
   computed: {
     isVisible: function isVisible() {
-      return this.configFilter.visible !== false;
-    },
-    queryParamName: function queryParamName() {
-      return this.configFilter.name;
-    },
-    keyName: function keyName() {
-      return this.configFilter.key;
+      return this.visible !== false;
     },
     shouldShowLess: function shouldShowLess() {
       var numberOfItemsToAdd = 10;
@@ -1279,8 +1292,8 @@ var lodash = __webpack_require__("2ef0");
   methods: {
     buildFilterHref: function buildFilterHref(option) {
       var params = this.cleanedInput;
-      params[this.queryParamName] = option.submitValue;
       params['page'] = 1;
+      params[this.name] = option.submitValue;
       var qs = [];
       var value = null;
       Object.keys(params).forEach(function (key) {
@@ -1290,7 +1303,7 @@ var lodash = __webpack_require__("2ef0");
       return "/jobs?" + qs.join("&");
     },
     isExistingFilter: function isExistingFilter(value) {
-      var inputValue = this.input[this.queryParamName];
+      var inputValue = this.input[this.name];
       var isExisting = inputValue == value;
       return isExisting;
     },
@@ -1298,7 +1311,11 @@ var lodash = __webpack_require__("2ef0");
       var display = option.display;
       var submitValue = option.display;
 
-      if (this.queryParamName == "location") {
+      if (Object.prototype.hasOwnProperty.call(option, 'submitValue')) {
+        submitValue = option.submitValue;
+      }
+
+      if (this.name == "location") {
         display = Object(services_location["a" /* fullState */])(Object(services_location["b" /* removeCountry */])(option.display));
         submitValue = display;
       } else if (this.keyName == "moc") {
