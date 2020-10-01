@@ -177,7 +177,6 @@ export default {
 
             this.formatInput()
 
-            console.log(this.input)
         },
         getFilterOptions(filter) {
             let key = filter.key
