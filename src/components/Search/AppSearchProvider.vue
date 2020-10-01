@@ -105,7 +105,7 @@ export default {
 
             if (this.hasLocationInput && distanceIndex == -1) {
                 options.push("distance")
-            } else if (!this.hasLocationInput && distanceIndex != -1) {
+            } else if (!this.hasLocationInput && distanceIndex != -1 || (blank(this.input.r) && this.isSolr)) {
                 options.splice(distanceIndex, 1)
             }
 
