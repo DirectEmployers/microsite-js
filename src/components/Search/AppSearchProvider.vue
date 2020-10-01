@@ -98,7 +98,7 @@ export default {
             let options = []
 
             let sort = clone(this.meta.sort || {})
-            
+
             if (!blank(sort)) {
                 options = sort.options
             }
@@ -247,6 +247,7 @@ export default {
         },
 
         submitSearchForm() {
+            this.input.page = 1
             this.$router
                 .push({
                     path: "/jobs",
