@@ -1,5 +1,5 @@
 import { kebabCase } from "lodash"
-import { removeCountry } from "./api/location"
+import { removeCountry } from "./location"
 
 /**
  * Check if the given value is "blank".

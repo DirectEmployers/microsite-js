@@ -1,42 +1,39 @@
 <template>
     <component :is="tag">
         <slot
-            :filters="filters"
-            :getUserCoordinates="getUserCoordinates"
-            :blank="blank"
-            :input="input"
-            :getFilterOptions="getFilterOptions"
             :jobs="jobs"
-            :meta="meta"
-            :pagination="pagination"
+            :input="input"
+            :filteredInput="getPayload()"
             :status="status"
-            :source="source"
+            :filters="filters"
             :sort="sort"
-            :submitSearchForm="submitSearchForm"
-            :supported="supported"
+            :sortedBy="sortedBy"
+            :sortOptions="sortOptions"
+            :source="source"
+            :isSolr="isSolr"
+            :isGoogleTalent="isGoogleTalent"
+            :pagination="pagination"
             :selectPage="selectPage"
+            :removeFilter="removeFilter"
             :featuredJobs="featuredJobs"
-            :isGoogleTalent="meta.source == 'google_talent'"
-            :isSolr="meta.source == 'solr'"
+            :appliedFilters="appliedFilters"
+            :getFilterOptions="getFilterOptions"
+            :submitSearchForm="submitSearchForm"
+            :isCommuteSearch="isCommuteSearch"
         />
     </component>
 </template>
 <script>
-import {blank, log} from "../../services/helpers"
-import {fullState, removeCountry} from "../../services/api/location"
-import {omitBy, omit, clone, merge, assign} from "lodash"
-import {SearchService, CommuteSearchService} from "../../services/api/search"
+import {blank, titleCase} from "../../services/helpers"
+import {fullState} from "../../services/location"
+import {omitBy, clone, merge, startCase} from "lodash"
+import {CommuteSearchService, SearchService} from "../../services/search"
 
 export default {
     props: {
         siteConfig: {
             required: true,
             type: Object,
-        },
-        geoLocationInputText: {
-            required: false,
-            type: String,
-            default: "Your Location",
         },
         tag: {
             required: false,
@@ -55,101 +52,105 @@ export default {
         },
     },
     data() {
-        const defaultInput = this.getInputDefaults()
         return {
             jobs: [],
             featuredJobs: [],
-            source: this.siteConfig.source,
             filters: [],
             pagination: {},
             status: {
                 loading: false,
                 error: false,
             },
-            supported: {
-                geolocation: false,
-            },
             meta: {},
-            input: defaultInput,
+            input: this.getInputDefaults(),
         }
     },
     created() {
-        // set meta in created because it references computed properties
-        // which is not avilable during a gridsome build
-        this.meta = this.getDefaultMeta()
-        //allow other components to update input via global event.
-        this.$router.app.$on("searchInputUpdated", this.setInput)
-
-        //filter/breadcrumb removal
-        this.$router.app.$on("searchFilterRemoved", this.removeFilter)
-
         this.setInputFromQuery()
 
         if (this.searchOnLoad) {
             this.search()
         }
     },
-    mounted() {
-        if (process.isClient) {
-            this.supported["geolocation"] = "geolocation" in window.navigator
-        }
-    },
     computed: {
-        hasJobs() {
-            return (this.jobs || []).length > 0
+        service() {
+            if (this.isCommuteSearch) {
+                return CommuteSearchService
+            }
+            return SearchService
         },
-        hasFeaturedJobs() {
-            return (this.featuredJobs || []).length > 0
+        sortedBy() {
+            if (blank(this.meta.sort)) {
+                return ""
+            }
+            return startCase(this.meta.sort.active)
         },
-        isLocationSearch() {
-            return this.input.searchType == "location"
+        source() {
+            if (blank(this.meta.source)) {
+                return this.siteConfig.source
+            }
+            return this.meta.source
+        },
+        hasLocationInput() {
+            return !blank(this.input.coords) || !blank(this.input.location)
+        },
+        sortOptions() {
+            let options = []
+
+            let sort = clone(this.meta.sort || {})
+
+            if (!blank(sort)) {
+                options = sort.options
+            }
+
+            return options.map(o => startCase(o))
+        },
+        isGoogleTalent() {
+            return this.meta.source == "google_talent"
+        },
+        isSolr() {
+            return this.meta.source == "solr"
         },
         isCommuteSearch() {
-            return this.input.searchType == "commute"
+            return (
+                !blank(this.input.coords) && !blank(this.input.commuteLocation)
+            )
         },
-        searchService() {
-            const searchType = this.input.searchType
-            switch (searchType) {
-                case "commute":
-                    return CommuteSearchService
-                case "location":
-                default:
-                    return SearchService
-            }
-        },
-        configFilters(){
+        configFilters() {
             return this.siteConfig.filters || []
         },
-        selectedFilters() {
-            let value = null
-            let name = null
-            let duplicates = []
-            let filters = []
-
-            this.configFilters.forEach(filter => {
-                name = filter.name
-
-                value = this.input[name]
-
-                if (!this.blank(value) && !duplicates.includes(name)) {
-                    duplicates.push(name)
-
-                    filters.push({
-                        display: value,
-                        parameter: name,
-                    })
-                }
-            })
-
-            return filters
-        },
-
-        filterParamList() {
+        filterParamNames() {
             let params = this.configFilters.map(filter => {
                 return filter.name
             })
 
-            return params.concat(Object.keys(this.getInputDefaults()))
+            return params
+        },
+        appliedFilters() {
+            let filters = []
+            let added = []
+            let input = this.$route.query
+            this.configFilters.forEach(filter => {
+                if (
+                    !blank(input[filter.name]) &&
+                    !added.includes(filter.name)
+                ) {
+                    filters.push({
+                        display: input[filter.name],
+                        parameter: filter.name,
+                    })
+                    added.push(filter.name)
+                }
+            })
+
+            if (this.isCommuteSearch) {
+                let commuteLocation = input.commuteLocation
+                filters.push({
+                    display: `Commute:${commuteLocation}`,
+                    parameter: "commuteLocation",
+                })
+            }
+            return filters
         },
     },
     watch: {
@@ -160,131 +161,27 @@ export default {
         },
     },
     methods: {
-        selectPage(page) {
-            this.$router.push({
-                path: this.$route.path,
-                query: {
-                    ...this.$route.query,
-                    ...{page: page},
-                },
-            })
-
-            this.$el.scrollIntoView()
-        },
-
-        getInputDefaults() {
-            let defaultInput = clone(this.defaultInput)
-
-            return merge(
-                {
-                    searchType: "location",
-                    commuteMethod: "DRIVING",
-                    travelDuration: "900",
-                    roadTraffic: "TRAFFIC_FREE",
-                    commuteLocation: "",
-                    q: "",
-                    r: "",
-                    moc: "",
-                    location: "",
-                    coords: null,
-                    sort: "relevance",
-                },
-                defaultInput
-            )
-        },
-
-        hasLocationInput() {
-            if (this.isLocationSearch && !this.blank(this.input.location)) {
-                return true
-            }
-
-            if (this.isCommuteSearch && !this.blank(this.input.coords)) {
-                return true
-            }
-
-            return false
-        },
-        removeFilter(param) {
-            const query = {...this.$route.query}
-            const defaultInput = this.getInputDefaults()
-
-            let toRemove = [param]
-
-            if (param == "*") {
-                toRemove = this.filterParamList
-            }
-
-            if (toRemove.includes("location")) {
-                toRemove.push("coords")
-
-                if (!this.hasLocationInput()) {
-                    this.input.sort = defaultInput["sort"]
-
-                    query["sort"] = this.input.sort
-                }
-            }
-
-            toRemove.forEach(param => {
-                delete query[param]
-            })
-
-            query["page"] = 1
-
-            this.$router.replace({query})
-        },
-
-        sort(field) {
-            if (!this.meta.sort.options.includes(field)) {
-                throw new Error(`Invalid sort option ${field}`)
-            }
-
-            const query = {...this.$route.query}
-
-            query["sort"] = field
-
-            this.$router.replace({query})
-        },
-
-        hasInput(key) {
-            return !blank(this.input[key])
-        },
-
-        setInput(key, value) {
-            this.$set(this.input, key, value)
-        },
-
-        getGeoLocation(done) {
-            navigator.geolocation.getCurrentPosition(position => {
-                let lat = position.coords.latitude.toFixed(6)
-
-                let lon = position.coords.longitude.toFixed(6)
-
-                let coords = lat + "," + lon
-
-                if (typeof done == "function") {
-                    done(coords)
-                }
-            })
-        },
-
-        getPayload() {
-            let data = omitBy(clone(this.input), blank)
-
+        formatInput() {
             if (!this.isCommuteSearch) {
-                data = omit(data, [
-                    "searchType",
-                    "commuteLocation",
-                    "roadTraffic",
-                    "travelDuration",
-                    "commuteMethod",
-                ])
+                this.input.location = fullState(this.input.location)
+            } else {
+                this.input.location = ""
             }
-            return data
+        },
+
+        setInputFromQuery() {
+            this.input = merge(this.getInputDefaults(), this.$route.query)
+
+            this.formatInput()
         },
         getFilterOptions(filter) {
+            if (!blank(filter.options)) {
+                return filter.options
+            }
+
             let key = filter.key
 
-            if (this.blank(key)) {
+            if (blank(key)) {
                 key = filter.name
             }
 
@@ -294,134 +191,122 @@ export default {
 
             return []
         },
-        getDefaultMeta() {
-            let inputDefaults = this.getInputDefaults()
-
-            let source = this.siteConfig.source
-
+        getCommuteDefaults() {
             return clone({
-                hasJobs: this.hasJobs,
-                hasFeaturedJobs: this.hasFeaturedJobs,
-                selectedFilters: this.selectedFilters,
-                source: source,
-                sort: {
-                    active: inputDefaults["sort"],
-                    options: ["relevance", "distance", "title", "date"],
+                commuteMethod: "DRIVING",
+                travelDuration: "900",
+                commuteLocation: "",
+                roadTraffic: "TRAFFIC_FREE",
+            })
+        },
+        getInputDefaults() {
+            let defaultInput = clone(this.defaultInput)
+
+            return merge(
+                {
+                    q: "",
+                    r: "",
+                    moc: "",
+                    location: "",
+                    coords: null,
+                    page: 1,
+                    sort: "relevance",
                 },
-            })
+                this.getCommuteDefaults(),
+                defaultInput
+            )
         },
-        setMeta(meta) {
-            this.meta = merge(this.getDefaultMeta(), meta)
-        },
-        async search() {
-            this.status.loading = true
-
-            const Service = this.searchService
-
-            try {
-                const response = await Service.get(
-                    this.getPayload(),
-                    this.siteConfig
-                )
-
-                let data = response.data || {}
-
-                let {jobs, pagination, filters, meta, featured_jobs} = data
-
-                this.jobs = jobs || []
-
-                this.pagination = pagination || {}
-
-                this.featuredJobs = featured_jobs || []
-
-                this.filters = filters || {}
-
-                this.setMeta(meta)
-
-                this.status.loading = false
-
-                return response
-            } catch (error) {
-                this.status.error = error
-
-                this.meta.selectedFilters = []
-
-                log(error, "error")
-
-                return error
-            } finally {
-                this.status.loading = false
-            }
-        },
-        getUserCoordinates() {
-            this.getGeoLocation(coords => {
-                this.input.coords = coords
-                this.input.location = this.geoLocationInputText
-                this.input.sort = "distance"
-            })
-        },
-        formatInput() {
-            if (this.isLocationSearch) {
-                this.input.location = fullState(this.input.location)
-            }
-        },
-        setInputFromQuery() {
-            this.input = merge(this.getInputDefaults(), this.$route.query)
-
-            this.formatInput()
-        },
-        blank(value) {
-            return blank(value)
-        },
-        setSearchType(type) {
-            if (!["location", "commute"].includes(type)) {
-                type = "location"
-            }
-
-            this.input.searchType = type
-
-            if (this.isCommuteSearch) {
-                this.input.location = ""
-            }
-
-            if (this.shouldClearCoords()) {
-                this.input.coords = ""
-                this.input.commuteLocation = ""
-            }
-        },
-        shouldClearCoords() {
-            const loc = this.input.location
-            const commuteLoc = this.input.commuteLocation
-            const coords = this.input.coords
-            const geoText = this.geoLocationInputText
-
-            if (this.isLocationSearch && (this.blank(loc) || loc != geoText)) {
-                return true
-            }
-
-            if (this.isCommuteSearch && this.blank(commuteLoc)) {
-                return true
-            }
-
-            return false
-        },
-        submitSearchForm(searchType = "location") {
-            this.input.page = 1
-
-            this.setSearchType(searchType)
-
-            if (this.shouldClearCoords()) {
-                this.input.coords = ""
-            }
-
+        pushPayload() {
             this.$router
                 .push({
                     path: "/jobs",
                     query: this.getPayload(),
                 })
-                .catch(err => {
-                    log(err, "error")
-                })
+                .catch(err => {})
+        },
+        selectPage(page) {
+            this.input["page"] = page
+
+            this.pushPayload()
+
+            this.$el.scrollIntoView()
+        },
+
+        sort(field) {
+            field = field.toLowerCase()
+
+            if (this.meta.sort.options.includes(field)) {
+                this.input.sort = field
+                this.submitSearchForm()
+            }
+        },
+
+        getPayload() {
+            let exclude = []
+
+            if (!this.isCommuteSearch) {
+                exclude = Object.keys(this.getCommuteDefaults())
+            }
+
+            return omitBy(clone(this.input), (v, k) => {
+                return blank(v) || exclude.includes(k)
+            })
+        },
+
+        submitSearchForm() {
+            this.input.page = 1
+            this.pushPayload()
+        },
+
+        removeFilter(name) {
+            const defaultInput = this.getInputDefaults()
+
+            if (name == "*") {
+                this.input = defaultInput
+            }
+
+            this.input[name] = defaultInput[name] || ""
+
+            if (["location", "commuteLocation"].includes(name)) {
+                this.input.coords = ""
+            }
+
+            this.submitSearchForm()
+        },
+
+        async search() {
+            this.status.loading = true
+
+            try {
+                const response = await this.service.get(
+                    this.getPayload(),
+                    this.siteConfig
+                )
+
+                const data = response.data || {}
+
+                this.jobs = data.jobs || []
+
+                this.pagination = data.pagination || {}
+
+                this.featuredJobs = data.featured_jobs || []
+
+                this.filters = data.filters || {}
+
+                this.meta = data.meta || {}
+
+                this.status.loading = false
+
+                return response
+            } catch (error) {
+                if (Object.prototype.hasOwnProperty.call(error, "response")) {
+                    this.status.error = error
+                } else {
+                    throw new Error(error)
+                }
+            } finally {
+                this.status.loading = false
+            }
         },
     },
 }

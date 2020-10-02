@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { SearchService } from "../services/api/search"
+import { SearchService } from "../services/search"
 import { buildJobDetailUrl } from "../services/helpers"
 import AppJob from './AppJob'
 export default {

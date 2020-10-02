@@ -1,5 +1,5 @@
-import { trim, trimEnd } from "lodash"
-import { blank } from '../helpers'
+import {trim, trimEnd} from "lodash"
+import {blank} from "./helpers"
 
 export let states = {
     AK: "Alaska",
@@ -65,32 +65,30 @@ export let states = {
 }
 
 export let provinces = {
-    "AB": "Alberta",
-    "BC": "British Columbia",
-    "MB": "Manitoba",
-    "NB": "New Brunswick",
-    "NL": "Newfoundland",
-    "NW": "Northwest Territories",
-    "NS": "Nova Scotia",
-    "NU": "Territory of Nunavut",
-    "ON": "Ontario",
-    "PE": "Prince Edward Island",
-    "QC": "Quebec",
-    "SK": "Saskatchewan",
-    "YT": "Yukon Territory",
+    AB: "Alberta",
+    BC: "British Columbia",
+    MB: "Manitoba",
+    NB: "New Brunswick",
+    NL: "Newfoundland",
+    NW: "Northwest Territories",
+    NS: "Nova Scotia",
+    NU: "Territory of Nunavut",
+    ON: "Ontario",
+    PE: "Prince Edward Island",
+    QC: "Quebec",
+    SK: "Saskatchewan",
+    YT: "Yukon Territory",
 }
 
 export let countries = {
     USA: "United States",
-    CAN: "Canada"
+    CAN: "Canada",
 }
-
 
 /**
  * Remove country abbreviation from end of given value.
  */
 export function removeCountry(value) {
-
     let i
     let keys = Object.keys(countries)
     let total = keys.length
@@ -109,7 +107,6 @@ export function removeCountry(value) {
  * Remove state abbreviation from end of given value.
  */
 export function removeState(value) {
-
     let i
     let keys = Object.keys(states)
     let total = keys.length
@@ -127,8 +124,8 @@ export function removeState(value) {
 /**
  * Expand a code value to full state name.
  */
-export function fullState(code){
-    if(blank(code)){
+export function fullState(code) {
+    if (blank(code)) {
         return code
     }
     let result = trim(code.toString())
@@ -136,7 +133,6 @@ export function fullState(code){
     if (Object.prototype.hasOwnProperty.call(states, result.toUpperCase())) {
         return states[result.toUpperCase()]
     }
-
 
     if (Object.prototype.hasOwnProperty.call(provinces, result.toUpperCase())) {
         return provinces[result.toUpperCase()]

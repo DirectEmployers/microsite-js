@@ -1,33 +1,32 @@
 <template>
     <AppAccordion
-        v-if="!blank(filteredOptions) && isVisible"
+        v-if="displayedOptions.length && isVisible"
         :open="isActive"
         class="search-filter"
         :key="`${keyName}-accordion`"
         :name="`${keyName}-accordion`"
     >
-        <template v-slot:header="{ isOpen }">
+        <template v-slot:header="{isOpen}">
             <slot name="display" :isOpen="isOpen">
                 <h3
-                    v-if="configFilter.display"
+                    v-if="display"
                     class="search-filter-display"
-                    :class="{ 'search-filter-display--active': isActive }"
+                    :class="{'search-filter-display--active': isActive}"
                 >
-                    {{ configFilter.display }}
+                    Filter By {{ display }}
                 </h3>
             </slot>
         </template>
 
         <ul class="search-filter-options">
             <li
-                @click="selectOption(option)"
                 class="search-filter-options-item"
                 :key="index"
                 v-for="(option, index) in displayedOptions"
             >
-                <slot name="option" :option="option">
-                    {{ option.display }} ({{ option.value }})
-                </slot>
+                <g-link :to="option.href">
+                    {{ option.display }} <span v-if="option.value">({{ option.value }})</span>
+                </g-link>
             </li>
         </ul>
         <section
@@ -57,15 +56,28 @@
 </template>
 <script>
 import AppAccordion from "../AppAccordion"
-import { blank } from "../../services/helpers"
-import { removeCountry, fullState } from "../../services/api/location"
-import { truncate } from 'lodash'
-
+import {blank} from "../../services/helpers"
+import {fullState, removeCountry} from "../../services/location"
+import {omitBy, truncate, trim} from "lodash"
 export default {
     props: {
-        configFilter: {
+        display: {
             required: true,
-            type: Object,
+            type: String,
+        },
+        keyName: {
+            required: false,
+            default() {
+                return this._uid
+            }
+        },
+        name: {
+            required: true,
+            type: String,
+        },
+        visibile:{
+            type: Boolean,
+            default: true
         },
         options: {
             required: false,
@@ -99,15 +111,7 @@ export default {
     },
     computed: {
         isVisible() {
-            return this.configFilter.visible !== false
-        },
-
-        queryParamName() {
-            return this.configFilter.name
-        },
-
-        keyName() {
-            return this.configFilter.key
+            return this.visible !== false
         },
 
         shouldShowLess() {
@@ -131,60 +135,74 @@ export default {
 
             return false
         },
+        cleanedInput() {
+            return omitBy({...this.input}, blank)
+        },
     },
     methods: {
-        selectOption(option) {
-            let query = {
-                ...this.$route.query,
-                [this.queryParamName]: option.display,
-            }
+        buildFilterHref(option) {
+            let params = this.cleanedInput
 
-            query['page'] = 1
+            params['page'] = 1
+            params[this.name] = option.submitValue
 
-            this.$router.push({
-                path: this.$route.path,
-                query: query,
+            let qs = []
+
+            let value = null
+
+            Object.keys(params).forEach(key => {
+                value = encodeURIComponent(params[key])
+
+                qs.push(`${key}=${value}`)
             })
 
-            this.$emit("searchFilterSelected", option)
+            return "/jobs?" + qs.join("&")
         },
 
-        isExistingFilter(display) {
-            return this.input[this.queryParamName] == display
-        },
+        isExistingFilter(value) {
+            let inputValue = this.input[this.name]
 
+            let isExisting = inputValue == value
+
+            return isExisting
+        },
+        formatOption(option) {
+            let display = option.display
+            let submitValue = option.display
+
+            if(Object.prototype.hasOwnProperty.call(option, 'submitValue')){
+                submitValue = option.submitValue
+            }
+
+            if (this.name == "location") {
+                display = fullState(removeCountry(option.display))
+                submitValue = display
+            } else if (this.keyName == "moc") {
+                display = truncate(option.display, {length: 32})
+                submitValue = trim(option.display.split("-")[0])
+            }
+
+            option.display = display
+            option.submitValue = submitValue
+            option.href =  this.buildFilterHref(option)
+
+            return option
+        },
         filterOptions(options) {
             let filtered = []
             let display = null
 
-            options.forEach((option) => {
-                display = this.formatDisplay(option.display)
+            options.forEach(option => {
+                option = this.formatOption(option)
 
-                if (!this.isExistingFilter(display)) {
-                    filtered.push({
-                        display: display,
-                        value: option.value,
-                    })
+                if (!this.isExistingFilter(option.submitValue)) {
+                    filtered.push(option)
                 } else {
                     this.isActive = true
                 }
             })
 
             return filtered
-        },
-
-        formatDisplay(display) {
-            if (this.queryParamName == "location") {
-                //strip off countries
-                display = removeCountry(display)
-                //and try to expand to a full value
-                display = fullState(display)
-            }
-            if(this.keyName == 'moc'){
-                display = truncate(display, { length: 32 })
-            }
-
-            return display
         },
 
         showMore() {
@@ -207,10 +225,6 @@ export default {
                 0,
                 currentTotalShown - numberOfItemsToAdd
             )
-        },
-
-        blank(value) {
-            return blank(value)
         },
     },
 }

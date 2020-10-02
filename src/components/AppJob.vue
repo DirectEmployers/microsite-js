@@ -23,7 +23,7 @@
 
 <script>
 import { buildJobDetailUrl, blank } from "../services/helpers"
-import { fullState, removeCountry, removeState } from "../services/api/location"
+import { fullState, removeCountry, removeState } from "../services/location"
 import { get, isArray } from "lodash"
 
 export default {
@@ -159,7 +159,7 @@ export default {
             ) {
                 return false
             }
-            
+
             return true
         },
         commuteTime() {

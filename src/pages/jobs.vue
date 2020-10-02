@@ -1,278 +1,179 @@
 <template>
     <Layout>
-        <AppSearchProvider
-            class="my-6"
-            :site-config="$siteConfig"
-            v-slot="{
-                jobs,
-                input,
-                sort,
-                submitSearchForm,
-                supported,
-                getUserCoordinates,
-                getFilterOptions,
-                status,
-                meta,
-                selectPage,
-                pagination,
-                featuredJobs,
-                isGoogleTalent,
-                isSolr,
-            }"
-        >
-            <Loader v-if="status.loading" />
-
-            <section v-else>
-                <div class="mx-4">
-                    <SearchForm
-                        :input="input"
-                        :submitSearchForm="submitSearchForm"
-                        :supported="supported"
-                        :isSolr="isSolr"
-                        :getUserCoordinates="getUserCoordinates"
-                    />
-                </div>
-                <div class="flex flex-col lg:flex-row">
-                    <div class="mx-4 w-full lg:w-1/2">
-                        <h3 v-if="status.error">Unable to load jobs...</h3>
-                        <div class="bg-gray-100 rounded py-3" v-if="featuredJobs.length > 0">
-                            <h3 class="font-bold text-4xl">Featured Jobs:</h3>
-                            <div
-                                class="hover:bg-gray-300"
-                                :key="index"
-                                v-for="(job, index) in featuredJobs"
-                            >
-                                <AppJob :source="meta.source" :job="job">
-                                    <template v-slot="jobData">
-                                        <g-link
-                                            :to="jobData.detailUrl"
-                                            class="mb-2"
-                                        >
-                                            <h3 class="font-bold text-xl">
-                                                {{ jobData.title }}
-                                            </h3>
-                                            <h3 class="font-bold text-lg">
-                                                Requisition ID:
-                                                {{ jobData.reqId }}
-                                            </h3>
-                                            <h3 class="text-md">
-                                                {{
-                                                    jobData.city + ", " + jobData.state
-                                                }}
-                                            </h3>
-                                            <div
-                                                class="job-listing__commute-time"
-                                                v-if="jobData.hasCommuteInfo"
-                                            >
-                                                Estimated Travel:
-                                                {{ jobData.commuteTime }} minutes.
-                                            </div>
-                                        </g-link>
-                                    </template>
-                                </AppJob>
-                            </div>
-                        </div>
-                        <section v-if="meta.hasJobs" class="jobs">
-                            <h3 class="text-3xl font-bold">Search Results</h3>
-                            <div
-                                v-if="meta.hasJobs"
-                                id="total-jobs"
-                                class="text-2xl"
-                            >
-                                {{ pagination.total }} jobs found
-                            </div>
-                            <div
-                                class="hover:bg-gray-300"
-                                :key="index"
-                                v-for="(job, index) in jobs"
-                            >
-                                <AppJob :source="meta.source" :job="job">
-                                    <template v-slot="jobData">
-                                        <g-link
-                                            :to="jobData.detailUrl"
-                                            class="mb-2"
-                                        >
-                                            <h3 class="font-bold text-xl">
-                                                {{ jobData.title }}
-                                            </h3>
-                                            <h3 class="font-bold text-lg">
-                                                Requisition ID:
-                                                {{ jobData.reqId }}
-                                            </h3>
-                                            <h3 class="text-md">
-                                                {{
-                                                    jobData.city + ", " + jobData.state
-                                                }}
-                                            </h3>
-                                            <div
-                                                class="job-listing__commute-time"
-                                                v-if="jobData.hasCommuteInfo"
-                                            >
-                                                Estimated Travel:
-                                                {{ jobData.commuteTime }} minutes.
-                                            </div>
-                                        </g-link>
-                                    </template>
-                                </AppJob>
-                            </div>
-                            <AppPagination
-                                v-if="!status.loading"
-                                @pageSelected="selectPage"
-                                :current-page="pagination.page"
-                                :total-records="pagination.total"
-                                :total-pages="pagination.total_pages"
-                            />
-                        </section>
-
-                        <h3 class="font-bold text-lg" v-else-if="!meta.hasJobs && !meta.hasFeaturedJobs">
-                            No results found...
-                        </h3>
-                    </div>
-                    
-                    <div class="lg:ml-4 w-full lg:w-2/5">
-                        <h3 class="font-bold text-4xl">Search Filters:</h3>
-
-                        <div class="m-2" v-if="meta.selectedFilters.length">
-                            <h3 class="font-bold text-xl">
-                                Current Search Criteria
-                            </h3>
-
-                            <AppSearchFilterChip
-                                v-for="(filter, index) in meta.selectedFilters"
-                                :key="index"
-                                :display="filter.display"
-                                :parameter="filter.parameter"
-                            ></AppSearchFilterChip>
-
-                            <AppSearchFilterChip
-                                display="Clear All"
-                                parameter="*"
-                            ></AppSearchFilterChip>
-                        </div>
-
-                        <AppAccordion>
-                            <template v-slot:header>
-                                <h3 class="font-bold text-xl">
-                                    Sorted By
-                                    <strong>
-                                        {{ titleCase(meta.sort.active) }}
-                                    </strong>
-                                </h3>
-                            </template>
-
-                            <ul>
-                                <li
-                                    class="cursor-pointer"
-                                    @click="sort(option)"
-                                    v-for="(option, index) in meta.sort.options"
-                                    :key="index"
-                                >
-                                    <span
-                                        v-if="
-                                            shouldShowSortOption(option, input)
-                                        "
-                                    >
-                                        {{ titleCase(option) }}
-                                    </span>
-                                </li>
-                            </ul>
-                        </AppAccordion>
-
-                        <AppSearchFilter
-                            :key="index"
-                            :config-filter="configFilter"
+        <AppSearchProvider ref="provider" class="my-6" :site-config="$siteConfig">
+            <template
+                v-slot="{
+                    jobs,
+                    input,
+                    status,
+                    source,
+                    sort,
+                    getFilterOptions,
+                    sortedBy,
+                    filteredInput,
+                    sortOptions,
+                    removeFilter,
+                    pagination,
+                    selectPage,
+                    featuredJobs,
+                    appliedFilters,
+                    submitSearchForm,
+                    isGoogleTalent,
+                }"
+            >
+                <AppLoader v-if="status.loading" />
+                <!-- done loading -->
+                <section v-else>
+                    <div class="mx-4">
+                        <AppSearchForm
                             :input="input"
-                            v-for="(configFilter, index) in $siteConfig.filters"
-                            :options="getFilterOptions(configFilter)"
-                        >
-                            <template v-slot:display="{ isOpen }">
-                                <h3
-                                    class="search-filter-display"
-                                    :class="{
-                                        'search-filter-display--active': isOpen,
-                                    }"
-                                >
-                                    Filter By
-                                    <strong>{{ configFilter.display }}</strong>
-                                </h3>
-                            </template>
-                            <template v-slot:option="{ option }">
-                                <span class="text-xl">
-                                    {{ option.display }} ({{ option.value }})
-                                </span>
-                            </template>
-                        </AppSearchFilter>
-
-                        <div class="container">
-                            <button
-                                @click="toggleCommuteModal()"
-                                class="button"
-                                v-if="isGoogleTalent"
-                            >
-                                Commute Search
-                            </button>
-                        </div>
-                        <AppModal
-                            id="commute-modal"
-                            v-if="isGoogleTalent"
-                            ref="commute-modal"
-                            title="Commute Search"
-                        >
-                            <CommuteSearchForm
-                                :input="input"
-                                :submitSearchForm="submitSearchForm"
-                                :getUserCoordinates="getUserCoordinates"
-                            />
-                        </AppModal>
-                        
+                            :source="source"
+                            :submitSearchForm="submitSearchForm"
+                        />
                     </div>
-                </div>
-            </section>
+                    <section class="flex flex-col lg:flex-row">
+                        <div class="mx-4 w-full lg:w-1/2">
+                            <h3 v-if="status.error">Unable to load jobs...</h3>
+                            <AppFeaturedJobs
+                                :featured-jobs="featuredJobs"
+                                :source="source"
+                            />
+                            <section v-if="jobs.length">
+                                <div class="text-2xl">
+                                    {{ pagination.total }} jobs found
+                                </div>
+                                <AppJobSearchResults
+                                    :jobs="jobs"
+                                    :source="source"
+                                />
+                                <AppPagination
+                                    @pageSelected="selectPage"
+                                    :current-page="pagination.page"
+                                    :total-records="pagination.total"
+                                    :total-pages="pagination.total_pages"
+                                />
+                            </section>
+                            <h3
+                                class="font-bold text-lg"
+                                v-else-if="
+                                    jobs.length == 0 && featuredJobs.length == 0
+                                "
+                            >
+                                No results found...
+                            </h3>
+                        </div>
+                        <section class="lg:ml-4 w-full lg:w-2/5">
+                            <div v-if="appliedFilters.length">
+                                <h3 class="font-bold text-xl">
+                                    Current Search Criteria
+                                </h3>
+
+                                <AppChip
+                                    v-for="(filter, index) in appliedFilters"
+                                    :key="index"
+                                    :name="filter.parameter"
+                                    @chipClicked="removeFilter"
+                                    class="cursor-pointer"
+                                >
+                                    <AppXIcon class="w-2 inline" />
+                                    {{ filter.display }}
+                                </AppChip>
+
+                                <AppChip
+                                    name="*"
+                                    class="cursor-pointer"
+                                    text="Clear All"
+                                    @chipClicked="removeFilter"
+                                ></AppChip>
+                            </div>
+                            <AppAccordion :open="true">
+                                <template v-slot:header>
+                                    <h3 class="font-bold text-xl">
+                                        Sorted By
+                                        <strong>
+                                            {{ sortedBy }}
+                                        </strong>
+                                    </h3>
+                                </template>
+                                <ul>
+                                    <li
+                                        @click="sort(option)"
+                                        class="cursor-pointer"
+                                        :key="index"
+                                        v-for="(option, index) in sortOptions"
+                                        name="sort"
+                                    >
+                                        {{ option }}
+                                    </li>
+                                </ul>
+                            </AppAccordion>
+                            <AppSearchFilter
+                                :key="index"
+                                :name="configFilter.name"
+                                :display="configFilter.display"
+                                :key-name="configFilter.key"
+                                :visible="configFilter.visible"
+                                :input="filteredInput"
+                                v-for="(configFilter, index) in $siteConfig.filters"
+                                :options="getFilterOptions(configFilter)"
+                            />
+                            
+                            <div class="container">
+                                <button
+                                    @click="toggleCommuteModal()"
+                                    class="button"
+                                    v-if="isGoogleTalent"
+                                >
+                                    Commute Search
+                                </button>
+                            </div>
+                            <AppModal
+                                id="commute-modal"
+                                v-if="isGoogleTalent"
+                                ref="commute-modal"
+                                title="Commute Search"
+                            >
+                                <AppCommuteSearchForm
+                                    :input="input"
+                                    :submitSearchForm="submitSearchForm"
+                                />
+                            </AppModal>
+                        </section>
+                    </section>
+                </section>
+            </template>
         </AppSearchProvider>
     </Layout>
 </template>
 <script>
 import AppSearchProvider from "~/components/Search/AppSearchProvider"
-import { blank } from "~/services/helpers"
+import {blank} from "~/services/helpers"
 import AppPagination from "~/components/AppPagination"
 import AppAccordion from "~/components/AppAccordion"
-import CommuteSearchForm from "~/demo/components/CommuteSearchForm"
-import SearchForm from "~/demo/components/SearchForm"
-import Loader from "~/demo/components/Loader"
-import AppSearchFilter from "~/components/Search/AppSearchFilter"
-import AppSearchFilterChip from "~/components/Search/AppSearchFilterChip"
-import { toLower, startCase } from "lodash"
 import AppModal from "~/components/AppModal"
-import AppJob from "~/components/AppJob"
+import AppSearchForm from "~/demo/components/AppSearchForm"
+import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
+import AppLoader from "~/demo/components/AppLoader"
+import AppSearchFilter from "~/components/Search/AppSearchFilter"
+import AppChip from "~/components/AppChip"
+import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
+import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
+import AppXIcon from "~/components/Icons/AppXIcon"
+
 export default {
     components: {
         AppAccordion,
-        AppModal,
-        AppJob,
         AppPagination,
         AppSearchFilter,
-        AppSearchFilterChip,
+        AppJobSearchResults,
+        AppXIcon,
+        AppModal,
+        AppChip,
         AppSearchProvider,
-        CommuteSearchForm,
-        Loader,
-        SearchForm,
-    },
-    methods: {
-        titleCase(str) {
-            return startCase(toLower(str))
-        },
-        shouldShowSortOption(option, input) {
-            const hasLocation = input.location || input.coords
-
-            if (option == "distance" && !hasLocation) {
-                return false
-            }
-
-            return true
-        },
-        toggleCommuteModal() {
-            this.$refs["commute-modal"].toggle()
-        },
+        AppLoader,
+        AppFeaturedJobs,
+        AppSearchForm,
+        AppCommuteSearchForm,
     },
     metaInfo: {
         title: "Jobs",
@@ -284,5 +185,10 @@ export default {
             },
         ],
     },
+    methods:{
+        toggleCommuteModal() {
+            this.$refs["commute-modal"].toggle()
+        }
+    }
 }
 </script>

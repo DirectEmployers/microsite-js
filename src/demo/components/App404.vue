@@ -8,17 +8,12 @@
                     v-slot="{
                         input,
                         submitSearchForm,
-                        supported,
-                        getUserCoordinates,
                     }"
                 >
                     <div class="mx-4">
-                        <SearchForm
+                        <AppSearchForm
                             :input="input"
                             :submitSearchForm="submitSearchForm"
-                            :supported="supported"
-                            :getUserCoordinates="getUserCoordinates"
-
                         />
                     </div>
                 </AppSearchProvider>
@@ -46,12 +41,12 @@
 </div>
 </template>
 <script>
-import SearchForm from "~/demo/components/SearchForm"
+import AppSearchForm from "~/demo/components/AppSearchForm"
 import AppSearchProvider from "~/components/Search/AppSearchProvider"
 
 export default {
     components: {
-        SearchForm,
+        AppSearchForm,
         AppSearchProvider,
     }
 }
