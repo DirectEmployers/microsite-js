@@ -201,7 +201,6 @@ export default {
         },
         getInputDefaults() {
             let defaultInput = clone(this.defaultInput)
-
             return merge(
                 {
                     q: "",

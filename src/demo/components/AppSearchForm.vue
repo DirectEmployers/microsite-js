@@ -19,7 +19,7 @@
                     <AppAutocompleteInput
                         ref="location"
                         v-model="input.location"
-                        @input="input.coords=''"
+                        @input="typedLocation"
                         label="Where"
                         placeholder="Type city or state"
                         aria-label="Type city or state"
@@ -120,6 +120,11 @@ export default {
         },
     },
     methods:{
+        typedLocation(){
+            if(this.input.location){
+                this.input.coords = ''
+            }
+        },
         setLocationFromGeo(coords){
             this.input.location = "Your Location"
             this.input.coords = coords

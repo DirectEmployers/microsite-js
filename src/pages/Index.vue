@@ -7,7 +7,7 @@
             v-slot="{
                 input,
                 submitSearchForm,
-                source
+                source,
             }"
         >
             <div class="mx-4">

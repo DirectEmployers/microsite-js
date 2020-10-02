@@ -117,7 +117,7 @@
                                 v-for="(configFilter, index) in $siteConfig.filters"
                                 :options="getFilterOptions(configFilter)"
                             />
-                            
+
                             <div class="container">
                                 <button
                                     @click="toggleCommuteModal()"
