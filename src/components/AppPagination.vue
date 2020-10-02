@@ -150,7 +150,7 @@ export default {
             }
 
             this.current = page
-            
+
             this.$emit("pageSelected", page)
 
         },

@@ -108,7 +108,7 @@ export default {
         source:{
             type: String,
             required: true
-        }, 
+        },
         submitSearchForm: {
             type: Function,
             required: true

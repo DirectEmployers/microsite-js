@@ -13,7 +13,7 @@
                 aria-label="navbar Toggle"
                 class="navbar__toggler"
             >
-                <AppHamburgerMenuIcon         
+                <AppHamburgerMenuIcon
                     v-if="!toggled"
                     class="pointer-events-none"
                 />

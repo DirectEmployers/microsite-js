@@ -1,6 +1,6 @@
 <template>
     <div class="video">
-        <iframe 
+        <iframe
             :src="youtubeUrl"
             title="Youtube Video"
             frameborder="0"

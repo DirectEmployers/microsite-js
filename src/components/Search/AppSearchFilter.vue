@@ -113,7 +113,7 @@ export default {
         isVisible() {
             return this.visible !== false
         },
-        
+
         shouldShowLess() {
             const numberOfItemsToAdd = 10
 
@@ -142,7 +142,7 @@ export default {
     methods: {
         buildFilterHref(option) {
             let params = this.cleanedInput
-            
+
             params['page'] = 1
             params[this.name] = option.submitValue
 
@@ -181,7 +181,7 @@ export default {
                 display = truncate(option.display, {length: 32})
                 submitValue = trim(option.display.split("-")[0])
             }
-            
+
             option.display = display
             option.submitValue = submitValue
             option.href =  this.buildFilterHref(option)

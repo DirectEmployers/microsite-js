@@ -104,7 +104,7 @@ export default {
                 e.preventDefault()
             }
 
-            
+
         },
     },
 }
