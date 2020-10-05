@@ -1,3 +1,6 @@
 .geolocation__button{
     @apply p-2 rounded bg-black;
+    path{
+        fill: white;
+    }
 }
