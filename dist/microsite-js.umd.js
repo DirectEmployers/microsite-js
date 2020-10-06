@@ -149,12 +149,15 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=3235904c&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=81c2c64a&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"input":_vm.input,"filteredInput":_vm.getPayload(),"status":_vm.status,"filters":_vm.filters,"sort":_vm.sort,"sortedBy":_vm.sortedBy,"sortOptions":_vm.sortOptions,"source":_vm.source,"isSolr":_vm.isSolr,"isGoogleTalent":_vm.isGoogleTalent,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"removeFilter":_vm.removeFilter,"featuredJobs":_vm.featuredJobs,"appliedFilters":_vm.appliedFilters,"getFilterOptions":_vm.getFilterOptions,"submitSearchForm":_vm.submitSearchForm,"isCommuteSearch":_vm.isCommuteSearch})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=3235904c&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=81c2c64a&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
+var es_array_concat = __webpack_require__("99af");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -202,6 +205,7 @@ var lodash = __webpack_require__("2ef0");
 var services_search = __webpack_require__("e73b");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
+
 
 
 
@@ -329,6 +333,10 @@ var services_search = __webpack_require__("e73b");
       return this.meta.source == "solr";
     },
     isCommuteSearch: function isCommuteSearch() {
+      if (!Object(helpers["a" /* blank */])(this.input.coords) && !Object(helpers["a" /* blank */])(this.input.commuteLocation)) {
+        return true;
+      }
+
       return !Object(helpers["a" /* blank */])(this.$route.query.coords) && !Object(helpers["a" /* blank */])(this.$route.query.commuteLocation);
     },
     configFilters: function configFilters() {
@@ -456,22 +464,33 @@ var services_search = __webpack_require__("e73b");
       this.pushPayload();
     },
     removeFilter: function removeFilter(name) {
+      var _this = this;
+
+      var remove = [name];
       var defaultInput = this.getInputDefaults();
 
       if (name == "*") {
-        this.input = defaultInput;
+        remove = Object.keys(defaultInput).concat(this.filterParamNames);
       }
 
-      this.input[name] = defaultInput[name] || "";
+      remove.forEach(function (key) {
+        _this.input[key] = defaultInput[name] || "";
+      });
 
       if (["location", "commuteLocation"].includes(name)) {
         this.input.coords = "";
       }
 
+      if (name == "commuteLocation") {
+        Object.keys(this.getCommuteDefaults()).forEach(function (key) {
+          _this.input[key] = defaultInput[name] || "";
+        });
+      }
+
       this.submitSearchForm();
     },
     search: function search() {
-      var _this = this;
+      var _this2 = this;
 
       return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var response, data;
@@ -479,20 +498,20 @@ var services_search = __webpack_require__("e73b");
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this.status.loading = true;
+                _this2.status.loading = true;
                 _context.prev = 1;
                 _context.next = 4;
-                return _this.service.get(_this.getPayload(), _this.siteConfig);
+                return _this2.service.get(_this2.getPayload(), _this2.siteConfig);
 
               case 4:
                 response = _context.sent;
                 data = response.data || {};
-                _this.jobs = data.jobs || [];
-                _this.pagination = data.pagination || {};
-                _this.featuredJobs = data.featured_jobs || [];
-                _this.filters = data.filters || {};
-                _this.meta = data.meta || {};
-                _this.status.loading = false;
+                _this2.jobs = data.jobs || [];
+                _this2.pagination = data.pagination || {};
+                _this2.featuredJobs = data.featured_jobs || [];
+                _this2.filters = data.filters || {};
+                _this2.meta = data.meta || {};
+                _this2.status.loading = false;
                 return _context.abrupt("return", response);
 
               case 15:
@@ -504,7 +523,7 @@ var services_search = __webpack_require__("e73b");
                   break;
                 }
 
-                _this.status.error = _context.t0;
+                _this2.status.error = _context.t0;
                 _context.next = 22;
                 break;
 
@@ -513,7 +532,7 @@ var services_search = __webpack_require__("e73b");
 
               case 22:
                 _context.prev = 22;
-                _this.status.loading = false;
+                _this2.status.loading = false;
                 return _context.finish(22);
 
               case 25:
@@ -21445,12 +21464,12 @@ module.exports = function (a, b) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=047c2956&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=0e38cbd6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('input',_vm._b({ref:"autocompleteInput",attrs:{"type":"text"},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.$emit('input', $event.target.value)}}},'input',_vm.$attrs,false))}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=047c2956&
+// CONCATENATED MODULE: ./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=0e38cbd6&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
 var esm_typeof = __webpack_require__("53ca");
@@ -21518,7 +21537,7 @@ var helpers = __webpack_require__("a74a");
           var lat = geo.location.lat();
           var lon = geo.location.lng();
 
-          _this.$emit("getCoords", lat + "," + lon);
+          _this.$emit("locationSelected", place.formatted_address, lat + "," + lon);
         }
       });
     }

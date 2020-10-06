@@ -112,7 +112,11 @@ export default {
             return this.meta.source == "solr"
         },
         isCommuteSearch() {
-
+            if (
+                !blank(this.input.coords) && !blank(this.input.commuteLocation)
+            ){
+                return true
+            }
             return (
                 !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation)
             )
@@ -259,16 +263,25 @@ export default {
         },
 
         removeFilter(name) {
+            let remove = [name]
             const defaultInput = this.getInputDefaults()
 
             if (name == "*") {
-                this.input = defaultInput
+                remove = Object.keys(defaultInput).concat(this.filterParamNames)
             }
 
-            this.input[name] = defaultInput[name] || ""
+            remove.forEach(key=>{
+                this.input[key] = defaultInput[name] || ""
+            })
 
             if (["location", "commuteLocation"].includes(name)) {
                 this.input.coords = ""
+            }
+
+            if(name == "commuteLocation"){
+                Object.keys(this.getCommuteDefaults()).forEach(key =>{
+                    this.input[key] =  defaultInput[name] || ""
+                })
             }
 
             this.submitSearchForm()

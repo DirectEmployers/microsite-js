@@ -9,7 +9,7 @@
                     :api-key="apiKey"
                     v-model="input.commuteLocation"
                     class="form__input"
-                    @getCoords="googleAutocompleteSelected"
+                    @locationSelected="googleAutocompleteSelected"
                 />
             </div>
             <div class="form__input-group form__input-group--stacked">
@@ -98,8 +98,8 @@ export default {
         AppGoogleLocationAutocomplete,
     },
     methods:{
-        googleAutocompleteSelected(coords){
-
+        googleAutocompleteSelected(location, coords){
+            this.input.commuteLocation = location
             this.input.coords = coords
         }
     }

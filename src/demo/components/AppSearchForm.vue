@@ -36,7 +36,7 @@
                         :api-key="apiKey"
                         v-model="input.commuteLocation"
                         class="form__input"
-                        @getCoords="googleAutocompleteSelected"
+                        @locationSelected="googleAutocompleteSelected"
                     />
                 </div>
 
@@ -147,7 +147,8 @@ export default {
             this.input.location = "Your Location"
             this.input.coords = coords
         },
-        googleAutocompleteSelected(coords){
+        googleAutocompleteSelected(location, coords){
+            this.input.commuteLocation = location
             this.input.coords = coords
             this.submitSearchForm()
         }

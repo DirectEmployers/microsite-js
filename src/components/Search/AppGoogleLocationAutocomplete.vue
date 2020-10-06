@@ -59,7 +59,7 @@ export default {
 
                     const lon = geo.location.lng()
 
-                    this.$emit("getCoords", lat + "," + lon)
+                    this.$emit("locationSelected",  place.formatted_address, lat + "," + lon)
                 }
             })
         },
