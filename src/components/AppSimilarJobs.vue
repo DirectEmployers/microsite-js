@@ -1,6 +1,6 @@
 <template>
     <section class="similar-jobs" v-if="hasSimilarJobs">
-        <h3 class="similar-jobs__title">{{ header }}</h3>
+        <h2 class="similar-jobs__title">{{ header }}</h2>
         <div class="similar-jobs__grid">
             <AppJob
                 :key="index"
@@ -18,9 +18,9 @@
                             )"
                         >
                             <slot :jobData="jobData">
-                                <h4 class="similar-jobs__grid-item-title">
+                                <h3 class="similar-jobs__grid-item-title">
                                     {{ jobData.title }}
-                                </h4>
+                                </h3>
                                 <p class="similar-jobs__grid-item-location">
                                     {{ jobData.location }}
                                 </p>
