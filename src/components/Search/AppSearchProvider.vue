@@ -112,8 +112,9 @@ export default {
             return this.meta.source == "solr"
         },
         isCommuteSearch() {
+
             return (
-                !blank(this.input.coords) && !blank(this.input.commuteLocation)
+                !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation)
             )
         },
         configFilters() {

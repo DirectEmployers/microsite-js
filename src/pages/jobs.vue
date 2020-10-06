@@ -19,6 +19,7 @@
                     appliedFilters,
                     submitSearchForm,
                     isGoogleTalent,
+                    isCommuteSearch
                 }"
             >
                 <AppLoader v-if="status.loading" />
@@ -28,6 +29,7 @@
                         <AppSearchForm
                             :input="input"
                             :source="source"
+                            :isCommuteSearch="isCommuteSearch"
                             :submitSearchForm="submitSearchForm"
                         />
                     </div>

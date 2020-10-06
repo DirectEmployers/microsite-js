@@ -5,12 +5,11 @@
                 <label for="commuteLocation" class="form__label">
                     Commute From
                 </label>
-                <input
-                    id="commuteLocation"
-                    class="form__input"
-                    type="text"
-                    ref="commuteLocationInput"
+                <AppGoogleLocationAutocomplete
+                    :api-key="apiKey"
                     v-model="input.commuteLocation"
+                    class="form__input"
+                    @getCoords="googleAutocompleteSelected"
                 />
             </div>
             <div class="form__input-group form__input-group--stacked">
@@ -79,45 +78,30 @@
 </template>
 
 <script>
-import {  retry } from '~/services/helpers'
-
+import AppGoogleLocationAutocomplete from "~/components/Search/AppGoogleLocationAutocomplete"
 export default {
     name: "CommuteSearchForm",
     props: {
         input: {
             required: false,
-            default: ()=>{}
+            default: () => {},
         },
-        submitSearchForm:{
+        submitSearchForm: {
             type: Function,
-            required:true
-        }
-    },
-    mounted() {
-        retry(this.initAutocomplete)
-    },
-    methods: {
-        initAutocomplete() {
-            const placeAutoComplete = new google.maps.places.Autocomplete(
-                this.$refs.commuteLocationInput
-            )
-            placeAutoComplete.addListener("place_changed", () => {
-                const place = placeAutoComplete.getPlace()
-
-                const geo = place.geometry
-
-                if (geo) {
-                    const lat = geo.location.lat()
-
-                    const lon = geo.location.lng()
-
-                    this.input.coords = lat + "," + lon
-
-                    this.input.commuteLocation = place.formatted_address
-
-                }
-            })
+            required: true,
         },
     },
+    data(){
+        return { apiKey: process.env.GRIDSOME_GOOGLE_MAPS_API_KEY}
+    },
+    components: {
+        AppGoogleLocationAutocomplete,
+    },
+    methods:{
+        googleAutocompleteSelected(coords){
+
+            this.input.coords = coords
+        }
+    }
 }
 </script>
