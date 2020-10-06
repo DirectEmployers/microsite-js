@@ -10,38 +10,38 @@
 
 <script>
 import {get} from "lodash"
-import { retry } from '../../services/helpers'
+import {retry} from "../../services/helpers"
 export default {
-    props:{
+    props: {
         apiKey: {
             type: String,
-            required: true
+            required: true,
         },
-        value: String
+        value: String,
     },
-    created(){
-        if(!this.placesApiLoaded){
+    created() {
+        if (!this.placesApiLoaded) {
             this.appendPlacesScript()
         }
     },
-    mounted(){
+    mounted() {
         retry(this.initAutocomplete)
     },
-    computed:{
-        apiScriptUrl(){
+    computed: {
+        apiScriptUrl() {
             let key = this.apiKey
 
             return `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`
         },
-        placesApiLoaded(){
-            return (typeof get(window, "google.maps.places")) == 'object'
+        placesApiLoaded() {
+            return typeof get(window, "google.maps.places") == "object"
         },
     },
-    methods:{
-        appendPlacesScript(){
-            let script = document.createElement('script')
+    methods: {
+        appendPlacesScript() {
+            let script = document.createElement("script")
 
-            script.setAttribute('src', this.apiScriptUrl)
+            script.setAttribute("src", this.apiScriptUrl)
 
             document.head.appendChild(script)
         },
@@ -59,10 +59,14 @@ export default {
 
                     const lon = geo.location.lng()
 
-                    this.$emit("locationSelected",  place.formatted_address, lat + "," + lon)
+                    this.$emit(
+                        "locationSelected",
+                        place.formatted_address,
+                        lat + "," + lon
+                    )
                 }
             })
         },
-    }
+    },
 }
 </script>

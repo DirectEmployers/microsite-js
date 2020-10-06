@@ -21464,12 +21464,12 @@ module.exports = function (a, b) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=0e38cbd6&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=1aa51fad&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('input',_vm._b({ref:"autocompleteInput",attrs:{"type":"text"},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.$emit('input', $event.target.value)}}},'input',_vm.$attrs,false))}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=0e38cbd6&
+// CONCATENATED MODULE: ./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=1aa51fad&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
 var esm_typeof = __webpack_require__("53ca");
@@ -21516,13 +21516,13 @@ var helpers = __webpack_require__("a74a");
       return "https://maps.googleapis.com/maps/api/js?key=".concat(key, "&libraries=places");
     },
     placesApiLoaded: function placesApiLoaded() {
-      return Object(esm_typeof["a" /* default */])(Object(lodash["get"])(window, "google.maps.places")) == 'object';
+      return Object(esm_typeof["a" /* default */])(Object(lodash["get"])(window, "google.maps.places")) == "object";
     }
   },
   methods: {
     appendPlacesScript: function appendPlacesScript() {
-      var script = document.createElement('script');
-      script.setAttribute('src', this.apiScriptUrl);
+      var script = document.createElement("script");
+      script.setAttribute("src", this.apiScriptUrl);
       document.head.appendChild(script);
     },
     initAutocomplete: function initAutocomplete() {
