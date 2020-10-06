@@ -149,12 +149,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=81c2c64a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=1938d4b2&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"input":_vm.input,"filteredInput":_vm.getPayload(),"status":_vm.status,"filters":_vm.filters,"sort":_vm.sort,"sortedBy":_vm.sortedBy,"sortOptions":_vm.sortOptions,"source":_vm.source,"isSolr":_vm.isSolr,"isGoogleTalent":_vm.isGoogleTalent,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"removeFilter":_vm.removeFilter,"featuredJobs":_vm.featuredJobs,"appliedFilters":_vm.appliedFilters,"getFilterOptions":_vm.getFilterOptions,"submitSearchForm":_vm.submitSearchForm,"isCommuteSearch":_vm.isCommuteSearch})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=81c2c64a&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=1938d4b2&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -278,6 +278,7 @@ var services_search = __webpack_require__("e73b");
         loading: false,
         error: false
       },
+      isCommuteSearch: !Object(helpers["a" /* blank */])(this.$route.query.coords) && !Object(helpers["a" /* blank */])(this.$route.query.commuteLocation),
       meta: {},
       input: this.getInputDefaults()
     };
@@ -331,13 +332,6 @@ var services_search = __webpack_require__("e73b");
     },
     isSolr: function isSolr() {
       return this.meta.source == "solr";
-    },
-    isCommuteSearch: function isCommuteSearch() {
-      if (!Object(helpers["a" /* blank */])(this.input.coords) && !Object(helpers["a" /* blank */])(this.input.commuteLocation)) {
-        return true;
-      }
-
-      return !Object(helpers["a" /* blank */])(this.$route.query.coords) && !Object(helpers["a" /* blank */])(this.$route.query.commuteLocation);
     },
     configFilters: function configFilters() {
       return this.siteConfig.filters || [];
@@ -412,7 +406,7 @@ var services_search = __webpack_require__("e73b");
     getCommuteDefaults: function getCommuteDefaults() {
       return Object(lodash["clone"])({
         commuteMethod: "DRIVING",
-        travelDuration: "900",
+        travelDuration: "3600",
         commuteLocation: "",
         roadTraffic: "TRAFFIC_FREE"
       });
@@ -461,6 +455,12 @@ var services_search = __webpack_require__("e73b");
     },
     submitSearchForm: function submitSearchForm() {
       this.input.page = 1;
+
+      if (!Object(helpers["a" /* blank */])(this.input.coords) && !Object(helpers["a" /* blank */])(this.input.commuteLocation)) {
+        this.isCommuteSearch = true;
+        this.input.location = "";
+      }
+
       this.pushPayload();
     },
     removeFilter: function removeFilter(name) {
@@ -470,6 +470,7 @@ var services_search = __webpack_require__("e73b");
       var defaultInput = this.getInputDefaults();
 
       if (name == "*") {
+        this.isCommuteSearch = false;
         remove = Object.keys(defaultInput).concat(this.filterParamNames);
       }
 
@@ -482,6 +483,7 @@ var services_search = __webpack_require__("e73b");
       }
 
       if (name == "commuteLocation") {
+        this.isCommuteSearch = false;
         Object.keys(this.getCommuteDefaults()).forEach(function (key) {
           _this.input[key] = defaultInput[name] || "";
         });
