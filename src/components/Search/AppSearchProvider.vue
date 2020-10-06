@@ -61,6 +61,7 @@ export default {
                 loading: false,
                 error: false,
             },
+            isCommuteSearch: !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation),
             meta: {},
             input: this.getInputDefaults(),
         }
@@ -111,11 +112,6 @@ export default {
         isSolr() {
             return this.meta.source == "solr"
         },
-        isCommuteSearch() {
-            return (
-                !blank(this.input.coords) && !blank(this.input.commuteLocation)
-            )
-        },
         configFilters() {
             return this.siteConfig.filters || []
         },
@@ -135,11 +131,12 @@ export default {
                     !blank(input[filter.name]) &&
                     !added.includes(filter.name)
                 ) {
-                    filters.push({
-                        display: input[filter.name],
-                        parameter: filter.name,
-                    })
-                    added.push(filter.name)
+                        filters.push({
+                            display: input[filter.name],
+                            parameter: filter.name,
+                        })
+                        added.push(filter.name)
+
                 }
             })
 
@@ -194,7 +191,7 @@ export default {
         getCommuteDefaults() {
             return clone({
                 commuteMethod: "DRIVING",
-                travelDuration: "900",
+                travelDuration: "3600",
                 commuteLocation: "",
                 roadTraffic: "TRAFFIC_FREE",
             })
@@ -254,25 +251,40 @@ export default {
 
         submitSearchForm() {
             this.input.page = 1
+            if (
+                !blank(this.input.coords) && !blank(this.input.commuteLocation)
+            ){
+                this.isCommuteSearch = true
+                this.input.location = ""
+            }
             this.pushPayload()
         },
 
         removeFilter(name) {
+            let remove = [name]
             const defaultInput = this.getInputDefaults()
 
             if (name == "*") {
-                this.input = defaultInput
+                this.isCommuteSearch = false
+                remove = Object.keys(defaultInput).concat(this.filterParamNames)
             }
 
-            this.input[name] = defaultInput[name] || ""
-
+            remove.forEach(key=>{
+                this.input[key] = defaultInput[name] || ""
+            })
             if (["location", "commuteLocation"].includes(name)) {
                 this.input.coords = ""
             }
 
+            if(name == "commuteLocation"){
+                this.isCommuteSearch = false
+                Object.keys(this.getCommuteDefaults()).forEach(key =>{
+                    this.input[key] =  defaultInput[name] || ""
+                })
+            }
+
             this.submitSearchForm()
         },
-
         async search() {
             this.status.loading = true
 

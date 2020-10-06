@@ -15,7 +15,7 @@
                 />
             </div>
             <div class="search-form__section">
-                <div class="search-form__location-autocomplete">
+                <div class="search-form__location-autocomplete" v-if="!isCommuteSearch">
                     <AppAutocompleteInput
                         ref="location"
                         v-model="input.location"
@@ -30,6 +30,14 @@
                     <div class="form__input-group">
                         <AppGeoLocation class="form__input-addon" @getCoords="setLocationFromGeo"/>
                     </div>
+                </div>
+                <div class="mt-6" v-else>
+                    <AppGoogleLocationAutocomplete
+                        :api-key="apiKey"
+                        v-model="input.commuteLocation"
+                        class="form__input"
+                        @locationSelected="googleAutocompleteSelected"
+                    />
                 </div>
 
                 <div
@@ -87,6 +95,7 @@
 import AppAutocompleteInput from "~/components/Form/AppAutocompleteInput"
 import AppSearchProvider from "~/components/Search/AppSearchProvider"
 import AppGeoLocation from "~/components/Search/AppGeoLocation"
+import AppGoogleLocationAutocomplete from "~/components/Search/AppGoogleLocationAutocomplete"
 import {
     TitleCompleteService,
     MOCCompleteService,
@@ -97,6 +106,7 @@ export default {
     name: "SearchForm",
     components: {
         AppAutocompleteInput,
+        AppGoogleLocationAutocomplete,
         AppGeoLocation
     },
     props:{
@@ -104,6 +114,11 @@ export default {
             type: Object,
             required: false,
             default: ()=>{ return {} }
+        },
+        isCommuteSearch: {
+            required: false,
+            default: false,
+            type: Boolean
         },
         source:{
             type: String,
@@ -116,6 +131,9 @@ export default {
     },
     computed: {
         shouldShowRadiusInput() {
+            if(this.isCommuteSearch){
+                return false
+            }
             return this.input.coords || this.input.location
         },
     },
@@ -128,12 +146,18 @@ export default {
         setLocationFromGeo(coords){
             this.input.location = "Your Location"
             this.input.coords = coords
+        },
+        googleAutocompleteSelected(location, coords){
+            this.input.commuteLocation = location
+            this.input.coords = coords
+            this.submitSearchForm()
         }
     },
     data: () => ({
         TitleCompleteService,
         MOCCompleteService,
         LocationCompleteService,
+        apiKey: process.env.GRIDSOME_GOOGLE_MAPS_API_KEY
     }),
 }
 </script>

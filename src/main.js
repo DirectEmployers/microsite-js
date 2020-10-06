@@ -9,7 +9,7 @@ export default function (Vue, { router, head, isClient }) {
     //can reference it globally in components & templates.
     Vue.prototype.$siteConfig = siteConfig
 
-    head.script.push({
-        src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCnblVPQXhdpcLynXA6LvAohQcuVE8dnKE&libraries=places",
-    })
+    // head.script.push({
+    //     src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCnblVPQXhdpcLynXA6LvAohQcuVE8dnKE&libraries=places",
+    // })
 }
