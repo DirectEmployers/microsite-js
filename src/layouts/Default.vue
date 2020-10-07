@@ -20,14 +20,18 @@
                 </template>
             </AppNavbar>
             <slot />
+        <AppDETracker/>
+
         </main>
     </div>
 </template>
 <script>
+import AppDETracker from "~/components/AppDETracker"
 import AppNavbar from "~/components/AppNavbar"
 export default {
     components: {
         AppNavbar,
+        AppDETracker
     },
     metaInfo: {
         title: "Home",

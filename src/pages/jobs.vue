@@ -161,7 +161,6 @@ import AppChip from "~/components/AppChip"
 import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppXIcon from "~/components/Icons/AppXIcon"
-
 export default {
     components: {
         AppAccordion,
