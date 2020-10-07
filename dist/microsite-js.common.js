@@ -731,16 +731,16 @@ module.exports = Axios;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=65c0553d&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h3',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppJob',{key:index,attrs:{"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [(_vm.guid != jobData.guid)?_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":_vm.buildJobDetailUrl(
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=fcaf4eca&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h2',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppJob',{key:index,attrs:{"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [(_vm.guid != jobData.guid)?_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":_vm.buildJobDetailUrl(
                             jobData.title,
                             jobData.location,
                             jobData.guid
-                        )}},[_vm._t("default",[_c('h4',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.location)+" ")])],{"jobData":jobData})],2)],1):_vm._e()]}}],null,true)})}),1)]):_vm._e()}
+                        )}},[_vm._t("default",[_c('h3',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.location)+" ")])],{"jobData":jobData})],2)],1):_vm._e()]}}],null,true)})}),1)]):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=65c0553d&
+// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=fcaf4eca&
 
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
 var runtime = __webpack_require__("96cf");
@@ -21457,87 +21457,18 @@ module.exports = function (a, b) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=1aa51fad&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=893f01c6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('input',_vm._b({ref:"autocompleteInput",attrs:{"type":"text"},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.$emit('input', $event.target.value)}}},'input',_vm.$attrs,false))}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=1aa51fad&
+// CONCATENATED MODULE: ./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=893f01c6&
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
-var esm_typeof = __webpack_require__("53ca");
+// EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=script&lang=js&
+var AppGoogleLocationAutocompletevue_type_script_lang_js_ = __webpack_require__("adbe");
 
-// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
-var lodash = __webpack_require__("2ef0");
-
-// EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
-var helpers = __webpack_require__("a74a");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=script&lang=js&
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ var AppGoogleLocationAutocompletevue_type_script_lang_js_ = ({
-  props: {
-    apiKey: {
-      type: String,
-      required: true
-    },
-    value: String
-  },
-  created: function created() {
-    if (!this.placesApiLoaded) {
-      this.appendPlacesScript();
-    }
-  },
-  mounted: function mounted() {
-    Object(helpers["c" /* retry */])(this.initAutocomplete);
-  },
-  computed: {
-    apiScriptUrl: function apiScriptUrl() {
-      var key = this.apiKey;
-      return "https://maps.googleapis.com/maps/api/js?key=".concat(key, "&libraries=places");
-    },
-    placesApiLoaded: function placesApiLoaded() {
-      return Object(esm_typeof["a" /* default */])(Object(lodash["get"])(window, "google.maps.places")) == "object";
-    }
-  },
-  methods: {
-    appendPlacesScript: function appendPlacesScript() {
-      var script = document.createElement("script");
-      script.setAttribute("src", this.apiScriptUrl);
-      document.head.appendChild(script);
-    },
-    initAutocomplete: function initAutocomplete() {
-      var _this = this;
-
-      var placeAutoComplete = new google.maps.places.Autocomplete(this.$refs.autocompleteInput);
-      placeAutoComplete.addListener("place_changed", function () {
-        var place = placeAutoComplete.getPlace();
-        var geo = place.geometry;
-
-        if (geo) {
-          var lat = geo.location.lat();
-          var lon = geo.location.lng();
-
-          _this.$emit("locationSelected", place.formatted_address, lat + "," + lon);
-        }
-      });
-    }
-  }
-});
 // CONCATENATED MODULE: ./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=script&lang=js&
- /* harmony default export */ var Search_AppGoogleLocationAutocompletevue_type_script_lang_js_ = (AppGoogleLocationAutocompletevue_type_script_lang_js_); 
+ /* harmony default export */ var Search_AppGoogleLocationAutocompletevue_type_script_lang_js_ = (AppGoogleLocationAutocompletevue_type_script_lang_js_["a" /* default */]); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
 
@@ -27589,6 +27520,82 @@ module.exports = function () {
   return result;
 };
 
+
+/***/ }),
+
+/***/ "adbe":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("53ca");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("2ef0");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a74a");
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  props: {
+    apiKey: {
+      type: String,
+      required: true
+    },
+    value: String
+  },
+  created: function created() {
+    if (!this.placesApiLoaded) {
+      this.appendPlacesScript();
+    }
+  },
+  mounted: function mounted() {
+    Object(_services_helpers__WEBPACK_IMPORTED_MODULE_2__[/* retry */ "c"])(this.initAutocomplete);
+  },
+  computed: {
+    apiScriptUrl: function apiScriptUrl() {
+      var key = this.apiKey;
+      return "https://maps.googleapis.com/maps/api/js?key=".concat(key, "&libraries=places");
+    },
+    placesApiLoaded: function placesApiLoaded() {
+      return Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(Object(lodash__WEBPACK_IMPORTED_MODULE_1__["get"])(window, "google.maps.places")) == "object";
+    }
+  },
+  methods: {
+    appendPlacesScript: function appendPlacesScript() {
+      if (process.isClient) {
+        var script = document.createElement("script");
+        script.setAttribute("src", this.apiScriptUrl);
+        document.head.appendChild(script);
+      }
+    },
+    initAutocomplete: function initAutocomplete() {
+      var _this = this;
+
+      var placeAutoComplete = new google.maps.places.Autocomplete(this.$refs.autocompleteInput);
+      placeAutoComplete.addListener("place_changed", function () {
+        var place = placeAutoComplete.getPlace();
+        var geo = place.geometry;
+
+        if (geo) {
+          var lat = geo.location.lat();
+          var lon = geo.location.lng();
+
+          _this.$emit("locationSelected", place.formatted_address, lat + "," + lon);
+        }
+      });
+    }
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("4362")))
 
 /***/ }),
 

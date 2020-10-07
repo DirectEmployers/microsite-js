@@ -39,11 +39,11 @@ export default {
     },
     methods: {
         appendPlacesScript() {
-            let script = document.createElement("script")
-
-            script.setAttribute("src", this.apiScriptUrl)
-
-            document.head.appendChild(script)
+            if (process.isClient) {
+                let script = document.createElement("script")
+                script.setAttribute("src", this.apiScriptUrl)
+                document.head.appendChild(script)
+            }
         },
         initAutocomplete() {
             const placeAutoComplete = new google.maps.places.Autocomplete(

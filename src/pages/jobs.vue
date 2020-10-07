@@ -88,7 +88,7 @@
                                     @chipClicked="removeFilter"
                                 ></AppChip>
                             </div>
-                            <AppAccordion :open="true">
+                            <AppAccordion :open="true" v-if="sortOptions.length">
                                 <template v-slot:header>
                                     <h3 class="font-bold text-xl">
                                         Sorted By
