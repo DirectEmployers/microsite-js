@@ -27027,7 +27027,8 @@ hiddenKeys[HIDDEN] = true;
     } // everytime vue rerenders the script,
     // make sure we are always using a single instance
     // of the tracker. In 1.0 we do a fresh page load
-    // on every page so we never had to worry about than one instance,
+    // on every page so we never had to worry about
+    // having more than one instance,
     // but since this is SPA, we are ending up with several
     // instances of the tracker on every SPA update, so clear out
     // the instances so we can "simulate" a page change.
