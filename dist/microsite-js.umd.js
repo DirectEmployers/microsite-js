@@ -23196,6 +23196,7 @@ module.exports = {
 var map = {
 	"./AppAccordion.vue": "32c7",
 	"./AppChip.vue": "9dc8",
+	"./AppDETracker.vue": "7a58",
 	"./AppDropdown.vue": "884f",
 	"./AppJob.vue": "9f80",
 	"./AppJobDescription.vue": "d669",
@@ -23247,6 +23248,8 @@ webpackContext.id = "6ae9";
 /* harmony import */ var core_js_modules_es_number_to_fixed__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_to_fixed__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Icons_AppRadiusIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("4ebe");
 
+//
+//
 //
 //
 //
@@ -23924,6 +23927,44 @@ module.exports = [
   'valueOf'
 ];
 
+
+/***/ }),
+
+/***/ "7a58":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDETracker.vue?vue&type=script&lang=js&
+var AppDETrackervue_type_script_lang_js_ = __webpack_require__("a534");
+
+// CONCATENATED MODULE: ./src/components/AppDETracker.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_AppDETrackervue_type_script_lang_js_ = (AppDETrackervue_type_script_lang_js_["a" /* default */]); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/components/AppDETracker.vue
+var render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_AppDETrackervue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var AppDETracker = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -26970,6 +27011,91 @@ hiddenKeys[HIDDEN] = true;
 
 /***/ }),
 
+/***/ "a534":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("53ca");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("2ef0");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a74a");
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  props: {
+    canEngageWithJobs: {
+      type: Boolean,
+      default: false,
+      required: false
+    }
+  },
+  metaInfo: function metaInfo() {
+    if (!process.isClient || Object(_services_helpers__WEBPACK_IMPORTED_MODULE_2__[/* isDevelopment */ "c"])()) {
+      return {};
+    } // everytime vue rerenders the script,
+    // make sure we are always using a single instance
+    // of the tracker. In 1.0 we do a fresh page load
+    // on every page so we never had to worry about than one instance,
+    // but since this is SPA, we are ending up with several
+    // instances of the tracker on every SPA update, so clear out
+    // the instances so we can "simulate" a page change.
+
+
+    if ((typeof de_track === "undefined" ? "undefined" : Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(de_track)) == "object") {
+      de_track.instances = [];
+    }
+
+    return {
+      script: [{
+        id: "detrack",
+        defer: true,
+        src: this.scriptSrc
+      }]
+    };
+  },
+  computed: {
+    cleanPathName: function cleanPathName() {
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["trim"])(location.pathname, "/");
+    },
+    isJobDetail: function isJobDetail() {
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["endsWith"])(this.cleanPathName, "job");
+    },
+    isJobListing: function isJobListing() {
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["endsWith"])(this.cleanPathName, "jobs");
+    },
+    scriptSrc: function scriptSrc() {
+      var url = "https://d2e48ltfsb5exy.cloudfront.net/p/t.js?i=";
+      return url + this.scriptParams;
+    },
+    scriptParams: function scriptParams() {
+      // default params is to assume we are on a page with no jobs/maps
+      var params = "0,6";
+
+      if (this.canEngageWithJobs) {
+        // static or pages with job data/maps: 0,2,6
+        params = "0,2,6";
+      }
+
+      if (this.isJobDetail) {
+        params = "0,1,6";
+      }
+
+      if (this.isJobListing) {
+        params = "0,3,6";
+      }
+
+      return params;
+    }
+  },
+  render: function render() {
+    return this.$slots.default;
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("4362")))
+
+/***/ }),
+
 /***/ "a630":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27191,10 +27317,9 @@ exports.default = Tokenizer;
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ blank; });
-__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ retry; });
+__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ retry; });
+__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ isDevelopment; });
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ buildJobDetailUrl; });
-
-// UNUSED EXPORTS: log
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -27364,14 +27489,12 @@ function retry(callback) {
     }
   });
 }
-/**
- * Log to console only when ENV is development.
- */
+/** Return true if the env is dev. */
 
-function log(message) {
-  var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "log";
-
+function isDevelopment() {
   if (false) {}
+
+  return false;
 }
 /**
  * Build a job detail url.
@@ -27567,7 +27690,7 @@ module.exports = function () {
     }
   },
   mounted: function mounted() {
-    Object(_services_helpers__WEBPACK_IMPORTED_MODULE_2__[/* retry */ "c"])(this.initAutocomplete);
+    Object(_services_helpers__WEBPACK_IMPORTED_MODULE_2__[/* retry */ "d"])(this.initAutocomplete);
   },
   computed: {
     apiScriptUrl: function apiScriptUrl() {
@@ -28451,14 +28574,14 @@ exports.start = start;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGeoLocation.vue?vue&type=template&id=353ab59e&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isSupported)?_c('button',{staticClass:"geolocation__button",class:{
-        hidden: !_vm.isSupported,
-    },attrs:{"type":"button","aria-label":"Your location"},on:{"click":_vm.getGeoLocation}},[_vm._t("default",[_c('AppRadiusIcon',{attrs:{"width":"18px"}})])],2):_vm._e()}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGeoLocation.vue?vue&type=template&id=d43d1ae0&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[(_vm.isSupported)?_c('button',{staticClass:"geolocation__button",class:{
+            hidden: !_vm.isSupported,
+        },attrs:{"type":"button","aria-label":"Your location"},on:{"click":_vm.getGeoLocation}},[_vm._t("default",[_c('AppRadiusIcon',{attrs:{"width":"18px"}})])],2):_vm._e()])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppGeoLocation.vue?vue&type=template&id=353ab59e&
+// CONCATENATED MODULE: ./src/components/Search/AppGeoLocation.vue?vue&type=template&id=d43d1ae0&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGeoLocation.vue?vue&type=script&lang=js&
 var AppGeoLocationvue_type_script_lang_js_ = __webpack_require__("6d75");

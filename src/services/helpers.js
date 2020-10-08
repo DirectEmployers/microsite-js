@@ -45,13 +45,12 @@ export function retry(callback, args = [], max = 5, delay = 100) {
     })
 }
 
-/**
- * Log to console only when ENV is development.
- */
-export function log(message, context = "log") {
+/** Return true if the env is dev. */
+export function isDevelopment() {
     if (process.env.NODE_ENV == "development") {
-        console[context](message)
+        return true
     }
+    return false
 }
 
 /**

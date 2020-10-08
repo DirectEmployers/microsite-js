@@ -1,18 +1,20 @@
 <template>
-    <button
-        @click="getGeoLocation"
-        v-if="isSupported"
-        type="button"
-        aria-label="Your location"
-        class="geolocation__button"
-        :class="{
-            hidden: !isSupported,
-        }"
-    >
-        <slot>
-            <AppRadiusIcon width="18px" />
-        </slot>
-    </button>
+    <ClientOnly>
+        <button
+            @click="getGeoLocation"
+            v-if="isSupported"
+            type="button"
+            aria-label="Your location"
+            class="geolocation__button"
+            :class="{
+                hidden: !isSupported,
+            }"
+        >
+            <slot>
+                <AppRadiusIcon width="18px" />
+            </slot>
+        </button>
+    </ClientOnly>
 </template>
 <script>
 import AppRadiusIcon from "../Icons/AppRadiusIcon"

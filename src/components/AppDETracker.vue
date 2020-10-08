@@ -1,5 +1,6 @@
 <script>
-import {trim, endsWith } from "lodash"
+import {trim, endsWith} from "lodash"
+import { isDevelopment } from "../services/helpers"
 export default {
     props: {
         canEngageWithJobs: {
@@ -8,16 +9,22 @@ export default {
             required: false,
         },
     },
-    created() {
-        if (process.isClient) {
-            // this.appendTrackerScript()
-        }
-    },
     metaInfo() {
-        if (!process.isClient) {
+        if (!process.isClient || isDevelopment()) {
             return {}
         }
-        // TODO, figure out how to disable auto increment on id?
+
+        // everytime vue rerenders the script,
+        // make sure we are always using a single instance
+        // of the tracker. In 1.0 we do a fresh page load
+        // on every page so we never had to worry about than one instance,
+        // but since this is SPA, we are ending up with several
+        // instances of the tracker on every SPA update, so clear out
+        // the instances so we can "simulate" a page change.
+        if (typeof de_track == "object") {
+            de_track.instances = []
+        }
+
         return {
             script: [
                 {
@@ -64,19 +71,6 @@ export default {
     },
     render() {
         return this.$slots.default
-    },
-    methods: {
-        appendTrackerScript() {
-            let script = document.createElement("scipt")
-
-            script.setAttribute("defer", true)
-
-            script.setAttribute("id", "detrack") // required for script to work
-
-            script.setAttribute("src", src)
-            console.log(script)
-            document.body.appendChild(script)
-        },
-    },
+    }
 }
 </script>
