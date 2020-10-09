@@ -1,6 +1,6 @@
 <script>
 import {trim, endsWith} from "lodash"
-import { isDevelopment } from "../services/helpers"
+import {isDevelopment} from "../services/helpers"
 export default {
     props: {
         canEngageWithJobs: {
@@ -9,32 +9,38 @@ export default {
             required: false,
         },
     },
-    metaInfo() {
-        if (!process.isClient || isDevelopment()) {
-            return {}
-        }
 
-        // everytime vue rerenders the script,
-        // make sure we are always using a single instance
-        // of the tracker. In 1.0 we do a fresh page load
-        // on every page so we never had to worry about
-        // having more than one instance,
-        // but since this is SPA, we are ending up with several
-        // instances of the tracker on every SPA update, so clear out
-        // the instances so we can "simulate" a page change.
-        if (typeof de_track == "object") {
-            de_track.instances = []
+    created() {
+        if (process.isClient) {
+            this.appendTracker()
         }
+    },
 
-        return {
-            script: [
-                {
-                    id: "detrack",
-                    defer: true,
-                    src: this.scriptSrc,
-                },
-            ],
-        }
+    methods: {
+        appendTracker() {
+            // everytime vue rerenders the script,
+            // make sure we are always using a single instance
+            // of the tracker. In 1.0 we do a fresh page load
+            // on every page so we never had to worry about
+            // having more than one instance,
+            // but since this is SPA, we are ending up with several
+            // instances of the tracker on every SPA update, so clear out
+            // the instances so we can "simulate" a page change.
+            if (typeof de_track == "object") {
+                de_track.instances = []
+            }
+
+            document.querySelectorAll("[id*='detrack']").forEach(el=>el.remove())
+
+            const script = document.createElement('script')
+
+            script.setAttribute('src', this.scriptSrc)
+
+            script.setAttribute('id', 'detrack')
+            script.setAttribute('defer', true)
+
+            document.body.appendChild(script)
+        },
     },
     computed: {
         cleanPathName() {
@@ -72,6 +78,6 @@ export default {
     },
     render() {
         return this.$slots.default
-    }
+    },
 }
 </script>

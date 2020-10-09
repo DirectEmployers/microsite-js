@@ -27015,10 +27015,16 @@ hiddenKeys[HIDDEN] = true;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("53ca");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("2ef0");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a74a");
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4160");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("159b");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("53ca");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("2ef0");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("a74a");
+
+
 
 
 
@@ -27030,40 +27036,44 @@ hiddenKeys[HIDDEN] = true;
       required: false
     }
   },
-  metaInfo: function metaInfo() {
-    if (!process.isClient || Object(_services_helpers__WEBPACK_IMPORTED_MODULE_2__[/* isDevelopment */ "c"])()) {
-      return {};
-    } // everytime vue rerenders the script,
-    // make sure we are always using a single instance
-    // of the tracker. In 1.0 we do a fresh page load
-    // on every page so we never had to worry about
-    // having more than one instance,
-    // but since this is SPA, we are ending up with several
-    // instances of the tracker on every SPA update, so clear out
-    // the instances so we can "simulate" a page change.
-
-
-    if ((typeof de_track === "undefined" ? "undefined" : Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(de_track)) == "object") {
-      de_track.instances = [];
+  created: function created() {
+    if (process.isClient) {
+      this.appendTracker();
     }
+  },
+  methods: {
+    appendTracker: function appendTracker() {
+      // everytime vue rerenders the script,
+      // make sure we are always using a single instance
+      // of the tracker. In 1.0 we do a fresh page load
+      // on every page so we never had to worry about
+      // having more than one instance,
+      // but since this is SPA, we are ending up with several
+      // instances of the tracker on every SPA update, so clear out
+      // the instances so we can "simulate" a page change.
+      if ((typeof de_track === "undefined" ? "undefined" : Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(de_track)) == "object") {
+        de_track.instances = [];
+      }
 
-    return {
-      script: [{
-        id: "detrack",
-        defer: true,
-        src: this.scriptSrc
-      }]
-    };
+      document.querySelectorAll("[id*='detrack']").forEach(function (el) {
+        return el.remove();
+      });
+      var script = document.createElement('script');
+      script.setAttribute('src', this.scriptSrc);
+      script.setAttribute('id', 'detrack');
+      script.setAttribute('defer', true);
+      document.body.appendChild(script);
+    }
   },
   computed: {
     cleanPathName: function cleanPathName() {
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["trim"])(location.pathname, "/");
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["trim"])(location.pathname, "/");
     },
     isJobDetail: function isJobDetail() {
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["endsWith"])(this.cleanPathName, "job");
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["endsWith"])(this.cleanPathName, "job");
     },
     isJobListing: function isJobListing() {
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["endsWith"])(this.cleanPathName, "jobs");
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["endsWith"])(this.cleanPathName, "jobs");
     },
     scriptSrc: function scriptSrc() {
       var url = "https://d2e48ltfsb5exy.cloudfront.net/p/t.js?i=";
@@ -27318,9 +27328,10 @@ exports.default = Tokenizer;
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ blank; });
-__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ retry; });
-__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ isDevelopment; });
+__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ retry; });
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ buildJobDetailUrl; });
+
+// UNUSED EXPORTS: isDevelopment
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -27691,7 +27702,7 @@ module.exports = function () {
     }
   },
   mounted: function mounted() {
-    Object(_services_helpers__WEBPACK_IMPORTED_MODULE_2__[/* retry */ "d"])(this.initAutocomplete);
+    Object(_services_helpers__WEBPACK_IMPORTED_MODULE_2__[/* retry */ "c"])(this.initAutocomplete);
   },
   computed: {
     apiScriptUrl: function apiScriptUrl() {
