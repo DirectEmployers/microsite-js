@@ -11,7 +11,7 @@ export default {
     },
 
     created() {
-        if (process.isClient) {
+        if (process.isClient && !isDevelopment()) {
             this.appendTracker()
         }
     },
