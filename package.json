@@ -1,0 +1,101 @@
+{
+  "name": "microsite-js",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Support javascript and vue components to be used in microsites 2.0 gridsome applications.",
+  "main": "dist/microsite-js.common.js",
+  "scripts": {
+    "serve": "node serve-build.js",
+    "develop": "gridsome develop",
+    "explore": "gridsome explore",
+    "build-gridsome": "gridsome build",
+    "build": "vue-cli-service build --target lib --name microsite-js ./src/index.js",
+    "lint": "vue-cli-service lint",
+    "test": "jest --no-cache"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "vue": "^2.6.11",
+    "axios": "^0.19.2",
+    "html2json": "^1.0.2",
+    "linkifyjs": "^2.1.9",
+    "lodash": "^4.17.15",
+    "tailwindcss": "^1.3.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "serve": "^11.3.2",
+    "gridsome": "^0.7.19",
+    "@babel/preset-env": "^7.10.2",
+    "@vue/cli-plugin-babel": "~4.4.0",
+    "@vue/cli-plugin-eslint": "~4.4.0",
+    "@vue/cli-service": "~4.4.0",
+    "@vue/test-utils": "^1.0.3",
+    "node-sass": "^4.14.0",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^24.8.0",
+    "babel-loader": "^8.0.6",
+    "gridsome-plugin-tailwindcss": "^2.2.43",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "jest": "^26.0.1",
+    "sass-loader": "^8.0.2",
+    "vue-jest": "^3.0.5",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "files": [
+    "dist/microsite-js.common.js",
+    "dist/microsite-js.umd.js",
+    "dist/microsite-js.umd.min.js",
+    "dist/microsite-js.css",
+    "src/components/*",
+    "src/services/*",
+    "src/scss/*",
+    "!dist/*.html"
+  ],
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {
+      "no-unused-vars": "off",
+      "no-undef": "off"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "vue-jest",
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,vue}",
+      "!**/node_modules/**",
+      "!**/gridsome.config.js",
+      "!**/gridsome.server.js",
+      "!**/src/main.js",
+      "!**/src/tests/coverage/lcov-report/*.js",
+      "!**/src/tests/mocks/fileMock.js",
+      "!**/dist/**"
+    ],
+    "coverageDirectory": "<rootDir>/src/tests/coverage"
+  }
+}

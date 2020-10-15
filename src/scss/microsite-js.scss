@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './components/accordion';
+@import './components/animation';
+@import './components/button';
+@import './components/dropdown';
+@import './components/form';
+@import './components/modal';
+@import './components/navbar';
+@import './components/pagination';
+@import './components/search-filter';
+@import './components/chip';
+@import './components/video';
+@import './components/similar-jobs';
+@import './components/geolocation';
