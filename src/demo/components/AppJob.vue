@@ -51,7 +51,8 @@ import AppYoutube from "~/components/AppYoutube"
 import AppJobDescription from "~/components/AppJobDescription"
 import AppSimilarJobs from "~/components/AppSimilarJobs"
 import {blank} from '~/services/helpers'
-import { toQueryString } from '../../services/helpers'
+import buildUrl from 'axios/lib/helpers/buildURL'
+
 export default {
     name: "AppJob",
     metaInfo() {
@@ -77,7 +78,7 @@ export default {
     computed:{
         searchResultsUrl(){
             if(!blank(this.$route.query)){
-                return "/jobs?" + toQueryString(this.$route.query)
+                return buildUrl("jobs", this.$route.query)
             }
             return '/jobs'
         },

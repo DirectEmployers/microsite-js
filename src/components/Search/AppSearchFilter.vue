@@ -57,9 +57,10 @@
 </template>
 <script>
 import AppAccordion from "../AppAccordion"
-import {blank, toQueryString} from "../../services/helpers"
+import {blank } from "../../services/helpers"
 import {fullState, removeCountry} from "../../services/location"
 import {omitBy, truncate, trim} from "lodash"
+import buildUrl from 'axios/lib/helpers/buildURL'
 export default {
     props: {
         display: {
@@ -147,7 +148,7 @@ export default {
 
             params[this.name] = option.submitValue
 
-            return "/jobs?" + toQueryString(params)
+            return buildUrl('jobs', params)
         },
 
         isExistingFilter(value) {

@@ -22,9 +22,10 @@
 </template>
 
 <script>
-import { buildJobDetailUrl, blank, toQueryString } from "../services/helpers"
+import { buildJobDetailUrl, blank } from "../services/helpers"
 import { fullState, removeCountry, removeState } from "../services/location"
 import { get, isArray } from "lodash"
+import buildUrl from 'axios/lib/helpers/buildURL'
 
 export default {
     props: {
@@ -106,7 +107,7 @@ export default {
             let url = buildJobDetailUrl(this.title, this.location, this.guid)
 
             if(!blank(this.input)){
-                url = url + "?"+ toQueryString(this.input)
+                return buildUrl(url, this.input)
             }
             return url
         },

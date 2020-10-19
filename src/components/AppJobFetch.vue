@@ -1,7 +1,8 @@
 <script>
 import {kebabCase} from "lodash"
 import {getJob} from "../services/cdn/job"
-import {toQueryString, blank } from "../services/helpers"
+import {blank } from "../services/helpers"
+import buildUrl from 'axios/lib/helpers/buildURL'
 
 export default {
     props: {
@@ -62,8 +63,7 @@ export default {
                     let redirect = `/${locationSlug}/${data.title_slug}/${guid}/job`
 
                     if (!blank(this.$route.query)) {
-                        redirect =
-                            redirect + "?" + toQueryString(this.$route.query)
+                        redirect = buildUrl(redirect, this.$route.query)
                     }
 
                     window.location.replace(redirect)
