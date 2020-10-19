@@ -368,7 +368,7 @@ var services_search = __webpack_require__("e73b");
   methods: {
     formatInput: function formatInput() {
       if (!this.isCommuteSearch) {
-        this.input.location = Object(services_location["b" /* fullState */])(this.input.location);
+        this.input.location = Object(services_location["a" /* fullState */])(this.input.location);
       } else {
         this.input.location = "";
       }
@@ -1039,14 +1039,14 @@ module.exports = ''.repeat || function repeat(count) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=04830634&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=62e4d94c&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.displayedOptions.length && _vm.isVisible)?_c('AppAccordion',{key:(_vm.keyName + "-accordion"),staticClass:"search-filter",attrs:{"open":_vm.isActive,"name":(_vm.keyName + "-accordion")},scopedSlots:_vm._u([{key:"header",fn:function(ref){
 var isOpen = ref.isOpen;
 return [_vm._t("display",[(_vm.display)?_c('h3',{staticClass:"search-filter-display",class:{'search-filter-display--active': _vm.isActive}},[_vm._v(" Filter By "+_vm._s(_vm.display)+" ")]):_vm._e()],{"isOpen":isOpen})]}}],null,true)},[_c('ul',{staticClass:"search-filter-options"},_vm._l((_vm.displayedOptions),function(option,index){return _c('li',{key:index,staticClass:"search-filter-options-item"},[_c('g-link',{attrs:{"to":option.href}},[_vm._v(" "+_vm._s(option.display)+" "),(option.value)?_c('span',[_vm._v("("+_vm._s(option.value)+")")]):_vm._e()])],1)}),0),(_vm.shouldShowLess || _vm.hasMoreItems)?_c('section',{staticClass:"search-filter-limiter"},[(_vm.hasMoreItems)?_c('button',{staticClass:"search-filter-limiter-more",attrs:{"aria-label":"Show more filters","rel":"nofollow"},on:{"click":function($event){return _vm.showMore()}}},[_vm._v(" More ")]):_vm._e(),(_vm.shouldShowLess)?_c('button',{staticClass:"search-filter-limiter-less",attrs:{"aria-label":"Show less filters","rel":"nofollow"},on:{"click":function($event){return _vm.showLess()}}},[_vm._v(" Less ")]):_vm._e()]):_vm._e()]):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=04830634&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=62e4d94c&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -1320,10 +1320,8 @@ var lodash = __webpack_require__("2ef0");
         submitValue = option.submitValue;
       }
 
-      if (this.keyName == 'country') {
-        display = Object(services_location["a" /* fullCountry */])(option.display);
-      } else if (this.name == "location") {
-        display = Object(services_location["b" /* fullState */])(Object(services_location["c" /* removeCountry */])(option.display));
+      if (this.name == "location") {
+        display = Object(services_location["a" /* fullState */])(Object(services_location["b" /* removeCountry */])(option.display));
         submitValue = display;
       } else if (this.keyName == "moc") {
         display = Object(lodash["truncate"])(option.display, {
@@ -2086,10 +2084,9 @@ module.exports = /(iphone|ipod|ipad).*applewebkit/i.test(userAgent);
 /* unused harmony export states */
 /* unused harmony export provinces */
 /* unused harmony export countries */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return removeCountry; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return removeCountry; });
 /* unused harmony export removeState */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return fullState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return fullCountry; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return fullState; });
 /* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("b64b");
 /* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("d3b7");
@@ -2185,255 +2182,8 @@ var provinces = {
   YT: "Yukon Territory"
 };
 var countries = {
-  ABW: "Aruba",
-  AFG: "Afghanistan",
-  AGO: "Angola",
-  AIA: "Anguilla",
-  ALA: "Åland Islands",
-  ALB: "Albania",
-  AND: "Andorra",
-  ARE: "United Arab Emirates",
-  ARG: "Argentina",
-  ARM: "Armenia",
-  ASM: "American Samoa",
-  ATA: "Antarctica",
-  ATF: "French Southern Territories",
-  ATG: "Antigua and Barbuda",
-  AUS: "Australia",
-  AUT: "Austria",
-  AZE: "Azerbaijan",
-  BDI: "Burundi",
-  BEL: "Belgium",
-  BEN: "Benin",
-  BES: "Bonaire, Sint Eustatius and Saba",
-  BFA: "Burkina Faso",
-  BGD: "Bangladesh",
-  BGR: "Bulgaria",
-  BHR: "Bahrain",
-  BHS: "Bahamas",
-  BIH: "Bosnia and Herzegovina",
-  BLM: "Saint Barthélemy",
-  BLR: "Belarus",
-  BLZ: "Belize",
-  BMU: "Bermuda",
-  BOL: "Bolivia, Plurinational State of",
-  BRA: "Brazil",
-  BRB: "Barbados",
-  BRN: "Brunei Darussalam",
-  BTN: "Bhutan",
-  BVT: "Bouvet Island",
-  BWA: "Botswana",
-  CAF: "Central African Republic",
-  CAN: "Canada",
-  CCK: "Cocos (Keeling) Islands",
-  CHE: "Switzerland",
-  CHL: "Chile",
-  CHN: "China",
-  CIV: "Côte d'Ivoire",
-  CMR: "Cameroon",
-  COD: "Congo, the Democratic Republic of the",
-  COG: "Congo",
-  COK: "Cook Islands",
-  COL: "Colombia",
-  COM: "Comoros",
-  CPV: "Cape Verde",
-  CRI: "Costa Rica",
-  CUB: "Cuba",
-  CUW: "Curaçao",
-  CXR: "Christmas Island",
-  CYM: "Cayman Islands",
-  CYP: "Cyprus",
-  CZE: "Czech Republic",
-  DEU: "Germany",
-  DJI: "Djibouti",
-  DMA: "Dominica",
-  DNK: "Denmark",
-  DOM: "Dominican Republic",
-  DZA: "Algeria",
-  ECU: "Ecuador",
-  EGY: "Egypt",
-  ERI: "Eritrea",
-  ESH: "Western Sahara",
-  ESP: "Spain",
-  EST: "Estonia",
-  ETH: "Ethiopia",
-  FIN: "Finland",
-  FJI: "Fiji",
-  FLK: "Falkland Islands (Malvinas)",
-  FRA: "France",
-  FRO: "Faroe Islands",
-  FSM: "Micronesia, Federated States of",
-  GAB: "Gabon",
-  GBR: "United Kingdom",
-  GEO: "Georgia",
-  GGY: "Guernsey",
-  GHA: "Ghana",
-  GIB: "Gibraltar",
-  GIN: "Guinea",
-  GLP: "Guadeloupe",
-  GMB: "Gambia",
-  GNB: "Guinea-Bissau",
-  GNQ: "Equatorial Guinea",
-  GRC: "Greece",
-  GRD: "Grenada",
-  GRL: "Greenland",
-  GTM: "Guatemala",
-  GUF: "French Guiana",
-  GUM: "Guam",
-  GUY: "Guyana",
-  HKG: "Hong Kong",
-  HMD: "Heard Island and McDonald Islands",
-  HND: "Honduras",
-  HRV: "Croatia",
-  HTI: "Haiti",
-  HUN: "Hungary",
-  IDN: "Indonesia",
-  IMN: "Isle of Man",
-  IND: "India",
-  IOT: "British Indian Ocean Territory",
-  IRL: "Ireland",
-  IRN: "Iran, Islamic Republic of",
-  IRQ: "Iraq",
-  ISL: "Iceland",
-  ISR: "Israel",
-  ITA: "Italy",
-  JAM: "Jamaica",
-  JEY: "Jersey",
-  JOR: "Jordan",
-  JPN: "Japan",
-  KAZ: "Kazakhstan",
-  KEN: "Kenya",
-  KGZ: "Kyrgyzstan",
-  KHM: "Cambodia",
-  KIR: "Kiribati",
-  KNA: "Saint Kitts and Nevis",
-  KOR: "South Korea",
-  KWT: "Kuwait",
-  LAO: "Lao People's Democratic Republic",
-  LBN: "Lebanon",
-  LBR: "Liberia",
-  LBY: "Libya",
-  LCA: "Saint Lucia",
-  LIE: "Liechtenstein",
-  LKA: "Sri Lanka",
-  LSO: "Lesotho",
-  LTU: "Lithuania",
-  LUX: "Luxembourg",
-  LVA: "Latvia",
-  MAC: "Macao",
-  MAF: "Saint Martin (French part)",
-  MAR: "Morocco",
-  MCO: "Monaco",
-  MDA: "Moldova, Republic of",
-  MDG: "Madagascar",
-  MDV: "Maldives",
-  MEX: "Mexico",
-  MHL: "Marshall Islands",
-  MKD: "Macedonia, the former Yugoslav Republic of",
-  MLI: "Mali",
-  MLT: "Malta",
-  MMR: "Myanmar",
-  MNE: "Montenegro",
-  MNG: "Mongolia",
-  MNP: "Northern Mariana Islands",
-  MOZ: "Mozambique",
-  MRT: "Mauritania",
-  MSR: "Montserrat",
-  MTQ: "Martinique",
-  MUS: "Mauritius",
-  MWI: "Malawi",
-  MYS: "Malaysia",
-  MYT: "Mayotte",
-  NAM: "Namibia",
-  NCL: "New Caledonia",
-  NER: "Niger",
-  NFK: "Norfolk Island",
-  NGA: "Nigeria",
-  NIC: "Nicaragua",
-  NIU: "Niue",
-  NLD: "Netherlands",
-  NOR: "Norway",
-  NPL: "Nepal",
-  NRU: "Nauru",
-  NZL: "New Zealand",
-  OMN: "Oman",
-  PAK: "Pakistan",
-  PAN: "Panama",
-  PCN: "Pitcairn",
-  PER: "Peru",
-  PHL: "Philippines",
-  PLW: "Palau",
-  PNG: "Papua New Guinea",
-  POL: "Poland",
-  PRI: "Puerto Rico",
-  PRK: "North Korea",
-  PRT: "Portugal",
-  PRY: "Paraguay",
-  PSE: "Palestinian Territory, Occupied",
-  PYF: "French Polynesia",
-  QAT: "Qatar",
-  REU: "Réunion",
-  ROU: "Romania",
-  RUS: "Russia",
-  RWA: "Rwanda",
-  SAU: "Saudi Arabia",
-  SDN: "Sudan",
-  SEN: "Senegal",
-  SGP: "Singapore",
-  SGS: "South Georgia and the South Sandwich Islands",
-  SHN: "Saint Helena, Ascension and Tristan da Cunha",
-  SJM: "Svalbard and Jan Mayen",
-  SLB: "Solomon Islands",
-  SLE: "Sierra Leone",
-  SLV: "El Salvador",
-  SMR: "San Marino",
-  SOM: "Somalia",
-  SPM: "Saint Pierre and Miquelon",
-  SRB: "Serbia",
-  SSD: "South Sudan",
-  STP: "Sao Tome and Principe",
-  SUR: "Suriname",
-  SVK: "Slovakia",
-  SVN: "Slovenia",
-  SWE: "Sweden",
-  SWZ: "Swaziland",
-  SXM: "Sint Maarten (Dutch part)",
-  SYC: "Seychelles",
-  SYR: "Syrian Arab Republic",
-  TCA: "Turks and Caicos Islands",
-  TCD: "Chad",
-  TGO: "Togo",
-  THA: "Thailand",
-  TJK: "Tajikistan",
-  TKL: "Tokelau",
-  TKM: "Turkmenistan",
-  TLS: "Timor-Leste",
-  TON: "Tonga",
-  TTO: "Trinidad and Tobago",
-  TUN: "Tunisia",
-  TUR: "Turkey",
-  TUV: "Tuvalu",
-  TWN: "Taiwan, Province of China",
-  TZA: "Tanzania, United Republic of",
-  UGA: "Uganda",
-  UKR: "Ukraine",
-  UMI: "United States Minor Outlying Islands",
-  URY: "Uruguay",
   USA: "United States",
-  UZB: "Uzbekistan",
-  VAT: "Holy See (Vatican City State)",
-  VCT: "Saint Vincent and the Grenadines",
-  VEN: "Venezuela, Bolivarian Republic of",
-  VGB: "Virgin Islands, British",
-  VIR: "Virgin Islands, U.S.",
-  VNM: "Viet Nam",
-  VUT: "Vanuatu",
-  WLF: "Wallis and Futuna",
-  WSM: "Samoa",
-  YEM: "Yemen",
-  ZAF: "South Africa",
-  ZMB: "Zambia",
-  ZWE: "Zimbabwe"
+  CAN: "Canada"
 };
 /**
  * Remove country abbreviation from end of given value.
@@ -2490,23 +2240,6 @@ function fullState(code) {
 
   if (Object.prototype.hasOwnProperty.call(provinces, result.toUpperCase())) {
     return provinces[result.toUpperCase()];
-  }
-
-  return result;
-}
-/**
- * Expand a code value to full country name.
- */
-
-function fullCountry(code) {
-  if (Object(_helpers__WEBPACK_IMPORTED_MODULE_5__[/* blank */ "a"])(code)) {
-    return code;
-  }
-
-  var result = Object(lodash__WEBPACK_IMPORTED_MODULE_4__["trim"])(code.toString());
-
-  if (Object.prototype.hasOwnProperty.call(countries, result.toUpperCase())) {
-    return countries[result.toUpperCase()];
   }
 
   return result;
@@ -26653,7 +26386,7 @@ var lodash = __webpack_require__("2ef0");
     },
     location: function location() {
       if (this.isGoogleTalent) {
-        return Object(services_location["c" /* removeCountry */])(this.getAttribute("city_admin1_country"));
+        return Object(services_location["b" /* removeCountry */])(this.getAttribute("city_admin1_country"));
       }
 
       return this.jobData.location_exact;
@@ -26684,7 +26417,7 @@ var lodash = __webpack_require__("2ef0");
     state: function state() {
       if (this.isGoogleTalent) {
         var loc = Object(lodash["get"])(this.jobData, "derivedInfo.locations[0].postalAddress.administrativeArea");
-        return Object(services_location["b" /* fullState */])(loc);
+        return Object(services_location["a" /* fullState */])(loc);
       }
 
       var state = this.jobData.state_short_exact; //handle missing state data
@@ -26693,7 +26426,7 @@ var lodash = __webpack_require__("2ef0");
         state = this.location.split(",")[1];
       }
 
-      return Object(services_location["b" /* fullState */])(state);
+      return Object(services_location["a" /* fullState */])(state);
     },
     country: function country() {
       if (this.isGoogleTalent) {
@@ -27798,7 +27531,7 @@ function isDevelopment() {
  */
 
 function buildJobDetailUrl(title, location, guid) {
-  var locationSlug = Object(lodash["kebabCase"])(Object(services_location["c" /* removeCountry */])(location));
+  var locationSlug = Object(lodash["kebabCase"])(Object(services_location["b" /* removeCountry */])(location));
   var titleSlug = Object(lodash["kebabCase"])(title);
   return "/".concat(locationSlug, "/").concat(titleSlug, "/").concat(guid, "/job/");
 }
