@@ -23292,6 +23292,10 @@ webpackContext.id = "6ae9";
           var coords = lat + "," + lon;
 
           _this.$emit("getCoords", coords);
+        }, function (error) {
+          if (error.code == 1) {
+            _this.$emit("permissionDenied");
+          }
         });
       }
     }
@@ -28657,14 +28661,14 @@ exports.start = start;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGeoLocation.vue?vue&type=template&id=d43d1ae0&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGeoLocation.vue?vue&type=template&id=2af0c570&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[(_vm.isSupported)?_c('button',{staticClass:"geolocation__button",class:{
             hidden: !_vm.isSupported,
         },attrs:{"type":"button","aria-label":"Your location"},on:{"click":_vm.getGeoLocation}},[_vm._t("default",[_c('AppRadiusIcon',{attrs:{"width":"18px"}})])],2):_vm._e()])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppGeoLocation.vue?vue&type=template&id=d43d1ae0&
+// CONCATENATED MODULE: ./src/components/Search/AppGeoLocation.vue?vue&type=template&id=2af0c570&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGeoLocation.vue?vue&type=script&lang=js&
 var AppGeoLocationvue_type_script_lang_js_ = __webpack_require__("6d75");

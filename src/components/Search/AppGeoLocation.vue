@@ -41,6 +41,10 @@ export default {
                     let coords = lat + "," + lon
 
                     this.$emit("getCoords", coords)
+                }, (error)=>{
+                    if(error.code == 1){
+                        this.$emit("permissionDenied")
+                    }
                 })
             }
         },
