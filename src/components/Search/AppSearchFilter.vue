@@ -25,7 +25,8 @@
                 v-for="(option, index) in displayedOptions"
             >
                 <g-link :to="option.href">
-                    {{ option.display }} <span v-if="option.value">({{ option.value }})</span>
+                    {{ option.display }}
+                    <span v-if="option.value">({{ option.value }})</span>
                 </g-link>
             </li>
         </ul>
@@ -69,15 +70,15 @@ export default {
             required: false,
             default() {
                 return this._uid
-            }
+            },
         },
         name: {
             required: true,
             type: String,
         },
-        visibile:{
+        visibile: {
             type: Boolean,
-            default: true
+            default: true,
         },
         options: {
             required: false,
@@ -115,11 +116,10 @@ export default {
         },
 
         shouldShowLess() {
-            const numberOfItemsToAdd = 10
 
             const totalItemsShown = this.displayedOptions.length
 
-            const hasItemsAdded = totalItemsShown > numberOfItemsToAdd
+            const hasItemsAdded = totalItemsShown > this.limit
 
             if (hasItemsAdded) {
                 return true
@@ -143,7 +143,7 @@ export default {
         buildFilterHref(option) {
             let params = this.cleanedInput
 
-            params['page'] = 1
+            params["page"] = 1
 
             params[this.name] = option.submitValue
 
@@ -161,7 +161,7 @@ export default {
             let display = option.display
             let submitValue = option.display
 
-            if(Object.prototype.hasOwnProperty.call(option, 'submitValue')){
+            if (Object.prototype.hasOwnProperty.call(option, "submitValue")) {
                 submitValue = option.submitValue
             }
             if (this.name == "location") {
@@ -174,7 +174,7 @@ export default {
 
             option.display = display
             option.submitValue = submitValue
-            option.href =  this.buildFilterHref(option)
+            option.href = this.buildFilterHref(option)
 
             return option
         },
@@ -196,7 +196,7 @@ export default {
         },
 
         showMore() {
-            const numberOfItemsToAdd = 10
+            const numberOfItemsToAdd = this.limit
 
             const currentTotalShown = this.displayedOptions.length
 
@@ -207,13 +207,19 @@ export default {
         },
 
         showLess() {
-            const numberOfItemsToAdd = 10
+            const limit = this.limit
 
             const currentTotalShown = this.displayedOptions.length
 
+            let less = currentTotalShown - limit
+
+            if(less < limit){
+                less = currentTotalShown - less
+            }
+
             this.displayedOptions = this.filteredOptions.slice(
                 0,
-                currentTotalShown - numberOfItemsToAdd
+                less
             )
         },
     },
