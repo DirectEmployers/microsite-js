@@ -57,7 +57,7 @@
 <script>
 import AppAccordion from "../AppAccordion"
 import {blank, toQueryString} from "../../services/helpers"
-import {fullState, removeCountry, fullCountry} from "../../services/location"
+import {fullState, removeCountry} from "../../services/location"
 import {omitBy, truncate, trim} from "lodash"
 export default {
     props: {
@@ -164,10 +164,7 @@ export default {
             if(Object.prototype.hasOwnProperty.call(option, 'submitValue')){
                 submitValue = option.submitValue
             }
-            if(this.keyName == 'country'){
-                display = fullCountry(option.display)
-            }
-            else if (this.name == "location") {
+            if (this.name == "location") {
                 display = fullState(removeCountry(option.display))
                 submitValue = display
             } else if (this.keyName == "moc") {
