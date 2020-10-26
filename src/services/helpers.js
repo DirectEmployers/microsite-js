@@ -57,7 +57,7 @@ export function isDevelopment() {
  * Build a job detail url.
  */
 export function buildJobDetailUrl(title, location, guid) {
-    const locationSlug = kebabCase(removeCountry(location))
+    let locationSlug = kebabCase(removeCountry(location))
 
     const titleSlug = kebabCase(title)
 

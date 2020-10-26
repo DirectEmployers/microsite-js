@@ -26273,12 +26273,12 @@ exports.BROKEN_CARET = fails(function () {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=cbd0989a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=3c66026a&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=cbd0989a&
+// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=3c66026a&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
 var es_symbol = __webpack_require__("a4d3");
@@ -26429,7 +26429,13 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
       return this.jobData.location_exact;
     },
     detailUrl: function detailUrl() {
-      var url = Object(helpers["b" /* buildJobDetailUrl */])(this.title, this.location, this.guid);
+      var loc = this.location; //fall back to state if location is blank
+
+      if (Object(helpers["a" /* blank */])(loc)) {
+        loc = this.state;
+      }
+
+      var url = Object(helpers["b" /* buildJobDetailUrl */])(this.title, loc, this.guid);
 
       if (!Object(helpers["a" /* blank */])(this.input)) {
         return buildURL_default()(url, this.input);
@@ -27548,6 +27554,11 @@ function isDevelopment() {
 function buildJobDetailUrl(title, location, guid) {
   var locationSlug = Object(lodash["kebabCase"])(Object(services_location["b" /* removeCountry */])(location));
   var titleSlug = Object(lodash["kebabCase"])(title);
+
+  if (blank(locationSlug)) {
+    locationSlug = 'none';
+  }
+
   return "/".concat(locationSlug, "/").concat(titleSlug, "/").concat(guid, "/job/");
 }
 
