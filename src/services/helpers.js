@@ -61,6 +61,10 @@ export function buildJobDetailUrl(title, location, guid) {
 
     const titleSlug = kebabCase(title)
 
+    if(blank(locationSlug)){
+        locationSlug = 'none'
+    }
+
     return `/${locationSlug}/${titleSlug}/${guid}/job/`
 }
 

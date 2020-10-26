@@ -104,7 +104,14 @@ export default {
             return this.jobData.location_exact
         },
         detailUrl() {
-            let url = buildJobDetailUrl(this.title, this.location, this.guid)
+            let loc = this.location
+
+            //fall back to state if location is blank
+            if(blank(loc)){
+                loc = this.state
+            }
+
+            let url = buildJobDetailUrl(this.title, loc, this.guid)
 
             if(!blank(this.input)){
                 return buildUrl(url, this.input)
