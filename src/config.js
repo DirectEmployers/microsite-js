@@ -16,6 +16,6 @@ export default {
             name: "q",
             key: "title",
             display: "Title",
-        }
-    ]
+        },
+    ],
 }

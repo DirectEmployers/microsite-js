@@ -2210,6 +2210,10 @@ var countries = {
  */
 
 function removeCountry(value) {
+  if (Object(_helpers__WEBPACK_IMPORTED_MODULE_5__[/* blank */ "a"])(value)) {
+    return value;
+  }
+
   var i;
   var keys = Object.keys(countries);
   var total = keys.length;
@@ -2229,6 +2233,10 @@ function removeCountry(value) {
  */
 
 function removeState(value) {
+  if (Object(_helpers__WEBPACK_IMPORTED_MODULE_5__[/* blank */ "a"])(value)) {
+    return value;
+  }
+
   var i;
   var keys = Object.keys(states);
   var total = keys.length;
@@ -26265,12 +26273,12 @@ exports.BROKEN_CARET = fails(function () {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=d914ada2&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=cbd0989a&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=d914ada2&
+// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=cbd0989a&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
 var es_symbol = __webpack_require__("a4d3");
@@ -26438,14 +26446,14 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
     },
     city: function city() {
       if (this.isGoogleTalent) {
-        return Object(lodash["get"])(this.jobData, "derivedInfo.locations[0].postalAddress.locality");
+        return Object(lodash["get"])(this.jobData, "derivedInfo.locations[0].postalAddress.locality", "");
       }
 
       return this.jobData.city_exact;
     },
     state: function state() {
       if (this.isGoogleTalent) {
-        var loc = Object(lodash["get"])(this.jobData, "derivedInfo.locations[0].postalAddress.administrativeArea");
+        var loc = Object(lodash["get"])(this.jobData, "derivedInfo.locations[0].postalAddress.administrativeArea", "");
         return Object(services_location["a" /* fullState */])(loc);
       }
 
@@ -26494,7 +26502,7 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
       var seconds = parseInt(this.commuteData.travelDuration.replace("s", ""));
       var hours = Math.floor(seconds / 60 / 60);
       var minutes = Math.floor(seconds / 60) - hours * 60;
-      return minutes == 0 ? "< 1 minute" : minutes + "minutes";
+      return minutes == 0 ? "< 1 minute" : minutes + " minutes";
     },
     htmlDescription: function htmlDescription() {
       if (this.isGoogleTalent) {
@@ -32290,9 +32298,11 @@ var SOLR = "solr";
 var GOOGLE_TALENT = "google_talent";
 var API_URL = "https://qc-search-api.jobsyn.org/api/v1/";
 
-if (!Object(helpers["c" /* isDevelopment */])()) {
+if (Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_USE_MINIKUBE === "true") {
+  API_URL = "http://minikube:35000/api/v1";
+} else if (!Object(helpers["c" /* isDevelopment */])()) {
   //update whenever we have a prod version.
-  var _API_URL = "https://qc-search-api.jobsyn.org/api/v1/";
+  API_URL = "https://qc-search-api.jobsyn.org/api/v1/";
 }
 
 function api() {

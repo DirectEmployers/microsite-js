@@ -16,7 +16,7 @@
                             Requisition ID:
                             {{ jobData.reqId }}
                         </h3>
-                        <h3 class="text-md">
+                        <h3 class="text-md" v-if="jobData.city && jobData.state">
                             {{ jobData.city + ", " + jobData.state }}
                         </h3>
                         <div

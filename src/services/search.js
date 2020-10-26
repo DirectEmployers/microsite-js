@@ -6,11 +6,13 @@ const TIMEOUT_THRESHOLD = 5000
 const SOLR = "solr"
 const GOOGLE_TALENT = "google_talent"
 
-const API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
+var API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
 
-if(!isDevelopment()){
+if (process.env.GRIDSOME_USE_MINIKUBE === "true") {
+    API_URL = "http://minikube:35000/api/v1"
+} else if (!isDevelopment()) {
     //update whenever we have a prod version.
-    let API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
+    API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
 }
 
 export default function api() {

@@ -121,7 +121,8 @@ export default {
             if (this.isGoogleTalent) {
                 return get(
                     this.jobData,
-                    "derivedInfo.locations[0].postalAddress.locality"
+                    "derivedInfo.locations[0].postalAddress.locality",
+                    ""
                 )
             }
             return this.jobData.city_exact
@@ -130,7 +131,8 @@ export default {
             if (this.isGoogleTalent) {
                 let loc = get(
                     this.jobData,
-                    "derivedInfo.locations[0].postalAddress.administrativeArea"
+                    "derivedInfo.locations[0].postalAddress.administrativeArea",
+                    ""
                 )
 
                 return fullState(loc)
@@ -186,7 +188,7 @@ export default {
 
             const minutes = Math.floor(seconds / 60) - hours * 60
 
-            return minutes == 0 ? "< 1 minute" : minutes + "minutes"
+            return minutes == 0 ? "< 1 minute" : minutes + " minutes"
         },
         htmlDescription() {
             if (this.isGoogleTalent) {

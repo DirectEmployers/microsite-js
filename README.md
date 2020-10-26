@@ -19,6 +19,8 @@ npm ci
 npm run develop
 ```
 
+**Note** Set `GRIDSOME_USE_MINIKUBE=true` in `.env.development` for minikube search instead of qc.
+
 ### Compiles and minifies components for production
 ```
 npm run build

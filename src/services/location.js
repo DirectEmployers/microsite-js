@@ -89,6 +89,9 @@ export let countries = {
  * Remove country abbreviation from end of given value.
  */
 export function removeCountry(value) {
+    if (blank(value)) {
+        return value
+    }
     let i
     let keys = Object.keys(countries)
     let total = keys.length
@@ -107,6 +110,9 @@ export function removeCountry(value) {
  * Remove state abbreviation from end of given value.
  */
 export function removeState(value) {
+    if (blank(value)) {
+        return value
+    }
     let i
     let keys = Object.keys(states)
     let total = keys.length
