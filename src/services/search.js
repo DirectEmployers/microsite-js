@@ -3,8 +3,8 @@ import {kebabCase} from "lodash"
 import { isDevelopment } from "./helpers"
 
 const TIMEOUT_THRESHOLD = 5000
-const SOLR = "solr"
-const GOOGLE_TALENT = "google_talent"
+export const SOLR = "solr"
+export const GOOGLE_TALENT = "google_talent"
 
 var API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
 

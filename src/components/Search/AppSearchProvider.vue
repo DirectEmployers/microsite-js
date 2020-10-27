@@ -25,6 +25,7 @@
 </template>
 <script>
 import {blank, titleCase} from "../../services/helpers"
+import { GOOGLE_TALENT } from "../../services/search"
 import {fullState} from "../../services/location"
 import {omitBy, clone, merge, startCase} from "lodash"
 import {CommuteSearchService, SearchService} from "../../services/search"
@@ -52,6 +53,8 @@ export default {
         },
     },
     data() {
+        const isCommute =  !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation);
+
         return {
             jobs: [],
             featuredJobs: [],
@@ -61,7 +64,7 @@ export default {
                 loading: false,
                 error: false,
             },
-            isCommuteSearch: !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation),
+            isCommuteSearch: isCommute && this.siteConfig.source == GOOGLE_TALENT,
             meta: {},
             input: this.getInputDefaults(),
         }

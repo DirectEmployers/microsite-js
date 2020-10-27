@@ -149,12 +149,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=036a0732&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=2006a92a&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"input":_vm.input,"filteredInput":_vm.getPayload(),"status":_vm.status,"filters":_vm.filters,"sort":_vm.sort,"sortedBy":_vm.sortedBy,"sortOptions":_vm.sortOptions,"source":_vm.source,"isSolr":_vm.isSolr,"isGoogleTalent":_vm.isGoogleTalent,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"removeFilter":_vm.removeFilter,"featuredJobs":_vm.featuredJobs,"appliedFilters":_vm.appliedFilters,"getFilterOptions":_vm.getFilterOptions,"submitSearchForm":_vm.submitSearchForm,"isCommuteSearch":_vm.isCommuteSearch})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=036a0732&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=2006a92a&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -195,14 +195,14 @@ var asyncToGenerator = __webpack_require__("1da1");
 // EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
 var helpers = __webpack_require__("a74a");
 
+// EXTERNAL MODULE: ./src/services/search.js + 2 modules
+var services_search = __webpack_require__("e73b");
+
 // EXTERNAL MODULE: ./src/services/location.js
 var services_location = __webpack_require__("1d1e");
 
 // EXTERNAL MODULE: ./node_modules/lodash/lodash.js
 var lodash = __webpack_require__("2ef0");
-
-// EXTERNAL MODULE: ./src/services/search.js + 2 modules
-var services_search = __webpack_require__("e73b");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=script&lang=js&
 
@@ -246,6 +246,7 @@ var services_search = __webpack_require__("e73b");
 
 
 
+
 /* harmony default export */ var AppSearchProvidervue_type_script_lang_js_ = ({
   props: {
     siteConfig: {
@@ -269,6 +270,7 @@ var services_search = __webpack_require__("e73b");
     }
   },
   data: function data() {
+    var isCommute = !Object(helpers["a" /* blank */])(this.$route.query.coords) && !Object(helpers["a" /* blank */])(this.$route.query.commuteLocation);
     return {
       jobs: [],
       featuredJobs: [],
@@ -278,7 +280,7 @@ var services_search = __webpack_require__("e73b");
         loading: false,
         error: false
       },
-      isCommuteSearch: !Object(helpers["a" /* blank */])(this.$route.query.coords) && !Object(helpers["a" /* blank */])(this.$route.query.commuteLocation),
+      isCommuteSearch: isCommute && this.siteConfig.source == services_search["b" /* GOOGLE_TALENT */],
       meta: {},
       input: this.getInputDefaults()
     };
@@ -296,7 +298,7 @@ var services_search = __webpack_require__("e73b");
         return services_search["a" /* CommuteSearchService */];
       }
 
-      return services_search["b" /* SearchService */];
+      return services_search["c" /* SearchService */];
     },
     sortedBy: function sortedBy() {
       if (Object(helpers["a" /* blank */])(this.meta.sort)) {
@@ -868,7 +870,7 @@ var AppJob = __webpack_require__("9f80");
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return search["b" /* SearchService */].get({
+                return search["c" /* SearchService */].get({
                   num_items: 10,
                   q: _this.title,
                   location: _this.location
@@ -32253,10 +32255,11 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 "use strict";
 
 // EXPORTS
-__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ search_SearchService; });
+__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ GOOGLE_TALENT; });
+__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ search_SearchService; });
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ search_CommuteSearchService; });
 
-// UNUSED EXPORTS: default, TitleCompleteService, MOCCompleteService, LocationCompleteService
+// UNUSED EXPORTS: SOLR, default, TitleCompleteService, MOCCompleteService, LocationCompleteService
 
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
 var runtime = __webpack_require__("96cf");
