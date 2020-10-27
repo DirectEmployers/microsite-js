@@ -23228,6 +23228,7 @@ var map = {
 	"./Icons/AppXIcon.vue": "1c3e",
 	"./Parse/AppHtmlToJson.vue": "2a36",
 	"./Parse/AppJsonToHtml.vue": "1764",
+	"./Parse/AppViewSourceHandler.vue": "af51",
 	"./Search/AppGeoLocation.vue": "bafb",
 	"./Search/AppGoogleLocationAutocomplete.vue": "44e0",
 	"./Search/AppSearchFilter.vue": "1249",
@@ -26275,12 +26276,12 @@ exports.BROKEN_CARET = fails(function () {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=3c66026a&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=0a48a76e&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt,"applyLink":_vm.applyLink})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=3c66026a&
+// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=0a48a76e&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
 var es_symbol = __webpack_require__("a4d3");
@@ -26324,6 +26325,7 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
 
 
 
+//
 //
 //
 //
@@ -26429,6 +26431,9 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
       }
 
       return this.jobData.location_exact;
+    },
+    applyLink: function applyLink() {
+      return "https://rr.jobsyn.org/" + this.guid;
     },
     detailUrl: function detailUrl() {
       var loc = this.location; //fall back to state if location is blank
@@ -27370,9 +27375,11 @@ exports.default = Tokenizer;
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ blank; });
-__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ retry; });
+__webpack_require__.d(__webpack_exports__, "e", function() { return /* binding */ retry; });
 __webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ isDevelopment; });
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ buildJobDetailUrl; });
+__webpack_require__.d(__webpack_exports__, "f", function() { return /* binding */ strAfter; });
+__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ jsonParseQueryString; });
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -27388,6 +27395,15 @@ var es_object_to_string = __webpack_require__("d3b7");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
 var es_promise = __webpack_require__("e6cf");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
+var es_regexp_exec = __webpack_require__("ac1f");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
+var es_string_replace = __webpack_require__("5319");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
+var es_string_split = __webpack_require__("1276");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.trim.js
 var es_string_trim = __webpack_require__("498a");
@@ -27497,6 +27513,9 @@ var services_location = __webpack_require__("1d1e");
 
 
 
+
+
+
 /**
  * Check if the given value is "blank".
  */
@@ -27558,10 +27577,29 @@ function buildJobDetailUrl(title, location, guid) {
   var titleSlug = Object(lodash["kebabCase"])(title);
 
   if (blank(locationSlug)) {
-    locationSlug = 'none';
+    locationSlug = "none";
   }
 
   return "/".concat(locationSlug, "/").concat(titleSlug, "/").concat(guid, "/job/");
+}
+/**
+ * Get a given string after a given substring
+ */
+
+function strAfter(subject, search) {
+  return search === "" ? subject : subject.split(search)[1];
+}
+/**
+ * Format a query string and try to json parse it into an object.
+ */
+
+function jsonParseQueryString(qs) {
+  if (blank(qs)) {
+    return {};
+  }
+
+  var decodedString = decodeURI(qs).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"');
+  return JSON.parse('{"' + decodedString + '"}');
 }
 
 /***/ }),
@@ -27748,7 +27786,7 @@ module.exports = function () {
     }
   },
   mounted: function mounted() {
-    Object(_services_helpers__WEBPACK_IMPORTED_MODULE_2__[/* retry */ "d"])(this.initAutocomplete);
+    Object(_services_helpers__WEBPACK_IMPORTED_MODULE_2__[/* retry */ "e"])(this.initAutocomplete);
   },
   computed: {
     apiScriptUrl: function apiScriptUrl() {
@@ -27865,6 +27903,51 @@ module.exports = {
   BUGGY_SAFARI_ITERATORS: BUGGY_SAFARI_ITERATORS
 };
 
+
+/***/ }),
+
+/***/ "af51":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Parse/AppViewSourceHandler.vue?vue&type=template&id=0580829c&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._t("default",null,{"addViewSourceParams":_vm.addViewSourceParams})],2)}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/Parse/AppViewSourceHandler.vue?vue&type=template&id=0580829c&
+
+// EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Parse/AppViewSourceHandler.vue?vue&type=script&lang=js&
+var AppViewSourceHandlervue_type_script_lang_js_ = __webpack_require__("bc90");
+
+// CONCATENATED MODULE: ./src/components/Parse/AppViewSourceHandler.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Parse_AppViewSourceHandlervue_type_script_lang_js_ = (AppViewSourceHandlervue_type_script_lang_js_["a" /* default */]); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/components/Parse/AppViewSourceHandler.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  Parse_AppViewSourceHandlervue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var AppViewSourceHandler = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -28676,6 +28759,49 @@ var component = Object(componentNormalizer["a" /* default */])(
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("cee4");
+
+/***/ }),
+
+/***/ "bc90":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a74a");
+/* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("30b5");
+/* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  created: function created() {
+    if (Object.prototype.hasOwnProperty.call(this.$route.query, "vs")) {
+      this.setViewSource(this.$route.query.vs);
+    }
+  },
+  methods: {
+    setViewSource: function setViewSource(vs) {
+      if (!Object(_services_helpers__WEBPACK_IMPORTED_MODULE_0__[/* blank */ "a"])(vs) && process.isClient) {
+        sessionStorage.setItem("vs", vs);
+      }
+    },
+    addViewSourceParams: function addViewSourceParams(url) {
+      var qs = Object(_services_helpers__WEBPACK_IMPORTED_MODULE_0__[/* strAfter */ "f"])(url, "?");
+      var params = Object(_services_helpers__WEBPACK_IMPORTED_MODULE_0__[/* jsonParseQueryString */ "d"])(qs);
+      var vs = sessionStorage.getItem("vs");
+
+      if (!Object(_services_helpers__WEBPACK_IMPORTED_MODULE_0__[/* blank */ "a"])(vs)) {
+        params["vs"] = vs;
+      }
+
+      return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_1___default()(url, params);
+    }
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("4362")))
 
 /***/ }),
 

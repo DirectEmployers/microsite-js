@@ -1,5 +1,5 @@
-import { kebabCase } from "lodash"
-import { removeCountry } from "./location"
+import {kebabCase} from "lodash"
+import {removeCountry} from "./location"
 
 /**
  * Check if the given value is "blank".
@@ -61,11 +61,31 @@ export function buildJobDetailUrl(title, location, guid) {
 
     const titleSlug = kebabCase(title)
 
-    if(blank(locationSlug)){
-        locationSlug = 'none'
+    if (blank(locationSlug)) {
+        locationSlug = "none"
     }
 
     return `/${locationSlug}/${titleSlug}/${guid}/job/`
 }
 
+/**
+ * Get a given string after a given substring
+ */
+export function strAfter(subject, search) {
+    return search === "" ? subject : subject.split(search)[1]
+}
+/**
+ * Format a query string and try to json parse it into an object.
+ */
+export function jsonParseQueryString(qs) {
+    if (blank(qs)) {
+        return {}
+    }
 
+    const decodedString = decodeURI(qs)
+        .replace(/"/g, '\\"')
+        .replace(/&/g, '","')
+        .replace(/=/g, '":"')
+
+    return JSON.parse('{"' + decodedString + '"}')
+}

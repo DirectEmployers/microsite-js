@@ -17,15 +17,16 @@
             :description="description"
             :dateAdded="dateAdded"
             :deletedAt="deletedAt"
+            :applyLink="applyLink"
         ></slot>
     </component>
 </template>
 
 <script>
-import { buildJobDetailUrl, blank } from "../services/helpers"
-import { fullState, removeCountry, removeState } from "../services/location"
-import { get, isArray } from "lodash"
-import buildUrl from 'axios/lib/helpers/buildURL'
+import {buildJobDetailUrl, blank} from "../services/helpers"
+import {fullState, removeCountry, removeState} from "../services/location"
+import {get, isArray} from "lodash"
+import buildUrl from "axios/lib/helpers/buildURL"
 
 export default {
     props: {
@@ -46,7 +47,7 @@ export default {
         source: {
             type: String,
             required: true,
-            validator: (value) => {
+            validator: value => {
                 return ["solr", "google_talent"].includes(value)
             },
         },
@@ -103,17 +104,20 @@ export default {
             }
             return this.jobData.location_exact
         },
+        applyLink() {
+            return "https://rr.jobsyn.org/" + this.guid
+        },
         detailUrl() {
             let loc = this.location
 
             //fall back to state if location is blank
-            if(blank(loc)){
+            if (blank(loc)) {
                 loc = this.state
             }
 
             let url = buildJobDetailUrl(this.title, loc, this.guid)
 
-            if(!blank(this.input)){
+            if (!blank(this.input)) {
                 return buildUrl(url, this.input)
             }
             return url
