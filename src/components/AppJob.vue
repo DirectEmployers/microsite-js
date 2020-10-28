@@ -25,6 +25,7 @@
 <script>
 import {buildJobDetailUrl, blank} from "../services/helpers"
 import {fullState, removeCountry, removeState} from "../services/location"
+import {GOOGLE_TALENT, SOLR} from '../services/search'
 import {get, isArray} from "lodash"
 import buildUrl from "axios/lib/helpers/buildURL"
 
@@ -48,7 +49,7 @@ export default {
             type: String,
             required: true,
             validator: value => {
-                return ["solr", "google_talent"].includes(value)
+                return [GOOGLE_TALENT, SOLR].includes(value)
             },
         },
     },
@@ -79,10 +80,10 @@ export default {
             return this.job.commuteInfo
         },
         isSolr() {
-            return this.source == "solr"
+            return this.source == SOLR
         },
         isGoogleTalent() {
-            return this.source == "google_talent"
+            return this.source == GOOGLE_TALENT
         },
 
         reqId() {

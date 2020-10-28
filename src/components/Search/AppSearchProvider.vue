@@ -25,7 +25,7 @@
 </template>
 <script>
 import {blank, titleCase} from "../../services/helpers"
-import { GOOGLE_TALENT } from "../../services/search"
+import { GOOGLE_TALENT, SOLR } from "../../services/search"
 import {fullState} from "../../services/location"
 import {omitBy, clone, merge, startCase} from "lodash"
 import {CommuteSearchService, SearchService} from "../../services/search"
@@ -111,10 +111,10 @@ export default {
             return options.map(o => startCase(o))
         },
         isGoogleTalent() {
-            return this.meta.source == "google_talent"
+            return this.meta.source == GOOGLE_TALENT
         },
         isSolr() {
-            return this.meta.source == "solr"
+            return this.meta.source == SOLR
         },
         configFilters() {
             return this.siteConfig.filters || []
@@ -216,11 +216,13 @@ export default {
                 defaultInput
             )
         },
-        pushPayload() {
+        pushPayload(payload = null) {
+            payload = payload === null ? this.getPayload() : payload
+
             this.$router
                 .push({
                     path: "/jobs",
-                    query: this.getPayload(),
+                    query: payload,
                 })
                 .catch(err => {})
         },
@@ -257,7 +259,7 @@ export default {
             this.input.page = 1
             if (
                 !blank(this.input.coords) && !blank(this.input.commuteLocation)
-                && !this.isSolr
+                && this.isGoogleTalent
             ){
                 this.isCommuteSearch = true
                 this.input.location = ""
@@ -266,14 +268,14 @@ export default {
         },
 
         removeFilter(name) {
+            if (name == "*") {
+                this.isCommuteSearch = false
+                return this.pushPayload({})
+            }
+
             let remove = [name]
 
             const defaultInput = this.getInputDefaults()
-
-            if (name == "*") {
-                this.isCommuteSearch = false
-                remove = Object.keys(defaultInput).concat(this.filterParamNames)
-            }
 
             remove.forEach(key=>{
                 this.input[key] = defaultInput[name] || ""
