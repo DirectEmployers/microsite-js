@@ -7,16 +7,45 @@
 import {blank, strAfter, jsonParseQueryString} from "../../services/helpers"
 import buildUrl from "axios/lib/helpers/buildURL"
 
+const VS_KEY = 'vs'
+const UTM_KEY = 'external_utm'
+
 export default {
     created() {
-        if (Object.prototype.hasOwnProperty.call(this.$route.query, "vs")) {
-            this.setViewSource(this.$route.query.vs)
+
+        if(!this.hasSlotContent){
+
+            if (Object.prototype.hasOwnProperty.call(this.$route.query, "vs")) {
+                this.setViewSource(this.$route.query.vs)
+            }
+
+            this.setUtmParams()
+        }
+
+    },
+    computed:{
+        hasSlotContent(){
+            return Object.prototype.hasOwnProperty.call(this.$slots, 'default')
         }
     },
     methods: {
         setViewSource(vs) {
             if (!blank(vs) && process.isClient) {
-                sessionStorage.setItem("vs", vs)
+                sessionStorage.setItem(VS_KEY, vs)
+            }
+        },
+        setUtmParams(){
+            let params = {}
+            const query = this.$route.query
+
+            Object.keys(query).forEach((key)=>{
+                if(key.startsWith("utm_")){
+                    params[key] = query[key]
+                }
+            })
+
+            if(!blank(params)){
+                sessionStorage.setItem(UTM_KEY, JSON.stringify(params))
             }
         },
         addViewSourceParams(url) {
@@ -24,11 +53,27 @@ export default {
 
             let params = jsonParseQueryString(qs)
 
-            let vs = sessionStorage.getItem("vs")
+            const vs = sessionStorage.getItem(VS_KEY)
+
 
             if (!blank(vs)) {
-                params["vs"] = vs
+                params[VS_KEY] = vs
             }
+
+            const utm = sessionStorage.getItem(UTM_KEY)
+
+            let utm_params = {}
+
+            if(!blank(utm)){
+                try{
+                    utm_params = JSON.parse(utm)
+                }catch{
+                    utm_params = {}
+                }
+
+            }
+            params = { ...params, ...utm_params}
+
             return buildUrl(url, params)
         },
     },
