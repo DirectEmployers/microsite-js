@@ -3,8 +3,8 @@
         <main id="content">
             <AppNavbar
                 :links="[
-                    { href: '/', display: 'Home' },
-                    { href: '/jobs', display: 'Jobs' },
+                    {href: '/', display: 'Home'},
+                    {href: '/jobs', display: 'Jobs'},
                 ]"
             >
                 <template v-slot:logo>
@@ -20,18 +20,20 @@
                 </template>
             </AppNavbar>
             <slot />
-        <AppDETracker/>
-
+            <AppDETracker />
+            <AppViewSourceHandler />
         </main>
     </div>
 </template>
 <script>
 import AppDETracker from "~/components/AppDETracker"
+import AppViewSourceHandler from "~/components/Parse/AppViewSourceHandler"
 import AppNavbar from "~/components/AppNavbar"
 export default {
     components: {
         AppNavbar,
-        AppDETracker
+        AppDETracker,
+        AppViewSourceHandler,
     },
     metaInfo: {
         title: "Home",

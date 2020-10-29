@@ -1,18 +1,10 @@
 .button {
-    @apply transition-colors duration-100 inline-block w-auto;
-    @apply text-black;
+    @apply transition-colors duration-100 inline-block;
     @apply px-8 py-2 block;
-    @apply border border-gray-300 bg-gray-200;
-
-    &:hover {
-        @apply bg-gray-300;
-    }
+    @apply border border-gray-300;
 
     &--tall {
-        @apply py-3 mt-2
+        @apply py-3 mt-2;
     }
 
-    &--disabled {
-        @apply bg-gray-300 text-gray-600;
-    }
 }
