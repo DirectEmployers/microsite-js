@@ -15,7 +15,7 @@ export default {
 
         if(!this.hasSlotContent){
 
-            if (Object.prototype.hasOwnProperty.call(this.$route.query, "vs")) {
+            if (Object.prototype.hasOwnProperty.call(this.$route.query, VS_KEY)) {
                 this.setViewSource(this.$route.query.vs)
             }
 
