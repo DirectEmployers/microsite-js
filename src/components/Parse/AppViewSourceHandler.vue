@@ -11,7 +11,7 @@ const VS_KEY = 'vs'
 const UTM_KEY = 'external_utm'
 
 export default {
-    created() {
+    mounted() {
         if(!this.hasSlotContent){
 
             if (Object.prototype.hasOwnProperty.call(this.$route.query, VS_KEY)) {
