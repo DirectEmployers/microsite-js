@@ -12,7 +12,6 @@ const UTM_KEY = 'external_utm'
 
 export default {
     created() {
-
         if(!this.hasSlotContent){
 
             if (Object.prototype.hasOwnProperty.call(this.$route.query, VS_KEY)) {
@@ -25,7 +24,7 @@ export default {
     },
     computed:{
         hasSlotContent(){
-            return Object.prototype.hasOwnProperty.call(this.$slots, 'default')
+            return Object.prototype.hasOwnProperty.call(this.$scopedSlots, 'default')
         }
     },
     methods: {
