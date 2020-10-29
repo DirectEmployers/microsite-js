@@ -27652,7 +27652,13 @@ function buildJobDetailUrl(title, location, guid) {
  */
 
 function strAfter(subject, search) {
-  return search === "" ? subject : subject.split(search)[1];
+  var result = search === "" ? subject : subject.split(search)[1];
+
+  if (blank(result)) {
+    return null;
+  }
+
+  return result;
 }
 /**
  * Format a query string and try to json parse it into an object.
