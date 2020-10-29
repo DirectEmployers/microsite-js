@@ -16,7 +16,7 @@ export default {
         if(!this.hasSlotContent){
 
             if (Object.prototype.hasOwnProperty.call(this.$route.query, VS_KEY)) {
-                this.setViewSource(this.$route.query.vs)
+                this.setViewSource(this.$route.query[VS_KEY])
             }
 
             this.setUtmParams()
