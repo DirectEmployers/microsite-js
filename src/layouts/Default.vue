@@ -20,6 +20,26 @@
                 </template>
             </AppNavbar>
             <slot />
+            <AppCookieConsent class="fixed bottom-0 right-0 left-0 bg-white p-4 border-t border-gray-300">
+                <template v-slot="{ acceptCookieUse }">
+                    <p>
+                        We use cookies to improve your experience on our site.
+                        To find out more, read our
+                        <a
+                            class="text-blue-400 hover:underline"
+                            href="https://directemployers.org/privacy-terms/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            privacy policy
+                        </a>
+                        .
+                        <button @click="acceptCookieUse" class="button" type="button">
+                            Accept
+                        </button>
+                    </p>
+                </template>
+            </AppCookieConsent>
             <AppDETracker />
             <AppViewSourceHandler />
         </main>
@@ -27,12 +47,14 @@
 </template>
 <script>
 import AppDETracker from "~/components/AppDETracker"
+import AppCookieConsent from "~/components/AppCookieConsent"
 import AppViewSourceHandler from "~/components/Parse/AppViewSourceHandler"
 import AppNavbar from "~/components/AppNavbar"
 export default {
     components: {
         AppNavbar,
         AppDETracker,
+        AppCookieConsent,
         AppViewSourceHandler,
     },
     metaInfo: {
