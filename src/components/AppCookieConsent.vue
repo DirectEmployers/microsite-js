@@ -4,7 +4,7 @@
             :acceptCookieUse="acceptCookieUse"
             :declineCookieUse="declineCookieUse"
             :declined="declined"
-            :acknowledge="hasAcknowleged"
+            :acknowledged="hasAcknowleged"
             :accepted="accepted"
         />
     </section>
