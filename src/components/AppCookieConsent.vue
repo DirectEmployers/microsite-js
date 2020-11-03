@@ -26,14 +26,16 @@ function isStoredAs(key, stored_as) {
     return localStorage.getItem(key) === stored_as.toString()
 }
 
-const yettScript = document.querySelector(`script[src='${yett}']`)
+if (process.isClient) {
+    const yettScript = document.querySelector(`script[src='${yett}']`)
 
-if (process.isClient && isStoredAs(DECLINED_KEY, true) && !yettScript) {
-    let script = document.createElement("script")
+    if (isStoredAs(DECLINED_KEY, true) && !yettScript) {
+        let script = document.createElement("script")
 
-    script.src = yett
+        script.src = yett
 
-    document.head.insertBefore(script, document.head.firstChild)
+        document.head.insertBefore(script, document.head.firstChild)
+    }
 }
 
 export default {
