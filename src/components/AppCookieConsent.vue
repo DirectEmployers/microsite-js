@@ -14,7 +14,6 @@ import {blank} from "../services/helpers"
 
 const ACCEPTED_KEY = "accepted_cookie_use"
 const DECLINED_KEY = "declined_cookie_use"
-const ACKNOWLEDGE_KEY = "acknowledged_cookie_use"
 
 const yett = "https://unpkg.com/yett@0.1.13/dist/yett.min.js"
 
