@@ -1,33 +1,73 @@
 <template>
-    <section v-if="!acknowledged">
+    <section v-show="!hasAcknowleged">
         <slot
             :acceptCookieUse="acceptCookieUse"
-            :acknowledged="acknowledged"
+            :declineCookieUse="declineCookieUse"
+            :declined="declined"
+            :acknowledge="hasAcknowleged"
+            :accepted="accepted"
         />
     </section>
 </template>
 <script>
+import {blank} from "../services/helpers"
+
 const ACCEPTED_KEY = "accepted_cookie_use"
+const DECLINED_KEY = "declined_cookie_use"
+const ACKNOWLEDGE_KEY = "acknowledged_cookie_use"
+
+const yett = "https://unpkg.com/yett@0.1.13/dist/yett.min.js"
+
+function isStoredAs(key, stored_as) {
+    if (!process.isClient) {
+        return stored_as
+    }
+
+    return localStorage.getItem(key) === stored_as.toString()
+}
+
+const yettScript = document.querySelector(`script[src='${yett}']`)
+
+if (process.isClient && isStoredAs(DECLINED_KEY, true) && !yettScript) {
+    let script = document.createElement("script")
+
+    script.src = yett
+
+    document.head.insertBefore(script, document.head.firstChild)
+}
 
 export default {
-    props: {},
-
     data() {
         return {
-            acknowledged: this.isStoredTrue(ACCEPTED_KEY),
+            declined: isStoredAs(DECLINED_KEY, true),
+            accepted: isStoredAs(ACCEPTED_KEY, true),
         }
     },
-    methods: {
-        isStoredTrue(key) {
-            if (!process.isClient) {
-                return false
-            }
-            return localStorage.getItem(key) === "true"
+    computed: {
+        hasAcknowleged() {
+            return this.accepted || this.declined
         },
+    },
+    methods: {
         acceptCookieUse() {
             if (process.isClient) {
-                this.acknowledged = true
+                this.accepted = true
+                this.declined = false
+                localStorage.removeItem(DECLINED_KEY)
                 localStorage.setItem(ACCEPTED_KEY, "true")
+            }
+        },
+        declineCookieUse() {
+            if (process.isClient) {
+                this.accepted = false
+
+                this.declined = true
+
+                localStorage.removeItem(ACCEPTED_KEY)
+
+                localStorage.setItem(DECLINED_KEY, "true")
+
+                window.location.reload()
             }
         },
     },

@@ -2437,7 +2437,13 @@ module.exports = function (options, source) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {//
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("d3b7");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("25f0");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a74a");
+
+
 //
 //
 //
@@ -2445,26 +2451,60 @@ module.exports = function (options, source) {
 //
 //
 //
+//
+//
+//
+//
+
 var ACCEPTED_KEY = "accepted_cookie_use";
+var DECLINED_KEY = "declined_cookie_use";
+var ACKNOWLEDGE_KEY = "acknowledged_cookie_use";
+var yett = "https://unpkg.com/yett@0.1.13/dist/yett.min.js";
+
+function isStoredAs(key, stored_as) {
+  if (!process.isClient) {
+    return stored_as;
+  }
+
+  return localStorage.getItem(key) === stored_as.toString();
+}
+
+var yettScript = document.querySelector("script[src='".concat(yett, "']"));
+
+if (process.isClient && isStoredAs(DECLINED_KEY, true) && !yettScript) {
+  var script = document.createElement("script");
+  script.src = yett;
+  document.head.insertBefore(script, document.head.firstChild);
+}
+
 /* harmony default export */ __webpack_exports__["a"] = ({
-  props: {},
   data: function data() {
     return {
-      acknowledged: this.isStoredTrue(ACCEPTED_KEY)
+      declined: isStoredAs(DECLINED_KEY, true),
+      accepted: isStoredAs(ACCEPTED_KEY, true)
     };
   },
+  computed: {
+    hasAcknowleged: function hasAcknowleged() {
+      return this.accepted || this.declined;
+    }
+  },
   methods: {
-    isStoredTrue: function isStoredTrue(key) {
-      if (!process.isClient) {
-        return false;
-      }
-
-      return localStorage.getItem(key) === "true";
-    },
     acceptCookieUse: function acceptCookieUse() {
       if (process.isClient) {
-        this.acknowledged = true;
+        this.accepted = true;
+        this.declined = false;
+        localStorage.removeItem(DECLINED_KEY);
         localStorage.setItem(ACCEPTED_KEY, "true");
+      }
+    },
+    declineCookieUse: function declineCookieUse() {
+      if (process.isClient) {
+        this.accepted = false;
+        this.declined = true;
+        localStorage.removeItem(ACCEPTED_KEY);
+        localStorage.setItem(DECLINED_KEY, "true");
+        window.location.reload();
       }
     }
   }
@@ -31849,12 +31889,12 @@ module.exports = function (target, src, options) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppCookieConsent.vue?vue&type=template&id=ec0adfdc&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (!_vm.acknowledged)?_c('section',[_vm._t("default",null,{"acceptCookieUse":_vm.acceptCookieUse,"acknowledged":_vm.acknowledged})],2):_vm._e()}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppCookieConsent.vue?vue&type=template&id=8ccb5e70&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{directives:[{name:"show",rawName:"v-show",value:(!_vm.hasAcknowleged),expression:"!hasAcknowleged"}]},[_vm._t("default",null,{"acceptCookieUse":_vm.acceptCookieUse,"declineCookieUse":_vm.declineCookieUse,"declined":_vm.declined,"acknowledge":_vm.hasAcknowleged,"accepted":_vm.accepted})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppCookieConsent.vue?vue&type=template&id=ec0adfdc&
+// CONCATENATED MODULE: ./src/components/AppCookieConsent.vue?vue&type=template&id=8ccb5e70&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppCookieConsent.vue?vue&type=script&lang=js&
 var AppCookieConsentvue_type_script_lang_js_ = __webpack_require__("2414");
