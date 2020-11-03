@@ -26,6 +26,16 @@ function isStoredAs(key, stored_as) {
 }
 
 if (process.isClient) {
+    let defaultBlockList = [
+        /www\.google-analytics\.com/,
+        /d2e48ltfsb5exy\.cloudfront\.net\/p\/t.js/,
+    ]
+
+    if (!blank(window.BLOCK_DOMAINS)) {
+        window.YETT_BLACKLIST = defaultBlockList.concat(window.BLOCK_DOMAINS)
+    } else {
+        window.YETT_BLACKLIST = defaultBlockList
+    }
     const yettScript = document.querySelector(`script[src='${yett}']`)
 
     if (isStoredAs(DECLINED_KEY, true) && !yettScript) {

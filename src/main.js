@@ -8,10 +8,7 @@ export default function (Vue, { router, head, isClient }) {
     Vue.component("Layout", DefaultLayout)
 
     if(isClient){
-        window.YETT_BLACKLIST = [
-            /www\.google-analytics\.com/,
-            /d2e48ltfsb5exy\.cloudfront\.net\/p\/t.js/,
-        ]
+        window.BLOCK_DOMAINS = []
     }
 
 
