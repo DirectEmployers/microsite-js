@@ -1,8 +1,20 @@
+<template>
+    <ClientOnly>
+        <slot
+            :status="{
+                error: error,
+                pending: pending,
+                resolved: resolved,
+            }"
+            :job="job"
+        />
+    </ClientOnly>
+</template>
 <script>
 import {kebabCase} from "lodash"
 import {getJob} from "../services/cdn/job"
-import {blank } from "../services/helpers"
-import buildUrl from 'axios/lib/helpers/buildURL'
+import {blank} from "../services/helpers"
+import buildUrl from "axios/lib/helpers/buildURL"
 
 export default {
     props: {
@@ -11,10 +23,10 @@ export default {
             required: false,
             default: null,
         },
-        s3Folder:{
+        s3Folder: {
             required: true,
-            type:String
-        }
+            type: String,
+        },
     },
     data() {
         return {
@@ -56,10 +68,10 @@ export default {
                 const {data} = await getJob(guid, this.s3Folder)
 
                 const locationSlug = kebabCase(data.location)
+                const titleSlug = kebabCase(data.title_exact)
 
                 // check if this is the proper url for the job
-                if (locationSlug !== location || data.title_slug !== title) {
-
+                if (locationSlug !== location || titleSlug !== title) {
                     let redirect = `/${locationSlug}/${data.title_slug}/${guid}/job`
 
                     if (!blank(this.$route.query)) {
@@ -88,16 +100,6 @@ export default {
         "$route.params.guid"() {
             this.fetchJob()
         },
-    },
-    render() {
-        return this.$scopedSlots.default({
-            status: {
-                error: this.error,
-                pending: this.pending,
-                resolved: this.resolved,
-            },
-            job: this.job,
-        })
     },
 }
 </script>

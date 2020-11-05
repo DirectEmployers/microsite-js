@@ -1,62 +1,36 @@
 <template>
-    <section v-show="!hasAcknowleged">
-        <slot
-            :acceptCookieUse="acceptCookieUse"
-            :declineCookieUse="declineCookieUse"
-            :declined="declined"
-            :acknowledged="hasAcknowleged"
-            :accepted="accepted"
-        />
-    </section>
+    <ClientOnly>
+        <section v-if="!hasAcknowleged">
+            <slot
+                :acceptCookieUse="acceptCookieUse"
+                :declineCookieUse="declineCookieUse"
+                :declined="declined"
+                :acknowledged="hasAcknowleged"
+                :accepted="accepted"
+            />
+        </section>
+    </ClientOnly>
 </template>
 <script>
 import {blank} from "../services/helpers"
-
-const ACCEPTED_KEY = "accepted_cookie_use"
-const DECLINED_KEY = "declined_cookie_use"
-
-const yett = "https://unpkg.com/yett@0.1.13/dist/yett.min.js"
-
-function isStoredAs(key, stored_as) {
-    if (!process.isClient) {
-        return stored_as
-    }
-
-    return localStorage.getItem(key) === stored_as.toString()
-}
-
-if (process.isClient) {
-    let defaultBlockList = [
-        /www\.google-analytics\.com/,
-        /d2e48ltfsb5exy\.cloudfront\.net\/p\/t.js/,
-    ]
-
-    if (!blank(window.BLOCK_DOMAINS)) {
-        window.YETT_BLACKLIST = defaultBlockList.concat(window.BLOCK_DOMAINS)
-    } else {
-        window.YETT_BLACKLIST = defaultBlockList
-    }
-    const yettScript = document.querySelector(`script[src='${yett}']`)
-
-    if (isStoredAs(DECLINED_KEY, true) && !yettScript) {
-        let script = document.createElement("script")
-
-        script.src = yett
-
-        document.head.insertBefore(script, document.head.firstChild)
-    }
-}
+import {
+    ACCEPTED_COOKIES_KEY,
+    DECLINED_COOKIES_KEY,
+    acceptedCookieUse,
+    declinedCookieUse,
+    acknowledgedCookieUse,
+} from "../services/storage"
 
 export default {
     data() {
         return {
-            declined: isStoredAs(DECLINED_KEY, true),
-            accepted: isStoredAs(ACCEPTED_KEY, true),
+            declined: declinedCookieUse(),
+            accepted: acceptedCookieUse(),
         }
     },
     computed: {
         hasAcknowleged() {
-            return this.accepted || this.declined
+            return acknowledgedCookieUse()
         },
     },
     methods: {
@@ -64,19 +38,20 @@ export default {
             if (process.isClient) {
                 this.accepted = true
                 this.declined = false
-                localStorage.removeItem(DECLINED_KEY)
-                localStorage.setItem(ACCEPTED_KEY, "true")
+                localStorage.removeItem(DECLINED_COOKIES_KEY)
+                localStorage.setItem(ACCEPTED_COOKIES_KEY, "true")
             }
         },
+
         declineCookieUse() {
             if (process.isClient) {
                 this.accepted = false
 
                 this.declined = true
 
-                localStorage.removeItem(ACCEPTED_KEY)
+                localStorage.removeItem(ACCEPTED_COOKIES_KEY)
 
-                localStorage.setItem(DECLINED_KEY, "true")
+                localStorage.setItem(DECLINED_COOKIES_KEY, "true")
 
                 window.location.reload()
             }

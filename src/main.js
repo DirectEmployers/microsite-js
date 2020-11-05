@@ -7,11 +7,6 @@ import siteConfig from "~/config"
 export default function (Vue, { router, head, isClient }) {
     Vue.component("Layout", DefaultLayout)
 
-    if(isClient){
-        window.BLOCK_DOMAINS = []
-    }
-
-
     //can reference it globally in components & templates.
     Vue.prototype.$siteConfig = siteConfig
 }

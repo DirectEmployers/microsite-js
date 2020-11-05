@@ -57,7 +57,6 @@
             </AppCookieConsent>
 
             <AppDETracker />
-            <AppViewSourceHandler />
         </main>
     </div>
 </template>
@@ -65,14 +64,13 @@
 <script>
 import AppDETracker from "~/components/AppDETracker"
 import AppCookieConsent from "~/components/AppCookieConsent"
-import AppViewSourceHandler from "~/components/Parse/AppViewSourceHandler"
 import AppNavbar from "~/components/AppNavbar"
+import {setViewSourceParameters} from "~/services/storage"
 export default {
     components: {
         AppNavbar,
         AppDETracker,
         AppCookieConsent,
-        AppViewSourceHandler,
     },
 
     metaInfo: {
@@ -84,6 +82,9 @@ export default {
                 content: "only the best jobs",
             },
         ],
+    },
+    created() {
+        setViewSourceParameters(this.$route.query)
     },
 }
 </script>

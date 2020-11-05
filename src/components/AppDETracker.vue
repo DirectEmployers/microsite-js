@@ -1,6 +1,11 @@
 <script>
 import {trim, endsWith} from "lodash"
 import {isDevelopment} from "../services/helpers"
+import {
+    declinedCookieUse,
+} from "../services/storage"
+
+
 export default {
     props: {
         canEngageWithJobs: {
@@ -11,7 +16,8 @@ export default {
     },
 
     created() {
-        if (process.isClient && !isDevelopment()) {
+
+        if (process.isClient && !declinedCookieUse() && !isDevelopment()) {
             this.appendTracker()
         }
     },
@@ -37,6 +43,7 @@ export default {
             script.setAttribute('src', this.scriptSrc)
 
             script.setAttribute('id', 'detrack')
+
             script.setAttribute('defer', true)
 
             document.body.appendChild(script)
