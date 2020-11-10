@@ -67,31 +67,3 @@ export function buildJobDetailUrl(title, location, guid) {
 
     return `/${locationSlug}/${titleSlug}/${guid}/job/`
 }
-
-/**
- * Get a given string after a given substring
- */
-export function strAfter(subject, search) {
-    let result = search === "" ? subject : subject.split(search)[1]
-
-    if(blank(result)){
-        return null
-    }
-
-    return result
-}
-/**
- * Format a query string and try to json parse it into an object.
- */
-export function jsonParseQueryString(qs) {
-    if (blank(qs)) {
-        return {}
-    }
-
-    const decodedString = decodeURI(qs)
-        .replace(/"/g, '\\"')
-        .replace(/&/g, '","')
-        .replace(/=/g, '":"')
-
-    return JSON.parse('{"' + decodedString + '"}')
-}

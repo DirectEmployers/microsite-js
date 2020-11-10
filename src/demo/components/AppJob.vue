@@ -27,16 +27,12 @@
                         <div class="text-black text-base font-bold mb-2">
                             {{ jobData.location }}
                         </div>
-                        <AppViewSourceHandler>
-                            <template v-slot="{addViewSourceParams}">
-                                <a
-                                    :href="addViewSourceParams(jobData.applyLink)"
-                                    class="w-32 button p-2 bg-black text-white rounded text-center mx-auto"
-                                >
-                                    Apply
-                                </a>
-                            </template>
-                        </AppViewSourceHandler>
+                        <a
+                            :href="jobData.applyLink"
+                            class="w-32 button p-2 bg-black text-white rounded text-center mx-auto"
+                        >
+                            Apply
+                        </a>
                     </div>
                 </div>
 
@@ -69,7 +65,6 @@
 }
 </style>
 <script>
-import AppViewSourceHandler from "~/components/Parse/AppViewSourceHandler"
 import AppJobWrapper from "~/components/AppJob"
 import AppJobDescription from "~/components/AppJobDescription"
 import AppSimilarJobs from "~/components/AppSimilarJobs"
@@ -95,7 +90,6 @@ export default {
     },
     components: {
         AppJobDescription,
-        AppViewSourceHandler,
         AppJobWrapper,
         AppSimilarJobs,
     },

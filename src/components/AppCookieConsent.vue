@@ -1,33 +1,59 @@
 <template>
-    <section v-if="!acknowledged">
-        <slot
-            :acceptCookieUse="acceptCookieUse"
-            :acknowledged="acknowledged"
-        />
-    </section>
+    <ClientOnly>
+        <section v-if="!hasAcknowleged">
+            <slot
+                :acceptCookieUse="acceptCookieUse"
+                :declineCookieUse="declineCookieUse"
+                :declined="declined"
+                :acknowledged="hasAcknowleged"
+                :accepted="accepted"
+            />
+        </section>
+    </ClientOnly>
 </template>
 <script>
-const ACCEPTED_KEY = "accepted_cookie_use"
+import {blank} from "../services/helpers"
+import {
+    ACCEPTED_COOKIES_KEY,
+    DECLINED_COOKIES_KEY,
+    acceptedCookieUse,
+    declinedCookieUse,
+    acknowledgedCookieUse,
+} from "../services/storage"
 
 export default {
-    props: {},
-
     data() {
         return {
-            acknowledged: this.isStoredTrue(ACCEPTED_KEY),
+            declined: declinedCookieUse(),
+            accepted: acceptedCookieUse(),
         }
     },
-    methods: {
-        isStoredTrue(key) {
-            if (!process.isClient) {
-                return false
-            }
-            return localStorage.getItem(key) === "true"
+    computed: {
+        hasAcknowleged() {
+            return acknowledgedCookieUse()
         },
+    },
+    methods: {
         acceptCookieUse() {
             if (process.isClient) {
-                this.acknowledged = true
-                localStorage.setItem(ACCEPTED_KEY, "true")
+                this.accepted = true
+                this.declined = false
+                localStorage.removeItem(DECLINED_COOKIES_KEY)
+                localStorage.setItem(ACCEPTED_COOKIES_KEY, "true")
+            }
+        },
+
+        declineCookieUse() {
+            if (process.isClient) {
+                this.accepted = false
+
+                this.declined = true
+
+                localStorage.removeItem(ACCEPTED_COOKIES_KEY)
+
+                localStorage.setItem(DECLINED_COOKIES_KEY, "true")
+
+                window.location.reload()
             }
         },
     },

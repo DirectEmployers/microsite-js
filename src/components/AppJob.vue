@@ -23,9 +23,13 @@
 </template>
 
 <script>
-import {buildJobDetailUrl, blank} from "../services/helpers"
+import {
+    buildJobDetailUrl,
+    blank,
+} from "../services/helpers"
+import { VS_KEY, UTM_KEY} from '../services/storage'
 import {fullState, removeCountry, removeState} from "../services/location"
-import {GOOGLE_TALENT, SOLR} from '../services/search'
+import {GOOGLE_TALENT, SOLR} from "../services/search"
 import {get, isArray} from "lodash"
 import buildUrl from "axios/lib/helpers/buildURL"
 
@@ -106,7 +110,35 @@ export default {
             return this.jobData.location_exact
         },
         applyLink() {
-            return "https://rr.jobsyn.org/" + this.guid
+
+            let url = "https://rr.jobsyn.org/" + this.guid
+
+            if(!process.isClient){
+                return url
+            }
+            // add vs & utm parameters
+            const vs = sessionStorage.getItem(VS_KEY)
+
+            const utm = sessionStorage.getItem(UTM_KEY)
+
+            let utm_params = {}
+
+            if (!blank(utm)) {
+                try {
+                    utm_params = JSON.parse(utm)
+                } catch {
+                    utm_params = {}
+                }
+            }
+
+            let params = {}
+
+            params = {...this.$route.query, ...params, ...utm_params}
+
+            if (!blank(vs)) {
+                params[VS_KEY] = vs
+            }
+            return buildUrl(url, params)
         },
         detailUrl() {
             let loc = this.location
@@ -152,6 +184,7 @@ export default {
             let state = this.jobData.state_short_exact
             //handle missing state data
             if (blank(state)) {
+                console.log(this)
                 state = this.location.split(",")[1]
             }
             return fullState(state)

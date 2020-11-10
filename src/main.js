@@ -6,6 +6,7 @@ import siteConfig from "~/config"
 
 export default function (Vue, { router, head, isClient }) {
     Vue.component("Layout", DefaultLayout)
+
     //can reference it globally in components & templates.
     Vue.prototype.$siteConfig = siteConfig
 }

@@ -20,8 +20,10 @@
                 </template>
             </AppNavbar>
             <slot />
-            <AppCookieConsent class="fixed bottom-0 right-0 left-0 bg-white p-4 border-t border-gray-300">
-                <template v-slot="{ acceptCookieUse }">
+            <AppCookieConsent
+                class="fixed bottom-0 right-0 left-0 bg-white p-4 border-t border-gray-300"
+            >
+                <template v-slot="{acceptCookieUse, declineCookieUse}">
                     <p>
                         We use cookies to improve your experience on our site.
                         To find out more, read our
@@ -34,29 +36,43 @@
                             privacy policy
                         </a>
                         .
-                        <button @click="acceptCookieUse" class="button" type="button">
-                            Accept
-                        </button>
                     </p>
+                    <div class="flex">
+                        <button
+                            @click="acceptCookieUse"
+                            class="button"
+                            type="button"
+                        >
+                            Accept Cookies
+                        </button>
+                        <button
+                            @click="declineCookieUse"
+                            class="button"
+                            type="button"
+                        >
+                            Decline Cookies
+                        </button>
+                    </div>
                 </template>
             </AppCookieConsent>
+
             <AppDETracker />
-            <AppViewSourceHandler />
         </main>
     </div>
 </template>
+
 <script>
 import AppDETracker from "~/components/AppDETracker"
 import AppCookieConsent from "~/components/AppCookieConsent"
-import AppViewSourceHandler from "~/components/Parse/AppViewSourceHandler"
 import AppNavbar from "~/components/AppNavbar"
+import {setViewSourceParameters} from "~/services/storage"
 export default {
     components: {
         AppNavbar,
         AppDETracker,
         AppCookieConsent,
-        AppViewSourceHandler,
     },
+
     metaInfo: {
         title: "Home",
         meta: [
@@ -66,6 +82,9 @@ export default {
                 content: "only the best jobs",
             },
         ],
+    },
+    created() {
+        setViewSourceParameters(this.$route.query)
     },
 }
 </script>
