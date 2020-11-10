@@ -9,7 +9,7 @@
             <AppJob :site-config="$siteConfig" :source="source" :job="job" :input="input">
                 <template v-slot="{ detailUrl, title, reqId, clickedViewJob, location, hasCommuteInfo, commuteTime }">
 
-                    <span @click="clickedViewJob" :to="detailUrl" class="mb-2">
+                    <g-link @click.native="clickedViewJob" :to="detailUrl" class="mb-2">
                         <h3 class="font-bold text-xl">
                             {{ title }}
                         </h3>
@@ -27,7 +27,7 @@
                             Estimated Travel:
                             {{ commuteTime }}
                         </div>
-                    </span>
+                    </g-link>
 
                 </template>
             </AppJob>
