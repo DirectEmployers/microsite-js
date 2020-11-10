@@ -1,13 +1,15 @@
 <template>
     <ClientOnly>
-        <slot
-            :status="{
-                error: error,
-                pending: pending,
-                resolved: resolved,
-            }"
-            :job="job"
-        />
+        <section>
+            <slot
+                :status="{
+                    error: error,
+                    pending: pending,
+                    resolved: resolved,
+                }"
+                :job="job"
+            ></slot>
+        </section>
     </ClientOnly>
 </template>
 <script>

@@ -6,27 +6,29 @@
             :key="index"
             v-for="(job, index) in jobs"
         >
-            <AppJob :source="source" :job="job" :input="input">
-                <template v-slot="jobData">
-                    <g-link :to="jobData.detailUrl" class="mb-2">
+            <AppJob :site-config="$siteConfig" :source="source" :job="job" :input="input">
+                <template v-slot="{ detailUrl, title, reqId, clickedViewJob, location, hasCommuteInfo, commuteTime }">
+
+                    <span @click="clickedViewJob" :to="detailUrl" class="mb-2">
                         <h3 class="font-bold text-xl">
-                            {{ jobData.title }}
+                            {{ title }}
                         </h3>
                         <h3 class="font-bold text-lg">
                             Requisition ID:
-                            {{ jobData.reqId }}
+                            {{ reqId }}
                         </h3>
                         <h3 class="text-md">
-                            {{ jobData.location }}
+                            {{ location }}
                         </h3>
                         <div
                             class="job-listing__commute-time"
-                            v-if="jobData.hasCommuteInfo"
+                            v-if="hasCommuteInfo"
                         >
                             Estimated Travel:
-                            {{ jobData.commuteTime }}
+                            {{ commuteTime }}
                         </div>
-                    </g-link>
+                    </span>
+
                 </template>
             </AppJob>
         </div>

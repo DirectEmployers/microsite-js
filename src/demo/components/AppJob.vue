@@ -1,5 +1,5 @@
 <template>
-    <AppJobWrapper source="solr" :job="job">
+    <AppJobWrapper :site-config="$siteConfig" source="solr" :job="job">
         <template v-slot="jobData">
             <div class="max-w-screen-xl mx-auto w-full pt-4 lg:px-6">
                 <g-link :to="searchResultsUrl" class="pb-2">

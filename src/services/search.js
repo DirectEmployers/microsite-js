@@ -2,9 +2,9 @@ import axios from "axios"
 import {kebabCase} from "lodash"
 import { isDevelopment } from "./helpers"
 
-const TIMEOUT_THRESHOLD = 5000
 export const SOLR = "solr"
 export const GOOGLE_TALENT = "google_talent"
+export const TIMEOUT_THRESHOLD = 5000
 
 var API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
 
@@ -15,7 +15,7 @@ if (process.env.GRIDSOME_USE_MINIKUBE === "true") {
     API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
 }
 
-export default function api() {
+export function api() {
     return axios.create({
         baseURL: API_URL,
         withCredentials: false,
