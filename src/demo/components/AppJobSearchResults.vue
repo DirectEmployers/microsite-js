@@ -6,10 +6,28 @@
             :key="index"
             v-for="(job, index) in jobs"
         >
-            <AppJob :site-config="$siteConfig" :source="source" :job="job" :input="input">
-                <template v-slot="{ detailUrl, title, reqId, clickedViewJob, location, hasCommuteInfo, commuteTime }">
-
-                    <g-link @click.native="clickedViewJob" :to="detailUrl" class="mb-2">
+            <AppJob
+                :source="source"
+                :job="job"
+                :input="input"
+                :site-config="$siteConfig"
+            >
+                <template
+                    v-slot="{
+                        detailUrl,
+                        title,
+                        reqId,
+                        clickedViewJob,
+                        location,
+                        hasCommuteInfo,
+                        commuteTime,
+                    }"
+                >
+                    <g-link
+                        @click.native="clickedViewJob"
+                        :to="detailUrl"
+                        class="mb-2"
+                    >
                         <h3 class="font-bold text-xl">
                             {{ title }}
                         </h3>
@@ -28,7 +46,6 @@
                             {{ commuteTime }}
                         </div>
                     </g-link>
-
                 </template>
             </AppJob>
         </div>
@@ -42,17 +59,17 @@ export default {
         jobs: {
             type: Array,
             default: () => [],
-            required: false
+            required: false,
         },
         input: {
             type: Object,
             required: false,
             default: () => {},
         },
-        source:{
+        source: {
             required: true,
-            type: String
-        }
+            type: String,
+        },
     },
     components: {
         AppJob,

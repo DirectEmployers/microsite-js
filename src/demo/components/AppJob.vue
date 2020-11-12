@@ -1,6 +1,15 @@
 <template>
     <AppJobWrapper :site-config="$siteConfig" source="solr" :job="job">
-        <template v-slot="jobData">
+        <template
+            v-slot="{
+                title,
+                guid,
+                location,
+                applyLink,
+                clickedApplyJob,
+                htmlDescription,
+            }"
+        >
             <div class="max-w-screen-xl mx-auto w-full pt-4 lg:px-6">
                 <g-link :to="searchResultsUrl" class="pb-2">
                     <svg
@@ -21,14 +30,15 @@
                 <div class="bg-gray-300 mt-6 mb-8 mx-2 p-12">
                     <div class="mx-w-sm mx-auto text-center">
                         <h1 class="text-4xl text-black font-bold">
-                            {{ jobData.title }}
+                            {{ title }}
                         </h1>
 
                         <div class="text-black text-base font-bold mb-2">
-                            {{ jobData.location }}
+                            {{ location }}
                         </div>
                         <a
-                            :href="jobData.applyLink"
+                            @click="clickedApplyJob"
+                            :href="applyLink"
                             class="w-32 button p-2 bg-black text-white rounded text-center mx-auto"
                         >
                             Apply
@@ -40,16 +50,16 @@
                     class="min-h-screen max-w-screen-md mb-8 mx-4 md:mx-auto job-details-content"
                 >
                     <AppJobDescription
-                        :html="jobData.htmlDescription"
+                        :html="htmlDescription"
                         :lookupClass="'job-description-amp-qualifications'"
                     ></AppJobDescription>
                 </div>
 
                 <AppSimilarJobs
                     :siteConfig="$siteConfig"
-                    :guid="jobData.guid"
-                    :title="jobData.title"
-                    :location="jobData.location"
+                    :guid="guid"
+                    :title="title"
+                    :location="location"
                 />
 
                 <script type="application/ld+json">

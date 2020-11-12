@@ -188,11 +188,7 @@ export default {
                 key = filter.name
             }
 
-            if (Object.prototype.hasOwnProperty.call(this.filters, key)) {
-                return this.filters[key]
-            }
-
-            return []
+            return this.filters[key] || []
         },
         getCommuteDefaults() {
             return clone({

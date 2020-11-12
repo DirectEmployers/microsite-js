@@ -19,6 +19,7 @@
             :deletedAt="deletedAt"
             :applyLink="applyLink"
             :clickedViewJob="clickedViewJob"
+            :clickedApplyJob="clickedApplyJob"
         ></slot>
     </component>
 </template>
@@ -72,13 +73,43 @@ export default {
 
             return isArray(value) ? value.join(" ") : value
         },
+        clickedApplyJob(){
+            if(this.siteConfig.source == SOLR){
+                return;
+            }
+
+            let talentData = GoogleTalentClientEvent.getSavedTalentData()
+            // only if the stored event type is view do we post
+            // this means they are viewing this job directly from site instead
+            // of navigating directly to job detail.
+            if (talentData.eventType === 'view') {
+                GoogleTalentClientEvent.post(
+                    {
+                        eventType: "redirect",
+                        jobs: talentData.jobs,
+                        requestId: talentData.requestId,
+                    },
+                    this.siteConfig
+                ).catch((e) => {
+                    console.error(e)
+                    //fail silently from google talent errors.
+                })
+            }
+        },
         clickedViewJob() {
+
+            if(this.siteConfig.source == SOLR){
+                return;
+            }
+
             if (this.isGoogleTalent) {
+                let requestId = GoogleTalentClientEvent.getSavedTalentData().requestId
+
                 GoogleTalentClientEvent.post(
                     {
                         eventType: "view",
-                        jobs: this.jobData.name,
-                        requestId: GoogleTalentClientEvent.getSavedRequestId(),
+                        jobs: [this.jobData.name],
+                        requestId: requestId,
                     },
                     this.siteConfig
                 ).catch((e) => {

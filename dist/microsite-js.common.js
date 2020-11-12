@@ -140,12 +140,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=4f53137c&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=6bc5bc1b&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"input":_vm.input,"filteredInput":_vm.getPayload(),"status":_vm.status,"filters":_vm.filters,"sort":_vm.sort,"sortedBy":_vm.sortedBy,"sortOptions":_vm.sortOptions,"source":_vm.source,"isSolr":_vm.isSolr,"isGoogleTalent":_vm.isGoogleTalent,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"removeFilter":_vm.removeFilter,"featuredJobs":_vm.featuredJobs,"appliedFilters":_vm.appliedFilters,"getFilterOptions":_vm.getFilterOptions,"submitSearchForm":_vm.submitSearchForm,"isCommuteSearch":_vm.isCommuteSearch})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=4f53137c&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=6bc5bc1b&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -390,11 +390,7 @@ var lodash = __webpack_require__("2ef0");
         key = filter.name;
       }
 
-      if (Object.prototype.hasOwnProperty.call(this.filters, key)) {
-        return this.filters[key];
-      }
-
-      return [];
+      return this.filters[key] || [];
     },
     getCommuteDefaults: function getCommuteDefaults() {
       return Object(lodash["clone"])({
@@ -747,16 +743,12 @@ module.exports = Axios;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=e78302e4&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h2',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppJob',{key:index,attrs:{"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":_vm.buildJobDetailUrl(
-                            jobData.title,
-                            jobData.location,
-                            jobData.guid
-                        )}},[_vm._t("default",[_c('h3',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.location)+" ")])],{"jobData":jobData})],2)],1)]}}],null,true)})}),1)]):_vm._e()}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=72543351&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h2',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppJob',{key:index,attrs:{"site-config":_vm.siteConfig,"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":jobData.detailUrl}},[_vm._t("default",[_c('h3',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.location)+" ")])],{"jobData":jobData})],2)],1)]}}],null,true)})}),1)]):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=e78302e4&
+// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=72543351&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
 var es_array_filter = __webpack_require__("4de4");
@@ -769,9 +761,6 @@ var asyncToGenerator = __webpack_require__("1da1");
 
 // EXTERNAL MODULE: ./src/services/search.js
 var search = __webpack_require__("e73b");
-
-// EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
-var helpers = __webpack_require__("a74a");
 
 // EXTERNAL MODULE: ./src/components/AppJob.vue + 3 modules
 var AppJob = __webpack_require__("9f80");
@@ -812,10 +801,6 @@ var AppJob = __webpack_require__("9f80");
 //
 //
 //
-//
-//
-//
-
 
 
 /* harmony default export */ var AppSimilarJobsvue_type_script_lang_js_ = ({
@@ -862,9 +847,6 @@ var AppJob = __webpack_require__("9f80");
     }
   },
   methods: {
-    buildJobDetailUrl: function buildJobDetailUrl(title, location, guid) {
-      return Object(helpers["b" /* buildJobDetailUrl */])(title, location, guid);
-    },
     getJobs: function getJobs() {
       var _this = this;
 
@@ -26504,12 +26486,12 @@ exports.BROKEN_CARET = fails(function () {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=0b7fab1e&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt,"applyLink":_vm.applyLink,"clickedViewJob":_vm.clickedViewJob})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=e59409d8&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt,"applyLink":_vm.applyLink,"clickedViewJob":_vm.clickedViewJob,"clickedApplyJob":_vm.clickedApplyJob})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=0b7fab1e&
+// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=e59409d8&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=script&lang=js&
 var AppJobvue_type_script_lang_js_ = __webpack_require__("e5a1");
@@ -28694,22 +28676,19 @@ var GoogleTalentClientEvent = /*#__PURE__*/function () {
   }
 
   Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(GoogleTalentClientEvent, null, [{
-    key: "getSavedRequestId",
-    value: function getSavedRequestId() {
+    key: "getSavedTalentData",
+    value: function getSavedTalentData() {
       try {
-        return JSON.parse(localStorage.getItem('talent')).requestId;
+        return JSON.parse(sessionStorage.getItem("talent"));
       } catch (e) {
-        return null;
+        return {};
       }
     }
   }, {
     key: "saveTalentEventData",
-    value: function saveTalentEventData(eventType, requestId) {
-      if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_5__[/* blank */ "a"])(requestId) && process.isClient) {
-        localStorage.setItem('talent', JSON.stringify({
-          type: eventType,
-          requestId: requestId
-        }));
+    value: function saveTalentEventData(data) {
+      if (process.isClient) {
+        sessionStorage.setItem("talent", JSON.stringify(data));
       }
     }
   }, {
@@ -28721,7 +28700,7 @@ var GoogleTalentClientEvent = /*#__PURE__*/function () {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_5__[/* blank */ "a"])(input.requestId)) {
+                if (!(Object(_helpers__WEBPACK_IMPORTED_MODULE_5__[/* blank */ "a"])(input.requestId) || siteConfig.client_events === false)) {
                   _context.next = 2;
                   break;
                 }
@@ -28731,7 +28710,7 @@ var GoogleTalentClientEvent = /*#__PURE__*/function () {
               case 2:
                 _context.prev = 2;
                 _context.next = 5;
-                return Object(_search__WEBPACK_IMPORTED_MODULE_6__[/* api */ "f"])().post('google-talent/event', {
+                return Object(_search__WEBPACK_IMPORTED_MODULE_6__[/* api */ "f"])().post("google-talent/event", {
                   data: input,
                   config: {
                     project_id: siteConfig.project_id,
@@ -28747,7 +28726,8 @@ var GoogleTalentClientEvent = /*#__PURE__*/function () {
 
                 //save the new request id in local storage.
                 if (response.data) {
-                  GoogleTalentClientEvent.saveTalentEventData(input.eventType, response.data.request_id);
+                  input["requestId"] = response.data.request_id;
+                  GoogleTalentClientEvent.saveTalentEventData(input);
                 }
 
                 return _context.abrupt("return", response);
@@ -32081,6 +32061,7 @@ exports.f = wellKnownSymbol;
 //
 //
 //
+//
 
 
 
@@ -32128,12 +32109,36 @@ exports.f = wellKnownSymbol;
       var value = Object(lodash__WEBPACK_IMPORTED_MODULE_16__["get"])(this.job.job, customAttr, defaultValue);
       return Object(lodash__WEBPACK_IMPORTED_MODULE_16__["isArray"])(value) ? value.join(" ") : value;
     },
+    clickedApplyJob: function clickedApplyJob() {
+      if (this.siteConfig.source == _services_search__WEBPACK_IMPORTED_MODULE_11__[/* SOLR */ "c"]) {
+        return;
+      }
+
+      var talentData = _services_events__WEBPACK_IMPORTED_MODULE_12__[/* GoogleTalentClientEvent */ "a"].getSavedTalentData(); // only if the stored event type is view do we post
+      // this means they are viewing this job directly from site instead
+      // of navigating directly to job detail.
+
+      if (talentData.eventType === 'view') {
+        _services_events__WEBPACK_IMPORTED_MODULE_12__[/* GoogleTalentClientEvent */ "a"].post({
+          eventType: "redirect",
+          jobs: talentData.jobs,
+          requestId: talentData.requestId
+        }, this.siteConfig).catch(function (e) {
+          console.error(e); //fail silently from google talent errors.
+        });
+      }
+    },
     clickedViewJob: function clickedViewJob() {
+      if (this.siteConfig.source == _services_search__WEBPACK_IMPORTED_MODULE_11__[/* SOLR */ "c"]) {
+        return;
+      }
+
       if (this.isGoogleTalent) {
+        var requestId = _services_events__WEBPACK_IMPORTED_MODULE_12__[/* GoogleTalentClientEvent */ "a"].getSavedTalentData().requestId;
         _services_events__WEBPACK_IMPORTED_MODULE_12__[/* GoogleTalentClientEvent */ "a"].post({
           eventType: "view",
-          jobs: this.jobData.name,
-          requestId: _services_events__WEBPACK_IMPORTED_MODULE_12__[/* GoogleTalentClientEvent */ "a"].getSavedRequestId()
+          jobs: [this.jobData.name],
+          requestId: requestId
         }, this.siteConfig).catch(function (e) {
           console.error(e); //fail silently from google talent errors.
         });
