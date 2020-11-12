@@ -233,7 +233,6 @@ export default {
             let state = this.jobData.state_short_exact
             //handle missing state data
             if (blank(state)) {
-                console.log(this)
                 state = this.location.split(",")[1]
             }
             return fullState(state)
