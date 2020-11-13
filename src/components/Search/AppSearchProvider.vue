@@ -25,7 +25,8 @@
 </template>
 <script>
 import {blank, titleCase} from "../../services/helpers"
-import { GOOGLE_TALENT, SOLR } from "../../services/search"
+import {GOOGLE_TALENT, SOLR} from "../../services/search"
+import {GoogleTalentClientEvent} from "../../services/events"
 import {fullState} from "../../services/location"
 import {omitBy, clone, merge, startCase} from "lodash"
 import {CommuteSearchService, SearchService} from "../../services/search"
@@ -53,7 +54,9 @@ export default {
         },
     },
     data() {
-        const isCommute =  !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation);
+        const isCommute =
+            !blank(this.$route.query.coords) &&
+            !blank(this.$route.query.commuteLocation)
 
         return {
             jobs: [],
@@ -64,7 +67,8 @@ export default {
                 loading: false,
                 error: false,
             },
-            isCommuteSearch: isCommute && this.siteConfig.source == GOOGLE_TALENT,
+            isCommuteSearch:
+                isCommute && this.siteConfig.source == GOOGLE_TALENT,
             meta: {},
             input: this.getInputDefaults(),
         }
@@ -77,7 +81,6 @@ export default {
         }
     },
     computed: {
-
         service() {
             if (this.isCommuteSearch) {
                 return CommuteSearchService
@@ -135,12 +138,11 @@ export default {
                     !blank(input[filter.name]) &&
                     !added.includes(filter.name)
                 ) {
-                        filters.push({
-                            display: input[filter.name],
-                            parameter: filter.name,
-                        })
-                        added.push(filter.name)
-
+                    filters.push({
+                        display: input[filter.name],
+                        parameter: filter.name,
+                    })
+                    added.push(filter.name)
                 }
             })
 
@@ -186,11 +188,7 @@ export default {
                 key = filter.name
             }
 
-            if (Object.prototype.hasOwnProperty.call(this.filters, key)) {
-                return this.filters[key]
-            }
-
-            return []
+            return this.filters[key] || []
         },
         getCommuteDefaults() {
             return clone({
@@ -258,9 +256,10 @@ export default {
         submitSearchForm() {
             this.input.page = 1
             if (
-                !blank(this.input.coords) && !blank(this.input.commuteLocation)
-                && this.isGoogleTalent
-            ){
+                !blank(this.input.coords) &&
+                !blank(this.input.commuteLocation) &&
+                this.isGoogleTalent
+            ) {
                 this.isCommuteSearch = true
                 this.input.location = ""
             }
@@ -277,7 +276,7 @@ export default {
 
             const defaultInput = this.getInputDefaults()
 
-            remove.forEach(key=>{
+            remove.forEach(key => {
                 this.input[key] = defaultInput[name] || ""
             })
 
@@ -285,10 +284,10 @@ export default {
                 this.input.coords = ""
             }
 
-            if(name == "commuteLocation"){
+            if (name == "commuteLocation") {
                 this.isCommuteSearch = false
-                Object.keys(this.getCommuteDefaults()).forEach(key =>{
-                    this.input[key] =  defaultInput[name] || ""
+                Object.keys(this.getCommuteDefaults()).forEach(key => {
+                    this.input[key] = defaultInput[name] || ""
                 })
             }
 
@@ -314,6 +313,22 @@ export default {
                 this.filters = data.filters || {}
 
                 this.meta = data.meta || {}
+
+                if (this.isGoogleTalent) {
+                    GoogleTalentClientEvent.post(
+                        {
+                            eventType: "impression",
+                            jobs: this.jobs.map((data)=>{
+                                return data.job.name
+                            }),
+                            requestId: this.meta.request_id,
+                        },
+                        this.siteConfig
+                    ).catch((e) => {
+                        console.error(e)
+                        //fail silently from google talent errors.
+                    })
+                }
 
                 this.status.loading = false
 

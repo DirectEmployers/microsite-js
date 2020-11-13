@@ -140,12 +140,12 @@ module.exports = function (fn, that, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=6e4fdd73&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchProvider.vue?vue&type=template&id=6bc5bc1b&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"input":_vm.input,"filteredInput":_vm.getPayload(),"status":_vm.status,"filters":_vm.filters,"sort":_vm.sort,"sortedBy":_vm.sortedBy,"sortOptions":_vm.sortOptions,"source":_vm.source,"isSolr":_vm.isSolr,"isGoogleTalent":_vm.isGoogleTalent,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"removeFilter":_vm.removeFilter,"featuredJobs":_vm.featuredJobs,"appliedFilters":_vm.appliedFilters,"getFilterOptions":_vm.getFilterOptions,"submitSearchForm":_vm.submitSearchForm,"isCommuteSearch":_vm.isCommuteSearch})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=6e4fdd73&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchProvider.vue?vue&type=template&id=6bc5bc1b&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -183,8 +183,11 @@ var asyncToGenerator = __webpack_require__("1da1");
 // EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
 var helpers = __webpack_require__("a74a");
 
-// EXTERNAL MODULE: ./src/services/search.js + 2 modules
+// EXTERNAL MODULE: ./src/services/search.js
 var services_search = __webpack_require__("e73b");
+
+// EXTERNAL MODULE: ./src/services/events.js
+var events = __webpack_require__("bdbb");
 
 // EXTERNAL MODULE: ./src/services/location.js
 var services_location = __webpack_require__("1d1e");
@@ -229,6 +232,7 @@ var lodash = __webpack_require__("2ef0");
 //
 //
 //
+
 
 
 
@@ -386,11 +390,7 @@ var lodash = __webpack_require__("2ef0");
         key = filter.name;
       }
 
-      if (Object.prototype.hasOwnProperty.call(this.filters, key)) {
-        return this.filters[key];
-      }
-
-      return [];
+      return this.filters[key] || [];
     },
     getCommuteDefaults: function getCommuteDefaults() {
       return Object(lodash["clone"])({
@@ -503,36 +503,49 @@ var lodash = __webpack_require__("2ef0");
                 _this2.featuredJobs = data.featured_jobs || [];
                 _this2.filters = data.filters || {};
                 _this2.meta = data.meta || {};
+
+                if (_this2.isGoogleTalent) {
+                  events["a" /* GoogleTalentClientEvent */].post({
+                    eventType: "impression",
+                    jobs: _this2.jobs.map(function (data) {
+                      return data.job.name;
+                    }),
+                    requestId: _this2.meta.request_id
+                  }, _this2.siteConfig).catch(function (e) {
+                    console.error(e); //fail silently from google talent errors.
+                  });
+                }
+
                 _this2.status.loading = false;
                 return _context.abrupt("return", response);
 
-              case 15:
-                _context.prev = 15;
+              case 16:
+                _context.prev = 16;
                 _context.t0 = _context["catch"](1);
 
                 if (!Object.prototype.hasOwnProperty.call(_context.t0, "response")) {
-                  _context.next = 21;
+                  _context.next = 22;
                   break;
                 }
 
                 _this2.status.error = _context.t0;
-                _context.next = 22;
+                _context.next = 23;
                 break;
 
-              case 21:
+              case 22:
                 throw new Error(_context.t0);
 
-              case 22:
-                _context.prev = 22;
+              case 23:
+                _context.prev = 23;
                 _this2.status.loading = false;
-                return _context.finish(22);
+                return _context.finish(23);
 
-              case 25:
+              case 26:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 15, 22, 25]]);
+        }, _callee, null, [[1, 16, 23, 26]]);
       }))();
     }
   }
@@ -730,16 +743,12 @@ module.exports = Axios;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=e78302e4&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h2',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppJob',{key:index,attrs:{"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":_vm.buildJobDetailUrl(
-                            jobData.title,
-                            jobData.location,
-                            jobData.guid
-                        )}},[_vm._t("default",[_c('h3',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.location)+" ")])],{"jobData":jobData})],2)],1)]}}],null,true)})}),1)]):_vm._e()}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=72543351&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h2',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppJob',{key:index,attrs:{"site-config":_vm.siteConfig,"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":jobData.detailUrl}},[_vm._t("default",[_c('h3',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.location)+" ")])],{"jobData":jobData})],2)],1)]}}],null,true)})}),1)]):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=e78302e4&
+// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=72543351&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
 var es_array_filter = __webpack_require__("4de4");
@@ -750,11 +759,8 @@ var runtime = __webpack_require__("96cf");
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
 var asyncToGenerator = __webpack_require__("1da1");
 
-// EXTERNAL MODULE: ./src/services/search.js + 2 modules
+// EXTERNAL MODULE: ./src/services/search.js
 var search = __webpack_require__("e73b");
-
-// EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
-var helpers = __webpack_require__("a74a");
 
 // EXTERNAL MODULE: ./src/components/AppJob.vue + 3 modules
 var AppJob = __webpack_require__("9f80");
@@ -795,10 +801,6 @@ var AppJob = __webpack_require__("9f80");
 //
 //
 //
-//
-//
-//
-
 
 
 /* harmony default export */ var AppSimilarJobsvue_type_script_lang_js_ = ({
@@ -845,9 +847,6 @@ var AppJob = __webpack_require__("9f80");
     }
   },
   methods: {
-    buildJobDetailUrl: function buildJobDetailUrl(title, location, guid) {
-      return Object(helpers["b" /* buildJobDetailUrl */])(title, location, guid);
-    },
     getJobs: function getJobs() {
       var _this = this;
 
@@ -26487,12 +26486,12 @@ exports.BROKEN_CARET = fails(function () {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=10a3bdac&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt,"applyLink":_vm.applyLink})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=template&id=c1197d4c&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"reqId":_vm.reqId,"title":_vm.title,"location":_vm.location,"detailUrl":_vm.detailUrl,"guid":_vm.guid,"city":_vm.city,"state":_vm.state,"country":_vm.country,"company":_vm.company,"hasCommuteInfo":_vm.hasCommuteInfo,"commuteTime":_vm.commuteTime,"htmlDescription":_vm.htmlDescription,"cleanHtmlDescription":_vm.cleanHtmlDescription,"description":_vm.description,"dateAdded":_vm.dateAdded,"deletedAt":_vm.deletedAt,"applyLink":_vm.applyLink,"clickedViewJob":_vm.clickedViewJob,"clickedApplyJob":_vm.clickedApplyJob})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=10a3bdac&
+// CONCATENATED MODULE: ./src/components/AppJob.vue?vue&type=template&id=c1197d4c&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJob.vue?vue&type=script&lang=js&
 var AppJobvue_type_script_lang_js_ = __webpack_require__("e5a1");
@@ -28650,6 +28649,125 @@ exports.default = HTML5NamedCharRefs;
 
 /***/ }),
 
+/***/ "bdbb":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GoogleTalentClientEvent; });
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("96cf");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("1da1");
+/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("d4ec");
+/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("bee2");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("2ef0");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("a74a");
+/* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("e73b");
+
+
+
+
+
+
+
+var GoogleTalentClientEvent = /*#__PURE__*/function () {
+  function GoogleTalentClientEvent() {
+    Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(this, GoogleTalentClientEvent);
+  }
+
+  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(GoogleTalentClientEvent, null, [{
+    key: "getSavedTalentData",
+    value: function getSavedTalentData() {
+      try {
+        return JSON.parse(sessionStorage.getItem("talent"));
+      } catch (e) {
+        return {};
+      }
+    }
+  }, {
+    key: "saveTalentEventData",
+    value: function saveTalentEventData(data) {
+      if (process.isClient) {
+        sessionStorage.setItem("talent", JSON.stringify(data));
+      }
+    }
+  }, {
+    key: "post",
+    value: function () {
+      var _post = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(input, siteConfig) {
+        var response;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!(Object(_helpers__WEBPACK_IMPORTED_MODULE_5__[/* blank */ "a"])(input.requestId) || siteConfig.client_events === false)) {
+                  _context.next = 2;
+                  break;
+                }
+
+                return _context.abrupt("return");
+
+              case 2:
+                _context.prev = 2;
+                _context.next = 5;
+                return Object(_search__WEBPACK_IMPORTED_MODULE_6__[/* api */ "f"])().post("google-talent/event", {
+                  data: input,
+                  config: {
+                    project_id: siteConfig.project_id,
+                    tenant_uuid: siteConfig.tenant_uuid,
+                    company_uuids: siteConfig.company_uuids
+                  }
+                }, {
+                  timeout: _search__WEBPACK_IMPORTED_MODULE_6__[/* TIMEOUT_THRESHOLD */ "e"]
+                });
+
+              case 5:
+                response = _context.sent;
+
+                //save the new request id in local storage.
+                if (response.data) {
+                  input["requestId"] = response.data.request_id;
+                  GoogleTalentClientEvent.saveTalentEventData(input);
+                }
+
+                return _context.abrupt("return", response);
+
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](2);
+
+                if (!Object.prototype.hasOwnProperty.call(_context.t0, "response")) {
+                  _context.next = 14;
+                  break;
+                }
+
+                return _context.abrupt("return", _context.t0);
+
+              case 14:
+                throw new Error(_context.t0);
+
+              case 15:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[2, 10]]);
+      }));
+
+      function post(_x, _x2) {
+        return _post.apply(this, arguments);
+      }
+
+      return post;
+    }()
+  }]);
+
+  return GoogleTalentClientEvent;
+}();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("4362")))
+
+/***/ }),
+
 /***/ "bea1":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28858,6 +28976,29 @@ exports.EMAIL = EMAIL;
 exports.NL = NL;
 exports.TEXT = TEXT;
 exports.URL = URL;
+
+/***/ }),
+
+/***/ "bee2":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _createClass; });
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
 
 /***/ }),
 
@@ -30406,6 +30547,19 @@ module.exports = function (it, TAG, STATIC) {
 
 /***/ }),
 
+/***/ "d4ec":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _classCallCheck; });
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+/***/ }),
+
 /***/ "d669":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30730,16 +30884,16 @@ $({ target: 'Object', stat: true, sham: !DESCRIPTORS }, {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobFetch.vue?vue&type=template&id=a98a8c12&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[_vm._t("default",null,{"status":{
-            error: _vm.error,
-            pending: _vm.pending,
-            resolved: _vm.resolved,
-        },"job":_vm.job})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7ee05290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobFetch.vue?vue&type=template&id=e866e104&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[_c('section',[_vm._t("default",null,{"status":{
+                error: _vm.error,
+                pending: _vm.pending,
+                resolved: _vm.resolved,
+            },"job":_vm.job})],2)])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppJobFetch.vue?vue&type=template&id=a98a8c12&
+// CONCATENATED MODULE: ./src/components/AppJobFetch.vue?vue&type=template&id=e866e104&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -30794,6 +30948,8 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
 
 
 
+//
+//
 //
 //
 //
@@ -31850,23 +32006,26 @@ exports.f = wellKnownSymbol;
 /* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("a15b");
 /* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("ac1f");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("2532");
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("5319");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("1276");
-/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("5530");
-/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("a74a");
-/* harmony import */ var _services_storage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("968c");
-/* harmony import */ var _services_location__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("1d1e");
-/* harmony import */ var _services_search__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("e73b");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("2ef0");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("30b5");
-/* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("b0c0");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("ac1f");
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("2532");
+/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("5319");
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("1276");
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("5530");
+/* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("30b5");
+/* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _services_search__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("e73b");
+/* harmony import */ var _services_events__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("bdbb");
+/* harmony import */ var _services_storage__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("968c");
+/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("a74a");
+/* harmony import */ var _services_location__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__("1d1e");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__("2ef0");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_16__);
 
 
 
@@ -31876,6 +32035,7 @@ exports.f = wellKnownSymbol;
 
 
 
+
 //
 //
 //
@@ -31900,6 +32060,9 @@ exports.f = wellKnownSymbol;
 //
 //
 //
+//
+//
+
 
 
 
@@ -31917,6 +32080,10 @@ exports.f = wellKnownSymbol;
       required: false,
       default: "section"
     },
+    siteConfig: {
+      type: Object,
+      required: true
+    },
     input: {
       type: Object,
       required: false,
@@ -31926,7 +32093,7 @@ exports.f = wellKnownSymbol;
       type: String,
       required: true,
       validator: function validator(value) {
-        return [_services_search__WEBPACK_IMPORTED_MODULE_12__[/* GOOGLE_TALENT */ "b"], _services_search__WEBPACK_IMPORTED_MODULE_12__[/* SOLR */ "c"]].includes(value);
+        return [_services_search__WEBPACK_IMPORTED_MODULE_11__[/* GOOGLE_TALENT */ "b"], _services_search__WEBPACK_IMPORTED_MODULE_11__[/* SOLR */ "c"]].includes(value);
       }
     }
   },
@@ -31935,12 +32102,47 @@ exports.f = wellKnownSymbol;
       var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
       if (this.isSolr) {
-        return Object(lodash__WEBPACK_IMPORTED_MODULE_13__["get"])(this.job, attribute, defaultValue);
+        return Object(lodash__WEBPACK_IMPORTED_MODULE_16__["get"])(this.job, attribute, defaultValue);
       }
 
       var customAttr = "customAttributes.".concat(attribute, ".stringValues");
-      var value = Object(lodash__WEBPACK_IMPORTED_MODULE_13__["get"])(this.job.job, customAttr, defaultValue);
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_13__["isArray"])(value) ? value.join(" ") : value;
+      var value = Object(lodash__WEBPACK_IMPORTED_MODULE_16__["get"])(this.job.job, customAttr, defaultValue);
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_16__["isArray"])(value) ? value.join(" ") : value;
+    },
+    clickedApplyJob: function clickedApplyJob() {
+      if (this.siteConfig.source == _services_search__WEBPACK_IMPORTED_MODULE_11__[/* SOLR */ "c"]) {
+        return;
+      }
+
+      var talentData = _services_events__WEBPACK_IMPORTED_MODULE_12__[/* GoogleTalentClientEvent */ "a"].getSavedTalentData(); // only if the stored event type is view do we post
+      // this means they are viewing this job directly from site instead
+      // of navigating directly to job detail.
+
+      if (talentData.eventType === 'view') {
+        _services_events__WEBPACK_IMPORTED_MODULE_12__[/* GoogleTalentClientEvent */ "a"].post({
+          eventType: "redirect",
+          jobs: talentData.jobs,
+          requestId: talentData.requestId
+        }, this.siteConfig).catch(function (e) {
+          console.error(e); //fail silently from google talent errors.
+        });
+      }
+    },
+    clickedViewJob: function clickedViewJob() {
+      if (this.siteConfig.source == _services_search__WEBPACK_IMPORTED_MODULE_11__[/* SOLR */ "c"]) {
+        return;
+      }
+
+      if (this.isGoogleTalent) {
+        var requestId = _services_events__WEBPACK_IMPORTED_MODULE_12__[/* GoogleTalentClientEvent */ "a"].getSavedTalentData().requestId;
+        _services_events__WEBPACK_IMPORTED_MODULE_12__[/* GoogleTalentClientEvent */ "a"].post({
+          eventType: "view",
+          jobs: [this.jobData.name],
+          requestId: requestId
+        }, this.siteConfig).catch(function (e) {
+          console.error(e); //fail silently from google talent errors.
+        });
+      }
     }
   },
   computed: {
@@ -31959,10 +32161,10 @@ exports.f = wellKnownSymbol;
       return this.job.commuteInfo;
     },
     isSolr: function isSolr() {
-      return this.source == _services_search__WEBPACK_IMPORTED_MODULE_12__[/* SOLR */ "c"];
+      return this.source == _services_search__WEBPACK_IMPORTED_MODULE_11__[/* SOLR */ "c"];
     },
     isGoogleTalent: function isGoogleTalent() {
-      return this.source == _services_search__WEBPACK_IMPORTED_MODULE_12__[/* GOOGLE_TALENT */ "b"];
+      return this.source == _services_search__WEBPACK_IMPORTED_MODULE_11__[/* GOOGLE_TALENT */ "b"];
     },
     reqId: function reqId() {
       if (this.isGoogleTalent) {
@@ -31980,7 +32182,7 @@ exports.f = wellKnownSymbol;
     },
     location: function location() {
       if (this.isGoogleTalent) {
-        return Object(_services_location__WEBPACK_IMPORTED_MODULE_11__[/* removeCountry */ "b"])(this.getAttribute("city_admin1_country"));
+        return Object(_services_location__WEBPACK_IMPORTED_MODULE_15__[/* removeCountry */ "b"])(this.getAttribute("city_admin1_country"));
       }
 
       return this.jobData.location_exact;
@@ -31993,11 +32195,11 @@ exports.f = wellKnownSymbol;
       } // add vs & utm parameters
 
 
-      var vs = sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* VS_KEY */ "d"]);
-      var utm = sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* UTM_KEY */ "c"]);
+      var vs = sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_13__[/* VS_KEY */ "d"]);
+      var utm = sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_13__[/* UTM_KEY */ "c"]);
       var utm_params = {};
 
-      if (!Object(_services_helpers__WEBPACK_IMPORTED_MODULE_9__[/* blank */ "a"])(utm)) {
+      if (!Object(_services_helpers__WEBPACK_IMPORTED_MODULE_14__[/* blank */ "a"])(utm)) {
         try {
           utm_params = JSON.parse(utm);
         } catch (_unused) {
@@ -32006,25 +32208,25 @@ exports.f = wellKnownSymbol;
       }
 
       var params = {};
-      params = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"])(Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"])(Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"])({}, this.$route.query), params), utm_params);
+      params = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"])(Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"])(Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"])({}, this.$route.query), params), utm_params);
 
-      if (!Object(_services_helpers__WEBPACK_IMPORTED_MODULE_9__[/* blank */ "a"])(vs)) {
-        params[_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* VS_KEY */ "d"]] = vs;
+      if (!Object(_services_helpers__WEBPACK_IMPORTED_MODULE_14__[/* blank */ "a"])(vs)) {
+        params[_services_storage__WEBPACK_IMPORTED_MODULE_13__[/* VS_KEY */ "d"]] = vs;
       }
 
-      return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_14___default()(url, params);
+      return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_10___default()(url, params);
     },
     detailUrl: function detailUrl() {
       var loc = this.location; //fall back to state if location is blank
 
-      if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_9__[/* blank */ "a"])(loc)) {
+      if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_14__[/* blank */ "a"])(loc)) {
         loc = this.state;
       }
 
-      var url = Object(_services_helpers__WEBPACK_IMPORTED_MODULE_9__[/* buildJobDetailUrl */ "b"])(this.title, loc, this.guid);
+      var url = Object(_services_helpers__WEBPACK_IMPORTED_MODULE_14__[/* buildJobDetailUrl */ "b"])(this.title, loc, this.guid);
 
-      if (!Object(_services_helpers__WEBPACK_IMPORTED_MODULE_9__[/* blank */ "a"])(this.input)) {
-        return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_14___default()(url, this.input);
+      if (!Object(_services_helpers__WEBPACK_IMPORTED_MODULE_14__[/* blank */ "a"])(this.input)) {
+        return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_10___default()(url, this.input);
       }
 
       return url;
@@ -32038,25 +32240,24 @@ exports.f = wellKnownSymbol;
     },
     city: function city() {
       if (this.isGoogleTalent) {
-        return Object(lodash__WEBPACK_IMPORTED_MODULE_13__["get"])(this.jobData, "derivedInfo.locations[0].postalAddress.locality", "");
+        return Object(lodash__WEBPACK_IMPORTED_MODULE_16__["get"])(this.jobData, "derivedInfo.locations[0].postalAddress.locality", "");
       }
 
       return this.jobData.city_exact;
     },
     state: function state() {
       if (this.isGoogleTalent) {
-        var loc = Object(lodash__WEBPACK_IMPORTED_MODULE_13__["get"])(this.jobData, "derivedInfo.locations[0].postalAddress.administrativeArea", "");
-        return Object(_services_location__WEBPACK_IMPORTED_MODULE_11__[/* fullState */ "a"])(loc);
+        var loc = Object(lodash__WEBPACK_IMPORTED_MODULE_16__["get"])(this.jobData, "derivedInfo.locations[0].postalAddress.administrativeArea", "");
+        return Object(_services_location__WEBPACK_IMPORTED_MODULE_15__[/* fullState */ "a"])(loc);
       }
 
       var state = this.jobData.state_short_exact; //handle missing state data
 
-      if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_9__[/* blank */ "a"])(state)) {
-        console.log(this);
+      if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_14__[/* blank */ "a"])(state)) {
         state = this.location.split(",")[1];
       }
 
-      return Object(_services_location__WEBPACK_IMPORTED_MODULE_11__[/* fullState */ "a"])(state);
+      return Object(_services_location__WEBPACK_IMPORTED_MODULE_15__[/* fullState */ "a"])(state);
     },
     country: function country() {
       if (this.isGoogleTalent) {
@@ -32077,7 +32278,7 @@ exports.f = wellKnownSymbol;
         return false;
       }
 
-      if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_9__[/* blank */ "a"])(this.commuteData)) {
+      if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_14__[/* blank */ "a"])(this.commuteData)) {
         return false;
       }
 
@@ -32088,7 +32289,7 @@ exports.f = wellKnownSymbol;
       return true;
     },
     commuteTime: function commuteTime() {
-      if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_9__[/* blank */ "a"])(this.commuteData)) {
+      if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_14__[/* blank */ "a"])(this.commuteData)) {
         return null;
       }
 
@@ -32562,54 +32763,25 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ SOLR; });
-__webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ GOOGLE_TALENT; });
-__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ search_SearchService; });
-__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ search_CommuteSearchService; });
-
-// UNUSED EXPORTS: default, TitleCompleteService, MOCCompleteService, LocationCompleteService
-
-// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
-var runtime = __webpack_require__("96cf");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__("1da1");
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/createClass.js
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-// EXTERNAL MODULE: ./node_modules/axios/index.js
-var axios = __webpack_require__("bc3a");
-var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
-
-// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
-var lodash = __webpack_require__("2ef0");
-
-// EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
-var helpers = __webpack_require__("a74a");
-
-// CONCATENATED MODULE: ./src/services/search.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return SOLR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return GOOGLE_TALENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return TIMEOUT_THRESHOLD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return api; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SearchService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommuteSearchService; });
+/* unused harmony export TitleCompleteService */
+/* unused harmony export MOCCompleteService */
+/* unused harmony export LocationCompleteService */
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("96cf");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("1da1");
+/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("d4ec");
+/* harmony import */ var _home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("bee2");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("bc3a");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("2ef0");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("a74a");
 
 
 
@@ -32617,20 +32789,20 @@ var helpers = __webpack_require__("a74a");
 
 
 
-var TIMEOUT_THRESHOLD = 5000;
 var SOLR = "solr";
 var GOOGLE_TALENT = "google_talent";
+var TIMEOUT_THRESHOLD = 5000;
 var API_URL = "https://qc-search-api.jobsyn.org/api/v1/";
 
 if (Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_USE_MINIKUBE === "true") {
   API_URL = "http://minikube:35000/api/v1";
-} else if (!Object(helpers["c" /* isDevelopment */])()) {
+} else if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_6__[/* isDevelopment */ "c"])()) {
   //update whenever we have a prod version.
   API_URL = "https://qc-search-api.jobsyn.org/api/v1/";
 }
 
 function api() {
-  return axios_default.a.create({
+  return axios__WEBPACK_IMPORTED_MODULE_4___default.a.create({
     baseURL: API_URL,
     withCredentials: false,
     headers: {
@@ -32639,21 +32811,21 @@ function api() {
     }
   });
 }
-var search_SearchService = /*#__PURE__*/function () {
+var SearchService = /*#__PURE__*/function () {
   function SearchService() {
-    _classCallCheck(this, SearchService);
+    Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(this, SearchService);
   }
 
-  _createClass(SearchService, null, [{
+  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(SearchService, null, [{
     key: "get",
     value: function () {
-      var _get = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(input, siteConfig) {
+      var _get = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(input, siteConfig) {
         var source, response;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                source = Object(lodash["kebabCase"])(siteConfig.source);
+                source = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["kebabCase"])(siteConfig.source);
                 _context.prev = 1;
                 _context.next = 4;
                 return api().post("".concat(source, "/search"), {
@@ -32699,21 +32871,21 @@ var search_SearchService = /*#__PURE__*/function () {
 
   return SearchService;
 }();
-var search_CommuteSearchService = /*#__PURE__*/function () {
+var CommuteSearchService = /*#__PURE__*/function () {
   function CommuteSearchService() {
-    _classCallCheck(this, CommuteSearchService);
+    Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(this, CommuteSearchService);
   }
 
-  _createClass(CommuteSearchService, null, [{
+  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(CommuteSearchService, null, [{
     key: "get",
     value: function () {
-      var _get2 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(input, siteConfig) {
+      var _get2 = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(input, siteConfig) {
         var source, response;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                source = Object(lodash["kebabCase"])(siteConfig.source);
+                source = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["kebabCase"])(siteConfig.source);
                 _context2.prev = 1;
                 _context2.next = 4;
                 return api().post("".concat(source, "/commute"), {
@@ -32759,21 +32931,21 @@ var search_CommuteSearchService = /*#__PURE__*/function () {
 
   return CommuteSearchService;
 }();
-var search_TitleCompleteService = /*#__PURE__*/function () {
+var TitleCompleteService = /*#__PURE__*/function () {
   function TitleCompleteService() {
-    _classCallCheck(this, TitleCompleteService);
+    Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(this, TitleCompleteService);
   }
 
-  _createClass(TitleCompleteService, null, [{
+  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(TitleCompleteService, null, [{
     key: "get",
     value: function () {
-      var _get3 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(q, siteConfig) {
+      var _get3 = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(q, siteConfig) {
         var slug, params, response;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                slug = Object(lodash["kebabCase"])(siteConfig.source);
+                slug = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["kebabCase"])(siteConfig.source);
                 params = {
                   q: q,
                   buids: siteConfig.buids
@@ -32828,15 +33000,15 @@ var search_TitleCompleteService = /*#__PURE__*/function () {
 
   return TitleCompleteService;
 }();
-var search_MOCCompleteService = /*#__PURE__*/function () {
+var MOCCompleteService = /*#__PURE__*/function () {
   function MOCCompleteService() {
-    _classCallCheck(this, MOCCompleteService);
+    Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(this, MOCCompleteService);
   }
 
-  _createClass(MOCCompleteService, null, [{
+  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(MOCCompleteService, null, [{
     key: "get",
     value: function () {
-      var _get4 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(q) {
+      var _get4 = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(q) {
         var response;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
@@ -32887,15 +33059,15 @@ var search_MOCCompleteService = /*#__PURE__*/function () {
 
   return MOCCompleteService;
 }();
-var search_LocationCompleteService = /*#__PURE__*/function () {
+var LocationCompleteService = /*#__PURE__*/function () {
   function LocationCompleteService() {
-    _classCallCheck(this, LocationCompleteService);
+    Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(this, LocationCompleteService);
   }
 
-  _createClass(LocationCompleteService, null, [{
+  Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(LocationCompleteService, null, [{
     key: "get",
     value: function () {
-      var _get5 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(q) {
+      var _get5 = Object(_home_surgiie_Desktop_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(q) {
         var response;
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {

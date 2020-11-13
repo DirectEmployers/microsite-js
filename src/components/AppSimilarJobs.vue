@@ -4,6 +4,7 @@
         <div class="similar-jobs__grid">
             <AppJob
                 :key="index"
+                :site-config="siteConfig"
                 :source="meta.source"
                 :job="similarJob"
                 v-for="(similarJob, index) in similarJobs"
@@ -11,11 +12,7 @@
                 <template v-slot="jobData">
                     <section class="similar-jobs__grid-item">
                         <g-link
-                            :to="buildJobDetailUrl(
-                                jobData.title,
-                                jobData.location,
-                                jobData.guid
-                            )"
+                            :to="jobData.detailUrl"
                         >
                             <slot :jobData="jobData">
                                 <h3 class="similar-jobs__grid-item-title">
@@ -35,7 +32,6 @@
 
 <script>
 import { SearchService } from "../services/search"
-import { buildJobDetailUrl } from "../services/helpers"
 import AppJob from './AppJob'
 export default {
     data() {
@@ -81,9 +77,7 @@ export default {
         },
     },
     methods: {
-        buildJobDetailUrl(title, location, guid){
-            return buildJobDetailUrl(title, location, guid)
-        },
+
         async getJobs() {
             const response = await SearchService.get(
                 {

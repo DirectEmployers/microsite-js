@@ -18,20 +18,20 @@
             :dateAdded="dateAdded"
             :deletedAt="deletedAt"
             :applyLink="applyLink"
+            :clickedViewJob="clickedViewJob"
+            :clickedApplyJob="clickedApplyJob"
         ></slot>
     </component>
 </template>
 
 <script>
-import {
-    buildJobDetailUrl,
-    blank,
-} from "../services/helpers"
-import { VS_KEY, UTM_KEY} from '../services/storage'
-import {fullState, removeCountry, removeState} from "../services/location"
-import {GOOGLE_TALENT, SOLR} from "../services/search"
-import {get, isArray} from "lodash"
 import buildUrl from "axios/lib/helpers/buildURL"
+import {GOOGLE_TALENT, SOLR } from "../services/search"
+import {GoogleTalentClientEvent} from "../services/events"
+import {VS_KEY, UTM_KEY} from "../services/storage"
+import {buildJobDetailUrl, blank} from "../services/helpers"
+import {fullState, removeCountry, removeState} from "../services/location"
+import {get, isArray} from "lodash"
 
 export default {
     props: {
@@ -43,6 +43,10 @@ export default {
             type: String,
             required: false,
             default: "section",
+        },
+        siteConfig: {
+            type: Object,
+            required: true,
         },
         input: {
             type: Object,
@@ -68,6 +72,52 @@ export default {
             const value = get(this.job.job, customAttr, defaultValue)
 
             return isArray(value) ? value.join(" ") : value
+        },
+        clickedApplyJob(){
+            if(this.siteConfig.source == SOLR){
+                return;
+            }
+
+            let talentData = GoogleTalentClientEvent.getSavedTalentData()
+            // only if the stored event type is view do we post
+            // this means they are viewing this job directly from site instead
+            // of navigating directly to job detail.
+            if (talentData.eventType === 'view') {
+                GoogleTalentClientEvent.post(
+                    {
+                        eventType: "redirect",
+                        jobs: talentData.jobs,
+                        requestId: talentData.requestId,
+                    },
+                    this.siteConfig
+                ).catch((e) => {
+                    console.error(e)
+                    //fail silently from google talent errors.
+                })
+            }
+        },
+        clickedViewJob() {
+
+            if(this.siteConfig.source == SOLR){
+                return;
+            }
+
+            if (this.isGoogleTalent) {
+                let requestId = GoogleTalentClientEvent.getSavedTalentData().requestId
+
+                GoogleTalentClientEvent.post(
+                    {
+                        eventType: "view",
+                        jobs: [this.jobData.name],
+                        requestId: requestId,
+                    },
+                    this.siteConfig
+                ).catch((e) => {
+                    console.error(e)
+                    //fail silently from google talent errors.
+                })
+            }
+
         },
     },
     computed: {
@@ -110,10 +160,9 @@ export default {
             return this.jobData.location_exact
         },
         applyLink() {
-
             let url = "https://rr.jobsyn.org/" + this.guid
 
-            if(!process.isClient){
+            if (!process.isClient) {
                 return url
             }
             // add vs & utm parameters
@@ -184,7 +233,6 @@ export default {
             let state = this.jobData.state_short_exact
             //handle missing state data
             if (blank(state)) {
-                console.log(this)
                 state = this.location.split(",")[1]
             }
             return fullState(state)
