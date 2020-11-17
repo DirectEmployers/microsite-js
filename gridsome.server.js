@@ -25,6 +25,10 @@ module.exports = function (api) {
             path: "/:guid/job",
             component: "./src/templates/Job.vue"
         })
+        createPage({
+            path: '/locations/:location/jobs',
+            component: './src/pages/jobs.vue'
+        })
     })
 
     api.afterBuild(({
