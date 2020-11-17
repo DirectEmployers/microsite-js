@@ -1,4 +1,4 @@
-import {toString, words} from "lodash"
+import {upperFirst, toString, words} from "lodash"
 import {removeCountry} from "./location"
 
 /**
@@ -69,6 +69,12 @@ export function buildJobDetailUrl(title, location, guid) {
 
 const slugify = (string) => (
     words(toString(string).replace(/["\u2019+:]/g, ""), /[\w]+/g).reduce((result, word, index) => (
-      result + (index ? "-" : "") + word.toLowerCase()
+        result + (index ? "-" : "") + word.toLowerCase()
     ), "")
-  )
+)
+
+export function displayLocationFromSlug(string) {
+    return words(toString(string)).reduce((result, word, index, original) => (
+        upperFirst(result + (index !== original.length - 1 ? " " + upperFirst(word) : ", " + word.toUpperCase()))
+    ))
+}
