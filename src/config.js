@@ -18,8 +18,8 @@ export default {
             display: "City",
         },
         {
-            name: "q",
             key: "title",
+            name: "q",
             display: "Title",
         },
     ],
