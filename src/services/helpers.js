@@ -1,4 +1,4 @@
-import {kebabCase} from "lodash"
+import {toString, words} from "lodash"
 import {removeCountry} from "./location"
 
 /**
@@ -57,9 +57,8 @@ export function isDevelopment() {
  * Build a job detail url.
  */
 export function buildJobDetailUrl(title, location, guid) {
-    let locationSlug = kebabCase(removeCountry(location))
-
-    const titleSlug = kebabCase(title)
+    let locationSlug = slugify(removeCountry(location))
+    let titleSlug = slugify(title)
 
     if (blank(locationSlug)) {
         locationSlug = "none"
@@ -67,3 +66,9 @@ export function buildJobDetailUrl(title, location, guid) {
 
     return `/${locationSlug}/${titleSlug}/${guid}/job/`
 }
+
+const slugify = (string) => (
+    words(toString(string).replace(/["\u2019+:]/g, ""), /[\w]+/g).reduce((result, word, index) => (
+      result + (index ? "-" : "") + word.toLowerCase()
+    ), "")
+  )

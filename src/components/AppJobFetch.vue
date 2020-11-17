@@ -15,7 +15,7 @@
 <script>
 import {kebabCase} from "lodash"
 import {getJob} from "../services/cdn/job"
-import {blank} from "../services/helpers"
+import {buildJobDetailUrl, blank} from "../services/helpers"
 import buildUrl from "axios/lib/helpers/buildURL"
 
 export default {
@@ -69,18 +69,15 @@ export default {
             try {
                 const {data} = await getJob(guid, this.s3Folder)
 
-                const locationSlug = kebabCase(data.location)
-                const titleSlug = kebabCase(data.title_exact)
+                let url = buildJobDetailUrl(data.title_slug, data.location_exact, data.guid)
+                let routePath = this.$route.path.endsWith("/") ? this.$route.path : this.$route.path + "/"
 
                 // check if this is the proper url for the job
-                if (locationSlug !== location || titleSlug !== title) {
-                    let redirect = `/${locationSlug}/${data.title_slug}/${guid}/job`
-
+                if (url !== routePath) {
                     if (!blank(this.$route.query)) {
-                        redirect = buildUrl(redirect, this.$route.query)
+                        url = buildUrl(url, this.$route.query)
                     }
-
-                    window.location.replace(redirect)
+                    window.location.replace(url)
                 } else {
                     this.job = data
                     this.status({resolved: true})
