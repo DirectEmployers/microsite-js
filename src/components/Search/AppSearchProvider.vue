@@ -182,7 +182,7 @@ export default {
             this.formatInput()
         },
 
-        setInputFromParams (query) {
+        setInputFromParams() {
             let params = { ... this.$route.params }
             Object.entries(params).map(([key, value]) => {
                 this.input[key] = value
