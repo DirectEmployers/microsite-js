@@ -24,7 +24,7 @@
     </component>
 </template>
 <script>
-import {blank, titleCase} from "../../services/helpers"
+import {blank, titleCase, displayLocationFromSlug} from "../../services/helpers"
 import {GOOGLE_TALENT, SOLR} from "../../services/search"
 import {GoogleTalentClientEvent} from "../../services/events"
 import {fullState} from "../../services/location"
@@ -75,6 +75,7 @@ export default {
     },
     created() {
         this.setInputFromQuery()
+        this.setInputFromParams()
 
         if (this.searchOnLoad) {
             this.search()
@@ -172,11 +173,23 @@ export default {
             }
         },
 
+        formatLocationSlug() {
+            this.input.location = this.input.location ? displayLocationFromSlug(this.input.location) : ""
+        },
+
         setInputFromQuery() {
             this.input = merge(this.getInputDefaults(), this.$route.query)
-
             this.formatInput()
         },
+
+        setInputFromParams() {
+            let params = { ... this.$route.params }
+            Object.entries(params).map(([key, value]) => {
+                this.input[key] = value
+            })
+            this.formatLocationSlug()
+        },
+
         getFilterOptions(filter) {
             if (!blank(filter.options)) {
                 return filter.options
@@ -293,6 +306,7 @@ export default {
 
             this.submitSearchForm()
         },
+
         async search() {
             this.status.loading = true
 
