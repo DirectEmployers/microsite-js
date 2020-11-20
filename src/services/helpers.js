@@ -68,7 +68,7 @@ export function buildJobDetailUrl(title, location, guid) {
 }
 
 const slugify = (string) => (
-    words(toString(string).replace(/["\u2019+:]/g, ""), /[\w]+/g).reduce((result, word, index) => (
+    words(toString(string).replace(/["\u2019+:+\/]/g, ""), /[\w]+/g).reduce((result, word, index) => (
         result + (index ? "-" : "") + word.toLowerCase()
     ), "")
 )
