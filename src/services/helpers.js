@@ -74,7 +74,16 @@ const slugify = (string) => (
 )
 
 export function displayLocationFromSlug(string) {
-    return words(toString(string)).reduce((result, word, index, original) => (
-        upperFirst(result + (index !== original.length - 1 ? " " + upperFirst(word) : ", " + word.toUpperCase()))
-    ))
+    if (string.indexOf("-") > -1) {
+        return words(toString(string)).reduce((result, word, index, original) => (
+            upperFirst(result + (index !== original.length - 1 ? " " + upperFirst(word) : ", " + word.toUpperCase()))
+        ))
+    }
+    return upperFirst(string);
 }
+
+// const sortAlphabetically =
+
+// export function sortItemsAlphabetically(items) {
+//     return items
+// }
