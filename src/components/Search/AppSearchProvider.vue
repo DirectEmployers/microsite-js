@@ -166,7 +166,7 @@ export default {
     },
     methods: {
         formatLocationSlug() {
-            if(typeof this.input.location == 'string' && !blank(this.input.location)){
+            if(!blank(this.$route.params.location)){
                 this.input.location =  displayLocationFromSlug(this.input.location)
             }
         },
@@ -190,7 +190,14 @@ export default {
                 return filter.options
             }
 
-            return this.filters[filter.name] || []
+            //all filter results are keyed by "key"
+            let key = filter.key
+            //or param name if no key is present
+            if(blank(key)){
+                key = filter.name
+            }
+
+            return this.filters[key] || []
         },
         getCommuteDefaults() {
             return clone({

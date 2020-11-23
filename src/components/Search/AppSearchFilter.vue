@@ -170,14 +170,14 @@ export default {
             // consider moving all formatting back to the back end as data varies between sources
             // or implement a reliable formatting standard that will parse data regardless of source.
             // perhaps a format prop :format="some_state_formatting_function" ?
-            if(this.name == 'state'){
+            if(this.keyName == 'state'){
                 let parsed = strAfter(option.display, "::")
                 if(parsed){
                     display = parsed
                     submitValue = parsed
                 }
             }
-            if (["location", 'city', 'state'].includes(this.name)) {
+            if (['city', 'state'].includes(this.keyName)) {
                 display = fullState(removeCountry(display))
                 submitValue = display
             } else if (this.name == "moc") {

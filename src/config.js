@@ -17,10 +17,6 @@ export default {
     // },
     filters: [
         {
-            name: "state",
-            display: "State"
-        },
-        {
             name: "location",
             visible: false,
         },
@@ -29,11 +25,18 @@ export default {
             display: "MOC",
         },
         {
-            name: "city",
+            name: "location",
+            key: "city",
             display: "City",
         },
         {
-            name: "country",
+            name: "location",
+            key: "state",
+            display: "State"
+        },
+        {
+            name: "location",
+            key: "country",
             display: "Country",
         },
         {
