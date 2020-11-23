@@ -17,10 +17,6 @@ export default {
     // },
     filters: [
         {
-            name: "location",
-            visible: false,
-        },
-        {
             name: "moc",
             display: "MOC",
         },
