@@ -1,13 +1,22 @@
 const fs = require("fs");
+const config = require("./src/config.js");
+var pluralize = require('pluralize')
+const kebabCase = require('lodash.kebabcase')
 
-// Server API makes it possible to hook into various parts of Gridsome
-// on server-side and add custom data to the GraphQL data layer.
-// Learn more: https://gridsome.org/docs/server-api/
+const sortByDisplay = (a, b) => {
+    const displayA = kebabCase(a.display)
+    const displayB = kebabCase(b.display)
 
-// Changes here require a server restart.
-// To restart press CTRL + C in terminal and run `gridsome develop`
+    let comparison = 0
+    if (displayA > displayB) {
+        comparison = 1
+    } else if (displayA < displayB) {
+        comparison = -1
+    }
+    return comparison
+}
 
-module.exports = function (api) {
+module.exports = function (api, filters) {
     api.loadSource(({
         addCollection
     }) => {
@@ -29,6 +38,38 @@ module.exports = function (api) {
             path: '/locations/:location/jobs',
             component: './src/pages/jobs.vue'
         })
+        let filters = config.filters
+        filters.sort(sortByDisplay)
+
+        function buildFilterPages(filterGroup, prevPath = null, prevParam = null) {
+            for (let i = 0, len = filterGroup.length; i < len; i++) {
+                let path = null
+                let param = filterGroup[i].name
+                if (param != prevParam && param != 'location' && param != 'q') {
+                    path = `/${kebabCase(filterGroup[i].display)}/:${param}`
+                    if (prevPath) {
+                        path = `${prevPath}${path}`
+                    }
+                    createPage({
+                        path: `${path}/jobs`,
+                        component: './src/pages/jobs.vue'
+                    })
+                    createPage({
+                        path: `/locations/:location/${path}/jobs`,
+                        component: './src/pages/jobs.vue'
+                    })
+                }
+                if (path) {
+                    buildFilterPages(filterGroup.slice(i), path, param)
+                }
+            }
+        }
+        function loopOverFilters(filters) {
+            for (let i = 0, len = filters.length; i < len; i++) {
+                buildFilterPages(filters.slice(i))
+            }
+        }
+        loopOverFilters(filters)
     })
 
     api.afterBuild(({

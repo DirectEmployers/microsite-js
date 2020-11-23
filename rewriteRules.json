@@ -2,5 +2,13 @@
   {
     "source": "/:location/:title/:guid/job",
     "destination": "/_location/_title/_guid/job.html"
+  },
+  {
+    "source": "/locations/:location/jobs",
+    "destination": "/locations/_location/jobs.html"
+  },
+  {
+    "source": "/:guid/job",
+    "destination": "/_guid/job.html"
   }
 ]
