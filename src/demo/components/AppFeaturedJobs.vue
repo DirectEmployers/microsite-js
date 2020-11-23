@@ -6,7 +6,7 @@
             :key="index"
             v-for="(job, index) in featuredJobs"
         >
-            <AppJob :source="source" :job="job">
+            <AppJob :source="source" :job="job" :site-config="$siteConfig">
                 <template v-slot="jobData">
                     <g-link :to="jobData.detailUrl" class="mb-2">
                         <h3 class="font-bold text-xl">

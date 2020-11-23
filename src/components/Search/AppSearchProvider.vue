@@ -24,7 +24,7 @@
     </component>
 </template>
 <script>
-import {blank, titleCase, displayLocationFromSlug} from "../../services/helpers"
+import {blank, titleCase, displayLocationFromSlug, strAfter } from "../../services/helpers"
 import {GOOGLE_TALENT, SOLR} from "../../services/search"
 import {GoogleTalentClientEvent} from "../../services/events"
 import {fullState} from "../../services/location"
@@ -165,21 +165,14 @@ export default {
         },
     },
     methods: {
-        formatInput() {
-            if (!this.isCommuteSearch) {
-                this.input.location = fullState(this.input.location)
-            } else {
-                this.input.location = ""
-            }
-        },
-
         formatLocationSlug() {
-            this.input.location = this.input.location ? displayLocationFromSlug(this.input.location) : ""
+            if(typeof this.input.location == 'string' && !blank(this.input.location)){
+                this.input.location =  displayLocationFromSlug(this.input.location)
+            }
         },
 
         setInputFromQuery() {
             this.input = merge(this.getInputDefaults(), this.$route.query)
-            this.formatInput()
         },
 
         setInputFromParams() {
@@ -187,6 +180,8 @@ export default {
             Object.entries(params).map(([key, value]) => {
                 this.input[key] = value
             })
+            //TODO only do this if the slug was actually present?
+            // this causes geolocation value to parse to Your, LOCATION
             this.formatLocationSlug()
         },
 
@@ -195,13 +190,7 @@ export default {
                 return filter.options
             }
 
-            let key = filter.key
-
-            if (blank(key)) {
-                key = filter.name
-            }
-
-            return this.filters[key] || []
+            return this.filters[filter.name] || []
         },
         getCommuteDefaults() {
             return clone({

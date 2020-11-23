@@ -57,14 +57,14 @@
 </template>
 <script>
 import AppAccordion from "../AppAccordion"
-import {blank } from "../../services/helpers"
-import {fullState, removeCountry} from "../../services/location"
+import {blank, strAfter} from "../../services/helpers"
+import {removeCountry, fullState} from "../../services/location"
 import {omitBy, truncate, trim} from "lodash"
 import buildUrl from 'axios/lib/helpers/buildURL'
 export default {
     props: {
         display: {
-            required: true,
+            required: false,
             type: String,
         },
         keyName: {
@@ -165,12 +165,25 @@ export default {
             if (Object.prototype.hasOwnProperty.call(option, "submitValue")) {
                 submitValue = option.submitValue
             }
-            if (this.name == "location") {
-                display = fullState(removeCountry(option.display))
+            // TODO - Rework this component because its sloppy and because formatting is fragile
+            // Either:
+            // consider moving all formatting back to the back end as data varies between sources
+            // or implement a reliable formatting standard that will parse data regardless of source.
+            // perhaps a format prop :format="some_state_formatting_function" ?
+            if(this.name == 'state'){
+                let parsed = strAfter(option.display, "::")
+                if(parsed){
+                    display = parsed
+                    submitValue = parsed
+                }
+            }
+            if (["location", 'city', 'state'].includes(this.name)) {
+                display = fullState(removeCountry(display))
                 submitValue = display
-            } else if (this.keyName == "moc") {
-                display = truncate(option.display, {length: 32})
-                submitValue = trim(option.display.split("-")[0])
+            } else if (this.name == "moc") {
+                display = display.split("::")[1]
+                display = truncate(display, {length: 32})
+                submitValue = trim(display.split("-")[0])
             }
 
             option.display = display
