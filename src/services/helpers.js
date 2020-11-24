@@ -67,6 +67,17 @@ export function buildJobDetailUrl(title, location, guid) {
     return `/${locationSlug}/${titleSlug}/${guid}/job/`
 }
 
+
+export function strAfter(subject, search) {
+    let result = search === "" ? subject : subject.split(search)[1]
+
+    if(blank(result)){
+        return null
+    }
+
+    return result
+}
+
 const slugify = (string) => (
     words(toString(string).replace(/["\u2019+:]/g, ""), /[\w]+/g).reduce((result, word, index) => (
         result + (index ? "-" : "") + word.toLowerCase()
