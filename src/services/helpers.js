@@ -79,13 +79,16 @@ export function strAfter(subject, search) {
 }
 
 const slugify = (string) => (
-    words(toString(string).replace(/["\u2019+:]/g, ""), /[\w]+/g).reduce((result, word, index) => (
+    words(toString(string).replace(/["\u2019+:+/]/g, ""), /[\w]+/g).reduce((result, word, index) => (
         result + (index ? "-" : "") + word.toLowerCase()
     ), "")
 )
 
 export function displayLocationFromSlug(string) {
-    return words(toString(string)).reduce((result, word, index, original) => (
-        upperFirst(result + (index !== original.length - 1 ? " " + upperFirst(word) : ", " + word.toUpperCase()))
-    ))
+    if (string.indexOf("-") > -1) {
+        return words(toString(string)).reduce((result, word, index, original) => (
+            upperFirst(result + (index !== original.length - 1 ? " " + upperFirst(word) : ", " + word.toUpperCase()))
+        ))
+    }
+    return upperFirst(string);
 }

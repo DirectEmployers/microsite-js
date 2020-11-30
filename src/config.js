@@ -1,4 +1,4 @@
-export default {
+const config =  {
     // buids: [50611, 50613],
     buids:[19424],
     source: "google_talent",
@@ -48,7 +48,11 @@ export default {
                 Rotating:'text:"Rotating"',
             },
         },
+        {
+            name: "business-unit",
+            display: "Business Unit",
+        }
     ],
 }
 
-
+module.exports = config
