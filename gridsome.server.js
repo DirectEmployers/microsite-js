@@ -1,20 +1,15 @@
-const fs = require("fs");
-const config = require("./src/config.js");
-var pluralize = require('pluralize')
-const kebabCase = require('lodash.kebabcase')
+const fs = require("fs")
+const _ = require('lodash')
+const alphabeticalOrder = require("./src/services/alphabeticalOrder")
+const config = require("./src/config.js")
+const defaultUrlFilters = require("./src/constants/defaultFilters.js")
+const defaultFilterNames = _.map(defaultUrlFilters, 'name')
+const pluralize = require("pluralize")
 
-const sortByDisplay = (a, b) => {
-    const displayA = kebabCase(a.display)
-    const displayB = kebabCase(b.display)
-
-    let comparison = 0
-    if (displayA > displayB) {
-        comparison = 1
-    } else if (displayA < displayB) {
-        comparison = -1
-    }
-    return comparison
-}
+let urlFilters = config.filters
+urlFilters = urlFilters.filter(filter => !defaultFilterNames.includes(filter.name))
+urlFilters.sort(alphabeticalOrder('display'))
+urlFilters = _.union(defaultUrlFilters, urlFilters)
 
 module.exports = function (api, filters) {
     api.loadSource(({
@@ -34,28 +29,18 @@ module.exports = function (api, filters) {
             path: "/:guid/job",
             component: "./src/templates/Job.vue"
         })
-        createPage({
-            path: '/locations/:location/jobs',
-            component: './src/pages/jobs.vue'
-        })
-        let filters = config.filters
-        filters.sort(sortByDisplay)
 
         function buildFilterPages(filterGroup, prevPath = null, prevParam = null) {
             for (let i = 0, len = filterGroup.length; i < len; i++) {
                 let path = null
                 let param = filterGroup[i].name
-                if (param != prevParam && param != 'location' && param != 'q') {
-                    path = `/${kebabCase(filterGroup[i].display)}/:${param}`
+                if (param != prevParam) {
+                    path = `/${_.kebabCase(pluralize(filterGroup[i].display))}/:${param}`
                     if (prevPath) {
                         path = `${prevPath}${path}`
                     }
                     createPage({
                         path: `${path}/jobs`,
-                        component: './src/pages/jobs.vue'
-                    })
-                    createPage({
-                        path: `/locations/:location/${path}/jobs`,
                         component: './src/pages/jobs.vue'
                     })
                 }
@@ -69,7 +54,7 @@ module.exports = function (api, filters) {
                 buildFilterPages(filters.slice(i))
             }
         }
-        loopOverFilters(filters)
+        loopOverFilters(urlFilters)
     })
 
     api.afterBuild(({
