@@ -1,15 +1,5 @@
 const fs = require("fs")
-const _ = require('lodash')
-const alphabeticalOrder = require("./src/services/alphabeticalOrder")
-const config = require("./src/config.js")
-const defaultUrlFilters = require("./src/constants/defaultFilters.js")
-const defaultFilterNames = _.map(defaultUrlFilters, 'name')
-const pluralize = require("pluralize")
-
-let urlFilters = config.filters
-urlFilters = urlFilters.filter(filter => !defaultFilterNames.includes(filter.name))
-urlFilters.sort(alphabeticalOrder('display'))
-urlFilters = _.union(defaultUrlFilters, urlFilters)
+const getFilterPaths = require("./src/services/gridsomeFilterPaths")
 
 module.exports = function (api, filters) {
     api.loadSource(({
@@ -30,31 +20,13 @@ module.exports = function (api, filters) {
             component: "./src/templates/Job.vue"
         })
 
-        function buildFilterPages(filterGroup, prevPath = null, prevParam = null) {
-            for (let i = 0, len = filterGroup.length; i < len; i++) {
-                let path = null
-                let param = filterGroup[i].name
-                if (param !== prevParam) {
-                    path = `/${_.kebabCase(pluralize(filterGroup[i].display))}/:${param}`
-                    if (prevPath) {
-                        path = `${prevPath}${path}`
-                    }
-                    createPage({
-                        path: `${path}/jobs`,
-                        component: './src/pages/jobs.vue'
-                    })
-                }
-                if (path) {
-                    buildFilterPages(filterGroup.slice(i), path, param)
-                }
-            }
+        let filterPaths = getFilterPaths()
+        for (let i = 0, len = filterPaths.length; i < len; i++) {
+            createPage({
+                path: filterPaths[i],
+                component: './src/pages/jobs.vue'
+            })
         }
-        function loopOverFilters(filters) {
-            for (let i = 0, len = filters.length; i < len; i++) {
-                buildFilterPages(filters.slice(i))
-            }
-        }
-        loopOverFilters(urlFilters)
     })
 
     api.afterBuild(({

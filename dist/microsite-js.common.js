@@ -27782,10 +27782,7 @@ function displayLocationFromSlug(string) {
   }
 
   return Object(lodash["upperFirst"])(string);
-} // const sortAlphabetically =
-// export function sortItemsAlphabetically(items) {
-//     return items
-// }
+}
 
 /***/ }),
 
