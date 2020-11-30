@@ -92,9 +92,3 @@ export function displayLocationFromSlug(string) {
     }
     return upperFirst(string);
 }
-
-// const sortAlphabetically =
-
-// export function sortItemsAlphabetically(items) {
-//     return items
-// }
