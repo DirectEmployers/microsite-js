@@ -34,7 +34,7 @@ module.exports = function (api, filters) {
             for (let i = 0, len = filterGroup.length; i < len; i++) {
                 let path = null
                 let param = filterGroup[i].name
-                if (param != prevParam) {
+                if (param !== prevParam) {
                     path = `/${_.kebabCase(pluralize(filterGroup[i].display))}/:${param}`
                     if (prevPath) {
                         path = `${prevPath}${path}`
