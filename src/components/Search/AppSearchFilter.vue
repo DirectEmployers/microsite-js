@@ -182,8 +182,8 @@ export default {
                 submitValue = display
             } else if (this.name == "moc") {
                 display = display.split("::")[1]
+                submitValue = display
                 display = truncate(display, {length: 32})
-                submitValue = trim(display.split("-")[0])
             }
 
             option.display = display
