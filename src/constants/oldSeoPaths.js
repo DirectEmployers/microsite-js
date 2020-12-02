@@ -7,9 +7,9 @@ const oldSeoPaths = {
     ],
     MOC: ["/:moc/vet-jobs"],
     FILTERS: [
-        "/:filter/new-jobs",
-        "/:filter/:filter/new-jobs",
-        "/:filter/:filter/:filter/new-jobs"
+        "/:filter0/new-jobs",
+        "/:filter0/:filter1/new-jobs",
+        "/:filter0/:filter1/:filter2/new-jobs"
     ],
     COMPANY: ["/:company/careers"]
 }
