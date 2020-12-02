@@ -1,5 +1,7 @@
 const fs = require("fs")
 const getFilterPaths = require("./src/services/gridsomeFilterPaths")
+const getOldSeoPaths = require("./src/services/gridsomeOldSeoPaths")
+
 
 module.exports = function (api, filters) {
     api.loadSource(({
@@ -19,6 +21,14 @@ module.exports = function (api, filters) {
             path: "/:guid/job",
             component: "./src/templates/Job.vue"
         })
+
+        let oldSeoPaths = getOldSeoPaths()
+        for (let i = 0, len = oldSeoPaths.length; i < len; i++) {
+            createPage({
+                path: oldSeoPaths[i],
+                component: './src/pages/jobs.vue'
+            })
+        }
 
         let filterPaths = getFilterPaths()
         for (let i = 0, len = filterPaths.length; i < len; i++) {
