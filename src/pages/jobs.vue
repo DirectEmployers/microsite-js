@@ -1,6 +1,10 @@
 <template>
     <Layout>
-        <AppSearchProvider ref="provider" class="my-6" :site-config="$siteConfig">
+        <AppSearchProvider
+            ref="provider"
+            class="my-6"
+            :site-config="$siteConfig"
+        >
             <template
                 v-slot="{
                     jobs,
@@ -19,7 +23,8 @@
                     appliedFilters,
                     submitSearchForm,
                     isGoogleTalent,
-                    isCommuteSearch
+                    isCommuteSearch,
+                    hasFilter,
                 }"
             >
                 <AppLoader v-if="status.loading" />
@@ -89,8 +94,11 @@
                                     @chipClicked="removeFilter"
                                 ></AppChip>
                             </div>
-                            <AppAccordion :open="true" v-if="sortOptions.length">
-                                <template v-slot:header>
+                            <AppAccordion
+                                :open="true"
+                                v-if="sortOptions.length"
+                            >
+                                <template v-slot:display>
                                     <h3 class="font-bold text-xl">
                                         Sorted By
                                         <strong>
@@ -110,16 +118,70 @@
                                     </li>
                                 </ul>
                             </AppAccordion>
+
                             <AppSearchFilter
                                 :key="index"
+                                :input="filteredInput"
                                 :name="configFilter.name"
-                                :display="configFilter.display"
                                 :key-name="configFilter.key"
                                 :visible="configFilter.visible"
-                                :input="filteredInput"
-                                v-for="(configFilter, index) in $siteConfig.filters"
                                 :options="getFilterOptions(configFilter)"
-                            />
+                                v-for="(configFilter, index) in $siteConfig.filters"
+                            >
+                                <template
+                                    v-slot="{
+                                        displayedFilters,
+                                        shouldShowLess,
+                                        shouldShowMore,
+                                        showLess,
+                                        showMore,
+                                    }"
+                                >
+                                    <AppAccordion
+                                        :display="`Filter By ${configFilter.display}`"
+                                        :open="hasFilter(configFilter.name)"
+                                    >
+
+                                        <ul class="search-filter-options">
+                                            <li
+                                                class="search-filter-options-item"
+                                                :key="index"
+                                                v-for="(filter, index) in displayedFilters"
+                                            >
+                                                <g-link :to="filter.href">
+                                                    {{ filter.display }}
+                                                    <span v-if="filter.value">
+                                                        ({{ filter.value }})
+                                                    </span>
+                                                </g-link>
+                                            </li>
+                                        </ul>
+                                        <section
+                                            class="search-filter-limiter"
+                                            v-if="shouldShowLess || shouldShowMore"
+                                        >
+                                            <button
+                                                class="search-filter-limiter-more"
+                                                @click="showMore()"
+                                                v-if="shouldShowMore"
+                                                aria-label="Show more filters"
+                                                rel="nofollow"
+                                            >
+                                                More
+                                            </button>
+                                            <button
+                                                v-if="shouldShowLess"
+                                                @click="showLess()"
+                                                aria-label="Show less filters"
+                                                class="search-filter-limiter-less"
+                                                rel="nofollow"
+                                            >
+                                                Less
+                                            </button>
+                                        </section>
+                                    </AppAccordion>
+                                </template>
+                            </AppSearchFilter>
 
                             <div class="container">
                                 <button
@@ -177,6 +239,11 @@ export default {
         AppSearchForm,
         AppCommuteSearchForm,
     },
+    data() {
+        return {
+            AppAccordion,
+        }
+    },
     metaInfo: {
         title: "Jobs",
         meta: [
@@ -187,10 +254,10 @@ export default {
             },
         ],
     },
-    methods:{
+    methods: {
         toggleCommuteModal() {
             this.$refs["commute-modal"].toggle()
-        }
-    }
+        },
+    },
 }
 </script>

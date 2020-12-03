@@ -1,6 +1,6 @@
 .accordion {
 
     &__header {
-        @apply cursor-pointer;
+        @apply font-bold text-lg cursor-pointer;
     }
 }

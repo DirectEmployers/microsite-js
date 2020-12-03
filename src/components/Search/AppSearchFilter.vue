@@ -1,80 +1,85 @@
 <template>
-    <AppAccordion
-        v-if="displayedOptions.length && isVisible"
-        :open="isActive"
+    <component
         class="search-filter"
-        :key="`${keyName}-accordion`"
-        :name="`${keyName}-accordion`"
+        :is="tag"
+        v-if="isVisible && hasOptions"
+        v-bind="$attrs"
     >
-        <template v-slot:header="{isOpen}">
-            <slot name="display" :isOpen="isOpen">
-                <h3
-                    v-if="display"
-                    class="search-filter-display"
-                    :class="{'search-filter-display--active': isActive}"
-                >
-                    Filter By {{ display }}
-                </h3>
-            </slot>
-        </template>
-
-        <ul class="search-filter-options">
-            <li
-                class="search-filter-options-item"
-                :key="index"
-                v-for="(option, index) in displayedOptions"
-            >
-                <g-link :to="option.href">
-                    {{ option.display }}
-                    <span v-if="option.value">({{ option.value }})</span>
-                </g-link>
-            </li>
-        </ul>
-        <section
-            class="search-filter-limiter"
-            v-if="shouldShowLess || hasMoreItems"
+        <h3
+            v-if="display"
+            class="search-filter-display"
         >
-            <button
-                class="search-filter-limiter-more"
-                @click="showMore()"
-                v-if="hasMoreItems"
-                aria-label="Show more filters"
-                rel="nofollow"
+            Filter By {{ display }}
+        </h3>
+        <slot
+            :displayedFilters="displayedFilters"
+            :shouldShowLess="shouldShowLess"
+            :shouldShowMore="shouldShowMore"
+            :showMore="showMore"
+            :showLess="showLess"
+        >
+            <ul class="search-filter-options">
+                <li
+                    class="search-filter-options-item"
+                    :key="index"
+                    v-for="(option, index) in displayedFilters"
+                >
+                    <g-link :to="option.href">
+                        {{ option.display }}
+                        <span v-if="option.value">({{ option.value }})</span>
+                    </g-link>
+                </li>
+            </ul>
+            <section
+                class="search-filter-limiter"
+                v-if="shouldShowLess || shouldShowMore"
             >
-                More
-            </button>
-            <button
-                v-if="shouldShowLess"
-                @click="showLess()"
-                aria-label="Show less filters"
-                class="search-filter-limiter-less"
-                rel="nofollow"
-            >
-                Less
-            </button>
-        </section>
-    </AppAccordion>
+                <button
+                    class="search-filter-limiter-more"
+                    @click="showMore()"
+                    v-if="shouldShowMore"
+                    aria-label="Show more filters"
+                    rel="nofollow"
+                >
+                    More
+                </button>
+                <button
+                    v-if="shouldShowLess"
+                    @click="showLess()"
+                    aria-label="Show less filters"
+                    class="search-filter-limiter-less"
+                    rel="nofollow"
+                >
+                    Less
+                </button>
+            </section>
+        </slot>
+    </component>
 </template>
 <script>
-import AppAccordion from "../AppAccordion"
-import {blank, strAfter} from "../../services/helpers"
-import {removeCountry, fullState} from "../../services/location"
-import {omitBy, truncate, trim} from "lodash"
-import buildUrl from 'axios/lib/helpers/buildURL'
+import {clone} from "lodash"
+import {blank} from "../../services/helpers"
+import buildUrl from "axios/lib/helpers/buildURL"
+
 export default {
     props: {
-        display: {
-            required: false,
-            type: String,
-        },
         keyName: {
             required: false,
             default() {
                 return this._uid
             },
         },
+        tag: {
+            type: [String, Object],
+            required: false,
+            default: "section",
+        },
         name: {
             required: true,
+            type: String,
+        },
+        display: {
+            required: false,
             type: String,
         },
         visibile: {
@@ -96,125 +101,60 @@ export default {
             default: 10,
         },
     },
-    components: {
-        AppAccordion,
-    },
     data() {
         return {
-            isActive: false,
-            filteredOptions: [],
-            displayedOptions: [],
+            givenOptions: clone(this.options),
+            displayedFilters: {},
         }
     },
     created() {
-        this.filteredOptions = this.filterOptions(this.options)
 
-        this.displayedOptions = this.filteredOptions.slice(0, this.limit)
+        let filteredOptions = []
+        this.givenOptions.forEach(option => {
+            if(this.input[this.name] != option.display){
+                filteredOptions.push(
+                    this.buildFilterHref(option)
+                )
+            }
+        })
+
+        this.displayedFilters = filteredOptions.slice(0, this.limit)
     },
     computed: {
+        hasOptions() {
+            return this.displayedFilters.length > 0
+        },
+
         isVisible() {
             return this.visible !== false
         },
 
         shouldShowLess() {
-
-            const totalItemsShown = this.displayedOptions.length
-
-            const hasItemsAdded = totalItemsShown > this.limit
-
-            if (hasItemsAdded) {
-                return true
-            }
-
-            return false
+            return this.displayedFilters.length > this.limit
         },
 
-        hasMoreItems() {
-            if (this.displayedOptions.length < this.filteredOptions.length) {
-                return true
-            }
-
-            return false
-        },
-        cleanedInput() {
-            return omitBy({...this.input}, blank)
+        shouldShowMore() {
+            return this.displayedFilters.length < this.givenOptions.length
         },
     },
     methods: {
         buildFilterHref(option) {
-            let params = this.cleanedInput
+            let currentParams = this.input
 
-            params["page"] = 1
-
-            params[this.name] = option.submitValue
-
-            return buildUrl('jobs', params)
-        },
-
-        isExistingFilter(value) {
-            let inputValue = this.input[this.name]
-
-            let isExisting = inputValue == value
-
-            return isExisting
-        },
-        formatOption(option) {
-            let display = option.display
-            let submitValue = option.display
-
-            if (Object.prototype.hasOwnProperty.call(option, "submitValue")) {
-                submitValue = option.submitValue
-            }
-            // TODO - Rework this component because its sloppy and because formatting is fragile
-            // Either:
-            // consider moving all formatting back to the back end as data varies between sources
-            // or implement a reliable formatting standard that will parse data regardless of source.
-            // perhaps a format prop :format="some_state_formatting_function" ?
-            if(this.keyName == 'state'){
-                let parsed = strAfter(option.display, "::")
-                if(parsed){
-                    display = parsed
-                    submitValue = parsed
-                }
-            }
-            if (['city', 'state'].includes(this.keyName)) {
-                display = fullState(removeCountry(display))
-                submitValue = display
-            } else if (this.name == "moc") {
-                display = display.split("::")[1]
-                submitValue = display
-                display = truncate(display, {length: 32})
+            let params = {
+                page: 1,
+                [this.name]: option.display,
             }
 
-            option.display = display
-            option.submitValue = submitValue
-            option.href = this.buildFilterHref(option)
-
+            option.href = buildUrl("jobs", {...currentParams, ...params})
             return option
         },
-        filterOptions(options) {
-            let filtered = []
-            let display = null
-
-            options.forEach(option => {
-                option = this.formatOption(option)
-
-                if (!this.isExistingFilter(option.submitValue)) {
-                    filtered.push(option)
-                } else {
-                    this.isActive = true
-                }
-            })
-
-            return filtered
-        },
-
         showMore() {
             const numberOfItemsToAdd = this.limit
 
-            const currentTotalShown = this.displayedOptions.length
+            const currentTotalShown = this.displayedFilters.length
 
-            this.displayedOptions = this.filteredOptions.slice(
+            this.displayedFilters = this.givenOptions.slice(
                 0,
                 currentTotalShown + numberOfItemsToAdd
             )
@@ -223,18 +163,15 @@ export default {
         showLess() {
             const limit = this.limit
 
-            const currentTotalShown = this.displayedOptions.length
+            const currentTotalShown = this.displayedFilters.length
 
             let less = currentTotalShown - limit
 
-            if(less < limit){
+            if (less < limit) {
                 less = currentTotalShown - less
             }
 
-            this.displayedOptions = this.filteredOptions.slice(
-                0,
-                less
-            )
+            this.displayedFilters = this.givenOptions.slice(0, less)
         },
     },
 }
