@@ -6,22 +6,22 @@
             :id="`accordion-header-${id}`"
             class="accordion__header"
             :class="{
-                'accordion__header--active': isOpen
+                'accordion__header--active': active
             }"
-            :aria-expanded="isOpen"
-            @click="isOpen = !isOpen"
-            @keyup.enter="isOpen = !isOpen"
+            :aria-expanded="active"
+            @click="active = !active"
+            @keyup.enter="active = !active"
         >
-            <slot name="header" :isOpen="isOpen">
-                <h3 v-if="header" class="accordion__header-text">
-                    {{ header }}
+            <slot name="display" :active="active">
+                <h3 v-if="display" class="accordion__header-text">
+                    {{ display }}
                 </h3>
             </slot>
         </div>
         <div
             :id="`accordion-content-${id}`"
             class="accordion__content"
-            v-if="isOpen"
+            v-if="active"
             :aria-labelledby="`accordion-header-${id}`"
         >
             <slot />
@@ -33,7 +33,7 @@
 export default {
     data() {
         return {
-            isOpen: this.open
+            active: this.open
         }
     },
     props: {
@@ -49,7 +49,7 @@ export default {
                 return `${this._uid}`
             }
         },
-        header: {
+        display: {
             type: String,
             required: false,
             default : ''
