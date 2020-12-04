@@ -20,7 +20,6 @@
             :getFilterOptions="getFilterOptions"
             :submitSearchForm="submitSearchForm"
             :isCommuteSearch="isCommuteSearch"
-            :hasFilter="hasFilter"
         />
     </component>
 </template>
@@ -233,9 +232,6 @@ export default {
                     query: payload,
                 })
                 .catch(err => {})
-        },
-        hasFilter(name){
-            return !blank(this.input[name])
         },
         selectPage(page) {
             this.input["page"] = page

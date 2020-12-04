@@ -139,7 +139,6 @@
                                 >
                                     <AppAccordion
                                         :display="`Filter By ${configFilter.display}`"
-                                        :open="hasFilter(configFilter.name)"
                                     >
 
                                         <ul class="search-filter-options">
