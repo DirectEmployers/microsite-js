@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="submitSearchForm">
+    <form @submit.prevent="search">
         <div class="search-form__wrapper">
             <div class="search-form__section">
                 <AppAutocompleteInput
@@ -11,11 +11,12 @@
                     aria-label="Search by keyword"
                     autocapitalize="off"
                     :query="TitleCompleteService"
-                    @setResult="submitSearchForm"
+                    @setResult="search"
                 />
             </div>
             <div class="search-form__section">
-                <div class="search-form__location-autocomplete" v-if="!isCommuteSearch">
+                <!-- v-if="!isCommuteSearch"-->
+                <div class="search-form__location-autocomplete" >
                     <AppAutocompleteInput
                         ref="location"
                         v-model="input.location"
@@ -25,20 +26,20 @@
                         aria-label="Type city or state"
                         autocapitalize="off"
                         :query="LocationCompleteService"
-                        @setResult="submitSearchForm"
+                        @setResult="search"
                     />
                     <div class="form__input-group">
                         <AppGeoLocation class="form__input-addon" @getCoords="setLocationFromGeo"/>
                     </div>
                 </div>
-                <div class="mt-6" v-else>
+                <!-- <div class="mt-6" v-else>
                     <AppGoogleLocationAutocomplete
                         :api-key="apiKey"
                         v-model="input.commuteLocation"
                         class="form__input"
                         @locationSelected="googleAutocompleteSelected"
                     />
-                </div>
+                </div> -->
 
                 <div
                     v-if="shouldShowRadiusInput"
@@ -79,7 +80,7 @@
                     aria-label="Search by MOC code"
                     autocapitalize="off"
                     :query="MOCCompleteService"
-                    @setResult="submitSearchForm"
+                    @setResult="search"
                 />
             </div>
             <div class="search-form__button-wrapper">
@@ -123,10 +124,6 @@ export default {
         source:{
             type: String,
             required: true
-        },
-        submitSearchForm: {
-            type: Function,
-            required: true
         }
     },
     computed: {
@@ -138,6 +135,9 @@ export default {
         },
     },
     methods:{
+        search(){
+            this.$emit('search')
+        },
         typedLocation(){
             if(this.input.location){
                 this.input.coords = ''

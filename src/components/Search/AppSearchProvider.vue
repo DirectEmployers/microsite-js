@@ -2,24 +2,24 @@
     <component :is="tag">
         <slot
             :jobs="jobs"
-            :input="input"
-            :filteredInput="getPayload()"
-            :status="status"
-            :filters="filters"
             :sort="sort"
-            :sortedBy="sortedBy"
-            :sortOptions="sortOptions"
+            :input="input"
+            :status="status"
             :source="source"
             :isSolr="isSolr"
-            :isGoogleTalent="isGoogleTalent"
+            :filters="filters"
+            :sortedBy="sortedBy"
             :pagination="pagination"
             :selectPage="selectPage"
+            :sortOptions="sortOptions"
             :removeFilter="removeFilter"
             :featuredJobs="featuredJobs"
+            :filteredInput="getPayload()"
+            :isGoogleTalent="isGoogleTalent"
             :appliedFilters="appliedFilters"
+            :isCommuteSearch="isCommuteSearch"
             :getFilterOptions="getFilterOptions"
             :submitSearchForm="submitSearchForm"
-            :isCommuteSearch="isCommuteSearch"
         />
     </component>
 </template>

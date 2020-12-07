@@ -1,41 +1,28 @@
 <template>
     <Layout>
-        <AppSearchProvider
-            ref="provider"
-            class="my-6"
-            :site-config="$siteConfig"
-        >
-            <template
-                v-slot="{
-                    jobs,
-                    input,
-                    status,
-                    source,
-                    sort,
-                    getFilterOptions,
-                    sortedBy,
-                    filteredInput,
-                    sortOptions,
-                    removeFilter,
-                    pagination,
-                    selectPage,
-                    featuredJobs,
-                    appliedFilters,
-                    submitSearchForm,
-                    isGoogleTalent,
-                    isCommuteSearch,
-                    hasFilter,
-                }"
-            >
-                <AppLoader v-if="status.loading" />
-                <!-- done loading -->
+        <AppSolrSearchProvider :site-config="$siteConfig">
+            <template v-slot="{
+                jobs,
+                featuredJobs,
+                source,
+                status,
+                selectPage,
+                pagination,
+                input,
+                hasJobs,
+                appliedFilters,
+                removeFilter,
+                newSearch,
+                getFilterOptions
+            }">
+                <AppLoader v-if="status.loading"/>
                 <section v-else>
                     <div class="mx-4">
+                        <!-- :isCommuteSearch="isCommuteSearch" -->
                         <AppSearchForm
                             :input="input"
                             :source="source"
-                            :isCommuteSearch="isCommuteSearch"
-                            :submitSearchForm="submitSearchForm"
+                            @search="newSearch"
                         />
                     </div>
                     <section class="flex flex-col lg:flex-row">
@@ -46,14 +33,14 @@
                                 :source="source"
                             />
                             <section v-if="jobs.length">
+                                <AppJobSearchResults
+                                    :jobs="jobs"
+                                    :input="input"
+                                    :source="source"
+                                />
                                 <div class="text-2xl">
                                     {{ pagination.total }} jobs found
                                 </div>
-                                <AppJobSearchResults
-                                    :jobs="jobs"
-                                    :input="filteredInput"
-                                    :source="source"
-                                />
                                 <AppPagination
                                     @pageSelected="selectPage"
                                     :current-page="pagination.page"
@@ -63,9 +50,7 @@
                             </section>
                             <h3
                                 class="font-bold text-lg"
-                                v-else-if="
-                                    jobs.length == 0 && featuredJobs.length == 0
-                                "
+                                v-else-if="!status.error && !hasJobs"
                             >
                                 No results found...
                             </h3>
@@ -94,31 +79,6 @@
                                     @chipClicked="removeFilter"
                                 ></AppChip>
                             </div>
-                            <AppAccordion
-                                :open="true"
-                                v-if="sortOptions.length"
-                            >
-                                <template v-slot:display>
-                                    <h3 class="font-bold text-xl">
-                                        Sorted By
-                                        <strong>
-                                            {{ sortedBy }}
-                                        </strong>
-                                    </h3>
-                                </template>
-                                <ul>
-                                    <li
-                                        @click="sort(option)"
-                                        class="cursor-pointer"
-                                        :key="index"
-                                        v-for="(option, index) in sortOptions"
-                                        name="sort"
-                                    >
-                                        {{ option }}
-                                    </li>
-                                </ul>
-                            </AppAccordion>
-
                             <AppSearchFilter
                                 :key="index"
                                 :input="filteredInput"
@@ -181,36 +141,15 @@
                                     </AppAccordion>
                                 </template>
                             </AppSearchFilter>
-
-                            <div class="container">
-                                <button
-                                    @click="toggleCommuteModal()"
-                                    class="button"
-                                    v-if="isGoogleTalent"
-                                >
-                                    Commute Search
-                                </button>
-                            </div>
-                            <AppModal
-                                id="commute-modal"
-                                v-if="isGoogleTalent"
-                                ref="commute-modal"
-                                title="Commute Search"
-                            >
-                                <AppCommuteSearchForm
-                                    :input="input"
-                                    :submitSearchForm="submitSearchForm"
-                                />
-                            </AppModal>
                         </section>
                     </section>
                 </section>
             </template>
-        </AppSearchProvider>
+        </AppSolrSearchProvider>
     </Layout>
 </template>
 <script>
-import AppSearchProvider from "~/components/Search/AppSearchProvider"
+import AppSolrSearchProvider from "~/components/Search/Providers/AppSolrSearchProvider"
 import {blank} from "~/services/helpers"
 import AppPagination from "~/components/AppPagination"
 import AppAccordion from "~/components/AppAccordion"
@@ -232,8 +171,34 @@ export default {
         AppXIcon,
         AppModal,
         AppChip,
-        AppSearchProvider,
+        AppSolrSearchProvider,
         AppLoader,
+        AppFeaturedJobs,
+        AppSearchForm,
+        AppCommuteSearchForm,
+    },
+    data() {
+        return {
+            AppAccordion,
+        }
+    },
+    metaInfo: {
+        title: "Jobs",
+        meta: [
+            {
+                key: "description",
+                name: "description",
+                content: "only the best jobs",
+            },
+        ],
+    },
+    methods: {
+        toggleCommuteModal() {
+            this.$refs["commute-modal"].toggle()
+        },
+    },
+}
+</script>        AppLoader,
         AppFeaturedJobs,
         AppSearchForm,
         AppCommuteSearchForm,

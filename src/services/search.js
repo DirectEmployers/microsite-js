@@ -50,6 +50,21 @@ export class SearchService {
     }
 }
 
+export function searchService(input, siteConfig){
+    const source = kebabCase(siteConfig.source)
+
+    return api().post(
+        `${source}/search`,
+        {
+            data: input,
+            config: siteConfig,
+        },
+        {
+            timeout: TIMEOUT_THRESHOLD
+        }
+    )
+}
+
 export class CommuteSearchService {
     static async get(input, siteConfig) {
         const source = kebabCase(siteConfig.source)
