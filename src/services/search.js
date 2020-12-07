@@ -26,30 +26,6 @@ export function api() {
     })
 }
 
-export class SearchService {
-    static async get(input, siteConfig) {
-        const source = kebabCase(siteConfig.source)
-
-        try {
-            let response = await api().post(
-                `${source}/search`,
-                {
-                    data: input,
-                    config: siteConfig,
-                },
-                {timeout: TIMEOUT_THRESHOLD}
-            )
-
-            return response
-        } catch (error) {
-            if (Object.prototype.hasOwnProperty.call(error, "response")) {
-                return error
-            }
-            throw new Error(error)
-        }
-    }
-}
-
 export function searchService(input, siteConfig){
     const source = kebabCase(siteConfig.source)
 
@@ -65,28 +41,19 @@ export function searchService(input, siteConfig){
     )
 }
 
-export class CommuteSearchService {
-    static async get(input, siteConfig) {
-        const source = kebabCase(siteConfig.source)
-
-        try {
-            let response = await api().post(
-                `${source}/commute`,
-                {
-                    data: input,
-                    config: siteConfig,
-                },
-                {timeout: TIMEOUT_THRESHOLD}
-            )
-            return response
-        } catch (error) {
-            if (Object.prototype.hasOwnProperty.call(error, "response")) {
-                return error
-            }
-            throw new Error(error)
+export function commuteSearchService(input, siteConfig){
+    return api().post(
+        `google-talent/commute`,
+        {
+            data: input,
+            config: siteConfig,
+        },
+        {
+            timeout: TIMEOUT_THRESHOLD
         }
-    }
+    )
 }
+
 
 export class TitleCompleteService {
     static async get(q, siteConfig) {

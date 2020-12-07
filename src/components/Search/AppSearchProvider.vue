@@ -60,16 +60,16 @@ export default {
 
         return {
             jobs: [],
-            featuredJobs: [],
-            filters: [],
-            pagination: {},
+            meta: {},
             status: {
                 loading: false,
                 error: false,
             },
+            filters: [],
+            pagination: {},
+            featuredJobs: [],
             isCommuteSearch:
                 isCommute && this.siteConfig.source == GOOGLE_TALENT,
-            meta: {},
             input: this.getInputDefaults(),
         }
     },

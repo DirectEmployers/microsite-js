@@ -1,23 +1,24 @@
 <template>
     <Layout>
-        <AppSolrSearchProvider :site-config="$siteConfig">
+        <AppGoogleTalentSearchProvider :site-config="$siteConfig">
             <template v-slot="{
                 jobs,
-                featuredJobs,
+                sort,
+                input,
                 source,
                 status,
+                hasJobs,
+                sortedBy,
+                newSearch,
                 selectPage,
                 pagination,
-                input,
-                hasJobs,
-                appliedFilters,
-                removeFilter,
-                newSearch,
-                getFilterOptions,
-                filteredInput,
-                sort,
                 sortOptions,
-                sortedBy
+                featuredJobs,
+                removeFilter,
+                filteredInput,
+                appliedFilters,
+                getFilterOptions,
+                isCommuteSearch
             }">
                 <AppLoader v-if="status.loading"/>
                 <section v-else>
@@ -173,11 +174,11 @@
                     </section>
                 </section>
             </template>
-        </AppSolrSearchProvider>
+        </AppGoogleTalentSearchProvider>
     </Layout>
 </template>
 <script>
-import AppSolrSearchProvider from "~/components/Search/Providers/AppSolrSearchProvider"
+import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
 import {blank} from "~/services/helpers"
 import AppPagination from "~/components/AppPagination"
 import AppAccordion from "~/components/AppAccordion"
@@ -199,7 +200,7 @@ export default {
         AppXIcon,
         AppModal,
         AppChip,
-        AppSolrSearchProvider,
+        AppGoogleTalentSearchProvider,
         AppLoader,
         AppFeaturedJobs,
         AppSearchForm,
@@ -226,30 +227,5 @@ export default {
         },
     },
 }
-</script>        AppLoader,
-        AppFeaturedJobs,
-        AppSearchForm,
-        AppCommuteSearchForm,
-    },
-    data() {
-        return {
-            AppAccordion,
-        }
-    },
-    metaInfo: {
-        title: "Jobs",
-        meta: [
-            {
-                key: "description",
-                name: "description",
-                content: "only the best jobs",
-            },
-        ],
-    },
-    methods: {
-        toggleCommuteModal() {
-            this.$refs["commute-modal"].toggle()
-        },
-    },
-}
+</script>}
 </script>

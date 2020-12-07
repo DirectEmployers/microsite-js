@@ -26,6 +26,7 @@ export default  {
     },
     data(){
         return {
+            isCommuteSearch: false,
             jobs: [],
             meta: {
                 source: this.siteConfig.source
@@ -41,6 +42,9 @@ export default  {
         }
     },
     computed:{
+        service(){
+            return searchService
+        },
         hasJobs(){
             return this.jobs.length > 0 && this.featuredJobs.length > 0
         },
@@ -101,9 +105,8 @@ export default  {
     methods:{
         search() {
             this.status.loading = true
-            searchService(this.input, this.siteConfig).then(resp=>{
+            this.service(this.input, this.siteConfig).then(resp=>{
                 const data = resp.data || {}
-
                 this.featuredJobs = data.featured_jobs || []
                 this.pagination = data.pagination || {}
                 this.filters = data.filters || {}
@@ -134,7 +137,6 @@ export default  {
             field = field.toLowerCase()
 
             if (!this.meta.sort.options.includes(field)) {
-                console.log(field, this.meta.sort)
                 return
             }
 
@@ -217,3 +219,4 @@ export default  {
 
     }
 }
+
