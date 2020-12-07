@@ -15,6 +15,7 @@
             :featuredJobs="featuredJobs"
             :removeFilter="removeFilter"
             :appliedFilters="appliedFilters"
+            :isCommuteSearch="isCommuteSearch"
             :getFilterOptions="getFilterOptions"
             :filteredInput="getCurrentPayload()"
         >

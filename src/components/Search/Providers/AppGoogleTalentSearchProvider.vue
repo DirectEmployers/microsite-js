@@ -38,7 +38,7 @@ export default {
     mixins: [base],
     data(){
         return {
-            isCommuteSearch : (this.$route.query.coords && this.$route.query.commuteLocation),
+            isCommuteSearch : !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation),
         }
     },
     computed:{
