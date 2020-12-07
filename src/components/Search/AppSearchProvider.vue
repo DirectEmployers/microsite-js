@@ -7,7 +7,6 @@
             :status="status"
             :source="source"
             :isSolr="isSolr"
-            :filters="filters"
             :sortedBy="sortedBy"
             :pagination="pagination"
             :selectPage="selectPage"
@@ -19,7 +18,6 @@
             :appliedFilters="appliedFilters"
             :isCommuteSearch="isCommuteSearch"
             :getFilterOptions="getFilterOptions"
-            :submitSearchForm="submitSearchForm"
         />
     </component>
 </template>

@@ -18,16 +18,17 @@
                 filteredInput,
                 appliedFilters,
                 getFilterOptions,
-                isCommuteSearch
+                isCommuteSearch,
+                isGoogleTalent
             }">
                 <AppLoader v-if="status.loading"/>
                 <section v-else>
                     <div class="mx-4">
-                        <!-- :isCommuteSearch="isCommuteSearch" -->
                         <AppSearchForm
                             :input="input"
                             :source="source"
                             @search="newSearch"
+                            :isCommuteSearch="isCommuteSearch"
                         />
                     </div>
                     <section class="flex flex-col lg:flex-row">
@@ -170,6 +171,26 @@
                                     </AppAccordion>
                                 </template>
                             </AppSearchFilter>
+                            <div class="container">
+                                <button
+                                    @click="toggleCommuteModal()"
+                                    class="button"
+                                    v-if="isGoogleTalent"
+                                >
+                                    Commute Search
+                                </button>
+                            </div>
+                            <AppModal
+                                id="commute-modal"
+                                v-if="isGoogleTalent"
+                                ref="commute-modal"
+                                title="Commute Search"
+                            >
+                                <AppCommuteSearchForm
+                                    :input="input"
+                                    @search="newSearch"
+                                />
+                            </AppModal>
                         </section>
                     </section>
                 </section>

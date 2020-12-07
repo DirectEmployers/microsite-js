@@ -15,8 +15,7 @@
                 />
             </div>
             <div class="search-form__section">
-                <!-- v-if="!isCommuteSearch"-->
-                <div class="search-form__location-autocomplete" >
+                <div class="search-form__location-autocomplete" v-if="!isCommuteSearch">
                     <AppAutocompleteInput
                         ref="location"
                         v-model="input.location"
@@ -32,14 +31,14 @@
                         <AppGeoLocation class="form__input-addon" @getCoords="setLocationFromGeo"/>
                     </div>
                 </div>
-                <!-- <div class="mt-6" v-else>
+                <div class="mt-6" v-else>
                     <AppGoogleLocationAutocomplete
                         :api-key="apiKey"
                         v-model="input.commuteLocation"
                         class="form__input"
                         @locationSelected="googleAutocompleteSelected"
                     />
-                </div> -->
+                </div>
 
                 <div
                     v-if="shouldShowRadiusInput"

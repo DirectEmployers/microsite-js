@@ -1,6 +1,6 @@
 import { blank } from "../../../../services/helpers"
 import {omitBy, clone, merge, startCase } from "lodash"
-import { searchService } from '../../../../services/search'
+import { searchService, SOLR, GOOGLE_TALENT} from '../../../../services/search'
 
 export default  {
     props:{
@@ -44,6 +44,12 @@ export default  {
     computed:{
         service(){
             return searchService
+        },
+        isGoogleTalent() {
+            return this.meta.source == GOOGLE_TALENT
+        },
+        isSolr() {
+            return this.meta.source == SOLR
         },
         hasJobs(){
             return this.jobs.length > 0 && this.featuredJobs.length > 0

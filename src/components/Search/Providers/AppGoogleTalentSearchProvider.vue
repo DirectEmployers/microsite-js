@@ -1,11 +1,11 @@
 <template>
     <component :tag="tag" :is="component" v-bind="$attrs">
-            <!-- :filters="filters" appears unused?? -->
         <slot
             :jobs="jobs"
             :sort="sort"
             :input="input"
             :status="status"
+            :isSolr="isSolr"
             :hasJobs="hasJobs"
             :sortedBy="sortedBy"
             :source="meta.source"
@@ -15,11 +15,11 @@
             :sortOptions="sortOptions"
             :featuredJobs="featuredJobs"
             :removeFilter="removeFilter"
+            :isGoogleTalent="isGoogleTalent"
             :appliedFilters="appliedFilters"
             :isCommuteSearch="isCommuteSearch"
             :getFilterOptions="getFilterOptions"
             :filteredInput="getCurrentPayload()"
-
         >
         </slot>
     </component>
@@ -50,6 +50,32 @@ export default {
                 return AppSolrSearchProvider
             }
             return this.tag
+        },
+        appliedFilters(){
+            let filters = []
+            let added = []
+            let input = this.$route.query
+            this.configFilters.forEach(filter => {
+                if (
+                    !blank(input[filter.name]) &&
+                    !added.includes(filter.name)
+                ) {
+                    filters.push({
+                        display: input[filter.name],
+                        parameter: filter.name,
+                    })
+                    added.push(filter.name)
+                }
+            })
+
+            if (this.isCommuteSearch) {
+                let commuteLocation = input.commuteLocation
+                filters.push({
+                    display: `Commute:${commuteLocation}`,
+                    parameter: "commuteLocation",
+                })
+            }
+            return filters
         }
     },
     methods: {
