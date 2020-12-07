@@ -13,7 +13,11 @@
                 appliedFilters,
                 removeFilter,
                 newSearch,
-                getFilterOptions
+                getFilterOptions,
+                filteredInput,
+                sort,
+                sortOptions,
+                sortedBy
             }">
                 <AppLoader v-if="status.loading"/>
                 <section v-else>
@@ -79,6 +83,30 @@
                                     @chipClicked="removeFilter"
                                 ></AppChip>
                             </div>
+                            <AppAccordion
+                                :open="true"
+                                v-if="sortOptions.length"
+                            >
+                                <template v-slot:display>
+                                    <h3 class="font-bold text-xl">
+                                        Sorted By
+                                        <strong>
+                                            {{ sortedBy }}
+                                        </strong>
+                                    </h3>
+                                </template>
+                                <ul>
+                                    <li
+                                        @click="sort(option)"
+                                        class="cursor-pointer"
+                                        :key="index"
+                                        v-for="(option, index) in sortOptions"
+                                        name="sort"
+                                    >
+                                        {{ option }}
+                                    </li>
+                                </ul>
+                            </AppAccordion>
                             <AppSearchFilter
                                 :key="index"
                                 :input="filteredInput"
