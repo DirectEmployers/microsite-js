@@ -1,5 +1,5 @@
-import { blank } from "../../../../services/helpers"
-import {omitBy, clone, merge, startCase } from "lodash"
+import { blank, displayLocationFromSlug } from "../../../../services/helpers"
+import {omitBy, clone, cloneDeep, merge, startCase } from "lodash"
 import { searchService, SOLR, GOOGLE_TALENT} from '../../../../services/search'
 
 export default  {
@@ -87,13 +87,24 @@ export default  {
     },
     created(){
 
+        this.setInputFromParams()
         this.setInputFromQuery()
-
         if(this.searchOnLoad) {
             this.search()
         }
     },
     methods:{
+        setInputFromParams() {
+            let params = { ... this.$route.params }
+            Object.entries(params).map(([key, value]) => {
+                this.input[key] = value
+            })
+            console.log(this.input)
+
+            if(!blank(this.$route.params.location)){
+                this.input.location =  displayLocationFromSlug(this.input.location)
+            }
+        },
         removeInput(name){
             if (name == "*") {
                 this.isCommuteSearch = false
@@ -113,7 +124,7 @@ export default  {
         getAppliedFiltersBase(){
             let filters = []
             let added = []
-            let input = this.$route.query
+            const input = this.$route.query
             this.configFilters.forEach(filter => {
                 if (
                     !blank(input[filter.name]) &&
@@ -195,7 +206,7 @@ export default  {
         },
 
         setInputFromQuery() {
-            this.input = merge(this.getInputDefaults(), this.$route.query)
+            this.input = merge(this.getInputDefaults(), this.input, this.$route.query)
         },
 
         getInputDefaults() {
