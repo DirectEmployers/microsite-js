@@ -123,7 +123,7 @@ export default  {
         getAppliedFiltersBase(){
             let filters = []
             let added = []
-            const input = this.$route.query
+            const input = this.input
             this.configFilters.forEach(filter => {
                 if (
                     !blank(input[filter.name]) &&

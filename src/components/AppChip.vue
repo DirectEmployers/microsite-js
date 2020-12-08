@@ -1,5 +1,5 @@
 <template>
-    <span class="chip" tabindex="0" @click="clickedChip">
+    <span class="chip" tabindex="0" @click="clickedChip" v-once>
         <slot>
             {{ text }}
         </slot>
