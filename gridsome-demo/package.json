@@ -1,0 +1,13 @@
+{
+  "name": "demo",
+  "private": true,
+  "scripts": {
+    "build": "gridsome build",
+    "develop": "gridsome develop",
+    "explore": "gridsome explore"
+  },
+  "dependencies": {
+    "de-components": "file:../de-components",
+    "gridsome": "^0.7.0"
+  }
+}
