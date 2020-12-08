@@ -93,7 +93,6 @@
 
 <script>
 import AppAutocompleteInput from "~/components/Form/AppAutocompleteInput"
-import AppSearchProvider from "~/components/Search/AppSearchProvider"
 import AppGeoLocation from "~/components/Search/AppGeoLocation"
 import AppGoogleLocationAutocomplete from "~/components/Search/AppGoogleLocationAutocomplete"
 import {

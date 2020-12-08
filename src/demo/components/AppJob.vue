@@ -48,11 +48,8 @@
 
                 <div
                     class="min-h-screen max-w-screen-md mb-8 mx-4 md:mx-auto job-details-content"
+                    v-html="htmlDescription"
                 >
-                    <AppJobDescription
-                        :html="htmlDescription"
-                        :lookupClass="'job-description-amp-qualifications'"
-                    ></AppJobDescription>
                 </div>
 
                 <AppSimilarJobs
@@ -76,7 +73,6 @@
 </style>
 <script>
 import AppJobWrapper from "~/components/AppJob"
-import AppJobDescription from "~/components/AppJobDescription"
 import AppSimilarJobs from "~/components/AppSimilarJobs"
 import {blank} from "~/services/helpers"
 import buildUrl from "axios/lib/helpers/buildURL"
@@ -99,7 +95,6 @@ export default {
         },
     },
     components: {
-        AppJobDescription,
         AppJobWrapper,
         AppSimilarJobs,
     },

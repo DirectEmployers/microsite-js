@@ -3,11 +3,12 @@
     <div class="bg-gray-100 mt-6 p-2">
         <div class="container px-4 mx-auto mt-6 font-semibold">
             <div class="mt-6 search-form">
-              <AppSearchProvider
-                   :site-config="$siteConfig"
+                <AppGoogleTalentSearchProvider
+                    :site-config="$siteConfig"
+                    :search-on-load="false"
                     v-slot="{
                         input,
-                        submitSearchForm,
+                        newSearch,
                         source
                     }"
                 >
@@ -15,10 +16,10 @@
                         <AppSearchForm
                             :input="input"
                             :source="source"
-                            :submitSearchForm="submitSearchForm"
+                            @search="newSearch"
                         />
                     </div>
-                </AppSearchProvider>
+                </AppGoogleTalentSearchProvider>
             </div>
         </div>
     </div>
@@ -44,12 +45,12 @@
 </template>
 <script>
 import AppSearchForm from "~/demo/components/AppSearchForm"
-import AppSearchProvider from "~/components/Search/AppSearchProvider"
+import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
 
 export default {
     components: {
         AppSearchForm,
-        AppSearchProvider,
+        AppGoogleTalentSearchProvider,
     }
 }
 </script>

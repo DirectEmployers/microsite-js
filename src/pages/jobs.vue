@@ -17,9 +17,9 @@
                 removeFilter,
                 filteredInput,
                 appliedFilters,
-                getFilterOptions,
+                isGoogleTalent,
                 isCommuteSearch,
-                isGoogleTalent
+                getFilterOptions,
             }">
                 <AppLoader v-if="status.loading"/>
                 <section v-else>

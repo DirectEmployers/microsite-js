@@ -1,5 +1,5 @@
 <template>
-    <component :tag="tag" :is="component" v-bind="$attrs">
+    <component :is="component" v-bind="$props">
         <slot
             :jobs="jobs"
             :sort="sort"
@@ -52,25 +52,10 @@ export default {
             return this.tag
         },
         appliedFilters(){
-            let filters = []
-            let added = []
-            let input = this.$route.query
-
-            this.configFilters.forEach(filter => {
-                if (
-                    !blank(input[filter.name]) &&
-                    !added.includes(filter.name)
-                ) {
-                    filters.push({
-                        display: input[filter.name],
-                        parameter: filter.name,
-                    })
-                    added.push(filter.name)
-                }
-            })
+            let filters = this.getAppliedFiltersBase()
 
             if (this.isCommuteSearch) {
-                let commuteLocation = input.commuteLocation
+                let commuteLocation = this.$route.query.commuteLocation
                 filters.push({
                     display: `Commute:${commuteLocation}`,
                     parameter: "commuteLocation",
@@ -88,21 +73,8 @@ export default {
                 roadTraffic: "TRAFFIC_FREE",
             }
         },
-        getInputDefaults() {
-            let defaultInput = clone(this.defaultInput)
-            return merge(
-                {
-                    q: "",
-                    r: "",
-                    moc: "",
-                    location: "",
-                    coords: null,
-                    page: 1,
-                    sort: "relevance",
-                },
-                this.getCommuteDefaults(),
-                defaultInput
-            )
+        inputDefaults() {
+            return this.getCommuteDefaults()
         },
         getCurrentPayload() {
             let exclude = []
@@ -128,25 +100,13 @@ export default {
         },
 
         removeFilter(name) {
-            // TODO -removing this function?
-            if (name == "*") {
-                this.isCommuteSearch = false
-                return this.pushPayload({})
-            }
-
-            if(!Array.isArray(name)){
-                name = [name]
-            }
-
-            const defaultInput = this.getInputDefaults()
-
-            name.forEach(key => {
-                this.input[key] = defaultInput[name] || ""
-            })
+            this.removeInput(name)
 
             if (["location", "commuteLocation"].includes(name)) {
                 this.input.coords = ""
             }
+
+            const defaultInput = this.getCommuteDefaults()
 
             if (name.includes('commuteLocation')) {
                 this.isCommuteSearch = false

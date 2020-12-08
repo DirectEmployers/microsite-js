@@ -28,6 +28,11 @@
 import base from './mixins/provider'
 
 export default{
-    mixins: [base]
+    mixins: [base],
+    methods: {
+        inputDefaults(){
+            return {}
+        }
+    }
 }
 </script>

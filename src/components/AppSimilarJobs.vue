@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { SearchService } from "../services/search"
+import { searchService } from "../services/search"
 import AppJob from './AppJob'
 export default {
     data() {
@@ -78,29 +78,30 @@ export default {
     },
     methods: {
 
-        async getJobs() {
-            const response = await SearchService.get(
+        getJobs() {
+            searchService(
                 {
                     num_items: 10,
                     q: this.title,
                     location: this.location,
                 },
                 this.siteConfig
-            )
+            ).then(response=>{
 
-            const data = response.data
+                const data = response.data
 
-            const { jobs, meta } = data
+                const { jobs, meta } = data
 
-            this.meta = meta
+                this.meta = meta
 
-            this.similarJobs = jobs
+                this.similarJobs = jobs
 
-            if(this.guid){
-                this.similarJobs = this.similarJobs.filter((job)=>{
-                    return job.guid != this.guid
-                })
-            }
+                if(this.guid){
+                    this.similarJobs = this.similarJobs.filter((job)=>{
+                        return job.guid != this.guid
+                    })
+                }
+            })
 
         }
     },

@@ -75,6 +75,42 @@ export default  {
             return options.map(o => startCase(o))
         },
         appliedFilters() {
+            return this.getAppliedFiltersBase()
+        },
+    },
+    watch: {
+        //any time query string changes, update component input and search.
+        "$route.query"() {
+            this.setInputFromQuery()
+            this.search()
+        },
+    },
+    created(){
+
+        this.setInputFromQuery()
+
+        if(this.searchOnLoad) {
+            this.search()
+        }
+    },
+    methods:{
+        removeInput(name){
+            if (name == "*") {
+                this.isCommuteSearch = false
+                return this.pushPayload({})
+            }
+
+            if(!Array.isArray(name)){
+                name = [name]
+            }
+
+            const defaultInput = this.getInputDefaults()
+
+            name.forEach(key => {
+                this.input[key] = defaultInput[name] || ""
+            })
+        },
+        getAppliedFiltersBase(){
             let filters = []
             let added = []
             let input = this.$route.query
@@ -90,25 +126,8 @@ export default  {
                     added.push(filter.name)
                 }
             })
-
             return filters
         },
-    },
-    watch: {
-        //any time query string changes, update component input and search.
-        "$route.query"() {
-            this.setInputFromQuery()
-            this.search()
-        },
-    },
-    created(){
-        this.setInputFromQuery()
-
-        if(this.searchOnLoad) {
-            this.search()
-        }
-    },
-    methods:{
         search() {
             this.status.loading = true
             this.service(this.input, this.siteConfig).then(resp=>{
@@ -191,30 +210,12 @@ export default  {
                     page: 1,
                     sort: "relevance",
                 },
+                this.inputDefaults(),
                 defaultInput
             )
         },
         removeFilter(name) {
-
-            if (name == "*") {
-                return this.pushPayload({})
-            }
-
-            if(!Array.isArray(name)){
-                name = [name]
-            }
-
-            const defaultInput = this.getInputDefaults()
-
-            name.forEach(key => {
-                this.input[key] = defaultInput[name] || ""
-            })
-
-            if (["location"].includes(name)) {
-                this.input.coords = ""
-            }
-
-
+            this.removeInput(name)
             this.newSearch()
         },
 
