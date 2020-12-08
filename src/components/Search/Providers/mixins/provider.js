@@ -99,7 +99,6 @@ export default  {
             Object.entries(params).map(([key, value]) => {
                 this.input[key] = value
             })
-            console.log(this.input)
 
             if(!blank(this.$route.params.location)){
                 this.input.location =  displayLocationFromSlug(this.input.location)
