@@ -55,6 +55,7 @@ export default {
             let filters = []
             let added = []
             let input = this.$route.query
+
             this.configFilters.forEach(filter => {
                 if (
                     !blank(input[filter.name]) &&
