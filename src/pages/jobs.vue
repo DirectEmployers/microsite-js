@@ -8,23 +8,23 @@
             <template
                 v-slot="{
                     jobs,
+                    sort,
                     input,
                     status,
                     source,
-                    sort,
-                    getFilterOptions,
                     sortedBy,
-                    filteredInput,
-                    sortOptions,
-                    removeFilter,
+                    hasFilter,
                     pagination,
                     selectPage,
+                    sortOptions,
+                    removeFilter,
                     featuredJobs,
+                    filteredInput,
                     appliedFilters,
-                    submitSearchForm,
                     isGoogleTalent,
                     isCommuteSearch,
-                    hasFilter,
+                    getFilterOptions,
+                    submitSearchForm,
                 }"
             >
                 <AppLoader v-if="status.loading" />
@@ -54,6 +54,7 @@
                                     :input="filteredInput"
                                     :source="source"
                                 />
+                                <AppButtonPagination />
                                 <AppPagination
                                     @pageSelected="selectPage"
                                     :current-page="pagination.page"
@@ -210,32 +211,34 @@
     </Layout>
 </template>
 <script>
-import AppSearchProvider from "~/components/Search/AppSearchProvider"
 import {blank} from "~/services/helpers"
-import AppPagination from "~/components/AppPagination"
-import AppAccordion from "~/components/AppAccordion"
-import AppModal from "~/components/AppModal"
-import AppSearchForm from "~/demo/components/AppSearchForm"
-import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
-import AppLoader from "~/demo/components/AppLoader"
-import AppSearchFilter from "~/components/Search/AppSearchFilter"
 import AppChip from "~/components/AppChip"
-import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
-import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
+import AppModal from "~/components/AppModal"
 import AppXIcon from "~/components/Icons/AppXIcon"
+import AppLoader from "~/demo/components/AppLoader"
+import AppAccordion from "~/components/AppAccordion"
+import AppPagination from "~/components/AppPagination"
+import AppSearchForm from "~/demo/components/AppSearchForm"
+import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
+import AppSearchFilter from "~/components/Search/AppSearchFilter"
+import AppButtonPagination from "~/components/AppButtonPagination"
+import AppSearchProvider from "~/components/Search/AppSearchProvider"
+import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
+import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 export default {
     components: {
-        AppAccordion,
-        AppPagination,
-        AppSearchFilter,
-        AppJobSearchResults,
+        AppChip,
         AppXIcon,
         AppModal,
-        AppChip,
-        AppSearchProvider,
         AppLoader,
-        AppFeaturedJobs,
+        AppAccordion,
+        AppPagination,
         AppSearchForm,
+        AppSearchFilter,
+        AppFeaturedJobs,
+        AppSearchProvider,
+        AppButtonPagination,
+        AppJobSearchResults,
         AppCommuteSearchForm,
     },
     data() {

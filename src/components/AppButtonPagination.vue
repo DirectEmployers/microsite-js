@@ -22,9 +22,13 @@ export default {
             type: Number,
         }
     },
+    created() {
+        this.jobList = this.jobs
+    },
     data() {
         return {
-            current : this.currentPage
+            current : this.currentPage,
+            jobList : this.jobList
         }
     },
     computed: {
@@ -33,8 +37,10 @@ export default {
 
             return next <= this.totalPages ? next : false
         },
-        jobList() {
-            return this.jobs
+    },
+    methods: {
+        loadMore() {
+            return null
         }
     }
 }
