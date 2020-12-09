@@ -1,5 +1,5 @@
 <template>
-    <component :is="component" v-bind="$props">
+    <component :is="tag" v-bind="$props">
         <slot
             :jobs="jobs"
             :sort="sort"
@@ -44,12 +44,6 @@ export default {
     computed:{
         service(){
             return this.isCommuteSearch ? commuteSearchService : searchService
-        },
-        component(){
-            if(this.meta.source == SOLR){
-                return AppSolrSearchProvider
-            }
-            return this.tag
         },
         appliedFilters(){
             let filters = this.getAppliedFiltersBase()

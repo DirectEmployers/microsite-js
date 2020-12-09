@@ -1,9 +1,10 @@
 <template>
     <Layout>
-        <AppGoogleTalentSearchProvider
+        <component :is="provider"
             class="mt-6"
             :search-on-load="false"
             :site-config="$siteConfig"
+            @searchCompleted="setProvider"
             v-slot="{
                 input,
                 source,
@@ -17,16 +18,25 @@
                     @search="newSearch"
                 />
             </div>
-        </AppGoogleTalentSearchProvider>
+        </component>
     </Layout>
 </template>
 <script>
-import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
 import AppSearchForm from "~/demo/components/AppSearchForm"
+import {getProvider} from "~/services/search"
 export default {
     components: {
-        AppGoogleTalentSearchProvider,
         AppSearchForm,
+    },
+    data () {
+        return {
+            provider: getProvider(this.$siteConfig.source)
+        }
+    },
+    methods:{
+        setProvider(source){
+            this.provider = getProvider(source)
+        }
     },
     metaInfo: {
         title: "Home",

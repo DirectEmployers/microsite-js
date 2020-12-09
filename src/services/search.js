@@ -1,6 +1,8 @@
 import axios from "axios"
 import {kebabCase} from "lodash"
 import { isDevelopment } from "./helpers"
+import AppSolrSearchProvider from '../components/Search/Providers/AppSolrSearchProvider'
+import AppGoogleTalentSearchProvider from '../components/Search/Providers/AppGoogleTalentSearchProvider'
 
 export const SOLR = "solr"
 export const GOOGLE_TALENT = "google_talent"
@@ -24,6 +26,10 @@ export function api() {
             "Content-Type": "application/json",
         },
     })
+}
+
+export function getProvider(source){
+    return source == GOOGLE_TALENT ? AppGoogleTalentSearchProvider: AppSolrSearchProvider
 }
 
 export function searchService(input, siteConfig){

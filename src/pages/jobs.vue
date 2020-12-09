@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <AppGoogleTalentSearchProvider :site-config="$siteConfig">
+        <component :is="provider" :site-config="$siteConfig" @searchCompleted="setProvider">
             <template v-slot="{
                 jobs,
                 sort,
@@ -195,12 +195,12 @@
                     </section>
                 </section>
             </template>
-        </AppGoogleTalentSearchProvider>
+        </component>
     </Layout>
 </template>
 <script>
-import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
 import {blank} from "~/services/helpers"
+import {getProvider} from "~/services/search"
 import AppPagination from "~/components/AppPagination"
 import AppAccordion from "~/components/AppAccordion"
 import AppModal from "~/components/AppModal"
@@ -221,7 +221,6 @@ export default {
         AppXIcon,
         AppModal,
         AppChip,
-        AppGoogleTalentSearchProvider,
         AppLoader,
         AppFeaturedJobs,
         AppSearchForm,
@@ -230,8 +229,10 @@ export default {
     data() {
         return {
             AppAccordion,
+            provider: getProvider(this.$siteConfig.source)
         }
     },
+
     metaInfo: {
         title: "Jobs",
         meta: [
@@ -243,6 +244,9 @@ export default {
         ],
     },
     methods: {
+        setProvider(source){
+            this.provider = getProvider(source)
+        },
         toggleCommuteModal() {
             this.$refs["commute-modal"].toggle()
         },

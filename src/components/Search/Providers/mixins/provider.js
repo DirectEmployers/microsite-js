@@ -147,6 +147,7 @@ export default  {
                 this.filters = data.filters || {}
                 this.jobs = data.jobs || []
                 this.meta = data.meta || {'source': 'solr'} //prevents sites from erroring when unable to connect to api?
+                this.$emit('searchCompleted', this.meta.source)
             }).catch( err => {
                 this.status.error = err
             }).finally(() =>{
