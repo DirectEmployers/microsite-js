@@ -59,7 +59,7 @@ export default {
         }
     },
     methods: {
-        getCommuteDefaults(){
+        inputDefaults() {
             return {
                 commuteMethod: "DRIVING",
                 travelDuration: "3600",
@@ -67,14 +67,11 @@ export default {
                 roadTraffic: "TRAFFIC_FREE",
             }
         },
-        inputDefaults() {
-            return this.getCommuteDefaults()
-        },
         getCurrentPayload() {
             let exclude = []
 
             if (!this.isCommuteSearch) {
-                exclude = Object.keys(this.getCommuteDefaults())
+                exclude = Object.keys(this.inputDefaults())
             }
 
             return omitBy(clone(this.input), (v, k) => {
@@ -100,11 +97,11 @@ export default {
                 this.input.coords = ""
             }
 
-            const defaultInput = this.getCommuteDefaults()
+            const defaultInput = this.inputDefaults()
 
             if (name.includes('commuteLocation')) {
                 this.isCommuteSearch = false
-                Object.keys(this.getCommuteDefaults()).forEach(key => {
+                Object.keys(this.inputDefaults()).forEach(key => {
                     this.input[key] = defaultInput[name] || ""
                 })
             }
