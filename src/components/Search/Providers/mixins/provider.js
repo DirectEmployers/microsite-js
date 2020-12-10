@@ -26,7 +26,6 @@ export default  {
     },
     data(){
         return {
-            isCommuteSearch: false,
             jobs: [],
             meta: {
                 source: this.siteConfig.source
@@ -38,13 +37,14 @@ export default  {
             filters: [],
             pagination: {},
             featuredJobs: [],
+            appliedFilters: [],
+            isCommuteSearch: false,
             input: this.getInputDefaults(),
-            appliedFilters: []
         }
     },
-    mounted: function () {
-        this.appliedFilters = this.appliedFilters
-    },
+    // mounted: function () {
+    //     this.appliedFilters = this.getAppliedFiltersBase()
+    // },
     computed:{
         service(){
             return searchService
@@ -56,7 +56,7 @@ export default  {
             return this.meta.source == SOLR
         },
         hasJobs(){
-            return this.jobs.length > 0 && this.featuredJobs.length > 0
+            return this.jobs.length > 0 || this.featuredJobs.length > 0
         },
         configFilters() {
             return this.siteConfig.filters || []
@@ -82,30 +82,43 @@ export default  {
     watch: {
         //any time query string changes, update component input and search.
         "$route.query"() {
-            this.setInputFromQuery()
+            this.calculateInputFrom(this.$route.query)
             this.search()
         },
     },
     created(){
-        this.setInputFromParams()
-        this.setInputFromQuery()
+        this.input = this.calculateInputFrom({
+            ...this.$route.query,
+            ...this.$route.params
+        })
+
+        if(!blank(this.$route.params.location)){
+            input.location =  displayLocationFromSlug(input.location)
+        }
+
         if(this.searchOnLoad) {
             this.search()
         }
     },
     methods:{
-        updateFilters(){
-            this.appliedFilters = this.getAppliedFiltersBase()
+        applyFilters(){
+            return []
         },
-        setInputFromParams() {
-            let params = { ... this.$route.params }
+
+        calculateInputFrom(from = {}) {
+            let input = {}
+
+            let params = merge(
+                this.getInputDefaults(),
+                this.getCurrentPayload(),
+                from
+            )
+
             Object.entries(params).map(([key, value]) => {
-                this.input[key] = value
+                input[key] = value
             })
 
-            if(!blank(this.$route.params.location)){
-                this.input.location =  displayLocationFromSlug(this.input.location)
-            }
+            return input
         },
         removeInput(name){
             const defaultInput = this.getInputDefaults()
@@ -124,10 +137,11 @@ export default  {
                 this.input[key] = defaultInput[name] || ""
             })
         },
-        getAppliedFiltersBase(){
+        getAppliedConfigFilters(){
             let filters = []
             let added = []
             const input = this.input
+            console.log(input)
             this.configFilters.forEach(filter => {
                 if (
                     !blank(input[filter.name]) &&
@@ -150,20 +164,22 @@ export default  {
                 this.pagination = data.pagination || {}
                 this.filters = data.filters || {}
                 this.jobs = data.jobs || []
-                this.meta = data.meta || {'source': 'solr'} //prevents sites from erroring when unable to connect to api?
+                this.meta = data.meta || {'source': SOLR} //prevents sites from erroring when unable to connect to api?
+                this.appliedFilters = this.getAppliedConfigFilters().concat(this.applyFilters())
+                console.log(this.appliedFilters, this.getAppliedConfigFilters(), this.applyFilters())
+
                 this.$emit('searchCompleted', this.meta.source)
             }).catch( err => {
                 this.status.error = err
             }).finally(() =>{
                 this.status.loading = false
             })
-            this.updateFilters()
+
         },
         getFilterOptions(filter) {
             if (!blank(filter.options)) {
                 return filter.options
             }
-
             //all filter results are keyed by "key"
             let key = filter.key
             //or param name if no key is present
@@ -180,22 +196,18 @@ export default  {
             if (!this.meta.sort.options.includes(field)) {
                 return
             }
-
             this.input.sort = field
-
             this.newSearch()
 
         },
 
         selectPage(page) {
             this.input["page"] = page
-
             this.pushPayload()
         },
 
         pushPayload(payload = null) {
             payload = payload === null ? this.getCurrentPayload() : payload
-
             this.$router
                 .push({
                     path: "/jobs",
@@ -203,17 +215,11 @@ export default  {
                 })
                 .catch(err => {})
         },
-
         getCurrentPayload() {
             return omitBy(clone(this.input), (v, k) => {
                 return blank(v)
             })
         },
-
-        setInputFromQuery() {
-            this.input = merge(this.getInputDefaults(), this.input, this.$route.query)
-        },
-
         getInputDefaults() {
             let defaultInput = clone(this.defaultInput)
             return merge(
@@ -234,7 +240,6 @@ export default  {
             this.removeInput(name)
             this.newSearch()
         },
-
         newSearch() {
             this.input.page = 1
             this.pushPayload()

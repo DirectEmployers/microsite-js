@@ -12,11 +12,9 @@
                 newSearch,
                 selectPage,
                 pagination,
-                filterList,
                 sortOptions,
                 featuredJobs,
                 removeFilter,
-                updateFilters,
                 filteredInput,
                 appliedFilters,
                 isGoogleTalent,
@@ -30,13 +28,12 @@
                             :input="input"
                             :source="source"
                             @search="newSearch"
-                            @update="updateFilters"
                             :isCommuteSearch="isCommuteSearch"
                         />
                     </div>
                     <section class="flex flex-col lg:flex-row">
                         <div class="mx-4 w-full lg:w-1/2">
-                            <h3 v-if="status.error">Unable to load jobs...</h3>
+                            <h3 v-if="status.error && !hasJobs">Unable to load jobs...</h3>
                             <AppFeaturedJobs
                                 :featured-jobs="featuredJobs"
                                 :source="source"
@@ -65,7 +62,7 @@
                             </h3>
                         </div>
                         <section class="lg:ml-4 w-full lg:w-2/5">
-
+                            {{ appliedFilters }}
                             <div v-if="appliedFilters.length">
                                 <h3 class="font-bold text-xl">
                                     Current Search Criteria

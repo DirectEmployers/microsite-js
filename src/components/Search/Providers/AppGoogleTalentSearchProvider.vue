@@ -1,5 +1,5 @@
 <template>
-    <component :is="tag" v-bind="$props">
+    <component :is="tag">
         <slot
             :jobs="jobs"
             :sort="sort"
@@ -15,7 +15,6 @@
             :sortOptions="sortOptions"
             :featuredJobs="featuredJobs"
             :removeFilter="removeFilter"
-            :updateFilters="updateFilters"
             :isGoogleTalent="isGoogleTalent"
             :appliedFilters="appliedFilters"
             :isCommuteSearch="isCommuteSearch"
@@ -42,13 +41,15 @@ export default {
             isCommuteSearch : !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation),
         }
     },
+
     computed:{
         service(){
             return this.isCommuteSearch ? commuteSearchService : searchService
         },
-        appliedFilters(){
-            let filters = this.getAppliedFiltersBase()
-
+    },
+    methods: {
+        applyFilters(){
+            let filters = []
             if (this.isCommuteSearch) {
                 let commuteLocation = this.$route.query.commuteLocation
                 filters.push({
@@ -57,9 +58,7 @@ export default {
                 })
             }
             return filters
-        }
-    },
-    methods: {
+        },
         inputDefaults() {
             return {
                 commuteMethod: "DRIVING",
@@ -88,7 +87,7 @@ export default {
                 this.input.location = ""
             }
 
-            this.pushPayload()
+            this.search()
         },
 
         removeFilter(name) {

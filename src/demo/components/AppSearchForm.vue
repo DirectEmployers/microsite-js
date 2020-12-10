@@ -135,7 +135,6 @@ export default {
     methods:{
         search(){
             this.$emit('search')
-            this.$emit('update')
         },
         typedLocation(){
             if(this.input.location){
