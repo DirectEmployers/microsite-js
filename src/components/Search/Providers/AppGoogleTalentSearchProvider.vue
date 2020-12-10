@@ -53,7 +53,7 @@ export default {
                 let commuteLocation = this.$route.query.commuteLocation
                 filters.push({
                     display: `Commute:${commuteLocation}`,
-                    parameter: "commuteLocation",
+                    parameter: Object.keys(this.inputDefaults()).concat(['coords']),
                 })
             }
             return filters
@@ -80,6 +80,13 @@ export default {
 
         queryChanged(){
             this.isCommuteSearch = this.checkIsCommuteSearch()
+        },
+        newSearch() {
+            this.input.page = 1
+            if(this.input.coords && this.input.commuteLocation){
+                this.isCommuteSearch = true
+            }
+            this.pushPayload()
         },
 
     },
