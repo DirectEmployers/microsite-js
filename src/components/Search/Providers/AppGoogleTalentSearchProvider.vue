@@ -78,8 +78,9 @@ export default {
         },
         newSearch() {
             this.input.page = 1
-            if(this.input.coords && this.input.commuteLocation){
-                this.isCommuteSearch = true
+            this.isCommuteSearch = this.input.coords && this.input.commuteLocation
+            if(this.isCommuteSearch){
+                this.input.location = ""
             }
             this.pushPayload()
         },
