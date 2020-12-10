@@ -77,13 +77,13 @@ export default  {
     watch: {
         //any time query string changes, update component input and search.
         "$route.query"() {
-            this.input = this.calculateInputFrom(this.$route.query)
+            this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
             this.search()
         },
     },
     created(){
-        this.input = this.calculateInputFrom({
+        this.input = this.mergeWithDefaultInput({
             ...this.$route.query,
             ...this.$route.params
         })
@@ -101,21 +101,18 @@ export default  {
         applyFilters(){
             return []
         },
-        calculateInputFrom(from = {}) {
-            return merge(
-                this.getInputDefaults(),
-                this.getCurrentPayload(),
-                from
-            )
+        mergeWithDefaultInput(from = {}) {
+            return {
+                ...this.getInputDefaults(),
+                ...from
+            }
         },
         removeFilter(name){
             const defaultInput = this.getInputDefaults()
 
             if (name == "*") {
-                console.log("CLEAR ALL,PUSH")
                 return this.pushPayload({})
             }
-
             if(!Array.isArray(name)){
                 name = [name]
             }
@@ -136,7 +133,6 @@ export default  {
                     !blank(input[filter.name]) &&
                     !added.includes(filter.name)
                 ) {
-
                     filters.push({
                         display: input[filter.name],
                         parameter: filter.name,
@@ -181,7 +177,6 @@ export default  {
 
         pushPayload(payload = null) {
             payload = payload === null ? this.getCurrentPayload() : payload
-            console.log(payload)
             this.$router
                 .push({
                     path: "/jobs",
@@ -202,8 +197,8 @@ export default  {
         },
         getInputDefaults() {
             let defaultInput = clone(this.defaultInput)
-            return merge(
-                {
+            return {
+                ...{
                     q: "",
                     r: "",
                     location: "",
@@ -211,9 +206,9 @@ export default  {
                     page: 1,
                     sort: "relevance",
                 },
-                this.inputDefaults(),
-                defaultInput
-            )
+                ...this.inputDefaults(),
+                ...defaultInput
+            }
         },
         newSearch() {
             this.input.page = 1
