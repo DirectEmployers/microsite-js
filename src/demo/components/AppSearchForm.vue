@@ -148,7 +148,7 @@ export default {
         googleAutocompleteSelected(location, coords){
             this.input.commuteLocation = location
             this.input.coords = coords
-            this.submitSearchForm()
+            this.search()
         }
     },
     data: () => ({

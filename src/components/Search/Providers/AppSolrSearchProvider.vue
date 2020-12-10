@@ -5,7 +5,6 @@
             :sort="sort"
             :input="input"
             :status="status"
-            :isSolr="isSolr"
             :hasJobs="hasJobs"
             :sortedBy="sortedBy"
             :source="meta.source"

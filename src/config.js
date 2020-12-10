@@ -1,6 +1,5 @@
 const config =  {
-    // buids: [50611, 50613],
-    buids:[19424],
+    buids: [19424],
     source: "google_talent",
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
     tenant_uuid: process.env.GRIDSOME_GOOGLE_TALENT_TENANT,

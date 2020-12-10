@@ -1,6 +1,6 @@
-import { blank, displayLocationFromSlug } from "../../../../services/helpers"
-import {omitBy, clone, cloneDeep, merge, startCase } from "lodash"
-import { searchService, SOLR, GOOGLE_TALENT} from '../../../../services/search'
+import {blank, displayLocationFromSlug} from "../../../../services/helpers"
+import {omitBy, clone, merge, startCase} from "lodash"
+import {searchService, SOLR, GOOGLE_TALENT} from '../../../../services/search'
 
 export default  {
     props:{
@@ -24,7 +24,7 @@ export default  {
             default: () => { return {} },
         },
     },
-    data(){
+    data() {
         return {
             jobs: [],
             meta: {
@@ -42,20 +42,18 @@ export default  {
             input: this.getInputDefaults(),
         }
     },
-    // mounted: function () {
-    //     this.appliedFilters = this.getAppliedFiltersBase()
-    // },
     computed:{
-        service(){
+        service() {
             return searchService
         },
         isGoogleTalent() {
             return this.meta.source == GOOGLE_TALENT
         },
+        //unused
         isSolr() {
             return this.meta.source == SOLR
         },
-        hasJobs(){
+        hasJobs() {
             return this.jobs.length > 0 || this.featuredJobs.length > 0
         },
         configFilters() {
@@ -67,7 +65,7 @@ export default  {
             if (blank(sortMeta)) {
                 return sort
             }
-            sort.sortField = (field)=>{
+            sort.sortField = (field) => {
                 this.input.sort = field.toLowerCase()
                 this.newSearch()
             }
@@ -80,6 +78,7 @@ export default  {
         //any time query string changes, update component input and search.
         "$route.query"() {
             this.input = this.calculateInputFrom(this.$route.query)
+            this.queryChanged()
             this.search()
         },
     },
@@ -98,29 +97,22 @@ export default  {
         }
     },
     methods:{
+        queryChanged(){},
         applyFilters(){
             return []
         },
-
         calculateInputFrom(from = {}) {
-            let input = {}
-
-            let params = merge(
+            return merge(
                 this.getInputDefaults(),
                 this.getCurrentPayload(),
                 from
             )
-
-            Object.entries(params).map(([key, value]) => {
-                input[key] = value
-            })
-            return input
         },
-        removeInput(name){
+        removeFilter(name){
             const defaultInput = this.getInputDefaults()
+
             if (name == "*") {
-                this.isCommuteSearch = false
-                this.input = defaultInput
+                console.log("CLEAR ALL,PUSH")
                 return this.pushPayload({})
             }
 
@@ -128,12 +120,14 @@ export default  {
                 name = [name]
             }
 
-
             name.forEach(key => {
                 this.input[key] = defaultInput[name] || ""
             })
+
+            this.newSearch()
+
         },
-        getAppliedConfigFilters(){
+        getAppliedFilters(){
             let filters = []
             let added = []
             const input = this.input
@@ -142,6 +136,7 @@ export default  {
                     !blank(input[filter.name]) &&
                     !added.includes(filter.name)
                 ) {
+
                     filters.push({
                         display: input[filter.name],
                         parameter: filter.name,
@@ -149,7 +144,7 @@ export default  {
                     added.push(filter.name)
                 }
             })
-            return filters
+            return filters.concat(this.applyFilters())
         },
         search() {
             this.status.loading = true
@@ -160,7 +155,7 @@ export default  {
                 this.filters = data.filters || {}
                 this.jobs = data.jobs || []
                 this.meta = data.meta || {'source': SOLR} //prevents sites from erroring when unable to connect to api?
-                this.appliedFilters = this.getAppliedConfigFilters().concat(this.applyFilters())
+                this.appliedFilters = this.getAppliedFilters()
                 this.$emit('searchCompleted', this.meta.source)
             }).catch( err => {
                 this.status.error = err
@@ -170,12 +165,7 @@ export default  {
 
         },
         getFilterOptions(filter) {
-            //all filter results are keyed by "key"
-            let key = filter.key
-            //or param name if no key is present
-            if(blank(key)){
-                key = filter.name
-            }
+            let key = blank(filter.key) ? filter.name : filter.key
             return this.filters[key] || []
         },
 
@@ -191,6 +181,7 @@ export default  {
 
         pushPayload(payload = null) {
             payload = payload === null ? this.getCurrentPayload() : payload
+            console.log(payload)
             this.$router
                 .push({
                     path: "/jobs",
@@ -200,8 +191,13 @@ export default  {
         },
 
         getCurrentPayload() {
-            return omitBy(clone(this.input), (v, k) => {
+            return omitBy(this.input, (v, k) => {
                 return blank(v)
+            })
+        },
+        filterEmpty(data, callback) {
+            return omitBy(data, (v, k) => {
+                return blank(v) || callback(k, v)
             })
         },
         getInputDefaults() {
@@ -218,10 +214,6 @@ export default  {
                 this.inputDefaults(),
                 defaultInput
             )
-        },
-        removeFilter(name) {
-            this.removeInput(name)
-            this.newSearch()
         },
         newSearch() {
             this.input.page = 1

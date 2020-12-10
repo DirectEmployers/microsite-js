@@ -5,7 +5,6 @@
             :sort="sort"
             :input="input"
             :status="status"
-            :isSolr="isSolr"
             :hasJobs="hasJobs"
             :source="meta.source"
             :setFilter="setFilter"
@@ -18,35 +17,37 @@
             :appliedFilters="appliedFilters"
             :isCommuteSearch="isCommuteSearch"
             :getFilterOptions="getFilterOptions"
-        >
-        </slot>
+        ></slot>
     </component>
 </template>
 <script>
+import base from "./mixins/provider"
+import AppSolrSearchProvider from "./AppSolrSearchProvider"
+import {
+    searchService,
+    commuteSearchService,
+} from "../../../services/search"
 
-import base from './mixins/provider'
-import AppSolrSearchProvider from './AppSolrSearchProvider'
-import { SOLR, searchService, commuteSearchService } from '../../../services/search'
-
-import { blank } from "../../../services/helpers"
-import {omitBy, clone, merge, startCase } from "lodash"
-
+import {blank} from "../../../services/helpers"
 
 export default {
     mixins: [base],
-    data(){
+    data() {
         return {
-            isCommuteSearch : !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation),
+            isCommuteSearch: this.checkIsCommuteSearch()
         }
     },
 
-    computed:{
-        service(){
+    computed: {
+        service() {
             return this.isCommuteSearch ? commuteSearchService : searchService
         },
     },
     methods: {
-        applyFilters(){
+        checkIsCommuteSearch(){
+            return !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation)
+        },
+        applyFilters() {
             let filters = []
             if (this.isCommuteSearch) {
                 let commuteLocation = this.$route.query.commuteLocation
@@ -72,39 +73,13 @@ export default {
                 exclude = Object.keys(this.inputDefaults())
             }
 
-            return omitBy(clone(this.input), (v, k) => {
-                return blank(v) || exclude.includes(k)
+            return this.filterEmpty(this.input, (k)=>{
+                return exclude.includes(k)
             })
         },
 
-        newSearch() {
-            this.input.page = 1
-
-            if (this.input.coords && this.input.commuteLocation) {
-                this.isCommuteSearch = true
-                this.input.location = ""
-            }
-
-            this.pushPayload()
-        },
-
-        removeFilter(name) {
-            this.removeInput(name)
-
-            if (["location", "commuteLocation"].includes(name)) {
-                this.input.coords = ""
-            }
-
-            const defaultInput = this.inputDefaults()
-
-            if (name.includes('commuteLocation')) {
-                this.isCommuteSearch = false
-                Object.keys(this.inputDefaults()).forEach(key => {
-                    this.input[key] = defaultInput[name] || ""
-                })
-            }
-
-            this.newSearch()
+        queryChanged(){
+            this.isCommuteSearch = this.checkIsCommuteSearch()
         },
 
     },
