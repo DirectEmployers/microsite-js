@@ -93,7 +93,7 @@ export default {
         },
         input: {
             required: false,
-            type: Array,
+            type: Object,
             default: () => { return {} },
         },
         limit: {

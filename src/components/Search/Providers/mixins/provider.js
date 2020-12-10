@@ -107,22 +107,24 @@ export default  {
                 ...from
             }
         },
-        removeFilter(name){
+        removeFilter(params){
             const defaultInput = this.getInputDefaults()
-
-            if (name == "*") {
+            if (params == "*") {
                 return this.pushPayload({})
             }
-            if(!Array.isArray(name)){
-                name = [name]
+            if(!Array.isArray(params)){
+                params = [params]
             }
 
-            name.forEach(key => {
-                this.input[key] = defaultInput[name] || ""
+            params.forEach(key => {
+                this.input[key] = defaultInput[key] || ""
             })
 
+            if(params.includes('location')){
+                this.input['coords'] = defaultInput['coords']
+                this.input['r'] = defaultInput['r']
+            }
             this.newSearch()
-
         },
         getAppliedFilters(){
             let filters = []
@@ -130,13 +132,7 @@ export default  {
             const input = this.input
             this.configFilters.forEach(filter => {
                 let params = [filter.name]
-
                 if (!blank(input[filter.name]) && !added.includes(filter.name)) {
-                    if(filter.name == 'location') {
-                        params.push('coords')
-                        params.push('r')
-                    }
-
                     filters.push({
                         display: input[filter.name],
                         parameter: params,
@@ -188,13 +184,13 @@ export default  {
                 })
                 .catch(err => {})
         },
-
         getCurrentPayload() {
-            return omitBy(this.input, (v, k) => {
-                return blank(v)
-            })
+            return this.filterEmpty(this.input)
         },
-        filterEmpty(data, callback) {
+        filterEmpty(data, callback = null) {
+            if(callback === null){
+                callback =  () => false
+            }
             return omitBy(data, (v, k) => {
                 return blank(v) || callback(k, v)
             })

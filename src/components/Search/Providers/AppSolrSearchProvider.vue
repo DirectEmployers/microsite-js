@@ -6,13 +6,11 @@
             :input="input"
             :status="status"
             :hasJobs="hasJobs"
-            :sortedBy="sortedBy"
             :source="meta.source"
             :setFilter="setFilter"
             :newSearch="newSearch"
             :pagination="pagination"
             :selectPage="selectPage"
-            :sortOptions="sortOptions"
             :featuredJobs="featuredJobs"
             :removeFilter="removeFilter"
             :isGoogleTalent="isGoogleTalent"
@@ -31,7 +29,6 @@ import base from './mixins/provider'
 export default{
     mixins: [base],
     methods: {
-
         inputDefaults(){
             return {
                 moc: ""

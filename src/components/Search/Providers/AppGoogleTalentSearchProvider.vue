@@ -21,15 +21,13 @@
     </component>
 </template>
 <script>
-import base from "./mixins/provider"
-import AppSolrSearchProvider from "./AppSolrSearchProvider"
 import {
     searchService,
     commuteSearchService,
 } from "../../../services/search"
-
+import base from "./mixins/provider"
 import {blank} from "../../../services/helpers"
-
+import AppSolrSearchProvider from "./AppSolrSearchProvider"
 export default {
     mixins: [base],
     data() {
@@ -44,8 +42,16 @@ export default {
         },
     },
     methods: {
-        checkIsCommuteSearch(){
-            return !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation)
+        queryChanged(){
+            this.isCommuteSearch = this.checkIsCommuteSearch()
+        },
+        inputDefaults() {
+            return {
+                commuteMethod: "DRIVING",
+                travelDuration: "3600",
+                commuteLocation: "",
+                roadTraffic: "TRAFFIC_FREE",
+            }
         },
         applyFilters() {
             let filters = []
@@ -58,28 +64,17 @@ export default {
             }
             return filters
         },
-        inputDefaults() {
-            return {
-                commuteMethod: "DRIVING",
-                travelDuration: "3600",
-                commuteLocation: "",
-                roadTraffic: "TRAFFIC_FREE",
-            }
+        checkIsCommuteSearch(){
+            return !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation)
         },
         getCurrentPayload() {
             let exclude = []
-
             if (!this.isCommuteSearch) {
                 exclude = Object.keys(this.inputDefaults())
             }
-
             return this.filterEmpty(this.input, (k)=>{
                 return exclude.includes(k)
             })
-        },
-
-        queryChanged(){
-            this.isCommuteSearch = this.checkIsCommuteSearch()
         },
         newSearch() {
             this.input.page = 1
@@ -88,7 +83,6 @@ export default {
             }
             this.pushPayload()
         },
-
     },
 }
 </script>
