@@ -129,13 +129,17 @@ export default  {
             let added = []
             const input = this.input
             this.configFilters.forEach(filter => {
-                if (
-                    !blank(input[filter.name]) &&
-                    !added.includes(filter.name)
-                ) {
+                let params = [filter.name]
+
+                if (!blank(input[filter.name]) && !added.includes(filter.name)) {
+                    if(filter.name == 'location') {
+                        params.push('coords')
+                        params.push('r')
+                    }
+
                     filters.push({
                         display: input[filter.name],
-                        parameter: filter.name,
+                        parameter: params,
                     })
                     added.push(filter.name)
                 }
