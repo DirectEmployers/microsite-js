@@ -24,10 +24,10 @@
                     :key="index"
                     v-for="(option, index) in displayedFilters"
                 >
-                    <g-link :to="option.href">
+                    <span @click="selectOption(option)">
                         {{ option.display }}
                         <span v-if="option.value">({{ option.value }})</span>
-                    </g-link>
+                    </span>
                 </li>
             </ul>
             <section
@@ -138,16 +138,9 @@ export default {
         },
     },
     methods: {
-        buildFilterHref(option) {
-            let currentParams = this.input
 
-            let params = {
-                page: 1,
-                [this.name]: option.display,
-            }
-
-            option.href = buildUrl("jobs", {...currentParams, ...params})
-            return option
+        selectOption(option){
+            this.$emit('selectedFilter', this.name, option.display)
         },
         showMore() {
             const numberOfItemsToAdd = this.limit

@@ -82,7 +82,7 @@ export default  {
     watch: {
         //any time query string changes, update component input and search.
         "$route.query"() {
-            this.calculateInputFrom(this.$route.query)
+            this.input = this.calculateInputFrom(this.$route.query)
             this.search()
         },
     },
@@ -117,7 +117,6 @@ export default  {
             Object.entries(params).map(([key, value]) => {
                 input[key] = value
             })
-
             return input
         },
         removeInput(name){
@@ -141,7 +140,6 @@ export default  {
             let filters = []
             let added = []
             const input = this.input
-            console.log(input)
             this.configFilters.forEach(filter => {
                 if (
                     !blank(input[filter.name]) &&
@@ -166,8 +164,6 @@ export default  {
                 this.jobs = data.jobs || []
                 this.meta = data.meta || {'source': SOLR} //prevents sites from erroring when unable to connect to api?
                 this.appliedFilters = this.getAppliedConfigFilters().concat(this.applyFilters())
-                console.log(this.appliedFilters, this.getAppliedConfigFilters(), this.applyFilters())
-
                 this.$emit('searchCompleted', this.meta.source)
             }).catch( err => {
                 this.status.error = err
@@ -188,6 +184,11 @@ export default  {
             }
 
             return this.filters[key] || []
+        },
+
+        setFilter(key, value){
+            this.input[key] = value
+            this.newSearch()
         },
 
         sort(field) {

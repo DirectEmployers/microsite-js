@@ -9,6 +9,7 @@
                 status,
                 hasJobs,
                 sortedBy,
+                setFilter,
                 newSearch,
                 selectPage,
                 pagination,
@@ -62,7 +63,6 @@
                             </h3>
                         </div>
                         <section class="lg:ml-4 w-full lg:w-2/5">
-                            {{ appliedFilters }}
                             <div v-if="appliedFilters.length">
                                 <h3 class="font-bold text-xl">
                                     Current Search Criteria
@@ -109,10 +109,13 @@
                                     </li>
                                 </ul>
                             </AppAccordion>
+
+
                             <AppSearchFilter
                                 :key="index"
                                 :input="filteredInput"
                                 :name="configFilter.name"
+                                @selectedFilter="setFilter"
                                 :key-name="configFilter.key"
                                 :visible="configFilter.visible"
                                 :options="getFilterOptions(configFilter)"
