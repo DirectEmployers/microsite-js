@@ -38,8 +38,12 @@ export default  {
             filters: [],
             pagination: {},
             featuredJobs: [],
-            input: this.getInputDefaults()
+            input: this.getInputDefaults(),
+            appliedFilters: []
         }
+    },
+    mounted: function () {
+        this.appliedFilters = this.appliedFilters
     },
     computed:{
         service(){
@@ -74,9 +78,6 @@ export default  {
 
             return options.map(o => startCase(o))
         },
-        appliedFilters() {
-            return this.getAppliedFiltersBase()
-        },
     },
     watch: {
         //any time query string changes, update component input and search.
@@ -86,7 +87,6 @@ export default  {
         },
     },
     created(){
-
         this.setInputFromParams()
         this.setInputFromQuery()
         if(this.searchOnLoad) {
@@ -94,6 +94,9 @@ export default  {
         }
     },
     methods:{
+        updateFilters(){
+            this.appliedFilters = this.getAppliedFiltersBase()
+        },
         setInputFromParams() {
             let params = { ... this.$route.params }
             Object.entries(params).map(([key, value]) => {
@@ -105,8 +108,10 @@ export default  {
             }
         },
         removeInput(name){
+            const defaultInput = this.getInputDefaults()
             if (name == "*") {
                 this.isCommuteSearch = false
+                this.input = defaultInput
                 return this.pushPayload({})
             }
 
@@ -114,7 +119,6 @@ export default  {
                 name = [name]
             }
 
-            const defaultInput = this.getInputDefaults()
 
             name.forEach(key => {
                 this.input[key] = defaultInput[name] || ""
@@ -153,6 +157,7 @@ export default  {
             }).finally(() =>{
                 this.status.loading = false
             })
+            this.updateFilters()
         },
         getFilterOptions(filter) {
             if (!blank(filter.options)) {

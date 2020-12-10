@@ -15,6 +15,7 @@
             :sortOptions="sortOptions"
             :featuredJobs="featuredJobs"
             :removeFilter="removeFilter"
+            :updateFilters="updateFilters"
             :isGoogleTalent="isGoogleTalent"
             :appliedFilters="appliedFilters"
             :isCommuteSearch="isCommuteSearch"
