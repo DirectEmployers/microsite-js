@@ -5,19 +5,21 @@
             :sort="sort"
             :input="input"
             :status="status"
+            :isSolr="isSolr"
             :hasJobs="hasJobs"
             :sortedBy="sortedBy"
             :source="meta.source"
+            :setFilter="setFilter"
             :newSearch="newSearch"
             :pagination="pagination"
             :selectPage="selectPage"
             :sortOptions="sortOptions"
             :featuredJobs="featuredJobs"
             :removeFilter="removeFilter"
+            :isGoogleTalent="isGoogleTalent"
             :appliedFilters="appliedFilters"
             :isCommuteSearch="isCommuteSearch"
             :getFilterOptions="getFilterOptions"
-            :filteredInput="getCurrentPayload()"
         >
         </slot>
     </component>
@@ -32,7 +34,9 @@ export default{
     methods: {
 
         inputDefaults(){
-            return {}
+            return {
+                moc: ""
+            }
         }
     }
 }

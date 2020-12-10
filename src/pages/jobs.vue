@@ -8,15 +8,12 @@
                 source,
                 status,
                 hasJobs,
-                sortedBy,
                 setFilter,
                 newSearch,
                 selectPage,
                 pagination,
-                sortOptions,
                 featuredJobs,
                 removeFilter,
-                filteredInput,
                 appliedFilters,
                 isGoogleTalent,
                 isCommuteSearch,
@@ -87,22 +84,22 @@
                             </div>
                             <AppAccordion
                                 :open="true"
-                                v-if="sortOptions.length"
+                                v-if="sort.options.length"
                             >
                                 <template v-slot:display>
                                     <h3 class="font-bold text-xl">
                                         Sorted By
                                         <strong>
-                                            {{ sortedBy }}
+                                            {{ sort.by }}
                                         </strong>
                                     </h3>
                                 </template>
                                 <ul>
                                     <li
-                                        @click="sort(option)"
+                                        @click="sort.sortField(option)"
                                         class="cursor-pointer"
                                         :key="index"
-                                        v-for="(option, index) in sortOptions"
+                                        v-for="(option, index) in sort.options"
                                         name="sort"
                                     >
                                         {{ option }}
@@ -113,7 +110,7 @@
 
                             <AppSearchFilter
                                 :key="index"
-                                :input="filteredInput"
+                                :input="input"
                                 :name="configFilter.name"
                                 @selectedFilter="setFilter"
                                 :key-name="configFilter.key"
@@ -128,6 +125,7 @@
                                         shouldShowMore,
                                         showLess,
                                         showMore,
+                                        selectFilter
                                     }"
                                 >
                                     <AppAccordion
@@ -136,16 +134,16 @@
 
                                         <ul class="search-filter-options">
                                             <li
-                                                class="search-filter-options-item"
                                                 :key="index"
+                                                class="search-filter-options-item"
                                                 v-for="(filter, index) in displayedFilters"
                                             >
-                                                <g-link :to="filter.href">
+                                                <span @click="selectFilter(filter)">
                                                     {{ filter.display }}
                                                     <span v-if="filter.value">
                                                         ({{ filter.value }})
                                                     </span>
-                                                </g-link>
+                                                </span>
                                             </li>
                                         </ul>
                                         <section

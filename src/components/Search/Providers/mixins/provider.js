@@ -61,22 +61,19 @@ export default  {
         configFilters() {
             return this.siteConfig.filters || []
         },
-        sortedBy() {
-            if (blank(this.meta.sort)) {
-                return ""
+        sort() {
+            let sort = {}
+            let sortMeta = clone(this.meta.sort || {})
+            if (blank(sortMeta)) {
+                return sort
             }
-            return startCase(this.meta.sort.active)
-        },
-        sortOptions() {
-            let options = []
-
-            let sort = clone(this.meta.sort || {})
-
-            if (!blank(sort)) {
-                options = sort.options
+            sort.sortField = (field)=>{
+                this.input.sort = field.toLowerCase()
+                this.newSearch()
             }
-
-            return options.map(o => startCase(o))
+            sort.by = blank(sortMeta) ? "" : startCase(sortMeta.active)
+            sort.options = sortMeta.options.map(o => startCase(o))
+            return sort
         },
     },
     watch: {
@@ -173,33 +170,18 @@ export default  {
 
         },
         getFilterOptions(filter) {
-            if (!blank(filter.options)) {
-                return filter.options
-            }
             //all filter results are keyed by "key"
             let key = filter.key
             //or param name if no key is present
             if(blank(key)){
                 key = filter.name
             }
-
             return this.filters[key] || []
         },
 
         setFilter(key, value){
             this.input[key] = value
             this.newSearch()
-        },
-
-        sort(field) {
-            field = field.toLowerCase()
-
-            if (!this.meta.sort.options.includes(field)) {
-                return
-            }
-            this.input.sort = field
-            this.newSearch()
-
         },
 
         selectPage(page) {
@@ -216,6 +198,7 @@ export default  {
                 })
                 .catch(err => {})
         },
+
         getCurrentPayload() {
             return omitBy(clone(this.input), (v, k) => {
                 return blank(v)
@@ -227,7 +210,6 @@ export default  {
                 {
                     q: "",
                     r: "",
-                    moc: "",
                     location: "",
                     coords: null,
                     page: 1,

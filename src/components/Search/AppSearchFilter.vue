@@ -12,16 +12,17 @@
             Filter By {{ display }}
         </h3>
         <slot
-            :displayedFilters="displayedFilters"
+            :showLess="showLess"
+            :showMore="showMore"
+            :selectFilter="selectOption"
             :shouldShowLess="shouldShowLess"
             :shouldShowMore="shouldShowMore"
-            :showMore="showMore"
-            :showLess="showLess"
+            :displayedFilters="displayedFilters"
         >
             <ul class="search-filter-options">
                 <li
-                    class="search-filter-options-item"
                     :key="index"
+                    class="search-filter-options-item"
                     v-for="(option, index) in displayedFilters"
                 >
                     <span @click="selectOption(option)">
@@ -58,8 +59,6 @@
 </template>
 <script>
 import {clone} from "lodash"
-import {blank} from "../../services/helpers"
-import buildUrl from "axios/lib/helpers/buildURL"
 
 export default {
     props: {
@@ -80,6 +79,7 @@ export default {
         },
         display: {
             required: false,
+            default: "",
             type: String,
         },
         visibile: {
@@ -92,8 +92,9 @@ export default {
             default: () => [],
         },
         input: {
-            required: true,
-            type: Object,
+            required: false,
+            type: Array,
+            default: () => { return {} },
         },
         limit: {
             required: false,
@@ -112,9 +113,7 @@ export default {
         let filteredOptions = []
         this.givenOptions.forEach(option => {
             if(this.input[this.name] != option.display){
-                filteredOptions.push(
-                    this.buildFilterHref(option)
-                )
+                filteredOptions.push(option)
             }
         })
 
@@ -142,6 +141,7 @@ export default {
         selectOption(option){
             this.$emit('selectedFilter', this.name, option.display)
         },
+
         showMore() {
             const numberOfItemsToAdd = this.limit
 

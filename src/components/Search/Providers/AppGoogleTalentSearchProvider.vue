@@ -7,19 +7,17 @@
             :status="status"
             :isSolr="isSolr"
             :hasJobs="hasJobs"
-            :sortedBy="sortedBy"
             :source="meta.source"
+            :setFilter="setFilter"
             :newSearch="newSearch"
             :pagination="pagination"
             :selectPage="selectPage"
-            :sortOptions="sortOptions"
             :featuredJobs="featuredJobs"
             :removeFilter="removeFilter"
             :isGoogleTalent="isGoogleTalent"
             :appliedFilters="appliedFilters"
             :isCommuteSearch="isCommuteSearch"
             :getFilterOptions="getFilterOptions"
-            :filteredInput="getCurrentPayload()"
         >
         </slot>
     </component>
@@ -87,7 +85,7 @@ export default {
                 this.input.location = ""
             }
 
-            this.search()
+            this.pushPayload()
         },
 
         removeFilter(name) {
