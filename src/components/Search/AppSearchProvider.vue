@@ -7,6 +7,7 @@
             :status="status"
             :filters="filters"
             :sort="sort"
+            :loadMore="loadMore"
             :sortedBy="sortedBy"
             :sortOptions="sortOptions"
             :source="source"
@@ -238,7 +239,6 @@ export default {
 
             this.pushPayload()
 
-            this.$el.scrollIntoView()
         },
 
         sort(field) {
@@ -274,7 +274,13 @@ export default {
             }
             this.pushPayload()
         },
-
+        loadMore(page) {
+            let jobs = this.jobs
+            this.input["page"] = page
+            this.search(falsex).then(
+                ()=>{this.jobs = jobs.concat(this.jobs)}
+            )
+        },
         removeFilter(name) {
             if (name == "*") {
                 this.isCommuteSearch = false
@@ -303,8 +309,10 @@ export default {
             this.submitSearchForm()
         },
 
-        async search() {
-            this.status.loading = true
+        async search(isNewSearch = true) {
+            if(isNewSearch){
+                this.status.loading = true
+            }
 
             try {
                 const response = await this.service.get(

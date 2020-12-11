@@ -2,7 +2,7 @@
     <nav>
         <button
             type="button"
-            @click
+            @click="loadMore"
         >
             More
         </button>
@@ -20,28 +20,19 @@ export default {
         totalPages: {
             required: true,
             type: Number,
-        }
-    },
-    created() {
-        this.jobList = this.jobs
-    },
-    data() {
-        return {
-            current : this.currentPage,
-            jobList : this.jobList
-        }
+        },
     },
     computed: {
         nextPage() {
-            const next = this.current + 1
+            const next = this.currentPage + 1
 
             return next <= this.totalPages ? next : false
         },
     },
     methods: {
         loadMore() {
-            return null
-        }
+            this.$emit("loadMore", this.nextPage)
+        },
     }
 }
 </script>

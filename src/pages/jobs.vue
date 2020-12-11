@@ -13,6 +13,7 @@
                     status,
                     source,
                     sortedBy,
+                    loadMore,
                     hasFilter,
                     pagination,
                     selectPage,
@@ -54,7 +55,12 @@
                                     :input="filteredInput"
                                     :source="source"
                                 />
-                                <AppButtonPagination />
+                                <AppButtonPagination
+                                    :totalPages="pagination.total"
+                                    :currentPage="pagination.page"
+                                    :jobs="jobs"
+                                    @loadMore="loadMore"
+                                />
                                 <AppPagination
                                     @pageSelected="selectPage"
                                     :current-page="pagination.page"
