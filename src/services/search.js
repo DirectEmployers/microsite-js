@@ -28,10 +28,6 @@ export function api() {
     })
 }
 
-export function getProvider(source){
-    return source == GOOGLE_TALENT ? AppGoogleTalentSearchProvider: AppSolrSearchProvider
-}
-
 export function searchService(input, siteConfig){
     const source = kebabCase(siteConfig.source)
 

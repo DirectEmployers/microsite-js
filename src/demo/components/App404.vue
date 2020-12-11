@@ -50,7 +50,7 @@ import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoog
 export default {
     components: {
         AppSearchForm,
-        AppGoogleTalentSearchProvider,
+        AppGoogleTalentSearchProvider
     }
 }
 </script>

@@ -150,15 +150,13 @@ export default  {
                 this.pagination = data.pagination || {}
                 this.filters = data.filters || {}
                 this.jobs = data.jobs || []
-                this.meta = data.meta || {'source': SOLR} //prevents sites from erroring when unable to connect to api?
+                this.meta = data.meta || {'source': SOLR} //prevents sites from erroring when unable to connect to api
                 this.appliedFilters = this.getAppliedFilters()
-                this.$emit('searchCompleted', this.meta.source)
             }).catch( err => {
                 this.status.error = err
             }).finally(() =>{
                 this.status.loading = false
             })
-
         },
         getFilterOptions(filter) {
             let key = blank(filter.key) ? filter.name : filter.key

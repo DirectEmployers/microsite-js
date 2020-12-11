@@ -27,7 +27,6 @@ import {
 } from "../../../services/search"
 import base from "./mixins/provider"
 import {blank} from "../../../services/helpers"
-import AppSolrSearchProvider from "./AppSolrSearchProvider"
 export default {
     mixins: [base],
     data() {
@@ -55,7 +54,7 @@ export default {
         },
         applyFilters() {
             let filters = []
-            if (this.isCommuteSearch) {
+            if (!this.isSolr && this.isCommuteSearch) {
                 let commuteLocation = this.$route.query.commuteLocation
                 filters.push({
                     display: `Commute:${commuteLocation}`,
@@ -65,6 +64,9 @@ export default {
             return filters
         },
         checkIsCommuteSearch(){
+            if(this.isSolr){
+                return false
+            }
             return !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation)
         },
         getCurrentPayload() {
@@ -78,7 +80,7 @@ export default {
         },
         newSearch() {
             this.input.page = 1
-            this.isCommuteSearch = this.input.coords && this.input.commuteLocation
+            this.isCommuteSearch = !this.isSolr && (this.input.coords && this.input.commuteLocation)
             if(this.isCommuteSearch){
                 this.input.location = ""
             }
