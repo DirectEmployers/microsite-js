@@ -277,7 +277,7 @@ export default {
         loadMore(page) {
             let jobs = this.jobs
             this.input["page"] = page
-            this.search(falsex).then(
+            this.search(false).then(
                 ()=>{this.jobs = jobs.concat(this.jobs)}
             )
         },
