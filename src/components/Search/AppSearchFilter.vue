@@ -12,19 +12,19 @@
             Filter By {{ display }}
         </h3>
         <slot
-            :displayedFilters="displayedFilters"
+            :showLess="showLess"
+            :showMore="showMore"
             :shouldShowLess="shouldShowLess"
             :shouldShowMore="shouldShowMore"
-            :showMore="showMore"
-            :showLess="showLess"
+            :displayedFilters="displayedFilters"
         >
             <ul class="search-filter-options">
                 <li
-                    class="search-filter-options-item"
                     :key="index"
+                    class="search-filter-options-item"
                     v-for="(option, index) in displayedFilters"
                 >
-                    <g-link :to="option.href">
+                    <g-link :to="option.href">">
                         {{ option.display }}
                         <span v-if="option.value">({{ option.value }})</span>
                     </g-link>
@@ -58,7 +58,6 @@
 </template>
 <script>
 import {clone} from "lodash"
-import {blank} from "../../services/helpers"
 import buildUrl from "axios/lib/helpers/buildURL"
 
 export default {
@@ -80,6 +79,7 @@ export default {
         },
         display: {
             required: false,
+            default: "",
             type: String,
         },
         visibile: {
@@ -92,8 +92,9 @@ export default {
             default: () => [],
         },
         input: {
-            required: true,
+            required: false,
             type: Object,
+            default: () => { return {} },
         },
         limit: {
             required: false,
@@ -139,16 +140,21 @@ export default {
     },
     methods: {
         buildFilterHref(option) {
-            let currentParams = this.input
-
+            let currentParams = {}
+            for(let param in this.input){
+                if(this.input[param]){
+                    currentParams[param] = this.input[param]
+                }
+            }
             let params = {
                 page: 1,
                 [this.name]: option.display,
             }
-
             option.href = buildUrl("jobs", {...currentParams, ...params})
             return option
         },
+        
+
         showMore() {
             const numberOfItemsToAdd = this.limit
 

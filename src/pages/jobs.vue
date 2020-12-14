@@ -1,59 +1,50 @@
 <template>
     <Layout>
-        <AppSearchProvider
-            ref="provider"
-            class="my-6"
-            :site-config="$siteConfig"
-        >
-            <template
-                v-slot="{
-                    jobs,
-                    input,
-                    status,
-                    source,
-                    sort,
-                    getFilterOptions,
-                    sortedBy,
-                    filteredInput,
-                    sortOptions,
-                    removeFilter,
-                    pagination,
-                    selectPage,
-                    featuredJobs,
-                    appliedFilters,
-                    submitSearchForm,
-                    isGoogleTalent,
-                    isCommuteSearch,
-                    hasFilter,
-                }"
-            >
-                <AppLoader v-if="status.loading" />
-                <!-- done loading -->
+        <AppGoogleTalentSearchProvider :site-config="$siteConfig">
+            <template v-slot="{
+                jobs,
+                sort,
+                input,
+                source,
+                status,
+                hasJobs,
+                setFilter,
+                newSearch,
+                selectPage,
+                pagination,
+                featuredJobs,
+                removeFilter,
+                appliedFilters,
+                isGoogleTalent,
+                isCommuteSearch,
+                getFilterOptions,
+            }">
+                <AppLoader v-if="status.loading"/>
                 <section v-else>
                     <div class="mx-4">
                         <AppSearchForm
                             :input="input"
                             :source="source"
+                            @search="newSearch"
                             :isCommuteSearch="isCommuteSearch"
-                            :submitSearchForm="submitSearchForm"
                         />
                     </div>
                     <section class="flex flex-col lg:flex-row">
                         <div class="mx-4 w-full lg:w-1/2">
-                            <h3 v-if="status.error">Unable to load jobs...</h3>
+                            <h3 v-if="status.error && !hasJobs">Unable to load jobs...</h3>
                             <AppFeaturedJobs
                                 :featured-jobs="featuredJobs"
                                 :source="source"
                             />
                             <section v-if="jobs.length">
+                                <AppJobSearchResults
+                                    :jobs="jobs"
+                                    :input="input"
+                                    :source="source"
+                                />
                                 <div class="text-2xl">
                                     {{ pagination.total }} jobs found
                                 </div>
-                                <AppJobSearchResults
-                                    :jobs="jobs"
-                                    :input="filteredInput"
-                                    :source="source"
-                                />
                                 <AppPagination
                                     @pageSelected="selectPage"
                                     :current-page="pagination.page"
@@ -63,9 +54,7 @@
                             </section>
                             <h3
                                 class="font-bold text-lg"
-                                v-else-if="
-                                    jobs.length == 0 && featuredJobs.length == 0
-                                "
+                                v-else-if="!status.error && !hasJobs"
                             >
                                 No results found...
                             </h3>
@@ -75,7 +64,6 @@
                                 <h3 class="font-bold text-xl">
                                     Current Search Criteria
                                 </h3>
-
                                 <AppChip
                                     v-for="(filter, index) in appliedFilters"
                                     :key="index"
@@ -96,33 +84,34 @@
                             </div>
                             <AppAccordion
                                 :open="true"
-                                v-if="sortOptions.length"
+                                v-if="sort.options.length"
                             >
                                 <template v-slot:display>
                                     <h3 class="font-bold text-xl">
                                         Sorted By
                                         <strong>
-                                            {{ sortedBy }}
+                                            {{ sort.by }}
                                         </strong>
                                     </h3>
                                 </template>
                                 <ul>
                                     <li
-                                        @click="sort(option)"
+                                        @click="sort.sortField(option)"
                                         class="cursor-pointer"
                                         :key="index"
-                                        v-for="(option, index) in sortOptions"
-                                        name="sort"
+                                        v-for="(option, index) in sort.options"
                                     >
                                         {{ option }}
                                     </li>
                                 </ul>
                             </AppAccordion>
 
+
                             <AppSearchFilter
                                 :key="index"
-                                :input="filteredInput"
+                                :input="input"
                                 :name="configFilter.name"
+                                @selectedFilter="setFilter"
                                 :key-name="configFilter.key"
                                 :visible="configFilter.visible"
                                 :options="getFilterOptions(configFilter)"
@@ -143,8 +132,8 @@
 
                                         <ul class="search-filter-options">
                                             <li
-                                                class="search-filter-options-item"
                                                 :key="index"
+                                                class="search-filter-options-item"
                                                 v-for="(filter, index) in displayedFilters"
                                             >
                                                 <g-link :to="filter.href">
@@ -181,7 +170,6 @@
                                     </AppAccordion>
                                 </template>
                             </AppSearchFilter>
-
                             <div class="container">
                                 <button
                                     @click="toggleCommuteModal()"
@@ -199,18 +187,17 @@
                             >
                                 <AppCommuteSearchForm
                                     :input="input"
-                                    :submitSearchForm="submitSearchForm"
+                                    @search="newSearch"
                                 />
                             </AppModal>
                         </section>
                     </section>
                 </section>
             </template>
-        </AppSearchProvider>
+        </AppGoogleTalentSearchProvider>
     </Layout>
 </template>
 <script>
-import AppSearchProvider from "~/components/Search/AppSearchProvider"
 import {blank} from "~/services/helpers"
 import AppPagination from "~/components/AppPagination"
 import AppAccordion from "~/components/AppAccordion"
@@ -223,6 +210,7 @@ import AppChip from "~/components/AppChip"
 import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppXIcon from "~/components/Icons/AppXIcon"
+import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
 export default {
     components: {
         AppAccordion,
@@ -232,11 +220,11 @@ export default {
         AppXIcon,
         AppModal,
         AppChip,
-        AppSearchProvider,
         AppLoader,
         AppFeaturedJobs,
         AppSearchForm,
         AppCommuteSearchForm,
+        AppGoogleTalentSearchProvider,
     },
     data() {
         return {

@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="submitSearchForm">
+    <form @submit.prevent="search">
         <div class="commute-search">
             <div class="form__input-group form__input-group--stacked">
                 <label for="commuteLocation" class="form__label">
@@ -86,10 +86,6 @@ export default {
             required: false,
             default: () => {},
         },
-        submitSearchForm: {
-            type: Function,
-            required: true,
-        },
     },
     data(){
         return { apiKey: process.env.GRIDSOME_GOOGLE_MAPS_API_KEY}
@@ -98,6 +94,9 @@ export default {
         AppGoogleLocationAutocomplete,
     },
     methods:{
+        search(){
+            this.$emit('search')
+        },
         googleAutocompleteSelected(location, coords){
             this.input.commuteLocation = location
             this.input.coords = coords

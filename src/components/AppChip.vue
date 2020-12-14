@@ -12,7 +12,7 @@ const ENTER_KEY = 13
 export default {
     props:{
         name: {
-            type: String,
+            type: [String, Array],
             required: false,
             default() {
                 return `${this._uid}`
