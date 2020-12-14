@@ -140,7 +140,12 @@ export default {
     },
     methods: {
         buildFilterHref(option) {
-            let currentParams = this.input
+            let currentParams = {}
+            for(let param in this.input){
+                if(this.input[param]){
+                    currentParams[param] = this.input[param]
+                }
+            }
             let params = {
                 page: 1,
                 [this.name]: option.display,
@@ -148,6 +153,7 @@ export default {
             option.href = buildUrl("jobs", {...currentParams, ...params})
             return option
         },
+        
 
         showMore() {
             const numberOfItemsToAdd = this.limit

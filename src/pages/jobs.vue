@@ -59,7 +59,6 @@
                                 No results found...
                             </h3>
                         </div>
-                                {{appliedFilters}}
                         <section class="lg:ml-4 w-full lg:w-2/5">
                             <div v-if="appliedFilters.length">
                                 <h3 class="font-bold text-xl">
