@@ -11,7 +11,7 @@ export default  {
         tag: {
             required: false,
             type: String,
-            default: "section",
+            default: "div",
         },
         searchOnLoad: {
             type: Boolean,

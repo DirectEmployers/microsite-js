@@ -100,7 +100,6 @@
                                         class="cursor-pointer"
                                         :key="index"
                                         v-for="(option, index) in sort.options"
-                                        name="sort"
                                     >
                                         {{ option }}
                                     </li>
@@ -125,7 +124,6 @@
                                         shouldShowMore,
                                         showLess,
                                         showMore,
-                                        selectFilter
                                     }"
                                 >
                                     <AppAccordion
@@ -138,12 +136,12 @@
                                                 class="search-filter-options-item"
                                                 v-for="(filter, index) in displayedFilters"
                                             >
-                                                <span @click="selectFilter(filter)">
+                                                <g-link :to="filter.href">
                                                     {{ filter.display }}
                                                     <span v-if="filter.value">
                                                         ({{ filter.value }})
                                                     </span>
-                                                </span>
+                                                </g-link>
                                             </li>
                                         </ul>
                                         <section

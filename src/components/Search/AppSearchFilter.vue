@@ -14,7 +14,6 @@
         <slot
             :showLess="showLess"
             :showMore="showMore"
-            :selectFilter="selectOption"
             :shouldShowLess="shouldShowLess"
             :shouldShowMore="shouldShowMore"
             :displayedFilters="displayedFilters"
@@ -25,10 +24,10 @@
                     class="search-filter-options-item"
                     v-for="(option, index) in displayedFilters"
                 >
-                    <span @click="selectOption(option)">
+                    <g-link :to="option.href">">
                         {{ option.display }}
                         <span v-if="option.value">({{ option.value }})</span>
-                    </span>
+                    </g-link>
                 </li>
             </ul>
             <section
@@ -59,6 +58,7 @@
 </template>
 <script>
 import {clone} from "lodash"
+import buildUrl from "axios/lib/helpers/buildURL"
 
 export default {
     props: {
@@ -113,7 +113,9 @@ export default {
         let filteredOptions = []
         this.givenOptions.forEach(option => {
             if(this.input[this.name] != option.display){
-                filteredOptions.push(option)
+                filteredOptions.push(
+                    this.buildFilterHref(option)
+                )
             }
         })
 
@@ -137,7 +139,15 @@ export default {
         },
     },
     methods: {
-
+        buildFilterHref(option) {
+            let currentParams = this.input
+            let params = {
+                page: 1,
+                [this.name]: option.display,
+            }
+            option.href = buildUrl("jobs", {...currentParams, ...params})
+            return option
+        },
         selectOption(option){
             this.$emit('selectedFilter', this.name, option.display)
         },
