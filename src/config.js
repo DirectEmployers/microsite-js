@@ -20,6 +20,10 @@ const config =  {
             display: "MOC",
         },
         {
+            name: "company",
+            display: "Company",
+        },
+        {
             name: "location",
             key: "city",
             display: "City",

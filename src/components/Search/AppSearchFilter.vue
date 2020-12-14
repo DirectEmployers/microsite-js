@@ -148,9 +148,6 @@ export default {
             option.href = buildUrl("jobs", {...currentParams, ...params})
             return option
         },
-        selectOption(option){
-            this.$emit('selectedFilter', this.name, option.display)
-        },
 
         showMore() {
             const numberOfItemsToAdd = this.limit
