@@ -26,7 +26,7 @@
 
 <script>
 import buildUrl from "axios/lib/helpers/buildURL"
-import {GOOGLE_TALENT, SOLR } from "../services/search"
+import {GOOGLE_TALENT, SOLR} from "../services/search"
 import {GoogleTalentClientEvent} from "../services/events"
 import {VS_KEY, UTM_KEY} from "../services/storage"
 import {buildJobDetailUrl, blank} from "../services/helpers"
@@ -56,7 +56,7 @@ export default {
         source: {
             type: String,
             required: true,
-            validator: value => {
+            validator: (value) => {
                 return [GOOGLE_TALENT, SOLR].includes(value)
             },
         },
@@ -73,16 +73,16 @@ export default {
 
             return isArray(value) ? value.join(" ") : value
         },
-        clickedApplyJob(){
-            if(this.siteConfig.source == SOLR){
-                return;
+        clickedApplyJob() {
+            if (this.siteConfig.source == SOLR) {
+                return
             }
 
             let talentData = GoogleTalentClientEvent.getSavedTalentData()
             // only if the stored event type is view do we post
             // this means they are viewing this job directly from site instead
             // of navigating directly to job detail.
-            if (talentData.eventType === 'view') {
+            if (talentData.eventType === "view") {
                 GoogleTalentClientEvent.post(
                     {
                         eventType: "redirect",
@@ -97,13 +97,13 @@ export default {
             }
         },
         clickedViewJob() {
-
-            if(this.siteConfig.source == SOLR){
-                return;
+            if (this.siteConfig.source == SOLR) {
+                return
             }
 
             if (this.isGoogleTalent) {
-                let requestId = GoogleTalentClientEvent.getSavedTalentData().requestId
+                let requestId = GoogleTalentClientEvent.getSavedTalentData()
+                    .requestId
 
                 GoogleTalentClientEvent.post(
                     {
@@ -117,7 +117,6 @@ export default {
                     //fail silently from google talent errors.
                 })
             }
-
         },
     },
     computed: {

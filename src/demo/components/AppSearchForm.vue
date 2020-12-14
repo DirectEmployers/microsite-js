@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="submitSearchForm">
+    <form @submit.prevent="search">
         <div class="search-form__wrapper">
             <div class="search-form__section">
                 <AppAutocompleteInput
@@ -11,7 +11,7 @@
                     aria-label="Search by keyword"
                     autocapitalize="off"
                     :query="TitleCompleteService"
-                    @setResult="submitSearchForm"
+                    @setResult="search"
                 />
             </div>
             <div class="search-form__section">
@@ -25,7 +25,7 @@
                         aria-label="Type city or state"
                         autocapitalize="off"
                         :query="LocationCompleteService"
-                        @setResult="submitSearchForm"
+                        @setResult="search"
                     />
                     <div class="form__input-group">
                         <AppGeoLocation class="form__input-addon" @getCoords="setLocationFromGeo"/>
@@ -79,7 +79,7 @@
                     aria-label="Search by MOC code"
                     autocapitalize="off"
                     :query="MOCCompleteService"
-                    @setResult="submitSearchForm"
+                    @setResult="search"
                 />
             </div>
             <div class="search-form__button-wrapper">
@@ -93,7 +93,6 @@
 
 <script>
 import AppAutocompleteInput from "~/components/Form/AppAutocompleteInput"
-import AppSearchProvider from "~/components/Search/AppSearchProvider"
 import AppGeoLocation from "~/components/Search/AppGeoLocation"
 import AppGoogleLocationAutocomplete from "~/components/Search/AppGoogleLocationAutocomplete"
 import {
@@ -123,10 +122,6 @@ export default {
         source:{
             type: String,
             required: true
-        },
-        submitSearchForm: {
-            type: Function,
-            required: true
         }
     },
     computed: {
@@ -138,6 +133,9 @@ export default {
         },
     },
     methods:{
+        search(){
+            this.$emit('search')
+        },
         typedLocation(){
             if(this.input.location){
                 this.input.coords = ''
@@ -150,7 +148,7 @@ export default {
         googleAutocompleteSelected(location, coords){
             this.input.commuteLocation = location
             this.input.coords = coords
-            this.submitSearchForm()
+            this.search()
         }
     },
     data: () => ({
