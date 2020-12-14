@@ -20148,11 +20148,9 @@ module.exports = function isCancel(value) {
         _this3.jobs = data.jobs || [];
         _this3.meta = data.meta || {
           'source': _services_search__WEBPACK_IMPORTED_MODULE_15__[/* SOLR */ "b"]
-        }; //prevents sites from erroring when unable to connect to api?
+        }; //prevents sites from erroring when unable to connect to api
 
         _this3.appliedFilters = _this3.getAppliedFilters();
-
-        _this3.$emit('searchCompleted', _this3.meta.source);
       }).catch(function (err) {
         _this3.status.error = err;
       }).finally(function () {
@@ -27815,12 +27813,12 @@ if (DESCRIPTORS && !(NAME in FunctionPrototype)) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=1150e9e2&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=79ef27da&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"sort":_vm.sort,"input":_vm.input,"status":_vm.status,"hasJobs":_vm.hasJobs,"source":_vm.meta.source,"setFilter":_vm.setFilter,"newSearch":_vm.newSearch,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"featuredJobs":_vm.featuredJobs,"removeFilter":_vm.removeFilter,"isGoogleTalent":_vm.isGoogleTalent,"appliedFilters":_vm.appliedFilters,"isCommuteSearch":_vm.isCommuteSearch,"getFilterOptions":_vm.getFilterOptions})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=1150e9e2&
+// CONCATENATED MODULE: ./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=79ef27da&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -27842,9 +27840,6 @@ var provider = __webpack_require__("300c");
 
 // EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
 var helpers = __webpack_require__("a74a");
-
-// EXTERNAL MODULE: ./src/components/Search/Providers/AppSolrSearchProvider.vue + 4 modules
-var AppSolrSearchProvider = __webpack_require__("7b6a");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=script&lang=js&
 
@@ -27876,7 +27871,6 @@ var AppSolrSearchProvider = __webpack_require__("7b6a");
 
 
 
-
 /* harmony default export */ var AppGoogleTalentSearchProvidervue_type_script_lang_js_ = ({
   mixins: [provider["a" /* default */]],
   data: function data() {
@@ -27904,7 +27898,7 @@ var AppSolrSearchProvider = __webpack_require__("7b6a");
     applyFilters: function applyFilters() {
       var filters = [];
 
-      if (this.isCommuteSearch) {
+      if (!this.isSolr && this.isCommuteSearch) {
         var commuteLocation = this.$route.query.commuteLocation;
         filters.push({
           display: "Commute:".concat(commuteLocation),
@@ -27915,6 +27909,10 @@ var AppSolrSearchProvider = __webpack_require__("7b6a");
       return filters;
     },
     checkIsCommuteSearch: function checkIsCommuteSearch() {
+      if (this.isSolr) {
+        return false;
+      }
+
       return !Object(helpers["a" /* blank */])(this.$route.query.coords) && !Object(helpers["a" /* blank */])(this.$route.query.commuteLocation);
     },
     getCurrentPayload: function getCurrentPayload() {
@@ -27930,7 +27928,7 @@ var AppSolrSearchProvider = __webpack_require__("7b6a");
     },
     newSearch: function newSearch() {
       this.input.page = 1;
-      this.isCommuteSearch = this.input.coords && this.input.commuteLocation;
+      this.isCommuteSearch = !this.isSolr && this.input.coords && this.input.commuteLocation;
 
       if (this.isCommuteSearch) {
         this.input.location = "";
@@ -32944,7 +32942,6 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GOOGLE_TALENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return TIMEOUT_THRESHOLD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return api; });
-/* unused harmony export getProvider */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return searchService; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return commuteSearchService; });
 /* unused harmony export TitleCompleteService */
@@ -32992,9 +32989,6 @@ function api() {
       "Content-Type": "application/json"
     }
   });
-}
-function getProvider(source) {
-  return source == GOOGLE_TALENT ? _components_Search_Providers_AppGoogleTalentSearchProvider__WEBPACK_IMPORTED_MODULE_8__["default"] : _components_Search_Providers_AppSolrSearchProvider__WEBPACK_IMPORTED_MODULE_7__["default"];
 }
 function searchService(input, siteConfig) {
   var source = Object(lodash__WEBPACK_IMPORTED_MODULE_5__["kebabCase"])(siteConfig.source);
