@@ -1,32 +1,32 @@
 <template>
     <Layout>
-        <AppSearchProvider
+        <AppGoogleTalentSearchProvider
             class="mt-6"
             :search-on-load="false"
             :site-config="$siteConfig"
             v-slot="{
                 input,
-                submitSearchForm,
                 source,
+                newSearch,
             }"
         >
             <div class="mx-4">
                 <AppSearchForm
                     :input="input"
                     :source="source"
-                    :submitSearchForm="submitSearchForm"
+                    @search="newSearch"
                 />
             </div>
-        </AppSearchProvider>
+        </AppGoogleTalentSearchProvider>
     </Layout>
 </template>
 <script>
-import AppSearchProvider from "~/components/Search/AppSearchProvider"
 import AppSearchForm from "~/demo/components/AppSearchForm"
+import AppGoogleTalentSearchProvider from '~/components/Search/Providers/AppGoogleTalentSearchProvider'
 export default {
     components: {
-        AppSearchProvider,
         AppSearchForm,
+        AppGoogleTalentSearchProvider
     },
     metaInfo: {
         title: "Home",

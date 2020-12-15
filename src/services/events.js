@@ -4,7 +4,7 @@ import {TIMEOUT_THRESHOLD, api} from "./search"
 export class GoogleTalentClientEvent {
     static getSavedTalentData() {
         try {
-            return JSON.parse(sessionStorage.getItem("talent"))
+            return JSON.parse(sessionStorage.getItem("talent")) || {}
         } catch (e) {
             return {}
         }
