@@ -30,7 +30,8 @@ export default {
     },
     computed: {
         hasAcknowleged() {
-            return acknowledgedCookieUse()
+            const acknowledged = this.declined || this.accepted
+            return acknowledged || acknowledgedCookieUse()
         },
     },
     methods: {
