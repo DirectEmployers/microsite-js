@@ -1,14 +1,12 @@
 import axios from "axios"
 import {kebabCase} from "lodash"
 import { isDevelopment } from "./helpers"
-import AppSolrSearchProvider from '../components/Search/Providers/AppSolrSearchProvider'
-import AppGoogleTalentSearchProvider from '../components/Search/Providers/AppGoogleTalentSearchProvider'
 
 export const SOLR = "solr"
 export const GOOGLE_TALENT = "google_talent"
 export const TIMEOUT_THRESHOLD = 5000
-
-var API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
+// const siteConfig = require("./../config.js")
+let API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
 
 if (process.env.GRIDSOME_USE_MINIKUBE === "true") {
     API_URL = "http://minikube:35000/api/v1"
@@ -58,7 +56,8 @@ export function commuteSearchService(input, siteConfig){
 
 
 export class TitleCompleteService {
-    static async get(q, siteConfig) {
+    static async get(q) {
+        const siteConfig = require("./../config.js")
         const slug = kebabCase(siteConfig.source)
         let params = {q: q, buids: siteConfig.buids}
 

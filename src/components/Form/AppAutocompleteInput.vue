@@ -81,12 +81,6 @@ export default {
                 return `${this._uid}`
             },
         },
-        siteConfig:{
-            type: Object,
-            required: false,
-            default: ()=>{ return {}}
-
-        },
         value: String,
         label: String,
         query: Function,
@@ -107,16 +101,11 @@ export default {
     },
     methods: {
         doSearch: debounce( async function (value) {
-            this.loading = true
+            if (value.length < 2) return
 
-            const args = blank(this.siteConfig) ? [value] : [value, this.siteConfig]
-
-            if (value.length < 2) {
-                this.loading = false
-                return
-            }
             try {
-                const { data } = await this.query.get(...args)
+                this.loading = true
+                const { data } = await this.query.get(value)
                 this.results = data || []
             } catch (error) {
                 this.error = error

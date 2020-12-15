@@ -5,7 +5,6 @@
                 <AppAutocompleteInput
                     ref="q"
                     v-model="input.q"
-                    :site-config="$siteConfig"
                     label="Search by keyword"
                     placeholder="Enter keywords"
                     aria-label="Search by keyword"
