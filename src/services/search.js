@@ -1,5 +1,5 @@
 import axios from "axios"
-import {kebabCase} from "lodash"
+import { kebabCase } from "lodash"
 import { isDevelopment } from "./helpers"
 
 export const SOLR = "solr"
@@ -56,8 +56,7 @@ export function commuteSearchService(input, siteConfig){
 
 
 export class TitleCompleteService {
-    static async get(q) {
-        const siteConfig = require("./../config.js")
+    static async get(q, siteConfig) {
         const slug = kebabCase(siteConfig.source)
         let params = {q: q, buids: siteConfig.buids}
 
@@ -81,6 +80,8 @@ export class TitleCompleteService {
         }
     }
 }
+
+
 export class MOCCompleteService {
     static async get(q) {
         try {

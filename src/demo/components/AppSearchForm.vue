@@ -100,12 +100,17 @@ import {
     LocationCompleteService,
 } from "~/services/search"
 
+const siteConfig = require("./../../config")
+
 export default {
     name: "SearchForm",
     components: {
         AppAutocompleteInput,
         AppGoogleLocationAutocomplete,
         AppGeoLocation
+    },
+    beforeCreate: () => {
+        TitleCompleteService.config = siteConfig
     },
     props:{
         input: {

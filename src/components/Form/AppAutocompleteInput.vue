@@ -103,9 +103,11 @@ export default {
         doSearch: debounce( async function (value) {
             if (value.length < 2) return
 
+            const args = blank(this.query.config) ? [value] : [value, this.query.config]
+
             try {
                 this.loading = true
-                const { data } = await this.query.get(value)
+                const { data } = await this.query.get(...args)
                 this.results = data || []
             } catch (error) {
                 this.error = error
