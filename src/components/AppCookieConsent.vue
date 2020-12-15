@@ -18,7 +18,6 @@ import {
     DECLINED_COOKIES_KEY,
     acceptedCookieUse,
     declinedCookieUse,
-    acknowledgedCookieUse,
 } from "../services/storage"
 
 export default {
