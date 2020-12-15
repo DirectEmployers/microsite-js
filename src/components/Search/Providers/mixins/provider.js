@@ -26,7 +26,6 @@ export default  {
     },
     data() {
         return {
-            jobs: [],
             meta: {
                 source: this.siteConfig.source
             },
@@ -34,8 +33,11 @@ export default  {
                 loading: false,
                 error: false,
             },
+            jobs: [],
             filters: [],
+            tmpData: [],
             pagination: {},
+            // isFirstLoad: true,
             featuredJobs: [],
             appliedFilters: [],
             isCommuteSearch: false,
@@ -79,7 +81,12 @@ export default  {
         "$route.query"() {
             this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
-            this.search()
+            this.search().then( () => {
+                if(this.isLoadingMore){
+                    this.isLoadingMore = false
+                    this.jobs = this.tmpJobs.concat(this.jobs)
+                }
+            })
         },
     },
     created(){
@@ -102,11 +109,10 @@ export default  {
             return []
         },
         loadMore(page) {
-            let jobs = this.jobs
+            this.tmpJobs = this.jobs
+            this.isLoadingMore = true
             this.input["page"] = page
-            this.search(false).then(
-                ()=>{this.jobs = jobs.concat(this.jobs)}
-            )
+            this.pushPayload()
         },
         mergeWithDefaultInput(from = {}) {
             return {
@@ -149,10 +155,20 @@ export default  {
             })
             return filters.concat(this.applyFilters())
         },
-        search(isNewSearch = true) {
-            if(isNewSearch){
+        search() {
+            if(!this.isLoadingMore){
                 this.status.loading = true
             }
+
+            //prevents needing to request all jobs again when using button pagination
+            // if(this.isFirstLoad){
+            //     this.isFirstLoad = false
+            //     if(this.siteConfig.pagination_type){
+            //         let defaultNum = this.siteConfig.default_num_items
+            //         this.input.num_items =  defaultNum ? defaultNum * this.input.page : 15 * this.input.page
+            //     }
+            // }
+
             return this.service(this.input, this.siteConfig).then(resp=>{
                 const data = resp.data || {}
                 this.featuredJobs = data.featured_jobs || []
@@ -184,10 +200,13 @@ export default  {
 
         pushPayload(payload = null) {
             payload = payload === null ? this.getCurrentPayload() : payload
+
             this.$router
                 .push({
+                    name: "jobs",
                     path: "/jobs",
                     query: payload,
+                    params: {savePos: true}
                 })
                 .catch(err => {})
         },

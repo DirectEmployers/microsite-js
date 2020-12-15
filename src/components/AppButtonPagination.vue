@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <nav v-if="totalPages > 1 && currentPage < totalPages">
         <button
             type="button"
             @click="loadMore"
@@ -25,7 +25,6 @@ export default {
     computed: {
         nextPage() {
             const next = this.currentPage + 1
-
             return next <= this.totalPages ? next : false
         },
     },

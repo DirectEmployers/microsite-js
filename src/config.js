@@ -4,7 +4,8 @@ const config =  {
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
     tenant_uuid: process.env.GRIDSOME_GOOGLE_TALENT_TENANT,
     company_uuids: [process.env.GRIDSOME_GOOGLE_TALENT_COMPANY],
-    client_events: true,
+    client_events: true, // Should be extracted to a separate config at some point
+    pagination_type: true, // true = button, false = page Should be extracted to a separate config at some point
     featured_jobs: {
         num_items: 10, //number of items per page.
         solr:"reqid:(" +

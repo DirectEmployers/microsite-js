@@ -43,21 +43,24 @@
                                     :input="input"
                                     :source="source"
                                 />
+                                <div class="text-2xl">
+                                    {{ pagination.total }} jobs found
+                                </div>
                                 <AppButtonPagination
-                                    :totalPages="pagination.total"
+                                    v-if="showButton"
+                                    :totalPages="pagination.total_pages"
                                     :currentPage="pagination.page"
                                     :jobs="jobs"
                                     @loadMore="loadMore"
                                 />
-                                <div class="text-2xl">
-                                    {{ pagination.total }} jobs found
-                                </div>
                                 <AppPagination
+                                    v-else
                                     @pageSelected="selectPage"
                                     :current-page="pagination.page"
                                     :total-records="pagination.total"
                                     :total-pages="pagination.total_pages"
                                 />
+
                             </section>
                             <h3
                                 class="font-bold text-lg"
@@ -237,7 +240,7 @@ export default {
     },
     data() {
         return {
-            AppAccordion,
+            showButton: this.$siteConfig.pagination_type
         }
     },
     metaInfo: {
