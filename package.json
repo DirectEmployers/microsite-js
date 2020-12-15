@@ -18,7 +18,6 @@
     "core-js": "^3.6.5",
     "html2json": "^1.0.2",
     "linkifyjs": "^2.1.9",
-    "lodash": "^4.17.15",
     "pluralize": "^8.0.0",
     "tailwindcss": "^1.3.5",
     "vue": "^2.6.11"
@@ -38,6 +37,7 @@
     "gridsome": "^0.7.23",
     "gridsome-plugin-tailwindcss": "^2.2.43",
     "jest": "^26.0.1",
+    "lodash": "^4.17.20",
     "node-sass": "^4.14.0",
     "sass-loader": "^8.0.2",
     "serve": "^11.3.2",

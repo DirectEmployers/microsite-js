@@ -6,8 +6,6 @@
 
     <h1>Hello, world!</h1>
 
-    <de-sample />
-
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur excepturi labore tempore expedita, et iste tenetur suscipit explicabo! Dolores, aperiam non officia eos quod asperiores
     </p>
@@ -21,20 +19,15 @@
 </template>
 
 <script>
-import DeSample from "@de/de-sample"
-
 export default {
   metaInfo: {
     title: 'Hello, world!'
   },
   components: {
-    DeSample,
   }
 }
 </script>
 
 <style>
-.home-links a {
-  margin-right: 1rem;
-}
+
 </style>

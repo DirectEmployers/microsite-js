@@ -8,8 +8,18 @@ const path = require("path")
 // const {config} = require("process")
 
 module.exports = {
-  siteName: "Gridsome",
-  plugins: [],
+  siteName: "Microsite Dev",
+  plugins: [
+    {
+      use: "gridsome-plugin-tailwindcss",
+      options: {
+        tailwindConfig: './tailwind.config.js',
+        presetEnvConfig: {},
+        shouldImport: false,
+        shouldTimeTravel: true
+      }
+    },
+  ],
   configureWebpack: {
     resolve: {
       alias: {

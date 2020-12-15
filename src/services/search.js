@@ -58,7 +58,8 @@ export function commuteSearchService(input, siteConfig){
 
 
 export class TitleCompleteService {
-    static async get(q, siteConfig) {
+    static async get(q) {
+        const siteConfig = require("./../config.js")
         const slug = kebabCase(siteConfig.source)
         let params = {q: q, buids: siteConfig.buids}
 
