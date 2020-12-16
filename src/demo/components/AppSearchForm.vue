@@ -10,7 +10,7 @@
                     aria-label="Search by keyword"
                     autocapitalize="off"
                     :query="TitleCompleteService"
-                    :config="{
+                    :queryConfig="{
                         source: $siteConfig.source,
                         buids: $siteConfig.buids,
                         project_id: $siteConfig.project_id,

@@ -70,7 +70,6 @@
 
 <script>
 import {debounce} from "lodash"
-import {blank} from "../../services/helpers"
 
 export default {
     name: "AppAutocompleteInput",
@@ -90,7 +89,7 @@ export default {
             required: false,
             default: "display",
         },
-        config: {
+        queryConfig: {
             type: Object,
             required: false,
             default: () => {
@@ -113,7 +112,7 @@ export default {
 
             try {
                 this.loading = true
-                const {data} = await this.query.get(value, this.config)
+                const {data} = await this.query.get(value, this.queryConfig)
                 this.results = data || []
             } catch (error) {
                 this.error = error
