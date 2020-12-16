@@ -12,6 +12,7 @@
                 newSearch,
                 selectPage,
                 pagination,
+                filteredInput,
                 featuredJobs,
                 removeFilter,
                 appliedFilters,
@@ -106,10 +107,9 @@
                                 </ul>
                             </AppAccordion>
 
-
                             <AppSearchFilter
                                 :key="index"
-                                :input="input"
+                                :input="filteredInput"
                                 :name="configFilter.name"
                                 @selectedFilter="setFilter"
                                 :key-name="configFilter.key"
