@@ -60,7 +60,11 @@ export default  {
             return this.siteConfig.filters || []
         },
         sort() {
-            let sort = { options: [], sortField: ()=>{}, by: null}
+            let sort = {
+                options: [],
+                sortField: ()=>{},
+                by: null
+            }
 
             let sortMeta = clone(this.meta.sort || {})
             if (blank(sortMeta)) {

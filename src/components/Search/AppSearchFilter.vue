@@ -112,10 +112,7 @@ export default {
         let value = null
         let filteredOptions = []
         this.givenOptions.forEach(option => {
-            value = this.optionHasSubmitValue(option) ? option.submit: option.display
-            if(this.name == 'r'){
-                console.log(this.input, value)
-            }
+            value = this.optionHasSubmitValue(option) ? option.submit : option.display
             if(this.input[this.name] != value){
                 filteredOptions.push(
                     this.buildFilterHref(option)
