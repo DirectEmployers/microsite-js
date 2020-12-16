@@ -24,7 +24,7 @@
                     class="search-filter-options-item"
                     v-for="(option, index) in displayedFilters"
                 >
-                    <g-link :to="option.href">">
+                    <g-link :to="option.href">
                         {{ option.display }}
                         <span v-if="option.value">({{ option.value }})</span>
                     </g-link>
@@ -104,21 +104,24 @@ export default {
     },
     data() {
         return {
-            givenOptions: clone(this.options),
+            givenOptions: clone(this.options || []),
             displayedFilters: {},
         }
     },
     created() {
-
+        let value = null
         let filteredOptions = []
         this.givenOptions.forEach(option => {
-            if(this.input[this.name] != option.display){
+            value = this.optionHasSubmitValue(option) ? option.submit: option.display
+            if(this.name == 'r'){
+                console.log(this.input, value)
+            }
+            if(this.input[this.name] != value){
                 filteredOptions.push(
                     this.buildFilterHref(option)
                 )
             }
         })
-
         this.displayedFilters = filteredOptions.slice(0, this.limit)
     },
     computed: {
@@ -139,21 +142,18 @@ export default {
         },
     },
     methods: {
+        optionHasSubmitValue(option){
+            return Object.prototype.hasOwnProperty.call(option, 'submit')
+        },
         buildFilterHref(option) {
-            let currentParams = {}
-            for(let param in this.input){
-                if(this.input[param]){
-                    currentParams[param] = this.input[param]
-                }
-            }
+            let value = this.optionHasSubmitValue(option) ? option.submit: option.display;
             let params = {
                 page: 1,
-                [this.name]: option.display,
+                [this.name]: value
             }
-            option.href = buildUrl("jobs", {...currentParams, ...params})
+            option.href = buildUrl("jobs", {...this.input, ...params})
             return option
         },
-        
 
         showMore() {
             const numberOfItemsToAdd = this.limit
