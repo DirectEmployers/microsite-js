@@ -110,6 +110,7 @@ export default  {
             return []
         },
         loadMore(page) {
+            //This code is a potential solution for timeouts. A backend PR will be required to implement
             // let getOffset = (items_per_page) => {
             //     if(items_per_page * page > 100){
             //         let maxPage = Math.floor(100 / items_per_page)
