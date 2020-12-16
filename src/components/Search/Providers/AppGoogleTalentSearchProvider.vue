@@ -1,6 +1,5 @@
 <template>
     <component :is="tag">
-
         <slot
             :jobs="jobs"
             :sort="sort"
@@ -20,7 +19,6 @@
             :getFilterOptions="getFilterOptions"
             :filteredInput="getCurrentPayload()"
         ></slot>
-
     </component>
 </template>
 <script>

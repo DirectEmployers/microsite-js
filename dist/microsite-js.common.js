@@ -1965,13 +1965,13 @@ module.exports = function (options, source) {
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
-      declined: Object(_services_storage__WEBPACK_IMPORTED_MODULE_1__[/* declinedCookieUse */ "g"])(),
+      declined: Object(_services_storage__WEBPACK_IMPORTED_MODULE_1__[/* declinedCookieUse */ "f"])(),
       accepted: Object(_services_storage__WEBPACK_IMPORTED_MODULE_1__[/* acceptedCookieUse */ "e"])()
     };
   },
   computed: {
     hasAcknowleged: function hasAcknowleged() {
-      return Object(_services_storage__WEBPACK_IMPORTED_MODULE_1__[/* acknowledgedCookieUse */ "f"])();
+      return this.declined || this.accepted;
     }
   },
   methods: {
@@ -24806,9 +24806,9 @@ module.exports = isForced;
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ACCEPTED_COOKIES_KEY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return DECLINED_COOKIES_KEY; });
 /* unused harmony export isStoredAs */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return declinedCookieUse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return declinedCookieUse; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return acceptedCookieUse; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return acknowledgedCookieUse; });
+/* unused harmony export acknowledgedCookieUse */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return VS_KEY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return UTM_KEY; });
 /* unused harmony export setViewSourceParameters */
@@ -26879,7 +26879,7 @@ hiddenKeys[HIDDEN] = true;
     }
   },
   created: function created() {
-    if (process.isClient && !Object(_services_storage__WEBPACK_IMPORTED_MODULE_5__[/* declinedCookieUse */ "g"])() && !Object(_services_helpers__WEBPACK_IMPORTED_MODULE_4__[/* isDevelopment */ "d"])()) {
+    if (process.isClient && !Object(_services_storage__WEBPACK_IMPORTED_MODULE_5__[/* declinedCookieUse */ "f"])() && !Object(_services_helpers__WEBPACK_IMPORTED_MODULE_4__[/* isDevelopment */ "d"])()) {
       this.appendTracker();
     }
   },
@@ -27835,12 +27835,12 @@ if (DESCRIPTORS && !(NAME in FunctionPrototype)) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=57e13145&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=f9ebcf9e&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"sort":_vm.sort,"input":_vm.input,"status":_vm.status,"hasJobs":_vm.hasJobs,"source":_vm.meta.source,"setFilter":_vm.setFilter,"newSearch":_vm.newSearch,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"featuredJobs":_vm.featuredJobs,"removeFilter":_vm.removeFilter,"isGoogleTalent":_vm.isGoogleTalent,"appliedFilters":_vm.appliedFilters,"isCommuteSearch":_vm.isCommuteSearch,"getFilterOptions":_vm.getFilterOptions,"filteredInput":_vm.getCurrentPayload()})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=57e13145&
+// CONCATENATED MODULE: ./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=f9ebcf9e&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -27868,8 +27868,6 @@ var helpers = __webpack_require__("a74a");
 
 
 
-//
-//
 //
 //
 //
@@ -31893,12 +31891,12 @@ module.exports = function (target, src, options) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppCookieConsent.vue?vue&type=template&id=010af692&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppCookieConsent.vue?vue&type=template&id=b5048332&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[(!_vm.hasAcknowleged)?_c('section',[_vm._t("default",null,{"acceptCookieUse":_vm.acceptCookieUse,"declineCookieUse":_vm.declineCookieUse,"declined":_vm.declined,"acknowledged":_vm.hasAcknowleged,"accepted":_vm.accepted})],2):_vm._e()])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppCookieConsent.vue?vue&type=template&id=010af692&
+// CONCATENATED MODULE: ./src/components/AppCookieConsent.vue?vue&type=template&id=b5048332&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppCookieConsent.vue?vue&type=script&lang=js&
 var AppCookieConsentvue_type_script_lang_js_ = __webpack_require__("2414");
