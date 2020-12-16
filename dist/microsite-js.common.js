@@ -568,12 +568,12 @@ module.exports = ''.repeat || function repeat(count) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=2f80e841&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isVisible && _vm.hasOptions)?_c(_vm.tag,_vm._b({tag:"component",staticClass:"search-filter"},'component',_vm.$attrs,false),[(_vm.display)?_c('h3',{staticClass:"search-filter-display"},[_vm._v(" Filter By "+_vm._s(_vm.display)+" ")]):_vm._e(),_vm._t("default",[_c('ul',{staticClass:"search-filter-options"},_vm._l((_vm.displayedFilters),function(option,index){return _c('li',{key:index,staticClass:"search-filter-options-item"},[_c('g-link',{attrs:{"to":option.href}},[_vm._v("\"> "+_vm._s(option.display)+" "),(option.value)?_c('span',[_vm._v("("+_vm._s(option.value)+")")]):_vm._e()])],1)}),0),(_vm.shouldShowLess || _vm.shouldShowMore)?_c('section',{staticClass:"search-filter-limiter"},[(_vm.shouldShowMore)?_c('button',{staticClass:"search-filter-limiter-more",attrs:{"aria-label":"Show more filters","rel":"nofollow"},on:{"click":function($event){return _vm.showMore()}}},[_vm._v(" More ")]):_vm._e(),(_vm.shouldShowLess)?_c('button',{staticClass:"search-filter-limiter-less",attrs:{"aria-label":"Show less filters","rel":"nofollow"},on:{"click":function($event){return _vm.showLess()}}},[_vm._v(" Less ")]):_vm._e()]):_vm._e()],{"showLess":_vm.showLess,"showMore":_vm.showMore,"shouldShowLess":_vm.shouldShowLess,"shouldShowMore":_vm.shouldShowMore,"displayedFilters":_vm.displayedFilters})],2):_vm._e()}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=75415c0f&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isVisible && _vm.hasOptions)?_c(_vm.tag,_vm._b({tag:"component",staticClass:"search-filter"},'component',_vm.$attrs,false),[(_vm.display)?_c('h3',{staticClass:"search-filter-display"},[_vm._v(" Filter By "+_vm._s(_vm.display)+" ")]):_vm._e(),_vm._t("default",[_c('ul',{staticClass:"search-filter-options"},_vm._l((_vm.displayedFilters),function(option,index){return _c('li',{key:index,staticClass:"search-filter-options-item"},[_c('g-link',{attrs:{"to":option.href}},[_vm._v(" "+_vm._s(option.display)+" "),(option.value)?_c('span',[_vm._v("("+_vm._s(option.value)+")")]):_vm._e()])],1)}),0),(_vm.shouldShowLess || _vm.shouldShowMore)?_c('section',{staticClass:"search-filter-limiter"},[(_vm.shouldShowMore)?_c('button',{staticClass:"search-filter-limiter-more",attrs:{"aria-label":"Show more filters","rel":"nofollow"},on:{"click":function($event){return _vm.showMore()}}},[_vm._v(" More ")]):_vm._e(),(_vm.shouldShowLess)?_c('button',{staticClass:"search-filter-limiter-less",attrs:{"aria-label":"Show less filters","rel":"nofollow"},on:{"click":function($event){return _vm.showLess()}}},[_vm._v(" Less ")]):_vm._e()]):_vm._e()],{"showLess":_vm.showLess,"showMore":_vm.showMore,"shouldShowLess":_vm.shouldShowLess,"shouldShowMore":_vm.shouldShowMore,"displayedFilters":_vm.displayedFilters})],2):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=2f80e841&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=75415c0f&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -719,16 +719,19 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
   },
   data: function data() {
     return {
-      givenOptions: Object(lodash["clone"])(this.options),
+      givenOptions: Object(lodash["clone"])(this.options || []),
       displayedFilters: {}
     };
   },
   created: function created() {
     var _this = this;
 
+    var value = null;
     var filteredOptions = [];
     this.givenOptions.forEach(function (option) {
-      if (_this.input[_this.name] != option.display) {
+      value = _this.optionHasSubmitValue(option) ? option.submit : option.display;
+
+      if (_this.input[_this.name] != value) {
         filteredOptions.push(_this.buildFilterHref(option));
       }
     });
@@ -749,20 +752,17 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
     }
   },
   methods: {
+    optionHasSubmitValue: function optionHasSubmitValue(option) {
+      return Object.prototype.hasOwnProperty.call(option, 'submit');
+    },
     buildFilterHref: function buildFilterHref(option) {
-      var currentParams = {};
-
-      for (var param in this.input) {
-        if (this.input[param]) {
-          currentParams[param] = this.input[param];
-        }
-      }
+      var value = this.optionHasSubmitValue(option) ? option.submit : option.display;
 
       var params = Object(defineProperty["a" /* default */])({
         page: 1
-      }, this.name, option.display);
+      }, this.name, value);
 
-      option.href = buildURL_default()("jobs", Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, currentParams), params));
+      option.href = buildURL_default()("jobs", Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, this.input), params));
       return option;
     },
     showMore: function showMore() {
@@ -20063,7 +20063,11 @@ module.exports = function isCancel(value) {
     sort: function sort() {
       var _this = this;
 
-      var sort = {};
+      var sort = {
+        options: [],
+        sortField: function sortField() {},
+        by: null
+      };
       var sortMeta = Object(lodash__WEBPACK_IMPORTED_MODULE_14__["clone"])(this.meta.sort || {});
 
       if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* blank */ "a"])(sortMeta)) {
@@ -20175,7 +20179,7 @@ module.exports = function isCancel(value) {
     },
     getFilterOptions: function getFilterOptions(filter) {
       var key = Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* blank */ "a"])(filter.key) ? filter.name : filter.key;
-      return this.filters[key] || [];
+      return Object(_services_helpers__WEBPACK_IMPORTED_MODULE_13__[/* blank */ "a"])(this.filters[key]) || !Array.isArray(this.filters[key]) ? [] : this.filters[key];
     },
     setFilter: function setFilter(key, value) {
       this.input[key] = value;
@@ -23960,17 +23964,18 @@ module.exports = function (argument) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppSolrSearchProvider.vue?vue&type=template&id=89b05cfe&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"sort":_vm.sort,"input":_vm.input,"status":_vm.status,"hasJobs":_vm.hasJobs,"source":_vm.meta.source,"setFilter":_vm.setFilter,"newSearch":_vm.newSearch,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"featuredJobs":_vm.featuredJobs,"removeFilter":_vm.removeFilter,"isGoogleTalent":_vm.isGoogleTalent,"appliedFilters":_vm.appliedFilters,"isCommuteSearch":_vm.isCommuteSearch,"getFilterOptions":_vm.getFilterOptions})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppSolrSearchProvider.vue?vue&type=template&id=0c1c9c06&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"sort":_vm.sort,"input":_vm.input,"status":_vm.status,"hasJobs":_vm.hasJobs,"source":_vm.meta.source,"setFilter":_vm.setFilter,"newSearch":_vm.newSearch,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"featuredJobs":_vm.featuredJobs,"removeFilter":_vm.removeFilter,"isGoogleTalent":_vm.isGoogleTalent,"appliedFilters":_vm.appliedFilters,"isCommuteSearch":_vm.isCommuteSearch,"getFilterOptions":_vm.getFilterOptions,"filteredInput":_vm.getCurrentPayload()})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/Providers/AppSolrSearchProvider.vue?vue&type=template&id=89b05cfe&
+// CONCATENATED MODULE: ./src/components/Search/Providers/AppSolrSearchProvider.vue?vue&type=template&id=0c1c9c06&
 
 // EXTERNAL MODULE: ./src/components/Search/Providers/mixins/provider.js
 var provider = __webpack_require__("300c");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppSolrSearchProvider.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -27826,12 +27831,12 @@ if (DESCRIPTORS && !(NAME in FunctionPrototype)) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=79ef27da&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"sort":_vm.sort,"input":_vm.input,"status":_vm.status,"hasJobs":_vm.hasJobs,"source":_vm.meta.source,"setFilter":_vm.setFilter,"newSearch":_vm.newSearch,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"featuredJobs":_vm.featuredJobs,"removeFilter":_vm.removeFilter,"isGoogleTalent":_vm.isGoogleTalent,"appliedFilters":_vm.appliedFilters,"isCommuteSearch":_vm.isCommuteSearch,"getFilterOptions":_vm.getFilterOptions})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=f9ebcf9e&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"jobs":_vm.jobs,"sort":_vm.sort,"input":_vm.input,"status":_vm.status,"hasJobs":_vm.hasJobs,"source":_vm.meta.source,"setFilter":_vm.setFilter,"newSearch":_vm.newSearch,"pagination":_vm.pagination,"selectPage":_vm.selectPage,"featuredJobs":_vm.featuredJobs,"removeFilter":_vm.removeFilter,"isGoogleTalent":_vm.isGoogleTalent,"appliedFilters":_vm.appliedFilters,"isCommuteSearch":_vm.isCommuteSearch,"getFilterOptions":_vm.getFilterOptions,"filteredInput":_vm.getCurrentPayload()})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=79ef27da&
+// CONCATENATED MODULE: ./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=f9ebcf9e&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -27859,6 +27864,7 @@ var helpers = __webpack_require__("a74a");
 
 
 
+//
 //
 //
 //
