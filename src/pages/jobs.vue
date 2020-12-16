@@ -116,7 +116,6 @@
                                 </ul>
                             </AppAccordion>
 
-
                             <AppSearchFilter
                                 :key="index"
                                 :input="input"

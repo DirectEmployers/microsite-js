@@ -153,7 +153,6 @@ export default {
             option.href = buildUrl("jobs", {...currentParams, ...params})
             return option
         },
-        
 
         showMore() {
             const numberOfItemsToAdd = this.limit

@@ -14,7 +14,7 @@ export default function (Vue, { router, head, isClient }) {
     }])
     router.options.scrollBehavior = function(to, from, savedPosition) {
         if (savedPosition) {
-            return  savedPosition;
+            return savedPosition;
         }
         if (to.params.savePos) {
             return {}

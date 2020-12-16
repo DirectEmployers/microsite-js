@@ -35,10 +35,11 @@ export default  {
             },
             jobs: [],
             filters: [],
-            tmpData: [],
+            tmpData: {},
+            default_num_items: 15,
             pagination: {},
-            // isFirstLoad: true,
             featuredJobs: [],
+            isFirstLoad: true,
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.getInputDefaults(),
@@ -84,7 +85,7 @@ export default  {
             this.search().then( () => {
                 if(this.isLoadingMore){
                     this.isLoadingMore = false
-                    this.jobs = this.tmpJobs.concat(this.jobs)
+                    this.jobs = this.tmpData.jobs.concat(this.jobs)
                 }
             })
         },
@@ -109,9 +110,22 @@ export default  {
             return []
         },
         loadMore(page) {
-            this.tmpJobs = this.jobs
+            // let getOffset = (items_per_page) => {
+            //     if(items_per_page * page > 100){
+            //         let maxPage = Math.floor(100 / items_per_page)
+            //         this.input.offset = items_per_page * (page - maxPage)
+            //     }
+            // }
+
+            // if(this.siteConfig.num_items){
+            //     getOffset(this.siteConfig.num_items)
+            // } else {
+            //     getOffset(this.default_num_items)
+            // }
+
+            this.tmpData.jobs = this.jobs
             this.isLoadingMore = true
-            this.input["page"] = page
+            this.input.page = page
             this.pushPayload()
         },
         mergeWithDefaultInput(from = {}) {
@@ -161,13 +175,12 @@ export default  {
             }
 
             //prevents needing to request all jobs again when using button pagination
-            // if(this.isFirstLoad){
-            //     this.isFirstLoad = false
-            //     if(this.siteConfig.pagination_type){
-            //         let defaultNum = this.siteConfig.default_num_items
-            //         this.input.num_items =  defaultNum ? defaultNum * this.input.page : 15 * this.input.page
-            //     }
-            // }
+            if(this.isFirstLoad && this.siteConfig.pagination_type){
+                let defaultNum = this.siteConfig.num_items
+                this.input.num_items = defaultNum ? defaultNum * this.input.page : this.default_num_items * this.input.page
+                this.tmpData.page = parseInt(this.input.page)
+                this.input.page = 1
+            }
 
             return this.service(this.input, this.siteConfig).then(resp=>{
                 const data = resp.data || {}
@@ -181,6 +194,24 @@ export default  {
                 this.status.error = err
             }).finally(() =>{
                 this.status.loading = false
+                if(this.isFirstLoad){
+                    this.isFirstLoad = false
+                    if(this.siteConfig.num_items){
+                        this.input.num_items = this.siteConfig.num_items
+                    } else {
+                        delete this.input.num_items
+                    }
+                    //siteconfig really should never be modified like this. A function that dynamically changes it then passes to this.service is 
+                    //preferable IMO. Won't change here
+                    if(this.siteConfig.pagination_type){
+                        this.pagination.page = this.tmpData.page
+                        this.input.page = this.tmpData.page
+                        //These lines keep the loadmore button from disappearing
+                        let divisor = this.siteConfig.num_items ? this.siteConfig.num_items : this.default_num_items
+                        this.pagination.total_pages = parseInt(this.pagination.total) / divisor
+                    }
+
+                }
             })
         },
         getFilterOptions(filter) {

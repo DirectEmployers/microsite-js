@@ -22,6 +22,7 @@ const config =  {
         },
         {
             name: "company",
+            key: "company",
             display: "Company",
         },
         {
