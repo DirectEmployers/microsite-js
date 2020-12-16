@@ -1,75 +1,76 @@
 <template>
-<div
-    class="form__autocomplete"
-    role="combobox"
-    aria-haspopup="listbox"
-    :aria-owns="`form__autocomplete-items-${id}`"
-    :aria-expanded="isExpanded"
->
-    <label
-        v-if="label"
-        class="form__label"
-        :id="`form__label-${id}`"
-        :for="`form__autocomplete-${id}`">
-            {{ label }}
-    </label>
-    <input
-        :id="`form__autocomplete-${id}`"
-        ref="input"
-        v-bind="$attrs"
-        class="form__input"
-        type="text"
-        :value="value"
-        @input="changeValue($event.target.value)"
-        @blur="blur"
-        @keydown.enter.prevent="keyEnter"
-        @keydown.esc="blur"
-        @keydown.up="keyUp"
-        @keydown.down="keyDown"
-        aria-autocomplete="list"
+    <div
+        class="form__autocomplete"
+        role="combobox"
         aria-haspopup="listbox"
-        :aria-labelledby="`form__label-${id}`"
-        :aria-activedescendant="activeDescendant"
+        :aria-owns="`form__autocomplete-items-${id}`"
+        :aria-expanded="isExpanded"
     >
-    <div
-        v-if="loading"
-        class="form__autocomplete--loading spinner spinner--gray"
-    ></div>
-
-    <div
-        v-show="results.length"
-        class="form__autocomplete-results"
-    >
-        <ul
-            class="form__autocomplete-items"
-            :id="`form__autocomplete-items-${id}`"
-            role="listbox"
+        <label
+            v-if="label"
+            class="form__label"
+            :id="`form__label-${id}`"
+            :for="`form__autocomplete-${id}`"
         >
-            <template v-for="(result, index) in results">
-                <slot name="result" :result="result">
-                    <li
-                        class="form__autocomplete-item"
-                        :ref="`option-${index}`"
-                        :key="index"
-                        :id="`form__autocomplete--${id}-${index}`"
-                        :class="{ 'form__autocomplete-item--active':index === selectedIndex }"
-                        @mouseover="selectedIndex = index"
-                        @click="setValue(result)"
-                        role="option"
-                        :aria-selected="activeDescendant"
-                    >
-                        {{ result[display] }}
-                    </li>
-                </slot>
-            </template>
-        </ul>
+            {{ label }}
+        </label>
+        <input
+            :id="`form__autocomplete-${id}`"
+            ref="input"
+            v-bind="$attrs"
+            class="form__input"
+            type="text"
+            :value="value"
+            @input="changeValue($event.target.value)"
+            @blur="blur"
+            @keydown.enter.prevent="keyEnter"
+            @keydown.esc="blur"
+            @keydown.up="keyUp"
+            @keydown.down="keyDown"
+            aria-autocomplete="list"
+            aria-haspopup="listbox"
+            :aria-labelledby="`form__label-${id}`"
+            :aria-activedescendant="activeDescendant"
+        />
+        <div
+            v-if="loading"
+            class="form__autocomplete--loading spinner spinner--gray"
+        ></div>
+
+        <div v-show="results.length" class="form__autocomplete-results">
+            <ul
+                class="form__autocomplete-items"
+                :id="`form__autocomplete-items-${id}`"
+                role="listbox"
+            >
+                <template v-for="(result, index) in results">
+                    <slot name="result" :result="result">
+                        <li
+                            class="form__autocomplete-item"
+                            :ref="`option-${index}`"
+                            :key="index"
+                            :id="`form__autocomplete--${id}-${index}`"
+                            :class="{
+                                'form__autocomplete-item--active':
+                                    index === selectedIndex,
+                            }"
+                            @mouseover="selectedIndex = index"
+                            @click="setValue(result)"
+                            role="option"
+                            :aria-selected="activeDescendant"
+                        >
+                            {{ result[display] }}
+                        </li>
+                    </slot>
+                </template>
+            </ul>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
-import { debounce } from "lodash"
-import { blank } from "../../services/helpers"
+import {debounce} from "lodash"
+import {blank} from "../../services/helpers"
 
 export default {
     name: "AppAutocompleteInput",
@@ -87,8 +88,15 @@ export default {
         display: {
             type: String,
             required: false,
-            default: "display"
-        }
+            default: "display",
+        },
+        config: {
+            type: Object,
+            required: false,
+            default: () => {
+                return {}
+            },
+        },
     },
     data() {
         return {
@@ -96,18 +104,16 @@ export default {
             results: [],
             result: null,
             loading: false,
-            error: null
+            error: null,
         }
     },
     methods: {
-        doSearch: debounce( async function (value) {
+        doSearch: debounce(async function (value) {
             if (value.length < 2) return
-
-            const args = blank(this.query.config) ? [value] : [value, this.query.config]
 
             try {
                 this.loading = true
-                const { data } = await this.query.get(...args)
+                const {data} = await this.query.get(value, this.config)
                 this.results = data || []
             } catch (error) {
                 this.error = error
@@ -115,19 +121,19 @@ export default {
                 this.loading = false
             }
         }, 200),
-        changeValue (value) {
+        changeValue(value) {
             this.$emit("input", value)
             this.selectedIndex = -1
             this.doSearch(value)
         },
-        blur (event) {
+        blur(event) {
             this.$emit("input", event.target.value)
-            setTimeout( () => this.results = [], 200)
+            setTimeout(() => (this.results = []), 200)
         },
-        setValue (result) {
+        setValue(result) {
             let value = result[this.display]
 
-            if(Object.prototype.hasOwnProperty.call(result, 'value')){
+            if (Object.prototype.hasOwnProperty.call(result, "value")) {
                 value = result.value
             }
 
@@ -135,8 +141,8 @@ export default {
             this.result = result
             this.$emit("setResult", result)
         },
-        keyEnter () {
-            if(this.selectedIndex !== -1) {
+        keyEnter() {
+            if (this.selectedIndex !== -1) {
                 this.setValue(this.results[this.selectedIndex])
                 this.results = []
                 this.selectedIndex = -1
@@ -146,7 +152,7 @@ export default {
                 this.$emit("setResult", null)
             }
         },
-        keyUp () {
+        keyUp() {
             if (this.selectedIndex > -1) {
                 this.selectedIndex--
             }
@@ -155,7 +161,7 @@ export default {
             }
             this.scroll()
         },
-        keyDown () {
+        keyDown() {
             if (this.selectedIndex <= this.results.length) {
                 this.selectedIndex++
             }
@@ -167,17 +173,23 @@ export default {
         scroll() {
             const option = this.$refs[`option-${this.selectedIndex}`]
             if (option) {
-                option[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+                option[0].scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "start",
+                })
             }
-        }
+        },
     },
     computed: {
-        isExpanded () {
+        isExpanded() {
             return this.results.length ? "true" : "false"
         },
-        activeDescendant () {
-            return this.selectedIndex > -1 ? `form__autocomplete--${this.id}-${this.selectedIndex}` : ""
-        }
-    }
+        activeDescendant() {
+            return this.selectedIndex > -1
+                ? `form__autocomplete--${this.id}-${this.selectedIndex}`
+                : ""
+        },
+    },
 }
 </script>
