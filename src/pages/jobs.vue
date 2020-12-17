@@ -8,9 +8,8 @@
                 source,
                 status,
                 hasJobs,
-                setFilter,
+                setInput,
                 newSearch,
-                selectPage,
                 pagination,
                 filteredInput,
                 featuredJobs,
@@ -47,7 +46,7 @@
                                     {{ pagination.total }} jobs found
                                 </div>
                                 <AppPagination
-                                    @pageSelected="selectPage"
+                                    @pageSelected="setInput"
                                     :current-page="pagination.page"
                                     :total-records="pagination.total"
                                     :total-pages="pagination.total_pages"
@@ -111,7 +110,6 @@
                                 :key="index"
                                 :input="filteredInput"
                                 :name="configFilter.name"
-                                @selectedFilter="setFilter"
                                 :key-name="configFilter.key"
                                 :visible="configFilter.visible"
                                 :options="getFilterOptions(configFilter)"
