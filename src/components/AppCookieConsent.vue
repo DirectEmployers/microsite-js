@@ -18,7 +18,6 @@ import {
     DECLINED_COOKIES_KEY,
     acceptedCookieUse,
     declinedCookieUse,
-    acknowledgedCookieUse,
 } from "../services/storage"
 
 export default {
@@ -30,7 +29,7 @@ export default {
     },
     computed: {
         hasAcknowleged() {
-            return acknowledgedCookieUse()
+            return this.declined || this.accepted
         },
     },
     methods: {
