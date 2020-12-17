@@ -94,7 +94,7 @@ export default  {
         })
 
         if(!blank(this.$route.params.location)){
-            input.location =  displayLocationFromSlug(input.location)
+            this.input.location =  displayLocationFromSlug(this.input.location)
         }
 
         if(this.searchOnLoad) {
