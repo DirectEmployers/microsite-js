@@ -1,7 +1,7 @@
 <template>
     <component :is="tag">
         <slot
-            v-bind="slotData()"
+            v-bind="slotData"
         >
         </slot>
     </component>

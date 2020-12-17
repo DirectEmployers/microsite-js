@@ -83,6 +83,26 @@ export default {
             sort.options = sortMeta.options.map(o => startCase(o))
             return sort
         },
+        slotData() {
+            return {
+                jobs: this.jobs,
+                sort: this.sort,
+                input: this.input,
+                status: this.status,
+                hasJobs: this.hasJobs,
+                source: this.meta.source,
+                setInput: this.setInput,
+                newSearch: this.newSearch,
+                pagination: this.pagination,
+                featuredJobs: this.featuredJobs,
+                removeFilter: this.removeFilter,
+                isGoogleTalent: this.isGoogleTalent,
+                appliedFilters: this.appliedFilters,
+                isCommuteSearch: this.isCommuteSearch,
+                getFilterOptions: this.getFilterOptions,
+                filteredInput: this.filterInput(this.input),
+            }
+        },
     },
     watch: {
         //any time query string changes, update component input and search.
@@ -152,7 +172,7 @@ export default {
         },
         removeFilter(params) {
             if (params == "*") {
-                return this.newSearch({})
+                return this.newSearch(this.defaultInput)
             }
             if (!Array.isArray(params)) {
                 params = [params]
@@ -234,26 +254,6 @@ export default {
                     query: this.filterInput(payload),
                 })
                 .catch(err => {})
-        },
-        slotData() {
-            return {
-                jobs: this.jobs,
-                sort: this.sort,
-                input: this.input,
-                status: this.status,
-                hasJobs: this.hasJobs,
-                source: this.meta.source,
-                setInput: this.setInput,
-                newSearch: this.newSearch,
-                pagination: this.pagination,
-                featuredJobs: this.featuredJobs,
-                removeFilter: this.removeFilter,
-                isGoogleTalent: this.isGoogleTalent,
-                appliedFilters: this.appliedFilters,
-                isCommuteSearch: this.isCommuteSearch,
-                getFilterOptions: this.getFilterOptions,
-                filteredInput: this.filterInput(this.input),
-            }
-        },
+        }
     },
 }

@@ -1,6 +1,6 @@
 <template>
     <component :is="tag">
-        <slot v-bind="slotData()"></slot>
+        <slot v-bind="slotData"></slot>
     </component>
 </template>
 <script>
@@ -68,8 +68,7 @@ export default {
             return !blank(this.input.coords) && !blank(this.input.commuteLocation)
         },
         beforeSearch() {
-            this.isCommuteSearch = !this.isSolr && this.shouldDoCommuteSearch()
-            if (this.isCommuteSearch) {
+            if (this.isCommuteSearch = this.shouldDoCommuteSearch()) {
                 this.input.location = ""
             }
         },
