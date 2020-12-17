@@ -98,12 +98,14 @@ export default {
             ...this.$route.params,
         })
 
-        if (!blank(this.$route.params.location)) {
-            input.location = displayLocationFromSlug(input.location)
+        if(!blank(this.$route.params.location)){
+            this.input.location =  displayLocationFromSlug(this.input.location)
         }
 
         if (this.searchOnLoad) {
             this.search()
+        }else{
+            this.appliedFilters = this.getAppliedFilters()
         }
     },
     methods: {
