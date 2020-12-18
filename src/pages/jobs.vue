@@ -40,7 +40,7 @@
                             <section v-if="jobs.length">
                                 <AppJobSearchResults
                                     :jobs="jobs"
-                                    :input="input"
+                                    :input="filteredInput"
                                     :source="source"
                                 />
                                 <div class="text-2xl">

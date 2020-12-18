@@ -3,7 +3,7 @@
         <AppJobFetch s3-folder="sanfordhealth-jobs">
             <template v-slot="{job, status: {error, pending, resolved}}">
                 <AppLoader v-if="pending" />
-                <App404 v-else-if="error && resolved" />
+                <App404 v-else-if="error && !resolved" />
                 <AppJobExpired v-else-if="isExpired(job)" :job="job" />
                 <AppJob v-else-if="job" :job="job" />
             </template>
