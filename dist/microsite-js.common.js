@@ -31074,7 +31074,7 @@ $({ target: 'Object', stat: true, sham: !DESCRIPTORS }, {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobFetch.vue?vue&type=template&id=33ca2f99&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobFetch.vue?vue&type=template&id=2e1b1b70&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[_c('section',[_vm._t("default",null,{"status":{
                 error: _vm.error,
                 pending: _vm.pending,
@@ -31083,7 +31083,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppJobFetch.vue?vue&type=template&id=33ca2f99&
+// CONCATENATED MODULE: ./src/components/AppJobFetch.vue?vue&type=template&id=2e1b1b70&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
 var es_regexp_exec = __webpack_require__("ac1f");
@@ -31180,9 +31180,6 @@ var helpers = __webpack_require__("a74a");
     };
   },
   watch: {
-    "guid": function guid() {
-      this.fetchJob(this.guid);
-    },
     "$route.params.guid": function $routeParamsGuid() {
       this.fetchJob(this.$route.params.guid, this.correctJobRouteUrl);
     }

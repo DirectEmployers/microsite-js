@@ -38,9 +38,6 @@ export default {
         }
     },
     watch: {
-        "guid"() {
-            this.fetchJob(this.guid)
-        },
         "$route.params.guid"() {
             this.fetchJob(
                 this.$route.params.guid,
