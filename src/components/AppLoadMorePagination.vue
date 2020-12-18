@@ -1,10 +1,10 @@
 <template>
-    <nav v-if="totalPages > 1 && currentPage < totalPages">
+    <nav v-if="totalPages > 1 && currentPage < totalPages" class="load-more">
         <button
             type="button"
             @click="loadMore"
         >
-            More
+            Load More Jobs
         </button>
     </nav>
 </template>

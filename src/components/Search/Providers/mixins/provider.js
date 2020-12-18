@@ -8,6 +8,11 @@ export default  {
             required: true,
             type: Object,
         },
+        isLoadMore: {
+            required: false,
+            type: Boolean,
+            default: false
+        },
         tag: {
             required: false,
             type: String,
@@ -25,6 +30,7 @@ export default  {
         },
     },
     data() {
+        let num_items = 15
         return {
             meta: {
                 source: this.siteConfig.source
@@ -36,13 +42,15 @@ export default  {
             jobs: [],
             filters: [],
             tmpData: {},
-            default_num_items: 15,
             pagination: {},
             featuredJobs: [],
+            displayedJobs: [],
             isFirstLoad: true,
             appliedFilters: [],
+            default_num_items: num_items,
             isCommuteSearch: false,
             input: this.getInputDefaults(),
+            offset: this.siteConfig.num_items ? this.siteConfig.num_items : num_items,
         }
     },
     computed:{
@@ -82,12 +90,28 @@ export default  {
         "$route.query"() {
             this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
-            this.search().then( () => {
-                if(this.isLoadingMore){
-                    this.isLoadingMore = false
-                    this.jobs = this.tmpData.jobs.concat(this.jobs)
-                }
-            })
+            this.input.page = parseInt(this.input.page)
+            this.$route.query.page = parseInt(this.$route.query.page)
+
+            let isNextPage = this.input.page < this.tmpData.page
+            let isPrevPage = (this.tmpData.lastPage < this.input.page)
+
+            if(isNextPage && isPrevPage){
+                this.displayedJobs = this.displayedJobs.concat(this.tmpData.nextPage.splice(0,this.offset))
+                this.pagination.page = this.input.page
+            } else if (isNextPage) {
+                let offset = this.offset
+                offset *= this.input.page
+                this.pagination.page = this.input.page
+                this.tmpData.lastPage = this.input.page
+                this.tmpData.nextPage = this.displayedJobs.splice(offset).concat(this.tmpData.nextPage)
+            } else {
+                this.search().then( () => {
+                    if(this.isLoadingMore){
+                        this.isLoadingMore = false
+                    }
+                })
+            }
         },
     },
     created(){
@@ -123,8 +147,6 @@ export default  {
             // } else {
             //     getOffset(this.default_num_items)
             // }
-
-            this.tmpData.jobs = this.jobs
             this.isLoadingMore = true
             this.input.page = page
             this.pushPayload()
@@ -176,13 +198,17 @@ export default  {
             }
 
             //prevents needing to request all jobs again when using button pagination
-            if(this.isFirstLoad && this.siteConfig.pagination_type){
+            if(this.isFirstLoad && this.isLoadMore){
                 let defaultNum = this.siteConfig.num_items
-                this.input.num_items = defaultNum ? defaultNum * this.input.page : this.default_num_items * this.input.page
+                let calcTotal = (num) => { return (num * this.input.page + num) }
+                this.input.num_items = defaultNum ? calcTotal(defaultNum) : calcTotal(this.default_num_items)
                 this.tmpData.page = parseInt(this.input.page)
                 this.input.page = 1
+            } else if(this.isLoadMore) {
+                this.tmpData.lastPage = this.$route.query.page
+                this.displayedJobs = this.displayedJobs.concat(this.tmpData.nextPage)
+                this.input.page++
             }
-
             return this.service(this.input, this.siteConfig).then(resp=>{
                 const data = resp.data || {}
                 this.featuredJobs = data.featured_jobs || []
@@ -195,6 +221,11 @@ export default  {
                 this.status.error = err
             }).finally(() =>{
                 this.status.loading = false
+                if(!this.isFirstLoad && this.isLoadMore){
+                    this.pagination.page--
+                    this.tmpData.page = this.input.page > this.tmpData.page ? this.input.page : this.tmpData.page
+                    this.tmpData.nextPage = this.jobs
+                }
                 if(this.isFirstLoad){
                     this.isFirstLoad = false
                     if(this.siteConfig.num_items){
@@ -202,16 +233,15 @@ export default  {
                     } else {
                         delete this.input.num_items
                     }
-                    //siteconfig really should never be modified like this. A function that dynamically changes it then passes to this.service is 
-                    //preferable IMO. Won't change here
-                    if(this.siteConfig.pagination_type){
+                    if(this.isLoadMore){
+                        this.tmpData.nextPage = this.jobs.splice(this.jobs.length - this.offset)
+                        this.displayedJobs = this.jobs
                         this.pagination.page = this.tmpData.page
                         this.input.page = this.tmpData.page
-                        //These lines keep the loadmore button from disappearing
-                        let divisor = this.siteConfig.num_items ? this.siteConfig.num_items : this.default_num_items
-                        this.pagination.total_pages = parseInt(this.pagination.total) / divisor
+                        //These lines keep the loadmore button from disappearing when first load is large
+                        //eg page loaded is 8, but pagination returns 3 total due to large num_items
+                        this.pagination.total_pages = parseInt(this.pagination.total) / this.offset
                     }
-
                 }
             })
         },

@@ -1,7 +1,7 @@
 <template>
     <component :is="tag">
         <slot
-            :jobs="jobs"
+            :jobs="displayedJobs"
             :sort="sort"
             :input="input"
             :status="status"

@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <AppGoogleTalentSearchProvider :site-config="$siteConfig">
+        <AppGoogleTalentSearchProvider :site-config="$siteConfig" :isLoadMore="true">
             <template v-slot="{
                 jobs,
                 sort,
@@ -43,23 +43,15 @@
                                     :input="input"
                                     :source="source"
                                 />
-                                <div class="text-2xl">
-                                    {{ pagination.total }} jobs found
-                                </div>
-                                <AppButtonPagination
-                                    v-if="showButton"
+                                <AppLoadMorePagination
                                     :totalPages="pagination.total_pages"
                                     :currentPage="pagination.page"
                                     :jobs="jobs"
                                     @loadMore="loadMore"
                                 />
-                                <AppPagination
-                                    v-else
-                                    @pageSelected="selectPage"
-                                    :current-page="pagination.page"
-                                    :total-records="pagination.total"
-                                    :total-pages="pagination.total_pages"
-                                />
+                                <div class="text-2xl">
+                                    {{ pagination.total }} jobs found
+                                </div>
 
                             </section>
                             <h3
@@ -217,7 +209,7 @@ import AppPagination from "~/components/AppPagination"
 import AppSearchForm from "~/demo/components/AppSearchForm"
 import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
 import AppSearchFilter from "~/components/Search/AppSearchFilter"
-import AppButtonPagination from "~/components/AppButtonPagination"
+import AppLoadMorePagination from "~/components/AppLoadMorePagination"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
@@ -232,7 +224,7 @@ export default {
         AppSearchForm,
         AppSearchFilter,
         AppFeaturedJobs,
-        AppButtonPagination,
+        AppLoadMorePagination,
         AppJobSearchResults,
         AppCommuteSearchForm,
         AppGoogleTalentSearchProvider,
