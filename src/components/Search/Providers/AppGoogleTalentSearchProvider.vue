@@ -18,6 +18,7 @@
             :appliedFilters="appliedFilters"
             :isCommuteSearch="isCommuteSearch"
             :getFilterOptions="getFilterOptions"
+            :filteredInput="getCurrentPayload()"
         ></slot>
     </component>
 </template>

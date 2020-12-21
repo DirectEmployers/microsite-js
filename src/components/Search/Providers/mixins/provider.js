@@ -69,7 +69,12 @@ export default  {
             return this.siteConfig.filters || []
         },
         sort() {
-            let sort = {}
+            let sort = {
+                options: [],
+                sortField: ()=>{},
+                by: null
+            }
+
             let sortMeta = clone(this.meta.sort || {})
             if (blank(sortMeta)) {
                 return sort
@@ -128,7 +133,7 @@ export default  {
         this.updateTmpData()
 
         if(!blank(this.$route.params.location)){
-            input.location =  displayLocationFromSlug(input.location)
+            this.input.location =  displayLocationFromSlug(this.input.location)
         }
 
         if(this.searchOnLoad) {
@@ -275,7 +280,7 @@ export default  {
         },
         getFilterOptions(filter) {
             let key = blank(filter.key) ? filter.name : filter.key
-            return this.filters[key] || []
+            return (blank(this.filters[key]) || !Array.isArray(this.filters[key])) ? [] : this.filters[key]
         },
 
         setFilter(key, value){

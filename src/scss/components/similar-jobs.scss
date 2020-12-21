@@ -2,44 +2,44 @@
     font-weight: 700;
     letter-spacing: 0.02em;
     margin-bottom: 4rem;
-    
-    &__title {
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin: 1rem 0.3125rem;
-        text-align: center;
-    }
-
-    &__grid {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-    }
-
-    &__grid-item {
-        @apply border-gray-500 border-b bg-gray-200 mx-4;
-        padding: 1.25rem;
-        text-transform: uppercase;
-        margin-bottom: 1rem;
-
-        &:hover {
-            @apply bg-gray-400;
-        }
-    }
-
-    &__grid-item-title {
-        font-size: 1.1875rem;
-        margin: 0;
-        padding: 0;
-    }
-
-    &__grid-item-location {
-        margin: 0;
-        padding: 0;
-    }
-
-    &__grid-item-area {
-        margin: 0;
-        padding: 0;
-    }
+}
+.similar-jobs__title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 1rem 0.3125rem;
+    text-align: center;
+}
+.similar-jobs__grid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+.similar-jobs__grid-item {
+    --border-opacity: 1;
+    border-color: #ccc;
+    border-color: rgba(204, 204, 204, var(--border-opacity));
+    border-bottom-width: 1px;
+    --bg-opacity: 1;
+    background-color: #edf2f7;
+    background-color: rgba(237, 242, 247, var(--bg-opacity));
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 1.25rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+.similar-jobs__grid-item:hover {
+    --bg-opacity: 1;
+    background-color: #cbd5e0;
+    background-color: rgba(203, 213, 224, var(--bg-opacity));
+}
+.similar-jobs__grid-item-title {
+    font-size: 1.1875rem;
+    margin: 0;
+    padding: 0;
+}
+.similar-jobs__grid-item-area,
+.similar-jobs__grid-item-location {
+    margin: 0;
+    padding: 0;
 }
