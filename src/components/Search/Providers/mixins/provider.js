@@ -97,13 +97,9 @@ export default  {
             let isNextPage = this.tmpData.lastPage < this.input.page
 
             if(isLessThanMaxPage && isNextPage){
-                //Max page loaded is less than current page. page number increased
                 this.displayedJobs = this.displayedJobs.concat(this.tmpData.nextPage.splice(0,this.offset))
                 this.pagination.page = this.input.page
-                console.log("page loaded")
-            } else if(isLessThanMaxPage) {
-                //page number decreased
-                console.log("page num decrease")
+            } else if(isLessThanMaxPage && this.isNotNewQuery()) {
                 let offset = this.offset
                 offset = this.displayedJobs.length - offset
                 this.pagination.page = this.input.page
@@ -111,6 +107,12 @@ export default  {
                 let removedJobs = this.displayedJobs.splice(offset)
                 this.tmpData.nextPage = removedJobs.concat(this.tmpData.nextPage)
             } else {
+                if(!this.isNotNewQuery()){
+                    this.tmpData.nextPage = []
+                    this.displayedJobs = []
+                    this.isFirstLoad = true
+                }
+                this.updateTmpData()
                 this.search().then( () => {
                     if(this.isLoadingMore){
                         this.isLoadingMore = false
@@ -125,6 +127,8 @@ export default  {
             ...this.$route.params
         })
 
+        this.updateTmpData()
+
         if(!blank(this.$route.params.location)){
             input.location =  displayLocationFromSlug(input.location)
         }
@@ -138,11 +142,36 @@ export default  {
         applyFilters(){
             return []
         },
-        loadMore(page) {
 
-            this.isLoadingMore = true
-            this.input.page = page
-            this.pushPayload()
+        isNotNewQuery(){
+            let allowed = ["location", "travelDuration", "roadTraffic", "title", "shift"]
+            for(let key in this.input){
+                if(allowed.includes(key)){
+                    if(!(this.tmpData.query[key] === this.input[key])){
+                        return false
+                    }
+                }
+            }
+            return true
+        },
+        updateTmpData(){
+            this.tmpData.query = {
+                location: this.input.location,
+                travelDuration: this.input.travelDuration,
+                roadTraffic: this.input.roadTraffic,
+                title: this.input.title,
+                shift: this.input.shift,
+            }
+        },
+        loadMore(page) {
+            if(page){
+                this.isLoadingMore = true
+                this.input.page = page
+                this.pushPayload()
+            } else {
+                this.displayedJobs = this.displayedJobs.concat(this.tmpData.nextPage)
+                this.tmpData.nextPage = []
+            }
         },
         mergeWithDefaultInput(from = {}) {
             return {
@@ -207,7 +236,6 @@ export default  {
             } else if(this.isLoadMore) {
                 this.tmpData.lastPage = this.$route.query.page
                 this.displayedJobs = this.displayedJobs.concat(this.tmpData.nextPage)
-
             }
 
             return this.service(this.input, this.siteConfig).then(resp=>{
@@ -232,13 +260,17 @@ export default  {
 
                     if(this.isLoadMore){
                         this.input.num_items = this.tmpData.num_items
-                        this.tmpData.nextPage = this.jobs.splice(this.jobs.length - this.offset)
+                        if(this.jobs.length >= 30){
+                            this.tmpData.nextPage = this.jobs.splice(this.jobs.length - this.offset)
+                        } else if(this.jobs.length < 30){
+                            this.tmpData.nextPage = this.jobs.splice(15)
+                        }
                         this.displayedJobs = this.jobs
                         this.pagination.page = this.tmpData.page
                         this.input.page = this.tmpData.page
                         //this line keep the load more button from disappearing when first load is large
                         //eg page loaded is 8, but pagination returns 3 total due to large num_items
-                        this.pagination.total_pages = parseInt(this.pagination.total) / this.offset
+                        this.pagination.total_pages = Math.ceil(parseInt(this.pagination.total) / this.offset)
                     }
                 }
             })

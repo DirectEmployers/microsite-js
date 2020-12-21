@@ -24,7 +24,7 @@
                     class="search-filter-options-item"
                     v-for="(option, index) in displayedFilters"
                 >
-                    <g-link :to="option.href">">
+                    <g-link :to="option.href">
                         {{ option.display }}
                         <span v-if="option.value">({{ option.value }})</span>
                     </g-link>
