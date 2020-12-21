@@ -189,6 +189,9 @@ export default  {
             if(!this.isLoadingMore){
                 this.status.loading = true
             }
+            if(this.input.offset){
+                delete this.input.offset
+            }
 
             //load pages n - n-5 on first load.
             if(this.isFirstLoad && this.isLoadMore){
@@ -204,9 +207,7 @@ export default  {
             } else if(this.isLoadMore) {
                 this.tmpData.lastPage = this.$route.query.page
                 this.displayedJobs = this.displayedJobs.concat(this.tmpData.nextPage)
-                if(this.input.offset){
-                    delete this.input.offset
-                }
+
             }
 
             return this.service(this.input, this.siteConfig).then(resp=>{
