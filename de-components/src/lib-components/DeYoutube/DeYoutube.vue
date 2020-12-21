@@ -38,3 +38,7 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+@import "./DeYoutube";
+</style>

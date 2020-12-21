@@ -1,0 +1,31 @@
+.form {
+    &__autocomplete {
+        @apply relative w-full;
+
+        &-results {
+            @apply absolute right-0 left-0 bg-white border-2 border-gray-500 border-t-0 rounded rounded-t-none shadow-lg z-50;
+            top: calc(100% - 3px);
+        }
+
+        &--loading {
+            @apply absolute;
+            right: 1rem;
+            bottom: 0.75rem;
+        }
+
+        &-items {
+            @apply p-0 m-0 relative overflow-y-auto list-none;
+            max-height: 14rem;
+        }
+
+        &-item {
+            @apply p-2 pl-6 list-none;
+
+            &:hover,
+            &--active {
+                @apply cursor-pointer bg-gray-600 text-white;
+            }
+        }
+    }
+
+}

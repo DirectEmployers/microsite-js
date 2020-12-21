@@ -8,6 +8,7 @@ import replace from '@rollup/plugin-replace';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
+import css from 'rollup-plugin-css-only'
 import copy from 'rollup-plugin-copy'
 
 // Get browserslist config and remove ie from es build targets
@@ -36,7 +37,8 @@ const baseConfig = {
       'process.env.ES_BUILD': JSON.stringify('false'),
     },
     vue: {
-      css: true,
+      css: false,
+      preprocessStyles: true,
       template: {
         isProduction: true,
       },
@@ -54,6 +56,7 @@ const external = [
   // list external dependencies, exactly the way it is written in the import statement.
   // eg. 'jquery'
   'vue',
+  'lodash',
 ];
 
 // UMD/IIFE shared settings: output.globals
@@ -62,6 +65,7 @@ const globals = {
   // Provide global variable names to replace your external imports
   // eg. jquery: '$'
   vue: 'Vue',
+  lodash: 'lodash',
 };
 
 // Customize configs for individual targets
@@ -94,9 +98,10 @@ if (!argv.format || argv.format === 'es') {
         ],
       }),
       commonjs(),
+      css({ output: 'de-bundle.css' }),
       copy({
         targets: [
-          { src: 'src/lib-components/**/*.scss', dest: 'dist/styles' }
+          { src: 'src/lib-components/**/*.scss', dest: 'dist/scss' }
         ]
       })
     ],
