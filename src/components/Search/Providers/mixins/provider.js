@@ -1,5 +1,5 @@
 import {blank, displayLocationFromSlug} from "../../../../services/helpers"
-import {omitBy, clone, merge, startCase} from "lodash"
+import {omitBy, clone, startCase} from "lodash"
 import {searchService, SOLR, GOOGLE_TALENT} from '../../../../services/search'
 
 export default  {
@@ -30,7 +30,6 @@ export default  {
         },
     },
     data() {
-        let num_items = 15
         return {
             meta: {
                 source: this.siteConfig.source
@@ -47,10 +46,9 @@ export default  {
             displayedJobs: [],
             isFirstLoad: true,
             appliedFilters: [],
-            default_num_items: num_items,
+            num_items: this.siteConfig.num_items ? this.siteConfig.num_items : 15,
             isCommuteSearch: false,
             input: this.getInputDefaults(),
-            offset: this.siteConfig.num_items ? this.siteConfig.num_items : num_items,
         }
     },
     computed:{
@@ -97,10 +95,10 @@ export default  {
             let isNextPage = this.tmpData.lastPage < this.input.page
 
             if(isLessThanMaxPage && isNextPage){
-                this.displayedJobs = this.displayedJobs.concat(this.tmpData.nextPage.splice(0,this.offset))
+                this.displayedJobs = this.displayedJobs.concat(this.tmpData.nextPage.splice(0, this.num_items))
                 this.pagination.page = this.input.page
             } else if(isLessThanMaxPage && this.isNotNewQuery()) {
-                let offset = this.offset
+                let offset = this.num_items
                 offset = this.displayedJobs.length - offset
                 this.pagination.page = this.input.page
                 this.tmpData.lastPage = this.input.page
@@ -226,7 +224,7 @@ export default  {
             if(this.isFirstLoad && this.isLoadMore){
                 this.tmpData.page = parseInt(this.input.page)
 
-                this.tmpData.num_items = this.siteConfig.num_items ? this.siteConfig.num_items : this.default_num_items
+                this.tmpData.num_items = this.num_items
                 this.input.num_items = this.tmpData.num_items * this.input.page + this.tmpData.num_items
                 if(this.input.num_items > 90){
                     this.input.offset = this.input.num_items - 90
@@ -261,7 +259,7 @@ export default  {
                     if(this.isLoadMore){
                         this.input.num_items = this.tmpData.num_items
                         if(this.jobs.length >= 30){
-                            this.tmpData.nextPage = this.jobs.splice(this.jobs.length - this.offset)
+                            this.tmpData.nextPage = this.jobs.splice(this.jobs.length - this.num_items)
                         } else if(this.jobs.length < 30){
                             this.tmpData.nextPage = this.jobs.splice(15)
                         }
@@ -270,7 +268,7 @@ export default  {
                         this.input.page = this.tmpData.page
                         //this line keep the load more button from disappearing when first load is large
                         //eg page loaded is 8, but pagination returns 3 total due to large num_items
-                        this.pagination.total_pages = Math.ceil(parseInt(this.pagination.total) / this.offset)
+                        this.pagination.total_pages = Math.ceil(parseInt(this.pagination.total) / this.num_items)
                     }
                 }
             })
