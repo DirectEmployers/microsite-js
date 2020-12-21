@@ -31083,7 +31083,7 @@ $({ target: 'Object', stat: true, sham: !DESCRIPTORS }, {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobFetch.vue?vue&type=template&id=05df7eb0&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3cb8bb39-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobFetch.vue?vue&type=template&id=2e1b1b70&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[_c('section',[_vm._t("default",null,{"status":{
                 error: _vm.error,
                 pending: _vm.pending,
@@ -31092,7 +31092,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppJobFetch.vue?vue&type=template&id=05df7eb0&
+// CONCATENATED MODULE: ./src/components/AppJobFetch.vue?vue&type=template&id=2e1b1b70&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
 var es_regexp_exec = __webpack_require__("ac1f");
@@ -31137,12 +31137,12 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 function getJob(guid, s3Folder) {
   return cdn().get("".concat(s3Folder, "/data/").concat(guid.toUpperCase(), ".json"));
 }
-// EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
-var helpers = __webpack_require__("a74a");
-
 // EXTERNAL MODULE: ./node_modules/axios/lib/helpers/buildURL.js
 var buildURL = __webpack_require__("30b5");
 var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 6 modules
+var helpers = __webpack_require__("a74a");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobFetch.vue?vue&type=script&lang=js&
 
@@ -31188,49 +31188,57 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
       resolved: null
     };
   },
+  watch: {
+    "$route.params.guid": function $routeParamsGuid() {
+      this.fetchJob(this.$route.params.guid, this.correctJobRouteUrl);
+    }
+  },
   created: function created() {
-    //if a guid was specified, fetch that
-    if (this.guid) {
-      this.fetchByGuid(this.guid); //otherwise assume we are on the job detail.
+    if (this.guid !== null) {
+      this.fetchJob(this.guid);
     } else {
-      this.fetchJob();
+      this.fetchJob(this.$route.params.guid, this.correctJobRouteUrl);
     }
   },
   methods: {
-    fetchByGuid: function fetchByGuid(guid) {
-      var _this = this;
+    fetchJob: function fetchJob(guid) {
+      var _arguments = arguments,
+          _this = this;
 
       return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var _yield$getJob, data;
+        var onResolve, _yield$getJob, data;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                onResolve = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : null;
+
                 _this.status({
                   error: false,
                   pending: true
                 });
 
-                _context.prev = 1;
-                _context.next = 4;
+                _context.prev = 2;
+                _context.next = 5;
                 return getJob(guid, _this.s3Folder);
 
-              case 4:
+              case 5:
                 _yield$getJob = _context.sent;
                 data = _yield$getJob.data;
-                _this.job = data;
 
-                _this.status({
-                  resolved: true
-                });
+                if (typeof onResolve == 'function') {
+                  onResolve(data);
+                } else {
+                  _this.setJob(data);
+                }
 
                 _context.next = 13;
                 break;
 
               case 10:
                 _context.prev = 10;
-                _context.t0 = _context["catch"](1);
+                _context.t0 = _context["catch"](2);
 
                 _this.status({
                   error: _context.t0,
@@ -31242,68 +31250,24 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 10]]);
+        }, _callee, null, [[2, 10]]);
       }))();
     },
-    fetchJob: function fetchJob() {
-      var _this2 = this;
+    setJob: function setJob(job) {
+      this.job = job;
+      this.status({
+        resolved: true
+      });
+    },
+    correctJobRouteUrl: function correctJobRouteUrl(job) {
+      var routePath = this.$route.path.endsWith("/") ? this.$route.path : "".concat(this.$route.path, "/");
+      var url = Object(helpers["b" /* buildJobDetailUrl */])(job.title_slug, job.location_exact, job.guid); // check if this is the proper url for the job
 
-      return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-        var _this2$$route$params, location, title, guid, _yield$getJob2, data, url, routePath;
-
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _this2.status({
-                  error: false,
-                  pending: true
-                });
-
-                _this2$$route$params = _this2.$route.params, location = _this2$$route$params.location, title = _this2$$route$params.title, guid = _this2$$route$params.guid;
-                _context2.prev = 2;
-                _context2.next = 5;
-                return getJob(guid, _this2.s3Folder);
-
-              case 5:
-                _yield$getJob2 = _context2.sent;
-                data = _yield$getJob2.data;
-                url = Object(helpers["b" /* buildJobDetailUrl */])(data.title_slug, data.location_exact, data.guid);
-                routePath = _this2.$route.path.endsWith("/") ? _this2.$route.path : _this2.$route.path + "/"; // check if this is the proper url for the job
-
-                if (url !== routePath) {
-                  if (!Object(helpers["a" /* blank */])(_this2.$route.query)) {
-                    url = buildURL_default()(url, _this2.$route.query);
-                  }
-
-                  window.location.replace(url);
-                } else {
-                  _this2.job = data;
-
-                  _this2.status({
-                    resolved: true
-                  });
-                }
-
-                _context2.next = 15;
-                break;
-
-              case 12:
-                _context2.prev = 12;
-                _context2.t0 = _context2["catch"](2);
-
-                _this2.status({
-                  error: _context2.t0,
-                  resolved: false
-                });
-
-              case 15:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[2, 12]]);
-      }))();
+      if (url !== routePath) {
+        window.location.replace(buildURL_default()(url, this.$route.query));
+      } else {
+        this.setJob(job);
+      }
     },
     status: function status(_ref) {
       var _ref$error = _ref.error,
@@ -31315,11 +31279,6 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
       this.error = error;
       this.pending = pending;
       this.resolved = resolved;
-    }
-  },
-  watch: {
-    "$route.params.guid": function $routeParamsGuid() {
-      this.fetchJob();
     }
   }
 });

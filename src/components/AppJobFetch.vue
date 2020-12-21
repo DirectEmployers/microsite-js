@@ -15,9 +15,8 @@
 <script>
 import {kebabCase} from "lodash"
 import {getJob} from "../services/cdn/job"
-import {buildJobDetailUrl, blank} from "../services/helpers"
 import buildUrl from "axios/lib/helpers/buildURL"
-
+import {buildJobDetailUrl, blank} from "../services/helpers"
 export default {
     props: {
         guid: {
@@ -38,49 +37,34 @@ export default {
             resolved: null,
         }
     },
+    watch: {
+        "$route.params.guid"() {
+            this.fetchJob(
+                this.$route.params.guid,
+                this.correctJobRouteUrl
+            )
+        },
+    },
     created() {
-        //if a guid was specified, fetch that
-        if (this.guid) {
-            this.fetchByGuid(this.guid)
-            //otherwise assume we are on the job detail.
+        if (this.guid !== null) {
+            this.fetchJob(this.guid)
         } else {
-            this.fetchJob()
+            this.fetchJob(
+                this.$route.params.guid,
+                this.correctJobRouteUrl
+            )
         }
     },
     methods: {
-        async fetchByGuid(guid) {
+        async fetchJob(guid, onResolve = null) {
             this.status({error: false, pending: true})
             try {
-                const {data} = await getJob(guid, this.s3Folder)
-                this.job = data
-                this.status({resolved: true})
-            } catch (error) {
-                this.status({
-                    error,
-                    resolved: false,
-                })
-            }
-        },
-        async fetchJob() {
-            this.status({error: false, pending: true})
+                let {data} = await getJob(guid, this.s3Folder)
 
-            let {location, title, guid} = this.$route.params
-
-            try {
-                const {data} = await getJob(guid, this.s3Folder)
-
-                let url = buildJobDetailUrl(data.title_slug, data.location_exact, data.guid)
-                let routePath = this.$route.path.endsWith("/") ? this.$route.path : this.$route.path + "/"
-
-                // check if this is the proper url for the job
-                if (url !== routePath) {
-                    if (!blank(this.$route.query)) {
-                        url = buildUrl(url, this.$route.query)
-                    }
-                    window.location.replace(url)
-                } else {
-                    this.job = data
-                    this.status({resolved: true})
+                if(typeof onResolve == 'function'){
+                    onResolve(data)
+                }else{
+                    this.setJob(data)
                 }
             } catch (error) {
                 this.status({
@@ -89,15 +73,28 @@ export default {
                 })
             }
         },
+        setJob(job){
+            this.job = job
+            this.status({resolved: true})
+        },
+        correctJobRouteUrl(job) {
+            let routePath = this.$route.path.endsWith("/") ? this.$route.path: `${this.$route.path}/`
+            let url = buildJobDetailUrl(
+                job.title_slug,
+                job.location_exact,
+                job.guid
+            )
+            // check if this is the proper url for the job
+            if (url !== routePath) {
+                window.location.replace(buildUrl(url, this.$route.query))
+            }else{
+                this.setJob(job)
+            }
+        },
         status({error = null, pending = false, resolved = null}) {
             this.error = error
             this.pending = pending
             this.resolved = resolved
-        },
-    },
-    watch: {
-        "$route.params.guid"() {
-            this.fetchJob()
         },
     },
 }
