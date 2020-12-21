@@ -93,18 +93,23 @@ export default  {
             this.input.page = parseInt(this.input.page)
             this.$route.query.page = parseInt(this.$route.query.page)
 
-            let isNextPage = this.input.page < this.tmpData.page
-            let isPrevPage = (this.tmpData.lastPage < this.input.page)
+            let isLessThanMaxPage = this.input.page < this.tmpData.page
+            let isNextPage = this.tmpData.lastPage < this.input.page
 
-            if(isNextPage && isPrevPage){
+            if(isLessThanMaxPage && isNextPage){
+                //Max page loaded is less than current page. page number increased
                 this.displayedJobs = this.displayedJobs.concat(this.tmpData.nextPage.splice(0,this.offset))
                 this.pagination.page = this.input.page
-            } else if (isNextPage) {
+                console.log("page loaded")
+            } else if(isLessThanMaxPage) {
+                //page number decreased
+                console.log("page num decrease")
                 let offset = this.offset
-                offset *= this.input.page
+                offset = this.displayedJobs.length - offset
                 this.pagination.page = this.input.page
                 this.tmpData.lastPage = this.input.page
-                this.tmpData.nextPage = this.displayedJobs.splice(offset).concat(this.tmpData.nextPage)
+                let removedJobs = this.displayedJobs.splice(offset)
+                this.tmpData.nextPage = removedJobs.concat(this.tmpData.nextPage)
             } else {
                 this.search().then( () => {
                     if(this.isLoadingMore){
@@ -134,19 +139,7 @@ export default  {
             return []
         },
         loadMore(page) {
-            //This code is a potential solution for timeouts. A backend PR will be required to implement
-            // let getOffset = (items_per_page) => {
-            //     if(items_per_page * page > 100){
-            //         let maxPage = Math.floor(100 / items_per_page)
-            //         this.input.offset = items_per_page * (page - maxPage)
-            //     }
-            // }
 
-            // if(this.siteConfig.num_items){
-            //     getOffset(this.siteConfig.num_items)
-            // } else {
-            //     getOffset(this.default_num_items)
-            // }
             this.isLoadingMore = true
             this.input.page = page
             this.pushPayload()
@@ -197,18 +190,25 @@ export default  {
                 this.status.loading = true
             }
 
-            //prevents needing to request all jobs again when using button pagination
+            //load pages n - n-5 on first load.
             if(this.isFirstLoad && this.isLoadMore){
-                let defaultNum = this.siteConfig.num_items
-                let calcTotal = (num) => { return (num * this.input.page + num) }
-                this.input.num_items = defaultNum ? calcTotal(defaultNum) : calcTotal(this.default_num_items)
                 this.tmpData.page = parseInt(this.input.page)
+
+                this.tmpData.num_items = this.siteConfig.num_items ? this.siteConfig.num_items : this.default_num_items
+                this.input.num_items = this.tmpData.num_items * this.input.page + this.tmpData.num_items
+                if(this.input.num_items > 90){
+                    this.input.offset = this.input.num_items - 90
+                    this.input.num_items = 90
+                }
                 this.input.page = 1
             } else if(this.isLoadMore) {
                 this.tmpData.lastPage = this.$route.query.page
                 this.displayedJobs = this.displayedJobs.concat(this.tmpData.nextPage)
-                this.input.page++
+                if(this.input.offset){
+                    delete this.input.offset
+                }
             }
+
             return this.service(this.input, this.siteConfig).then(resp=>{
                 const data = resp.data || {}
                 this.featuredJobs = data.featured_jobs || []
@@ -222,23 +222,20 @@ export default  {
             }).finally(() =>{
                 this.status.loading = false
                 if(!this.isFirstLoad && this.isLoadMore){
-                    this.pagination.page--
                     this.tmpData.page = this.input.page > this.tmpData.page ? this.input.page : this.tmpData.page
                     this.tmpData.nextPage = this.jobs
                 }
+
                 if(this.isFirstLoad){
                     this.isFirstLoad = false
-                    if(this.siteConfig.num_items){
-                        this.input.num_items = this.siteConfig.num_items
-                    } else {
-                        delete this.input.num_items
-                    }
+
                     if(this.isLoadMore){
+                        this.input.num_items = this.tmpData.num_items
                         this.tmpData.nextPage = this.jobs.splice(this.jobs.length - this.offset)
                         this.displayedJobs = this.jobs
                         this.pagination.page = this.tmpData.page
                         this.input.page = this.tmpData.page
-                        //These lines keep the loadmore button from disappearing when first load is large
+                        //this line keep the load more button from disappearing when first load is large
                         //eg page loaded is 8, but pagination returns 3 total due to large num_items
                         this.pagination.total_pages = parseInt(this.pagination.total) / this.offset
                     }
