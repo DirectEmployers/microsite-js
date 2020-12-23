@@ -48,19 +48,12 @@
                                     {{ pagination.total }} jobs found
                                 </div>
                                 <AppButtonPagination
-                                    v-if="showButton"
                                     :totalPages="pagination.total_pages"
                                     :currentPage="pagination.page"
                                     :jobs="jobs"
                                     @loadMore="loadMore"
                                 />
-                                <AppPagination
-                                    v-else
-                                    @pageSelected="selectPage"
-                                    :current-page="pagination.page"
-                                    :total-records="pagination.total"
-                                    :total-pages="pagination.total_pages"
-                                />
+
 
                             </section>
                             <h3
@@ -229,7 +222,6 @@ export default {
         AppModal,
         AppLoader,
         AppAccordion,
-        AppPagination,
         AppSearchForm,
         AppSearchFilter,
         AppFeaturedJobs,
@@ -237,11 +229,6 @@ export default {
         AppJobSearchResults,
         AppCommuteSearchForm,
         AppGoogleTalentSearchProvider,
-    },
-    data() {
-        return {
-            showButton: this.$siteConfig.pagination_type
-        }
     },
     metaInfo: {
         title: "Jobs",

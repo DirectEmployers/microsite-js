@@ -1,5 +1,5 @@
 import {blank, displayLocationFromSlug} from "../../../../services/helpers"
-import {omitBy, clone, merge, startCase} from "lodash"
+import {omitBy, clone, startCase} from "lodash"
 import {searchService, SOLR, GOOGLE_TALENT} from '../../../../services/search'
 
 export default  {
