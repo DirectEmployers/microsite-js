@@ -1,91 +1,76 @@
 <template>
     <component :is="tag">
-        <slot
-            :jobs="jobs"
-            :sort="sort"
-            :input="input"
-            :status="status"
-            :hasJobs="hasJobs"
-            :source="meta.source"
-            :setFilter="setFilter"
-            :newSearch="newSearch"
-            :pagination="pagination"
-            :selectPage="selectPage"
-            :featuredJobs="featuredJobs"
-            :removeFilter="removeFilter"
-            :isGoogleTalent="isGoogleTalent"
-            :appliedFilters="appliedFilters"
-            :isCommuteSearch="isCommuteSearch"
-            :getFilterOptions="getFilterOptions"
-            :filteredInput="getCurrentPayload()"
-        ></slot>
+        <slot v-bind="slotData"></slot>
     </component>
 </template>
 <script>
-import {
-    searchService,
-    commuteSearchService,
-} from "../../../services/search"
 import base from "./mixins/provider"
 import {blank} from "../../../services/helpers"
+import {searchService, commuteSearchService} from "../../../services/search"
 export default {
     mixins: [base],
     data() {
         return {
-            isCommuteSearch: this.checkIsCommuteSearch()
+            isCommuteSearch: false,
         }
     },
-
     computed: {
         service() {
             return this.isCommuteSearch ? commuteSearchService : searchService
         },
     },
     methods: {
-        queryChanged(){
-            this.isCommuteSearch = this.checkIsCommuteSearch()
+        queryChanged() {
+            this.isCommuteSearch = this.shouldDoCommuteSearch()
         },
-        inputDefaults() {
+        providerInputDefinition() {
             return {
-                commuteMethod: "DRIVING",
-                travelDuration: "3600",
-                commuteLocation: "",
-                roadTraffic: "TRAFFIC_FREE",
+                commuteMethod: {
+                    default: "DRIVING",
+                },
+                travelDuration: {
+                    default: "3600",
+                },
+
+                roadTraffic: {
+                    default: "TRAFFIC_FREE",
+                },
+                commuteLocation: {
+                    default: "",
+                    clears: [
+                        "travelDuration",
+                        "roadTraffic",
+                        "commuteMethod",
+                        "coords",
+                    ],
+                },
             }
         },
         applyFilters() {
-            let filters = []
             if (!this.isSolr && this.isCommuteSearch) {
-                let commuteLocation = this.$route.query.commuteLocation
-                filters.push({
-                    display: `Commute:${commuteLocation}`,
-                    parameter: Object.keys(this.inputDefaults()).concat(['coords']),
-                })
+                return [
+                    {
+                        display: `Commute:${this.input.commuteLocation}`,
+                        parameter: "commuteLocation",
+                    }
+                ]
             }
-            return filters
+            return []
         },
-        checkIsCommuteSearch(){
-            if(this.isSolr){
-                return false
-            }
-            return !blank(this.$route.query.coords) && !blank(this.$route.query.commuteLocation)
-        },
-        getCurrentPayload() {
+        excludePayload() {
             let exclude = []
-            if (!this.isCommuteSearch) {
-                exclude = Object.keys(this.inputDefaults())
+            if (!this.shouldDoCommuteSearch()) {
+                exclude = Object.keys(this.providerInputDefinition())
             }
-            return this.filterEmpty(this.input, (k)=>{
-                return exclude.includes(k)
-            })
+            return exclude
         },
-        newSearch() {
-            this.input.page = 1
-            this.isCommuteSearch = !this.isSolr && (this.input.coords && this.input.commuteLocation)
-            if(this.isCommuteSearch){
+        shouldDoCommuteSearch() {
+            return !blank(this.input.coords) && !blank(this.input.commuteLocation)
+        },
+        beforeSearch() {
+            if (this.isCommuteSearch = this.shouldDoCommuteSearch()) {
                 this.input.location = ""
             }
-            this.pushPayload()
         },
     },
 }
