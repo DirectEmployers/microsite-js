@@ -13,6 +13,7 @@
                 newSearch,
                 selectPage,
                 pagination,
+                filteredInput,
                 featuredJobs,
                 removeFilter,
                 appliedFilters,
@@ -40,7 +41,7 @@
                             <section v-if="jobs.length">
                                 <AppJobSearchResults
                                     :jobs="jobs"
-                                    :input="input"
+                                    :input="filteredInput"
                                     :source="source"
                                 />
                                 <div class="text-2xl">
@@ -116,10 +117,9 @@
                                 </ul>
                             </AppAccordion>
 
-
                             <AppSearchFilter
                                 :key="index"
-                                :input="input"
+                                :input="filteredInput"
                                 :name="configFilter.name"
                                 @selectedFilter="setFilter"
                                 :key-name="configFilter.key"

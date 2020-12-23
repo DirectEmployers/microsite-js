@@ -1,52 +1,71 @@
-.search-filter {
-
-    &-chip {
-        @apply cursor-pointer block break-words w-auto flex items-center text-lg py-2 relative;
-        max-width: 200px;
-
-        &::before {
-            @apply w-6 h-6 p-2 text-white bg-black rounded-full leading-none;
-            @apply flex items-center justify-center mr-2 font-bold;
-            content: "\00d7";
-        }
-    }
-
-    &-display {
-        @apply font-bold text-xl py-3;
-
-        &-text {
-            @apply font-semibold;
-        }
-    }
-
-    &-options {
-        @apply list-none;
-
-        &-item {
-            @apply cursor-pointer border-b border-solid py-2 my-2;
-            &-button {
-                @apply block border-b border-solid py-2 text-sm flex flex-row w-full text-left;
-            }
-        }
-    }
-
-    &-limiter {
-        @apply m-0 p-0 items-center py-2 text-sm flex flex-row w-full text-left text-lg;
-
-        &-more {
-            @apply flex flex-row mr-2;
-            &::after {
-                content: "\002B";
-                @apply font-bold flex ml-1 items-center justify-center;
-            }
-        }
-
-        &-less {
-            @apply flex flex-row mr-2;
-            &::after {
-                content: "\2013";
-                @apply font-bold flex ml-1 items-center justify-center;
-            }
-        }
-    }
+.search-filter-display {
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+.search-filter-display-text {
+    font-weight: 600;
+}
+.search-filter-options {
+    list-style-type: none;
+}
+.search-filter-options-item {
+    cursor: pointer;
+    border-bottom-width: 1px;
+    border-style: solid;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.search-filter-options-item-button {
+    display: block;
+    border-bottom-width: 1px;
+    border-style: solid;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+}
+.search-filter-limiter,
+.search-filter-options-item-button {
+    font-size: 0.875rem;
+    flex-direction: row;
+    width: 100%;
+    text-align: left;
+}
+.search-filter-limiter {
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    font-size: 1.125rem;
+}
+.search-filter-limiter-more {
+    display: flex;
+    flex-direction: row;
+    margin-right: 0.5rem;
+}
+.search-filter-limiter-more:after {
+    content: "\002B";
+    font-weight: 700;
+    display: flex;
+    margin-left: 0.25rem;
+    align-items: center;
+    justify-content: center;
+}
+.search-filter-limiter-less {
+    display: flex;
+    flex-direction: row;
+    margin-right: 0.5rem;
+}
+.search-filter-limiter-less:after {
+    content: "\2013";
+    font-weight: 700;
+    display: flex;
+    margin-left: 0.25rem;
+    align-items: center;
+    justify-content: center;
 }
