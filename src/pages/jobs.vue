@@ -199,17 +199,17 @@
 </template>
 <script>
 import {blank} from "~/services/helpers"
-import AppPagination from "~/components/AppPagination"
-import AppAccordion from "~/components/AppAccordion"
-import AppModal from "~/components/AppModal"
-import AppSearchForm from "~/demo/components/AppSearchForm"
-import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
-import AppLoader from "~/demo/components/AppLoader"
-import AppSearchFilter from "~/components/Search/AppSearchFilter"
 import AppChip from "~/components/AppChip"
-import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
-import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
+import AppModal from "~/components/AppModal"
 import AppXIcon from "~/components/Icons/AppXIcon"
+import AppLoader from "~/demo/components/AppLoader"
+import AppAccordion from "~/components/AppAccordion"
+import AppPagination from "~/components/AppPagination"
+import AppSearchForm from "~/demo/components/AppSearchForm"
+import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
+import AppSearchFilter from "~/components/Search/AppSearchFilter"
+import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
+import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
 export default {
     components: {
