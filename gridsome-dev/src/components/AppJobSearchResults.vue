@@ -6,7 +6,7 @@
             :key="index"
             v-for="(job, index) in jobs"
         >
-            <AppJob
+            <DEJobWrapper
                 :source="source"
                 :job="job"
                 :input="input"
@@ -47,13 +47,13 @@
                         </div>
                     </g-link>
                 </template>
-            </AppJob>
+            </DEJobWrapper>
         </div>
     </div>
 </template>
 
 <script>
-import AppJob from "~/components/AppJob"
+import DEJobWrapper from "@de/DEJobWrapper"
 
 export default {
     props: {
@@ -73,7 +73,7 @@ export default {
         },
     },
     components: {
-        AppJob,
+        DEJobWrapper,
     },
 }
 </script>

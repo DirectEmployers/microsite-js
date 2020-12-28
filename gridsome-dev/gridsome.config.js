@@ -5,7 +5,6 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 const merge = require("webpack-merge")
 const path = require("path")
-// const {config} = require("process")
 
 module.exports = {
   siteName: "Microsite Dev",
@@ -23,7 +22,7 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        "@de": path.resolve(__dirname, "../src/lib-components/"),
+        "@de": path.resolve(__dirname, "./src/components/de/lib-components/"),
       }
     }
   }

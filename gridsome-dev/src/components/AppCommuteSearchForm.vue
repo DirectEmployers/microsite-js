@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import AppGoogleLocationAutocomplete from "~/components/de/lib-components/Search/AppGoogleLocationAutocomplete"
+import AppGoogleLocationAutocomplete from "@de/Search/AppGoogleLocationAutocomplete"
 export default {
     name: "CommuteSearchForm",
     props: {

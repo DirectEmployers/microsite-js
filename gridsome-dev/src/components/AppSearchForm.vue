@@ -102,9 +102,9 @@
 </template>
 
 <script>
-import AppAutocompleteInput from "~/components/de/lib-components/Form/AppAutocompleteInput"
-import AppGeoLocation from "~/components/de/lib-components/Search/AppGeoLocation"
-import AppGoogleLocationAutocomplete from "~/components/de/lib-components/Search/AppGoogleLocationAutocomplete"
+import AppAutocompleteInput from "@de/Form/AppAutocompleteInput"
+import AppGeoLocation from "@de/Search/AppGeoLocation"
+import AppGoogleLocationAutocomplete from "@de/Search/AppGoogleLocationAutocomplete"
 import {
     TitleCompleteService,
     MOCCompleteService,

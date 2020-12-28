@@ -66,15 +66,11 @@
         </template>
     </AppJobWrapper>
 </template>
-<style lang="scss">
-.job-detail-link {
-    @apply uppercase font-bold border-b border-gold;
-}
-</style>
+
 <script>
 import AppJobWrapper from "~/components/AppJob"
-import AppSimilarJobs from "~/components/AppSimilarJobs"
-// import {blank} from "~/services/helpers"
+import AppSimilarJobs from "@de/AppSimilarJobs"
+import {blank} from "~/services/helpers"
 import buildUrl from "axios/lib/helpers/buildURL"
 
 export default {
@@ -100,9 +96,9 @@ export default {
     },
     computed: {
         searchResultsUrl() {
-            // if (!blank(this.$route.query)) {
-            //     return buildUrl("jobs", this.$route.query)
-            // }
+            if (!blank(this.$route.query)) {
+                return buildUrl("jobs", this.$route.query)
+            }
             return "/jobs"
         },
         jsonLd() {

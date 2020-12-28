@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import AppSimilarJobs from "~/components/de/lib-components/AppSimilarJobs"
+import AppSimilarJobs from "@de/AppSimilarJobs"
 
 export default {
     name: "AppJobExpired",

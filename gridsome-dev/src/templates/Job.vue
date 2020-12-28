@@ -16,8 +16,8 @@ import App404 from "~/components/App404"
 import AppJob from "~/components/AppJob"
 import AppJobExpired from "~/components/AppJobExpired"
 import AppLoader from "~/components/AppLoader"
-import AppJobFetch from "~/components/AppJobFetch"
-// import {blank} from "~/services/helpers"
+import AppJobFetch from "@de/AppJobFetch"
+import {blank} from "~/services/helpers"
 
 export default {
     components: {
@@ -28,9 +28,9 @@ export default {
         AppJobFetch,
     },
     methods: {
-        // isExpired(job) {
-        //     return job && !blank(job.deleted_at)
-        // },
+        isExpired(job) {
+            return job && !blank(job.deleted_at)
+        },
     },
 }
 </script>

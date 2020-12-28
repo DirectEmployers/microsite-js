@@ -13,8 +13,10 @@
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "autoprefixer": "^9.8.6",
     "gridsome-plugin-tailwindcss": "^4.1.1",
+    "node-sass": "^4.14.0",
     "postcss": "^7.0.35",
     "postcss-preset-env": "^6.7.0",
+    "sass-loader": "^8.0.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
   }
 }

@@ -197,18 +197,20 @@
 </template>
 <script>
 import {blank} from "~/services/helpers"
-import AppPagination from "~/components/AppPagination"
-import AppAccordion from "~/components/AppAccordion"
-import AppModal from "~/components/AppModal"
-import AppSearchForm from "~/demo/components/AppSearchForm"
-import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
-import AppLoader from "~/demo/components/AppLoader"
-import AppSearchFilter from "~/components/Search/AppSearchFilter"
-import AppChip from "~/components/AppChip"
-import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
-import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
-import AppXIcon from "~/components/Icons/AppXIcon"
-import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
+import AppPagination from "@de/AppPagination"
+import AppAccordion from "@de/AppAccordion"
+import AppModal from "@de/AppModal"
+import AppSearchForm from "~/components/AppSearchForm"
+import AppCommuteSearchForm from "~/components/AppCommuteSearchForm"
+import AppLoader from "~/components/AppLoader"
+import AppSearchFilter from "@de/Search/AppSearchFilter"
+import AppChip from "@de/AppChip"
+import AppFeaturedJobs from "~/components/AppFeaturedJobs"
+import AppJobSearchResults from "~/components/AppJobSearchResults"
+import AppXIcon from "@de/Icons/AppXIcon"
+
+import AppGoogleTalentSearchProvider from "@de/Search/Providers/AppGoogleTalentSearchProvider"
+
 export default {
     components: {
         AppAccordion,

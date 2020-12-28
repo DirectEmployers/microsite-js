@@ -4,7 +4,7 @@
   </Layout>
 </template>
 <script>
-import App404 from '~/demo/components/App404'
+import App404 from '~/components/App404'
 
 export default {
   components: {

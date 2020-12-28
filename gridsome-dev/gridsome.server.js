@@ -6,11 +6,39 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = function (api) {
-  api.loadSource(({ addCollection }) => {
+  api.loadSource(({
+    addCollection
+  }) => {
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
   })
 
-  api.createPages(({ createPage }) => {
+  api.createPages(({
+    createPage
+  }) => {
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
+    createPage({
+      path: "/:location/:title/:guid/job",
+      component: "./src/templates/Job.vue"
+    })
+    createPage({
+      path: "/:guid/job",
+      component: "./src/templates/Job.vue"
+    })
+  })
+
+  api.afterBuild(({
+    redirects
+  }) => {
+    const rules = [];
+    for (const rule of redirects) {
+      const serveRule = {
+        source: rule.from,
+        destination: rule.to
+      }
+      rules.push(serveRule)
+    }
+    const rulesString = JSON.stringify(rules, null, 2)
+    console.log(rulesString)
+    fs.writeFileSync("rewriteRules.json", rulesString)
   })
 }

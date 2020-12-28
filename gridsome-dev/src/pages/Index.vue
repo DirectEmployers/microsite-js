@@ -22,7 +22,7 @@
 </template>
 <script>
 import AppSearchForm from "~/components/AppSearchForm"
-import AppGoogleTalentSearchProvider from '~/components/de/lib-components/Search/Providers/AppGoogleTalentSearchProvider'
+import AppGoogleTalentSearchProvider from '@de/Search/Providers/AppGoogleTalentSearchProvider'
 
 export default {
     components: {
