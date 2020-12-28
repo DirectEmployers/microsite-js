@@ -1,8 +1,8 @@
-import { get } from "lodash"
+import { get, omitBy } from "lodash"
 import buildUrl from "axios/lib/helpers/buildURL"
 import {GOOGLE_TALENT, SOLR} from "../../../services/search"
-import { buildJobApplyLink } from '../../../services/storage'
-import { buildJobDetailUrl } from '../../../services/helpers'
+import { VS_KEY, UTM_KEY } from '../../../services/storage'
+import { buildJobDetailUrl, blank } from '../../../services/helpers'
 
 export default{
     props: {
@@ -65,7 +65,23 @@ export default{
             return buildUrl(url, this.input)
         },
         applyLink() {
-            return buildJobApplyLink(this.guid, this.$route.query)
+            let url = "https://rr.jobsyn.org/" + this.guid
+
+            if (!process.isClient) {
+                return url
+            }
+
+            let utm_params = {}
+            try {
+                utm_params = JSON.parse(sessionStorage.getItem(UTM_KEY))
+            } catch {
+                utm_params = {}
+            }
+
+            let params = {...this.$route.query, ...utm_params}
+            params[VS_KEY] = sessionStorage.getItem(VS_KEY)
+
+            return buildUrl(url, omitBy(params, blank))
         },
         description() {
             return this.jobInfo.html_description
@@ -85,15 +101,33 @@ export default{
         hasCommuteInfo() {
             return false
         },
-        slotData(){
-            return {}
-        },
+
     },
     methods: {
         clickedApplyJob() {},
         clickedViewJob() {},
         getAttribute(name, defaultValue = ''){
             return get(this.jobInfo, name, defaultValue)
+        },
+        slotData(){
+            return {
+                reqId: this.reqId,
+                title: this.title,
+                location: this.location,
+                detailUrl: this.detailUrl,
+                guid: this.guid,
+                city: this.city,
+                state: this.state,
+                country: this.country,
+                company: this.company,
+                hasCommuteInfo: this.hasCommuteInfo,
+                commuteTime: this.commuteTime,
+                description: this.description,
+                dateAdded: this.dateAdded,
+                applyLink: this.applyLink,
+                clickedViewJob: this.clickedViewJob,
+                clickedApplyJob: this.clickedApplyJob
+            }
         },
     }
 }

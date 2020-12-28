@@ -6,7 +6,7 @@
             :key="index"
             v-for="(job, index) in jobs"
         >
-            <AppGoogleTalentJob :source="source" :job="job">
+            <AppJobProvider :source="source" :job="job" :input="input">
                 <template v-slot="{
                     detailUrl,
                     title,
@@ -16,27 +16,6 @@
                     hasCommuteInfo,
                     commuteTime,
                 }">
-
-
-                </template>
-            </AppGoogleTalentJob>
-            <!-- <AppJob
-                :job="job"
-                :input="input"
-                :source="source"
-                :site-config="$siteConfig"
-            >
-                <template
-                    v-slot="{
-                        detailUrl,
-                        title,
-                        reqId,
-                        clickedViewJob,
-                        location,
-                        hasCommuteInfo,
-                        commuteTime,
-                    }"
-                >
                     <g-link
                         @click.native="clickedViewJob"
                         :to="detailUrl"
@@ -60,15 +39,15 @@
                             {{ commuteTime }}
                         </div>
                     </g-link>
+
                 </template>
-            </AppJob> -->
+            </AppJobProvider>
         </div>
     </div>
 </template>
 
 <script>
-import AppJob from "~/components/AppJob"
-import AppGoogleTalentJob from "~/components/Jobs/AppGoogleTalentJob"
+import AppJobProvider from "~/components/Jobs/AppJobProvider"
 export default {
     props: {
         jobs: {
@@ -87,7 +66,7 @@ export default {
         },
     },
     components: {
-        AppGoogleTalentJob,
+        AppJobProvider,
     },
 }
 </script>

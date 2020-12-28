@@ -1,13 +1,13 @@
 <template>
     <component :is="tag">
-        <slot v-bind="slotData"></slot>
+        <slot v-bind="slotData()"></slot>
     </component>
 </template>
 
 <script>
 import {get} from "lodash"
 import base from "./mixins/job"
-
+import SolrJob from './AppSolrJob'
 export default {
     mixins: [base],
     computed: {

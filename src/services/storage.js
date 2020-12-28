@@ -1,7 +1,5 @@
 /**Helpers for working with local/session storage */
-import {omitBy} from "lodash"
 import {blank} from "./helpers"
-import buildUrl from "axios/lib/helpers/buildURL"
 
 export const ACCEPTED_COOKIES_KEY = "accepted_cookie_use"
 export const DECLINED_COOKIES_KEY = "declined_cookie_use"
@@ -71,27 +69,3 @@ export function setViewSourceParameters(query) {
     }
 }
 
-/**
- * Build an apply link for the given guid but
- * append on any existing and stored UTM & VS paramerters
- * stored in session storage.
- */
-export function buildJobApplyLink(guid, query = {}) {
-    let url = "https://rr.jobsyn.org/" + guid
-
-    if (!process.isClient) {
-        return url
-    }
-
-    let utm_params = {}
-    try {
-        utm_params = JSON.parse(sessionStorage.getItem(UTM_KEY))
-    } catch {
-        utm_params = {}
-    }
-
-    let params = {...query, ...utm_params}
-    params[VS_KEY] = sessionStorage.getItem(VS_KEY)
-
-    return buildUrl(url, omitBy(params, blank))
-}
