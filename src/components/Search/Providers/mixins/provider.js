@@ -1,7 +1,19 @@
-import {omitBy, clone, merge, startCase, uniqBy} from "lodash"
-import {blank, displayLocationFromSlug} from "../../../../services/helpers"
-import {omitBy, clone, startCase} from "lodash"
-import {searchService, SOLR, GOOGLE_TALENT} from '../../../../services/search'
+import {
+    omitBy,
+    clone,
+    merge,
+    startCase,
+    uniqBy
+} from "lodash"
+import {
+    blank,
+    displayLocationFromSlug
+} from "../../../../services/helpers"
+import {
+    searchService,
+    SOLR,
+    GOOGLE_TALENT
+} from '../../../../services/search'
 
 export default {
     props: {
@@ -38,13 +50,17 @@ export default {
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.defaultInput,
+            num_items: this.numItems(),
             isLoadingMore: this.siteConfig.pagination_type == "load_more",
-            num_items: this.siteConfig.num_items ? this.siteConfig.num_items : 15,
+
         }
     },
     computed: {
         inputDefinition() {
-            return {...this.sharedInputDefinition(), ...this.providerInputDefinition()}
+            return {
+                ...this.sharedInputDefinition(),
+                ...this.providerInputDefinition()
+            }
         },
         defaultInput() {
             let defaults = {}
@@ -90,19 +106,20 @@ export default {
         },
         slotData() {
             return {
-                jobs: this.jobs,
                 sort: this.sort,
                 input: this.input,
                 status: this.status,
                 hasJobs: this.hasJobs,
-                source: this.meta.source,
+                jobs: this.jobDisplay,
+                loadMore: this.loadMore,
                 setInput: this.setInput,
+                source: this.meta.source,
                 newSearch: this.newSearch,
                 pagination: this.pagination,
                 featuredJobs: this.featuredJobs,
                 removeFilter: this.removeFilter,
-                isGoogleTalent: this.isGoogleTalent,
                 appliedFilters: this.appliedFilters,
+                isGoogleTalent: this.isGoogleTalent,
                 isCommuteSearch: this.isCommuteSearch,
                 getFilterOptions: this.getFilterOptions,
                 filteredInput: this.filterInput(this.input),
@@ -123,17 +140,16 @@ export default {
             ...this.$route.params,
         })
 
-        if(!blank(this.$route.params.location)){
-            this.input.location =  displayLocationFromSlug(this.input.location)
+        if (!blank(this.$route.params.location)) {
+            this.input.location = displayLocationFromSlug(this.input.location)
         }
 
-        if(this.isLoadingMore){
+        if (this.isLoadingMore) {
             this.siteConfig.num_items = this.siteConfig.MAX_PAGE_SIZE
         }
-
-        if(this.searchOnLoad) {
+        if (this.searchOnLoad) {
             this.search().then(() => {
-                if(this.isLoadingMore){
+                if (this.isLoadingMore) {
                     this.siteConfig.offset = this.siteConfig.num_items
                 }
                 this.jobDisplay = this.jobs.splice(0, this.num_items)
@@ -141,6 +157,9 @@ export default {
         } else {
             this.appliedFilters = this.getAppliedFilters()
         }
+    },
+    destroyed() {
+        this.siteConfig.num_items = this.num_items
     },
     methods: {
         queryChanged() {},
@@ -154,15 +173,18 @@ export default {
         applyFilters() {
             return []
         },
+        numItems() {
+            return this.siteConfig.num_items ? this.siteConfig.num_items : 15
+        },
         loadMore() {
-            if(this.jobs.length > this.num_items){
-                this.jobDisplay = this.jobDisplay.concat(this.jobs.splice(0,this.num_items))
+            if (this.jobs.length > this.num_items) {
+                this.jobDisplay = this.jobDisplay.concat(this.jobs.splice(0, this.num_items))
             } else {
-                this.search().then(()=>{
+                this.search().then(() => {
                     this.siteConfig.offset += this.siteConfig.num_items
                 })
                 //since search is async load the last few jobs before fetching. Otherwise you overwrite 15 jobs
-                this.jobDisplay = this.jobDisplay.concat(this.jobs.splice(0,this.num_items))
+                this.jobDisplay = this.jobDisplay.concat(this.jobs.splice(0, this.num_items))
             }
         },
         sharedInputDefinition() {
@@ -205,7 +227,7 @@ export default {
 
             let otherParams = null
             let definition = null
-            let getDefinition = (name)=> this.inputDefinition[name] || {}
+            let getDefinition = (name) => this.inputDefinition[name] || {}
 
             params.forEach(key => {
                 // default this input filter
@@ -233,18 +255,20 @@ export default {
                 }).concat(this.applyFilters())
         },
         search() {
-            if(!this.isLoadingMore || this.jobDisplay == 0){
+            if (!this.isLoadingMore || this.jobDisplay == 0) {
                 this.status.loading = true
             }
             this.beforeSearch()
-            this.service(this.filterInput(this.input), this.siteConfig)
+            return this.service(this.filterInput(this.input), this.siteConfig)
                 .then(resp => {
                     const data = resp.data || {}
                     this.featuredJobs = data.featured_jobs || []
                     this.pagination = data.pagination || {}
                     this.filters = data.filters || {}
                     this.jobs = data.jobs || []
-                    this.meta = data.meta || {source: SOLR} //prevents sites from erroring when unable to connect to api
+                    this.meta = data.meta || {
+                        source: SOLR
+                    } //prevents sites from erroring when unable to connect to api
                     this.appliedFilters = this.getAppliedFilters()
                 })
                 .catch(err => {
