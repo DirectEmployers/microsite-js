@@ -34,14 +34,16 @@ export default  {
                 error: false,
             },
             jobs: [],
+            jobDisplay: [],
             filters: [],
-            tmpData: [],
             pagination: {},
-            // isFirstLoad: true,
             featuredJobs: [],
+            isFirstLoad: true,
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.getInputDefaults(),
+            isLoadingMore: this.siteConfig.pagination_type == "load_more",
+            num_items: this.siteConfig.num_items ? this.siteConfig.num_items : 15,
         }
     },
     computed:{
@@ -86,12 +88,7 @@ export default  {
         "$route.query"() {
             this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
-            this.search().then( () => {
-                if(this.isLoadingMore){
-                    this.isLoadingMore = false
-                    this.jobs = this.tmpJobs.concat(this.jobs)
-                }
-            })
+            this.search()
         },
     },
     created(){
@@ -104,8 +101,17 @@ export default  {
             this.input.location =  displayLocationFromSlug(this.input.location)
         }
 
+        if(this.isLoadingMore){
+            this.siteConfig.num_items = this.siteConfig.MAX_PAGE_SIZE
+        }
+
         if(this.searchOnLoad) {
-            this.search()
+            this.search().then(() => {
+                if(this.isLoadingMore){
+                    this.siteConfig.offset = this.siteConfig.num_items
+                }
+                this.jobDisplay = this.jobs.splice(0, this.num_items)
+            })
         }
     },
     methods:{
@@ -113,11 +119,16 @@ export default  {
         applyFilters(){
             return []
         },
-        loadMore(page) {
-            this.tmpJobs = this.jobs
-            this.isLoadingMore = true
-            this.input["page"] = page
-            this.pushPayload()
+        loadMore() {
+            if(this.jobs.length > this.num_items){
+                this.jobDisplay = this.jobDisplay.concat(this.jobs.splice(0,this.num_items))
+            } else {
+                this.search().then(()=>{
+                    this.siteConfig.offset += this.siteConfig.num_items
+                })
+                //since search is async load the last few jobs before fetching. Otherwise you overwrite 15 jobs
+                this.jobDisplay = this.jobDisplay.concat(this.jobs.splice(0,this.num_items))
+            }
         },
         mergeWithDefaultInput(from = {}) {
             return {
@@ -161,19 +172,9 @@ export default  {
             return filters.concat(this.applyFilters())
         },
         search() {
-            if(!this.isLoadingMore){
+            if(!this.isLoadingMore || this.jobDisplay == 0){
                 this.status.loading = true
             }
-
-            //prevents needing to request all jobs again when using button pagination
-            // if(this.isFirstLoad){
-            //     this.isFirstLoad = false
-            //     if(this.siteConfig.pagination_type){
-            //         let defaultNum = this.siteConfig.default_num_items
-            //         this.input.num_items =  defaultNum ? defaultNum * this.input.page : 15 * this.input.page
-            //     }
-            // }
-
             return this.service(this.input, this.siteConfig).then(resp=>{
                 const data = resp.data || {}
                 this.featuredJobs = data.featured_jobs || []
@@ -208,7 +209,6 @@ export default  {
 
             this.$router
                 .push({
-                    name: "jobs",
                     path: "/jobs",
                     query: payload,
                     params: {savePos: true}

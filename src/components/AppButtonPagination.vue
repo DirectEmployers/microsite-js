@@ -22,15 +22,10 @@ export default {
             type: Number,
         },
     },
-    computed: {
-        nextPage() {
-            const next = this.currentPage + 1
-            return next <= this.totalPages ? next : false
-        },
-    },
+
     methods: {
         loadMore() {
-            this.$emit("loadMore", this.nextPage)
+            this.$emit("loadMore")
         },
     }
 }
