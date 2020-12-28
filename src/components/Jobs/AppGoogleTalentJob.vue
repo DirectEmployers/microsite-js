@@ -117,7 +117,7 @@ export default {
                             event: currentEvent,
                         })
                     )
-                })
+                }).catch(()=>{})
             }
         },
     },

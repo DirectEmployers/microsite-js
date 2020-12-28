@@ -41,7 +41,7 @@ export default {
                                 event: event,
                             })
                         )
-                    })
+                    }).catch(()=>{})
                 }
             }
 

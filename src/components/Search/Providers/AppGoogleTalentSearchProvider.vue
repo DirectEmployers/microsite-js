@@ -50,7 +50,7 @@ export default {
                             event: event,
                         })
                     )
-                })
+                }).catch(()=>{})
             }
         },
         providerInputDefinition() {
