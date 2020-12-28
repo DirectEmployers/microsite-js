@@ -72,7 +72,7 @@ import buildUrl from "axios/lib/helpers/buildURL"
 import AppSimilarJobs from "~/components/AppSimilarJobs"
 import AppJobProvider from "~/components/Jobs/AppJobProvider"
 export default {
-    name: "AppJob",
+    name: "AppJobDetail",
     metaInfo() {
         return {
             title: this.job ? this.job.title : null,

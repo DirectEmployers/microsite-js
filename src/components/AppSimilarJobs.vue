@@ -19,7 +19,7 @@
                                     {{ jobData.title }}
                                 </h3>
                                 <p class="similar-jobs__grid-item-location">
-                                    {{ jobData.location }}
+                                    {{ jobData.city }}, {{ jobData.state }}
                                 </p>
                             </slot>
                         </g-link>
@@ -32,7 +32,7 @@
 
 <script>
 import { searchService } from "../services/search"
-import AppJobProviderProvider from './Jobs/AppJobProvider'
+import AppJobProvider from './Jobs/AppJobProvider'
 export default {
     data() {
         return {

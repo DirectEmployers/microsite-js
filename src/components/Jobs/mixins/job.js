@@ -1,4 +1,4 @@
-import { get, omitBy } from "lodash"
+import { get, omitBy, words, startCase } from "lodash"
 import buildUrl from "axios/lib/helpers/buildURL"
 import {GOOGLE_TALENT, SOLR} from "../../../services/search"
 import { VS_KEY, UTM_KEY } from '../../../services/storage'
@@ -18,6 +18,10 @@ export default{
             type: String,
             required: false,
             default: "div",
+        },
+        siteConfig:{
+            type: Object,
+            required: true
         },
         input: {
             type: Object,
@@ -39,7 +43,7 @@ export default{
             return this.source == GOOGLE_TALENT
         },
         city() {
-            return this.jobData.city_exact
+            return this.jobInfo.city_exact
         },
         company() {
             return this.jobInfo.company_exact
@@ -57,7 +61,7 @@ export default{
             return this.getAttribute("location_exact")
         },
         country() {
-            // return this.jobInfo.country_short_exact
+            return this.jobInfo.country_exact
         },
         detailUrl() {
             let url = buildJobDetailUrl(this.title, this.location, this.guid)
@@ -84,16 +88,19 @@ export default{
             return buildUrl(url, omitBy(params, blank))
         },
         description() {
-            return this.jobInfo.html_description
+            return this.jobInfo.html_description || this.jobInfo.description
         },
         state() {
-            // TODO
-            // let state = this.jobData.state_short_exact
-            // //handle missing state data
-            // if (blank(state)) {
-                //     state = this.location.split(",")[1]
-                // }
-                // return fullState(state)
+            let state = this.jobInfo.city_slab_exact
+
+
+            state = this.jobInfo.city_slab_exact.split("/")[1];
+
+            if(blank(state)){
+                return this.jobInfo.state_short_exact
+            }
+
+            return startCase(words(state).join(" "))
         },
         commuteTime(){
             return ""
