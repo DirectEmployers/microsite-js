@@ -33,6 +33,7 @@
 <script>
 import { searchService } from "../services/search"
 import AppJob from './AppJob'
+
 export default {
     data() {
         return {

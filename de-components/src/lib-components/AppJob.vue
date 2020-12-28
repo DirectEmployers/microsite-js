@@ -97,7 +97,9 @@ export default {
             }
         },
         clickedViewJob() {
-            if (this.siteConfig.source == SOLR) return
+            if (this.siteConfig.source == SOLR) {
+                return
+            }
 
             if (this.isGoogleTalent) {
                 let requestId = GoogleTalentClientEvent.getSavedTalentData()
@@ -136,12 +138,14 @@ export default {
         isGoogleTalent() {
             return this.source == GOOGLE_TALENT
         },
+
         reqId() {
             if (this.isGoogleTalent) {
                 return this.getAttribute("reqid")
             }
             return this.jobData.reqid
         },
+
         title() {
             if (this.isGoogleTalent) {
                 return this.jobData.title

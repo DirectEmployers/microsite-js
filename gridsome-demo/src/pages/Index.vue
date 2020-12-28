@@ -1,42 +1,44 @@
 <template>
-  <Layout>
-
-    <!-- Learn how to use images here: https://gridsome.org/docs/images -->
-    <g-image alt="Example image" src="~/favicon.png" width="135" />
-
-    <h1>Hello, world!</h1>
-
-    <de-x-icon />
-
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur excepturi labore tempore expedita, et iste tenetur suscipit explicabo! Dolores, aperiam non officia eos quod asperiores
-    </p>
-
-    <p class="home-links">
-      <a href="https://gridsome.org/docs/" target="_blank" rel="noopener">Gridsome Docs</a>
-      <a href="https://github.com/gridsome/gridsome" target="_blank" rel="noopener">GitHub</a>
-    </p>
-
-  </Layout>
+    <Layout>
+        <AppGoogleTalentSearchProvider
+            class="mt-6"
+            :search-on-load="false"
+            :site-config="$siteConfig"
+            v-slot="{
+                input,
+                source,
+                newSearch,
+            }"
+        >
+            <div class="mx-4">
+                <AppSearchForm
+                    :input="input"
+                    :source="source"
+                    @search="newSearch"
+                />
+            </div>
+        </AppGoogleTalentSearchProvider>
+    </Layout>
 </template>
-
 <script>
-import { DeXIcon } from 'de-components'
 
+import AppSearchForm from "~/demo/components/AppSearchForm"
+import AppGoogleTalentSearchProvider from '~/components/Search/Providers/AppGoogleTalentSearchProvider'
 export default {
-  metaInfo: {
-    title: 'Hello, world!'
-  },
-  components: {
-    DeXIcon,
-  }
+    components: {
+        AppSearchForm,
+        AppGoogleTalentSearchProvider
+    },
+    metaInfo: {
+        title: "Home",
+        meta: [
+            {
+                key: "description",
+                name: "description",
+                content: "only the best jobs",
+            },
+        ],
+    }
 }
 </script>
 
-<style lang="scss">
-@import 'de-components/dist/styles/video';
-
-.home-links a {
-  margin-right: 1rem;
-}
-</style>

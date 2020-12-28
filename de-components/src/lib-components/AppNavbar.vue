@@ -55,7 +55,6 @@
 <script>
 import AppHamburgerMenuIcon from './Icons/AppHamburgerMenuIcon'
 import AppXIcon from './Icons/AppXIcon'
-
 export default {
     props: {
         links: {

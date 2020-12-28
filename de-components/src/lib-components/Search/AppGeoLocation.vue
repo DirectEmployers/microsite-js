@@ -11,14 +11,13 @@
             }"
         >
             <slot>
-                <DeRadiusIcon width="18px" />
+                <AppRadiusIcon width="18px" />
             </slot>
         </button>
     </ClientOnly>
 </template>
 <script>
-import AppRadiusIcon from "./Icons/DeRadiusIcon"
-
+import AppRadiusIcon from "../Icons/AppRadiusIcon"
 export default {
     computed: {
         isSupported() {
@@ -29,7 +28,7 @@ export default {
         },
     },
     components:{
-        DeRadiusIcon
+        AppRadiusIcon
     },
     methods: {
         getGeoLocation() {

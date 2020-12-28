@@ -72,7 +72,7 @@
 import {debounce} from "lodash"
 
 export default {
-    name: "DeAutocomplete",
+    name: "AppAutocompleteInput",
     inheritAttrs: false,
     props: {
         id: {
@@ -192,7 +192,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-@import "./DeAutocomplete";
-</style>

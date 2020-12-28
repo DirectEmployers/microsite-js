@@ -1,7 +1,10 @@
 <script>
 import {trim, endsWith} from "lodash"
 import {isDevelopment} from "../services/helpers"
-import {declinedCookieUse} from "../services/storage"
+import {
+    declinedCookieUse,
+} from "../services/storage"
+
 
 export default {
     props: {
@@ -13,6 +16,7 @@ export default {
     },
 
     created() {
+
         if (process.isClient && !declinedCookieUse() && !isDevelopment()) {
             this.appendTracker()
         }
@@ -32,17 +36,15 @@ export default {
                 de_track.instances = []
             }
 
-            document
-                .querySelectorAll("[id*='detrack']")
-                .forEach((el) => el.remove())
+            document.querySelectorAll("[id*='detrack']").forEach(el=>el.remove())
 
-            const script = document.createElement("script")
+            const script = document.createElement('script')
 
-            script.setAttribute("src", this.scriptSrc)
+            script.setAttribute('src', this.scriptSrc)
 
-            script.setAttribute("id", "detrack")
+            script.setAttribute('id', 'detrack')
 
-            script.setAttribute("defer", true)
+            script.setAttribute('defer', true)
 
             document.body.appendChild(script)
         },

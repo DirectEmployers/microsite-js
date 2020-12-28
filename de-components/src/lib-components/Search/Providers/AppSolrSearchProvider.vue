@@ -1,23 +1,7 @@
 <template>
     <component :is="tag">
         <slot
-            :jobs="jobs"
-            :sort="sort"
-            :input="input"
-            :status="status"
-            :hasJobs="hasJobs"
-            :source="meta.source"
-            :setFilter="setFilter"
-            :newSearch="newSearch"
-            :pagination="pagination"
-            :selectPage="selectPage"
-            :featuredJobs="featuredJobs"
-            :removeFilter="removeFilter"
-            :isGoogleTalent="isGoogleTalent"
-            :appliedFilters="appliedFilters"
-            :isCommuteSearch="isCommuteSearch"
-            :getFilterOptions="getFilterOptions"
-            :filteredInput="getCurrentPayload()"
+            v-bind="slotData"
         >
         </slot>
     </component>
@@ -30,9 +14,11 @@ import base from './mixins/provider'
 export default{
     mixins: [base],
     methods: {
-        inputDefaults(){
+        providerInputDefinition(){
             return {
-                moc: ""
+                moc: {
+                    default: ""
+                }
             }
         }
     }
