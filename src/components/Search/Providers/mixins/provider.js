@@ -1,9 +1,10 @@
+import {omitBy, clone, merge, startCase, uniqBy} from "lodash"
 import {blank, displayLocationFromSlug} from "../../../../services/helpers"
 import {omitBy, clone, startCase} from "lodash"
 import {searchService, SOLR, GOOGLE_TALENT} from '../../../../services/search'
 
-export default  {
-    props:{
+export default {
+    props: {
         siteConfig: {
             required: true,
             type: Object,
@@ -18,16 +19,11 @@ export default  {
             default: true,
             required: false,
         },
-        defaultInput: {
-            required: false,
-            type: Object,
-            default: () => { return {} },
-        },
     },
     data() {
         return {
             meta: {
-                source: this.siteConfig.source
+                source: this.siteConfig.source,
             },
             status: {
                 loading: false,
@@ -41,12 +37,22 @@ export default  {
             isFirstLoad: true,
             appliedFilters: [],
             isCommuteSearch: false,
-            input: this.getInputDefaults(),
+            input: this.defaultInput,
             isLoadingMore: this.siteConfig.pagination_type == "load_more",
             num_items: this.siteConfig.num_items ? this.siteConfig.num_items : 15,
         }
     },
-    computed:{
+    computed: {
+        inputDefinition() {
+            return {...this.sharedInputDefinition(), ...this.providerInputDefinition()}
+        },
+        defaultInput() {
+            let defaults = {}
+            Object.entries(this.inputDefinition).forEach(([name, definition]) => {
+                defaults[name] = definition.default
+            })
+            return defaults
+        },
         service() {
             return searchService
         },
@@ -66,21 +72,41 @@ export default  {
         sort() {
             let sort = {
                 options: [],
-                sortField: ()=>{},
-                by: null
+                sortField: () => {},
+                by: null,
             }
 
             let sortMeta = clone(this.meta.sort || {})
             if (blank(sortMeta)) {
                 return sort
             }
-            sort.sortField = (field) => {
+            sort.sortField = field => {
                 this.input.sort = field.toLowerCase()
                 this.newSearch()
             }
             sort.by = blank(sortMeta) ? "" : startCase(sortMeta.active)
             sort.options = sortMeta.options.map(o => startCase(o))
             return sort
+        },
+        slotData() {
+            return {
+                jobs: this.jobs,
+                sort: this.sort,
+                input: this.input,
+                status: this.status,
+                hasJobs: this.hasJobs,
+                source: this.meta.source,
+                setInput: this.setInput,
+                newSearch: this.newSearch,
+                pagination: this.pagination,
+                featuredJobs: this.featuredJobs,
+                removeFilter: this.removeFilter,
+                isGoogleTalent: this.isGoogleTalent,
+                appliedFilters: this.appliedFilters,
+                isCommuteSearch: this.isCommuteSearch,
+                getFilterOptions: this.getFilterOptions,
+                filteredInput: this.filterInput(this.input),
+            }
         },
     },
     watch: {
@@ -91,10 +117,10 @@ export default  {
             this.search()
         },
     },
-    created(){
+    created() {
         this.input = this.mergeWithDefaultInput({
             ...this.$route.query,
-            ...this.$route.params
+            ...this.$route.params,
         })
 
         if(!blank(this.$route.params.location)){
@@ -112,11 +138,20 @@ export default  {
                 }
                 this.jobDisplay = this.jobs.splice(0, this.num_items)
             })
+        } else {
+            this.appliedFilters = this.getAppliedFilters()
         }
     },
-    methods:{
-        queryChanged(){},
-        applyFilters(){
+    methods: {
+        queryChanged() {},
+        beforeSearch() {},
+        excludePayload() {
+            return []
+        },
+        providerInputDefinition() {
+            return {}
+        },
+        applyFilters() {
             return []
         },
         loadMore() {
@@ -130,122 +165,122 @@ export default  {
                 this.jobDisplay = this.jobDisplay.concat(this.jobs.splice(0,this.num_items))
             }
         },
-        mergeWithDefaultInput(from = {}) {
+        sharedInputDefinition() {
             return {
-                ...this.getInputDefaults(),
-                ...from
+                q: {
+                    default: "",
+                },
+                r: {
+                    default: "",
+                },
+                location: {
+                    default: "",
+                    clears: ["coords", "r"],
+                },
+                coords: {
+                    default: "",
+                    clears: ["location", "r"],
+                },
+                page: {
+                    default: 1,
+                },
+                sort: {
+                    default: "relevance",
+                },
             }
         },
-        removeFilter(params){
-            const defaultInput = this.getInputDefaults()
-            if (params == "*") {
-                return this.pushPayload({})
+        mergeWithDefaultInput(object = {}) {
+            return {
+                ...this.defaultInput,
+                ...object,
             }
-            if(!Array.isArray(params)){
+        },
+        removeFilter(params) {
+            if (params == "*") {
+                return this.newSearch(this.defaultInput)
+            }
+            if (!Array.isArray(params)) {
                 params = [params]
             }
 
+            let otherParams = null
+            let definition = null
+            let getDefinition = (name)=> this.inputDefinition[name] || {}
+
             params.forEach(key => {
-                this.input[key] = defaultInput[key] || ""
+                // default this input filter
+                definition = getDefinition(key)
+                this.input[key] = definition.default || ""
+                //then default dependent params as defined in definition for this input.
+                otherParams = definition.clears || []
+                otherParams.forEach(name => {
+                    definition = getDefinition(name)
+                    this.input[name] = definition.default || ""
+                })
             })
 
-            if(params.includes('location')){
-                this.input['coords'] = defaultInput['coords']
-                this.input['r'] = defaultInput['r']
-            }
             this.newSearch()
         },
-        getAppliedFilters(){
-            let filters = []
-            let added = []
-            const input = this.input
-            this.configFilters.forEach(filter => {
-                let params = [filter.name]
-                if (!blank(input[filter.name]) && !added.includes(filter.name)) {
-                    filters.push({
-                        display: input[filter.name],
-                        parameter: params,
-                    })
-                    added.push(filter.name)
-                }
-            })
-            return filters.concat(this.applyFilters())
+        getAppliedFilters() {
+            return uniqBy(this.configFilters, "name")
+                .filter(filter => {
+                    return !blank(this.input[filter.name])
+                }).map(filter => {
+                    return {
+                        display: this.input[filter.name],
+                        parameter: filter.name,
+                    }
+                }).concat(this.applyFilters())
         },
         search() {
             if(!this.isLoadingMore || this.jobDisplay == 0){
                 this.status.loading = true
             }
-            return this.service(this.input, this.siteConfig).then(resp=>{
-                const data = resp.data || {}
-                this.featuredJobs = data.featured_jobs || []
-                this.pagination = data.pagination || {}
-                this.filters = data.filters || {}
-                this.jobs = data.jobs || []
-                this.meta = data.meta || {'source': SOLR} //prevents sites from erroring when unable to connect to api
-                this.appliedFilters = this.getAppliedFilters()
-            }).catch( err => {
-                this.status.error = err
-            }).finally(() =>{
-                this.status.loading = false
-            })
+            this.beforeSearch()
+            this.service(this.filterInput(this.input), this.siteConfig)
+                .then(resp => {
+                    const data = resp.data || {}
+                    this.featuredJobs = data.featured_jobs || []
+                    this.pagination = data.pagination || {}
+                    this.filters = data.filters || {}
+                    this.jobs = data.jobs || []
+                    this.meta = data.meta || {source: SOLR} //prevents sites from erroring when unable to connect to api
+                    this.appliedFilters = this.getAppliedFilters()
+                })
+                .catch(err => {
+                    this.status.error = err
+                })
+                .finally(() => {
+                    this.status.loading = false
+                })
         },
         getFilterOptions(filter) {
             let key = blank(filter.key) ? filter.name : filter.key
-            return (blank(this.filters[key]) || !Array.isArray(this.filters[key])) ? [] : this.filters[key]
+            let options = this.filters[key]
+            return blank(options) || !Array.isArray(options) ? [] : options
         },
-
-        setFilter(key, value){
-            this.input[key] = value
-            this.newSearch()
+        setInput(filter) {
+            this.newSearch(
+                this.mergeWithDefaultInput({
+                    ...this.input,
+                    ...filter,
+                })
+            )
         },
-
-        selectPage(page) {
-            this.input["page"] = page
-            this.pushPayload()
+        filterInput(input) {
+            let excluded = this.excludePayload()
+            return omitBy(input, (v, k) => {
+                return blank(v) || excluded.includes(k)
+            })
         },
-
-        pushPayload(payload = null) {
-            payload = payload === null ? this.getCurrentPayload() : payload
-
+        newSearch(payload = null) {
+            payload = payload === null ? this.input : payload
             this.$router
                 .push({
                     path: "/jobs",
-                    query: payload,
-                    params: {savePos: true}
+                    query: this.filterInput(payload),
                 })
                 .catch(err => {})
-        },
-        getCurrentPayload() {
-            return this.filterEmpty(this.input)
-        },
-        filterEmpty(data, callback = null) {
-            if(callback === null){
-                callback =  () => false
-            }
-            return omitBy(data, (v, k) => {
-                return blank(v) || callback(k, v)
-            })
-        },
-        getInputDefaults() {
-            let defaultInput = clone(this.defaultInput)
-            return {
-                ...{
-                    q: "",
-                    r: "",
-                    location: "",
-                    coords: null,
-                    page: 1,
-                    sort: "relevance",
-                },
-                ...this.inputDefaults(),
-                ...defaultInput
-            }
-        },
-        newSearch() {
-            this.input.page = 1
-            this.pushPayload()
-        },
-
-    }
+        }
+    },
 }
-

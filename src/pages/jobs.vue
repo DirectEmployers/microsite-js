@@ -10,8 +10,8 @@
                 hasJobs,
                 loadMore,
                 setFilter,
+                setInput,
                 newSearch,
-                selectPage,
                 pagination,
                 filteredInput,
                 featuredJobs,
@@ -114,7 +114,6 @@
                                 :key="index"
                                 :input="filteredInput"
                                 :name="configFilter.name"
-                                @selectedFilter="setFilter"
                                 :key-name="configFilter.key"
                                 :visible="configFilter.visible"
                                 :options="getFilterOptions(configFilter)"
