@@ -92,14 +92,11 @@ export default{
         },
         state() {
             let state = this.jobInfo.city_slab_exact
-
-
             state = this.jobInfo.city_slab_exact.split("/")[1];
 
             if(blank(state)){
                 return this.jobInfo.state_short_exact
             }
-
             return startCase(words(state).join(" "))
         },
         commuteTime(){
