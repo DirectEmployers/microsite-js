@@ -1,25 +1,27 @@
 <template>
     <Layout>
         <AppGoogleTalentSearchProvider :site-config="$siteConfig">
-            <template v-slot="{
-                jobs,
-                sort,
-                input,
-                source,
-                status,
-                hasJobs,
-                setInput,
-                newSearch,
-                pagination,
-                filteredInput,
-                featuredJobs,
-                removeFilter,
-                appliedFilters,
-                isGoogleTalent,
-                isCommuteSearch,
-                getFilterOptions,
-            }">
-                <AppLoader v-if="status.loading"/>
+            <template
+                v-slot="{
+                    jobs,
+                    sort,
+                    input,
+                    source,
+                    status,
+                    hasJobs,
+                    setInput,
+                    newSearch,
+                    pagination,
+                    filteredInput,
+                    featuredJobs,
+                    removeFilter,
+                    appliedFilters,
+                    isGoogleTalent,
+                    isCommuteSearch,
+                    getFilterOptions,
+                }"
+            >
+                <AppLoader v-if="status.loading" />
                 <section v-else>
                     <div class="mx-4">
                         <AppSearchForm
@@ -31,7 +33,9 @@
                     </div>
                     <section class="flex flex-col lg:flex-row">
                         <div class="mx-4 w-full lg:w-1/2">
-                            <h3 v-if="status.error && !hasJobs">Unable to load jobs...</h3>
+                            <h3 v-if="status.error && !hasJobs">
+                                Unable to load jobs...
+                            </h3>
                             <AppFeaturedJobs
                                 :featured-jobs="featuredJobs"
                                 :source="source"
@@ -113,7 +117,9 @@
                                 :key-name="configFilter.key"
                                 :visible="configFilter.visible"
                                 :options="getFilterOptions(configFilter)"
-                                v-for="(configFilter, index) in $siteConfig.filters"
+                                v-for="(
+                                    configFilter, index
+                                ) in $siteConfig.filters"
                             >
                                 <template
                                     v-slot="{
@@ -127,12 +133,13 @@
                                     <AppAccordion
                                         :display="`Filter By ${configFilter.display}`"
                                     >
-
                                         <ul class="search-filter-options">
                                             <li
                                                 :key="index"
                                                 class="search-filter-options-item"
-                                                v-for="(filter, index) in displayedFilters"
+                                                v-for="(
+                                                    filter, index
+                                                ) in displayedFilters"
                                             >
                                                 <g-link :to="filter.href">
                                                     {{ filter.display }}
@@ -144,7 +151,9 @@
                                         </ul>
                                         <section
                                             class="search-filter-limiter"
-                                            v-if="shouldShowLess || shouldShowMore"
+                                            v-if="
+                                                shouldShowLess || shouldShowMore
+                                            "
                                         >
                                             <button
                                                 class="search-filter-limiter-more"
@@ -196,19 +205,24 @@
     </Layout>
 </template>
 <script>
-import {blank} from "~/services/helpers"
-import AppPagination from "~/components/AppPagination"
-import AppAccordion from "~/components/AppAccordion"
-import AppModal from "~/components/AppModal"
-import AppSearchForm from "~/demo/components/AppSearchForm"
-import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
-import AppLoader from "~/demo/components/AppLoader"
-import AppSearchFilter from "~/components/Search/AppSearchFilter"
-import AppChip from "~/components/AppChip"
-import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
-import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
-import AppXIcon from "~/components/Icons/AppXIcon"
-import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
+import {blank} from "de-components/src/services/helpers"
+
+import AppSearchForm from "~/components/AppSearchForm"
+import AppCommuteSearchForm from "~/components/AppCommuteSearchForm"
+import AppLoader from "~/components/AppLoader"
+import AppFeaturedJobs from "~/components/AppFeaturedJobs"
+import AppJobSearchResults from "~/components/AppJobSearchResults"
+
+import {
+    AppXIcon,
+    AppPagination,
+    AppAccordion,
+    AppModal,
+    AppSearchFilter,
+    AppChip,
+    AppGoogleTalentSearchProvider,
+} from "de-components"
+
 export default {
     components: {
         AppAccordion,

@@ -21,9 +21,9 @@
     </Layout>
 </template>
 <script>
+import AppSearchForm from "~/components/AppSearchForm"
+import {AppGoogleTalentSearchProvider} from 'de-components'
 
-import AppSearchForm from "~/demo/components/AppSearchForm"
-import AppGoogleTalentSearchProvider from '~/components/Search/Providers/AppGoogleTalentSearchProvider'
 export default {
     components: {
         AppSearchForm,
