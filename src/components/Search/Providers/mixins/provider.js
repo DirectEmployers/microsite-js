@@ -249,7 +249,7 @@ export default {
                 .concat(this.applyFilters())
         },
         search() {
-            if (!this.isLoadingMore || this.jobDisplay == 0) {
+            if (!this.isLoadingMore || this.jobDisplay.length == 0) {
                 this.status.loading = true
             }
             this.beforeSearch()
