@@ -1,10 +1,11 @@
 <template>
     <nav v-if="totalPages > 1 && currentPage < totalPages">
         <button
+            id="loadMore"
             type="button"
             @click="loadMore"
         >
-            More
+            Load More
         </button>
     </nav>
 </template>
