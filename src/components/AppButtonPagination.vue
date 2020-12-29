@@ -1,7 +1,7 @@
 <template>
     <nav v-if="totalPages > 1 && currentPage < totalPages">
         <button
-            id="loadMore"
+            class="button"
             type="button"
             @click="loadMore"
         >
