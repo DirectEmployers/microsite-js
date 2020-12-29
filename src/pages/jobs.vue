@@ -47,7 +47,7 @@
                                 <div class="text-2xl">
                                     {{ pagination.total }} jobs found
                                 </div>
-                                <AppButtonPagination
+                                <AppLoadMore
                                     :totalPages="pagination.total_pages"
                                     :currentPage="pagination.page"
                                     :jobs="jobs"
@@ -210,7 +210,7 @@ import AppPagination from "~/components/AppPagination"
 import AppSearchForm from "~/demo/components/AppSearchForm"
 import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
 import AppSearchFilter from "~/components/Search/AppSearchFilter"
-import AppButtonPagination from "~/components/AppButtonPagination"
+import AppLoadMore from "~/components/AppLoadMore"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
@@ -224,7 +224,7 @@ export default {
         AppSearchForm,
         AppSearchFilter,
         AppFeaturedJobs,
-        AppButtonPagination,
+        AppLoadMore,
         AppJobSearchResults,
         AppCommuteSearchForm,
         AppGoogleTalentSearchProvider,
