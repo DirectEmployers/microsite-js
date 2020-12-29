@@ -7,7 +7,8 @@
 </template>
 
 <script>
-import AppHtmlToJson from "./Parse/AppHtmlToJson"
+import AppHtmlToJson from "./Parse/AppHtmlToJson.vue"
+
 export default {
     name: "AppJobDescription",
     props: {

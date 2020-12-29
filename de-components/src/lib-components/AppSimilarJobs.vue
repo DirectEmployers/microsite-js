@@ -32,7 +32,7 @@
 
 <script>
 import { searchService } from "../services/search"
-import AppJob from './AppJob'
+import AppJob from './AppJob.vue'
 
 export default {
     data() {

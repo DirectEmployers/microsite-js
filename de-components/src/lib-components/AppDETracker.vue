@@ -5,7 +5,6 @@ import {
     declinedCookieUse,
 } from "../services/storage"
 
-
 export default {
     props: {
         canEngageWithJobs: {

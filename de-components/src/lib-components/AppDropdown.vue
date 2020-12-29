@@ -54,6 +54,7 @@ const UP_KEY = 38
 const DOWN_KEY = 40
 const ESC_KEY = 27
 const ENTER_KEY = 13
+
 export default {
     props: {
         id: {

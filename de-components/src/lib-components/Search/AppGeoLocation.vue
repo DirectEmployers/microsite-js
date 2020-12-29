@@ -17,7 +17,7 @@
     </ClientOnly>
 </template>
 <script>
-import AppRadiusIcon from "../Icons/AppRadiusIcon"
+import AppRadiusIcon from "../Icons/AppRadiusIcon.vue"
 export default {
     computed: {
         isSupported() {

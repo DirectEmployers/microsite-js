@@ -24,12 +24,9 @@
 
 <script>
 import linkify from "linkifyjs/html"
-
 import { kebabCase, truncate } from "lodash"
-
 const html2json = require("html2json").html2json
-
-import AppJsonToHtml from "./AppJsonToHtml"
+import AppJsonToHtml from "./AppJsonToHtml.vue"
 
 export default {
     name: "AppHtmlToJson",

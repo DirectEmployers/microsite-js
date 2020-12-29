@@ -8,7 +8,6 @@
 </template>
 
 <script>
-
 import base from './mixins/provider'
 
 export default{

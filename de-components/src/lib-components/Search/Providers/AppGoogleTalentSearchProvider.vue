@@ -7,6 +7,7 @@
 import base from "./mixins/provider"
 import {blank} from "../../../services/helpers"
 import {searchService, commuteSearchService} from "../../../services/search"
+
 export default {
     mixins: [base],
     data() {

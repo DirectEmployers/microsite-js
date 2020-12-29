@@ -53,8 +53,9 @@
 </template>
 
 <script>
-import AppHamburgerMenuIcon from './Icons/AppHamburgerMenuIcon'
-import AppXIcon from './Icons/AppXIcon'
+import AppHamburgerMenuIcon from './Icons/AppHamburgerMenuIcon.vue'
+import AppXIcon from './Icons/AppXIcon.vue'
+
 export default {
     props: {
         links: {
