@@ -1,5 +1,5 @@
 <template>
-    <AppJobWrapper :site-config="$siteConfig" source="solr" :job="job">
+    <DeJobWrapper :site-config="$siteConfig" source="solr" :job="job">
         <template
             v-slot="{
                 title,
@@ -49,8 +49,7 @@
                 <div
                     class="min-h-screen max-w-screen-md mb-8 mx-4 md:mx-auto job-details-content"
                     v-html="htmlDescription"
-                >
-                </div>
+                ></div>
 
                 <AppSimilarJobs
                     :siteConfig="$siteConfig"
@@ -64,12 +63,11 @@
                 </script>
             </div>
         </template>
-    </AppJobWrapper>
+    </DeJobWrapper>
 </template>
 
 <script>
-import AppJobWrapper from "~/components/AppJob"
-import {AppSimilarJobs} from "de-components"
+import {DeJobWrapper, AppSimilarJobs} from "de-components"
 import {blank} from "de-components/src/services/helpers"
 import buildUrl from "axios/lib/helpers/buildURL"
 
@@ -91,7 +89,7 @@ export default {
         },
     },
     components: {
-        AppJobWrapper,
+        DeJobWrapper,
         AppSimilarJobs,
     },
     computed: {

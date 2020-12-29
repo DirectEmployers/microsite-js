@@ -12,5 +12,13 @@ module.exports = function (api) {
 
   api.createPages(({ createPage }) => {
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
+    createPage({
+      path: "/:location/:title/:guid/job",
+      component: "./src/templates/Job.vue"
+    })
+    createPage({
+      path: "/:guid/job",
+      component: "./src/templates/Job.vue"
+    })
   })
 }
