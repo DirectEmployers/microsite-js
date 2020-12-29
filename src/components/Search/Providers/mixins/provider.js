@@ -1,19 +1,6 @@
-import {
-    omitBy,
-    clone,
-    merge,
-    startCase,
-    uniqBy
-} from "lodash"
-import {
-    blank,
-    displayLocationFromSlug
-} from "../../../../services/helpers"
-import {
-    searchService,
-    SOLR,
-    GOOGLE_TALENT
-} from '../../../../services/search'
+import {omitBy, clone, merge, startCase, uniqBy} from "lodash"
+import {blank, displayLocationFromSlug} from "../../../../services/helpers"
+import {searchService, SOLR, GOOGLE_TALENT} from "../../../../services/search"
 
 export default {
     props: {
@@ -52,21 +39,22 @@ export default {
             input: this.defaultInput,
             num_items: this.numItems(),
             isLoadingMore: this.siteConfig.pagination_type == "load_more",
-
         }
     },
     computed: {
         inputDefinition() {
             return {
                 ...this.sharedInputDefinition(),
-                ...this.providerInputDefinition()
+                ...this.providerInputDefinition(),
             }
         },
         defaultInput() {
             let defaults = {}
-            Object.entries(this.inputDefinition).forEach(([name, definition]) => {
-                defaults[name] = definition.default
-            })
+            Object.entries(this.inputDefinition).forEach(
+                ([name, definition]) => {
+                    defaults[name] = definition.default
+                }
+            )
             return defaults
         },
         service() {
@@ -178,13 +166,17 @@ export default {
         },
         loadMore() {
             if (this.jobs.length > this.num_items) {
-                this.jobDisplay = this.jobDisplay.concat(this.jobs.splice(0, this.num_items))
+                this.jobDisplay = this.jobDisplay.concat(
+                    this.jobs.splice(0, this.num_items)
+                )
             } else {
                 this.search().then(() => {
                     this.siteConfig.offset += this.siteConfig.num_items
                 })
                 //since search is async load the last few jobs before fetching. Otherwise you overwrite 15 jobs
-                this.jobDisplay = this.jobDisplay.concat(this.jobs.splice(0, this.num_items))
+                this.jobDisplay = this.jobDisplay.concat(
+                    this.jobs.splice(0, this.num_items)
+                )
             }
         },
         sharedInputDefinition() {
@@ -227,7 +219,7 @@ export default {
 
             let otherParams = null
             let definition = null
-            let getDefinition = (name) => this.inputDefinition[name] || {}
+            let getDefinition = name => this.inputDefinition[name] || {}
 
             params.forEach(key => {
                 // default this input filter
@@ -247,12 +239,14 @@ export default {
             return uniqBy(this.configFilters, "name")
                 .filter(filter => {
                     return !blank(this.input[filter.name])
-                }).map(filter => {
+                })
+                .map(filter => {
                     return {
                         display: this.input[filter.name],
                         parameter: filter.name,
                     }
-                }).concat(this.applyFilters())
+                })
+                .concat(this.applyFilters())
         },
         search() {
             if (!this.isLoadingMore || this.jobDisplay == 0) {
@@ -267,7 +261,7 @@ export default {
                     this.filters = data.filters || {}
                     this.jobs = data.jobs || []
                     this.meta = data.meta || {
-                        source: SOLR
+                        source: SOLR,
                     } //prevents sites from erroring when unable to connect to api
                     this.appliedFilters = this.getAppliedFilters()
                 })
@@ -305,6 +299,6 @@ export default {
                     query: this.filterInput(payload),
                 })
                 .catch(err => {})
-        }
+        },
     },
 }

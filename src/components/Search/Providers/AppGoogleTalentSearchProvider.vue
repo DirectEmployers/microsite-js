@@ -52,7 +52,7 @@ export default {
                     {
                         display: `Commute:${this.input.commuteLocation}`,
                         parameter: "commuteLocation",
-                    }
+                    },
                 ]
             }
             return []
@@ -65,7 +65,9 @@ export default {
             return exclude
         },
         shouldDoCommuteSearch() {
-            return !blank(this.input.coords) && !blank(this.input.commuteLocation)
+            return (
+                !blank(this.input.coords) && !blank(this.input.commuteLocation)
+            )
         },
         beforeSearch() {
             this.isCommuteSearch = this.shouldDoCommuteSearch()

@@ -1,10 +1,6 @@
 <template>
     <nav v-if="totalPages > 1 && currentPage < totalPages">
-        <button
-            class="button"
-            type="button"
-            @click="loadMore"
-        >
+        <button class="button" type="button" @click="loadMore">
             Load More
         </button>
     </nav>
@@ -28,6 +24,6 @@ export default {
         loadMore() {
             this.$emit("loadMore")
         },
-    }
+    },
 }
 </script>
