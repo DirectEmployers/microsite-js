@@ -22,6 +22,10 @@ const config =  {
         {
             name: "company",
             display: "Company",
+            key:{
+                solr: "company",
+                google_talent: "employer"
+            }
         },
         {
             name: "location",

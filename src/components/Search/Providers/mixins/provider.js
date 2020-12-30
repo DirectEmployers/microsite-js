@@ -38,14 +38,22 @@ export default {
         }
     },
     computed: {
+        source() {
+            return this.isGoogleTalent ? GOOGLE_TALENT : SOLR
+        },
         inputDefinition() {
-            return {...this.sharedInputDefinition(), ...this.providerInputDefinition()}
+            return {
+                ...this.sharedInputDefinition(),
+                ...this.providerInputDefinition(),
+            }
         },
         defaultInput() {
             let defaults = {}
-            Object.entries(this.inputDefinition).forEach(([name, definition]) => {
-                defaults[name] = definition.default
-            })
+            Object.entries(this.inputDefinition).forEach(
+                ([name, definition]) => {
+                    defaults[name] = definition.default
+                }
+            )
             return defaults
         },
         service() {
@@ -118,13 +126,13 @@ export default {
             ...this.$route.params,
         })
 
-        if(!blank(this.$route.params.location)){
-            this.input.location =  displayLocationFromSlug(this.input.location)
+        if (!blank(this.$route.params.location)) {
+            this.input.location = displayLocationFromSlug(this.input.location)
         }
 
         if (this.searchOnLoad) {
             this.search()
-        }else{
+        } else {
             this.appliedFilters = this.getAppliedFilters()
         }
     },
@@ -180,7 +188,7 @@ export default {
 
             let otherParams = null
             let definition = null
-            let getDefinition = (name)=> this.inputDefinition[name] || {}
+            let getDefinition = name => this.inputDefinition[name] || {}
 
             params.forEach(key => {
                 // default this input filter
@@ -200,12 +208,14 @@ export default {
             return uniqBy(this.configFilters, "name")
                 .filter(filter => {
                     return !blank(this.input[filter.name])
-                }).map(filter => {
+                })
+                .map(filter => {
                     return {
                         display: this.input[filter.name],
                         parameter: filter.name,
                     }
-                }).concat(this.applyFilters())
+                })
+                .concat(this.applyFilters())
         },
         search() {
             this.beforeSearch()
@@ -227,9 +237,15 @@ export default {
                     this.status.loading = false
                 })
         },
+        getFilterKey(filter) {
+            let key = filter.key
+            if(typeof key == "object"){
+                key = key[this.source]
+            }
+            return blank(key) ? filter.name : key
+        },
         getFilterOptions(filter) {
-            let key = blank(filter.key) ? filter.name : filter.key
-            let options = this.filters[key]
+            let options = this.filters[this.getFilterKey(filter)]
             return blank(options) || !Array.isArray(options) ? [] : options
         },
         setInput(filter) {
@@ -254,6 +270,6 @@ export default {
                     query: this.filterInput(payload),
                 })
                 .catch(err => {})
-        }
+        },
     },
 }
