@@ -37,7 +37,7 @@ export default {
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.defaultInput,
-            num_items: this.numItems(),
+            siteConfigClone: clone(this.siteConfig),
             isLoadingMore: this.siteConfig.pagination_type == "load_more",
         }
     },
@@ -131,27 +131,26 @@ export default {
         if (!blank(this.$route.params.location)) {
             this.input.location = displayLocationFromSlug(this.input.location)
         }
-
-        if (this.isLoadingMore) {
-            this.siteConfig.num_items = this.siteConfig.MAX_PAGE_SIZE
-        }
         if (this.searchOnLoad) {
             this.search().then(() => {
                 if (this.isLoadingMore) {
-                    this.siteConfig.offset = this.siteConfig.num_items
+                    this.siteConfigClone.offset = this.siteConfig.num_items
                 }
-                this.jobDisplay = this.jobs.splice(0, this.num_items)
+                this.jobDisplay = this.jobs.splice(0, this.siteConfig.num_items)
             })
         } else {
             this.appliedFilters = this.getAppliedFilters()
         }
     },
-    destroyed() {
-        this.siteConfig.num_items = this.num_items
-    },
     methods: {
         queryChanged() {},
-        beforeSearch() {},
+        beforeSearch() {
+            if(this.isFirstLoad && this.isLoadingMore){
+                delete this.input.page
+                this.siteConfigClone.num_items = this.siteConfig.max_page_size
+                this.isFirstLoad = false
+            }
+        },
         excludePayload() {
             return []
         },
@@ -161,26 +160,23 @@ export default {
         applyFilters() {
             return []
         },
-        numItems() {
-            return this.siteConfig.num_items ? this.siteConfig.num_items : 15
-        },
         loadMore() {
-            if (this.jobs.length > this.num_items) {
+            if (this.jobs.length > this.siteConfig.num_items) {
                 this.jobDisplay = this.jobDisplay.concat(
-                    this.jobs.splice(0, this.num_items)
+                    this.jobs.splice(0, this.siteConfig.num_items)
                 )
             } else {
                 this.search().then(() => {
-                    this.siteConfig.offset += this.siteConfig.num_items
+                    this.siteConfigClone.offset += this.siteConfig.num_items
                 })
                 //since search is async load the last few jobs before fetching. Otherwise you overwrite 15 jobs
                 this.jobDisplay = this.jobDisplay.concat(
-                    this.jobs.splice(0, this.num_items)
+                    this.jobs.splice(0, this.siteConfig.num_items)
                 )
             }
         },
         sharedInputDefinition() {
-            return {
+            let r = {
                 q: {
                     default: "",
                 },
@@ -202,6 +198,10 @@ export default {
                     default: "relevance",
                 },
             }
+            if(this.isLoadingMore){
+                delete r.page
+            }
+            return r
         },
         mergeWithDefaultInput(object = {}) {
             return {
@@ -253,7 +253,7 @@ export default {
                 this.status.loading = true
             }
             this.beforeSearch()
-            return this.service(this.filterInput(this.input), this.siteConfig)
+            return this.service(this.filterInput(this.input), this.siteConfigClone)
                 .then(resp => {
                     const data = resp.data || {}
                     this.featuredJobs = data.featured_jobs || []
@@ -270,6 +270,9 @@ export default {
                 })
                 .finally(() => {
                     this.status.loading = false
+                    if(!this.isLoadingMore){
+                        this.jobDisplay = this.jobs
+                    }
                 })
         },
         getFilterOptions(filter) {

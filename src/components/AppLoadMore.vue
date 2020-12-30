@@ -1,7 +1,9 @@
 <template>
-    <nav v-if="totalPages > 1 && currentPage < totalPages">
-        <button class="button" type="button" @click="loadMore">
-            Load More
+    <nav v-if="totalPages > 1 && currentPage < totalPages" class='load-more-pagination'>
+        <button class="load-more-pagination-button" type="button" @click="loadMore">
+            <slot>
+                Load More
+            </slot>
         </button>
     </nav>
 </template>

@@ -70,6 +70,11 @@ export default {
             )
         },
         beforeSearch() {
+            if(this.isFirstLoad && this.isLoadingMore){
+                delete this.input.page
+                this.siteConfigClone.num_items = this.siteConfig.max_page_size
+                this.isFirstLoad = false
+            }
             this.isCommuteSearch = this.shouldDoCommuteSearch()
             if (this.isCommuteSearch) {
                 this.input.location = ""
