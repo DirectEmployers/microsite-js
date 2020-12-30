@@ -14,7 +14,7 @@ module.exports = {
       options: {
         tailwindConfig: './tailwind.config.js',
         presetEnvConfig: {},
-        shouldImport: false,
+        shouldImport: true,
         shouldTimeTravel: true
       }
     },

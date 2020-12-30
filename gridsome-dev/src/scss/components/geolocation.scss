@@ -1,0 +1,10 @@
+.geolocation__button {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    --bg-opacity: 1;
+    background-color: #000;
+    background-color: rgba(0, 0, 0, var(--bg-opacity));
+}
+.geolocation__button path {
+    fill: #fff;
+}

@@ -1,4 +1,5 @@
 // This is the main.js file for our demo gridsome playground
+import "~/scss/microsite-js.scss"
 import DefaultLayout from "~/layouts/Default.vue"
 import siteConfig from "~/config"
 

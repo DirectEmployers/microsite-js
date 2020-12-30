@@ -1,0 +1,170 @@
+
+.form__label {
+    margin-bottom: 0.25rem;
+    color: #000;
+    color: rgba(0, 0, 0, var(--text-opacity));
+    font-weight: 500;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.form__input,
+.form__label {
+    display: block;
+    --text-opacity: 1;
+}
+.form__input {
+    padding: 0.5rem;
+    line-height: 1.5;
+    width: 100%;
+    border-width: 1px;
+    color: #4a5568;
+    color: rgba(74, 85, 104, var(--text-opacity));
+    --bg-opacity: 1;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, var(--bg-opacity));
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+        Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    border-radius: 0.25rem;
+    text-align: left;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.form__input.focus,
+.form__input:focus {
+    --border-opacity: 1;
+    border-color: #ccc;
+    border-color: rgba(204, 204, 204, var(--border-opacity));
+}
+.form__input::-moz-placeholder {
+    --text-opacity: 1;
+    color: #ccc;
+    color: rgba(204, 204, 204, var(--text-opacity));
+    opacity: 1;
+}
+.form__input:-ms-input-placeholder {
+    --text-opacity: 1;
+    color: #ccc;
+    color: rgba(204, 204, 204, var(--text-opacity));
+    opacity: 1;
+}
+.form__input::-ms-input-placeholder {
+    --text-opacity: 1;
+    color: #ccc;
+    color: rgba(204, 204, 204, var(--text-opacity));
+    opacity: 1;
+}
+.form__input::placeholder {
+    --text-opacity: 1;
+    color: #ccc;
+    color: rgba(204, 204, 204, var(--text-opacity));
+    opacity: 1;
+}
+.form__input-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+}
+.form__input-group .form__input {
+    flex-shrink: 1;
+    flex-grow: 1;
+    flex: 1 1 auto;
+    line-height: 1.5;
+    width: 1px;
+    flex: 1 1 0%;
+    border-radius: 0.25rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+.form__input-group .form__input:focus {
+    border-radius: 0;
+}
+.form__input-group .form__input-addon {
+    display: flex;
+    margin-right: 1px;
+    border-radius: 0.25rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-width: 1px;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    align-items: center;
+    height: 39px;
+}
+.form__input-group .form__input-addon:focus {
+    border-radius: 0;
+}
+.form__input-group--stacked {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+.form__input-group--stacked .form__input {
+    width: 100%;
+}
+.form__down-arrow {
+    font-size: 0.75rem;
+    position: absolute;
+    pointer-events: none;
+    bottom: 0.6rem;
+    right: 0.5rem;
+}
+.form__autocomplete {
+    position: relative;
+    width: 100%;
+}
+.form__autocomplete-results {
+    position: absolute;
+    right: 0;
+    left: 0;
+    --bg-opacity: 1;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, var(--bg-opacity));
+    border-width: 2px;
+    --border-opacity: 1;
+    border-color: #ccc;
+    border-color: rgba(204, 204, 204, var(--border-opacity));
+    border-top-width: 0;
+    border-radius: 0.25rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    z-index: 50;
+    top: calc(100% - 3px);
+}
+.form__autocomplete--loading {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.75rem;
+}
+.form__autocomplete-items {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    overflow-y: auto;
+    list-style-type: none;
+    max-height: 14rem;
+}
+.form__autocomplete-item {
+    padding: 0.5rem;
+    padding-left: 1.5rem;
+    list-style-type: none;
+}
+.form__autocomplete-item--active,
+.form__autocomplete-item:hover {
+    cursor: pointer;
+    --bg-opacity: 1;
+    background-color: #718096;
+    background-color: rgba(113, 128, 150, var(--bg-opacity));
+    --text-opacity: 1;
+    color: #fff;
+    color: rgba(255, 255, 255, var(--text-opacity));
+}
