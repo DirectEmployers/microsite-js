@@ -42,6 +42,9 @@ export default {
         }
     },
     computed: {
+        source() {
+            return this.isGoogleTalent ? GOOGLE_TALENT : SOLR
+        },
         inputDefinition() {
             return {
                 ...this.sharedInputDefinition(),
@@ -275,9 +278,15 @@ export default {
                     }
                 })
         },
+        getFilterKey(filter) {
+            let key = filter.key
+            if(typeof key == "object"){
+                key = key[this.source]
+            }
+            return blank(key) ? filter.name : key
+        },
         getFilterOptions(filter) {
-            let key = blank(filter.key) ? filter.name : filter.key
-            let options = this.filters[key]
+            let options = this.filters[this.getFilterKey(filter)]
             return blank(options) || !Array.isArray(options) ? [] : options
         },
         setInput(filter) {
