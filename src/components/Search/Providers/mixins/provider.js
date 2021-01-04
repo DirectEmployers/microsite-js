@@ -1,4 +1,4 @@
-import {omitBy, clone, merge, startCase, uniqBy} from "lodash"
+import {omitBy, clone, cloneDeep, startCase, uniqBy} from "lodash"
 import {blank, displayLocationFromSlug} from "../../../../services/helpers"
 import {searchService, SOLR, GOOGLE_TALENT} from "../../../../services/search"
 
@@ -37,8 +37,8 @@ export default {
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.defaultInput,
-            siteConfigClone: clone(this.siteConfig),
-            isLoadingMore: this.siteConfig.pagination_type == "load_more",
+            siteConfigClone: cloneDeep(this.siteConfig),
+            isLoadingMore: this.siteConfig.pagination.type == "load_more",
         }
     },
     computed: {
@@ -130,16 +130,15 @@ export default {
             ...this.$route.query,
             ...this.$route.params,
         })
-
         if (!blank(this.$route.params.location)) {
             this.input.location = displayLocationFromSlug(this.input.location)
         }
         if (this.searchOnLoad) {
             this.search().then(() => {
                 if (this.isLoadingMore) {
-                    this.siteConfigClone.offset = this.siteConfig.num_items
+                    this.siteConfigClone.pagination.offset = this.siteConfig.pagination.num_items
                 }
-                this.jobDisplay = this.jobs.splice(0, this.siteConfig.num_items)
+                this.jobDisplay = this.jobs.splice(0, this.siteConfig.pagination.num_items)
             })
         } else {
             this.appliedFilters = this.getAppliedFilters()
@@ -150,7 +149,7 @@ export default {
         beforeSearch() {
             if(this.isFirstLoad && this.isLoadingMore){
                 delete this.input.page
-                this.siteConfigClone.num_items = this.siteConfig.max_page_size
+                this.siteConfigClone.pagination.num_items = this.siteConfig.pagination.max_page_size
                 this.isFirstLoad = false
             }
         },
@@ -164,17 +163,17 @@ export default {
             return []
         },
         loadMore() {
-            if (this.jobs.length > this.siteConfig.num_items) {
+            if (this.jobs.length > this.siteConfig.pagination.num_items) {
                 this.jobDisplay = this.jobDisplay.concat(
-                    this.jobs.splice(0, this.siteConfig.num_items)
+                    this.jobs.splice(0, this.siteConfig.pagination.num_items)
                 )
             } else {
                 this.search().then(() => {
-                    this.siteConfigClone.offset += this.siteConfig.num_items
+                    this.siteConfigClone.pagination.offset += this.siteConfig.pagination.num_items
                 })
                 //since search is async load the last few jobs before fetching. Otherwise you overwrite 15 jobs
                 this.jobDisplay = this.jobDisplay.concat(
-                    this.jobs.splice(0, this.siteConfig.num_items)
+                    this.jobs.splice(0, this.siteConfig.pagination.num_items)
                 )
             }
         },
