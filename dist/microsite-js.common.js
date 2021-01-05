@@ -33131,7 +33131,7 @@ if (Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_USE_MINIKUBE === "
   API_URL = "http://minikube:35000/api/v1";
 } else if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_6__[/* isDevelopment */ "d"])()) {
   //update whenever we have a prod version.
-  API_URL = "https://qc-search-api.jobsyn.org/api/v1/";
+  API_URL = "https://prod-search-api.jobsyn.org/api/v1/";
 }
 
 function api() {
