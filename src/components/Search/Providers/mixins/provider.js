@@ -18,6 +18,11 @@ export default {
             default: true,
             required: false,
         },
+        isLoadMore: {
+            type: Boolean,
+            default: false,
+            required: false,
+        }
     },
     data() {
         return {
@@ -37,8 +42,7 @@ export default {
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.defaultInput,
-            siteConfigClone: cloneDeep(this.siteConfig),
-            isLoadingMore: this.siteConfig.pagination.type == "load_more",
+            paginationData: {num_items: this.siteConfig.num_items},
         }
     },
     computed: {
@@ -135,10 +139,11 @@ export default {
         }
         if (this.searchOnLoad) {
             this.search().then(() => {
-                if (this.isLoadingMore) {
-                    this.siteConfigClone.pagination.offset = this.siteConfig.pagination.num_items
+                if (this.isLoadMore) {
+                    this.paginationData.offset = this.paginationData.num_items
+                    this.paginationData.num_items /= 2
+                    this.jobDisplay = this.jobs.splice(0, this.paginationData.num_items)
                 }
-                this.jobDisplay = this.jobs.splice(0, this.siteConfig.pagination.num_items)
             })
         } else {
             this.appliedFilters = this.getAppliedFilters()
@@ -147,9 +152,8 @@ export default {
     methods: {
         queryChanged() {},
         beforeSearch() {
-            if(this.isFirstLoad && this.isLoadingMore){
-                delete this.input.page
-                this.siteConfigClone.pagination.num_items = this.siteConfig.pagination.max_page_size
+            if(this.isFirstLoad && this.isLoadMore){
+                this.paginationData.num_items *= 2
                 this.isFirstLoad = false
             }
         },
@@ -163,19 +167,10 @@ export default {
             return []
         },
         loadMore() {
-            if (this.jobs.length > this.siteConfig.pagination.num_items) {
-                this.jobDisplay = this.jobDisplay.concat(
-                    this.jobs.splice(0, this.siteConfig.pagination.num_items)
-                )
-            } else {
-                this.search().then(() => {
-                    this.siteConfigClone.pagination.offset += this.siteConfig.pagination.num_items
-                })
-                //since search is async load the last few jobs before fetching. Otherwise you overwrite 15 jobs
-                this.jobDisplay = this.jobDisplay.concat(
-                    this.jobs.splice(0, this.siteConfig.pagination.num_items)
-                )
-            }
+            this.jobDisplay = this.jobDisplay.concat(this.jobs)
+            this.search().then(() => {
+                this.paginationData.offset += this.paginationData.num_items
+            })
         },
         sharedInputDefinition() {
             let r = {
@@ -200,7 +195,7 @@ export default {
                     default: "relevance",
                 },
             }
-            if(this.isLoadingMore){
+            if(this.isLoadMore){
                 delete r.page
             }
             return r
@@ -251,11 +246,11 @@ export default {
                 .concat(this.applyFilters())
         },
         search() {
-            if (!this.isLoadingMore || this.jobDisplay.length == 0) {
+            if (!this.isLoadMore || this.jobDisplay.length == 0) {
                 this.status.loading = true
             }
             this.beforeSearch()
-            return this.service(this.filterInput(this.input), this.siteConfigClone)
+            return this.service({...this.filterInput(this.input), ...this.paginationData}, this.siteConfig)
                 .then(resp => {
                     const data = resp.data || {}
                     this.featuredJobs = data.featured_jobs || []
@@ -272,7 +267,7 @@ export default {
                 })
                 .finally(() => {
                     this.status.loading = false
-                    if(!this.isLoadingMore){
+                    if(!this.isLoadMore){
                         this.jobDisplay = this.jobs
                     }
                 })
