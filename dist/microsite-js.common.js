@@ -20208,6 +20208,9 @@ var es_string_search = __webpack_require__("841c");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
 var web_dom_collections_for_each = __webpack_require__("159b");
 
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
+var esm_typeof = __webpack_require__("53ca");
+
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
@@ -20311,6 +20314,7 @@ var services_search = __webpack_require__("e73b");
 
 
 
+
 /* harmony default export */ var provider = __webpack_exports__["a"] = ({
   props: {
     siteConfig: {
@@ -20347,6 +20351,9 @@ var services_search = __webpack_require__("e73b");
     };
   },
   computed: {
+    source: function source() {
+      return this.isGoogleTalent ? services_search["a" /* GOOGLE_TALENT */] : services_search["b" /* SOLR */];
+    },
     inputDefinition: function inputDefinition() {
       return Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, this.sharedInputDefinition()), this.providerInputDefinition());
     },
@@ -20553,9 +20560,17 @@ var services_search = __webpack_require__("e73b");
         _this4.status.loading = false;
       });
     },
+    getFilterKey: function getFilterKey(filter) {
+      var key = filter.key;
+
+      if (Object(esm_typeof["a" /* default */])(key) == "object") {
+        key = key[this.source];
+      }
+
+      return Object(helpers["a" /* blank */])(key) ? filter.name : key;
+    },
     getFilterOptions: function getFilterOptions(filter) {
-      var key = Object(helpers["a" /* blank */])(filter.key) ? filter.name : filter.key;
-      var options = this.filters[key];
+      var options = this.filters[this.getFilterKey(filter)];
       return Object(helpers["a" /* blank */])(options) || !Array.isArray(options) ? [] : options;
     },
     setInput: function setInput(filter) {
@@ -33191,8 +33206,7 @@ var API_URL = "https://qc-search-api.jobsyn.org/api/v1/";
 if (Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_USE_MINIKUBE === "true") {
   API_URL = "http://minikube:35000/api/v1";
 } else if (!Object(helpers["d" /* isDevelopment */])()) {
-  //update whenever we have a prod version.
-  API_URL = "https://qc-search-api.jobsyn.org/api/v1/";
+  API_URL = "https://prod-search-api.jobsyn.org/api/v1/";
 }
 
 function api() {
