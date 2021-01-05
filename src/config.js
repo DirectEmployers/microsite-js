@@ -5,7 +5,7 @@ const config =  {
     tenant_uuid: process.env.GRIDSOME_GOOGLE_TALENT_TENANT,
     company_uuids: [process.env.GRIDSOME_GOOGLE_TALENT_COMPANY],
     client_events: true, // Should be extracted to a separate config at some point
-    pagination_type: {
+    pagination: {
         type: "load_more", // Options: [load_more, page] load_more uses offset, page uses pages to load more jobs
         num_items: 15,
         max_page_size: 90, //should be a multiple of num_items and under 100

@@ -72,7 +72,7 @@ export default {
         beforeSearch() {
             if(this.isFirstLoad && this.isLoadingMore){
                 delete this.input.page
-                this.siteConfigClone.num_items = this.siteConfig.max_page_size
+                this.siteConfigClone.pagination.num_items = this.siteConfig.pagination.max_page_size
                 this.isFirstLoad = false
             }
             this.isCommuteSearch = this.shouldDoCommuteSearch()
