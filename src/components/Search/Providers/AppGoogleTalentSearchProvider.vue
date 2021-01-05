@@ -4,9 +4,14 @@
     </component>
 </template>
 <script>
+import {
+    searchService,
+    GOOGLE_TALENT,
+    commuteSearchService,
+} from "../../../services/search"
 import base from "./mixins/provider"
 import {blank} from "../../../services/helpers"
-import {searchService, commuteSearchService} from "../../../services/search"
+import {googleTalentEventService} from "../../../services/events"
 export default {
     mixins: [base],
     data() {
@@ -22,6 +27,31 @@ export default {
     methods: {
         queryChanged() {
             this.isCommuteSearch = this.shouldDoCommuteSearch()
+        },
+        searchCompleted(data) {
+            if (process.isClient && this.isGoogleTalent) {
+                let event = {
+                    eventType: "impression",
+                    jobs: this.jobs.map(details => details.job.name),
+                    requestId: (data.meta || {}).request_id,
+                }
+
+                googleTalentEventService(event, {
+                    client_events: this.siteConfig.client_events,
+                    project_id: this.siteConfig.project_id,
+                    tenant_uuid: this.siteConfig.tenant_uuid,
+                    company_uuids: this.siteConfig.company_uuids,
+                }).then(response => {
+                    // update the request id to what is returned from google.
+                    event.requestId = (response.data || {}).request_id
+                    sessionStorage.setItem(
+                        GOOGLE_TALENT,
+                        JSON.stringify({
+                            event: event,
+                        })
+                    )
+                }).catch(()=>{})
+            }
         },
         providerInputDefinition() {
             return {
@@ -52,7 +82,7 @@ export default {
                     {
                         display: `Commute:${this.input.commuteLocation}`,
                         parameter: "commuteLocation",
-                    }
+                    },
                 ]
             }
             return []
@@ -65,10 +95,12 @@ export default {
             return exclude
         },
         shouldDoCommuteSearch() {
-            return !blank(this.input.coords) && !blank(this.input.commuteLocation)
+            return (
+                !blank(this.input.coords) && !blank(this.input.commuteLocation)
+            )
         },
         beforeSearch() {
-            if (this.isCommuteSearch = this.shouldDoCommuteSearch()) {
+            if ((this.isCommuteSearch = this.shouldDoCommuteSearch())) {
                 this.input.location = ""
             }
         },

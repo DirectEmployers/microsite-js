@@ -139,6 +139,7 @@ export default {
     methods: {
         queryChanged() {},
         beforeSearch() {},
+        searchCompleted(data) {},
         excludePayload() {
             return []
         },
@@ -229,6 +230,7 @@ export default {
                     this.jobs = data.jobs || []
                     this.meta = data.meta || {source: SOLR} //prevents sites from erroring when unable to connect to api
                     this.appliedFilters = this.getAppliedFilters()
+                    this.searchCompleted(data)
                 })
                 .catch(err => {
                     this.status.error = err

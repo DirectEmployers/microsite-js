@@ -6,7 +6,12 @@
             :key="index"
             v-for="(job, index) in featuredJobs"
         >
-            <AppJob :source="source" :job="job" :site-config="$siteConfig">
+            <AppJobProvider :source="source" :job="job" :site-config="{
+                source: $siteConfig.source,
+                project_id: $siteConfig.project_id,
+                tenant_uuid: $siteConfig.tenant_uuid,
+                company_uuids: $siteConfig.company_uuids
+            }">
                 <template v-slot="jobData">
                     <g-link :to="jobData.detailUrl" class="mb-2">
                         <h3 class="font-bold text-xl">
@@ -28,13 +33,13 @@
                         </div>
                     </g-link>
                 </template>
-            </AppJob>
+            </AppJobProvider>
         </div>
     </div>
 </template>
 
 <script>
-import AppJob from "~/components/AppJob"
+import AppJobProvider from "~/components/Jobs/AppJobProvider"
 export default {
     props:{
         featuredJobs: {
@@ -48,7 +53,7 @@ export default {
         }
     },
     components:{
-        AppJob,
+        AppJobProvider,
     }
 }
 </script>
