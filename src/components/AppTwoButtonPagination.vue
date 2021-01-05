@@ -1,7 +1,7 @@
 <template>
-    <nav aria-label="pagination" class="simplePagination">
+    <nav aria-label="pagination" class="simple-pagination">
         <button
-            class="button"
+            class="simple-pagination-button"
             v-if="currentPage > 1"
             @click.prevent="selectPage(previousPage)"
         >
@@ -9,7 +9,7 @@
         </button>
         page {{currentPage}}
         <button
-            class="button"
+            class="simple-pagination-button"
             v-if="currentPage < totalPages"
             @click.prevent="selectPage(nextPage)"
         >
@@ -18,9 +18,10 @@
     </nav>
 </template>
 
+<script>
+
 export default {
     props: {
-        totalRecords: { required: true, type: Number },
         totalPages: { required: true, type: Number },
         pageLimit: { required: false, type: Number, default: 5 },
         currentPage: { required: false, type: Number, default: 1 },
@@ -110,7 +111,7 @@ export default {
 
             this.current = page
 
-            this.$emit("pageSelected", page)
+            this.$emit("pageSelected", {page})
 
         },
 
@@ -121,30 +122,6 @@ export default {
                 range.push(i)
             }
             return range
-        },
-
-        disablePage(page) {
-            if (page === this.current) {
-                return true
-            }
-
-            if (page === "...") {
-                return true
-            }
-
-            return false
-        },
-
-        ariaPageTitle(page) {
-            if (page === this.current) {
-                return "Current Page"
-            }
-
-            if (page === "...") {
-                return "Page Number Break"
-            }
-
-            return `Page ${page}`
         },
     },
 }

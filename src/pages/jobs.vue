@@ -45,7 +45,7 @@
                                     :source="source"
                                 />
                                 <AppTwoButtonPagination
-                                    @pageSelected="selectPage"
+                                    @pageSelected="setInput"
                                     :current-page="pagination.page"
                                     :total-records="pagination.total"
                                     :total-pages="pagination.total_pages"
