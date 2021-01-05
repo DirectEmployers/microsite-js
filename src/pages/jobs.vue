@@ -44,16 +44,15 @@
                                     :input="filteredInput"
                                     :source="source"
                                 />
+                                <AppTwoButtonPagination
+                                    @pageSelected="selectPage"
+                                    :current-page="pagination.page"
+                                    :total-records="pagination.total"
+                                    :total-pages="pagination.total_pages"
+                                />
                                 <div class="text-2xl">
                                     {{ pagination.total }} jobs found
                                 </div>
-                                <AppLoadMore
-                                    :totalPages="pagination.total_pages"
-                                    :currentPage="pagination.page"
-                                    :jobs="jobs"
-                                    @loadMore="loadMore"
-                                />
-
 
                             </section>
                             <h3
@@ -212,6 +211,7 @@ import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
 import AppSearchFilter from "~/components/Search/AppSearchFilter"
 import AppLoadMore from "~/components/AppLoadMore"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
+import AppTwoButtonPagination from "~/components/AppTwoButtonPagination"
 import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
 export default {
@@ -227,6 +227,7 @@ export default {
         AppLoadMore,
         AppJobSearchResults,
         AppCommuteSearchForm,
+        AppTwoButtonPagination,
         AppGoogleTalentSearchProvider,
     },
     metaInfo: {
