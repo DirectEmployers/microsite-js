@@ -10,7 +10,6 @@ let API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
 if (process.env.GRIDSOME_USE_MINIKUBE === "true") {
     API_URL = "http://minikube:35000/api/v1"
 } else if (!isDevelopment()) {
-    //update whenever we have a prod version.
     API_URL = "https://prod-search-api.jobsyn.org/api/v1/"
 }
 
