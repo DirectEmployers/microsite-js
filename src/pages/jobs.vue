@@ -48,9 +48,8 @@
                                     {{ pagination.total }} jobs found
                                 </div>
                                 <AppLoadMore
-                                    :totalPages="pagination.total_pages"
-                                    :currentPage="pagination.page"
-                                    :jobs="jobs"
+                                    :totalJobs="pagination.total"
+                                    :currentJobs="jobs"
                                     @loadMore="loadMore"
                                 />
 
