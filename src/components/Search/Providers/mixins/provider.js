@@ -123,11 +123,15 @@ export default {
     },
     watch: {
         //any time query string changes, update component input and search.
-        "$route.query"() {
+        "$route.query"(newval, oldval) {
             this.jobDisplay = []
             this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
-            //route query should only update when isLoadMore while doing a new search, thus we have to redo this.
+            //route query should only update when a new filter is added/removed so we reset data
+            if(this.isLoadMore){
+                this.paginationData = {num_items: this.siteConfig.num_items}
+                this.paginationData.num_items *= 2
+            }
             this.search().then(() => {
                 if (this.isLoadMore) {
                     this.paginationData.offset = this.paginationData.num_items
@@ -148,8 +152,8 @@ export default {
         if (this.searchOnLoad) {
             this.search().then(() => {
                 if (this.isLoadMore) {
-                    this.paginationData.offset = this.paginationData.num_items
                     this.paginationData.num_items /= 2
+                    this.paginationData.offset = this.paginationData.num_items
                     this.jobDisplay = this.jobs.splice(0, this.paginationData.num_items)
                 }
             })
@@ -306,11 +310,6 @@ export default {
             })
         },
         newSearch(payload = null) {
-            //reset pagination data
-            if(this.isLoadMore){
-                this.paginationData = {num_items: this.siteConfig.num_items}
-                this.paginationData.num_items *= 2
-            }
             payload = payload === null ? this.input : payload
             this.$router
                 .push({
