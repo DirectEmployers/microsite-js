@@ -1,10 +1,10 @@
-import { get, omitBy, words, startCase } from "lodash"
+import {get, omitBy, words, startCase} from "lodash"
 import buildUrl from "axios/lib/helpers/buildURL"
 import {GOOGLE_TALENT, SOLR} from "../../../services/search"
-import { VS_KEY, UTM_KEY } from '../../../services/storage'
-import { buildJobDetailUrl, blank } from '../../../services/helpers'
+import {VS_KEY, UTM_KEY} from "../../../services/storage"
+import {buildJobDetailUrl, blank} from "../../../services/helpers"
 
-export default{
+export default {
     props: {
         job: {
             type: Object,
@@ -19,9 +19,9 @@ export default{
             required: false,
             default: "div",
         },
-        siteConfig:{
+        siteConfig: {
             type: Object,
-            required: true
+            required: true,
         },
         input: {
             type: Object,
@@ -29,7 +29,7 @@ export default{
             default: () => {},
         },
     },
-    computed:{
+    computed: {
         jobInfo() {
             return this.job
         },
@@ -92,28 +92,27 @@ export default{
         },
         state() {
             let state = this.jobInfo.city_slab_exact
-            state = this.jobInfo.city_slab_exact.split("/")[1];
+            state = this.jobInfo.city_slab_exact.split("/")[1]
 
-            if(blank(state)){
+            if (blank(state) || state == "none") {
                 return this.jobInfo.state_short_exact
             }
             return startCase(words(state).join(" "))
         },
-        commuteTime(){
+        commuteTime() {
             return ""
         },
         hasCommuteInfo() {
             return false
         },
-
     },
     methods: {
         clickedApplyJob() {},
         clickedViewJob() {},
-        getAttribute(name, defaultValue = ''){
+        getAttribute(name, defaultValue = "") {
             return get(this.jobInfo, name, defaultValue)
         },
-        slotData(){
+        slotData() {
             return {
                 reqId: this.reqId,
                 title: this.title,
@@ -130,8 +129,8 @@ export default{
                 dateAdded: this.dateAdded,
                 applyLink: this.applyLink,
                 clickedViewJob: this.clickedViewJob,
-                clickedApplyJob: this.clickedApplyJob
+                clickedApplyJob: this.clickedApplyJob,
             }
         },
-    }
+    },
 }
