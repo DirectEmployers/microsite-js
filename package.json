@@ -14,7 +14,7 @@
     "test": "jest --no-cache"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "html2json": "^1.0.2",
     "linkifyjs": "^2.1.9",
