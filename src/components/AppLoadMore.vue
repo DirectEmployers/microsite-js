@@ -1,5 +1,5 @@
 <template>
-    <nav v-if="totalJobs > 1 && currentJobs.length < totalJobs" class='load-more-pagination'>
+    <nav v-if="totalJobs > 1 && currentJobs < totalJobs" class='load-more-pagination'>
         <button class="load-more-pagination-button" type="button" @click="loadMore">
             <slot>
                 Load More

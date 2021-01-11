@@ -49,7 +49,7 @@
                                 </div>
                                 <AppLoadMore
                                     :totalJobs="pagination.total"
-                                    :currentJobs="jobs"
+                                    :currentJobs="jobs.length"
                                     @loadMore="loadMore"
                                 />
 
