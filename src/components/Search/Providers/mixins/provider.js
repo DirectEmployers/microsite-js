@@ -152,8 +152,8 @@ export default {
         if (this.searchOnLoad) {
             this.search().then(() => {
                 if (this.isLoadMore) {
-                    this.paginationData.num_items /= 2
                     this.paginationData.offset = this.paginationData.num_items
+                    this.paginationData.num_items /= 2
                     this.jobDisplay = this.jobs.splice(0, this.paginationData.num_items)
                 }
             })
