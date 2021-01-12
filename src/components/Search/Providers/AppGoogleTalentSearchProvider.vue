@@ -102,7 +102,7 @@ export default {
         beforeSearch() {
             if(this.isFirstLoad && this.isLoadMore){
                 delete this.input.page
-                this.paginationData.num_items *= 2
+                this.extraData.num_items *= 2
                 this.isFirstLoad = false
             }
             this.isCommuteSearch = this.shouldDoCommuteSearch()
