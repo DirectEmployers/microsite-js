@@ -260,6 +260,7 @@ export default {
                 .concat(this.applyFilters())
         },
         search() {
+            this.status.loading = true
             this.beforeSearch()
             return this.service({...this.filterInput(this.input), ...this.extraData}, this.siteConfig)
                 .then(resp => {
@@ -273,15 +274,15 @@ export default {
                     } //prevents sites from erroring when unable to connect to api
                     this.appliedFilters = this.getAppliedFilters()
                     this.searchCompleted(data)
+                    if(!this.isLoadMore){
+                        this.jobDisplay = this.jobs
+                    }
                 })
                 .catch(err => {
                     this.status.error = err
                 })
                 .finally(() => {
                     this.status.loading = false
-                    if(!this.isLoadMore){
-                        this.jobDisplay = this.jobs
-                    }
                 })
         },
         getFilterKey(filter) {
