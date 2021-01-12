@@ -42,7 +42,7 @@ export default {
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.defaultInput,
-            paginationData: {num_items: this.siteConfig.num_items},
+            extraData: {num_items: this.siteConfig.num_items},
         }
     },
     computed: {
@@ -130,14 +130,14 @@ export default {
             this.queryChanged()
             //route query should only update when a new filter is added/removed so we reset data
             if(this.isLoadMore){
-                this.paginationData = {num_items: this.siteConfig.num_items}
-                this.paginationData.num_items *= 2
+                this.extraData = {num_items: this.siteConfig.num_items}
+                this.extraData.num_items *= 2
             }
             this.search().then(() => {
                 if (this.isLoadMore) {
-                    this.paginationData.offset = this.paginationData.num_items
-                    this.paginationData.num_items /= 2
-                    this.jobDisplay = this.jobs.splice(0, this.paginationData.num_items)
+                    this.extraData.offset = this.extraData.num_items
+                    this.extraData.num_items /= 2
+                    this.jobDisplay = this.jobs.splice(0, this.extraData.num_items)
                 }
             })
         },
@@ -153,9 +153,9 @@ export default {
         if (this.searchOnLoad) {
             this.search().then(() => {
                 if (this.isLoadMore) {
-                    this.paginationData.offset = this.paginationData.num_items
-                    this.paginationData.num_items /= 2
-                    this.jobDisplay = this.jobs.splice(0, this.paginationData.num_items)
+                    this.extraData.offset = this.extraData.num_items
+                    this.extraData.num_items /= 2
+                    this.jobDisplay = this.jobs.splice(0, this.extraData.num_items)
                 }
             })
         } else {
@@ -166,7 +166,7 @@ export default {
         queryChanged() {},
         beforeSearch() {
             if(this.isFirstLoad && this.isLoadMore){
-                this.paginationData.num_items *= 2
+                this.extraData.num_items *= 2
                 this.isFirstLoad = false
             }
         },
@@ -183,7 +183,7 @@ export default {
         loadMore() {
             this.jobDisplay = this.jobDisplay.concat(this.jobs)
             this.search().then(() => {
-                this.paginationData.offset += this.paginationData.num_items
+                this.extraData.offset += this.extraData.num_items
             })
         },
         sharedInputDefinition() {
@@ -261,7 +261,7 @@ export default {
         },
         search() {
             this.beforeSearch()
-            return this.service({...this.filterInput(this.input), ...this.paginationData}, this.siteConfig)
+            return this.service({...this.filterInput(this.input), ...this.extraData}, this.siteConfig)
                 .then(resp => {
                     const data = resp.data || {}
                     this.featuredJobs = data.featured_jobs || []
