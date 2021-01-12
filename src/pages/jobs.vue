@@ -14,6 +14,7 @@
                 newSearch,
                 pagination,
                 isLoadMore,
+                isFirstLoad,
                 filteredInput,
                 featuredJobs,
                 removeFilter,
@@ -22,7 +23,7 @@
                 isCommuteSearch,
                 getFilterOptions,
             }">
-                <AppLoader v-if="status.loading && !isLoadMore"/>
+                <AppLoader v-if="status.loading && !isLoadMore || status.loading && isFirstLoad"/>
                 <section v-else>
                     <div class="mx-4">
                         <AppSearchForm
@@ -111,13 +112,13 @@
                             </AppAccordion>
 
                             <AppSearchFilter
+                                v-for="(configFilter, index) in $siteConfig.filters"
                                 :key="index"
                                 :input="filteredInput"
                                 :name="configFilter.name"
                                 :key-name="configFilter.key"
                                 :visible="configFilter.visible"
                                 :options="getFilterOptions(configFilter)"
-                                v-for="(configFilter, index) in $siteConfig.filters"
                             >
                                 <template
                                     v-slot="{
@@ -172,6 +173,7 @@
                                     </AppAccordion>
                                 </template>
                             </AppSearchFilter>
+
                             <div class="container">
                                 <button
                                     @click="toggleCommuteModal()"

@@ -112,6 +112,7 @@ export default {
                 newSearch: this.newSearch,
                 isLoadMore: this.isLoadMore,
                 pagination: this.pagination,
+                isFirstLoad: this.isLoadMore,
                 featuredJobs: this.featuredJobs,
                 removeFilter: this.removeFilter,
                 appliedFilters: this.appliedFilters,
@@ -294,7 +295,8 @@ export default {
         },
         getFilterOptions(filter) {
             let options = this.filters[this.getFilterKey(filter)]
-            return blank(options) || !Array.isArray(options) ? [] : options
+            options = blank(options) || !Array.isArray(options) ? [] : options
+            return options
         },
         setInput(filter) {
             this.newSearch(
