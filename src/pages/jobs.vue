@@ -13,6 +13,7 @@
                 setFilter,
                 newSearch,
                 pagination,
+                isLoadMore,
                 filteredInput,
                 featuredJobs,
                 removeFilter,
@@ -21,7 +22,7 @@
                 isCommuteSearch,
                 getFilterOptions,
             }">
-                <AppLoader v-if="status.loading"/>
+                <AppLoader v-if="status.loading && !isLoadMore"/>
                 <section v-else>
                     <div class="mx-4">
                         <AppSearchForm

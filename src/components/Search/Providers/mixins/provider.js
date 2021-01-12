@@ -110,6 +110,7 @@ export default {
                 setInput: this.setInput,
                 source: this.meta.source,
                 newSearch: this.newSearch,
+                isLoadMore: this.isLoadMore,
                 pagination: this.pagination,
                 featuredJobs: this.featuredJobs,
                 removeFilter: this.removeFilter,
@@ -259,9 +260,6 @@ export default {
                 .concat(this.applyFilters())
         },
         search() {
-            if (!this.isLoadMore || this.jobDisplay.length == 0) {
-                this.status.loading = true
-            }
             this.beforeSearch()
             return this.service({...this.filterInput(this.input), ...this.paginationData}, this.siteConfig)
                 .then(resp => {
