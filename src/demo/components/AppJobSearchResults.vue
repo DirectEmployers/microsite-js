@@ -15,10 +15,9 @@
                 }"
             >
                 <template v-slot="{
-                    city,
+                    location,
                     title,
                     reqId,
-                    state,
                     detailUrl,
                     commuteTime,
                     clickedViewJob,
@@ -37,7 +36,7 @@
                             {{ reqId }}
                         </h3>
                         <h3 class="text-md">
-                            {{ city }}, {{ state }}
+                            {{ location }}
                         </h3>
                         <div
                             class="job-listing__commute-time"

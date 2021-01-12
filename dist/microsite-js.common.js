@@ -285,7 +285,7 @@ module.exports.f = function getOwnPropertyNames(it) {
       var state = this.jobInfo.city_slab_exact;
       state = this.jobInfo.city_slab_exact.split("/")[1];
 
-      if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_10__[/* blank */ "a"])(state)) {
+      if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_10__[/* blank */ "a"])(state) || state == "none") {
         return this.jobInfo.state_short_exact;
       }
 
@@ -302,7 +302,7 @@ module.exports.f = function getOwnPropertyNames(it) {
     clickedApplyJob: function clickedApplyJob() {},
     clickedViewJob: function clickedViewJob() {},
     getAttribute: function getAttribute(name) {
-      var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+      var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
       return Object(lodash__WEBPACK_IMPORTED_MODULE_6__["get"])(this.jobInfo, name, defaultValue);
     },
     slotData: function slotData() {
