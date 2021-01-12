@@ -112,7 +112,6 @@ export default {
                 newSearch: this.newSearch,
                 isLoadMore: this.isLoadMore,
                 pagination: this.pagination,
-                isFirstLoad: this.isLoadMore,
                 featuredJobs: this.featuredJobs,
                 removeFilter: this.removeFilter,
                 appliedFilters: this.appliedFilters,

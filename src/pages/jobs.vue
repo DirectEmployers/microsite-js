@@ -14,7 +14,6 @@
                 newSearch,
                 pagination,
                 isLoadMore,
-                isFirstLoad,
                 filteredInput,
                 featuredJobs,
                 removeFilter,
