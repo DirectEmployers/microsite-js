@@ -153,6 +153,7 @@ export default {
                 this.isFirstLoad = false
             }
         },
+        searchCompleted(data) {},
         excludePayload() {
             return []
         },
@@ -266,6 +267,7 @@ export default {
                         source: SOLR,
                     } //prevents sites from erroring when unable to connect to api
                     this.appliedFilters = this.getAppliedFilters()
+                    this.searchCompleted(data)
                 })
                 .catch(err => {
                     this.status.error = err

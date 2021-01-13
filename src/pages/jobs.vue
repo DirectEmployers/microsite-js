@@ -212,6 +212,7 @@ import AppSearchFilter from "~/components/Search/AppSearchFilter"
 import AppLoadMore from "~/components/AppLoadMore"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppTwoButtonPagination from "~/components/AppTwoButtonPagination"
+import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
 export default {
