@@ -4,7 +4,6 @@
             class="mt-6"
             :search-on-load="false"
             :site-config="$siteConfig"
-            :is-load-more="true"
             v-slot="{
                 input,
                 source,

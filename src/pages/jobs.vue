@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <AppGoogleTalentSearchProvider :site-config="$siteConfig" :is-load-more="true">
+        <AppGoogleTalentSearchProvider :site-config="$siteConfig">
             <template v-slot="{
                 jobs,
                 sort,
