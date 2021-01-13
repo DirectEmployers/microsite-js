@@ -52,12 +52,18 @@ export default {
 
         removeFilter(){
             if(this.name === "*"){
-                return buildUrl(this.$route.path)
+                return this.$route.path
+            }
+            let query = Object.assign({}, this.$route.query)
+
+            if(!Array.isArray(this.name)){
+                delete query[this.name]
+                return buildUrl(this.$route.path, query)
             }
 
-            let query = Object.assign({}, this.$route.path)
-            delete query[this.name]
-
+            for(let item in this.name){
+                delete query[item]
+            }
             return buildUrl(this.$route.path, query)
         }
     }
