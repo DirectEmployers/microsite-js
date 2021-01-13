@@ -68,7 +68,6 @@
                                     v-for="(filter, index) in appliedFilters"
                                     :key="index"
                                     :name="filter.parameter"
-                                    @chipClicked="removeFilter"
                                     class="cursor-pointer"
                                 >
                                     <AppXIcon class="w-2 inline" />
@@ -79,7 +78,6 @@
                                     name="*"
                                     class="cursor-pointer"
                                     text="Clear All"
-                                    @chipClicked="removeFilter"
                                 ></AppChip>
                             </div>
                             <AppAccordion
