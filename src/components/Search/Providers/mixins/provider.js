@@ -42,7 +42,10 @@ export default {
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.defaultInput,
-            extraData: {num_items: this.siteConfig.num_items},
+            extraData: {
+                num_items: this.siteConfig.num_items,
+                offset: 0
+            },
         }
     },
     computed: {
@@ -126,20 +129,14 @@ export default {
         //any time query string changes, update component input and search.
         "$route.query"(newval, oldval) {
             this.jobDisplay = []
+            this.isFirstLoad = true
             this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
-            //route query should only update when a new filter is added/removed so we reset data
-            if(this.isLoadMore){
-                this.extraData = {num_items: this.siteConfig.num_items}
-                this.extraData.num_items *= 2
+            this.extraData = {
+                num_items: this.siteConfig.num_items,
+                offset: 0
             }
-            this.search().then(() => {
-                if (this.isLoadMore) {
-                    this.extraData.offset = this.extraData.num_items
-                    this.extraData.num_items /= 2
-                    this.jobDisplay = this.jobs.splice(0, this.extraData.num_items)
-                }
-            })
+            this.search()
         },
     },
     created() {
@@ -151,23 +148,22 @@ export default {
             this.input.location = displayLocationFromSlug(this.input.location)
         }
         if (this.searchOnLoad) {
-            this.search().then(() => {
-                if (this.isLoadMore) {
-                    this.extraData.offset = this.extraData.num_items
-                    this.extraData.num_items /= 2
-                    this.jobDisplay = this.jobs.splice(0, this.extraData.num_items)
-                }
-            })
+            this.search()
         } else {
             this.appliedFilters = this.getAppliedFilters()
         }
     },
     methods: {
         queryChanged() {},
-        beforeSearch() {
-            if(this.isFirstLoad && this.isLoadMore){
+        beforeSearch() {},
+        beforeLoadMoreSearch() {
+            if (this.isFirstLoad){
+                delete this.input.page
+                this.extraData.offset = 0
                 this.extraData.num_items *= 2
-                this.isFirstLoad = false
+            } else {
+                this.extraData.offset = this.extraData.num_items
+                this.extraData.num_items = this.siteConfig.num_items
             }
         },
         searchCompleted(data) {},
@@ -182,9 +178,7 @@ export default {
         },
         loadMore() {
             this.jobDisplay = this.jobDisplay.concat(this.jobs)
-            this.search().then(() => {
-                this.extraData.offset += this.extraData.num_items
-            })
+            this.search()
         },
         sharedInputDefinition() {
             let r = {
@@ -262,6 +256,9 @@ export default {
         search() {
             this.status.loading = true
             this.beforeSearch()
+            if (this.isLoadMore) {
+                this.beforeLoadMoreSearch()
+            }
             return this.service({...this.filterInput(this.input), ...this.extraData}, this.siteConfig)
                 .then(resp => {
                     const data = resp.data || {}
@@ -274,14 +271,18 @@ export default {
                     } //prevents sites from erroring when unable to connect to api
                     this.appliedFilters = this.getAppliedFilters()
                     this.searchCompleted(data)
-                    if(!this.isLoadMore){
+                    if (!this.isLoadMore){
                         this.jobDisplay = this.jobs
+                    }
+                    if (this.isLoadMore && this.isFirstLoad) {
+                        this.jobDisplay = this.jobs.splice(0, this.siteConfig.num_items)
                     }
                 })
                 .catch(err => {
                     this.status.error = err
                 })
                 .finally(() => {
+                    this.isFirstLoad = false
                     this.status.loading = false
                 })
         },

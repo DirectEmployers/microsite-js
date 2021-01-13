@@ -100,11 +100,11 @@ export default {
             )
         },
         beforeSearch() {
-            if(this.isFirstLoad && this.isLoadMore){
-                delete this.input.page
-                this.extraData.num_items *= 2
-                this.isFirstLoad = false
-            }
+            // if(this.isFirstLoad && this.isLoadMore){
+            //     delete this.input.page
+            //     this.extraData.num_items *= 2
+            //     // this.isFirstLoad = false
+            // }
             this.isCommuteSearch = this.shouldDoCommuteSearch()
             if (this.isCommuteSearch) {
                 this.input.location = ""
