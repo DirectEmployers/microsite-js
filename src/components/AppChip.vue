@@ -54,8 +54,7 @@ export default {
             if(this.name === "*"){
                 return buildUrl(this.$route.path)
             }
-
-            let query = Object.assign({}, this.$route.path)
+            let query = Object.assign({}, this.$route.query)
             delete query[this.name]
 
             return buildUrl(this.$route.path, query)
