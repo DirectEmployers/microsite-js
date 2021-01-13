@@ -162,7 +162,7 @@ export default {
                 this.extraData.offset = 0
                 this.extraData.num_items *= 2
             } else {
-                this.extraData.offset = this.extraData.num_items
+                this.extraData.offset += this.extraData.num_items
                 this.extraData.num_items = this.siteConfig.num_items
             }
         },
