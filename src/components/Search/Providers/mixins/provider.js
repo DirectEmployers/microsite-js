@@ -180,7 +180,7 @@ export default {
         },
 
         getAppliedFilters() {
-            return uniqBy(this.configFilters, "name")
+            let filters = uniqBy(this.configFilters, "name")
                 .filter(filter => {
                     return !blank(this.input[filter.name])
                 })
@@ -191,6 +191,21 @@ export default {
                     }
                 })
                 .concat(this.applyFilters())
+
+            let index = filters.map(obj => obj.parameter).indexOf('commuteLocation')
+            if(index != -1){
+                filters[index] = {
+                    display: filters[index].display,
+                    parameter: [
+                        filters[index].parameter,
+                        'coords',
+                        'roadTraffic',
+                        'commuteMethod',
+                        'travelDuration',
+                    ]
+                }
+            }
+            return filters
         },
         search() {
             this.beforeSearch()

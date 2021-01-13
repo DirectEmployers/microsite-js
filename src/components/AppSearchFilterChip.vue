@@ -55,13 +55,11 @@ export default {
                 return this.$route.path
             }
             let query = Object.assign({}, this.$route.query)
-
             if(!Array.isArray(this.name)){
                 delete query[this.name]
                 return buildUrl(this.$route.path, query)
             }
-
-            for(let item in this.name){
+            for(let item of this.name){
                 delete query[item]
             }
             return buildUrl(this.$route.path, query)
