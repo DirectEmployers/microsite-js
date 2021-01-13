@@ -18,6 +18,11 @@ export default {
             default: true,
             required: false,
         },
+        isLoadMore: {
+            type: Boolean,
+            default: false,
+            required: false,
+        }
     },
     data() {
         return {
@@ -37,8 +42,7 @@ export default {
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.defaultInput,
-            siteConfigClone: cloneDeep(this.siteConfig),
-            isLoadingMore: this.siteConfig.pagination.type == "load_more",
+            extraData: {num_items: this.siteConfig.num_items},
         }
     },
     computed: {
@@ -106,6 +110,7 @@ export default {
                 setInput: this.setInput,
                 source: this.meta.source,
                 newSearch: this.newSearch,
+                isLoadMore: this.isLoadMore,
                 pagination: this.pagination,
                 featuredJobs: this.featuredJobs,
                 removeFilter: this.removeFilter,
@@ -119,10 +124,22 @@ export default {
     },
     watch: {
         //any time query string changes, update component input and search.
-        "$route.query"() {
+        "$route.query"(newval, oldval) {
+            this.jobDisplay = []
             this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
-            this.search()
+            //route query should only update when a new filter is added/removed so we reset data
+            if(this.isLoadMore){
+                this.extraData = {num_items: this.siteConfig.num_items}
+                this.extraData.num_items *= 2
+            }
+            this.search().then(() => {
+                if (this.isLoadMore) {
+                    this.extraData.offset = this.extraData.num_items
+                    this.extraData.num_items /= 2
+                    this.jobDisplay = this.jobs.splice(0, this.extraData.num_items)
+                }
+            })
         },
     },
     created() {
@@ -135,10 +152,11 @@ export default {
         }
         if (this.searchOnLoad) {
             this.search().then(() => {
-                if (this.isLoadingMore) {
-                    this.siteConfigClone.pagination.offset = this.siteConfig.pagination.num_items
+                if (this.isLoadMore) {
+                    this.extraData.offset = this.extraData.num_items
+                    this.extraData.num_items /= 2
+                    this.jobDisplay = this.jobs.splice(0, this.extraData.num_items)
                 }
-                this.jobDisplay = this.jobs.splice(0, this.siteConfig.pagination.num_items)
             })
         } else {
             this.appliedFilters = this.getAppliedFilters()
@@ -147,9 +165,8 @@ export default {
     methods: {
         queryChanged() {},
         beforeSearch() {
-            if(this.isFirstLoad && this.isLoadingMore){
-                delete this.input.page
-                this.siteConfigClone.pagination.num_items = this.siteConfig.pagination.max_page_size
+            if(this.isFirstLoad && this.isLoadMore){
+                this.extraData.num_items *= 2
                 this.isFirstLoad = false
             }
         },
@@ -164,19 +181,10 @@ export default {
             return []
         },
         loadMore() {
-            if (this.jobs.length > this.siteConfig.pagination.num_items) {
-                this.jobDisplay = this.jobDisplay.concat(
-                    this.jobs.splice(0, this.siteConfig.pagination.num_items)
-                )
-            } else {
-                this.search().then(() => {
-                    this.siteConfigClone.pagination.offset += this.siteConfig.pagination.num_items
-                })
-                //since search is async load the last few jobs before fetching. Otherwise you overwrite 15 jobs
-                this.jobDisplay = this.jobDisplay.concat(
-                    this.jobs.splice(0, this.siteConfig.pagination.num_items)
-                )
-            }
+            this.jobDisplay = this.jobDisplay.concat(this.jobs)
+            this.search().then(() => {
+                this.extraData.offset += this.extraData.num_items
+            })
         },
         sharedInputDefinition() {
             let r = {
@@ -201,7 +209,7 @@ export default {
                     default: "relevance",
                 },
             }
-            if(this.isLoadingMore){
+            if(this.isLoadMore){
                 delete r.page
             }
             return r
@@ -252,11 +260,9 @@ export default {
                 .concat(this.applyFilters())
         },
         search() {
-            if (!this.isLoadingMore || this.jobDisplay.length == 0) {
-                this.status.loading = true
-            }
+            this.status.loading = true
             this.beforeSearch()
-            return this.service(this.filterInput(this.input), this.siteConfigClone)
+            return this.service({...this.filterInput(this.input), ...this.extraData}, this.siteConfig)
                 .then(resp => {
                     const data = resp.data || {}
                     this.featuredJobs = data.featured_jobs || []
@@ -268,15 +274,15 @@ export default {
                     } //prevents sites from erroring when unable to connect to api
                     this.appliedFilters = this.getAppliedFilters()
                     this.searchCompleted(data)
+                    if(!this.isLoadMore){
+                        this.jobDisplay = this.jobs
+                    }
                 })
                 .catch(err => {
                     this.status.error = err
                 })
                 .finally(() => {
                     this.status.loading = false
-                    if(!this.isLoadingMore){
-                        this.jobDisplay = this.jobs
-                    }
                 })
         },
         getFilterKey(filter) {
@@ -288,7 +294,8 @@ export default {
         },
         getFilterOptions(filter) {
             let options = this.filters[this.getFilterKey(filter)]
-            return blank(options) || !Array.isArray(options) ? [] : options
+            options = blank(options) || !Array.isArray(options) ? [] : options
+            return options
         },
         setInput(filter) {
             this.newSearch(

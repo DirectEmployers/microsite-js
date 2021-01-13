@@ -1,6 +1,6 @@
 <template>
-    <nav v-if="totalPages > 1 && currentPage < totalPages" class='load-more-pagination'>
-        <button class="load-more-pagination-button" type="button" @click="loadMore">
+    <nav v-if="totalJobs > 1 && currentJobs < totalJobs" class='load-more-pagination'>
+        <button class="load-more-pagination__button" type="button" @click="loadMore">
             <slot>
                 Load More
             </slot>
@@ -11,12 +11,12 @@
 <script>
 export default {
     props: {
-        currentPage: {
+        currentJobs: {
             required: false,
             type: Number,
             default: 1,
         },
-        totalPages: {
+        totalJobs: {
             required: true,
             type: Number,
         },

@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <AppGoogleTalentSearchProvider :site-config="$siteConfig">
+        <AppGoogleTalentSearchProvider :site-config="$siteConfig" :is-load-more="true">
             <template v-slot="{
                 jobs,
                 sort,
@@ -13,6 +13,7 @@
                 setFilter,
                 newSearch,
                 pagination,
+                isLoadMore,
                 filteredInput,
                 featuredJobs,
                 removeFilter,
@@ -21,7 +22,7 @@
                 isCommuteSearch,
                 getFilterOptions,
             }">
-                <AppLoader v-if="status.loading"/>
+                <AppLoader v-if="status.loading && !isLoadMore || status.loading && !jobs.length"/>
                 <section v-else>
                     <div class="mx-4">
                         <AppSearchForm
@@ -110,13 +111,13 @@
                             </AppAccordion>
 
                             <AppSearchFilter
+                                v-for="(configFilter, index) in $siteConfig.filters"
                                 :key="index"
                                 :input="filteredInput"
                                 :name="configFilter.name"
                                 :key-name="configFilter.key"
                                 :visible="configFilter.visible"
                                 :options="getFilterOptions(configFilter)"
-                                v-for="(configFilter, index) in $siteConfig.filters"
                             >
                                 <template
                                     v-slot="{
@@ -171,6 +172,7 @@
                                     </AppAccordion>
                                 </template>
                             </AppSearchFilter>
+
                             <div class="container">
                                 <button
                                     @click="toggleCommuteModal()"
@@ -202,6 +204,7 @@
 import {blank} from "~/services/helpers"
 import AppChip from "~/components/AppChip"
 import AppModal from "~/components/AppModal"
+import AppLoadMore from "~/components/AppLoadMore"
 import AppXIcon from "~/components/Icons/AppXIcon"
 import AppLoader from "~/demo/components/AppLoader"
 import AppAccordion from "~/components/AppAccordion"
@@ -209,10 +212,8 @@ import AppPagination from "~/components/AppPagination"
 import AppSearchForm from "~/demo/components/AppSearchForm"
 import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
 import AppSearchFilter from "~/components/Search/AppSearchFilter"
-import AppLoadMore from "~/components/AppLoadMore"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppTwoButtonPagination from "~/components/AppTwoButtonPagination"
-import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
 export default {
@@ -221,11 +222,11 @@ export default {
         AppXIcon,
         AppModal,
         AppLoader,
+        AppLoadMore,
         AppAccordion,
         AppSearchForm,
         AppSearchFilter,
         AppFeaturedJobs,
-        AppLoadMore,
         AppJobSearchResults,
         AppCommuteSearchForm,
         AppTwoButtonPagination,

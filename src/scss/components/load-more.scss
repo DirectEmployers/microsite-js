@@ -1,0 +1,14 @@
+.load-more-pagination__button {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: .1s;
+    display: inline-block;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    display: block;
+    border-width: 1px;
+    --border-opacity: 1;
+    border-color: #e2e8f0;
+    border-color: rgba(226, 232, 240, var(--border-opacity))
+}

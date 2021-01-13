@@ -104,10 +104,10 @@ export default {
     },
     data() {
         return {
-            givenOptions: clone(this.options || []),
             displayedFilters: {},
         }
     },
+
     created() {
         let value = null
         let filteredOptions = []
@@ -122,6 +122,10 @@ export default {
         this.displayedFilters = filteredOptions.slice(0, this.limit)
     },
     computed: {
+        givenOptions(){
+            return clone(this.options || [])
+        },
+
         hasOptions() {
             return this.displayedFilters.length > 0
         },
