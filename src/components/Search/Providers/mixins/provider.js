@@ -42,10 +42,7 @@ export default {
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.defaultInput,
-            extraData: {
-                num_items: this.siteConfig.num_items,
-                offset: 0
-            },
+            extraData: this.defaultExtraData(),
         }
     },
     computed: {
@@ -132,10 +129,7 @@ export default {
             this.isFirstLoad = true
             this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
-            this.extraData = {
-                num_items: this.siteConfig.num_items,
-                offset: 0
-            }
+            this.extraData = this.defaultExtraData()
             this.search()
         },
     },
@@ -203,7 +197,7 @@ export default {
                     default: "relevance",
                 },
             }
-            if(this.isLoadMore){
+            if (this.isLoadMore) {
                 delete r.page
             }
             return r
@@ -305,6 +299,15 @@ export default {
                     ...filter,
                 })
             )
+        },
+        defaultExtraData() {
+            if (this.isLoadMore) {
+                return {
+                    num_items: this.siteConfig.num_items,
+                    offset: 0
+                }
+            }
+            return {}
         },
         filterInput(input) {
             let excluded = this.excludePayload()
