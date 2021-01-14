@@ -57,11 +57,13 @@ export default {
         },
         defaultInput() {
             let defaults = {}
-            Object.entries(this.inputDefinition).forEach(
-                ([name, definition]) => {
-                    defaults[name] = definition.default
+            Object.entries(this.inputDefinition).forEach(entry => {
+                const [name, definition] = entry
+                if (name == 'page' && this.isLoadMore) {
+                    return
                 }
-            )
+                defaults[name] = definition.default
+            })
             return defaults
         },
         service() {
@@ -151,8 +153,7 @@ export default {
         queryChanged() {},
         beforeSearch() {},
         beforeLoadMoreSearch() {
-            if (this.isFirstLoad){
-                delete this.input.page
+            if (this.isFirstLoad) {
                 this.extraData.offset = 0
                 this.extraData.num_items *= 2
             } else {
@@ -175,7 +176,7 @@ export default {
             this.search()
         },
         sharedInputDefinition() {
-            let r = {
+            return {
                 q: {
                     default: "",
                 },
@@ -197,10 +198,6 @@ export default {
                     default: "relevance",
                 },
             }
-            if (this.isLoadMore) {
-                delete r.page
-            }
-            return r
         },
         mergeWithDefaultInput(object = {}) {
             return {
