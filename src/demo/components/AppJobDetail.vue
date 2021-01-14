@@ -1,5 +1,5 @@
 <template>
-    <AppJobWrapper :site-config="$siteConfig" source="solr" :job="job">
+    <AppJobProvider :site-config="$siteConfig" source="solr" :job="job">
         <template
             v-slot="{
                 title,
@@ -7,7 +7,7 @@
                 location,
                 applyLink,
                 clickedApplyJob,
-                htmlDescription,
+                description,
             }"
         >
             <div class="max-w-screen-xl mx-auto w-full pt-4 lg:px-6">
@@ -48,7 +48,7 @@
 
                 <div
                     class="min-h-screen max-w-screen-md mb-8 mx-4 md:mx-auto job-details-content"
-                    v-html="htmlDescription"
+                    v-html="description"
                 >
                 </div>
 
@@ -64,21 +64,15 @@
                 </script>
             </div>
         </template>
-    </AppJobWrapper>
+    </AppJobProvider>
 </template>
-<style lang="scss">
-.job-detail-link {
-    @apply uppercase font-bold border-b border-gold;
-}
-</style>
 <script>
-import AppJobWrapper from "~/components/AppJob"
-import AppSimilarJobs from "~/components/AppSimilarJobs"
 import {blank} from "~/services/helpers"
 import buildUrl from "axios/lib/helpers/buildURL"
-
+import AppSimilarJobs from "~/components/AppSimilarJobs"
+import AppJobProvider from "~/components/Jobs/AppJobProvider"
 export default {
-    name: "AppJob",
+    name: "AppJobDetail",
     metaInfo() {
         return {
             title: this.job ? this.job.title : null,
@@ -95,7 +89,7 @@ export default {
         },
     },
     components: {
-        AppJobWrapper,
+        AppJobProvider,
         AppSimilarJobs,
     },
     computed: {

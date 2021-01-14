@@ -2,7 +2,7 @@
     <section class="similar-jobs" v-if="hasSimilarJobs">
         <h2 class="similar-jobs__title">{{ header }}</h2>
         <div class="similar-jobs__grid">
-            <AppJob
+            <AppJobProvider
                 :key="index"
                 :site-config="siteConfig"
                 :source="meta.source"
@@ -19,20 +19,20 @@
                                     {{ jobData.title }}
                                 </h3>
                                 <p class="similar-jobs__grid-item-location">
-                                    {{ jobData.location }}
+                                    {{ jobData.city }}, {{ jobData.state }}
                                 </p>
                             </slot>
                         </g-link>
                     </section>
                 </template>
-            </AppJob>
+            </AppJobProvider>
         </div>
     </section>
 </template>
 
 <script>
 import { searchService } from "../services/search"
-import AppJob from './AppJob'
+import AppJobProvider from './Jobs/AppJobProvider'
 export default {
     data() {
         return {
@@ -41,7 +41,7 @@ export default {
         }
     },
     components:{
-        AppJob
+        AppJobProvider
     },
     props: {
         title: {
