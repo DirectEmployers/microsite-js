@@ -216,6 +216,7 @@ export default {
         AppXIcon,
         AppModal,
         AppLoader,
+        AppLoadMore,
         AppAccordion,
         AppSearchForm,
         AppSearchFilter,
