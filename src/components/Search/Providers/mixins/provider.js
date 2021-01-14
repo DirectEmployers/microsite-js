@@ -116,8 +116,8 @@ export default {
                 pagination: this.pagination,
                 featuredJobs: this.featuredJobs,
                 removeFilter: this.removeFilter,
-                appliedFilters: this.appliedFilters,
                 isGoogleTalent: this.isGoogleTalent,
+                appliedFilters: this.appliedFilters,
                 isCommuteSearch: this.isCommuteSearch,
                 getFilterOptions: this.getFilterOptions,
                 filteredInput: this.filterInput(this.input),
@@ -205,32 +205,7 @@ export default {
                 ...object,
             }
         },
-        removeFilter(params) {
-            if (params == "*") {
-                return this.newSearch(this.defaultInput)
-            }
-            if (!Array.isArray(params)) {
-                params = [params]
-            }
 
-            let otherParams = null
-            let definition = null
-            let getDefinition = name => this.inputDefinition[name] || {}
-
-            params.forEach(key => {
-                // default this input filter
-                definition = getDefinition(key)
-                this.input[key] = definition.default || ""
-                //then default dependent params as defined in definition for this input.
-                otherParams = definition.clears || []
-                otherParams.forEach(name => {
-                    definition = getDefinition(name)
-                    this.input[name] = definition.default || ""
-                })
-            })
-
-            this.newSearch()
-        },
         getAppliedFilters() {
             return uniqBy(this.configFilters, "name")
                 .filter(filter => {
@@ -244,6 +219,7 @@ export default {
                 })
                 .concat(this.applyFilters())
         },
+
         search() {
             this.status.loading = true
             this.beforeSearch()

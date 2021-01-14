@@ -12,6 +12,7 @@ import {
 import base from "./mixins/provider"
 import {blank} from "../../../services/helpers"
 import {googleTalentEventService} from "../../../services/events"
+import provider from './mixins/provider'
 export default {
     mixins: [base],
     data() {
@@ -81,7 +82,8 @@ export default {
                 return [
                     {
                         display: `Commute:${this.input.commuteLocation}`,
-                        parameter: "commuteLocation",
+                        parameter: ["commuteLocation"]
+                        .concat(this.providerInputDefinition().commuteLocation.clears),
                     },
                 ]
             }
