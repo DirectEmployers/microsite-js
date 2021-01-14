@@ -13,7 +13,6 @@
                 pagination,
                 filteredInput,
                 featuredJobs,
-                removeFilter,
                 appliedFilters,
                 isGoogleTalent,
                 isCommuteSearch,
@@ -64,23 +63,21 @@
                                 <h3 class="font-bold text-xl">
                                     Current Search Criteria
                                 </h3>
-                                <AppChip
+                                <AppSearchFilterChip
                                     v-for="(filter, index) in appliedFilters"
                                     :key="index"
                                     :name="filter.parameter"
-                                    @chipClicked="removeFilter"
                                     class="cursor-pointer"
                                 >
                                     <AppXIcon class="w-2 inline" />
                                     {{ filter.display }}
-                                </AppChip>
+                                </AppSearchFilterChip>
 
-                                <AppChip
+                                <AppSearchFilterChip
                                     name="*"
                                     class="cursor-pointer"
                                     text="Clear All"
-                                    @chipClicked="removeFilter"
-                                ></AppChip>
+                                ></AppSearchFilterChip>
                             </div>
                             <AppAccordion
                                 :open="true"
@@ -197,7 +194,6 @@
 </template>
 <script>
 import {blank} from "~/services/helpers"
-import AppChip from "~/components/AppChip"
 import AppModal from "~/components/AppModal"
 import AppXIcon from "~/components/Icons/AppXIcon"
 import AppLoader from "~/demo/components/AppLoader"
@@ -206,21 +202,22 @@ import AppPagination from "~/components/AppPagination"
 import AppSearchForm from "~/demo/components/AppSearchForm"
 import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
 import AppSearchFilter from "~/components/Search/AppSearchFilter"
+import AppSearchFilterChip from "~/components/AppSearchFilterChip"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
 export default {
     components: {
-        AppAccordion,
-        AppPagination,
-        AppSearchFilter,
-        AppJobSearchResults,
         AppXIcon,
         AppModal,
-        AppChip,
         AppLoader,
-        AppFeaturedJobs,
+        AppAccordion,
+        AppPagination,
         AppSearchForm,
+        AppSearchFilter,
+        AppFeaturedJobs,
+        AppJobSearchResults,
+        AppSearchFilterChip,
         AppCommuteSearchForm,
         AppGoogleTalentSearchProvider,
     },
