@@ -150,7 +150,7 @@ export default {
             let value = this.optionHasSubmitValue(option) ? option.submit: option.display;
             let params = {[this.name]: value}
             if('page' in this.$route.query){
-                param.page = 1
+                params.page = 1
             }
             option.href = buildUrl("jobs", {...this.input, ...params})
             return option
