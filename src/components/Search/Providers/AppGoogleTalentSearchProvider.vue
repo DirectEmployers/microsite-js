@@ -12,6 +12,7 @@ import {
 import base from "./mixins/provider"
 import {blank} from "../../../services/helpers"
 import {googleTalentEventService} from "../../../services/events"
+import provider from './mixins/provider'
 export default {
     mixins: [base],
     data() {
@@ -81,7 +82,8 @@ export default {
                 return [
                     {
                         display: `Commute:${this.input.commuteLocation}`,
-                        parameter: "commuteLocation",
+                        parameter: ["commuteLocation"]
+                        .concat(this.providerInputDefinition().commuteLocation.clears),
                     },
                 ]
             }
@@ -100,11 +102,6 @@ export default {
             )
         },
         beforeSearch() {
-            if(this.isFirstLoad && this.isLoadMore){
-                delete this.input.page
-                this.extraData.num_items *= 2
-                this.isFirstLoad = false
-            }
             this.isCommuteSearch = this.shouldDoCommuteSearch()
             if (this.isCommuteSearch) {
                 this.input.location = ""

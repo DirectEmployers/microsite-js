@@ -1,4 +1,4 @@
-import {omitBy, clone, cloneDeep, startCase, uniqBy} from "lodash"
+import {omitBy, clone, startCase, uniqBy} from "lodash"
 import {blank, displayLocationFromSlug} from "../../../../services/helpers"
 import {searchService, SOLR, GOOGLE_TALENT} from "../../../../services/search"
 
@@ -42,7 +42,7 @@ export default {
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.defaultInput,
-            extraData: {num_items: this.siteConfig.num_items},
+            extraData: this.defaultExtraData(),
         }
     },
     computed: {
@@ -57,11 +57,13 @@ export default {
         },
         defaultInput() {
             let defaults = {}
-            Object.entries(this.inputDefinition).forEach(
-                ([name, definition]) => {
-                    defaults[name] = definition.default
+            Object.entries(this.inputDefinition).forEach(entry => {
+                const [name, definition] = entry
+                if (name == 'page' && this.isLoadMore) {
+                    return
                 }
-            )
+                defaults[name] = definition.default
+            })
             return defaults
         },
         service() {
@@ -126,20 +128,11 @@ export default {
         //any time query string changes, update component input and search.
         "$route.query"(newval, oldval) {
             this.jobDisplay = []
+            this.isFirstLoad = true
             this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
-            //route query should only update when a new filter is added/removed so we reset data
-            if(this.isLoadMore){
-                this.extraData = {num_items: this.siteConfig.num_items}
-                this.extraData.num_items *= 2
-            }
-            this.search().then(() => {
-                if (this.isLoadMore) {
-                    this.extraData.offset = this.extraData.num_items
-                    this.extraData.num_items /= 2
-                    this.jobDisplay = this.jobs.splice(0, this.extraData.num_items)
-                }
-            })
+            this.extraData = this.defaultExtraData()
+            this.search()
         },
     },
     created() {
@@ -164,10 +157,14 @@ export default {
     },
     methods: {
         queryChanged() {},
-        beforeSearch() {
-            if(this.isFirstLoad && this.isLoadMore){
+        beforeSearch() {},
+        beforeLoadMoreSearch() {
+            if (this.isFirstLoad) {
+                this.extraData.offset = 0
                 this.extraData.num_items *= 2
-                this.isFirstLoad = false
+            } else {
+                this.extraData.offset += this.extraData.num_items
+                this.extraData.num_items = this.siteConfig.num_items
             }
         },
         searchCompleted(data) {},
@@ -182,9 +179,7 @@ export default {
         },
         loadMore() {
             this.jobDisplay = this.jobDisplay.concat(this.jobs)
-            this.search().then(() => {
-                this.extraData.offset += this.extraData.num_items
-            })
+            this.search()
         },
         sharedInputDefinition() {
             let r = {
@@ -220,32 +215,7 @@ export default {
                 ...object,
             }
         },
-        removeFilter(params) {
-            if (params == "*") {
-                return this.newSearch(this.defaultInput)
-            }
-            if (!Array.isArray(params)) {
-                params = [params]
-            }
 
-            let otherParams = null
-            let definition = null
-            let getDefinition = name => this.inputDefinition[name] || {}
-
-            params.forEach(key => {
-                // default this input filter
-                definition = getDefinition(key)
-                this.input[key] = definition.default || ""
-                //then default dependent params as defined in definition for this input.
-                otherParams = definition.clears || []
-                otherParams.forEach(name => {
-                    definition = getDefinition(name)
-                    this.input[name] = definition.default || ""
-                })
-            })
-
-            this.newSearch()
-        },
         getAppliedFilters() {
             return uniqBy(this.configFilters, "name")
                 .filter(filter => {
@@ -259,9 +229,13 @@ export default {
                 })
                 .concat(this.applyFilters())
         },
+
         search() {
             this.status.loading = true
             this.beforeSearch()
+            if (this.isLoadMore) {
+                this.beforeLoadMoreSearch()
+            }
             return this.service({...this.filterInput(this.input), ...this.extraData}, this.siteConfig)
                 .then(resp => {
                     const data = resp.data || {}
@@ -274,14 +248,18 @@ export default {
                     } //prevents sites from erroring when unable to connect to api
                     this.appliedFilters = this.getAppliedFilters()
                     this.searchCompleted(data)
-                    if(!this.isLoadMore){
+                    if (!this.isLoadMore){
                         this.jobDisplay = this.jobs
+                    }
+                    if (this.isLoadMore && this.isFirstLoad) {
+                        this.jobDisplay = this.jobs.splice(0, this.siteConfig.num_items)
                     }
                 })
                 .catch(err => {
                     this.status.error = err
                 })
                 .finally(() => {
+                    this.isFirstLoad = false
                     this.status.loading = false
                 })
         },
@@ -304,6 +282,15 @@ export default {
                     ...filter,
                 })
             )
+        },
+        defaultExtraData() {
+            if (this.isLoadMore) {
+                return {
+                    num_items: this.siteConfig.num_items,
+                    offset: 0
+                }
+            }
+            return {}
         },
         filterInput(input) {
             let excluded = this.excludePayload()
