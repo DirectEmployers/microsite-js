@@ -148,9 +148,9 @@ export default {
         },
         buildFilterHref(option) {
             let value = this.optionHasSubmitValue(option) ? option.submit: option.display;
-            let params = {
-                page: 1,
-                [this.name]: value
+            let params = {[this.name]: value}
+            if('page' in this.$route.query){
+                param.page = 1
             }
             option.href = buildUrl("jobs", {...this.input, ...params})
             return option
