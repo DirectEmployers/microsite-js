@@ -1,4 +1,4 @@
-import {omitBy, clone, merge, startCase, uniqBy} from "lodash"
+import {omitBy, clone, startCase, uniqBy} from "lodash"
 import {blank, displayLocationFromSlug} from "../../../../services/helpers"
 import {searchService, SOLR, GOOGLE_TALENT} from "../../../../services/search"
 
@@ -18,10 +18,14 @@ export default {
             default: true,
             required: false,
         },
+        isLoadMore: {
+            type: Boolean,
+            default: false,
+            required: false,
+        }
     },
     data() {
         return {
-            jobs: [],
             meta: {
                 source: this.siteConfig.source,
             },
@@ -29,12 +33,16 @@ export default {
                 loading: false,
                 error: false,
             },
+            jobs: [],
+            jobDisplay: [],
             filters: [],
             pagination: {},
             featuredJobs: [],
+            isFirstLoad: true,
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.defaultInput,
+            extraData: this.defaultExtraData(),
         }
     },
     computed: {
@@ -49,11 +57,13 @@ export default {
         },
         defaultInput() {
             let defaults = {}
-            Object.entries(this.inputDefinition).forEach(
-                ([name, definition]) => {
-                    defaults[name] = definition.default
+            Object.entries(this.inputDefinition).forEach(entry => {
+                const [name, definition] = entry
+                if (name == 'page' && this.isLoadMore) {
+                    return
                 }
-            )
+                defaults[name] = definition.default
+            })
             return defaults
         },
         service() {
@@ -93,16 +103,19 @@ export default {
         },
         slotData() {
             return {
-                jobs: this.jobs,
                 sort: this.sort,
                 input: this.input,
                 status: this.status,
                 hasJobs: this.hasJobs,
-                source: this.meta.source,
+                jobs: this.jobDisplay,
+                loadMore: this.loadMore,
                 setInput: this.setInput,
+                source: this.meta.source,
                 newSearch: this.newSearch,
+                isLoadMore: this.isLoadMore,
                 pagination: this.pagination,
                 featuredJobs: this.featuredJobs,
+                removeFilter: this.removeFilter,
                 isGoogleTalent: this.isGoogleTalent,
                 appliedFilters: this.appliedFilters,
                 isCommuteSearch: this.isCommuteSearch,
@@ -113,9 +126,12 @@ export default {
     },
     watch: {
         //any time query string changes, update component input and search.
-        "$route.query"() {
+        "$route.query"(newval, oldval) {
+            this.jobDisplay = []
+            this.isFirstLoad = true
             this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
+            this.extraData = this.defaultExtraData()
             this.search()
         },
     },
@@ -124,11 +140,9 @@ export default {
             ...this.$route.query,
             ...this.$route.params,
         })
-
         if (!blank(this.$route.params.location)) {
             this.input.location = displayLocationFromSlug(this.input.location)
         }
-
         if (this.searchOnLoad) {
             this.search()
         } else {
@@ -138,6 +152,15 @@ export default {
     methods: {
         queryChanged() {},
         beforeSearch() {},
+        beforeLoadMoreSearch() {
+            if (this.isFirstLoad) {
+                this.extraData.offset = 0
+                this.extraData.num_items *= 2
+            } else {
+                this.extraData.offset += this.extraData.num_items
+                this.extraData.num_items = this.siteConfig.num_items
+            }
+        },
         searchCompleted(data) {},
         excludePayload() {
             return []
@@ -147,6 +170,10 @@ export default {
         },
         applyFilters() {
             return []
+        },
+        loadMore() {
+            this.jobDisplay = this.jobDisplay.concat(this.jobs)
+            this.search()
         },
         sharedInputDefinition() {
             return {
@@ -194,23 +221,35 @@ export default {
         },
 
         search() {
-            this.beforeSearch()
             this.status.loading = true
-            this.service(this.filterInput(this.input), this.siteConfig)
+            this.beforeSearch()
+            if (this.isLoadMore) {
+                this.beforeLoadMoreSearch()
+            }
+            return this.service({...this.filterInput(this.input), ...this.extraData}, this.siteConfig)
                 .then(resp => {
                     const data = resp.data || {}
                     this.featuredJobs = data.featured_jobs || []
                     this.pagination = data.pagination || {}
                     this.filters = data.filters || {}
                     this.jobs = data.jobs || []
-                    this.meta = data.meta || {source: SOLR} //prevents sites from erroring when unable to connect to api
+                    this.meta = data.meta || {
+                        source: SOLR,
+                    } //prevents sites from erroring when unable to connect to api
                     this.appliedFilters = this.getAppliedFilters()
                     this.searchCompleted(data)
+                    if (!this.isLoadMore){
+                        this.jobDisplay = this.jobs
+                    }
+                    if (this.isLoadMore && this.isFirstLoad) {
+                        this.jobDisplay = this.jobs.splice(0, this.siteConfig.num_items)
+                    }
                 })
                 .catch(err => {
                     this.status.error = err
                 })
                 .finally(() => {
+                    this.isFirstLoad = false
                     this.status.loading = false
                 })
         },
@@ -223,7 +262,8 @@ export default {
         },
         getFilterOptions(filter) {
             let options = this.filters[this.getFilterKey(filter)]
-            return blank(options) || !Array.isArray(options) ? [] : options
+            options = blank(options) || !Array.isArray(options) ? [] : options
+            return options
         },
         setInput(filter) {
             this.newSearch(
@@ -232,6 +272,15 @@ export default {
                     ...filter,
                 })
             )
+        },
+        defaultExtraData() {
+            if (this.isLoadMore) {
+                return {
+                    num_items: this.siteConfig.num_items,
+                    offset: 0
+                }
+            }
+            return {}
         },
         filterInput(input) {
             let excluded = this.excludePayload()

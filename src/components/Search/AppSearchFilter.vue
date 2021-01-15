@@ -104,10 +104,10 @@ export default {
     },
     data() {
         return {
-            givenOptions: clone(this.options || []),
             displayedFilters: {},
         }
     },
+
     created() {
         let value = null
         let filteredOptions = []
@@ -122,6 +122,10 @@ export default {
         this.displayedFilters = filteredOptions.slice(0, this.limit)
     },
     computed: {
+        givenOptions(){
+            return clone(this.options || [])
+        },
+
         hasOptions() {
             return this.displayedFilters.length > 0
         },
@@ -144,9 +148,9 @@ export default {
         },
         buildFilterHref(option) {
             let value = this.optionHasSubmitValue(option) ? option.submit: option.display;
-            let params = {
-                page: 1,
-                [this.name]: value
+            let params = {[this.name]: value}
+            if('page' in this.$route.query){
+                params.page = 1
             }
             option.href = buildUrl("jobs", {...this.input, ...params})
             return option

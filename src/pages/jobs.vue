@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <AppGoogleTalentSearchProvider :site-config="$siteConfig">
+        <AppGoogleTalentSearchProvider :site-config="$siteConfig" :is-load-more="true">
             <template v-slot="{
                 jobs,
                 sort,
@@ -8,7 +8,9 @@
                 source,
                 status,
                 hasJobs,
+                loadMore,
                 setInput,
+                setFilter,
                 newSearch,
                 pagination,
                 filteredInput,
@@ -18,7 +20,7 @@
                 isCommuteSearch,
                 getFilterOptions,
             }">
-                <AppLoader v-if="status.loading"/>
+                <AppLoader v-if="status.loading && !jobs.length"/>
                 <section v-else>
                     <div class="mx-4">
                         <AppSearchForm
@@ -44,12 +46,13 @@
                                 <div class="text-2xl">
                                     {{ pagination.total }} jobs found
                                 </div>
-                                <AppPagination
-                                    @pageSelected="setInput"
-                                    :current-page="pagination.page"
-                                    :total-records="pagination.total"
-                                    :total-pages="pagination.total_pages"
+                                <AppLoadMore
+                                    :totalJobs="pagination.total"
+                                    :currentJobs="jobs.length"
+                                    @loadMore="loadMore"
                                 />
+
+
                             </section>
                             <h3
                                 class="font-bold text-lg"
@@ -104,13 +107,13 @@
                             </AppAccordion>
 
                             <AppSearchFilter
+                                v-for="(configFilter, index) in $siteConfig.filters"
                                 :key="index"
                                 :input="filteredInput"
                                 :name="configFilter.name"
                                 :key-name="configFilter.key"
                                 :visible="configFilter.visible"
                                 :options="getFilterOptions(configFilter)"
-                                v-for="(configFilter, index) in $siteConfig.filters"
                             >
                                 <template
                                     v-slot="{
@@ -165,6 +168,7 @@
                                     </AppAccordion>
                                 </template>
                             </AppSearchFilter>
+
                             <div class="container">
                                 <button
                                     @click="toggleCommuteModal()"
@@ -195,6 +199,7 @@
 <script>
 import {blank} from "~/services/helpers"
 import AppModal from "~/components/AppModal"
+import AppLoadMore from "~/components/AppLoadMore"
 import AppXIcon from "~/components/Icons/AppXIcon"
 import AppLoader from "~/demo/components/AppLoader"
 import AppAccordion from "~/components/AppAccordion"
@@ -211,8 +216,8 @@ export default {
         AppXIcon,
         AppModal,
         AppLoader,
+        AppLoadMore,
         AppAccordion,
-        AppPagination,
         AppSearchForm,
         AppSearchFilter,
         AppFeaturedJobs,
@@ -220,11 +225,6 @@ export default {
         AppSearchFilterChip,
         AppCommuteSearchForm,
         AppGoogleTalentSearchProvider,
-    },
-    data() {
-        return {
-            AppAccordion,
-        }
     },
     metaInfo: {
         title: "Jobs",

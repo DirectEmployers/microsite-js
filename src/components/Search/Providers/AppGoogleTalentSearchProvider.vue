@@ -102,7 +102,8 @@ export default {
             )
         },
         beforeSearch() {
-            if ((this.isCommuteSearch = this.shouldDoCommuteSearch())) {
+            this.isCommuteSearch = this.shouldDoCommuteSearch()
+            if (this.isCommuteSearch) {
                 this.input.location = ""
             }
         },
