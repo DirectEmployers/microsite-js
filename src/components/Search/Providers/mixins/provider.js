@@ -63,6 +63,10 @@ export default {
                     return
                 }
                 defaults[name] = definition.default
+
+                if(definition.clears){
+                    this.extraData.clears[name] = definition.clears
+                }
             })
             return defaults
         },
@@ -182,12 +186,13 @@ export default {
             this.search()
         },
         sharedInputDefinition() {
-            let r = {
+            return {
                 q: {
                     default: "",
                 },
                 r: {
                     default: "",
+                    clears: ["coords", "location"]
                 },
                 location: {
                     default: "",
@@ -204,10 +209,6 @@ export default {
                     default: "relevance",
                 },
             }
-            if(this.isLoadMore){
-                delete r.page
-            }
-            return r
         },
         mergeWithDefaultInput(object = {}) {
             return {
@@ -222,9 +223,10 @@ export default {
                     return !blank(this.input[filter.name])
                 })
                 .map(filter => {
+                    let parameter = this.extraData.clears[filter.name] ? [filter.name].concat(this.extraData.clears[filter.name]) : 'filter.name'
                     return {
                         display: this.input[filter.name],
-                        parameter: filter.name,
+                        parameter,
                     }
                 })
                 .concat(this.applyFilters())
@@ -286,8 +288,9 @@ export default {
         defaultExtraData() {
             if (this.isLoadMore) {
                 return {
+                    offset: 0,
+                    clears: {},
                     num_items: this.siteConfig.num_items,
-                    offset: 0
                 }
             }
             return {}
