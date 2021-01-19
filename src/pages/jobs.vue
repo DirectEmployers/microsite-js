@@ -202,7 +202,6 @@
     </Layout>
 </template>
 <script>
-const pluralize = require("pluralize")
 import {blank} from "~/services/helpers"
 import AppModal from "~/components/AppModal"
 import AppXIcon from "~/components/Icons/AppXIcon"
