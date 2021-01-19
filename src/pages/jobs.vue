@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <AppGoogleTalentSearchProvider :site-config="$siteConfig" :is-load-more="true">
+        <AppGoogleTalentSearchProvider :site-config="$siteConfig" :is-load-more="$static.metadata.loadMore">
             <template v-slot="{
                 jobs,
                 sort,
@@ -31,7 +31,7 @@
                         />
                     </div>
                     <section class="flex flex-col lg:flex-row">
-                        <div class="mx-4 w-full lg:w-1/2">
+                        <div class="mb-6 mx-4 w-full lg:w-1/2">
                             <h3 v-if="status.error && !hasJobs">Unable to load jobs...</h3>
                             <AppFeaturedJobs
                                 :featured-jobs="featuredJobs"
@@ -39,20 +39,25 @@
                             />
                             <section v-if="jobs.length">
                                 <AppJobSearchResults
+                                    class="mb-4"
                                     :jobs="jobs"
                                     :input="filteredInput"
                                     :source="source"
                                 />
-                                <div class="text-2xl">
-                                    {{ pagination.total }} jobs found
-                                </div>
-                                <AppLoadMore
+                                <AppLoadMore v-if="$static.metadata.loadMore"
                                     :totalJobs="pagination.total"
                                     :currentJobs="jobs.length"
                                     @loadMore="loadMore"
                                 />
-
-
+                                <AppPagination v-else
+                                    @pageSelected="setInput"
+                                    :current-page="pagination.page"
+                                    :total-records="pagination.total"
+                                    :total-pages="pagination.total_pages"
+                                />
+                                <div class="text-sm" v-if="$static.metadata.loadMore">
+                                    Showing {{ jobs.length }} of {{ pagination.total }} {{ jobs.length == 1 ? "job" : "jobs" }}
+                                </div>
                             </section>
                             <h3
                                 class="font-bold text-lg"
@@ -197,9 +202,9 @@
     </Layout>
 </template>
 <script>
+const pluralize = require("pluralize")
 import {blank} from "~/services/helpers"
 import AppModal from "~/components/AppModal"
-import AppLoadMore from "~/components/AppLoadMore"
 import AppXIcon from "~/components/Icons/AppXIcon"
 import AppLoader from "~/demo/components/AppLoader"
 import AppAccordion from "~/components/AppAccordion"
@@ -211,12 +216,12 @@ import AppSearchFilterChip from "~/components/AppSearchFilterChip"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
+
 export default {
     components: {
         AppXIcon,
         AppModal,
         AppLoader,
-        AppLoadMore,
         AppAccordion,
         AppSearchForm,
         AppSearchFilter,
@@ -225,6 +230,8 @@ export default {
         AppSearchFilterChip,
         AppCommuteSearchForm,
         AppGoogleTalentSearchProvider,
+        AppLoadMore: () => import("~/components/AppLoadMore"),
+        AppPagination: () => import("~/components/AppPagination"),
     },
     metaInfo: {
         title: "Jobs",
@@ -243,3 +250,12 @@ export default {
     },
 }
 </script>
+
+<static-query>
+query {
+    metadata {
+        loadMore,
+        siteName,
+    }
+}
+</static-query>
