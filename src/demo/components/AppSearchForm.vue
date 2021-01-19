@@ -4,7 +4,7 @@
             <div class="search-form__section">
                 <AppAutocompleteInput
                     ref="q"
-                    v-model="input.q"
+                    v-model="form.q"
                     label="Search by keyword"
                     placeholder="Enter keywords"
                     aria-label="Search by keyword"
@@ -20,6 +20,7 @@
                     @setResult="search"
                 />
             </div>
+            
             <div class="search-form__section">
                 <div
                     class="search-form__location-autocomplete"
@@ -27,7 +28,7 @@
                 >
                     <AppAutocompleteInput
                         ref="location"
-                        v-model="input.location"
+                        v-model="form.location"
                         @input="typedLocation"
                         label="Where"
                         placeholder="Type city or state"
@@ -46,7 +47,7 @@
                 <div class="mt-6" v-else>
                     <AppGoogleLocationAutocomplete
                         :api-key="apiKey"
-                        v-model="input.commuteLocation"
+                        v-model="form.commuteLocation"
                         class="form__input"
                         @locationSelected="googleAutocompleteSelected"
                     />
@@ -62,7 +63,7 @@
                     <select
                         id="r"
                         name="r"
-                        v-model="input.r"
+                        v-model="form.r"
                         class="search-form__radius form__input"
                         :disabled="!shouldShowRadiusInput"
                     >
@@ -84,7 +85,7 @@
             </div>
             <div class="search-form__section" v-if="source == 'solr'">
                 <AppAutocompleteInput
-                    v-model="input.moc"
+                    v-model="form.moc"
                     ref="moc"
                     label="Search by MOC code"
                     placeholder="Enter MOC code"
@@ -168,6 +169,13 @@ export default {
         MOCCompleteService,
         LocationCompleteService,
         apiKey: process.env.GRIDSOME_GOOGLE_MAPS_API_KEY,
+        form: {
+            q: '',
+            r: '',
+            moc: '',
+            location: '',
+            commuteLocation: '',
+        }
     }),
 }
 </script>

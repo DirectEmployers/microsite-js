@@ -112,7 +112,8 @@ export default {
 
             try {
                 this.loading = true
-                const {data} = await this.query.get(value, this.queryConfig)
+                const data = await this.query.get(value, this.queryConfig)
+                console.log(data)
                 this.results = data || []
             } catch (error) {
                 this.error = error
