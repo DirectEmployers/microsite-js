@@ -223,10 +223,10 @@ export default {
                     return !blank(this.input[filter.name])
                 })
                 .map(filter => {
-                    let parameter = this.extraData.clears[filter.name] ? [filter.name].concat(this.extraData.clears[filter.name]) : 'filter.name'
+                    let clears = this.inputDefinition[filter.name].clears || {}
                     return {
                         display: this.input[filter.name],
-                        parameter,
+                        parameter: [filter.name].concat(clears),
                     }
                 })
                 .concat(this.applyFilters())
