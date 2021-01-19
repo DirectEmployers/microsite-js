@@ -20,7 +20,7 @@
                     @setResult="search"
                 />
             </div>
-            
+
             <div class="search-form__section">
                 <div
                     class="search-form__location-autocomplete"
@@ -142,12 +142,12 @@ export default {
             if (this.isCommuteSearch) {
                 return false
             }
-            return this.input.coords || this.input.location
+            return this.form.coords || this.form.location
         },
     },
     methods: {
         search() {
-            this.$emit("search")
+            this.$emit("search", this.form)
         },
         typedLocation() {
             if (this.input.location) {
@@ -155,27 +155,30 @@ export default {
             }
         },
         setLocationFromGeo(coords) {
-            this.input.location = "Your Location"
-            this.input.coords = coords
+            this.form.location = "Your Location"
+            this.form.coords = coords
         },
         googleAutocompleteSelected(location, coords) {
-            this.input.commuteLocation = location
-            this.input.coords = coords
+            this.form.commuteLocation = location
+            this.form.coords = coords
             this.search()
         },
     },
-    data: () => ({
-        TitleCompleteService,
-        MOCCompleteService,
-        LocationCompleteService,
-        apiKey: process.env.GRIDSOME_GOOGLE_MAPS_API_KEY,
-        form: {
-            q: '',
-            r: '',
-            moc: '',
-            location: '',
-            commuteLocation: '',
+    data: function(){
+        return {
+            TitleCompleteService,
+            MOCCompleteService,
+            LocationCompleteService,
+            apiKey: process.env.GRIDSOME_GOOGLE_MAPS_API_KEY,
+            form: {
+                q: this.input.q,
+                r: this.input.r,
+                moc: this.input.moc,
+                cords: this.input.cords,
+                location: this.input.location,
+                commuteLocation: this.input.commuteLocation,
+            }
         }
-    }),
+    },
 }
 </script>
