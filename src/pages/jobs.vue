@@ -13,7 +13,6 @@
                 setFilter,
                 newSearch,
                 pagination,
-                isLoadMore,
                 filteredInput,
                 featuredJobs,
                 appliedFilters,

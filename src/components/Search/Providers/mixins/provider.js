@@ -63,10 +63,6 @@ export default {
                     return
                 }
                 defaults[name] = definition.default
-
-                if(definition.clears){
-                    this.extraData.clears[name] = definition.clears
-                }
             })
             return defaults
         },
@@ -120,8 +116,8 @@ export default {
                 pagination: this.pagination,
                 featuredJobs: this.featuredJobs,
                 removeFilter: this.removeFilter,
-                appliedFilters: this.appliedFilters,
                 isGoogleTalent: this.isGoogleTalent,
+                appliedFilters: this.appliedFilters,
                 isCommuteSearch: this.isCommuteSearch,
                 getFilterOptions: this.getFilterOptions,
                 filteredInput: this.filterInput(this.input),
@@ -148,13 +144,7 @@ export default {
             this.input.location = displayLocationFromSlug(this.input.location)
         }
         if (this.searchOnLoad) {
-            this.search().then(() => {
-                if (this.isLoadMore) {
-                    this.extraData.offset = this.extraData.num_items
-                    this.extraData.num_items /= 2
-                    this.jobDisplay = this.jobs.splice(0, this.extraData.num_items)
-                }
-            })
+            this.search()
         } else {
             this.appliedFilters = this.getAppliedFilters()
         }
@@ -288,9 +278,8 @@ export default {
         defaultExtraData() {
             if (this.isLoadMore) {
                 return {
-                    offset: 0,
-                    clears: {},
                     num_items: this.siteConfig.num_items,
+                    offset: 0
                 }
             }
             return {}
