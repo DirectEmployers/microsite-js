@@ -1,6 +1,6 @@
 const config =  {
     buids: [19424],
-    source: "google_talent",
+    source: "solr",
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
     tenant_uuid: process.env.GRIDSOME_GOOGLE_TALENT_TENANT,
     company_uuids: [process.env.GRIDSOME_GOOGLE_TALENT_COMPANY],
