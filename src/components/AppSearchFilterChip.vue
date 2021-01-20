@@ -21,6 +21,13 @@ export default {
                 return `${this._uid}`
             }
         },
+        path: {
+            type: String,
+            required: false,
+            default() {
+                return this.$route.path
+            }
+        },
         input: {
             required: false,
             type: Object,
@@ -59,7 +66,7 @@ export default {
 
         removeFilter(){
             if(this.name === "*"){
-                return this.$route.path
+                return this.path
             }
 
             let input = this.input
@@ -74,7 +81,7 @@ export default {
             for(let item of names){
                 delete query[item]
             }
-            return buildUrl(this.$route.path, query)
+            return buildUrl(this.path, query)
         }
     }
 }

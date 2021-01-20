@@ -27561,6 +27561,13 @@ var ENTER_KEY = 13;
         return "".concat(this._uid);
       }
     },
+    path: {
+      type: String,
+      required: false,
+      default: function _default() {
+        return this.$route.path;
+      }
+    },
     input: {
       required: false,
       type: Object,
@@ -27596,7 +27603,7 @@ var ENTER_KEY = 13;
     },
     removeFilter: function removeFilter() {
       if (this.name === "*") {
-        return this.$route.path;
+        return this.path;
       }
 
       var input = this.input;
@@ -27622,7 +27629,7 @@ var ENTER_KEY = 13;
         _iterator.f();
       }
 
-      return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4___default()(this.$route.path, query);
+      return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4___default()(this.path, query);
     }
   }
 });
@@ -30045,12 +30052,12 @@ module.exports = function (input, PREFERRED_STRING) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSearchFilterChip.vue?vue&type=template&id=176508ed&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSearchFilterChip.vue?vue&type=template&id=1b88c576&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"chip",attrs:{"tabindex":"0"}},[_c('g-link',{attrs:{"to":_vm.url}},[_vm._t("default",[_vm._v(" "+_vm._s(_vm.text)+" ")])],2)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppSearchFilterChip.vue?vue&type=template&id=176508ed&
+// CONCATENATED MODULE: ./src/components/AppSearchFilterChip.vue?vue&type=template&id=1b88c576&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSearchFilterChip.vue?vue&type=script&lang=js&
 var AppSearchFilterChipvue_type_script_lang_js_ = __webpack_require__("a528");
