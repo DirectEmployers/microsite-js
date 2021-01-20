@@ -33743,7 +33743,7 @@ var search_LocationCompleteService = /*#__PURE__*/function () {
               case 0:
                 _context3.prev = 0;
                 _context3.next = 3;
-                return api().get("/solr/complete/location", {
+                return api().get("complete/location", {
                   params: {
                     q: q
                   },

@@ -95,7 +95,7 @@ export class MOCCompleteService {
 export class LocationCompleteService {
     static async get(q) {
         try {
-            const response = await api().get("/solr/complete/location", {
+            const response = await api().get("complete/location", {
                 params: {
                     q: q,
                 },
