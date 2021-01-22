@@ -23,12 +23,15 @@ export default {
             this.appendPlacesScript()
         }
     },
+    updated(){
+        this.initAutocomplete()
+    },
     computed: {
         apiScriptUrl() {
             return `https://maps.googleapis.com/maps/api/js?key=${this.apiKey}&libraries=places`
         },
         placesApiLoaded() {
-            return window?.google?.maps?.places
+            return !!window?.google?.maps?.places
         },
     },
     methods: {
