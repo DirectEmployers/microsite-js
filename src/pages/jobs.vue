@@ -50,18 +50,18 @@
                                     :currentJobs="jobs.length"
                                     @loadMore="loadMore"
                                 />
-                                <AppTwoButtonPagination v-else
+                                <AppTwoButtonPagination v-else-if="$static.metadata.paginationType == 'simple'"
                                     @pageSelected="setInput"
                                     :current-page="pagination.page"
                                     :total-records="pagination.total"
                                     :total-pages="pagination.total_pages"
                                 />
-                                <!-- <AppPagination v-else
+                                <AppPagination v-else
                                     @pageSelected="setInput"
                                     :current-page="pagination.page"
                                     :total-records="pagination.total"
                                     :total-pages="pagination.total_pages"
-                                /> -->
+                                />
                                 <div class="text-sm" v-if="$static.metadata.paginationType == 'load'">
                                     Showing {{ jobs.length }} of {{ pagination.total }} {{ jobs.length == 1 ? "job" : "jobs" }}
                                 </div>
