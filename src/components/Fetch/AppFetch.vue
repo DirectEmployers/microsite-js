@@ -15,7 +15,7 @@ import {blank} from "../../services/helpers"
 export default {
     props: {
         endpoint: {
-            type: [String, Function],
+            type: [String, Function, Promise],
             required: true,
         },
         requestOnCreated: {
@@ -23,7 +23,7 @@ export default {
             required: false,
             default: true,
         },
-        payload: {
+        parameters: {
             required: false,
             type: Object,
             default: () => {
@@ -70,17 +70,18 @@ export default {
             return this.response?.data || {}
         },
         requestPayload() {
-            if (blank(this.payload)) {
+            if (blank(this.parameters)) {
                 return this.options
             }
 
-            return {...payload, ...this.options}
+            return { params: this.parameters, ...this.options }
         },
         requestHandler() {
             if (typeof this.endpoint == "function") {
+                return this.endpoint(this.requestPayload)
+            }else if(this.endpoint instanceof Promise){
                 return this.endpoint
             }
-
             return axios.get(this.endpoint, this.requestPayload)
         },
     },
@@ -89,7 +90,7 @@ export default {
             this.response = null
             this.status({error: false, pending: true})
             try {
-                this.response = await this.requestHandler()
+                this.response = await this.requestHandler
                 //if a resolve function was given, call it and
                 //let implementer mark status as resolved.
                 if(typeof this.onResolve == 'function'){

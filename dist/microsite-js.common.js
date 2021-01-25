@@ -1865,12 +1865,18 @@ var component = Object(componentNormalizer["a" /* default */])(
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppFetch.vue?vue&type=template&id=9db66ed6&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppFetch.vue?vue&type=template&id=11acd467&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[_c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"data":_vm.responseData,"request":this.request,"status":{resolved: _vm.resolved, error: _vm.error, pending: _vm.pending}})],2)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Fetch/AppFetch.vue?vue&type=template&id=9db66ed6&
+// CONCATENATED MODULE: ./src/components/Fetch/AppFetch.vue?vue&type=template&id=11acd467&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
+var es_object_to_string = __webpack_require__("d3b7");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
+var es_promise = __webpack_require__("e6cf");
 
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
 var runtime = __webpack_require__("96cf");
@@ -1892,6 +1898,8 @@ var helpers = __webpack_require__("a74a");
 
 
 
+
+
 //
 //
 //
@@ -1908,7 +1916,7 @@ var helpers = __webpack_require__("a74a");
 /* harmony default export */ var AppFetchvue_type_script_lang_js_ = ({
   props: {
     endpoint: {
-      type: [String, Function],
+      type: [String, Function, Promise],
       required: true
     },
     requestOnCreated: {
@@ -1916,7 +1924,7 @@ var helpers = __webpack_require__("a74a");
       required: false,
       default: true
     },
-    payload: {
+    parameters: {
       required: false,
       type: Object,
       default: function _default() {
@@ -1965,14 +1973,18 @@ var helpers = __webpack_require__("a74a");
       return ((_this$response = this.response) === null || _this$response === void 0 ? void 0 : _this$response.data) || {};
     },
     requestPayload: function requestPayload() {
-      if (Object(helpers["a" /* blank */])(this.payload)) {
+      if (Object(helpers["a" /* blank */])(this.parameters)) {
         return this.options;
       }
 
-      return Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, payload), this.options);
+      return Object(objectSpread2["a" /* default */])({
+        params: this.parameters
+      }, this.options);
     },
     requestHandler: function requestHandler() {
       if (typeof this.endpoint == "function") {
+        return this.endpoint(this.requestPayload);
+      } else if (this.endpoint instanceof Promise) {
         return this.endpoint;
       }
 
@@ -1997,7 +2009,7 @@ var helpers = __webpack_require__("a74a");
 
                 _context.prev = 2;
                 _context.next = 5;
-                return _this.requestHandler();
+                return _this.requestHandler;
 
               case 5:
                 _this.response = _context.sent;
