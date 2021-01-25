@@ -5,7 +5,7 @@
                 <label for="commuteLocation" class="form__label">
                     Commute From
                 </label>
-                <AppGoogleLocationAutocomplete
+                <AppGooglePlacesAutocomplete
                     :api-key="apiKey"
                     v-model="input.commuteLocation"
                     class="form__input"
@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import AppGoogleLocationAutocomplete from "~/components/Search/AppGoogleLocationAutocomplete"
+import AppGooglePlacesAutocomplete from "~/components/Search/AppGooglePlacesAutocomplete"
 export default {
     name: "CommuteSearchForm",
     props: {
@@ -91,7 +91,7 @@ export default {
         return { apiKey: process.env.GRIDSOME_GOOGLE_MAPS_API_KEY}
     },
     components: {
-        AppGoogleLocationAutocomplete,
+        AppGooglePlacesAutocomplete,
     },
     methods:{
         search(){
