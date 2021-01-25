@@ -21,6 +21,18 @@ export default {
                 return `${this._uid}`
             }
         },
+        path: {
+            type: String,
+            required: false,
+            default() {
+                return this.$route.path
+            }
+        },
+        input: {
+            required: false,
+            type: Object,
+            default: () => { return {} },
+        },
         text: {
             type: String,
             required: false,
@@ -40,29 +52,36 @@ export default {
         if(process.isClient){
             document.removeEventListener('keyup', this.hitEnter)
         }
-
     },
-
     methods:{
         hitEnter(e){
             if(e.keyCode == ENTER_KEY && document.activeElement == this.$el){
-                this.clickedChip()
+                this.$router
+                .push({
+                    path: this.url,
+                })
+                .catch(err => {})
             }
         },
 
         removeFilter(){
             if(this.name === "*"){
-                return this.$route.path
+                return this.path
             }
+
+            let input = this.input
+            let names = this.name
             let query = Object.assign({}, this.$route.query)
-            if(!Array.isArray(this.name)){
-                delete query[this.name]
-                return buildUrl(this.$route.path, query)
+            query = {...query, ...input}
+
+            if(!Array.isArray(names)){
+                names = [names]
             }
-            for(let item of this.name){
+
+            for(let item of names){
                 delete query[item]
             }
-            return buildUrl(this.$route.path, query)
+            return buildUrl(this.path, query)
         }
     }
 }

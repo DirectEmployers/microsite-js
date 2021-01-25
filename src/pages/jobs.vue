@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <AppGoogleTalentSearchProvider :site-config="$siteConfig">
+        <AppGoogleTalentSearchProvider :site-config="$siteConfig" :is-load-more="$static.metadata.loadMore">
             <template v-slot="{
                 jobs,
                 sort,
@@ -31,7 +31,7 @@
                         />
                     </div>
                     <section class="flex flex-col lg:flex-row">
-                        <div class="mx-4 w-full lg:w-1/2">
+                        <div class="mb-6 mx-4 w-full lg:w-1/2">
                             <h3 v-if="status.error && !hasJobs">Unable to load jobs...</h3>
                             <AppFeaturedJobs
                                 :featured-jobs="featuredJobs"
@@ -39,20 +39,32 @@
                             />
                             <section v-if="jobs.length">
                                 <AppJobSearchResults
+                                    class="mb-4"
                                     :jobs="jobs"
                                     :input="filteredInput"
                                     :source="source"
                                 />
-                                <AppTwoButtonPagination
+
+                                <AppLoadMore v-if="$static.metadata.loadMore"
+                                    :totalJobs="pagination.total"
+                                    :currentJobs="jobs.length"
+                                    @loadMore="loadMore"
+                                />
+                                <AppTwoButtonPagination v-else
                                     @pageSelected="setInput"
                                     :current-page="pagination.page"
                                     :total-records="pagination.total"
                                     :total-pages="pagination.total_pages"
                                 />
-                                <div class="text-2xl">
-                                    {{ pagination.total }} jobs found
+                                <!-- <AppPagination v-else
+                                    @pageSelected="setInput"
+                                    :current-page="pagination.page"
+                                    :total-records="pagination.total"
+                                    :total-pages="pagination.total_pages"
+                                /> -->
+                                <div class="text-sm" v-if="$static.metadata.loadMore">
+                                    Showing {{ jobs.length }} of {{ pagination.total }} {{ jobs.length == 1 ? "job" : "jobs" }}
                                 </div>
-
                             </section>
                             <h3
                                 class="font-bold text-lg"
@@ -199,7 +211,6 @@
 <script>
 import {blank} from "~/services/helpers"
 import AppModal from "~/components/AppModal"
-import AppLoadMore from "~/components/AppLoadMore"
 import AppXIcon from "~/components/Icons/AppXIcon"
 import AppLoader from "~/demo/components/AppLoader"
 import AppAccordion from "~/components/AppAccordion"
@@ -212,6 +223,7 @@ import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppTwoButtonPagination from "~/components/AppTwoButtonPagination"
 import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
+
 export default {
     components: {
         AppXIcon,
@@ -224,8 +236,10 @@ export default {
         AppJobSearchResults,
         AppSearchFilterChip,
         AppCommuteSearchForm,
-        AppTwoButtonPagination,
         AppGoogleTalentSearchProvider,
+        AppLoadMore: () => import("~/components/AppLoadMore"),
+        AppPagination: () => import("~/components/AppPagination"),
+        AppTwoButtonPagination: () => import("~/components/AppTwoButtonPagination"),
     },
     metaInfo: {
         title: "Jobs",
@@ -244,3 +258,12 @@ export default {
     },
 }
 </script>
+
+<static-query>
+query {
+    metadata {
+        loadMore,
+        siteName,
+    }
+}
+</static-query>

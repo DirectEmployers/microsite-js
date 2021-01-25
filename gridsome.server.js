@@ -4,10 +4,8 @@ const getOldSeoPaths = require("./src/services/gridsomeOldSeoPaths")
 
 
 module.exports = function (api, filters) {
-    api.loadSource(({
-        addCollection
-    }) => {
-        // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
+    api.loadSource(async store => {
+        store.addMetadata('loadMore', false)
     })
     api.createPages(async ({
         graphql,

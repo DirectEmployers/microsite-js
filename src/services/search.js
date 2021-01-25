@@ -54,18 +54,11 @@ export function commuteSearchService(input, siteConfig){
 
 
 export class TitleCompleteService {
-    static async get(q, siteConfig) {
-        const slug = kebabCase(siteConfig.source)
-        let params = {q: q, buids: siteConfig.buids}
-
-        if (siteConfig.source == GOOGLE_TALENT) {
-            params["project_id"] = siteConfig.project_id
-            params["tenant_uuid"] = siteConfig.tenant_uuid
-            params["company_uuids"] = siteConfig.company_uuids
-        }
+    static async get(q, queryParams = {}) {
+        let params = {q: q, ...queryParams}
 
         try {
-            const response = await api().get(`${slug}/complete/title`, {
+            const response = await api().get("complete/title", {
                 params: params,
                 timeout: TIMEOUT_THRESHOLD,
             })
@@ -102,7 +95,7 @@ export class MOCCompleteService {
 export class LocationCompleteService {
     static async get(q) {
         try {
-            const response = await api().get("/solr/complete/location", {
+            const response = await api().get("complete/location", {
                 params: {
                     q: q,
                 },
