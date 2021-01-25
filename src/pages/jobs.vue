@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <AppGoogleTalentSearchProvider :site-config="$siteConfig" :is-load-more="$static.metadata.loadMore">
+        <AppGoogleTalentSearchProvider :site-config="$siteConfig" :is-load-more="$static.metadata.paginationType == 'load'">
             <template v-slot="{
                 jobs,
                 sort,
@@ -45,7 +45,7 @@
                                     :source="source"
                                 />
 
-                                <AppLoadMore v-if="$static.metadata.loadMore"
+                                <AppLoadMore v-if="$static.metadata.paginationType == 'load'"
                                     :totalJobs="pagination.total"
                                     :currentJobs="jobs.length"
                                     @loadMore="loadMore"
@@ -62,7 +62,7 @@
                                     :total-records="pagination.total"
                                     :total-pages="pagination.total_pages"
                                 /> -->
-                                <div class="text-sm" v-if="$static.metadata.loadMore">
+                                <div class="text-sm" v-if="$static.metadata.paginationType == 'load'">
                                     Showing {{ jobs.length }} of {{ pagination.total }} {{ jobs.length == 1 ? "job" : "jobs" }}
                                 </div>
                             </section>
@@ -262,7 +262,7 @@ export default {
 <static-query>
 query {
     metadata {
-        loadMore,
+        paginationType,
         siteName,
     }
 }
