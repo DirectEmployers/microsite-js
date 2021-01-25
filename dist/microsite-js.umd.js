@@ -1867,6 +1867,227 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
+/***/ "1c53":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppFetch.vue?vue&type=template&id=9db66ed6&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[_c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"data":_vm.responseData,"request":this.request,"status":{resolved: _vm.resolved, error: _vm.error, pending: _vm.pending}})],2)],1)}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/Fetch/AppFetch.vue?vue&type=template&id=9db66ed6&
+
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__("96cf");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
+var asyncToGenerator = __webpack_require__("1da1");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js
+var objectSpread2 = __webpack_require__("5530");
+
+// EXTERNAL MODULE: ./node_modules/axios/index.js
+var axios = __webpack_require__("bc3a");
+var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 5 modules
+var helpers = __webpack_require__("a74a");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppFetch.vue?vue&type=script&lang=js&
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var AppFetchvue_type_script_lang_js_ = ({
+  props: {
+    endpoint: {
+      type: [String, Function],
+      required: true
+    },
+    requestOnCreated: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    payload: {
+      required: false,
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    options: {
+      required: false,
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    tag: {
+      default: "div",
+      required: false
+    },
+    onResolve: {
+      type: Function,
+      required: false,
+      default: null
+    },
+    onFailure: {
+      type: Function,
+      required: false,
+      default: null
+    }
+  },
+  data: function data() {
+    return {
+      response: null,
+      error: null,
+      pending: true,
+      resolved: null
+    };
+  },
+  created: function created() {
+    if (this.requestOnCreated) {
+      this.request();
+    }
+  },
+  computed: {
+    responseData: function responseData() {
+      var _this$response;
+
+      return ((_this$response = this.response) === null || _this$response === void 0 ? void 0 : _this$response.data) || {};
+    },
+    requestPayload: function requestPayload() {
+      if (Object(helpers["a" /* blank */])(this.payload)) {
+        return this.options;
+      }
+
+      return Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, payload), this.options);
+    },
+    requestHandler: function requestHandler() {
+      if (typeof this.endpoint == "function") {
+        return this.endpoint;
+      }
+
+      return axios_default.a.get(this.endpoint, this.requestPayload);
+    }
+  },
+  methods: {
+    request: function request() {
+      var _this = this;
+
+      return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.response = null;
+
+                _this.status({
+                  error: false,
+                  pending: true
+                });
+
+                _context.prev = 2;
+                _context.next = 5;
+                return _this.requestHandler();
+
+              case 5:
+                _this.response = _context.sent;
+
+                //if a resolve function was given, call it and
+                //let implementer mark status as resolved.
+                if (typeof _this.onResolve == 'function') {
+                  _this.onResolve(_this.responseData, _this.response, _this.status);
+                } else {
+                  _this.status({
+                    resolved: true
+                  });
+                }
+
+                _context.next = 12;
+                break;
+
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](2);
+
+                //if a failure function was given, call it and
+                //let the implementer mark error and resolve status.
+                if (typeof _this.onFailure == 'function') {
+                  _this.onFailure(_context.t0, _this.status);
+                } else {
+                  _this.status({
+                    error: _context.t0,
+                    resolved: false
+                  });
+                }
+
+              case 12:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[2, 9]]);
+      }))();
+    },
+    status: function status(_ref) {
+      var _ref$error = _ref.error,
+          error = _ref$error === void 0 ? null : _ref$error,
+          _ref$pending = _ref.pending,
+          pending = _ref$pending === void 0 ? false : _ref$pending,
+          _ref$resolved = _ref.resolved,
+          resolved = _ref$resolved === void 0 ? null : _ref$resolved;
+      this.error = error;
+      this.pending = pending;
+      this.resolved = resolved;
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/Fetch/AppFetch.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Fetch_AppFetchvue_type_script_lang_js_ = (AppFetchvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/components/Fetch/AppFetch.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  Fetch_AppFetchvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var AppFetch = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
 /***/ "1c7e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23601,7 +23822,6 @@ var map = {
 	"./AppDETracker.vue": "7a58",
 	"./AppDropdown.vue": "884f",
 	"./AppJobDescription.vue": "d669",
-	"./AppJobFetch.vue": "dd4b",
 	"./AppLoadMore.vue": "f124",
 	"./AppModal.vue": "41df",
 	"./AppNavbar.vue": "4f50",
@@ -23609,6 +23829,8 @@ var map = {
 	"./AppSearchFilterChip.vue": "c0de",
 	"./AppSimilarJobs.vue": "0a22",
 	"./AppYoutube.vue": "65f4",
+	"./Fetch/AppFetch.vue": "1c53",
+	"./Fetch/AppJobFetch.vue": "9262",
 	"./Form/AppAutocompleteInput.vue": "c5b3",
 	"./Icons/AppHamburgerMenuIcon.vue": "4e8d",
 	"./Icons/AppRadiusIcon.vue": "4ebe",
@@ -25316,6 +25538,184 @@ module.exports = DESCRIPTORS ? function (object, key, value) {
   return object;
 };
 
+
+/***/ }),
+
+/***/ "9262":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppJobFetch.vue?vue&type=template&id=8e3da122&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('AppFetch',{ref:"fetch",attrs:{"endpoint":_vm.fetchJob,"tag":_vm.tag,"on-resolve":_vm.resolveJob},scopedSlots:_vm._u([{key:"default",fn:function(ref){
+var status = ref.status;
+return [_vm._t("default",null,{"status":status,"job":_vm.job})]}}],null,true)})}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/Fetch/AppJobFetch.vue?vue&type=template&id=8e3da122&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
+var es_regexp_exec = __webpack_require__("ac1f");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.ends-with.js
+var es_string_ends_with = __webpack_require__("8a79");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
+var es_string_replace = __webpack_require__("5319");
+
+// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
+var lodash = __webpack_require__("2ef0");
+
+// EXTERNAL MODULE: ./src/components/Fetch/AppFetch.vue + 4 modules
+var AppFetch = __webpack_require__("1c53");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
+var es_array_concat = __webpack_require__("99af");
+
+// EXTERNAL MODULE: ./node_modules/axios/index.js
+var axios = __webpack_require__("bc3a");
+var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
+
+// CONCATENATED MODULE: ./src/services/cdn/cdn.js
+
+/* harmony default export */ var cdn = (function () {
+  return axios_default.a.create({
+    baseURL: "https://microsites.dejobs.org/",
+    withCredentials: false,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  });
+});
+// CONCATENATED MODULE: ./src/services/cdn/job.js
+
+
+function getJob(guid, s3Folder) {
+  return cdn().get("".concat(s3Folder, "/data/").concat(guid.toUpperCase(), ".json"));
+}
+// EXTERNAL MODULE: ./node_modules/axios/lib/helpers/buildURL.js
+var buildURL = __webpack_require__("30b5");
+var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 5 modules
+var helpers = __webpack_require__("a74a");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppJobFetch.vue?vue&type=script&lang=js&
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ var AppJobFetchvue_type_script_lang_js_ = ({
+  props: {
+    guid: {
+      type: String,
+      required: false,
+      default: null
+    },
+    s3Folder: {
+      required: true,
+      type: String
+    },
+    tag: {
+      required: false,
+      default: "div"
+    }
+  },
+  components: {
+    AppFetch: AppFetch["default"]
+  },
+  data: function data() {
+    return {
+      job: null,
+      fromRouteParam: false
+    };
+  },
+  watch: {
+    "$route.params.guid": function $routeParamsGuid() {
+      this.$refs['fetch'].request();
+    }
+  },
+  created: function created() {
+    if (this.guid == null) {
+      this.fromRouteParam = true;
+    }
+  },
+  methods: {
+    fetchJob: function fetchJob() {
+      var guid = this.guid;
+
+      if (this.fromRouteParam) {
+        guid = this.$route.params.guid;
+      }
+
+      return getJob(guid, this.s3Folder);
+    },
+    setJob: function setJob(job, setStatus) {
+      this.job = job;
+      setStatus({
+        resolved: true
+      });
+    },
+    resolveJob: function resolveJob(job, respone, setStatus) {
+      //correct url only if we loaded from route param.
+      if (!this.fromRouteParam) {
+        return this.setJob(job, setStatus);
+      }
+
+      var routePath = this.$route.path.endsWith("/") ? this.$route.path : "".concat(this.$route.path, "/");
+      var url = Object(helpers["b" /* buildJobDetailUrl */])(job.title_slug, job.location_exact, job.guid); // check if this is the proper url for the job
+
+      if (url !== routePath) {
+        window.location.replace(buildURL_default()(url, this.$route.query));
+      } else {
+        return this.setJob(job, setStatus);
+      }
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/Fetch/AppJobFetch.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Fetch_AppJobFetchvue_type_script_lang_js_ = (AppJobFetchvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/components/Fetch/AppJobFetch.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  Fetch_AppJobFetchvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var AppJobFetch = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -32027,240 +32427,6 @@ $({ target: 'Object', stat: true, sham: !DESCRIPTORS }, {
   }
 });
 
-
-/***/ }),
-
-/***/ "dd4b":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobFetch.vue?vue&type=template&id=2e1b1b70&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[_c('section',[_vm._t("default",null,{"status":{
-                error: _vm.error,
-                pending: _vm.pending,
-                resolved: _vm.resolved,
-            },"job":_vm.job})],2)])}
-var staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/AppJobFetch.vue?vue&type=template&id=2e1b1b70&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
-var es_regexp_exec = __webpack_require__("ac1f");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.ends-with.js
-var es_string_ends_with = __webpack_require__("8a79");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
-var es_string_replace = __webpack_require__("5319");
-
-// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
-var runtime = __webpack_require__("96cf");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__("1da1");
-
-// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
-var lodash = __webpack_require__("2ef0");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
-var es_array_concat = __webpack_require__("99af");
-
-// EXTERNAL MODULE: ./node_modules/axios/index.js
-var axios = __webpack_require__("bc3a");
-var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
-
-// CONCATENATED MODULE: ./src/services/cdn/cdn.js
-
-/* harmony default export */ var cdn = (function () {
-  return axios_default.a.create({
-    baseURL: "https://microsites.dejobs.org/",
-    withCredentials: false,
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  });
-});
-// CONCATENATED MODULE: ./src/services/cdn/job.js
-
-
-function getJob(guid, s3Folder) {
-  return cdn().get("".concat(s3Folder, "/data/").concat(guid.toUpperCase(), ".json"));
-}
-// EXTERNAL MODULE: ./node_modules/axios/lib/helpers/buildURL.js
-var buildURL = __webpack_require__("30b5");
-var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
-
-// EXTERNAL MODULE: ./src/services/helpers.js + 5 modules
-var helpers = __webpack_require__("a74a");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobFetch.vue?vue&type=script&lang=js&
-
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ var AppJobFetchvue_type_script_lang_js_ = ({
-  props: {
-    guid: {
-      type: String,
-      required: false,
-      default: null
-    },
-    s3Folder: {
-      required: true,
-      type: String
-    }
-  },
-  data: function data() {
-    return {
-      job: null,
-      error: null,
-      pending: true,
-      resolved: null
-    };
-  },
-  watch: {
-    "$route.params.guid": function $routeParamsGuid() {
-      this.fetchJob(this.$route.params.guid, this.correctJobRouteUrl);
-    }
-  },
-  created: function created() {
-    if (this.guid !== null) {
-      this.fetchJob(this.guid);
-    } else {
-      this.fetchJob(this.$route.params.guid, this.correctJobRouteUrl);
-    }
-  },
-  methods: {
-    fetchJob: function fetchJob(guid) {
-      var _arguments = arguments,
-          _this = this;
-
-      return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var onResolve, _yield$getJob, data;
-
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                onResolve = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : null;
-
-                _this.status({
-                  error: false,
-                  pending: true
-                });
-
-                _context.prev = 2;
-                _context.next = 5;
-                return getJob(guid, _this.s3Folder);
-
-              case 5:
-                _yield$getJob = _context.sent;
-                data = _yield$getJob.data;
-
-                if (typeof onResolve == 'function') {
-                  onResolve(data);
-                } else {
-                  _this.setJob(data);
-                }
-
-                _context.next = 13;
-                break;
-
-              case 10:
-                _context.prev = 10;
-                _context.t0 = _context["catch"](2);
-
-                _this.status({
-                  error: _context.t0,
-                  resolved: false
-                });
-
-              case 13:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[2, 10]]);
-      }))();
-    },
-    setJob: function setJob(job) {
-      this.job = job;
-      this.status({
-        resolved: true
-      });
-    },
-    correctJobRouteUrl: function correctJobRouteUrl(job) {
-      var routePath = this.$route.path.endsWith("/") ? this.$route.path : "".concat(this.$route.path, "/");
-      var url = Object(helpers["b" /* buildJobDetailUrl */])(job.title_slug, job.location_exact, job.guid); // check if this is the proper url for the job
-
-      if (url !== routePath) {
-        window.location.replace(buildURL_default()(url, this.$route.query));
-      } else {
-        this.setJob(job);
-      }
-    },
-    status: function status(_ref) {
-      var _ref$error = _ref.error,
-          error = _ref$error === void 0 ? null : _ref$error,
-          _ref$pending = _ref.pending,
-          pending = _ref$pending === void 0 ? false : _ref$pending,
-          _ref$resolved = _ref.resolved,
-          resolved = _ref$resolved === void 0 ? null : _ref$resolved;
-      this.error = error;
-      this.pending = pending;
-      this.resolved = resolved;
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/components/AppJobFetch.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_AppJobFetchvue_type_script_lang_js_ = (AppJobFetchvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__("2877");
-
-// CONCATENATED MODULE: ./src/components/AppJobFetch.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_AppJobFetchvue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var AppJobFetch = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
