@@ -48,10 +48,10 @@ export default {
             type: String,
             required: true,
         },
-        guid: {
-            type: String,
+        exclude: {
+            type: [String, Array],
             required: false,
-            default: ""
+            default: ()=>[]
         },
         location: {
             type: String,
@@ -79,11 +79,18 @@ export default {
     methods: {
 
         getJobs() {
+            let excludeGuids = this.exclude;
+
+            if(!Array.isArray(excludeGuids)){
+                excludeGuids = [excludeGuids]
+            }
+
             searchService(
                 {
                     num_items: 10,
                     q: this.title,
                     location: this.location,
+                    exclude: excludeGuids
                 },
                 this.siteConfig
             ).then(response=>{
@@ -96,11 +103,6 @@ export default {
 
                 this.similarJobs = jobs
 
-                if(this.guid){
-                    this.similarJobs = this.similarJobs.filter((job)=>{
-                        return job.guid != this.guid
-                    })
-                }
             })
 
         }

@@ -504,15 +504,12 @@ module.exports = Axios;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=65b77e24&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=005943c9&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h2',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppJobProvider',{key:index,attrs:{"site-config":_vm.siteConfig,"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":jobData.detailUrl}},[_vm._t("default",[_c('h3',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.city)+", "+_vm._s(jobData.state)+" ")])],{"jobData":jobData})],2)],1)]}}],null,true)})}),1)]):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=65b77e24&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
-var es_array_filter = __webpack_require__("4de4");
+// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=005943c9&
 
 // EXTERNAL MODULE: ./src/services/search.js + 2 modules
 var search = __webpack_require__("e73b");
@@ -521,7 +518,6 @@ var search = __webpack_require__("e73b");
 var AppJobProvider = __webpack_require__("1acf");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=script&lang=js&
-
 //
 //
 //
@@ -571,10 +567,12 @@ var AppJobProvider = __webpack_require__("1acf");
       type: String,
       required: true
     },
-    guid: {
-      type: String,
+    exclude: {
+      type: [String, Array],
       required: false,
-      default: ""
+      default: function _default() {
+        return [];
+      }
     },
     location: {
       type: String,
@@ -603,22 +601,23 @@ var AppJobProvider = __webpack_require__("1acf");
     getJobs: function getJobs() {
       var _this = this;
 
+      var excludeGuids = this.exclude;
+
+      if (!Array.isArray(excludeGuids)) {
+        excludeGuids = [excludeGuids];
+      }
+
       Object(search["f" /* searchService */])({
         num_items: 10,
         q: this.title,
-        location: this.location
+        location: this.location,
+        exclude: excludeGuids
       }, this.siteConfig).then(function (response) {
         var data = response.data;
         var jobs = data.jobs,
             meta = data.meta;
         _this.meta = meta;
         _this.similarJobs = jobs;
-
-        if (_this.guid) {
-          _this.similarJobs = _this.similarJobs.filter(function (job) {
-            return job.guid != _this.guid;
-          });
-        }
       });
     }
   }

@@ -54,7 +54,7 @@
 
                 <AppSimilarJobs
                     :siteConfig="$siteConfig"
-                    :guid="guid"
+                    :exclude="guid"
                     :title="title"
                     :location="location"
                 />

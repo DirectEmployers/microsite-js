@@ -1,6 +1,6 @@
 const config =  {
     buids: [19424],
-    source: "google_talent",
+    source: 'google_talent',
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
     tenant_uuid: process.env.GRIDSOME_GOOGLE_TALENT_TENANT,
     company_uuids: [process.env.GRIDSOME_GOOGLE_TALENT_COMPANY],
@@ -9,7 +9,7 @@ const config =  {
     featured_jobs: {
         num_items: 10, //number of items per page.
         solr:"reqid:(" +
-            ["R-33091", "R-25218"].join(" OR ") +
+            ["R-26193", "R-30131"].join(" OR ") +
         ")",
     },
     // force_filters: {
