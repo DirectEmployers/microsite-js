@@ -1,6 +1,6 @@
 const config =  {
     buids: [19424],
-    source: "google_talent",
+    source: "solr",
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
     tenant_uuid: process.env.GRIDSOME_GOOGLE_TALENT_TENANT,
     company_uuids: [process.env.GRIDSOME_GOOGLE_TALENT_COMPANY],
@@ -33,6 +33,21 @@ const config =  {
             key: "city",
             display: "City",
         },
+        // {
+        //     name: "jobFunctions",
+        //     key: "Functions",
+        //     display: "Job Functions",
+        // },
+        // {
+        //     name: "jobSchedule",
+        //     key: "Schedule",
+        //     display: "Job Schedule",
+        // },
+        // {
+        //     name: "jobTitle",
+        //     key: "T",
+        //     display: "Job Title",
+        // },
         {
             name: "location",
             key: "state",
