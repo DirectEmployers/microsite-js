@@ -1,5 +1,5 @@
 <template>
-    <span class="chip" tabindex="0">
+    <span class="search-filter-chip" tabindex="0">
         <g-link :to="url">
             <slot>
                 {{ text }}
