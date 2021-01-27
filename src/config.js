@@ -33,21 +33,21 @@ const config =  {
             key: "city",
             display: "City",
         },
-        // {
-        //     name: "jobFunctions",
-        //     key: "Functions",
-        //     display: "Job Functions",
-        // },
-        // {
-        //     name: "jobSchedule",
-        //     key: "Schedule",
-        //     display: "Job Schedule",
-        // },
-        // {
-        //     name: "jobTitle",
-        //     key: "T",
-        //     display: "Job Title",
-        // },
+        {
+            name: "jobfunction",
+            key: "jobfunction",
+            display: "Job Functions",
+        },
+        {
+            name: "schedule",
+            key: "schedule",
+            display: "Job Schedule",
+        },
+        {
+            name: "facility",
+            key: "facility",
+            display: "Facility",
+        },
         {
             name: "location",
             key: "state",

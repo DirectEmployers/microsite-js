@@ -233,7 +233,6 @@ export default {
                     this.featuredJobs = data.featured_jobs || []
                     this.pagination = data.pagination || {}
                     this.filters = data.filters || {}
-                    console.log(filters)
                     this.jobs = data.jobs || []
                     this.meta = data.meta || {
                         source: SOLR,
