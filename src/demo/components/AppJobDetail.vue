@@ -5,7 +5,7 @@
                 title,
                 guid,
                 location,
-                applyLink,
+                applyUrl,
                 clickedApplyJob,
                 description,
             }"
@@ -37,8 +37,8 @@
                             {{ location }}
                         </div>
                         <a
-                            @click="clickedApplyJob"
-                            :href="applyLink"
+                            @click.prevent="clickedApplyJob"
+                            :href="applyUrl"
                             class="w-32 button p-2 bg-black text-white rounded text-center mx-auto"
                         >
                             Apply
