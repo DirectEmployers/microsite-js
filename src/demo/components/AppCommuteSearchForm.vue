@@ -9,6 +9,7 @@
                     :api-key="apiKey"
                     v-model="input.commuteLocation"
                     class="form__input"
+                    @input="input.coords = ''"
                     @locationSelected="googleAutocompleteSelected"
                 />
             </div>
