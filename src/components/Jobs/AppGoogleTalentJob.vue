@@ -7,10 +7,8 @@
 <script>
 import {get} from "lodash"
 import base from "./mixins/job"
-import SolrJob from "./AppSolrJob"
 import {GOOGLE_TALENT} from "../../services/search"
 import {googleTalentEventService} from "../../services/events"
-import { types } from '@babel/core'
 
 export default {
     mixins: [base],
@@ -81,7 +79,9 @@ export default {
             )
             return Array.isArray(value) ? value.join(" ") : value
         },
-        clickedApplyJob() {
+        clickedApplyJob(callback) {
+            this.executeCallback(callback, [this.jobInfo])
+
             return this.tryClientEvent('redirect',()=>{
                 let nw = window.open(this.applyUrl, '_blank')
                 nw.focus()
