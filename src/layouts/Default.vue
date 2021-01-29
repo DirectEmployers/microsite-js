@@ -91,8 +91,9 @@ export default {
 
 <static-query>
 query {
-  metadata {
-    siteName
-  }
+    metadata {
+        loadMore,
+        siteName,
+    }
 }
 </static-query>

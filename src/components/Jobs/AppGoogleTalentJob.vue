@@ -7,7 +7,6 @@
 <script>
 import {get} from "lodash"
 import base from "./mixins/job"
-import SolrJob from "./AppSolrJob"
 import {GOOGLE_TALENT} from "../../services/search"
 import {googleTalentEventService} from "../../services/events"
 
@@ -80,15 +79,25 @@ export default {
             )
             return Array.isArray(value) ? value.join(" ") : value
         },
-        clickedApplyJob() {
-            return this.tryClientEvent('redirect')
+        clickedApplyJob(callback) {
+            this.executeCallback(callback, [this.jobInfo])
+
+            return this.tryClientEvent('redirect',()=>{
+                let nw = window.open(this.applyUrl, '_blank')
+                nw.focus()
+            })
         },
-        clickedViewJob() {
-            return this.tryClientEvent('view')
+        clickedViewJob(callback) {
+            this.executeCallback(callback, [this.jobInfo])
+
+            this.tryClientEvent('view', ()=>{
+                this.$router.push({
+                    path: this.detailUrl,
+                }).catch(err => {})
+            })
         },
-        tryClientEvent(type){
+        tryClientEvent(type, callback=null){
             if (this.isGoogleTalent && process.isClient) {
-                var lastEvent = null;
                 var currentEvent = {
                     eventType: type,
                     jobs: [this.jobInfo.name],
@@ -96,9 +105,10 @@ export default {
                 try{
                     //try to get the saved request id from the previous event (impression or view depending on what event is calling this method).
                     //the service call will do nothing if we werent able to.
-                    lastEvent = JSON.parse(sessionStorage.getItem(GOOGLE_TALENT)).event
+                    let lastEvent = JSON.parse(sessionStorage.getItem(GOOGLE_TALENT)).event
                     currentEvent.requestId = lastEvent.requestId
                 }catch(e){
+                    this.executeCallback(callback)
                     return
                 }
                 googleTalentEventService(
@@ -117,7 +127,12 @@ export default {
                             event: currentEvent,
                         })
                     )
-                }).catch(()=>{})
+
+                    this.executeCallback(callback)
+
+                }).catch(()=>{
+                    this.executeCallback(callback)
+                })
             }
         },
     },

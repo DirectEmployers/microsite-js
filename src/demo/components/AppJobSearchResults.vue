@@ -24,7 +24,7 @@
                     hasCommuteInfo,
                 }">
                     <g-link
-                        @click.native="clickedViewJob"
+                        @click.native.prevent="clickedViewJob(something)"
                         :to="detailUrl"
                         class="mb-2"
                     >

@@ -4,7 +4,7 @@
             class="mt-6"
             :search-on-load="false"
             :site-config="$siteConfig"
-            :is-load-more="true"
+            :is-load-more="$static.metadata.loadMore"
             v-slot="{
                 input,
                 source,
@@ -42,3 +42,11 @@ export default {
 }
 </script>
 
+<static-query>
+query {
+    metadata {
+        loadMore,
+        siteName,
+    }
+}
+</static-query>

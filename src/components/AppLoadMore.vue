@@ -1,5 +1,8 @@
 <template>
-    <nav v-if="totalJobs > 1 && currentJobs < totalJobs" class='load-more-pagination'>
+    <nav 
+    class='load-more-pagination'
+    :class="{hidden:!isVisible}"
+    >
         <button class="load-more-pagination__button" type="button" @click="loadMore">
             <slot>
                 Load More
@@ -20,6 +23,11 @@ export default {
             required: true,
             type: Number,
         },
+    },
+    computed: {
+        isVisible(){
+            return this.totalJobs > 1 && this.currentJobs < this.totalJobs
+        }
     },
 
     methods: {

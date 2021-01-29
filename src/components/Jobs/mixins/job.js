@@ -68,7 +68,7 @@ export default {
 
             return buildUrl(url, this.input)
         },
-        applyLink() {
+        applyUrl() {
             let url = "https://rr.jobsyn.org/" + this.guid
 
             if (!process.isClient) {
@@ -107,8 +107,24 @@ export default {
         },
     },
     methods: {
-        clickedApplyJob() {},
-        clickedViewJob() {},
+        executeCallback(callback, args=[]){
+            if(typeof callback == 'function'){
+                callback(...args)
+            }
+        },
+        clickedApplyJob(callback) {
+            this.executeCallback(callback, [this.jobInfo])
+            let nw = window.open(this.applyUrl, '_blank')
+            nw.focus()
+        },
+        clickedViewJob(callback) {
+            callback(this.jobInfo)
+            this.$router
+            .push({
+                path: this.detailUrl,
+            })
+            .catch(err => {})
+        },
         getAttribute(name, defaultValue = "") {
             return get(this.jobInfo, name, defaultValue)
         },
@@ -127,7 +143,7 @@ export default {
                 commuteTime: this.commuteTime,
                 description: this.description,
                 dateAdded: this.dateAdded,
-                applyLink: this.applyLink,
+                applyUrl: this.applyUrl,
                 clickedViewJob: this.clickedViewJob,
                 clickedApplyJob: this.clickedApplyJob,
             }
