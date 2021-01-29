@@ -176,7 +176,7 @@ module.exports.f = function getOwnPropertyNames(it) {
 /* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("1276");
 /* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _home_nate_programming_work_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("5530");
+/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("5530");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("2ef0");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("30b5");
@@ -273,7 +273,7 @@ module.exports.f = function getOwnPropertyNames(it) {
         utm_params = {};
       }
 
-      var params = Object(_home_nate_programming_work_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(Object(_home_nate_programming_work_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])({}, this.$route.query), utm_params);
+      var params = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])({}, this.$route.query), utm_params);
 
       params[_services_storage__WEBPACK_IMPORTED_MODULE_9__[/* VS_KEY */ "d"]] = sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_9__[/* VS_KEY */ "d"]);
       return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_7___default()(url, Object(lodash__WEBPACK_IMPORTED_MODULE_6__["omitBy"])(params, _services_helpers__WEBPACK_IMPORTED_MODULE_10__[/* blank */ "a"]));
@@ -335,39 +335,20 @@ module.exports.f = function getOwnPropertyNames(it) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ _unsupportedIterableToArray; });
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.from.js
-var es_array_from = __webpack_require__("a630");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
-var es_array_slice = __webpack_require__("fb6a");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
-var es_function_name = __webpack_require__("b0c0");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
-var es_object_to_string = __webpack_require__("d3b7");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.to-string.js
-var es_regexp_to_string = __webpack_require__("25f0");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.iterator.js
-var es_string_iterator = __webpack_require__("3ca3");
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
-  return arr2;
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _unsupportedIterableToArray; });
+/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a630");
+/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("fb6a");
+/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("b0c0");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("d3b7");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("25f0");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("3ca3");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _arrayLikeToArray__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("6b75");
 
 
 
@@ -377,11 +358,11 @@ function _arrayLikeToArray(arr, len) {
 
 function _unsupportedIterableToArray(o, minLen) {
   if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  if (typeof o === "string") return Object(_arrayLikeToArray__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor) n = o.constructor.name;
   if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Object(_arrayLikeToArray__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(o, minLen);
 }
 
 /***/ }),
@@ -20295,7 +20276,7 @@ function _iterableToArrayLimit(arr, i) {
 
   return _arr;
 }
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js + 1 modules
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
 var unsupportedIterableToArray = __webpack_require__("06c5");
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
@@ -20316,7 +20297,7 @@ var objectSpread2 = __webpack_require__("5530");
 // EXTERNAL MODULE: ./node_modules/lodash/lodash.js
 var lodash = __webpack_require__("2ef0");
 
-// EXTERNAL MODULE: ./src/services/helpers.js + 1 modules
+// EXTERNAL MODULE: ./src/services/helpers.js + 5 modules
 var helpers = __webpack_require__("a74a");
 
 // EXTERNAL MODULE: ./src/services/search.js + 2 modules
@@ -21694,6 +21675,51 @@ module.exports = function (a, b) {
 
 /***/ }),
 
+/***/ "44e0":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=893f01c6&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('input',_vm._b({ref:"autocompleteInput",attrs:{"type":"text"},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.$emit('input', $event.target.value)}}},'input',_vm.$attrs,false))}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=template&id=893f01c6&
+
+// EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=script&lang=js&
+var AppGoogleLocationAutocompletevue_type_script_lang_js_ = __webpack_require__("adbe");
+
+// CONCATENATED MODULE: ./src/components/Search/AppGoogleLocationAutocomplete.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Search_AppGoogleLocationAutocompletevue_type_script_lang_js_ = (AppGoogleLocationAutocompletevue_type_script_lang_js_["a" /* default */]); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/components/Search/AppGoogleLocationAutocomplete.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  Search_AppGoogleLocationAutocompletevue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var AppGoogleLocationAutocomplete = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
 /***/ "44e7":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22089,6 +22115,51 @@ module.exports = function mergeConfig(config1, config2) {
   return config;
 };
 
+
+/***/ }),
+
+/***/ "4bfa":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilterChip.vue?vue&type=template&id=649aad44&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"search-filter-chip",attrs:{"tabindex":"0"}},[_c('g-link',{attrs:{"to":_vm.url}},[_vm._t("default",[_vm._v(" "+_vm._s(_vm.text)+" ")])],2)],1)}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/Search/AppSearchFilterChip.vue?vue&type=template&id=649aad44&
+
+// EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilterChip.vue?vue&type=script&lang=js&
+var AppSearchFilterChipvue_type_script_lang_js_ = __webpack_require__("6571");
+
+// CONCATENATED MODULE: ./src/components/Search/AppSearchFilterChip.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Search_AppSearchFilterChipvue_type_script_lang_js_ = (AppSearchFilterChipvue_type_script_lang_js_["a" /* default */]); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/components/Search/AppSearchFilterChip.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  Search_AppSearchFilterChipvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var AppSearchFilterChip = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -23378,6 +23449,119 @@ module.exports = {
 
 /***/ }),
 
+/***/ "6571":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("b0c0");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("cca6");
+/* harmony import */ var core_js_modules_es_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_assign__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("b85c");
+/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("5530");
+/* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("30b5");
+/* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var ENTER_KEY = 13;
+/* harmony default export */ __webpack_exports__["a"] = ({
+  props: {
+    name: {
+      type: [String, Array],
+      required: false,
+      default: function _default() {
+        return "".concat(this._uid);
+      }
+    },
+    path: {
+      type: String,
+      required: false,
+      default: function _default() {
+        return this.$route.path;
+      }
+    },
+    input: {
+      required: false,
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    text: {
+      type: String,
+      required: false,
+      default: ''
+    }
+  },
+  created: function created() {
+    if (process.isClient) {
+      document.addEventListener('keyup', this.hitEnter);
+    }
+
+    this.url = this.removeFilter();
+  },
+  destroyed: function destroyed() {
+    if (process.isClient) {
+      document.removeEventListener('keyup', this.hitEnter);
+    }
+  },
+  methods: {
+    hitEnter: function hitEnter(e) {
+      if (e.keyCode == ENTER_KEY && document.activeElement == this.$el) {
+        this.$router.push({
+          path: this.url
+        }).catch(function (err) {});
+      }
+    },
+    removeFilter: function removeFilter() {
+      if (this.name === "*") {
+        return this.path;
+      }
+
+      var input = this.input;
+      var names = this.name;
+      var query = Object.assign({}, this.$route.query);
+      query = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])({}, query), input);
+
+      if (!Array.isArray(names)) {
+        names = [names];
+      }
+
+      var _iterator = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(names),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var item = _step.value;
+          delete query[item];
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4___default()(this.path, query);
+    }
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("4362")))
+
+/***/ }),
+
 /***/ "65f0":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23571,7 +23755,6 @@ var map = {
 	"./AppModal.vue": "41df",
 	"./AppNavbar.vue": "4f50",
 	"./AppPagination.vue": "55b1",
-	"./AppSearchFilterChip.vue": "c0de",
 	"./AppSimilarJobs.vue": "0a22",
 	"./AppYoutube.vue": "65f4",
 	"./Form/AppAutocompleteInput.vue": "c5b3",
@@ -23584,8 +23767,9 @@ var map = {
 	"./Parse/AppHtmlToJson.vue": "2a36",
 	"./Parse/AppJsonToHtml.vue": "1764",
 	"./Search/AppGeoLocation.vue": "bafb",
-	"./Search/AppGooglePlacesAutocomplete.vue": "9381",
+	"./Search/AppGoogleLocationAutocomplete.vue": "44e0",
 	"./Search/AppSearchFilter.vue": "1249",
+	"./Search/AppSearchFilterChip.vue": "4bfa",
 	"./Search/Providers/AppGoogleTalentSearchProvider.vue": "b2eb",
 	"./Search/Providers/AppSolrSearchProvider.vue": "7b6a"
 };
@@ -23609,6 +23793,23 @@ webpackContext.keys = function webpackContextKeys() {
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = "6ae9";
+
+/***/ }),
+
+/***/ "6b75":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _arrayLikeToArray; });
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
 
 /***/ }),
 
@@ -25404,51 +25605,6 @@ var component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var AppGoogleTalentJob = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "9381":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGooglePlacesAutocomplete.vue?vue&type=template&id=67cf946a&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('input',_vm._b({ref:"autocompleteInput",attrs:{"type":"text"},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.$emit('input', $event.target.value)}}},'input',_vm.$attrs,false))}
-var staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/Search/AppGooglePlacesAutocomplete.vue?vue&type=template&id=67cf946a&
-
-// EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGooglePlacesAutocomplete.vue?vue&type=script&lang=js&
-var AppGooglePlacesAutocompletevue_type_script_lang_js_ = __webpack_require__("c933");
-
-// CONCATENATED MODULE: ./src/components/Search/AppGooglePlacesAutocomplete.vue?vue&type=script&lang=js&
- /* harmony default export */ var Search_AppGooglePlacesAutocompletevue_type_script_lang_js_ = (AppGooglePlacesAutocompletevue_type_script_lang_js_["a" /* default */]); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__("2877");
-
-// CONCATENATED MODULE: ./src/components/Search/AppGooglePlacesAutocomplete.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  Search_AppGooglePlacesAutocompletevue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var AppGooglePlacesAutocomplete = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -27517,119 +27673,6 @@ hiddenKeys[HIDDEN] = true;
 
 /***/ }),
 
-/***/ "a528":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("b0c0");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("cca6");
-/* harmony import */ var core_js_modules_es_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_assign__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _home_nate_programming_work_microsite_js_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("b85c");
-/* harmony import */ var _home_nate_programming_work_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("5530");
-/* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("30b5");
-/* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4__);
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var ENTER_KEY = 13;
-/* harmony default export */ __webpack_exports__["a"] = ({
-  props: {
-    name: {
-      type: [String, Array],
-      required: false,
-      default: function _default() {
-        return "".concat(this._uid);
-      }
-    },
-    path: {
-      type: String,
-      required: false,
-      default: function _default() {
-        return this.$route.path;
-      }
-    },
-    input: {
-      required: false,
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    text: {
-      type: String,
-      required: false,
-      default: ''
-    }
-  },
-  created: function created() {
-    if (process.isClient) {
-      document.addEventListener('keyup', this.hitEnter);
-    }
-
-    this.url = this.removeFilter();
-  },
-  destroyed: function destroyed() {
-    if (process.isClient) {
-      document.removeEventListener('keyup', this.hitEnter);
-    }
-  },
-  methods: {
-    hitEnter: function hitEnter(e) {
-      if (e.keyCode == ENTER_KEY && document.activeElement == this.$el) {
-        this.$router.push({
-          path: this.url
-        }).catch(function (err) {});
-      }
-    },
-    removeFilter: function removeFilter() {
-      if (this.name === "*") {
-        return this.path;
-      }
-
-      var input = this.input;
-      var names = this.name;
-      var query = Object.assign({}, this.$route.query);
-      query = Object(_home_nate_programming_work_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(Object(_home_nate_programming_work_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])({}, query), input);
-
-      if (!Array.isArray(names)) {
-        names = [names];
-      }
-
-      var _iterator = Object(_home_nate_programming_work_microsite_js_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(names),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var item = _step.value;
-          delete query[item];
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4___default()(this.path, query);
-    }
-  }
-});
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("4362")))
-
-/***/ }),
-
 /***/ "a534":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -27638,7 +27681,7 @@ var ENTER_KEY = 13;
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("159b");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _home_nate_programming_work_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("53ca");
+/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("53ca");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("2ef0");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("a74a");
@@ -27672,7 +27715,7 @@ var ENTER_KEY = 13;
       // but since this is SPA, we are ending up with several
       // instances of the tracker on every SPA update, so clear out
       // the instances so we can "simulate" a page change.
-      if ((typeof de_track === "undefined" ? "undefined" : Object(_home_nate_programming_work_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(de_track)) == "object") {
+      if ((typeof de_track === "undefined" ? "undefined" : Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(de_track)) == "object") {
         de_track.instances = [];
       }
 
@@ -27949,6 +27992,7 @@ exports.default = Tokenizer;
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ blank; });
+__webpack_require__.d(__webpack_exports__, "e", function() { return /* binding */ retry; });
 __webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ isDevelopment; });
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ buildJobDetailUrl; });
 __webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ displayLocationFromSlug; });
@@ -27970,6 +28014,12 @@ var es_array_reduce = __webpack_require__("13d5");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
 var es_object_keys = __webpack_require__("b64b");
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
+var es_object_to_string = __webpack_require__("d3b7");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
+var es_promise = __webpack_require__("e6cf");
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
 var es_regexp_exec = __webpack_require__("ac1f");
 
@@ -27982,14 +28032,67 @@ var es_string_split = __webpack_require__("1276");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.trim.js
 var es_string_trim = __webpack_require__("498a");
 
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
+var arrayLikeToArray = __webpack_require__("6b75");
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return Object(arrayLikeToArray["a" /* default */])(arr);
+}
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
+var es_symbol = __webpack_require__("a4d3");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
+var es_symbol_description = __webpack_require__("e01a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.iterator.js
+var es_symbol_iterator = __webpack_require__("d28b");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.from.js
+var es_array_from = __webpack_require__("a630");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.iterator.js
+var es_array_iterator = __webpack_require__("e260");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.iterator.js
+var es_string_iterator = __webpack_require__("3ca3");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.iterator.js
+var web_dom_collections_iterator = __webpack_require__("ddb0");
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/iterableToArray.js
+
+
+
+
+
+
+
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
+var unsupportedIterableToArray = __webpack_require__("06c5");
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js
+
+
+
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || Object(unsupportedIterableToArray["a" /* default */])(arr) || _nonIterableSpread();
+}
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
 var esm_typeof = __webpack_require__("53ca");
 
 // EXTERNAL MODULE: ./node_modules/lodash/lodash.js
 var lodash = __webpack_require__("2ef0");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
-var es_object_to_string = __webpack_require__("d3b7");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.to-string.js
 var es_regexp_to_string = __webpack_require__("25f0");
@@ -28165,6 +28268,9 @@ function fullState(code) {
 
 
 
+
+
+
 /**
  * Check if the given value is "blank".
  */
@@ -28183,6 +28289,32 @@ function blank(value) {
   }
 
   return isBlank;
+}
+/**
+ * Run the given function and keep trying if it fails
+ * until the max retries are exceeded and return a promise.
+ */
+
+function retry(callback) {
+  var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  var max = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5;
+  var delay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 100;
+  return new Promise(function (resolve, reject) {
+    try {
+      var result = callback.apply(void 0, _toConsumableArray(args));
+      return resolve(result);
+    } catch (e) {
+      if (max > 0) {
+        setTimeout(function () {
+          return retry(callback, args, --max, delay * 2).then(resolve).catch(function (err) {
+            return reject(err);
+          });
+        }, delay);
+      } else {
+        return reject(e);
+      }
+    }
+  });
 }
 /** Return true if the env is dev. */
 
@@ -28542,6 +28674,82 @@ module.exports = function () {
   return result;
 };
 
+
+/***/ }),
+
+/***/ "adbe":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("53ca");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("2ef0");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a74a");
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  props: {
+    apiKey: {
+      type: String,
+      required: true
+    },
+    value: String
+  },
+  created: function created() {
+    if (!this.placesApiLoaded) {
+      this.appendPlacesScript();
+    }
+  },
+  mounted: function mounted() {
+    Object(_services_helpers__WEBPACK_IMPORTED_MODULE_2__[/* retry */ "e"])(this.initAutocomplete);
+  },
+  computed: {
+    apiScriptUrl: function apiScriptUrl() {
+      var key = this.apiKey;
+      return "https://maps.googleapis.com/maps/api/js?key=".concat(key, "&libraries=places");
+    },
+    placesApiLoaded: function placesApiLoaded() {
+      return Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(Object(lodash__WEBPACK_IMPORTED_MODULE_1__["get"])(window, "google.maps.places")) == "object";
+    }
+  },
+  methods: {
+    appendPlacesScript: function appendPlacesScript() {
+      if (process.isClient) {
+        var script = document.createElement("script");
+        script.setAttribute("src", this.apiScriptUrl);
+        document.head.appendChild(script);
+      }
+    },
+    initAutocomplete: function initAutocomplete() {
+      var _this = this;
+
+      var placeAutoComplete = new google.maps.places.Autocomplete(this.$refs.autocompleteInput);
+      placeAutoComplete.addListener("place_changed", function () {
+        var place = placeAutoComplete.getPlace();
+        var geo = place.geometry;
+
+        if (geo) {
+          var lat = geo.location.lat();
+          var lon = geo.location.lng();
+
+          _this.$emit("locationSelected", place.formatted_address, lat + "," + lon);
+        }
+      });
+    }
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("4362")))
 
 /***/ }),
 
@@ -29873,51 +30081,6 @@ module.exports = function (input, PREFERRED_STRING) {
 
 /***/ }),
 
-/***/ "c0de":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"52449730-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSearchFilterChip.vue?vue&type=template&id=1b88c576&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"chip",attrs:{"tabindex":"0"}},[_c('g-link',{attrs:{"to":_vm.url}},[_vm._t("default",[_vm._v(" "+_vm._s(_vm.text)+" ")])],2)],1)}
-var staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/AppSearchFilterChip.vue?vue&type=template&id=1b88c576&
-
-// EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSearchFilterChip.vue?vue&type=script&lang=js&
-var AppSearchFilterChipvue_type_script_lang_js_ = __webpack_require__("a528");
-
-// CONCATENATED MODULE: ./src/components/AppSearchFilterChip.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_AppSearchFilterChipvue_type_script_lang_js_ = (AppSearchFilterChipvue_type_script_lang_js_["a" /* default */]); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__("2877");
-
-// CONCATENATED MODULE: ./src/components/AppSearchFilterChip.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_AppSearchFilterChipvue_type_script_lang_js_,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var AppSearchFilterChip = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
 /***/ "c345":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31136,81 +31299,6 @@ module.exports = function (METHOD_NAME) {
 
 /***/ }),
 
-/***/ "c933":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("99af");
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__);
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["a"] = ({
-  props: {
-    apiKey: {
-      type: String,
-      required: true
-    },
-    value: String
-  },
-  created: function created() {
-    if (!this.placesApiLoaded) {
-      this.appendPlacesScript();
-    }
-  },
-  updated: function updated() {
-    this.initAutocomplete();
-  },
-  computed: {
-    apiScriptUrl: function apiScriptUrl() {
-      return "https://maps.googleapis.com/maps/api/js?key=".concat(this.apiKey, "&libraries=places");
-    },
-    placesApiLoaded: function placesApiLoaded() {
-      var _window, _window$google, _window$google$maps;
-
-      return !!((_window = window) === null || _window === void 0 ? void 0 : (_window$google = _window.google) === null || _window$google === void 0 ? void 0 : (_window$google$maps = _window$google.maps) === null || _window$google$maps === void 0 ? void 0 : _window$google$maps.places);
-    }
-  },
-  methods: {
-    appendPlacesScript: function appendPlacesScript() {
-      if (process.isClient) {
-        var script = document.createElement("script");
-        script.setAttribute("src", this.apiScriptUrl);
-        script.onload = this.initAutocomplete; //setAttribute & addEventListener don't work for this... God only knows why
-
-        document.head.appendChild(script);
-      }
-    },
-    initAutocomplete: function initAutocomplete() {
-      var _this = this;
-
-      var placeAutoComplete = new google.maps.places.Autocomplete(this.$refs.autocompleteInput);
-      placeAutoComplete.addListener("place_changed", function () {
-        var _place$geometry, _place$geometry2;
-
-        var place = placeAutoComplete.getPlace();
-        var lat = place === null || place === void 0 ? void 0 : (_place$geometry = place.geometry) === null || _place$geometry === void 0 ? void 0 : _place$geometry.location.lat();
-        var lon = place === null || place === void 0 ? void 0 : (_place$geometry2 = place.geometry) === null || _place$geometry2 === void 0 ? void 0 : _place$geometry2.location.lng();
-
-        if (lat && lon) {
-          _this.$emit("locationSelected", place.formatted_address, "".concat(lat, ",").concat(lon));
-        }
-      });
-    }
-  }
-});
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("4362")))
-
-/***/ }),
-
 /***/ "c975":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31998,7 +32086,7 @@ function getJob(guid, s3Folder) {
 var buildURL = __webpack_require__("30b5");
 var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
 
-// EXTERNAL MODULE: ./src/services/helpers.js + 1 modules
+// EXTERNAL MODULE: ./src/services/helpers.js + 5 modules
 var helpers = __webpack_require__("a74a");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobFetch.vue?vue&type=script&lang=js&
@@ -33486,7 +33574,7 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 // EXTERNAL MODULE: ./node_modules/lodash/lodash.js
 var lodash = __webpack_require__("2ef0");
 
-// EXTERNAL MODULE: ./src/services/helpers.js + 1 modules
+// EXTERNAL MODULE: ./src/services/helpers.js + 5 modules
 var helpers = __webpack_require__("a74a");
 
 // CONCATENATED MODULE: ./src/services/search.js
