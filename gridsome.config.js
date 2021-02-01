@@ -5,13 +5,14 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: 'Microsite JS',
-  plugins: [
-    {
-      use: 'gridsome-plugin-tailwindcss',
-      options: {
-        tailwindConfig: './tailwind.config.js'
-      }
-    }
-  ]
+    siteName: "Microsite JS",
+    plugins: [
+        {
+            use: "gridsome-plugin-tailwindcss",
+            options: {
+                tailwindConfig: "./tailwind.config.js",
+            },
+        },
+    ],
+    //
 }
