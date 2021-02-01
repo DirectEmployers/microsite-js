@@ -5,15 +5,15 @@
             v-if="currentPage > 1"
             @click.prevent="selectPage(previousPage)"
         >
-            Back
+            <slot name='back'>Back</slot>
         </button>
-        page {{currentPage}}
+        <slot>page {{currentPage}}</slot>
         <button
             class="simple-pagination-button"
             v-if="currentPage < totalPages"
             @click.prevent="selectPage(nextPage)"
         >
-            Next
+            <slot name='next'>Next</slot>
         </button>
     </nav>
 </template>

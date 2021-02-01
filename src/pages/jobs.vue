@@ -50,7 +50,7 @@
                                     :currentJobs="jobs.length"
                                     @loadMore="loadMore"
                                 />
-                                <AppTwoButtonPagination v-else-if="$static.metadata.paginationType == 'simple'"
+                                <AppSimplePagination v-else-if="$static.metadata.paginationType == 'simple'"
                                     @pageSelected="setInput"
                                     :current-page="pagination.page"
                                     :total-records="pagination.total"
@@ -220,7 +220,7 @@ import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
 import AppSearchFilter from "~/components/Search/AppSearchFilter"
 import AppSearchFilterChip from "~/components/AppSearchFilterChip"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
-import AppTwoButtonPagination from "~/components/AppTwoButtonPagination"
+import AppSimplePagination from "~/components/AppSimplePagination"
 import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
 
@@ -239,7 +239,7 @@ export default {
         AppGoogleTalentSearchProvider,
         AppLoadMore: () => import("~/components/AppLoadMore"),
         AppPagination: () => import("~/components/AppPagination"),
-        AppTwoButtonPagination: () => import("~/components/AppTwoButtonPagination"),
+        AppSimplePagination: () => import("~/components/AppSimplePagination"),
     },
     metaInfo: {
         title: "Jobs",
