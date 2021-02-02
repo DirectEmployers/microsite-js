@@ -209,18 +209,15 @@
     </Layout>
 </template>
 <script>
-import {blank} from "~/services/helpers"
 import AppModal from "~/components/AppModal"
 import AppXIcon from "~/components/Icons/AppXIcon"
 import AppLoader from "~/demo/components/AppLoader"
 import AppAccordion from "~/components/AppAccordion"
-import AppPagination from "~/components/AppPagination"
 import AppSearchForm from "~/demo/components/AppSearchForm"
 import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
 import AppSearchFilter from "~/components/Search/AppSearchFilter"
 import AppSearchFilterChip from "~/components/Search/AppSearchFilterChip"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
-import AppSimplePagination from "~/components/AppSimplePagination"
 import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
 
@@ -237,9 +234,9 @@ export default {
         AppSearchFilterChip,
         AppCommuteSearchForm,
         AppGoogleTalentSearchProvider,
-        AppLoadMore: () => import("~/components/AppLoadMore"),
-        AppPagination: () => import("~/components/AppPagination"),
-        AppSimplePagination: () => import("~/components/AppSimplePagination"),
+        AppLoadMore: () => import("~/components/Pagination/AppLoadMore"),
+        AppPagination: () => import("~/components/Pagination/AppPagination"),
+        AppSimplePagination: () => import("~/components/Pagination/AppSimplePagination"),
     },
     metaInfo: {
         title: "Jobs",
