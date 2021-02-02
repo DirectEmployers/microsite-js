@@ -7,7 +7,7 @@
         >
             <slot name='back'>Back</slot>
         </button>
-        <slot>page {{currentPage}}</slot>
+        <slot></slot>
         <button
             class="simple-pagination-button"
             v-if="currentPage < totalPages"
