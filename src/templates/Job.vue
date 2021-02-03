@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <AppJobFetch s3-folder="sanfordhealth-jobs">
+        <AppJobFetch :s3-folder="$siteConfig.s3Folder">
             <template v-slot="{job, status: {error, pending, resolved}}">
                 <AppLoader v-if="pending" />
                 <App404 v-else-if="error && !resolved" />

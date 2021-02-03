@@ -1,5 +1,5 @@
 <template>
-    <AppJobProvider :site-config="$siteConfig" source="solr" :job="job">
+    <AppSolrJob :site-config="$siteConfig" :job="job">
         <template
             v-slot="{
                 title,
@@ -64,13 +64,13 @@
                 </script>
             </div>
         </template>
-    </AppJobProvider>
+    </AppSolrJob>
 </template>
 <script>
 import {blank} from "~/services/helpers"
 import buildUrl from "axios/lib/helpers/buildURL"
 import AppSimilarJobs from "~/components/AppSimilarJobs"
-import AppJobProvider from "~/components/Jobs/AppJobProvider"
+import AppSolrJob from "~/components/Jobs/AppSolrJob"
 export default {
     name: "AppJobDetail",
     metaInfo() {
@@ -89,7 +89,7 @@ export default {
         },
     },
     components: {
-        AppJobProvider,
+        AppSolrJob,
         AppSimilarJobs,
     },
     computed: {
