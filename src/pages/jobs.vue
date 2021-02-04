@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <AppGoogleTalentSearchProvider :site-config="$siteConfig" :is-load-more="$static.metadata.loadMore">
+        <AppGoogleTalentSearchProvider :site-config="$siteConfig" :is-load-more="$static.metadata.paginationType == 'load'">
             <template v-slot="{
                 jobs,
                 sort,
@@ -44,10 +44,17 @@
                                     :input="filteredInput"
                                     :source="source"
                                 />
-                                <AppLoadMore v-if="$static.metadata.loadMore"
+
+                                <AppLoadMore v-if="$static.metadata.paginationType == 'load'"
                                     :totalJobs="pagination.total"
                                     :currentJobs="jobs.length"
                                     @loadMore="loadMore"
+                                />
+                                <AppSimplePagination v-else-if="$static.metadata.paginationType == 'simple'"
+                                    @pageSelected="setInput"
+                                    :current-page="pagination.page"
+                                    :total-records="pagination.total"
+                                    :total-pages="pagination.total_pages"
                                 />
                                 <AppPagination v-else
                                     @pageSelected="setInput"
@@ -55,7 +62,7 @@
                                     :total-records="pagination.total"
                                     :total-pages="pagination.total_pages"
                                 />
-                                <div class="text-sm" v-if="$static.metadata.loadMore">
+                                <div class="text-sm" v-if="$static.metadata.paginationType == 'load'">
                                     Showing {{ jobs.length }} of {{ pagination.total }} {{ jobs.length == 1 ? "job" : "jobs" }}
                                 </div>
                             </section>
@@ -202,12 +209,10 @@
     </Layout>
 </template>
 <script>
-import {blank} from "~/services/helpers"
 import AppModal from "~/components/AppModal"
 import AppXIcon from "~/components/Icons/AppXIcon"
 import AppLoader from "~/demo/components/AppLoader"
 import AppAccordion from "~/components/AppAccordion"
-import AppPagination from "~/components/AppPagination"
 import AppSearchForm from "~/demo/components/AppSearchForm"
 import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
 import AppSearchFilter from "~/components/Search/AppSearchFilter"
@@ -229,8 +234,9 @@ export default {
         AppSearchFilterChip,
         AppCommuteSearchForm,
         AppGoogleTalentSearchProvider,
-        AppLoadMore: () => import("~/components/AppLoadMore"),
-        AppPagination: () => import("~/components/AppPagination"),
+        AppLoadMore: () => import("~/components/Pagination/AppLoadMore"),
+        AppPagination: () => import("~/components/Pagination/AppPagination"),
+        AppSimplePagination: () => import("~/components/Pagination/AppSimplePagination"),
     },
     metaInfo: {
         title: "Jobs",
@@ -253,7 +259,7 @@ export default {
 <static-query>
 query {
     metadata {
-        loadMore,
+        paginationType,
         siteName,
     }
 }
