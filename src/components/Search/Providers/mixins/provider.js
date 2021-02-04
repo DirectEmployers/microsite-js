@@ -182,6 +182,7 @@ export default {
                 },
                 r: {
                     default: "",
+                    clears: ["coords", "location"]
                 },
                 location: {
                     default: "",

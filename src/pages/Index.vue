@@ -4,7 +4,7 @@
             class="mt-6"
             :search-on-load="false"
             :site-config="$siteConfig"
-            :is-load-more="$static.metadata.loadMore"
+            :is-load-more="$static.metadata.paginationType == 'load'"
             v-slot="{
                 input,
                 source,
@@ -45,7 +45,7 @@ export default {
 <static-query>
 query {
     metadata {
-        loadMore,
+        paginationType,
         siteName,
     }
 }
