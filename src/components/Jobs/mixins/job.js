@@ -64,16 +64,20 @@ export default {
             if (!process.isClient) {
                 return url
             }
+            var params = {}
+            try{
+                let utm_params = {}
+                try {
+                    utm_params = JSON.parse(sessionStorage.getItem(UTM_KEY))
+                } catch {
+                    utm_params = {}
+                }
 
-            let utm_params = {}
-            try {
-                utm_params = JSON.parse(sessionStorage.getItem(UTM_KEY))
-            } catch {
-                utm_params = {}
+                params = {...this.$route.query, ...utm_params}
+                params[VS_KEY] = sessionStorage.getItem(VS_KEY)
+            }catch(e){
+                console.error(e);
             }
-
-            let params = {...this.$route.query, ...utm_params}
-            params[VS_KEY] = sessionStorage.getItem(VS_KEY)
 
             return buildUrl(url, omitBy(params, blank))
         },

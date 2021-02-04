@@ -257,17 +257,23 @@ module.exports.f = function getOwnPropertyNames(it) {
         return url;
       }
 
-      var utm_params = {};
+      var params = {};
 
       try {
-        utm_params = JSON.parse(sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* UTM_KEY */ "c"]));
-      } catch (_unused) {
-        utm_params = {};
+        var utm_params = {};
+
+        try {
+          utm_params = JSON.parse(sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* UTM_KEY */ "c"]));
+        } catch (_unused) {
+          utm_params = {};
+        }
+
+        params = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])({}, this.$route.query), utm_params);
+        params[_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* VS_KEY */ "d"]] = sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* VS_KEY */ "d"]);
+      } catch (e) {
+        console.error(e);
       }
 
-      var params = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])({}, this.$route.query), utm_params);
-
-      params[_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* VS_KEY */ "d"]] = sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* VS_KEY */ "d"]);
       return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_8___default()(url, Object(lodash__WEBPACK_IMPORTED_MODULE_7__["omitBy"])(params, _services_helpers__WEBPACK_IMPORTED_MODULE_11__[/* blank */ "a"]));
     },
     description: function description() {
@@ -26046,11 +26052,15 @@ var DECLINED_COOKIES_KEY = "declined_cookie_use";
 function isStoredAs(key, stored_as) {
   var storageType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "localStorage";
 
-  if (!process.isClient) {
-    return false;
+  if (process.isClient) {
+    try {
+      return window[storageType].getItem(key) === JSON.stringify(stored_as);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
-  return window[storageType].getItem(key) === JSON.stringify(stored_as);
+  return false;
 }
 /**
  * Check if storage contains has declined cookie use.
@@ -26087,19 +26097,23 @@ function setViewSourceParameters(query) {
   if (process.isClient) {
     var viewSource = query[VS_KEY];
 
-    if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_4__[/* blank */ "a"])(viewSource)) {
-      sessionStorage.setItem(VS_KEY, viewSource);
-    }
-
-    var params = {};
-    Object.keys(query).forEach(function (key) {
-      if (key.startsWith("utm_")) {
-        params[key] = query[key];
+    try {
+      if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_4__[/* blank */ "a"])(viewSource)) {
+        sessionStorage.setItem(VS_KEY, viewSource);
       }
-    });
 
-    if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_4__[/* blank */ "a"])(params)) {
-      sessionStorage.setItem(UTM_KEY, JSON.stringify(params));
+      var params = {};
+      Object.keys(query).forEach(function (key) {
+        if (key.startsWith("utm_")) {
+          params[key] = query[key];
+        }
+      });
+
+      if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_4__[/* blank */ "a"])(params)) {
+        sessionStorage.setItem(UTM_KEY, JSON.stringify(params));
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 }
