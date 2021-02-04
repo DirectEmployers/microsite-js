@@ -10,10 +10,6 @@ export default {
             type: Object,
             required: true,
         },
-        source: {
-            type: String,
-            required: true,
-        },
         tag: {
             type: String,
             required: false,
@@ -35,12 +31,6 @@ export default {
         },
         commuteInfo() {
             return {}
-        },
-        isSolr() {
-            return this.source == SOLR
-        },
-        isGoogleTalent() {
-            return this.source == GOOGLE_TALENT
         },
         city() {
             return this.jobInfo.city_exact
@@ -122,7 +112,7 @@ export default {
             nw.focus()
         },
         clickedViewJob(callback) {
-            callback(this.jobInfo)
+            this.executeCallback(callback, [this.jobInfo])
             this.$router
             .push({
                 path: this.detailUrl,

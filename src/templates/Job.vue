@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <AppJobFetch s3-folder="sanfordhealth-jobs">
+        <AppJobFetch :s3-folder="$siteConfig.s3Folder">
             <template v-slot="{job, status: {error, pending, resolved}}">
                 <AppLoader v-if="pending" />
                 <App404 v-else-if="error && !resolved" />
@@ -14,7 +14,7 @@
 <script>
 import {blank} from "~/services/helpers"
 import App404 from "~/demo/components/App404"
-import AppJobFetch from "~/components/AppJobFetch"
+import AppJobFetch from "~/components/Fetch/AppJobFetch"
 import AppLoader from "~/demo/components/AppLoader"
 import AppJobDetail from "~/demo/components/AppJobDetail"
 import AppJobExpired from "~/demo/components/AppJobExpired"
