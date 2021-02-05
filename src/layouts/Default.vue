@@ -92,7 +92,7 @@ export default {
 <static-query>
 query {
     metadata {
-        loadMore,
+        paginationType,
         siteName,
     }
 }

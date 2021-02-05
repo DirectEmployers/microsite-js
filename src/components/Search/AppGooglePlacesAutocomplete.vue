@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import {get} from "lodash"
-import {retry} from "../../services/helpers"
 export default {
     props: {
         apiKey: {
@@ -24,17 +22,15 @@ export default {
             this.appendPlacesScript()
         }
     },
-    mounted() {
-        retry(this.initAutocomplete)
+    updated(){
+        this.initAutocomplete()
     },
     computed: {
         apiScriptUrl() {
-            let key = this.apiKey
-
-            return `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`
+            return `https://maps.googleapis.com/maps/api/js?key=${this.apiKey}&libraries=places`
         },
         placesApiLoaded() {
-            return typeof get(window, "google.maps.places") == "object"
+            return !!window?.google?.maps?.places
         },
     },
     methods: {
@@ -42,6 +38,7 @@ export default {
             if (process.isClient) {
                 let script = document.createElement("script")
                 script.setAttribute("src", this.apiScriptUrl)
+                script.onload = this.initAutocomplete //setAttribute & addEventListener don't work for this... God only knows why
                 document.head.appendChild(script)
             }
         },
@@ -52,17 +49,14 @@ export default {
             placeAutoComplete.addListener("place_changed", () => {
                 const place = placeAutoComplete.getPlace()
 
-                const geo = place.geometry
+                const lat = place?.geometry?.location.lat()
+                const lon = place?.geometry?.location.lng()
 
-                if (geo) {
-                    const lat = geo.location.lat()
-
-                    const lon = geo.location.lng()
-
+                if (lat && lon) {
                     this.$emit(
                         "locationSelected",
                         place.formatted_address,
-                        lat + "," + lon
+                        `${lat},${lon}`
                     )
                 }
             })

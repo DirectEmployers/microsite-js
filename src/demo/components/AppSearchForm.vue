@@ -24,7 +24,6 @@
             <div class="search-form__section">
                 <div
                     class="search-form__location-autocomplete"
-                    v-if="!isCommuteSearch"
                 >
                     <AppAutocompleteInput
                         ref="location"
@@ -43,14 +42,6 @@
                             @getCoords="setLocationFromGeo"
                         />
                     </div>
-                </div>
-                <div class="mt-6" v-else>
-                    <AppGoogleLocationAutocomplete
-                        :api-key="apiKey"
-                        v-model="form.commuteLocation"
-                        class="form__input"
-                        @locationSelected="googleAutocompleteSelected"
-                    />
                 </div>
 
                 <div
@@ -105,7 +96,6 @@
 <script>
 import AppAutocompleteInput from "~/components/Form/AppAutocompleteInput"
 import AppGeoLocation from "~/components/Search/AppGeoLocation"
-import AppGoogleLocationAutocomplete from "~/components/Search/AppGoogleLocationAutocomplete"
 import {
     TitleCompleteService,
     MOCCompleteService,
@@ -116,7 +106,6 @@ export default {
     name: "SearchForm",
     components: {
         AppAutocompleteInput,
-        AppGoogleLocationAutocomplete,
         AppGeoLocation,
     },
     props: {
@@ -176,7 +165,6 @@ export default {
                 moc: this.input.moc,
                 cords: this.input.cords,
                 location: this.input.location,
-                commuteLocation: this.input.commuteLocation,
             }
         }
     },

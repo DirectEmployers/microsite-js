@@ -97,7 +97,7 @@ export default {
             })
         },
         tryClientEvent(type, callback=null){
-            if (this.isGoogleTalent && process.isClient) {
+            if (process.isClient) {
                 var currentEvent = {
                     eventType: type,
                     jobs: [this.jobInfo.name],
