@@ -22,6 +22,11 @@ export default {
             type: Boolean,
             default: false,
             required: false,
+        },
+        delayLoadBy: {
+            type: Number,
+            default: 0,
+            required: false,
         }
     },
     data() {
@@ -252,7 +257,9 @@ export default {
                 })
                 .finally(() => {
                     this.isFirstLoad = false
-                    this.status.loading = false
+                    setTimeout(()=>{
+                        this.status.loading = false
+                    }, this.delayLoadBy)
                 })
         },
         getFilterKey(filter) {
