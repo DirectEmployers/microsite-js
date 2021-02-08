@@ -384,6 +384,10 @@
     "destination": "/companies/_company/jobs.html"
   },
   {
+    "source": "/:guid(/[a-z0-9A-Z]){32,}/i",
+    "destination": "/_guid/[a-z0-9A-Z]){32,}/i.html"
+  },
+  {
     "source": "/:filter0/:filter1/new-jobs",
     "destination": "/_filter_0/_filter_1/new-jobs.html"
   },
