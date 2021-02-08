@@ -72,17 +72,17 @@ const config =  {
                     "IT - Technology Solutions": "text:(\"Job Function: Information Technology\" OR \"Job Function: Data Analytics\")",
             }
         },
-        // {
-            // name: "schedule",
-            // key: "schedule",
-            // display: "Job Schedule",
-            // solr_queries: {
-            //     'Full time':"text:'Job Schedule: Full-Time'",
-            //     'PRN':"text:'Job Schedule: PRN'",
-            //     'Part time':"text:'Job Schedule: Part-Time'",
-                // 'Flex':"text:'Flex'",
-            // },
-        // },
+        {
+            name: "schedule",
+            key: "schedule",
+            display: "Job Schedule",
+            solr_queries: {
+                'Full time':"text:\"Job Schedule: Full-Time\"",
+                'PRN':"text:\"Job Schedule: PRN\"",
+                'Part time':"text:\"Job Schedule: Part-Time\"",
+                'Flex':"text:\"Flex\"",
+            },
+        },
         {
             name: "facility",
             key: "facility",
@@ -116,7 +116,7 @@ const config =  {
                 "Alexandria Broadway Clinic": "text:(\"Facility: Alexandria Broadway Clinic\")",
                 "Ann Berdahl Hall Building": "text:(\"Facility: Ann Berdahl Hall Building\")",
                 "Annex Building": "text:(\"Facility: Annex Building\")",
-                // "Ava's House Building": "text:(\"Facility: Ava's House Building\")",
+                // "Ava's House Building": "text:('Facility: Ava\'s House Building')", // Errors with unexpected identifer
                 "Bagley Clinic": "text:(\"Facility: Bagley Clinic\")",
                 "Bagley Medical Center": "text:(\"Facility: Bagley Medical Center\")",
                 "Bank Of The West Building": "text:(\"Facility: Bank Of The West Building\")",
@@ -153,8 +153,8 @@ const config =  {
                 "Chamberlain Medical Center": "text:(\"Facility: Chamberlain Medical Center\")",
                 "Cherapa Place Building": "text:(\"Facility: Cherapa Place Building\")",
                 "Child Development Center": "text:(\"Facility: Child Development Center\")",
-                // "Children's Hospital": "text:(\"Facility: Children's Hospital\")",
-                // "Children's World Clinic Klamath Falls": "text:(\"Facility: Children's World Clinic Klamath Falls\")",
+                // "Children's Hospital": "text:(\"Facility: Children\x27s Hospital\")",
+                // "Children's World Clinic Klamath Falls": "text:(\"Facility: Children\x27s World Clinic Klamath Falls\")",
                 "Clear Lake Medical Center": "text:(\"Facility: Clear Lake Medical Center\")",
                 "Clearbrook Clinic": "text:(\"Facility: Clearbrook Clinic\")",
                 "CNA Building": "text:(\"Facility: CNA Building\")",
@@ -338,7 +338,7 @@ const config =  {
                 Varies:"text:'Varies'",
                 Day:"text:'Day'",
                 Rotating:"text:'Rotating'",
-                // Evenings:"text:('Shift: Evenings' OR 'Shift: Evening' OR 'Shift: 10 Hours - Evening Shifts' OR 'Shift: 12 Hours - Evening Shifts' OR 'Shift: 8 Hours - Evening Shifts')"
+                Evenings:"text:(\"Shift: Evenings\" OR \"Shift: Evening\" OR \"Shift: 10 Hours - Evening Shifts\" OR \"Shift: 12 Hours - Evening Shifts\" OR \"Shift: 8 Hours - Evening Shifts\")"
             },
         },
     ],
