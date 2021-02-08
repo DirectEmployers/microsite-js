@@ -25646,14 +25646,14 @@ module.exports = DESCRIPTORS ? function (object, key, value) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5141caf7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppJobFetch.vue?vue&type=template&id=66c9cee7&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5141caf7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppJobFetch.vue?vue&type=template&id=b9e90916&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('AppFetch',{ref:"fetch",attrs:{"endpoint":_vm.fetchJob,"tag":_vm.tag,"on-resolve":_vm.resolveJob},scopedSlots:_vm._u([{key:"default",fn:function(ref){
 var status = ref.status;
 return [_vm._t("default",null,{"status":status,"job":_vm.job})]}}],null,true)})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Fetch/AppJobFetch.vue?vue&type=template&id=66c9cee7&
+// CONCATENATED MODULE: ./src/components/Fetch/AppJobFetch.vue?vue&type=template&id=b9e90916&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
 var es_regexp_exec = __webpack_require__("ac1f");
@@ -25772,12 +25772,12 @@ var helpers = __webpack_require__("a74a");
 
       if (this.fromRouteParam) {
         guid = this.$route.params.guid;
-        this.redirectRssFeedUrl(guid);
+        this.redirectGuidWithViewSources(guid);
       }
 
       return getJob(guid, this.s3Folder);
     },
-    redirectRssFeedUrl: function redirectRssFeedUrl(guid) {
+    redirectGuidWithViewSources: function redirectGuidWithViewSources(guid) {
       // rss feed urls are /guid+vs, redirect to job detail.
       if (guid.length > 32) {
         var guidOnly = guid.substring(0, 32);

@@ -57,16 +57,17 @@ export default {
 
             if (this.fromRouteParam) {
                 guid = this.$route.params.guid
-                this.redirectRssFeedUrl(guid)
+                this.redirectGuidWithViewSources(guid)
             }
 
             return getJob(guid, this.s3Folder)
         },
-        redirectRssFeedUrl(guid) {
+        redirectGuidWithViewSources(guid) {
             // rss feed urls are /guid+vs, redirect to job detail.
             if (guid.length > 32) {
                 let guidOnly = guid.substring(0, 32)
                 let viewSource = guid.split(guidOnly)[1]
+
                 window.location.replace(
                     buildUrl(`/t/l/${guidOnly}/job`, {
                         ...this.$route.query,
@@ -87,9 +88,7 @@ export default {
                 return this.setJob(job, setStatus)
             }
 
-            let routePath = this.$route.path.endsWith("/")
-                ? this.$route.path
-                : `${this.$route.path}/`
+            let routePath = this.$route.path.endsWith("/") ? this.$route.path : `${this.$route.path}/`
             let url = buildJobDetailUrl(
                 job.title_slug,
                 job.location_exact,
