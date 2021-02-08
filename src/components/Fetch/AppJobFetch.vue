@@ -82,7 +82,7 @@ export default {
                 resolved: true,
             })
         },
-        resolveJob(job, respone, setStatus) {
+        resolveJob(job, response, setStatus) {
             //correct url only if we loaded from route param.
             if (!this.fromRouteParam) {
                 return this.setJob(job, setStatus)
