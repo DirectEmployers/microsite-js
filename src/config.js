@@ -341,10 +341,6 @@ const config =  {
                 // Evenings:"text:('Shift: Evenings' OR 'Shift: Evening' OR 'Shift: 10 Hours - Evening Shifts' OR 'Shift: 12 Hours - Evening Shifts' OR 'Shift: 8 Hours - Evening Shifts')"
             },
         },
-        {
-            name: "business-unit",
-            display: "Business Unit",
-        }
     ],
 }
 
