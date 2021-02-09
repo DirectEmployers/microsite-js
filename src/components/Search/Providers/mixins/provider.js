@@ -141,7 +141,7 @@ export default {
             ...this.$route.query,
             ...this.$route.params,
         })
-        this.slugInputToExtraData()
+        this.extractSlugInputToExtraData()
         if (!blank(this.$route.params.location)) {
             this.input.location = displayLocationFromSlug(this.input.location)
         }
