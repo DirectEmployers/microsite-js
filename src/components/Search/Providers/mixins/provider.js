@@ -47,7 +47,7 @@ export default {
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.defaultInput,
-            extraData: this.mergeWithDefaultExtraData(),
+            extraData: this.defaultExtraData(),
         }
     },
     computed: {
@@ -136,7 +136,7 @@ export default {
             this.isFirstLoad = true
             this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
-            this.extraData = this.mergeWithDefaultExtraData()
+            this.extraData = this.defaultExtraData()
             this.search()
         },
     },
@@ -205,11 +205,10 @@ export default {
                 },
             }
         },
-        mergeWithDefaultExtraData() {
+        getExtraData() {
             return {
-                ...this.defaultExtraData(),
+                ...this.extraData,
                 ...this.getUrlExtraDataObject({
-                    ...this.$route.query,
                     ...this.$route.params,
                 }),
             }
@@ -217,7 +216,7 @@ export default {
         mergeWithDefaultInput(object = {}) {
             return {
                 ...this.defaultInput,
-                ...this.getUrlFiltersObject(object),
+                ...object,
             }
         },
         getUrlFiltersObject(object) {
@@ -259,7 +258,10 @@ export default {
             if (this.isLoadMore) {
                 this.beforeLoadMoreSearch()
             }
-            return this.service({...this.filterInput(this.input), ...this.extraData}, this.siteConfig)
+            return this.service({
+                    ...this.filterInput(this.input),
+                    ...this.getExtraData()
+                }, this.siteConfig)
                 .then(resp => {
                     const data = resp.data || {}
                     this.featuredJobs = data.featured_jobs || []
