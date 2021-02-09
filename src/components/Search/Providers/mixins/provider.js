@@ -258,10 +258,7 @@ export default {
             if (this.isLoadMore) {
                 this.beforeLoadMoreSearch()
             }
-            return this.service({
-                    ...this.filterInput(this.input),
-                    ...this.getExtraData()
-                }, this.siteConfig)
+            return this.service({...this.filterInput(this.input), ...this.getExtraData()}, this.siteConfig)
                 .then(resp => {
                     const data = resp.data || {}
                     this.featuredJobs = data.featured_jobs || []
