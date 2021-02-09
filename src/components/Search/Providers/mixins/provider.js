@@ -1,4 +1,4 @@
-import {omitBy, clone, startCase, uniqBy} from "lodash"
+import {omitBy, clone, startCase, uniqBy, map} from "lodash"
 import {blank, displayLocationFromSlug} from "../../../../services/helpers"
 import {searchService, SOLR, GOOGLE_TALENT} from "../../../../services/search"
 
@@ -47,7 +47,7 @@ export default {
             appliedFilters: [],
             isCommuteSearch: false,
             input: this.defaultInput,
-            extraData: this.defaultExtraData(),
+            extraData: this.mergeWithDefaultExtraData(),
         }
     },
     computed: {
@@ -136,7 +136,7 @@ export default {
             this.isFirstLoad = true
             this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
-            this.extraData = this.defaultExtraData()
+            this.extraData = this.mergeWithDefaultExtraData()
             this.search()
         },
     },
@@ -205,13 +205,40 @@ export default {
                 },
             }
         },
+        mergeWithDefaultExtraData() {
+            return {
+                ...this.defaultExtraData(),
+                ...this.getUrlExtraDataObject({
+                    ...this.$route.query,
+                    ...this.$route.params,
+                }),
+            }
+        },
         mergeWithDefaultInput(object = {}) {
             return {
                 ...this.defaultInput,
-                ...object,
+                ...this.getUrlFiltersObject(object),
             }
         },
-
+        getUrlFiltersObject(object) {
+            for (const key in object) {
+                if (! this.getConfigFilterSlugs().includes(key)) {
+                    delete object[key]
+                }
+            }
+            return object
+        },
+        getUrlExtraDataObject(object) {
+            for (const key in object) {
+                if (this.getConfigFilterSlugs().includes(key)) {
+                    delete object[key]
+                }
+            }
+            return object
+        },
+        getConfigFilterSlugs() {
+            return map(uniqBy(this.siteConfig.filters, "name"), "name")
+        },
         getAppliedFilters() {
             return uniqBy(this.configFilters, "name")
                 .filter(filter => {
@@ -226,7 +253,6 @@ export default {
                 })
                 .concat(this.applyFilters())
         },
-
         search() {
             this.status.loading = true
             this.beforeSearch()
