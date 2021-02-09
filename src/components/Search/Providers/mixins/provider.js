@@ -2,6 +2,7 @@ import {omitBy, clone, startCase, uniqBy} from "lodash"
 import {blank, displayLocationFromSlug} from "../../../../services/helpers"
 import {searchService, SOLR, GOOGLE_TALENT} from "../../../../services/search"
 
+
 export default {
     props: {
         siteConfig: {
@@ -140,6 +141,7 @@ export default {
             ...this.$route.query,
             ...this.$route.params,
         })
+        this.slugInputToExtraData()
         if (!blank(this.$route.params.location)) {
             this.input.location = displayLocationFromSlug(this.input.location)
         }
@@ -299,5 +301,14 @@ export default {
                 })
                 .catch(err => {})
         },
+        extractSlugInputToExtraData(){
+            let regex = new RegExp(/^filter\d/)
+            for(let key in this.input){
+                if(regex.test(key)){
+                    this.extraData[key] = this.input[key]
+                    delete this.input[key]
+                }
+            }
+        }
     },
 }
