@@ -217,6 +217,7 @@ export default {
             return {
                 ...this.defaultInput,
                 ...object,
+                ...this.getUrlFiltersObject(object),
             }
         },
         getUrlFiltersObject(object) {
