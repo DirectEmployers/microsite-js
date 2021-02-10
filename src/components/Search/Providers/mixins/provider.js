@@ -215,14 +215,19 @@ export default {
         },
         mergeWithDefaultInput(object = {}) {
             return {
-                ...this.defaultInput,
-                ...object,
-                ...this.getUrlFiltersObject(object),
+                ...this.getUrlFiltersObject({
+                    ...this.defaultInput,
+                    ...object
+                }),
             }
         },
         getUrlFiltersObject(object) {
+            const filterSlugs = this.getConfigFilterSlugs()
+            const defaultInputKeys = Object.keys(this.defaultInput)
+            const possibleKeys = defaultInputKeys.concat(filterSlugs)
+
             for (const key in object) {
-                if (! this.getConfigFilterSlugs().includes(key)) {
+                if (! possibleKeys.includes(key) ) {
                     delete object[key]
                 }
             }
