@@ -2,7 +2,6 @@ import {omitBy, clone, startCase, uniqBy, map} from "lodash"
 import {blank, displayLocationFromSlug} from "../../../../services/helpers"
 import {searchService, SOLR, GOOGLE_TALENT} from "../../../../services/search"
 
-
 export default {
     props: {
         siteConfig: {
@@ -135,27 +134,14 @@ export default {
         "$route.query"(newval, oldval) {
             this.jobDisplay = []
             this.isFirstLoad = true
-            this.input = this.mergeWithDefaultInput({
-                ...this.$route.query,
-                ...this.$route.params,
-            })
+            this.input = this.mergeWithDefaultInput(this.$route.query)
             this.queryChanged()
-            this.extractSlugInputToExtraData()
-
-            let newvalLength = Object.keys(newval).length
-            let oldvalLength = Object.keys(oldval).length
-            if(newvalLength != oldvalLength && newvalLength != 2){
-                this.extraData = this.defaultExtraData()
-            }
+            this.extraData = this.defaultExtraData()
             this.search()
         },
     },
     created() {
-        this.input = this.mergeWithDefaultInput({
-            ...this.$route.query,
-            ...this.$route.params,
-        })
-        this.extractSlugInputToExtraData()
+        this.input = this.mergeWithDefaultInput(this.$route.query)
         if (!blank(this.$route.params.location)) {
             this.input.location = displayLocationFromSlug(this.input.location)
         }
@@ -169,11 +155,6 @@ export default {
         queryChanged() {},
         beforeSearch() {},
         beforeLoadMoreSearch() {
-            if(!Object.keys(this.$route.params).includes("filter0")){
-                delete this.extraData.filter0
-                delete this.extraData.filter1
-                delete this.extraData.filter2
-            }
             if (this.isFirstLoad) {
                 this.extraData.offset = 0
                 this.extraData.num_items *= 2
@@ -193,7 +174,6 @@ export default {
             return []
         },
         loadMore() {
-            
             this.jobDisplay = this.jobDisplay.concat(this.jobs)
             this.search()
         },
@@ -271,6 +251,7 @@ export default {
         },
         search() {
             this.status.loading = true
+            delete this.status.error
             this.beforeSearch()
             if (this.isLoadMore) {
                 this.beforeLoadMoreSearch()
@@ -317,23 +298,22 @@ export default {
             return options
         },
         setInput(filter) {
-            if (Object.keys(this.extraData).includes("filter0") ) {
+            if(this.getUrlExtraDataObject(this.$route.params)){
                 let payload = this.mergeWithDefaultInput({
                     ...this.input,
                     ...filter,
-                })
-
-                this.$router.push({
-                    query: this.filterInput(payload),
-                })
-                .catch(err => {})
+            })
+            this.$router.push({
+                query: this.filterInput(payload),
+            })
+            .catch(err => {})
             } else {
                 this.newSearch(
                     this.mergeWithDefaultInput({
                         ...this.input,
                         ...filter,
                     })
-                )
+                    )
             }
         },
         defaultExtraData() {
@@ -360,14 +340,5 @@ export default {
                 })
                 .catch(err => {})
         },
-        extractSlugInputToExtraData(){
-            let regex = new RegExp(/^filter\d/)
-            for(let key in this.input){
-                if(regex.test(key)){
-                    this.extraData[key] = this.input[key]
-                    delete this.input[key]
-                }
-            }
-        }
     },
 }
