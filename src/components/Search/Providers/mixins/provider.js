@@ -130,9 +130,19 @@ export default {
         "$route.query"(newval, oldval) {
             this.jobDisplay = []
             this.isFirstLoad = true
-            this.input = this.mergeWithDefaultInput(this.$route.query)
+            this.input = this.mergeWithDefaultInput({
+                ...this.$route.query,
+                ...this.$route.params,
+            })
             this.queryChanged()
-            this.extraData = this.defaultExtraData()
+            this.extractSlugInputToExtraData()
+
+            let newvalLength = Object.keys(newval).length
+            let oldvalLength = Object.keys(oldval).length
+            if(newvalLength != oldvalLength && newvalLength != 2){
+                console.log('foobar')
+                this.extraData = this.defaultExtraData()
+            }
             this.search()
         },
     },
@@ -270,12 +280,29 @@ export default {
             return options
         },
         setInput(filter) {
-            this.newSearch(
-                this.mergeWithDefaultInput({
-                    ...this.input,
-                    ...filter,
-                })
-            )
+            if (Object.keys(this.extraData).includes("filter0") ) {
+                if(!this.isLoadMore){
+                    let payload = this.mergeWithDefaultInput({
+                        ...this.input,
+                        ...filter,
+                    })
+
+                    this.$router.push({
+                        query: this.filterInput(payload),
+                    })
+                    .catch(err => {})
+
+                } else {
+                    this.search()
+                }
+            } else {
+                this.newSearch(
+                    this.mergeWithDefaultInput({
+                        ...this.input,
+                        ...filter,
+                    })
+                )
+            }
         },
         defaultExtraData() {
             if (this.isLoadMore) {
