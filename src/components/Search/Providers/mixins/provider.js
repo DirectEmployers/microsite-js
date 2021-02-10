@@ -140,7 +140,6 @@ export default {
             let newvalLength = Object.keys(newval).length
             let oldvalLength = Object.keys(oldval).length
             if(newvalLength != oldvalLength && newvalLength != 2){
-                console.log('foobar')
                 this.extraData = this.defaultExtraData()
             }
             this.search()
@@ -165,6 +164,11 @@ export default {
         queryChanged() {},
         beforeSearch() {},
         beforeLoadMoreSearch() {
+            if(!Object.keys(this.$route.params).includes("filter0")){
+                delete this.extraData.filter0
+                delete this.extraData.filter1
+                delete this.extraData.filter2
+            }
             if (this.isFirstLoad) {
                 this.extraData.offset = 0
                 this.extraData.num_items *= 2
@@ -184,6 +188,7 @@ export default {
             return []
         },
         loadMore() {
+            
             this.jobDisplay = this.jobDisplay.concat(this.jobs)
             this.search()
         },
@@ -281,20 +286,15 @@ export default {
         },
         setInput(filter) {
             if (Object.keys(this.extraData).includes("filter0") ) {
-                if(!this.isLoadMore){
-                    let payload = this.mergeWithDefaultInput({
-                        ...this.input,
-                        ...filter,
-                    })
+                let payload = this.mergeWithDefaultInput({
+                    ...this.input,
+                    ...filter,
+                })
 
-                    this.$router.push({
-                        query: this.filterInput(payload),
-                    })
-                    .catch(err => {})
-
-                } else {
-                    this.search()
-                }
+                this.$router.push({
+                    query: this.filterInput(payload),
+                })
+                .catch(err => {})
             } else {
                 this.newSearch(
                     this.mergeWithDefaultInput({
