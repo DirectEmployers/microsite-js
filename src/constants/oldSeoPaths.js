@@ -5,7 +5,7 @@ const oldSeoPaths = {
         "/:state/:country/jobs",
         "/:city/:state/:country/jobs"
     ],
-    MOC: ["/:moc/vet-jobs"],
+    MOC: ["/:mocTitle/:moc/:mocBranch/vet-jobs"],
     FILTERS: [
         "/:filter0/new-jobs",
         "/:filter0/:filter1/new-jobs",

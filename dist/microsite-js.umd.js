@@ -20560,6 +20560,9 @@ var es_array_splice = __webpack_require__("a434");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
 var es_function_name = __webpack_require__("b0c0");
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
+var es_number_constructor = __webpack_require__("a9e3");
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.entries.js
 var es_object_entries = __webpack_require__("4fad");
 
@@ -20692,6 +20695,7 @@ var services_search = __webpack_require__("e73b");
 
 
 
+
 /* harmony default export */ var provider = __webpack_exports__["a"] = ({
   props: {
     siteConfig: {
@@ -20711,6 +20715,11 @@ var services_search = __webpack_require__("e73b");
     isLoadMore: {
       type: Boolean,
       default: false,
+      required: false
+    },
+    delayLoadBy: {
+      type: Number,
+      default: 0,
       required: false
     }
   },
@@ -20953,7 +20962,9 @@ var services_search = __webpack_require__("e73b");
         _this4.status.error = err;
       }).finally(function () {
         _this4.isFirstLoad = false;
-        _this4.status.loading = false;
+        setTimeout(function () {
+          _this4.status.loading = false;
+        }, _this4.delayLoadBy);
       });
     },
     getFilterKey: function getFilterKey(filter) {
@@ -25635,14 +25646,14 @@ module.exports = DESCRIPTORS ? function (object, key, value) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5141caf7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppJobFetch.vue?vue&type=template&id=8e3da122&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5141caf7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppJobFetch.vue?vue&type=template&id=7f79f674&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('AppFetch',{ref:"fetch",attrs:{"endpoint":_vm.fetchJob,"tag":_vm.tag,"on-resolve":_vm.resolveJob},scopedSlots:_vm._u([{key:"default",fn:function(ref){
 var status = ref.status;
 return [_vm._t("default",null,{"status":status,"job":_vm.job})]}}],null,true)})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Fetch/AppJobFetch.vue?vue&type=template&id=8e3da122&
+// CONCATENATED MODULE: ./src/components/Fetch/AppJobFetch.vue?vue&type=template&id=7f79f674&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
 var es_regexp_exec = __webpack_require__("ac1f");
@@ -25652,6 +25663,12 @@ var es_string_ends_with = __webpack_require__("8a79");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
 var es_string_replace = __webpack_require__("5319");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
+var es_string_split = __webpack_require__("1276");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js
+var objectSpread2 = __webpack_require__("5530");
 
 // EXTERNAL MODULE: ./node_modules/lodash/lodash.js
 var lodash = __webpack_require__("2ef0");
@@ -25695,6 +25712,10 @@ var helpers = __webpack_require__("a74a");
 
 
 
+
+
+//
+//
 //
 //
 //
@@ -25737,7 +25758,7 @@ var helpers = __webpack_require__("a74a");
   },
   watch: {
     "$route.params.guid": function $routeParamsGuid() {
-      this.$refs['fetch'].request();
+      this.$refs["fetch"].request();
     }
   },
   created: function created() {
@@ -25751,9 +25772,20 @@ var helpers = __webpack_require__("a74a");
 
       if (this.fromRouteParam) {
         guid = this.$route.params.guid;
+        this.redirectGuidWithViewSources(guid);
       }
 
       return getJob(guid, this.s3Folder);
+    },
+    redirectGuidWithViewSources: function redirectGuidWithViewSources(guid) {
+      // rss feed urls are /guid+vs, redirect to job detail.
+      if (guid.length > 32) {
+        var guidOnly = guid.substring(0, 32);
+        var viewSource = guid.split(guidOnly)[1];
+        window.location.replace(buildURL_default()("/t/l/".concat(guidOnly, "/job"), Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, this.$route.query), {
+          vs: viewSource
+        })));
+      }
     },
     setJob: function setJob(job, setStatus) {
       this.job = job;
@@ -25761,7 +25793,7 @@ var helpers = __webpack_require__("a74a");
         resolved: true
       });
     },
-    resolveJob: function resolveJob(job, respone, setStatus) {
+    resolveJob: function resolveJob(job, response, setStatus) {
       //correct url only if we loaded from route param.
       if (!this.fromRouteParam) {
         return this.setJob(job, setStatus);

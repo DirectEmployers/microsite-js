@@ -1,4 +1,4 @@
-import {omitBy, clone, startCase, uniqBy} from "lodash"
+import {omitBy, clone, startCase, uniqBy, map} from "lodash"
 import {blank, displayLocationFromSlug} from "../../../../services/helpers"
 import {searchService, SOLR, GOOGLE_TALENT} from "../../../../services/search"
 
@@ -22,6 +22,11 @@ export default {
         isLoadMore: {
             type: Boolean,
             default: false,
+            required: false,
+        },
+        delayLoadBy: {
+            type: Number,
+            default: 0,
             required: false,
         }
     },
@@ -217,13 +222,39 @@ export default {
                 },
             }
         },
+        getExtraData() {
+            return {
+                ...this.extraData,
+                ...this.getUrlExtraDataObject({
+                    ...this.$route.params,
+                }),
+            }
+        },
         mergeWithDefaultInput(object = {}) {
             return {
                 ...this.defaultInput,
                 ...object,
             }
         },
-
+        getUrlFiltersObject(object) {
+            for (const key in object) {
+                if (! this.getConfigFilterSlugs().includes(key)) {
+                    delete object[key]
+                }
+            }
+            return object
+        },
+        getUrlExtraDataObject(object) {
+            for (const key in object) {
+                if (this.getConfigFilterSlugs().includes(key)) {
+                    delete object[key]
+                }
+            }
+            return object
+        },
+        getConfigFilterSlugs() {
+            return map(uniqBy(this.siteConfig.filters, "name"), "name")
+        },
         getAppliedFilters() {
             return uniqBy(this.configFilters, "name")
                 .filter(filter => {
@@ -238,14 +269,13 @@ export default {
                 })
                 .concat(this.applyFilters())
         },
-
         search() {
             this.status.loading = true
             this.beforeSearch()
             if (this.isLoadMore) {
                 this.beforeLoadMoreSearch()
             }
-            return this.service({...this.filterInput(this.input), ...this.extraData}, this.siteConfig)
+            return this.service({...this.filterInput(this.input), ...this.getExtraData()}, this.siteConfig)
                 .then(resp => {
                     const data = resp.data || {}
                     this.featuredJobs = data.featured_jobs || []
@@ -269,7 +299,9 @@ export default {
                 })
                 .finally(() => {
                     this.isFirstLoad = false
-                    this.status.loading = false
+                    setTimeout(()=>{
+                        this.status.loading = false
+                    }, this.delayLoadBy)
                 })
         },
         getFilterKey(filter) {

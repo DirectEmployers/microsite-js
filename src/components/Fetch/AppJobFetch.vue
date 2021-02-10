@@ -1,16 +1,18 @@
 <template>
-    <AppFetch :endpoint="fetchJob" ref="fetch" :tag="tag" :on-resolve="resolveJob">
-        <template v-slot="{ status }">
-            <slot
-                :status="status"
-                :job="job"
-            ></slot>
+    <AppFetch
+        :endpoint="fetchJob"
+        ref="fetch"
+        :tag="tag"
+        :on-resolve="resolveJob"
+    >
+        <template v-slot="{status}">
+            <slot :status="status" :job="job"></slot>
         </template>
     </AppFetch>
 </template>
 <script>
 import {kebabCase} from "lodash"
-import AppFetch from './AppFetch'
+import AppFetch from "./AppFetch"
 import {getJob} from "../../services/cdn/job"
 import buildUrl from "axios/lib/helpers/buildURL"
 import {buildJobDetailUrl, blank} from "../../services/helpers"
@@ -25,23 +27,23 @@ export default {
             required: true,
             type: String,
         },
-        tag:{
+        tag: {
             required: false,
-            default: "div"
-        }
+            default: "div",
+        },
     },
-    components:{
-        AppFetch
+    components: {
+        AppFetch,
     },
     data() {
         return {
             job: null,
-            fromRouteParam: false
+            fromRouteParam: false,
         }
     },
     watch: {
         "$route.params.guid"() {
-            this.$refs['fetch'].request()
+            this.$refs["fetch"].request()
         },
     },
     created() {
@@ -50,26 +52,43 @@ export default {
         }
     },
     methods: {
-        fetchJob(){
+        fetchJob() {
             let guid = this.guid
-            if(this.fromRouteParam){
+
+            if (this.fromRouteParam) {
                 guid = this.$route.params.guid
+                this.redirectGuidWithViewSources(guid)
             }
+
             return getJob(guid, this.s3Folder)
         },
-        setJob(job, setStatus){
+        redirectGuidWithViewSources(guid) {
+            // rss feed urls are /guid+vs, redirect to job detail.
+            if (guid.length > 32) {
+                let guidOnly = guid.substring(0, 32)
+                let viewSource = guid.split(guidOnly)[1]
+
+                window.location.replace(
+                    buildUrl(`/t/l/${guidOnly}/job`, {
+                        ...this.$route.query,
+                        ...{vs: viewSource},
+                    })
+                )
+            }
+        },
+        setJob(job, setStatus) {
             this.job = job
             setStatus({
-                resolved: true
+                resolved: true,
             })
         },
-        resolveJob(job, respone, setStatus) {
+        resolveJob(job, response, setStatus) {
             //correct url only if we loaded from route param.
-            if(!this.fromRouteParam){
+            if (!this.fromRouteParam) {
                 return this.setJob(job, setStatus)
             }
 
-            let routePath = this.$route.path.endsWith("/") ? this.$route.path: `${this.$route.path}/`
+            let routePath = this.$route.path.endsWith("/") ? this.$route.path : `${this.$route.path}/`
             let url = buildJobDetailUrl(
                 job.title_slug,
                 job.location_exact,
@@ -78,7 +97,7 @@ export default {
             // check if this is the proper url for the job
             if (url !== routePath) {
                 window.location.replace(buildUrl(url, this.$route.query))
-            }else{
+            } else {
                 return this.setJob(job, setStatus)
             }
         },
