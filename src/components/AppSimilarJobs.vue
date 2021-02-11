@@ -86,11 +86,8 @@ export default {
                 this.siteConfig
             ).then((response) => {
                 const data = response.data
-
                 const {jobs, meta} = data
-
                 this.meta = meta
-
                 this.similarJobs = jobs
 
                 if (this.guid) {

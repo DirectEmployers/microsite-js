@@ -64,7 +64,6 @@ export default {
                 this.commuteInfo.travelDuration.replace("s", "")
             )
             const hours = Math.floor(seconds / 60 / 60)
-
             const minutes = Math.floor(seconds / 60) - hours * 60
 
             return minutes == 0 ? "< 1 minute" : minutes + " minutes"
@@ -89,7 +88,6 @@ export default {
         },
         clickedViewJob(callback) {
             this.executeCallback(callback, [this.jobInfo])
-
             this.tryClientEvent("view", () => {
                 this.$router
                     .push({

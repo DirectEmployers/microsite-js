@@ -24,7 +24,6 @@ export default {
     components: {
         AppHtmlToJson,
     },
-
     computed: {
         cleanHtml() {
             return this.html.replace(/(\r\n|\n|\r)/gm, "")

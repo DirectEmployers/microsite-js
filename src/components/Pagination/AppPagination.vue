@@ -73,12 +73,10 @@ export default {
 
             return next <= this.totalPages ? next : false
         },
-
         previousPage() {
             const previous = this.current - 1
             return previous >= 1 ? previous : false
         },
-
         pages: function () {
             let pages = this.getPageRange()
 
@@ -90,36 +88,28 @@ export default {
 
                 pages = this.range(start, this.totalPages)
             }
-
             pages = this.prefixPages(pages)
-
             return this.suffixPages(pages)
         },
-
         pageIsInRange: function () {
             const page = this.current
-
             return page >= 1 && page <= this.totalPages
         },
     },
     methods: {
         getPageRange() {
             let pages = []
-
             const pageLimit = this.pageLimit - 1
-
             const isLimitTotal = this.totalPages == pageLimit
 
             if (isLimitTotal || !this.pageIsInRange) {
                 return this.range(1, pageLimit)
             }
-
             return this.range(
                 this.current,
                 Math.min(this.current + pageLimit, this.totalPages)
             )
         },
-
         prefixPages(pages) {
             if (!pages.includes(1)) {
                 const fromOne = Math.abs(pages[0] - 1)
@@ -127,7 +117,6 @@ export default {
             }
             return pages
         },
-
         suffixPages(pages) {
             if (!pages.includes(this.totalPages)) {
                 const fromLast = Math.abs(
@@ -139,17 +128,13 @@ export default {
             }
             return pages
         },
-
         selectPage(page) {
             if (!page || isNaN(page)) {
                 return
             }
-
             this.current = page
-
             this.$emit("pageSelected", {page: page})
         },
-
         range(start, end) {
             let i
             let range = []
@@ -158,28 +143,22 @@ export default {
             }
             return range
         },
-
         disablePage(page) {
             if (page === this.current) {
                 return true
             }
-
             if (page === "...") {
                 return true
             }
-
             return false
         },
-
         ariaPageTitle(page) {
             if (page === this.current) {
                 return "Current Page"
             }
-
             if (page === "...") {
                 return "Page Number Break"
             }
-
             return `Page ${page}`
         },
     },

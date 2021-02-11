@@ -93,14 +93,12 @@ export default {
             }
             this.toggled = false
         },
-
         open() {
             if (!this.toggled) {
                 this.$emit("navbarOpened")
             }
             this.toggled = true
         },
-
         toggle() {
             if (this.toggled) {
                 this.close()
@@ -108,14 +106,12 @@ export default {
                 this.open()
             }
         },
-
         linkIsActive(href) {
             if (process.isClient) {
                 return href == window.location.pathname
             }
             return false
         },
-
         nonMenuClick(e) {
             const menuWrapper = this.$refs["navBarItems"]
 
@@ -126,7 +122,6 @@ export default {
                 this.close()
             }
         },
-
         getLinkType(item) {
             if (Object.prototype.hasOwnProperty.call(item, "tag")) {
                 return item.tag

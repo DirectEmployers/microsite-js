@@ -3,6 +3,7 @@
         <slot v-bind="slotData"></slot>
     </component>
 </template>
+
 <script>
 import {
     searchService,

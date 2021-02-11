@@ -67,7 +67,6 @@ export default {
             if (this.name === "*") {
                 return this.path
             }
-
             let input = this.input
             let names = this.name
             let query = Object.assign({}, this.$route.query)
@@ -76,7 +75,6 @@ export default {
             if (!Array.isArray(names)) {
                 names = [names]
             }
-
             for (let item of names) {
                 delete query[item]
             }

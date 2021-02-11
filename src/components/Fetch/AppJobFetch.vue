@@ -88,7 +88,6 @@ export default {
             if (!this.fromRouteParam) {
                 return this.setJob(job, setStatus)
             }
-
             let routePath = this.$route.path.endsWith("/")
                 ? this.$route.path
                 : `${this.$route.path}/`

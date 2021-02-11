@@ -41,7 +41,6 @@ export default {
                 localStorage.setItem(ACCEPTED_COOKIES_KEY, "true")
             }
         },
-
         declineCookieUse() {
             if (process.isClient) {
                 this.accepted = false
