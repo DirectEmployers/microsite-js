@@ -41,7 +41,9 @@
                         :to="item.href"
                         class="navbar__item-link"
                         :class="{
-                            'navbar__item-link--active': linkIsActive(item.href)
+                            'navbar__item-link--active': linkIsActive(
+                                item.href
+                            ),
                         }"
                     >
                         {{ item.display }}
@@ -53,8 +55,9 @@
 </template>
 
 <script>
-import AppHamburgerMenuIcon from './Icons/AppHamburgerMenuIcon'
-import AppXIcon from './Icons/AppXIcon'
+import AppHamburgerMenuIcon from "./Icons/AppHamburgerMenuIcon"
+import AppXIcon from "./Icons/AppXIcon"
+
 export default {
     props: {
         links: {
@@ -62,7 +65,7 @@ export default {
             required: true,
         },
     },
-    components:{
+    components: {
         AppXIcon,
         AppHamburgerMenuIcon,
     },
@@ -85,23 +88,23 @@ export default {
     },
     methods: {
         close() {
-            if(this.toggled){
+            if (this.toggled) {
                 this.$emit("navbarClosed")
             }
             this.toggled = false
         },
 
         open() {
-            if(!this.toggled){
+            if (!this.toggled) {
                 this.$emit("navbarOpened")
             }
             this.toggled = true
         },
 
         toggle() {
-            if(this.toggled){
+            if (this.toggled) {
                 this.close()
-            }else{
+            } else {
                 this.open()
             }
         },
@@ -124,9 +127,8 @@ export default {
             }
         },
 
-
         getLinkType(item) {
-            if (Object.prototype.hasOwnProperty.call(item, 'tag')) {
+            if (Object.prototype.hasOwnProperty.call(item, "tag")) {
                 return item.tag
             }
 

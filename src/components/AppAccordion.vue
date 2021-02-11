@@ -6,7 +6,7 @@
             :id="`accordion-header-${id}`"
             class="accordion__header"
             :class="{
-                'accordion__header--active': active
+                'accordion__header--active': active,
             }"
             :aria-expanded="active"
             @click="active = !active"
@@ -33,32 +33,32 @@
 export default {
     data() {
         return {
-            active: this.open
+            active: this.open,
         }
     },
     props: {
         open: {
             type: Boolean,
             required: false,
-            default: false
+            default: false,
         },
         id: {
             type: String,
             required: false,
             default() {
                 return `${this._uid}`
-            }
+            },
         },
         display: {
             type: String,
             required: false,
-            default : ''
+            default: "",
         },
         tag: {
             type: String,
             required: false,
-            default: "div"
-        }
-    }
+            default: "div",
+        },
+    },
 }
 </script>

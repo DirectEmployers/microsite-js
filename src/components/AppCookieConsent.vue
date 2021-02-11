@@ -11,8 +11,8 @@
         </section>
     </ClientOnly>
 </template>
+
 <script>
-import {blank} from "../services/helpers"
 import {
     ACCEPTED_COOKIES_KEY,
     DECLINED_COOKIES_KEY,

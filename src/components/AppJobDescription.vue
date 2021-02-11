@@ -8,6 +8,7 @@
 
 <script>
 import AppHtmlToJson from "./Parse/AppHtmlToJson"
+
 export default {
     name: "AppJobDescription",
     props: {

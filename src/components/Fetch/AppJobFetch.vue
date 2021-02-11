@@ -10,12 +10,13 @@
         </template>
     </AppFetch>
 </template>
+
 <script>
-import {kebabCase} from "lodash"
 import AppFetch from "./AppFetch"
 import {getJob} from "../../services/cdn/job"
 import buildUrl from "axios/lib/helpers/buildURL"
 import {buildJobDetailUrl, blank} from "../../services/helpers"
+
 export default {
     props: {
         guid: {
@@ -88,7 +89,9 @@ export default {
                 return this.setJob(job, setStatus)
             }
 
-            let routePath = this.$route.path.endsWith("/") ? this.$route.path : `${this.$route.path}/`
+            let routePath = this.$route.path.endsWith("/")
+                ? this.$route.path
+                : `${this.$route.path}/`
             let url = buildJobDetailUrl(
                 job.title_slug,
                 job.location_exact,

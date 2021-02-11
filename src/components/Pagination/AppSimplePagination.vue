@@ -5,7 +5,7 @@
             v-if="currentPage > 1"
             @click.prevent="selectPage(previousPage)"
         >
-            <slot name='back'>Back</slot>
+            <slot name="back">Back</slot>
         </button>
         <slot></slot>
         <button
@@ -13,22 +13,21 @@
             v-if="currentPage < totalPages"
             @click.prevent="selectPage(nextPage)"
         >
-            <slot name='next'>Next</slot>
+            <slot name="next">Next</slot>
         </button>
     </nav>
 </template>
 
 <script>
-
 export default {
     props: {
-        totalPages: { required: true, type: Number },
-        pageLimit: { required: false, type: Number, default: 5 },
-        currentPage: { required: false, type: Number, default: 1 },
+        totalPages: {required: true, type: Number},
+        pageLimit: {required: false, type: Number, default: 5},
+        currentPage: {required: false, type: Number, default: 1},
     },
-    data(){
+    data() {
         return {
-            current: this.currentPage
+            current: this.currentPage,
         }
     },
     computed: {
@@ -44,7 +43,6 @@ export default {
         },
     },
     methods: {
-
         selectPage(page) {
             if (!page || isNaN(page)) {
                 return

@@ -21,12 +21,14 @@ export function isStoredAs(key, stored_as, storageType = "localStorage") {
     }
     return false;
 }
+
 /**
  * Check if storage contains has declined cookie use.
  */
 export function declinedCookieUse() {
     return isStoredAs(DECLINED_COOKIES_KEY, true)
 }
+
 /**
  * Check if storage contains has accepted cookie use.
  */
@@ -75,4 +77,3 @@ export function setViewSourceParameters(query) {
         }
     }
 }
-

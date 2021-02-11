@@ -11,9 +11,7 @@
                         'pagination__link--hidden': !previousPage,
                     }"
                 >
-                    <slot name="previous-text">
-                        &laquo;
-                    </slot>
+                    <slot name="previous-text">&laquo;</slot>
                 </button>
             </li>
             <li
@@ -49,9 +47,7 @@
                         'pagination__link--hidden': !nextPage,
                     }"
                 >
-                    <slot name="next-text">
-                        &raquo;
-                    </slot>
+                    <slot name="next-text">&raquo;</slot>
                 </button>
             </li>
         </ul>
@@ -61,14 +57,14 @@
 <script>
 export default {
     props: {
-        totalRecords: { required: true, type: Number },
-        totalPages: { required: true, type: Number },
-        pageLimit: { required: false, type: Number, default: 5 },
-        currentPage: { required: false, type: Number, default: 1 },
+        totalRecords: {required: true, type: Number},
+        totalPages: {required: true, type: Number},
+        pageLimit: {required: false, type: Number, default: 5},
+        currentPage: {required: false, type: Number, default: 1},
     },
-    data(){
+    data() {
         return {
-            current: this.currentPage
+            current: this.currentPage,
         }
     },
     computed: {
@@ -83,7 +79,7 @@ export default {
             return previous >= 1 ? previous : false
         },
 
-        pages: function() {
+        pages: function () {
             let pages = this.getPageRange()
 
             if (pages.length < this.pageLimit) {
@@ -100,7 +96,7 @@ export default {
             return this.suffixPages(pages)
         },
 
-        pageIsInRange: function() {
+        pageIsInRange: function () {
             const page = this.current
 
             return page >= 1 && page <= this.totalPages
@@ -151,8 +147,7 @@ export default {
 
             this.current = page
 
-            this.$emit("pageSelected", { page: page })
-
+            this.$emit("pageSelected", {page: page})
         },
 
         range(start, end) {

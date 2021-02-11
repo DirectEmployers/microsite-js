@@ -5,10 +5,7 @@
         v-if="isVisible && hasOptions"
         v-bind="$attrs"
     >
-        <h3
-            v-if="display"
-            class="search-filter-display"
-        >
+        <h3 v-if="display" class="search-filter-display">
             Filter By {{ display }}
         </h3>
         <slot
@@ -56,6 +53,7 @@
         </slot>
     </component>
 </template>
+
 <script>
 import {clone} from "lodash"
 import buildUrl from "axios/lib/helpers/buildURL"
@@ -94,7 +92,9 @@ export default {
         input: {
             required: false,
             type: Object,
-            default: () => { return {} },
+            default: () => {
+                return {}
+            },
         },
         limit: {
             required: false,
@@ -107,58 +107,53 @@ export default {
             displayedFilters: {},
         }
     },
-
     created() {
         let value = null
         let filteredOptions = []
-        this.givenOptions.forEach(option => {
-            value = this.optionHasSubmitValue(option) ? option.submit : option.display
-            if(this.input[this.name] != value){
-                filteredOptions.push(
-                    this.buildFilterHref(option)
-                )
+        this.givenOptions.forEach((option) => {
+            value = this.optionHasSubmitValue(option)
+                ? option.submit
+                : option.display
+            if (this.input[this.name] != value) {
+                filteredOptions.push(this.buildFilterHref(option))
             }
         })
         this.displayedFilters = filteredOptions.slice(0, this.limit)
     },
     computed: {
-        givenOptions(){
+        givenOptions() {
             return clone(this.options || [])
         },
-
         hasOptions() {
             return this.displayedFilters.length > 0
         },
-
         isVisible() {
             return this.visible !== false
         },
-
         shouldShowLess() {
             return this.displayedFilters.length > this.limit
         },
-
         shouldShowMore() {
             return this.displayedFilters.length < this.givenOptions.length
         },
     },
     methods: {
-        optionHasSubmitValue(option){
-            return Object.prototype.hasOwnProperty.call(option, 'submit')
+        optionHasSubmitValue(option) {
+            return Object.prototype.hasOwnProperty.call(option, "submit")
         },
         buildFilterHref(option) {
-            let value = this.optionHasSubmitValue(option) ? option.submit: option.display;
+            let value = this.optionHasSubmitValue(option)
+                ? option.submit
+                : option.display
             let params = {[this.name]: value}
-            if('page' in this.$route.query){
+            if ("page" in this.$route.query) {
                 params.page = 1
             }
             option.href = buildUrl("jobs", {...this.input, ...params})
             return option
         },
-
         showMore() {
             const numberOfItemsToAdd = this.limit
-
             const currentTotalShown = this.displayedFilters.length
 
             this.displayedFilters = this.givenOptions.slice(
@@ -166,18 +161,14 @@ export default {
                 currentTotalShown + numberOfItemsToAdd
             )
         },
-
         showLess() {
             const limit = this.limit
-
             const currentTotalShown = this.displayedFilters.length
-
             let less = currentTotalShown - limit
 
             if (less < limit) {
                 less = currentTotalShown - less
             }
-
             this.displayedFilters = this.givenOptions.slice(0, less)
         },
     },

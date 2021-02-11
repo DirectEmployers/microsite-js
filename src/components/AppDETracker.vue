@@ -1,10 +1,7 @@
 <script>
 import {trim, endsWith} from "lodash"
 import {isDevelopment} from "../services/helpers"
-import {
-    declinedCookieUse,
-} from "../services/storage"
-
+import {declinedCookieUse} from "../services/storage"
 
 export default {
     props: {
@@ -14,14 +11,11 @@ export default {
             required: false,
         },
     },
-
     created() {
-
         if (process.isClient && !declinedCookieUse() && !isDevelopment()) {
             this.appendTracker()
         }
     },
-
     methods: {
         appendTracker() {
             // everytime vue rerenders the script,
@@ -35,17 +29,13 @@ export default {
             if (typeof de_track == "object") {
                 de_track.instances = []
             }
-
-            document.querySelectorAll("[id*='detrack']").forEach(el=>el.remove())
-
-            const script = document.createElement('script')
-
-            script.setAttribute('src', this.scriptSrc)
-
-            script.setAttribute('id', 'detrack')
-
-            script.setAttribute('defer', true)
-
+            document
+                .querySelectorAll("[id*='detrack']")
+                .forEach((el) => el.remove())
+            const script = document.createElement("script")
+            script.setAttribute("src", this.scriptSrc)
+            script.setAttribute("id", "detrack")
+            script.setAttribute("defer", true)
             document.body.appendChild(script)
         },
     },
@@ -66,20 +56,16 @@ export default {
         scriptParams() {
             // default params is to assume we are on a page with no jobs/maps
             let params = "0,6"
-
             if (this.canEngageWithJobs) {
                 // static or pages with job data/maps: 0,2,6
                 params = "0,2,6"
             }
-
             if (this.isJobDetail) {
                 params = "0,1,6"
             }
-
             if (this.isJobListing) {
                 params = "0,3,6"
             }
-
             return params
         },
     },

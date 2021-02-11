@@ -1,8 +1,18 @@
-import {get, omitBy, words, startCase} from "lodash"
+import {
+    get,
+    omitBy,
+    words,
+    startCase
+} from "lodash"
 import buildUrl from "axios/lib/helpers/buildURL"
-import {GOOGLE_TALENT, SOLR} from "../../../services/search"
-import {VS_KEY, UTM_KEY} from "../../../services/storage"
-import {buildJobDetailUrl, blank} from "../../../services/helpers"
+import {
+    VS_KEY,
+    UTM_KEY
+} from "../../../services/storage"
+import {
+    buildJobDetailUrl,
+    blank
+} from "../../../services/helpers"
 
 export default {
     props: {
@@ -65,17 +75,19 @@ export default {
                 return url
             }
             var params = {}
-            try{
+            try {
                 let utm_params = {}
                 try {
                     utm_params = JSON.parse(sessionStorage.getItem(UTM_KEY))
                 } catch {
                     utm_params = {}
                 }
-
-                params = {...this.$route.query, ...utm_params}
+                params = {
+                    ...this.$route.query,
+                    ...utm_params
+                }
                 params[VS_KEY] = sessionStorage.getItem(VS_KEY)
-            }catch(e){
+            } catch (e) {
                 console.error(e);
             }
 
@@ -101,8 +113,8 @@ export default {
         },
     },
     methods: {
-        executeCallback(callback, args=[]){
-            if(typeof callback == 'function'){
+        executeCallback(callback, args = []) {
+            if (typeof callback == 'function') {
                 callback(...args)
             }
         },
@@ -114,10 +126,10 @@ export default {
         clickedViewJob(callback) {
             this.executeCallback(callback, [this.jobInfo])
             this.$router
-            .push({
-                path: this.detailUrl,
-            })
-            .catch(err => {})
+                .push({
+                    path: this.detailUrl,
+                })
+                .catch(err => {})
         },
         getAttribute(name, defaultValue = "") {
             return get(this.jobInfo, name, defaultValue)

@@ -12,7 +12,7 @@ import {
 import base from "./mixins/provider"
 import {blank} from "../../../services/helpers"
 import {googleTalentEventService} from "../../../services/events"
-import provider from './mixins/provider'
+
 export default {
     mixins: [base],
     data() {
@@ -33,25 +33,26 @@ export default {
             if (process.isClient && this.isGoogleTalent) {
                 let event = {
                     eventType: "impression",
-                    jobs: this.jobs.map(details => details.job.name),
+                    jobs: this.jobs.map((details) => details.job.name),
                     requestId: (data.meta || {}).request_id,
                 }
-
                 googleTalentEventService(event, {
                     client_events: this.siteConfig.client_events,
                     project_id: this.siteConfig.project_id,
                     tenant_uuid: this.siteConfig.tenant_uuid,
                     company_uuids: this.siteConfig.company_uuids,
-                }).then(response => {
-                    // update the request id to what is returned from google.
-                    event.requestId = (response.data || {}).request_id
-                    sessionStorage.setItem(
-                        GOOGLE_TALENT,
-                        JSON.stringify({
-                            event: event,
-                        })
-                    )
-                }).catch(()=>{})
+                })
+                    .then((response) => {
+                        // update the request id to what is returned from google.
+                        event.requestId = (response.data || {}).request_id
+                        sessionStorage.setItem(
+                            GOOGLE_TALENT,
+                            JSON.stringify({
+                                event: event,
+                            })
+                        )
+                    })
+                    .catch(() => {})
             }
         },
         providerInputDefinition() {
@@ -82,8 +83,10 @@ export default {
                 return [
                     {
                         display: `Commute:${this.input.commuteLocation}`,
-                        parameter: ["commuteLocation"]
-                        .concat(this.providerInputDefinition().commuteLocation.clears),
+                        parameter: ["commuteLocation"].concat(
+                            this.providerInputDefinition().commuteLocation
+                                .clears
+                        ),
                     },
                 ]
             }

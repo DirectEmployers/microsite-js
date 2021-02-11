@@ -11,9 +11,7 @@
             >
                 <template v-slot="jobData">
                     <section class="similar-jobs__grid-item">
-                        <g-link
-                            :to="jobData.detailUrl"
-                        >
+                        <g-link :to="jobData.detailUrl">
                             <slot :jobData="jobData">
                                 <h3 class="similar-jobs__grid-item-title">
                                     {{ jobData.title }}
@@ -31,8 +29,9 @@
 </template>
 
 <script>
-import { searchService } from "../services/search"
-import AppJobProvider from './Jobs/AppJobProvider'
+import {searchService} from "../services/search"
+import AppJobProvider from "./Jobs/AppJobProvider"
+
 export default {
     data() {
         return {
@@ -40,8 +39,8 @@ export default {
             similarJobs: [],
         }
     },
-    components:{
-        AppJobProvider
+    components: {
+        AppJobProvider,
     },
     props: {
         title: {
@@ -51,12 +50,12 @@ export default {
         guid: {
             type: String,
             required: false,
-            default: ""
+            default: "",
         },
         location: {
             type: String,
             required: false,
-            default: ""
+            default: "",
         },
         siteConfig: {
             type: Object,
@@ -77,7 +76,6 @@ export default {
         },
     },
     methods: {
-
         getJobs() {
             searchService(
                 {
@@ -86,24 +84,22 @@ export default {
                     location: this.location,
                 },
                 this.siteConfig
-            ).then(response=>{
-
+            ).then((response) => {
                 const data = response.data
 
-                const { jobs, meta } = data
+                const {jobs, meta} = data
 
                 this.meta = meta
 
                 this.similarJobs = jobs
 
-                if(this.guid){
-                    this.similarJobs = this.similarJobs.filter((job)=>{
+                if (this.guid) {
+                    this.similarJobs = this.similarJobs.filter((job) => {
                         return job.guid != this.guid
                     })
                 }
             })
-
-        }
+        },
     },
 }
 </script>

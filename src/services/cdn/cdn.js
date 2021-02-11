@@ -5,8 +5,8 @@ export default() => {
         baseURL: "https://microsites.dejobs.org/",
         withCredentials: false,
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            "Accept": "application/json",
+            "Content-Type": "application/json"
         }
     })
 }

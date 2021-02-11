@@ -10,7 +10,7 @@
                 <template v-slot:logo>
                     <g-link to="/">
                         <img
-                            style="border-radius: 50%;"
+                            style="border-radius: 50%"
                             width="50px"
                             height="50px"
                             src="//d2e48ltfsb5exy.cloudfront.net/myjobs/logos/DE-icon-bleed.png"
@@ -66,6 +66,7 @@ import AppDETracker from "~/components/AppDETracker"
 import AppCookieConsent from "~/components/AppCookieConsent"
 import AppNavbar from "~/components/AppNavbar"
 import {setViewSourceParameters} from "~/services/storage"
+
 export default {
     components: {
         AppNavbar,
