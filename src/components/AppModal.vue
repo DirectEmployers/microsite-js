@@ -26,6 +26,8 @@
 </template>
 
 <script>
+const ESC_KEY = 27
+
 export default {
     props: {
         title: {
@@ -80,8 +82,7 @@ export default {
             }
         },
         exitModal(e) {
-            // escape
-            if (this.toggled && e.keyCode === 27) {
+            if (this.toggled && e.keyCode === ESC_KEY) {
                 this.close()
             }
         },
