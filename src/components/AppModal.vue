@@ -85,7 +85,6 @@ export default {
                 this.close()
             }
         },
-
         focusTrap(e) {
             const focusable = this.$refs.modal.querySelectorAll(
                 "button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
