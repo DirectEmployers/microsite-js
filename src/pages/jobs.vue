@@ -1,26 +1,31 @@
 <template>
     <Layout>
-        <AppGoogleTalentSearchProvider :site-config="$siteConfig" :is-load-more="$static.metadata.paginationType == 'load'">
-            <template v-slot="{
-                jobs,
-                sort,
-                input,
-                source,
-                status,
-                hasJobs,
-                loadMore,
-                setInput,
-                setFilter,
-                newSearch,
-                pagination,
-                filteredInput,
-                featuredJobs,
-                appliedFilters,
-                isGoogleTalent,
-                isCommuteSearch,
-                getFilterOptions,
-            }">
-                <AppLoader v-if="status.loading && !jobs.length"/>
+        <AppGoogleTalentSearchProvider
+            :site-config="$siteConfig"
+            :is-load-more="$static.metadata.paginationType == 'load'"
+        >
+            <template
+                v-slot="{
+                    jobs,
+                    sort,
+                    input,
+                    source,
+                    status,
+                    hasJobs,
+                    loadMore,
+                    setInput,
+                    setFilter,
+                    newSearch,
+                    pagination,
+                    filteredInput,
+                    featuredJobs,
+                    appliedFilters,
+                    isGoogleTalent,
+                    isCommuteSearch,
+                    getFilterOptions,
+                }"
+            >
+                <AppLoader v-if="status.loading && !jobs.length" />
                 <section v-else>
                     <div class="mx-4">
                         <AppSearchForm
@@ -32,7 +37,9 @@
                     </div>
                     <section class="flex flex-col lg:flex-row">
                         <div class="mb-6 mx-4 w-full lg:w-1/2">
-                            <h3 v-if="status.error && !hasJobs">Unable to load jobs...</h3>
+                            <h3 v-if="status.error && !hasJobs">
+                                Unable to load jobs...
+                            </h3>
                             <AppFeaturedJobs
                                 :featured-jobs="featuredJobs"
                                 :source="source"
@@ -45,25 +52,42 @@
                                     :source="source"
                                 />
 
-                                <AppLoadMore v-if="$static.metadata.paginationType == 'load'"
+                                <AppLoadMore
+                                    v-if="
+                                        $static.metadata.paginationType ==
+                                        'load'
+                                    "
                                     :totalJobs="pagination.total"
                                     :currentJobs="jobs.length"
                                     @loadMore="loadMore"
                                 />
-                                <AppSimplePagination v-else-if="$static.metadata.paginationType == 'simple'"
+                                <AppSimplePagination
+                                    v-else-if="
+                                        $static.metadata.paginationType ==
+                                        'simple'
+                                    "
                                     @pageSelected="setInput"
                                     :current-page="pagination.page"
                                     :total-records="pagination.total"
                                     :total-pages="pagination.total_pages"
                                 />
-                                <AppPagination v-else
+                                <AppPagination
+                                    v-else
                                     @pageSelected="setInput"
                                     :current-page="pagination.page"
                                     :total-records="pagination.total"
                                     :total-pages="pagination.total_pages"
                                 />
-                                <div class="text-sm" v-if="$static.metadata.paginationType == 'load'">
-                                    Showing {{ jobs.length }} of {{ pagination.total }} {{ jobs.length == 1 ? "job" : "jobs" }}
+                                <div
+                                    class="text-sm"
+                                    v-if="
+                                        $static.metadata.paginationType ==
+                                        'load'
+                                    "
+                                >
+                                    Showing {{ jobs.length }} of
+                                    {{ pagination.total }}
+                                    {{ jobs.length == 1 ? "job" : "jobs" }}
                                 </div>
                             </section>
                             <h3
@@ -119,7 +143,9 @@
                             </AppAccordion>
 
                             <AppSearchFilter
-                                v-for="(configFilter, index) in $siteConfig.filters"
+                                v-for="(
+                                    configFilter, index
+                                ) in $siteConfig.filters"
                                 :key="index"
                                 :input="filteredInput"
                                 :name="configFilter.name"
@@ -139,12 +165,13 @@
                                     <AppAccordion
                                         :display="`Filter By ${configFilter.display}`"
                                     >
-
                                         <ul class="search-filter-options">
                                             <li
                                                 :key="index"
                                                 class="search-filter-options-item"
-                                                v-for="(filter, index) in displayedFilters"
+                                                v-for="(
+                                                    filter, index
+                                                ) in displayedFilters"
                                             >
                                                 <g-link :to="filter.href">
                                                     {{ filter.display }}
@@ -156,7 +183,9 @@
                                         </ul>
                                         <section
                                             class="search-filter-limiter"
-                                            v-if="shouldShowLess || shouldShowMore"
+                                            v-if="
+                                                shouldShowLess || shouldShowMore
+                                            "
                                         >
                                             <button
                                                 class="search-filter-limiter-more"
@@ -208,6 +237,7 @@
         </AppGoogleTalentSearchProvider>
     </Layout>
 </template>
+
 <script>
 import AppModal from "~/components/AppModal"
 import AppXIcon from "~/components/Icons/AppXIcon"
@@ -236,7 +266,8 @@ export default {
         AppGoogleTalentSearchProvider,
         AppLoadMore: () => import("~/components/Pagination/AppLoadMore"),
         AppPagination: () => import("~/components/Pagination/AppPagination"),
-        AppSimplePagination: () => import("~/components/Pagination/AppSimplePagination"),
+        AppSimplePagination: () =>
+            import("~/components/Pagination/AppSimplePagination"),
     },
     metaInfo: {
         title: "Jobs",

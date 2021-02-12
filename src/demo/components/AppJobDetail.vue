@@ -49,8 +49,7 @@
                 <div
                     class="min-h-screen max-w-screen-md mb-8 mx-4 md:mx-auto job-details-content"
                     v-html="description"
-                >
-                </div>
+                ></div>
 
                 <AppSimilarJobs
                     :siteConfig="$siteConfig"
@@ -66,11 +65,13 @@
         </template>
     </AppSolrJob>
 </template>
+
 <script>
 import {blank} from "~/services/helpers"
 import buildUrl from "axios/lib/helpers/buildURL"
 import AppSimilarJobs from "~/components/AppSimilarJobs"
 import AppSolrJob from "~/components/Jobs/AppSolrJob"
+
 export default {
     name: "AppJobDetail",
     metaInfo() {

@@ -26,5 +26,4 @@ function getOldSeoPaths() {
     return builtPaths
 }
 
-
 module.exports = getOldSeoPaths

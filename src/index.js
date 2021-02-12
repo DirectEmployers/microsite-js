@@ -19,6 +19,6 @@ export function install(Vue) {
 }
 
 // Export the library as a plugin for Vue.use()
-export default { install: install }
-
-
+export default {
+    install: install
+}

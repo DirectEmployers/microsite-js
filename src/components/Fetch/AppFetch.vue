@@ -9,9 +9,11 @@
         </component>
     </ClientOnly>
 </template>
+
 <script>
 import axios from "axios"
 import {blank} from "../../services/helpers"
+
 export default {
     props: {
         endpoint: {
@@ -74,12 +76,12 @@ export default {
                 return this.options
             }
 
-            return { params: this.parameters, ...this.options }
+            return {params: this.parameters, ...this.options}
         },
         requestHandler() {
             if (typeof this.endpoint == "function") {
                 return this.endpoint(this.requestPayload)
-            }else if(this.endpoint instanceof Promise){
+            } else if (this.endpoint instanceof Promise) {
                 return this.endpoint
             }
             return axios.get(this.endpoint, this.requestPayload)
@@ -93,20 +95,23 @@ export default {
                 this.response = await this.requestHandler
                 //if a resolve function was given, call it and
                 //let implementer mark status as resolved.
-                if(typeof this.onResolve == 'function'){
-                    this.onResolve(this.responseData, this.response, this.status)
-                }else{
+                if (typeof this.onResolve == "function") {
+                    this.onResolve(
+                        this.responseData,
+                        this.response,
+                        this.status
+                    )
+                } else {
                     this.status({
                         resolved: true,
                     })
                 }
-
             } catch (error) {
                 //if a failure function was given, call it and
                 //let the implementer mark error and resolve status.
-                if(typeof this.onFailure == 'function'){
+                if (typeof this.onFailure == "function") {
                     this.onFailure(error, this.status)
-                }else{
+                } else {
                     this.status({
                         error,
                         resolved: false,

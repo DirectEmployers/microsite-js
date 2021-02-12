@@ -5,7 +5,11 @@
                 <h3 class="modal__header-title" v-if="title">
                     {{ title }}
                 </h3>
-                <button class="modal__header-close" @click="toggle" type="button">
+                <button
+                    class="modal__header-close"
+                    @click="toggle"
+                    type="button"
+                >
                     &times;
                 </button>
             </div>
@@ -22,6 +26,8 @@
 </template>
 
 <script>
+const ESC_KEY = 27
+
 export default {
     props: {
         title: {
@@ -36,7 +42,6 @@ export default {
             document.addEventListener("keyup", this.exitModal)
         }
     },
-
     destroyed() {
         if (process.isClient) {
             document.removeEventListener("click", this.nonModalClick)
@@ -49,22 +54,21 @@ export default {
         }
     },
     methods: {
-        close(){
+        close() {
             this.toggled = false
-            this.$emit('modalClosed')
+            this.$emit("modalClosed")
         },
-        open(){
+        open() {
             this.toggled = true
-            this.$emit('modalOpened')
+            this.$emit("modalOpened")
         },
         toggle() {
-            if(this.toggled){
+            if (this.toggled) {
                 this.close()
-            }else{
+            } else {
                 this.open()
             }
         },
-
         nonModalClick(e) {
             const modalWrapper = this.$el.firstChild
 
@@ -77,34 +81,26 @@ export default {
                 this.close()
             }
         },
-
         exitModal(e) {
-            // escape
-            if (this.toggled && e.keyCode === 27) {
+            if (this.toggled && e.keyCode === ESC_KEY) {
                 this.close()
             }
         },
-
         focusTrap(e) {
             const focusable = this.$refs.modal.querySelectorAll(
                 "button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
             )
-
             const firstFocusable = focusable[0]
-
             const lastFocusable = focusable[focusable.length - 1]
 
             if (e.shiftKey && document.activeElement === firstFocusable) {
                 lastFocusable.focus()
                 e.preventDefault()
             }
-
             if (!e.shiftKey && document.activeElement === lastFocusable) {
                 firstFocusable.focus()
                 e.preventDefault()
             }
-
-
         },
     },
 }

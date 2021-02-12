@@ -18,6 +18,7 @@ import AppJobFetch from "~/components/Fetch/AppJobFetch"
 import AppLoader from "~/demo/components/AppLoader"
 import AppJobDetail from "~/demo/components/AppJobDetail"
 import AppJobExpired from "~/demo/components/AppJobExpired"
+
 export default {
     components: {
         App404,

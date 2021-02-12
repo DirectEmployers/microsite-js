@@ -22,7 +22,7 @@ export default {
             this.appendPlacesScript()
         }
     },
-    updated(){
+    updated() {
         this.initAutocomplete()
     },
     computed: {

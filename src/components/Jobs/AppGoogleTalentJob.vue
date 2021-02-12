@@ -64,7 +64,6 @@ export default {
                 this.commuteInfo.travelDuration.replace("s", "")
             )
             const hours = Math.floor(seconds / 60 / 60)
-
             const minutes = Math.floor(seconds / 60) - hours * 60
 
             return minutes == 0 ? "< 1 minute" : minutes + " minutes"
@@ -82,57 +81,59 @@ export default {
         clickedApplyJob(callback) {
             this.executeCallback(callback, [this.jobInfo])
 
-            return this.tryClientEvent('redirect',()=>{
-                let nw = window.open(this.applyUrl, '_blank')
+            return this.tryClientEvent("redirect", () => {
+                let nw = window.open(this.applyUrl, "_blank")
                 nw.focus()
             })
         },
         clickedViewJob(callback) {
             this.executeCallback(callback, [this.jobInfo])
-
-            this.tryClientEvent('view', ()=>{
-                this.$router.push({
-                    path: this.detailUrl,
-                }).catch(err => {})
+            this.tryClientEvent("view", () => {
+                this.$router
+                    .push({
+                        path: this.detailUrl,
+                    })
+                    .catch((err) => {})
             })
         },
-        tryClientEvent(type, callback=null){
+        tryClientEvent(type, callback = null) {
             if (process.isClient) {
                 var currentEvent = {
                     eventType: type,
                     jobs: [this.jobInfo.name],
                 }
-                try{
+                try {
                     //try to get the saved request id from the previous event (impression or view depending on what event is calling this method).
                     //the service call will do nothing if we werent able to.
-                    let lastEvent = JSON.parse(sessionStorage.getItem(GOOGLE_TALENT)).event
+                    let lastEvent = JSON.parse(
+                        sessionStorage.getItem(GOOGLE_TALENT)
+                    ).event
                     currentEvent.requestId = lastEvent.requestId
-                }catch(e){
+                } catch (e) {
                     this.executeCallback(callback)
                     return
                 }
-                googleTalentEventService(
-                    currentEvent,
-                    {
-                        client_events: this.siteConfig.client_events,
-                        project_id: this.siteConfig.project_id,
-                        tenant_uuid: this.siteConfig.tenant_uuid,
-                        company_uuids: this.siteConfig.company_uuids,
-                    }
-                ).then(response => {
-                    currentEvent.requestId = (response.data || {}).request_id
-                    sessionStorage.setItem(
-                        GOOGLE_TALENT,
-                        JSON.stringify({
-                            event: currentEvent,
-                        })
-                    )
-
-                    this.executeCallback(callback)
-
-                }).catch(()=>{
-                    this.executeCallback(callback)
+                googleTalentEventService(currentEvent, {
+                    client_events: this.siteConfig.client_events,
+                    project_id: this.siteConfig.project_id,
+                    tenant_uuid: this.siteConfig.tenant_uuid,
+                    company_uuids: this.siteConfig.company_uuids,
                 })
+                    .then((response) => {
+                        currentEvent.requestId = (
+                            response.data || {}
+                        ).request_id
+                        sessionStorage.setItem(
+                            GOOGLE_TALENT,
+                            JSON.stringify({
+                                event: currentEvent,
+                            })
+                        )
+                        this.executeCallback(callback)
+                    })
+                    .catch(() => {
+                        this.executeCallback(callback)
+                    })
             }
         },
     },

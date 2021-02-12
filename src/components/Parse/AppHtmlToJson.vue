@@ -24,11 +24,8 @@
 
 <script>
 import linkify from "linkifyjs/html"
-
-import { kebabCase, truncate } from "lodash"
-
+import {kebabCase, truncate} from "lodash"
 const html2json = require("html2json").html2json
-
 import AppJsonToHtml from "./AppJsonToHtml"
 
 export default {
@@ -82,7 +79,7 @@ export default {
         linkifyHtml() {
             return linkify(this.cleanHtml(), {
                 className: "job-detail-link",
-                attributes: { rel: "noreferrer" },
+                attributes: {rel: "noreferrer"},
             })
         },
     },

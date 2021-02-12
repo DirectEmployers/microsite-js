@@ -1,5 +1,11 @@
-import {upperFirst, toString, words} from "lodash"
-import {removeCountry} from "./location"
+import {
+    upperFirst,
+    toString,
+    words
+} from "lodash"
+import {
+    removeCountry
+} from "./location"
 
 /**
  * Check if the given value is "blank".
@@ -20,7 +26,6 @@ export function blank(value) {
     return isBlank
 }
 
-
 /** Return true if the env is dev. */
 export function isDevelopment() {
     if (process.env.NODE_ENV == "development") {
@@ -39,18 +44,15 @@ export function buildJobDetailUrl(title, location, guid) {
     if (blank(locationSlug)) {
         locationSlug = "none"
     }
-
     return `/${locationSlug}/${titleSlug}/${guid}/job/`
 }
-
 
 export function strAfter(subject, search) {
     let result = search === "" ? subject : subject.split(search)[1]
 
-    if(blank(result)){
+    if (blank(result)) {
         return null
     }
-
     return result
 }
 

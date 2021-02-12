@@ -1,12 +1,11 @@
 <template>
-    <nav 
-    class='load-more-pagination'
-    :class="{hidden:!isVisible}"
-    >
-        <button class="load-more-pagination__button" type="button" @click="loadMore">
-            <slot>
-                Load More
-            </slot>
+    <nav class="load-more-pagination" :class="{hidden: !isVisible}">
+        <button
+            class="load-more-pagination__button"
+            type="button"
+            @click="loadMore"
+        >
+            <slot>Load More</slot>
         </button>
     </nav>
 </template>
@@ -25,11 +24,10 @@ export default {
         },
     },
     computed: {
-        isVisible(){
+        isVisible() {
             return this.totalJobs > 1 && this.currentJobs < this.totalJobs
-        }
+        },
     },
-
     methods: {
         loadMore() {
             this.$emit("loadMore")

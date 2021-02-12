@@ -20,11 +20,8 @@
                     @setResult="search"
                 />
             </div>
-
             <div class="search-form__section">
-                <div
-                    class="search-form__location-autocomplete"
-                >
+                <div class="search-form__location-autocomplete">
                     <AppAutocompleteInput
                         ref="location"
                         v-model="form.location"
@@ -43,7 +40,6 @@
                         />
                     </div>
                 </div>
-
                 <div
                     v-if="shouldShowRadiusInput"
                     class="search-form__location-input"
@@ -103,7 +99,7 @@ import {
 } from "~/services/search"
 
 export default {
-    name: "SearchForm",
+    name: "AppSearchForm",
     components: {
         AppAutocompleteInput,
         AppGeoLocation,
@@ -153,7 +149,7 @@ export default {
             this.search()
         },
     },
-    data: function(){
+    data: function () {
         return {
             TitleCompleteService,
             MOCCompleteService,
@@ -165,7 +161,7 @@ export default {
                 moc: this.input.moc,
                 cords: this.input.cords,
                 location: this.input.location,
-            }
+            },
         }
     },
 }
