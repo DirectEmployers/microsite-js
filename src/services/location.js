@@ -1,5 +1,10 @@
-import {trim, trimEnd} from "lodash"
-import {blank} from "./helpers"
+import {
+    trim,
+    trimEnd
+} from "lodash"
+import {
+    blank
+} from "./helpers"
 
 export let states = {
     AK: "Alaska",

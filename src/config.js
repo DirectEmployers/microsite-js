@@ -1,4 +1,4 @@
-const config =  {
+const config = {
     buids: [19424],
     source: "solr",
     s3Folder: "sanfordhealth-jobs",
@@ -9,22 +9,20 @@ const config =  {
     num_items: 2,
     featured_jobs: {
         num_items: 10, //number of items per page.
-        solr:"reqid:(" +
-            ["R-33091", "R-25218"].join(" OR ") +
-        ")",
+        solr: "reqid:(" + ["R-33091", "R-25218"].join(" OR ") +
+            ")",
     },
     // force_filters: {
     //     solr:"title_exact:*Sales* OR title_exact:*Retail*"
     // },
-    filters: [
-        {
+    filters: [{
             name: "moc",
             display: "MOC",
         },
         {
             name: "company",
             display: "Company",
-            key:{
+            key: {
                 solr: "company",
                 google_talent: "employer"
             }
@@ -335,9 +333,9 @@ const config =  {
             name: "shift",
             display: "Shift",
             solr_queries: {
-                Varies:"text:'Varies'",
-                Day:"text:'Day'",
-                Rotating:"text:'Rotating'",
+                Varies: 'text:"Varies"',
+                Day: 'text:"Day"',
+                Rotating: 'text:"Rotating"',
                 Evenings:"text:(\"Shift: Evenings\" OR \"Shift: Evening\" OR \"Shift: 10 Hours - Evening Shifts\" OR \"Shift: 12 Hours - Evening Shifts\" OR \"Shift: 8 Hours - Evening Shifts\")"
             },
         },

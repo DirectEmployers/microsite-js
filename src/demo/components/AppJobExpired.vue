@@ -18,7 +18,7 @@
 
         <div class="bg-gray-300 mt-6 mb-8 mx-2 p-12">
             <div class="mx-w-sm mx-auto text-center">
-                <h1 class="font-bold text-4xl text-black font-bold">
+                <h1 class="font-bold text-4xl text-black">
                     {{ job.title }} has expired.
                 </h1>
 
@@ -30,8 +30,12 @@
         <div
             class="min-h-screen text-center max-w-screen-md mb-8 mx-4 md:mx-auto job-details-content"
         >
-            <AppSimilarJobs :siteConfig="$siteConfig" :guid="job.guid" :title="job.title" :location="job.location_exact"/>
-
+            <AppSimilarJobs
+                :siteConfig="$siteConfig"
+                :guid="job.guid"
+                :title="job.title"
+                :location="job.location_exact"
+            />
         </div>
         <script type="application/ld+json">
             {{ jsonLd }}

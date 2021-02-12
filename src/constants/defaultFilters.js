@@ -1,5 +1,4 @@
-const defaultFilters = [
-    {
+const defaultFilters = [{
         name: "location",
         display: "locations"
     },

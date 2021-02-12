@@ -1,1 +1,1 @@
-export * from './defaultFilters.js';
+export * from './defaultFilters.js'

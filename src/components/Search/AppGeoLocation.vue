@@ -16,8 +16,10 @@
         </button>
     </ClientOnly>
 </template>
+
 <script>
 import AppRadiusIcon from "../Icons/AppRadiusIcon"
+
 export default {
     computed: {
         isSupported() {
@@ -27,25 +29,26 @@ export default {
             return false
         },
     },
-    components:{
-        AppRadiusIcon
+    components: {
+        AppRadiusIcon,
     },
     methods: {
         getGeoLocation() {
             if (process.isClient && this.isSupported) {
-                navigator.geolocation.getCurrentPosition(position => {
-                    let lat = position.coords.latitude.toFixed(6)
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        let lat = position.coords.latitude.toFixed(6)
+                        let lon = position.coords.longitude.toFixed(6)
+                        let coords = lat + "," + lon
 
-                    let lon = position.coords.longitude.toFixed(6)
-
-                    let coords = lat + "," + lon
-
-                    this.$emit("getCoords", coords)
-                }, (error)=>{
-                    if(error.code == 1){
-                        this.$emit("permissionDenied")
+                        this.$emit("getCoords", coords)
+                    },
+                    (error) => {
+                        if (error.code == 1) {
+                            this.$emit("permissionDenied")
+                        }
                     }
-                })
+                )
             }
         },
     },

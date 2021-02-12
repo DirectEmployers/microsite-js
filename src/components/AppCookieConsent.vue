@@ -11,8 +11,8 @@
         </section>
     </ClientOnly>
 </template>
+
 <script>
-import {blank} from "../services/helpers"
 import {
     ACCEPTED_COOKIES_KEY,
     DECLINED_COOKIES_KEY,
@@ -41,7 +41,6 @@ export default {
                 localStorage.setItem(ACCEPTED_COOKIES_KEY, "true")
             }
         },
-
         declineCookieUse() {
             if (process.isClient) {
                 this.accepted = false

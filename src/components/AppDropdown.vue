@@ -16,7 +16,7 @@
             class="dropdown__content"
             v-show="toggled"
             :aria-labelledby="`dropdown-display-${id}`"
-            :class="{ 'dropdown__content--active': toggled }"
+            :class="{'dropdown__content--active': toggled}"
         >
             <slot>
                 <div
@@ -36,7 +36,7 @@
                             class="dropdown__content-item"
                             :class="{
                                 'dropdown__content-item--active':
-                                    index === selectedIndex
+                                    index === selectedIndex,
                             }"
                         >
                             {{ link.display }}
@@ -54,6 +54,7 @@ const UP_KEY = 38
 const DOWN_KEY = 40
 const ESC_KEY = 27
 const ENTER_KEY = 13
+
 export default {
     props: {
         id: {
@@ -61,33 +62,33 @@ export default {
             required: false,
             default() {
                 return `${this._uid}`
-            }
+            },
         },
         interactionType: {
             type: String,
             required: false,
-            default: 'click'
+            default: "click",
         },
         links: {
             type: Array,
             required: false,
-            default: () => []
+            default: () => [],
         },
         tag: {
             type: String,
             required: false,
-            default: 'div'
+            default: "div",
         },
         display: {
             type: String,
             required: false,
-            default: 'Dropdown'
-        }
+            default: "Dropdown",
+        },
     },
     data() {
         return {
             toggled: false,
-            selectedIndex: -1
+            selectedIndex: -1,
         }
     },
     methods: {
@@ -102,21 +103,19 @@ export default {
             this.toggled = false
             this.selectedIndex = -1
         },
-
         keyUp(e) {
             const code = e.keyCode
             //if enter is pressed on the display button make sure dropdown is open.
             if (
                 !this.toggled &&
                 code == ENTER_KEY &&
-                document.activeElement == this.$refs['display']
+                document.activeElement == this.$refs["display"]
             ) {
                 this.open()
                 this.$nextTick(() => {
-                    this.$refs['link-0'][0].focus()
+                    this.$refs["link-0"][0].focus()
                 })
             }
-
             //escape
             if (code == ESC_KEY) {
                 return this.close()
@@ -143,7 +142,6 @@ export default {
                 }
                 this.setLinkFocus(this.selectedIndex)
             }
-
             if (this.toggled && code == TAB_KEY) {
                 if (this.selectedIndex == 0) {
                     return this.close()
@@ -161,45 +159,44 @@ export default {
             if (this.$el !== e.target && !this.$el.contains(e.target)) {
                 this.close()
             }
-        }
+        },
     },
     created() {
         if (process.isClient && this.isClick) {
-            document.addEventListener('click', this.exitDropdown)
+            document.addEventListener("click", this.exitDropdown)
             if (this.links.length) {
-                document.addEventListener('keyup', this.keyUp)
-                document.addEventListener('keydown', this.keyDown)
+                document.addEventListener("keyup", this.keyUp)
+                document.addEventListener("keydown", this.keyDown)
             }
         }
     },
     destroyed() {
         if (process.isClient && this.isClick) {
-            document.removeEventListener('click', this.exitDropdown)
+            document.removeEventListener("click", this.exitDropdown)
             if (this.links.length) {
-                document.removeEventListener('keyup', this.keyUp)
-                document.removeEventListener('keydown', this.keyDown)
+                document.removeEventListener("keyup", this.keyUp)
+                document.removeEventListener("keydown", this.keyDown)
             }
         }
     },
     computed: {
         isClick() {
-            return this.interactionType == 'click'
+            return this.interactionType == "click"
         },
-
         eventHandlers() {
             const type = this.interactionType
             switch (type) {
-                case 'click':
-                    return { click: this.toggle, mouseleave: this.close }
+                case "click":
+                    return {click: this.toggle, mouseleave: this.close}
                     break
-                case 'hover':
-                    return { mouseover: this.open, mouseleave: this.close }
+                case "hover":
+                    return {mouseover: this.open, mouseleave: this.close}
                     break
                 default:
                     throw new Error(`Unsupported interaction type '${type}'`)
                     break
             }
-        }
-    }
+        },
+    },
 }
 </script>

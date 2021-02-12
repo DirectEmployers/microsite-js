@@ -1,6 +1,10 @@
 import axios from "axios"
-import { kebabCase } from "lodash"
-import { isDevelopment } from "./helpers"
+import {
+    kebabCase
+} from "lodash"
+import {
+    isDevelopment
+} from "./helpers"
 
 export const SOLR = "solr"
 export const GOOGLE_TALENT = "google_talent"
@@ -24,29 +28,25 @@ export function api() {
     })
 }
 
-export function searchService(input, siteConfig){
+export function searchService(input, siteConfig) {
     const source = kebabCase(siteConfig.source)
 
     return api().post(
-        `${source}/search`,
-        {
+        `${source}/search`, {
             data: input,
             config: siteConfig,
-        },
-        {
+        }, {
             timeout: TIMEOUT_THRESHOLD
         }
     )
 }
 
-export function commuteSearchService(input, siteConfig){
+export function commuteSearchService(input, siteConfig) {
     return api().post(
-        `google-talent/commute`,
-        {
+        `google-talent/commute`, {
             data: input,
             config: siteConfig,
-        },
-        {
+        }, {
             timeout: TIMEOUT_THRESHOLD
         }
     )
@@ -55,7 +55,10 @@ export function commuteSearchService(input, siteConfig){
 
 export class TitleCompleteService {
     static async get(q, queryParams = {}) {
-        let params = {q: q, ...queryParams}
+        let params = {
+            q: q,
+            ...queryParams
+        }
 
         try {
             const response = await api().get("complete/title", {

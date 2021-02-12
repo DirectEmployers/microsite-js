@@ -5,11 +5,7 @@
             :search-on-load="false"
             :site-config="$siteConfig"
             :is-load-more="$static.metadata.paginationType == 'load'"
-            v-slot="{
-                input,
-                source,
-                newSearch,
-            }"
+            v-slot="{input, source, newSearch}"
         >
             <div class="mx-4">
                 <AppSearchForm
@@ -21,13 +17,15 @@
         </AppGoogleTalentSearchProvider>
     </Layout>
 </template>
+
 <script>
 import AppSearchForm from "~/demo/components/AppSearchForm"
-import AppGoogleTalentSearchProvider from '~/components/Search/Providers/AppGoogleTalentSearchProvider'
+import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
+
 export default {
     components: {
         AppSearchForm,
-        AppGoogleTalentSearchProvider
+        AppGoogleTalentSearchProvider,
     },
     metaInfo: {
         title: "Home",
@@ -38,7 +36,7 @@ export default {
                 content: "only the best jobs",
             },
         ],
-    }
+    },
 }
 </script>
 

@@ -1,8 +1,5 @@
 <template>
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 397.23 485.8"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 397.23 485.8">
         <title>Radius Icon</title>
         <g>
             <g>
