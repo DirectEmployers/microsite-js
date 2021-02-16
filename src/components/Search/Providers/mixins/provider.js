@@ -234,8 +234,9 @@ export default {
             return object
         },
         getUrlExtraDataObject(object) {
+            let filterSlugs = this.getConfigFilterSlugs()
             for (const key in object) {
-                if (this.getConfigFilterSlugs().includes(key)) {
+                if (filterSlugs.includes(key)) {
                     delete object[key]
                 }
             }
