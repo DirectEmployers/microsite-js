@@ -1,4 +1,5 @@
-const defaultFilters = [{
+const defaultFilters = [
+    {
         name: "location",
         display: "locations"
     },
@@ -9,7 +10,11 @@ const defaultFilters = [{
     {
         name: "moc",
         display: "military-codes"
-    }
+    },
+    {
+        name:'company',
+        display:'Company'
+    },
 ]
 
 module.exports = defaultFilters
