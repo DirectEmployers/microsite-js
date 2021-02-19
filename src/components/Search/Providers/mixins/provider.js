@@ -141,7 +141,10 @@ export default {
         },
     },
     created() {
-        this.input = this.mergeWithDefaultInput(this.$route.query)
+        this.input = this.mergeWithDefaultInput({
+            ...this.$route.query,
+            ...this.$route.params,
+        })
         if (!blank(this.$route.params.location)) {
             this.input.location = displayLocationFromSlug(this.input.location)
         }
@@ -304,23 +307,12 @@ export default {
             return options
         },
         setInput(filter) {
-            if(this.getUrlExtraDataObject(this.$route.params)){
-                let payload = this.mergeWithDefaultInput({
+            this.newSearch(
+                this.mergeWithDefaultInput({
                     ...this.input,
                     ...filter,
-            })
-            this.$router.push({
-                query: this.filterInput(payload),
-            })
-            .catch(err => {})
-            } else {
-                this.newSearch(
-                    this.mergeWithDefaultInput({
-                        ...this.input,
-                        ...filter,
-                    })
-                    )
-            }
+                })
+            )
         },
         defaultExtraData() {
             if (this.isLoadMore) {
