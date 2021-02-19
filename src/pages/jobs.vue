@@ -26,7 +26,7 @@
                 }"
             >
                 <AppLoader v-if="status.loading && !jobs.length" />
-                <section v-else-if="status.error && status.error.response ** status.error.response.status == 404">
+                <section v-else-if="status.error && status.error.response && status.error.response.status == 404">
                     <App404 />
                 </section>
                 <section v-else>
