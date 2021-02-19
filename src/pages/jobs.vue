@@ -26,6 +26,9 @@
                 }"
             >
                 <AppLoader v-if="status.loading && !jobs.length" />
+                <section v-else-if="status.error && status.error.response ** status.error.response.status == 404">
+                    <App404 />
+                </section>
                 <section v-else>
                     <div class="mx-4">
                         <AppSearchForm
@@ -240,6 +243,7 @@
 
 <script>
 import AppModal from "~/components/AppModal"
+import App404 from "~/demo/components/App404"
 import AppXIcon from "~/components/Icons/AppXIcon"
 import AppLoader from "~/demo/components/AppLoader"
 import AppAccordion from "~/components/AppAccordion"
@@ -253,6 +257,7 @@ import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoog
 
 export default {
     components: {
+        App404,
         AppXIcon,
         AppModal,
         AppLoader,
