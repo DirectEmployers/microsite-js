@@ -1,6 +1,6 @@
 const config = {
     buids: [19424],
-    source: "solr",
+    source: "google-talent", //solr or google-talent
     s3Folder: "sanfordhealth-jobs",
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
     tenant_uuid: process.env.GRIDSOME_GOOGLE_TALENT_TENANT,
