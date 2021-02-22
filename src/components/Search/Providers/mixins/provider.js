@@ -261,6 +261,7 @@ export default {
         },
         search() {
             this.status.loading = true
+            delete this.status.error
             this.beforeSearch()
             if (this.isLoadMore) {
                 this.beforeLoadMoreSearch()
