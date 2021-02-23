@@ -293,7 +293,16 @@ export default {
                     setTimeout(()=>{
                         this.status.loading = false
                     }, this.delayLoadBy)
+                    this.addCanonicalToHead()
                 })
+        },
+        addCanonicalToHead(){
+            if(process.isClient && this.meta.canonical){
+                let link = document.createElement('link')
+                link.setAttribute("rel", "canonical")
+                link.setAttribute("href", this.meta.canonical ?? '/jobs')
+                document.head.append(link)
+            }
         },
         getFilterKey(filter) {
             let key = filter.key

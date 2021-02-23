@@ -33,6 +33,41 @@ const config = {
             display: "City",
         },
         {
+            name: "location",
+            key: "state",
+            display: "State"
+        },
+        {
+            name: "location",
+            key: "country",
+            display: "Country",
+        },
+        {
+            name: "title",
+            display: "Title",
+        },
+        {
+            name: "schedule",
+            key: "schedule",
+            display: "Job Schedule",
+            solr_queries: {
+                'Full time':"text:\"Job Schedule: Full-Time\"",
+                'PRN':"text:\"Job Schedule: PRN\"",
+                'Part time':"text:\"Job Schedule: Part-Time\"",
+                'Flex':"text:\"Flex\"",
+            },
+        },
+        {
+            name: "shift",
+            display: "Shift",
+            solr_queries: {
+                Varies: 'text:"Varies"',
+                Day: 'text:"Day"',
+                Rotating: 'text:"Rotating"',
+                Evenings:"text:(\"Shift: Evenings\" OR \"Shift: Evening\" OR \"Shift: 10 Hours - Evening Shifts\" OR \"Shift: 12 Hours - Evening Shifts\" OR \"Shift: 8 Hours - Evening Shifts\")"
+            },
+        },
+        {
             name: "jobfunction",
             key: "jobfunction",
             display: "Job Functions",
@@ -69,17 +104,6 @@ const config = {
                     "RN": "(text:\"Job Function: Nursing\" AND title:(\"RN\" OR \"Registered Nurse\")) OR text:#nursingcareers",
                     "IT - Technology Solutions": "text:(\"Job Function: Information Technology\" OR \"Job Function: Data Analytics\")",
             }
-        },
-        {
-            name: "schedule",
-            key: "schedule",
-            display: "Job Schedule",
-            solr_queries: {
-                'Full time':"text:\"Job Schedule: Full-Time\"",
-                'PRN':"text:\"Job Schedule: PRN\"",
-                'Part time':"text:\"Job Schedule: Part-Time\"",
-                'Flex':"text:\"Flex\"",
-            },
         },
         {
             name: "facility",
@@ -314,30 +338,6 @@ const config = {
                 "Worthington Profile": "text:(\"Facility: Worthington Profile\")",
                 "Worthington Sunst Cottage": "text:(\"Facility: Worthington Sunst Cottage\")"
             }
-        },
-        {
-            name: "location",
-            key: "state",
-            display: "State"
-        },
-        {
-            name: "location",
-            key: "country",
-            display: "Country",
-        },
-        {
-            name: "title",
-            display: "Title",
-        },
-        {
-            name: "shift",
-            display: "Shift",
-            solr_queries: {
-                Varies: 'text:"Varies"',
-                Day: 'text:"Day"',
-                Rotating: 'text:"Rotating"',
-                Evenings:"text:(\"Shift: Evenings\" OR \"Shift: Evening\" OR \"Shift: 10 Hours - Evening Shifts\" OR \"Shift: 12 Hours - Evening Shifts\" OR \"Shift: 8 Hours - Evening Shifts\")"
-            },
         },
     ],
 }
