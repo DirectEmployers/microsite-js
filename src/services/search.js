@@ -8,7 +8,6 @@ import {
 
 export const SOLR = "solr"
 export const GOOGLE_TALENT = "google_talent"
-export const TIMEOUT_THRESHOLD = 5000
 let API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
 
 if (process.env.GRIDSOME_USE_MINIKUBE === "true") {
@@ -35,8 +34,6 @@ export function searchService(input, siteConfig) {
         `${source}/search`, {
             data: input,
             config: siteConfig,
-        }, {
-            timeout: TIMEOUT_THRESHOLD
         }
     )
 }
@@ -46,8 +43,6 @@ export function commuteSearchService(input, siteConfig) {
         `google-talent/commute`, {
             data: input,
             config: siteConfig,
-        }, {
-            timeout: TIMEOUT_THRESHOLD
         }
     )
 }
