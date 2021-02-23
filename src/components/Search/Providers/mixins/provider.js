@@ -297,10 +297,14 @@ export default {
                 })
         },
         addCanonicalToHead(){
-            if(process.isClient && this.meta.canonical){
-                let link = document.createElement('link')
+            let link = document.getElementById("canonicalLink")
+            if (link) {
+                link.setAttribute("href", this.meta.canonical)
+            } else if (process.isClient && this.meta.canonical) {
+                link = document.createElement('link')
                 link.setAttribute("rel", "canonical")
-                link.setAttribute("href", this.meta.canonical ?? '/jobs')
+                link.setAttribute("id", "canonicalLink")
+                link.setAttribute("href", this.meta.canonical)
                 document.head.append(link)
             }
         },
