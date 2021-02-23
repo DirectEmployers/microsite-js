@@ -58,7 +58,6 @@ export class TitleCompleteService {
         try {
             const response = await api().get("complete/title", {
                 params: params,
-                timeout: TIMEOUT_THRESHOLD,
             })
             return response
         } catch (error) {
@@ -78,7 +77,6 @@ export class MOCCompleteService {
                 params: {
                     q: q,
                 },
-                timeout: TIMEOUT_THRESHOLD,
             })
             return response
         } catch (error) {
@@ -97,7 +95,6 @@ export class LocationCompleteService {
                 params: {
                     q: q,
                 },
-                timeout: TIMEOUT_THRESHOLD,
             })
             return response
         } catch (error) {
