@@ -3,7 +3,6 @@ import {
 } from "./helpers"
 
 import {
-    TIMEOUT_THRESHOLD,
     api
 } from "./search"
 
@@ -21,8 +20,6 @@ export function googleTalentEventService(input, siteConfig) {
         "google-talent/event", {
             data: input,
             config: siteConfig
-        }, {
-            timeout: TIMEOUT_THRESHOLD
         }
     )
 }
