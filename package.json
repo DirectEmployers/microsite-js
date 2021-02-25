@@ -51,6 +51,7 @@
     "dist/microsite-js.css",
     "src/components/*",
     "src/services/*",
+    "src/constants/*",
     "src/scss/*",
     "!dist/*.html"
   ],
