@@ -1,6 +1,5 @@
 const _ = require("lodash")
 const alphabeticalOrder = require("./alphabeticalOrder")
-const config = require("./../config.js")
 const defaultUrlFilters = require("./../constants/defaultFilters.js")
 const defaultFilterNames = _.map(defaultUrlFilters, "name")
 const pluralize = require("pluralize")
@@ -23,9 +22,9 @@ function buildFilterPages(filterGroup, filterPaths, prevPath = null, prevParam =
     return filterPaths
 }
 
-function getFilterPaths() {
+function getFilterPaths(filters) {
     let filterPaths = []
-    let urlFilters = config.filters
+    let urlFilters = filters
     urlFilters = urlFilters.filter(filter => !defaultFilterNames.includes(filter.name))
     urlFilters.sort(alphabeticalOrder("display"))
     urlFilters = _.union(defaultUrlFilters, urlFilters)
