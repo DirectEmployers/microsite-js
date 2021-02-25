@@ -1,5 +1,4 @@
 const _ = require("lodash")
-const config = require("./../config.js")
 const oldSeoPaths = require("./../constants/oldSeoPaths.js")
 
 function buildOldSeoPaths(key, paths, builtPaths, builtKeys) {
