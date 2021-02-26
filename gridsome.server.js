@@ -1,4 +1,5 @@
 const fs = require("fs")
+const config = require("./src/config.js")
 const getFilterPaths = require("./src/services/gridsomeFilterPaths")
 const getOldSeoPaths = require("./src/services/gridsomeOldSeoPaths")
 
@@ -28,7 +29,7 @@ module.exports = function (api, filters) {
             })
         }
 
-        let filterPaths = getFilterPaths()
+        let filterPaths = getFilterPaths(config.filters)
         for (let i = 0, len = filterPaths.length; i < len; i++) {
             createPage({
                 path: filterPaths[i],
