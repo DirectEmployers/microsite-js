@@ -34,7 +34,9 @@
 }
 .dropdown__content {
     opacity: 0;
+    background-color: #fff;
     position: absolute;
+    z-index: 99;
     right: 0;
     left: 0;
     border-color: #ccc;
