@@ -176,8 +176,8 @@ module.exports.f = function getOwnPropertyNames(it) {
 /* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("1276");
 /* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("2909");
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("5530");
+/* harmony import */ var _Users_zarif_Desktop_microsite_js_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("2909");
+/* harmony import */ var _Users_zarif_Desktop_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("5530");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("2ef0");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("30b5");
@@ -268,7 +268,7 @@ module.exports.f = function getOwnPropertyNames(it) {
           utm_params = {};
         }
 
-        params = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])({}, this.$route.query), utm_params);
+        params = Object(_Users_zarif_Desktop_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(Object(_Users_zarif_Desktop_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])({}, this.$route.query), utm_params);
         params[_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* VS_KEY */ "d"]] = sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* VS_KEY */ "d"]);
       } catch (e) {
         console.error(e);
@@ -301,7 +301,7 @@ module.exports.f = function getOwnPropertyNames(it) {
       var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
       if (typeof callback == 'function') {
-        callback.apply(void 0, Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(args));
+        callback.apply(void 0, Object(_Users_zarif_Desktop_microsite_js_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(args));
       }
     },
     clickedApplyJob: function clickedApplyJob(callback) {
@@ -23589,8 +23589,8 @@ module.exports = {
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("cca6");
 /* harmony import */ var core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("b85c");
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("5530");
+/* harmony import */ var _Users_zarif_Desktop_microsite_js_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("b85c");
+/* harmony import */ var _Users_zarif_Desktop_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("5530");
 /* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("30b5");
 /* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_4__);
 
@@ -23666,13 +23666,13 @@ var ENTER_KEY = 13;
       var input = this.input;
       var names = this.name;
       var query = Object.assign({}, this.$route.query);
-      query = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])({}, query), input);
+      query = Object(_Users_zarif_Desktop_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(Object(_Users_zarif_Desktop_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])({}, query), input);
 
       if (!Array.isArray(names)) {
         names = [names];
       }
 
-      var _iterator = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(names),
+      var _iterator = Object(_Users_zarif_Desktop_microsite_js_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(names),
           _step;
 
       try {
@@ -25169,15 +25169,15 @@ module.exports = function (it) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5141caf7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=1346fa06&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g({tag:"component",staticClass:"dropdown"},_vm.eventHandlers),[_c('div',{ref:"display",staticClass:"dropdown__display",attrs:{"role":"button","tabindex":"0","aria-expanded":_vm.toggled,"id":("dropdown-display-" + _vm.id)}},[_vm._v(" "+_vm._s(_vm.display)+" ")]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.toggled),expression:"toggled"}],staticClass:"dropdown__content",class:{ 'dropdown__content--active': _vm.toggled },attrs:{"id":("dropdown-content-" + _vm.id),"aria-labelledby":("dropdown-display-" + _vm.id)}},[_vm._t("default",_vm._l((_vm.links),function(link,index){return _c('div',{key:index,on:{"mouseover":function($event){_vm.selectedIndex = index}}},[_vm._t(link.key,[_c('a',{ref:("link-" + index),refInFor:true,staticClass:"dropdown__content-item",class:{
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5141caf7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=171ca9db&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g({tag:"component",staticClass:"dropdown"},_vm.eventHandlers),[_c('div',{ref:"display",staticClass:"dropdown__display",attrs:{"tabindex":"0","role":"button","aria-haspopup":"true","aria-expanded":_vm.toggled,"id":("dropdown-display-" + _vm.id)}},[_vm._t("display",[_vm._v(" "+_vm._s(_vm.display)+" ")])],2),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.toggled),expression:"toggled"}],ref:"dropdown-content",staticClass:"dropdown__content",class:{ 'dropdown__content--active': _vm.toggled },attrs:{"id":("dropdown-content-" + _vm.id),"aria-labelledby":("dropdown-display-" + _vm.id)}},[_vm._t("default",_vm._l((_vm.links),function(link,index){return _c('div',{key:index,on:{"mouseover":function($event){_vm.selectedIndex = index}}},[_vm._t(link.key,[_c('a',_vm._b({ref:("link-" + index),refInFor:true,staticClass:"dropdown__content-item",class:{
                             'dropdown__content-item--active':
                                 index === _vm.selectedIndex
-                        },attrs:{"tabindex":"0","href":link.href}},[_vm._v(" "+_vm._s(link.display)+" ")])],{"link":link,"isSelected":index == _vm.selectedIndex})],2)}))],2)])}
+                        },attrs:{"tabindex":"0","dropdown-item":"","href":link.href}},'a',link.attributes || {},false),[_vm._v(" "+_vm._s(link.display)+" ")])],{"link":link,"isSelected":index == _vm.selectedIndex})],2)}),{"selectedIndex":_vm.selectedIndex})],2)])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=1346fa06&
+// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=171ca9db&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=script&lang=js&
 var AppDropdownvue_type_script_lang_js_ = __webpack_require__("e433");
@@ -28105,7 +28105,7 @@ hiddenKeys[HIDDEN] = true;
 /* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("159b");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("53ca");
+/* harmony import */ var _Users_zarif_Desktop_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("53ca");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("2ef0");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("a74a");
@@ -28139,7 +28139,7 @@ hiddenKeys[HIDDEN] = true;
       // but since this is SPA, we are ending up with several
       // instances of the tracker on every SPA update, so clear out
       // the instances so we can "simulate" a page change.
-      if ((typeof de_track === "undefined" ? "undefined" : Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(de_track)) == "object") {
+      if ((typeof de_track === "undefined" ? "undefined" : Object(_Users_zarif_Desktop_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(de_track)) == "object") {
         de_track.instances = [];
       }
 
@@ -33124,11 +33124,17 @@ var component = Object(componentNormalizer["a" /* default */])(
 //
 //
 //
-var TAB_KEY = 9;
-var UP_KEY = 38;
-var DOWN_KEY = 40;
-var ESC_KEY = 27;
-var ENTER_KEY = 13;
+//
+//
+//
+//
+//
+//
+var TAB_KEY_CODE = 9;
+var UP_KEY_CODE = 38;
+var DOWN_KEY_CODE = 40;
+var ESCAPE_KEY_CODE = 27;
+var ENTER_KEY_CODE = 13;
 /* harmony default export */ __webpack_exports__["a"] = ({
   props: {
     id: {
@@ -33163,104 +33169,117 @@ var ENTER_KEY = 13;
   },
   data: function data() {
     return {
+      items: [],
+      totalItems: 0,
       toggled: false,
       selectedIndex: -1
     };
   },
+  mounted: function mounted() {
+    this.items = this.$refs['dropdown-content'].querySelectorAll('[dropdown-item]');
+    this.totalItems = this.items.length;
+  },
+  created: function created() {
+    if (!process.isClient) {
+      return;
+    }
+
+    document.addEventListener('keyup', this.keyNavigation);
+    document.addEventListener('keydown', this.preventScroll);
+
+    if (this.isClick) {
+      document.addEventListener('click', this.clickOutOfMenu);
+    }
+  },
+  destroyed: function destroyed() {
+    if (!process.isClient) {
+      return;
+    }
+
+    document.removeEventListener("keyup", this.keyNavigation);
+    document.removeEventListener("keydown", this.preventScroll);
+
+    if (this.isClick) {
+      document.removeEventListener('click', this.clickOutOfMenu);
+    }
+  },
   methods: {
-    toggle: function toggle() {
-      this.toggled = !this.toggled;
+    clickOutOfMenu: function clickOutOfMenu(e) {
+      if (this.$el !== e.target && !this.$el.contains(e.target)) {
+        this.close();
+      }
     },
     open: function open() {
       this.toggled = true;
-      this.selectedIndex = 0;
     },
     close: function close() {
       this.toggled = false;
       this.selectedIndex = -1;
     },
-    keyUp: function keyUp(e) {
-      var _this = this;
+    down: function down() {
+      if (this.selectedIndex <= this.totalItems) {
+        this.selectedIndex++;
+      }
 
-      var code = e.keyCode; //if enter is pressed on the display button make sure dropdown is open.
+      if (this.selectedIndex >= this.totalItems) {
+        this.selectedIndex = 0;
+      }
 
-      if (!this.toggled && code == ENTER_KEY && document.activeElement == this.$refs['display']) {
-        this.open();
-        this.$nextTick(function () {
-          _this.$refs['link-0'][0].focus();
-        });
-      } //escape
+      this.items[this.selectedIndex].focus();
+    },
+    up: function up() {
+      if (this.selectedIndex <= 0) {
+        this.selectedIndex = this.totalItems - 1;
+      } else {
+        this.selectedIndex--;
+      }
 
+      this.items[this.selectedIndex].focus();
+    },
+    tab: function tab() {
+      this.selectedIndex++;
 
-      if (code == ESC_KEY) {
+      if (this.selectedIndex >= this.totalItems) {
         return this.close();
-      } //tab or up arrrow
+      }
 
-
-      if (this.toggled && [UP_KEY].includes(code)) {
-        if (this.selectedIndex <= 0) {
-          this.selectedIndex = this.links.length - 1;
-        } else {
-          this.selectedIndex--;
-        }
-
-        this.setLinkFocus(this.selectedIndex);
+      this.items[this.selectedIndex].focus();
+    },
+    toggle: function toggle() {
+      if (this.toggled) {
+        this.close();
+      } else {
+        this.open();
       }
     },
-    keyDown: function keyDown(e) {
+    preventScroll: function preventScroll(event) {
+      if (this.toggled && [UP_KEY_CODE, DOWN_KEY_CODE].includes(event.keyCode)) {
+        event.preventDefault();
+      }
+    },
+    keyNavigation: function keyNavigation(e) {
       var code = e.keyCode;
 
-      if (this.toggled && [DOWN_KEY, TAB_KEY].includes(code)) {
-        if (this.selectedIndex <= this.links.length) {
-          this.selectedIndex++;
+      if (code == ENTER_KEY_CODE && e.target == this.$refs['display']) {
+        return this.toggle();
+      }
+
+      if (code == ESCAPE_KEY_CODE) {
+        return this.close();
+      }
+
+      if (this.toggled) {
+        if (code == TAB_KEY_CODE) {
+          return this.tab();
         }
 
-        if (this.selectedIndex >= this.links.length) {
-          this.selectedIndex = 0;
+        if (code == DOWN_KEY_CODE) {
+          return this.down();
         }
 
-        this.setLinkFocus(this.selectedIndex);
-      }
-
-      if (this.toggled && code == TAB_KEY) {
-        if (this.selectedIndex == 0) {
-          return this.close();
-        } //odd bug where tab doesnt focus the right index :/
-
-
-        this.setLinkFocus(this.selectedIndex - 1);
-      }
-    },
-    setLinkFocus: function setLinkFocus(index) {
-      var _this2 = this;
-
-      this.$nextTick(function () {
-        _this2.$refs["link-".concat(index)][0].focus();
-      });
-    },
-    exitDropdown: function exitDropdown(e) {
-      if (this.$el !== e.target && !this.$el.contains(e.target)) {
-        this.close();
-      }
-    }
-  },
-  created: function created() {
-    if (process.isClient && this.isClick) {
-      document.addEventListener('click', this.exitDropdown);
-
-      if (this.links.length) {
-        document.addEventListener('keyup', this.keyUp);
-        document.addEventListener('keydown', this.keyDown);
-      }
-    }
-  },
-  destroyed: function destroyed() {
-    if (process.isClient && this.isClick) {
-      document.removeEventListener('click', this.exitDropdown);
-
-      if (this.links.length) {
-        document.removeEventListener('keyup', this.keyUp);
-        document.removeEventListener('keydown', this.keyDown);
+        if (code == UP_KEY_CODE) {
+          return this.up();
+        }
       }
     }
   },
@@ -33274,8 +33293,7 @@ var ENTER_KEY = 13;
       switch (type) {
         case 'click':
           return {
-            click: this.toggle,
-            mouseleave: this.close
+            click: this.toggle
           };
           break;
 
