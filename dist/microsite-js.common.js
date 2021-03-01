@@ -25207,15 +25207,15 @@ module.exports = function (it) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5141caf7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=49eda570&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g({tag:"component",staticClass:"dropdown"},_vm.eventHandlers),[_c('div',{ref:"display",staticClass:"dropdown__display",attrs:{"role":"button","tabindex":"0","aria-expanded":_vm.toggled,"id":("dropdown-display-" + _vm.id)}},[_vm._v(" "+_vm._s(_vm.display)+" ")]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.toggled),expression:"toggled"}],staticClass:"dropdown__content",class:{'dropdown__content--active': _vm.toggled},attrs:{"id":("dropdown-content-" + _vm.id),"aria-labelledby":("dropdown-display-" + _vm.id)}},[_vm._t("default",_vm._l((_vm.links),function(link,index){return _c('div',{key:index,on:{"mouseover":function($event){_vm.selectedIndex = index}}},[_vm._t(link.key,[_c('a',{ref:("link-" + index),refInFor:true,staticClass:"dropdown__content-item",class:{
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5141caf7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=5e552f4e&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._g({tag:"component",staticClass:"dropdown"},_vm.eventHandlers),[_c('div',{ref:"display",staticClass:"dropdown__display",attrs:{"tabindex":"0","role":"button","aria-haspopup":"true","aria-expanded":_vm.toggled,"id":("dropdown-display-" + _vm.id)}},[_vm._t("display",[_vm._v(" "+_vm._s(_vm.display)+" ")])],2),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.toggled),expression:"toggled"}],ref:"dropdown-content",staticClass:"dropdown__content",class:{'dropdown__content--active': _vm.toggled},attrs:{"id":("dropdown-content-" + _vm.id),"aria-labelledby":("dropdown-display-" + _vm.id)}},[_vm._t("default",_vm._l((_vm.links),function(link,index){return _c('div',{key:index,on:{"mouseover":function($event){_vm.selectedIndex = index}}},[_vm._t(link.key,[_c('a',_vm._b({ref:("link-" + index),refInFor:true,staticClass:"dropdown__content-item",class:{
                             'dropdown__content-item--active':
                                 index === _vm.selectedIndex,
-                        },attrs:{"tabindex":"0","href":link.href}},[_vm._v(" "+_vm._s(link.display)+" ")])],{"link":link,"isSelected":index == _vm.selectedIndex})],2)}))],2)])}
+                        },attrs:{"tabindex":"0","dropdown-item":"","href":link.href}},'a',link.attributes || {},false),[_vm._v(" "+_vm._s(link.display)+" ")])],{"link":link,"isSelected":index == _vm.selectedIndex})],2)}),{"selectedIndex":_vm.selectedIndex})],2)])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=49eda570&
+// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=5e552f4e&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=script&lang=js&
 var AppDropdownvue_type_script_lang_js_ = __webpack_require__("e433");
@@ -33161,11 +33161,17 @@ var component = Object(componentNormalizer["a" /* default */])(
 //
 //
 //
-var TAB_KEY = 9;
-var UP_KEY = 38;
-var DOWN_KEY = 40;
-var ESC_KEY = 27;
-var ENTER_KEY = 13;
+//
+//
+//
+//
+//
+//
+var TAB_KEY_CODE = 9;
+var UP_KEY_CODE = 38;
+var DOWN_KEY_CODE = 40;
+var ESCAPE_KEY_CODE = 27;
+var ENTER_KEY_CODE = 13;
 /* harmony default export */ __webpack_exports__["a"] = ({
   props: {
     id: {
@@ -33200,104 +33206,117 @@ var ENTER_KEY = 13;
   },
   data: function data() {
     return {
+      items: [],
+      totalItems: 0,
       toggled: false,
       selectedIndex: -1
     };
   },
+  mounted: function mounted() {
+    this.items = this.$refs['dropdown-content'].querySelectorAll('[dropdown-item]');
+    this.totalItems = this.items.length;
+  },
+  created: function created() {
+    if (!process.isClient) {
+      return;
+    }
+
+    document.addEventListener('keyup', this.keyNavigation);
+    document.addEventListener('keydown', this.preventScroll);
+
+    if (this.isClick) {
+      document.addEventListener('click', this.clickOutOfMenu);
+    }
+  },
+  destroyed: function destroyed() {
+    if (!process.isClient) {
+      return;
+    }
+
+    document.removeEventListener("keyup", this.keyNavigation);
+    document.removeEventListener("keydown", this.preventScroll);
+
+    if (this.isClick) {
+      document.removeEventListener('click', this.clickOutOfMenu);
+    }
+  },
   methods: {
-    toggle: function toggle() {
-      this.toggled = !this.toggled;
+    clickOutOfMenu: function clickOutOfMenu(e) {
+      if (this.$el !== e.target && !this.$el.contains(e.target)) {
+        this.close();
+      }
     },
     open: function open() {
       this.toggled = true;
-      this.selectedIndex = 0;
     },
     close: function close() {
       this.toggled = false;
       this.selectedIndex = -1;
     },
-    keyUp: function keyUp(e) {
-      var _this = this;
+    down: function down() {
+      if (this.selectedIndex <= this.totalItems) {
+        this.selectedIndex++;
+      }
 
-      var code = e.keyCode; //if enter is pressed on the display button make sure dropdown is open.
+      if (this.selectedIndex >= this.totalItems) {
+        this.selectedIndex = 0;
+      }
 
-      if (!this.toggled && code == ENTER_KEY && document.activeElement == this.$refs["display"]) {
-        this.open();
-        this.$nextTick(function () {
-          _this.$refs["link-0"][0].focus();
-        });
-      } //escape
+      this.items[this.selectedIndex].focus();
+    },
+    up: function up() {
+      if (this.selectedIndex <= 0) {
+        this.selectedIndex = this.totalItems - 1;
+      } else {
+        this.selectedIndex--;
+      }
 
+      this.items[this.selectedIndex].focus();
+    },
+    tab: function tab() {
+      this.selectedIndex++;
 
-      if (code == ESC_KEY) {
+      if (this.selectedIndex >= this.totalItems) {
         return this.close();
-      } //tab or up arrrow
+      }
 
-
-      if (this.toggled && [UP_KEY].includes(code)) {
-        if (this.selectedIndex <= 0) {
-          this.selectedIndex = this.links.length - 1;
-        } else {
-          this.selectedIndex--;
-        }
-
-        this.setLinkFocus(this.selectedIndex);
+      this.items[this.selectedIndex].focus();
+    },
+    toggle: function toggle() {
+      if (this.toggled) {
+        this.close();
+      } else {
+        this.open();
       }
     },
-    keyDown: function keyDown(e) {
+    preventScroll: function preventScroll(event) {
+      if (this.toggled && [UP_KEY_CODE, DOWN_KEY_CODE].includes(event.keyCode)) {
+        event.preventDefault();
+      }
+    },
+    keyNavigation: function keyNavigation(e) {
       var code = e.keyCode;
 
-      if (this.toggled && [DOWN_KEY, TAB_KEY].includes(code)) {
-        if (this.selectedIndex <= this.links.length) {
-          this.selectedIndex++;
+      if (code == ENTER_KEY_CODE && e.target == this.$refs['display']) {
+        return this.toggle();
+      }
+
+      if (code == ESCAPE_KEY_CODE) {
+        return this.close();
+      }
+
+      if (this.toggled) {
+        if (code == TAB_KEY_CODE) {
+          return this.tab();
         }
 
-        if (this.selectedIndex >= this.links.length) {
-          this.selectedIndex = 0;
+        if (code == DOWN_KEY_CODE) {
+          return this.down();
         }
 
-        this.setLinkFocus(this.selectedIndex);
-      }
-
-      if (this.toggled && code == TAB_KEY) {
-        if (this.selectedIndex == 0) {
-          return this.close();
-        } //odd bug where tab doesnt focus the right index :/
-
-
-        this.setLinkFocus(this.selectedIndex - 1);
-      }
-    },
-    setLinkFocus: function setLinkFocus(index) {
-      var _this2 = this;
-
-      this.$nextTick(function () {
-        _this2.$refs["link-".concat(index)][0].focus();
-      });
-    },
-    exitDropdown: function exitDropdown(e) {
-      if (this.$el !== e.target && !this.$el.contains(e.target)) {
-        this.close();
-      }
-    }
-  },
-  created: function created() {
-    if (process.isClient && this.isClick) {
-      document.addEventListener("click", this.exitDropdown);
-
-      if (this.links.length) {
-        document.addEventListener("keyup", this.keyUp);
-        document.addEventListener("keydown", this.keyDown);
-      }
-    }
-  },
-  destroyed: function destroyed() {
-    if (process.isClient && this.isClick) {
-      document.removeEventListener("click", this.exitDropdown);
-
-      if (this.links.length) {
-        document.removeEventListener("keyup", this.keyUp);
-        document.removeEventListener("keydown", this.keyDown);
+        if (code == UP_KEY_CODE) {
+          return this.up();
+        }
       }
     }
   },
@@ -33309,10 +33328,9 @@ var ENTER_KEY = 13;
       var type = this.interactionType;
 
       switch (type) {
-        case "click":
+        case 'click':
           return {
-            click: this.toggle,
-            mouseleave: this.close
+            click: this.toggle
           };
           break;
 
