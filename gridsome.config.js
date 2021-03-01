@@ -6,6 +6,7 @@
 
 module.exports = {
     siteName: "Microsite JS",
+    outputDir: "build",
     plugins: [
         {
             use: "gridsome-plugin-tailwindcss",
