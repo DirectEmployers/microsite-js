@@ -22,6 +22,7 @@ pnpm-debug.log*
 dist/*.gz
 dist/*.map
 dist/demo.html
+build/*
 src/tests
 .temp
 .cache
