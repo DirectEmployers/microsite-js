@@ -42,6 +42,7 @@ export default {
             jobDisplay: [],
             filters: [],
             pagination: {},
+            canonical: this.$route.path,
             featuredJobs: [],
             isFirstLoad: true,
             appliedFilters: [],
@@ -139,6 +140,13 @@ export default {
             this.extraData = this.defaultExtraData()
             this.search()
         },
+    },
+    metaInfo() {
+        return {
+            link: [
+                {rel: "canonical", href: this.canonical }
+            ]
+        }
     },
     created() {
         this.input = this.mergeWithDefaultInput({
@@ -276,6 +284,7 @@ export default {
                     this.meta = data.meta || {
                         source: SOLR,
                     } //prevents sites from erroring when unable to connect to api
+                    this.canonical = data.meta.canonical,
                     this.appliedFilters = this.getAppliedFilters()
                     this.searchCompleted(data)
                     if (!this.isLoadMore){
