@@ -1,27 +1,655 @@
 [
   {
-    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/career-areas/:jobcategory/jobs",
-    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/career-areas/_jobcategory/jobs.html"
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/military-codes/:moc/career-areas/:jobcategory/jobs",
-    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/career-areas/_jobcategory/jobs.html"
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/facility/:facility/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/facility/:facility/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/military-codes/_moc/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/companies/_company/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/companies/_company/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/companies/_company/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/facility/:facility/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/job-titles/_title/companies/_company/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/companies/_company/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/facility/:facility/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/facility/:facility/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/facility/:facility/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/military-codes/_moc/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/job-titles/_title/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/companies/_company/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/companies/_company/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/companies/_company/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/companies/_company/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/job-titles/_title/companies/_company/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/companies/_company/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/military-codes/:moc/facility/:facility/jobs",
+    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/facility/_facility/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/military-codes/_moc/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/military-codes/_moc/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/facility/:facility/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/companies/_company/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/military-codes/_moc/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/facility/:facility/shift/:shift/jobs",
+    "destination": "/locations/_location/companies/_company/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/job-titles/_title/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/facility/_facility/job-schedule/_schedule/jobs.html"
   },
   {
     "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/jobs",
     "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/jobs.html"
   },
   {
-    "source": "/locations/:location/military-codes/:moc/companies/:company/career-areas/:jobcategory/jobs",
-    "destination": "/locations/_location/military-codes/_moc/companies/_company/career-areas/_jobcategory/jobs.html"
+    "source": "/locations/:location/military-codes/:moc/companies/:company/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/job-functions/_jobfunction/jobs.html"
   },
   {
-    "source": "/job-titles/:title/military-codes/:moc/companies/:company/career-areas/:jobcategory/jobs",
-    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/career-areas/_jobcategory/jobs.html"
+    "source": "/locations/:location/military-codes/:moc/companies/:company/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/job-schedule/_schedule/jobs.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/companies/:company/career-areas/:jobcategory/jobs",
-    "destination": "/locations/_location/job-titles/_title/companies/_company/career-areas/_jobcategory/jobs.html"
+    "source": "/companies/:company/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/companies/_company/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/companies/:company/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/companies/_company/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/facility/:facility/shift/:shift/jobs",
+    "destination": "/job-titles/_title/companies/_company/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/job-functions/:jobfunction/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/military-codes/_moc/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/companies/:company/facility/:facility/jobs",
+    "destination": "/locations/_location/military-codes/_moc/companies/_company/facility/_facility/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/companies/:company/facility/:facility/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/facility/_facility/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/military-codes/_moc/companies/_company/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/military-codes/_moc/companies/_company/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/companies/_company/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/companies/_company/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/companies/:company/facility/:facility/jobs",
+    "destination": "/locations/_location/job-titles/_title/companies/_company/facility/_facility/jobs.html"
+  },
+  {
+    "source": "/companies/:company/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/companies/_company/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/job-titles/_title/companies/_company/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/companies/_company/facility/_facility/job-schedule/_schedule/jobs.html"
   },
   {
     "source": "/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs",
@@ -36,44 +664,228 @@
     "destination": "/_city/_state/_country/jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
   },
   {
+    "source": "/locations/:location/military-codes/:moc/shift/:shift/jobs",
+    "destination": "/locations/_location/military-codes/_moc/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/shift/:shift/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/locations/_location/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/locations/_location/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/shift/:shift/jobs",
+    "destination": "/locations/_location/job-titles/_title/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-functions/:jobfunction/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-functions/_jobfunction/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/job-titles/_title/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-titles/_title/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/facility/:facility/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/facility/:facility/shift/:shift/jobs",
+    "destination": "/locations/_location/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
     "source": "/locations/:location/job-titles/:title/military-codes/:moc/jobs",
     "destination": "/locations/_location/job-titles/_title/military-codes/_moc/jobs.html"
   },
   {
-    "source": "/locations/:location/military-codes/:moc/career-areas/:jobcategory/jobs",
-    "destination": "/locations/_location/military-codes/_moc/career-areas/_jobcategory/jobs.html"
+    "source": "/locations/:location/military-codes/:moc/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/military-codes/_moc/job-functions/_jobfunction/jobs.html"
   },
   {
-    "source": "/job-titles/:title/military-codes/:moc/career-areas/:jobcategory/jobs",
-    "destination": "/job-titles/_title/military-codes/_moc/career-areas/_jobcategory/jobs.html"
+    "source": "/locations/:location/military-codes/:moc/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/military-codes/_moc/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/facility/:facility/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/facility/_facility/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/facility/:facility/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/facility/_facility/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/facility/:facility/shift/:shift/jobs",
+    "destination": "/job-titles/_title/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/job-functions/:jobfunction/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/companies/_company/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/military-codes/_moc/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/shift/:shift/jobs",
+    "destination": "/locations/_location/companies/_company/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/job-titles/_title/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-titles/_title/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/companies/:company/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/companies/_company/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/companies/:company/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/companies/_company/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/shift/:shift/jobs",
+    "destination": "/job-titles/_title/companies/_company/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/military-codes/:moc/facility/:facility/jobs",
+    "destination": "/locations/_location/military-codes/_moc/facility/_facility/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/military-codes/:moc/facility/:facility/jobs",
+    "destination": "/job-titles/_title/military-codes/_moc/facility/_facility/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/military-codes/_moc/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/military-codes/_moc/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-titles/:title/facility/:facility/jobs",
+    "destination": "/locations/_location/job-titles/_title/facility/_facility/jobs.html"
   },
   {
     "source": "/locations/:location/military-codes/:moc/companies/:company/jobs",
     "destination": "/locations/_location/military-codes/_moc/companies/_company/jobs.html"
   },
   {
+    "source": "/companies/:company/facility/:facility/shift/:shift/jobs",
+    "destination": "/companies/_company/facility/_facility/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/facility/:facility/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/facility/_facility/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/job-titles/_title/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
     "source": "/job-titles/:title/military-codes/:moc/companies/:company/jobs",
     "destination": "/job-titles/_title/military-codes/_moc/companies/_company/jobs.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/career-areas/:jobcategory/jobs",
-    "destination": "/locations/_location/job-titles/_title/career-areas/_jobcategory/jobs.html"
+    "source": "/military-codes/:moc/companies/:company/job-functions/:jobfunction/jobs",
+    "destination": "/military-codes/_moc/companies/_company/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/job-schedule/:schedule/jobs",
+    "destination": "/military-codes/_moc/companies/_company/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/companies/_company/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/companies/_company/job-schedule/_schedule/jobs.html"
   },
   {
     "source": "/locations/:location/job-titles/:title/companies/:company/jobs",
     "destination": "/locations/_location/job-titles/_title/companies/_company/jobs.html"
   },
   {
-    "source": "/military-codes/:moc/companies/:company/career-areas/:jobcategory/jobs",
-    "destination": "/military-codes/_moc/companies/_company/career-areas/_jobcategory/jobs.html"
+    "source": "/companies/:company/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/companies/_company/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
   },
   {
-    "source": "/locations/:location/companies/:company/career-areas/:jobcategory/jobs",
-    "destination": "/locations/_location/companies/_company/career-areas/_jobcategory/jobs.html"
+    "source": "/job-titles/:title/companies/:company/job-functions/:jobfunction/jobs",
+    "destination": "/job-titles/_title/companies/_company/job-functions/_jobfunction/jobs.html"
   },
   {
-    "source": "/job-titles/:title/companies/:company/career-areas/:jobcategory/jobs",
-    "destination": "/job-titles/_title/companies/_company/career-areas/_jobcategory/jobs.html"
+    "source": "/job-titles/:title/companies/:company/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/companies/_company/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/companies/:company/facility/:facility/jobs",
+    "destination": "/military-codes/_moc/companies/_company/facility/_facility/jobs.html"
+  },
+  {
+    "source": "/locations/:location/companies/:company/facility/:facility/jobs",
+    "destination": "/locations/_location/companies/_company/facility/_facility/jobs.html"
+  },
+  {
+    "source": "/companies/:company/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/companies/_company/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/companies/:company/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/companies/_company/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/companies/:company/facility/:facility/jobs",
+    "destination": "/job-titles/_title/companies/_company/facility/_facility/jobs.html"
   },
   {
     "source": "/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs",
@@ -136,44 +948,116 @@
     "destination": "/_city/_state/_country/jobs/_company/careers.html"
   },
   {
+    "source": "/military-codes/:moc/shift/:shift/jobs",
+    "destination": "/military-codes/_moc/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/locations/:location/shift/:shift/jobs",
+    "destination": "/locations/_location/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-functions/:jobfunction/shift/:shift/jobs",
+    "destination": "/job-functions/_jobfunction/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-schedule/:schedule/shift/:shift/jobs",
+    "destination": "/job-schedule/_schedule/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/shift/:shift/jobs",
+    "destination": "/job-titles/_title/shift/_shift/jobs.html"
+  },
+  {
     "source": "/locations/:location/military-codes/:moc/jobs",
     "destination": "/locations/_location/military-codes/_moc/jobs.html"
+  },
+  {
+    "source": "/facility/:facility/shift/:shift/jobs",
+    "destination": "/facility/_facility/shift/_shift/jobs.html"
   },
   {
     "source": "/job-titles/:title/military-codes/:moc/jobs",
     "destination": "/job-titles/_title/military-codes/_moc/jobs.html"
   },
   {
+    "source": "/military-codes/:moc/job-functions/:jobfunction/jobs",
+    "destination": "/military-codes/_moc/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/job-schedule/:schedule/jobs",
+    "destination": "/military-codes/_moc/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-functions/:jobfunction/jobs",
+    "destination": "/locations/_location/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/locations/:location/job-schedule/:schedule/jobs",
+    "destination": "/locations/_location/job-schedule/_schedule/jobs.html"
+  },
+  {
     "source": "/locations/:location/job-titles/:title/jobs",
     "destination": "/locations/_location/job-titles/_title/jobs.html"
   },
   {
-    "source": "/military-codes/:moc/career-areas/:jobcategory/jobs",
-    "destination": "/military-codes/_moc/career-areas/_jobcategory/jobs.html"
+    "source": "/companies/:company/shift/:shift/jobs",
+    "destination": "/companies/_company/shift/_shift/jobs.html"
+  },
+  {
+    "source": "/job-functions/:jobfunction/job-schedule/:schedule/jobs",
+    "destination": "/job-functions/_jobfunction/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/job-functions/:jobfunction/jobs",
+    "destination": "/job-titles/_title/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/job-schedule/:schedule/jobs",
+    "destination": "/job-titles/_title/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/military-codes/:moc/facility/:facility/jobs",
+    "destination": "/military-codes/_moc/facility/_facility/jobs.html"
+  },
+  {
+    "source": "/locations/:location/facility/:facility/jobs",
+    "destination": "/locations/_location/facility/_facility/jobs.html"
+  },
+  {
+    "source": "/facility/:facility/job-functions/:jobfunction/jobs",
+    "destination": "/facility/_facility/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/facility/:facility/job-schedule/:schedule/jobs",
+    "destination": "/facility/_facility/job-schedule/_schedule/jobs.html"
+  },
+  {
+    "source": "/job-titles/:title/facility/:facility/jobs",
+    "destination": "/job-titles/_title/facility/_facility/jobs.html"
   },
   {
     "source": "/military-codes/:moc/companies/:company/jobs",
     "destination": "/military-codes/_moc/companies/_company/jobs.html"
   },
   {
-    "source": "/locations/:location/career-areas/:jobcategory/jobs",
-    "destination": "/locations/_location/career-areas/_jobcategory/jobs.html"
-  },
-  {
-    "source": "/job-titles/:title/career-areas/:jobcategory/jobs",
-    "destination": "/job-titles/_title/career-areas/_jobcategory/jobs.html"
-  },
-  {
     "source": "/locations/:location/companies/:company/jobs",
     "destination": "/locations/_location/companies/_company/jobs.html"
+  },
+  {
+    "source": "/companies/:company/job-functions/:jobfunction/jobs",
+    "destination": "/companies/_company/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/companies/:company/job-schedule/:schedule/jobs",
+    "destination": "/companies/_company/job-schedule/_schedule/jobs.html"
   },
   {
     "source": "/job-titles/:title/companies/:company/jobs",
     "destination": "/job-titles/_title/companies/_company/jobs.html"
   },
   {
-    "source": "/companies/:company/career-areas/:jobcategory/jobs",
-    "destination": "/companies/_company/career-areas/_jobcategory/jobs.html"
+    "source": "/companies/:company/facility/:facility/jobs",
+    "destination": "/companies/_company/facility/_facility/jobs.html"
   },
   {
     "source": "/:title/jobs-in/:filter0/:filter1/new-jobs",
@@ -240,6 +1124,10 @@
     "destination": "/_location/_title/_guid/job.html"
   },
   {
+    "source": "/shift/:shift/jobs",
+    "destination": "/shift/_shift/jobs.html"
+  },
+  {
     "source": "/military-codes/:moc/jobs",
     "destination": "/military-codes/_moc/jobs.html"
   },
@@ -248,12 +1136,20 @@
     "destination": "/locations/_location/jobs.html"
   },
   {
+    "source": "/job-functions/:jobfunction/jobs",
+    "destination": "/job-functions/_jobfunction/jobs.html"
+  },
+  {
+    "source": "/job-schedule/:schedule/jobs",
+    "destination": "/job-schedule/_schedule/jobs.html"
+  },
+  {
     "source": "/job-titles/:title/jobs",
     "destination": "/job-titles/_title/jobs.html"
   },
   {
-    "source": "/career-areas/:jobcategory/jobs",
-    "destination": "/career-areas/_jobcategory/jobs.html"
+    "source": "/facility/:facility/jobs",
+    "destination": "/facility/_facility/jobs.html"
   },
   {
     "source": "/companies/:company/jobs",

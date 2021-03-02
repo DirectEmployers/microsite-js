@@ -13,7 +13,7 @@ const defaultFilters = [
     },
     {
         name:'company',
-        display:'Company'
+        display:'companies'
     },
 ]
 
