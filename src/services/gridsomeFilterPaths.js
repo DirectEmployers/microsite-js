@@ -2,14 +2,13 @@ const _ = require("lodash")
 const alphabeticalOrder = require("./alphabeticalOrder")
 const defaultUrlFilters = require("./../constants/defaultFilters.js")
 const defaultFilterNames = _.map(defaultUrlFilters, "name")
-const pluralize = require("pluralize")
 
 function buildFilterPages(filterGroup, filterPaths, prevPath = null, prevParam = null) {
     for (let i = 0, len = filterGroup.length; i < len; i++) {
         let path = null
         let param = filterGroup[i].name
         if (param !== prevParam) {
-            path = `/${_.kebabCase(pluralize(filterGroup[i].display))}/:${param}`
+            path = `/${_.kebabCase(filterGroup[i].display)}/:${param}`
             if (prevPath) {
                 path = `${prevPath}${path}`
             }
