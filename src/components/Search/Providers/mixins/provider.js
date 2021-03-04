@@ -158,8 +158,6 @@ export default {
         }
         if (this.searchOnLoad) {
             this.search()
-        } else {
-            this.appliedFilters = this.getAppliedFilters()
         }
     },
     methods: {
@@ -253,20 +251,6 @@ export default {
         getConfigFilterSlugs() {
             return map(uniqBy(this.siteConfig.filters, "name"), "name")
         },
-        getAppliedFilters() {
-            return uniqBy(this.configFilters, "name")
-                .filter(filter => {
-                    return !blank(this.input[filter.name])
-                })
-                .map(filter => {
-                    let clears = this.inputDefinition?.[filter.name]?.clears || []
-                    return {
-                        display: this.input[filter.name],
-                        parameter: [filter.name].concat(clears),
-                    }
-                })
-                .concat(this.applyFilters())
-        },
         search() {
             this.status.loading = true
             delete this.status.error
@@ -285,7 +269,7 @@ export default {
                         source: SOLR,
                     } //prevents sites from erroring when unable to connect to api
                     this.canonical = data.meta.canonical,
-                    this.appliedFilters = this.getAppliedFilters()
+                    this.appliedFilters = data.meta.filters
                     this.searchCompleted(data)
                     if (!this.isLoadMore){
                         this.jobDisplay = this.jobs
