@@ -25,7 +25,7 @@ export default {
             type: String,
             required: false,
             default() {
-                return this.$route.path
+                return '/jobs'
             },
         },
         input: {
