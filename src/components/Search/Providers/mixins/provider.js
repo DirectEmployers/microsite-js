@@ -269,7 +269,7 @@ export default {
                         source: SOLR,
                     } //prevents sites from erroring when unable to connect to api
                     this.canonical = data.meta.canonical,
-                    this.appliedFilters = data.meta.filters
+                    this.appliedFilters = data.meta.filters || []
                     this.searchCompleted(data)
                     if (!this.isLoadMore){
                         this.jobDisplay = this.jobs
