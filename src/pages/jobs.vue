@@ -155,6 +155,7 @@
                                 :key-name="configFilter.key"
                                 :visible="configFilter.visible"
                                 :options="getFilterOptions(configFilter)"
+                                :preserve-query-params="isCommuteSearch"
                             >
                                 <template
                                     v-slot="{
@@ -176,7 +177,7 @@
                                                     filter, index
                                                 ) in displayedFilters"
                                             >
-                                                <g-link :to="filter.href">
+                                                <g-link :to="filter.link">
                                                     {{ filter.display }}
                                                     <span v-if="filter.value">
                                                         ({{ filter.value }})
