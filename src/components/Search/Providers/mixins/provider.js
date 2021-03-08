@@ -131,11 +131,15 @@ export default {
         },
     },
     watch: {
-        //any time query string changes, update component input and search.
-        "$route.query"(newval, oldval) {
+        //any time route changes, update component input and search.
+        "$route"(newval, oldval) {
             this.jobDisplay = []
             this.isFirstLoad = true
-            this.input = this.mergeWithDefaultInput(this.$route.query)
+            this.input = this.mergeWithDefaultInput({
+                ...this.$route.query,
+                ...this.$route.params,
+            })
+
             this.queryChanged()
             this.extraData = this.defaultExtraData()
             this.search()
@@ -153,9 +157,7 @@ export default {
             ...this.$route.query,
             ...this.$route.params,
         })
-        if (!blank(this.$route.params.location)) {
-            this.input.location = displayLocationFromSlug(this.input.location)
-        }
+
         if (this.searchOnLoad) {
             this.search()
         }
@@ -220,12 +222,16 @@ export default {
             }
         },
         mergeWithDefaultInput(object = {}) {
-            return {
+            let input = {
                 ...this.getUrlFiltersObject({
                     ...this.defaultInput,
                     ...object
                 }),
             }
+            if (!blank(input.location)) {
+                input.location = displayLocationFromSlug(input.location)
+            }
+            return input
         },
         getUrlFiltersObject(object) {
             const filterSlugs = this.getConfigFilterSlugs()
