@@ -21,34 +21,6 @@ export default {
             type: String,
             required: true,
         },
-        path: {
-            type: String,
-            required: false,
-            default() {
-                return this.$route.path
-            },
-        },
-    },
-    created() {
-        if (process.isClient) {
-            document.addEventListener("keyup", this.hitEnter)
-        }
-    },
-    destroyed() {
-        if (process.isClient) {
-            document.removeEventListener("keyup", this.hitEnter)
-        }
-    },
-    methods: {
-        hitEnter(e) {
-            if (e.keyCode == ENTER_KEY && document.activeElement == this.$el) {
-                this.$router
-                    .push({
-                        path: this.url,
-                    })
-                    .catch((err) => {})
-            }
-        },
     },
 }
 </script>
