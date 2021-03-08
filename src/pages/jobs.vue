@@ -108,7 +108,7 @@
                                 <AppSearchFilterChip
                                     v-for="(filter, index) in appliedFilters"
                                     :key="index"
-                                    :url="filter.link"
+                                    :link="filter.link"
                                     :text="filter.display"
                                     class="cursor-pointer"
                                 >
@@ -117,7 +117,7 @@
                                 </AppSearchFilterChip>
 
                                 <AppSearchFilterChip
-                                    url="/jobs"
+                                    link="/jobs"
                                     text="Clear All"
                                     class="cursor-pointer"
                                 ></AppSearchFilterChip>

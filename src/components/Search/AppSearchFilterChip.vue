@@ -1,6 +1,6 @@
 <template>
     <span class="search-filter-chip" tabindex="0">
-        <g-link :to="url">
+        <g-link :to="link">
             <slot>
                 {{ text }}
             </slot>
@@ -9,17 +9,16 @@
 </template>
 
 <script>
-const ENTER_KEY = 13
 
 export default {
     props: {
-        url: {
+        link: {
             type: String,
             required: true,
         },
         text: {
             type: String,
-            required: true,
+            required: false,
         },
     },
 }
