@@ -2,25 +2,23 @@
     <nav aria-label="pagination">
         <ul class="pagination" v-if="totalPages > 1">
             <li class="pagination__item">
-                <button
-                    type="button"
+                <g-link
                     aria-label="Previous Page"
-                    @click.prevent="selectPage(previousPage)"
                     class="pagination__link"
                     :class="{
                         'pagination__link--hidden': !previousPage,
                     }"
+                    :to="link(previousPage)"
                 >
                     <slot name="previous-text">&laquo;</slot>
-                </button>
+                </g-link>
             </li>
             <li
                 class="pagination__item"
                 v-for="(page, key) in pages"
                 :key="key"
             >
-                <button
-                    type="button"
+                <g-link
                     class="pagination__link"
                     :class="{
                         'pagination__link--active': page == current,
@@ -31,24 +29,23 @@
                     :aria-current="page == current"
                     :aria-disabled="disablePage(page)"
                     :disabled="disablePage(page)"
-                    @click.prevent="selectPage(page)"
+                    :to="link(page)"
                 >
                     {{ page }}
-                </button>
+                </g-link>
             </li>
             <li></li>
             <li class="pagination__item">
-                <button
-                    type="button"
+                <g-link
+                    :to="link(nextPage)"
                     class="pagination__link"
                     aria-label="Next Page"
-                    @click.prevent="selectPage(nextPage)"
                     :class="{
                         'pagination__link--hidden': !nextPage,
                     }"
                 >
                     <slot name="next-text">&raquo;</slot>
-                </button>
+                </g-link>
             </li>
         </ul>
     </nav>
@@ -110,6 +107,18 @@ export default {
                 Math.min(this.current + pageLimit, this.totalPages)
             )
         },
+
+        link(page){
+            if(typeof(page) !== 'number'){
+                return ""
+            }
+            let regex = /(\?page=)(\d+)|(&page=)(\d+)/
+            if(!regex.test(this.$route.fullPath)){
+                return this.$route.fullPath.includes('?') ? `${this.$route.fullPath}&page=${page}` : `${this.$route.fullPath}?page=${page}`
+            }
+            return this.$route.fullPath.replace(regex, `$1$3${page}`)
+        },
+
         prefixPages(pages) {
             if (!pages.includes(1)) {
                 const fromOne = Math.abs(pages[0] - 1)

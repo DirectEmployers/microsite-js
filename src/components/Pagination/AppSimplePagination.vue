@@ -1,20 +1,20 @@
 <template>
     <nav aria-label="pagination" class="simple-pagination">
-        <button
+        <g-link
             class="simple-pagination-button"
             v-if="currentPage > 1"
-            @click.prevent="selectPage(previousPage)"
+            :to="link(previousPage)"
         >
             <slot name="back">Back</slot>
-        </button>
+        </g-link>
         <slot></slot>
-        <button
+        <g-link
             class="simple-pagination-button"
             v-if="currentPage < totalPages"
-            @click.prevent="selectPage(nextPage)"
+            :to="link(nextPage)"
         >
             <slot name="next">Next</slot>
-        </button>
+        </g-link>
     </nav>
 </template>
 
@@ -43,13 +43,15 @@ export default {
         },
     },
     methods: {
-        selectPage(page) {
-            if (!page || isNaN(page)) {
-                return
+        link(page){
+            if(typeof(page) !== 'number'){
+                return ""
             }
-            this.current = page
-
-            this.$emit("pageSelected", {page})
+            let regex = /(\?page=)(\d+)|(&page=)(\d+)/
+            if(!regex.test(this.$route.fullPath)){
+                return this.$route.fullPath.includes('?') ? `${this.$route.fullPath}&page=${page}` : `${this.$route.fullPath}?page=${page}`
+            }
+            return this.$route.fullPath.replace(regex, `$1$3${page}`)
         },
     },
 }
