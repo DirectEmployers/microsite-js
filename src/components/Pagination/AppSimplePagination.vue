@@ -22,7 +22,6 @@
 export default {
     props: {
         totalPages: {required: true, type: Number},
-        pageLimit: {required: false, type: Number, default: 5},
         currentPage: {required: false, type: Number, default: 1},
     },
     data() {

@@ -54,7 +54,6 @@
 <script>
 export default {
     props: {
-        totalRecords: {required: true, type: Number},
         totalPages: {required: true, type: Number},
         pageLimit: {required: false, type: Number, default: 5},
         currentPage: {required: false, type: Number, default: 1},
@@ -136,13 +135,6 @@ export default {
                 )
             }
             return pages
-        },
-        selectPage(page) {
-            if (!page || isNaN(page)) {
-                return
-            }
-            this.current = page
-            this.$emit("pageSelected", {page: page})
         },
         range(start, end) {
             let i
