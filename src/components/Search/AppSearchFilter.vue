@@ -116,10 +116,8 @@ export default {
         let filteredOptions = []
         this.givenOptions.forEach((option) => {
             value = option.display
-            if (this.input[this.name] != value) {
-                option.link = this.getOptionLink(option)
-                filteredOptions.push(option)
-            }
+            option.link = this.getOptionLink(option)
+            filteredOptions.push(option)
         })
         this.displayedFilters = filteredOptions.slice(0, this.limit)
     },
