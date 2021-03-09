@@ -1,6 +1,5 @@
 import {get, omitBy, words, startCase} from "lodash"
 import buildUrl from "axios/lib/helpers/buildURL"
-import {GOOGLE_TALENT, SOLR} from "../../../services/search"
 import {VS_KEY, UTM_KEY} from "../../../services/storage"
 import {buildJobDetailUrl, blank} from "../../../services/helpers"
 
@@ -18,6 +17,10 @@ export default {
         siteConfig: {
             type: Object,
             required: true,
+        },
+        urlGuidCode:{
+            required: false,
+            default: 10
         },
         input: {
             type: Object,
@@ -59,8 +62,7 @@ export default {
             return buildUrl(url, this.input)
         },
         applyUrl() {
-            let url = "https://rr.jobsyn.org/" + this.guid
-
+            let url = `https://rr.jobsyn.org/${this.guid}`
             if (!process.isClient) {
                 return url
             }
@@ -78,8 +80,13 @@ export default {
             }catch(e){
                 console.error(e);
             }
+            params = omitBy(params, blank)
 
-            return buildUrl(url, omitBy(params, blank))
+            if(params[VS_KEY] && this.urlGuidCode !== false){
+                url = url + this.urlGuidCode
+            }
+
+            return buildUrl(url, params)
         },
         description() {
             return this.jobInfo.html_description || this.jobInfo.description
