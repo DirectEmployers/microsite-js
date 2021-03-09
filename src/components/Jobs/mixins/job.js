@@ -18,7 +18,7 @@ export default {
             type: Object,
             required: true,
         },
-        urlGuidCode:{
+        guidViewSource:{
             required: false,
             default: 10
         },
@@ -82,8 +82,8 @@ export default {
             }
             params = omitBy(params, blank)
 
-            if(params[VS_KEY] && this.urlGuidCode !== false){
-                url = url + this.urlGuidCode
+            if(params[VS_KEY] && this.guidViewSource !== false){
+                url = url + this.guidViewSource
             }
 
             return buildUrl(url, params)
