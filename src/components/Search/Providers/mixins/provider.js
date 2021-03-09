@@ -115,7 +115,6 @@ export default {
                 hasJobs: this.hasJobs,
                 jobs: this.jobDisplay,
                 loadMore: this.loadMore,
-                setInput: this.setInput,
                 source: this.meta.source,
                 newSearch: this.newSearch,
                 isLoadMore: this.isLoadMore,
@@ -315,14 +314,6 @@ export default {
             let options = this.filters[this.getFilterKey(filter)]
             options = blank(options) || !Array.isArray(options) ? [] : options
             return options
-        },
-        setInput(filter) {
-            this.newSearch(
-                this.mergeWithDefaultInput({
-                    ...this.input,
-                    ...filter,
-                })
-            )
         },
         defaultExtraData() {
             if (this.isLoadMore) {

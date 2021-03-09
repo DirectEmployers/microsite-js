@@ -13,8 +13,6 @@
                     status,
                     hasJobs,
                     loadMore,
-                    setInput,
-                    setFilter,
                     newSearch,
                     pagination,
                     filteredInput,
@@ -56,35 +54,24 @@
                                 />
 
                                 <AppLoadMore
-                                    v-if="
-                                        $static.metadata.paginationType ==
-                                        'load'
-                                    "
+                                    v-if="$static.metadata.paginationType =='load'"
                                     :totalJobs="pagination.total"
                                     :currentJobs="jobs.length"
                                     @loadMore="loadMore"
                                 />
                                 <AppSimplePagination
-                                    v-else-if="
-                                        $static.metadata.paginationType ==
-                                        'simple'
-                                    "
-                                    @pageSelected="setInput"
+                                    v-else-if="$static.metadata.paginationType == 'simple'"
                                     :current-page="pagination.page"
                                     :total-pages="pagination.total_pages"
                                 />
                                 <AppPagination
                                     v-else
                                     :current-page="pagination.page"
-                                    :total-records="pagination.total"
                                     :total-pages="pagination.total_pages"
                                 />
                                 <div
                                     class="text-sm"
-                                    v-if="
-                                        $static.metadata.paginationType ==
-                                        'load'
-                                    "
+                                    v-if="$static.metadata.paginationType =='load'"
                                 >
                                     Showing {{ jobs.length }} of
                                     {{ pagination.total }}
