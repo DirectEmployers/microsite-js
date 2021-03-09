@@ -93,7 +93,8 @@
                                 <AppSearchFilterChip
                                     v-for="(filter, index) in appliedFilters"
                                     :key="index"
-                                    :name="filter.parameter"
+                                    :link="filter.link"
+                                    :text="filter.display"
                                     class="cursor-pointer"
                                 >
                                     <AppXIcon class="w-2 inline" />
@@ -101,9 +102,9 @@
                                 </AppSearchFilterChip>
 
                                 <AppSearchFilterChip
-                                    name="*"
-                                    class="cursor-pointer"
+                                    link="/jobs"
                                     text="Clear All"
+                                    class="cursor-pointer"
                                 ></AppSearchFilterChip>
                             </div>
                             <AppAccordion
