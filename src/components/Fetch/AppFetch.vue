@@ -58,7 +58,7 @@ export default {
         return {
             response: null,
             error: null,
-            pending: true,
+            pending: false,
             resolved: null,
         }
     },
