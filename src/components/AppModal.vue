@@ -1,6 +1,6 @@
 <template>
     <div class="page--overlay" v-if="toggled" @keydown.tab="focusTrap">
-        <div class="modal" ref="modal" tabindex="0">
+        <div class="modal" ref="modal" tabindex="0" >
             <div class="modal__header">
                 <h3 class="modal__header-title" v-if="title">
                     {{ title }}
@@ -60,7 +60,10 @@ export default {
         },
         open() {
             this.toggled = true
-            this.$emit("modalOpened")
+            this.$nextTick(()=>{
+                this.$refs['modal'].focus()
+            })
+            this.$emit('modalOpened')
         },
         toggle() {
             if (this.toggled) {
