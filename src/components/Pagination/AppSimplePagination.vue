@@ -43,14 +43,13 @@ export default {
     },
     methods: {
         link(page){
-            if(typeof(page) !== 'number'){
+            if(isNaN(page)){
                 return ""
             }
-            let regex = /(\?page=)(\d+)|(&page=)(\d+)/
-            if(!regex.test(this.$route.fullPath)){
-                return this.$route.fullPath.includes('?') ? `${this.$route.fullPath}&page=${page}` : `${this.$route.fullPath}?page=${page}`
-            }
-            return this.$route.fullPath.replace(regex, `$1$3${page}`)
+            let query = this.$route.query
+            query.page = page
+
+            return buildURL(this.$route.path, query)
         },
     },
 }

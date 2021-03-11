@@ -2,6 +2,7 @@
     <nav aria-label="pagination">
         <ul class="pagination" v-if="totalPages > 1">
             <li class="pagination__item">
+
                 <g-link
                     aria-label="Previous Page"
                     class="pagination__link"
@@ -18,7 +19,7 @@
                 v-for="(page, key) in pages"
                 :key="key"
             >
-                <g-link
+                <component :is="page == '...' ? 'span' : 'g-link'"
                     class="pagination__link"
                     :class="{
                         'pagination__link--active': page == current,
@@ -32,7 +33,7 @@
                     :to="link(page)"
                 >
                     {{ page }}
-                </g-link>
+                </component>
             </li>
             <li></li>
             <li class="pagination__item">
@@ -52,6 +53,8 @@
 </template>
 
 <script>
+import buildURL from "axios/lib/helpers/buildURL"
+
 export default {
     props: {
         totalPages: {required: true, type: Number},
@@ -108,14 +111,13 @@ export default {
         },
 
         link(page){
-            if(typeof(page) !== 'number'){
+            if(isNaN(page)){
                 return ""
             }
-            let regex = /(\?page=)(\d+)|(&page=)(\d+)/
-            if(!regex.test(this.$route.fullPath)){
-                return this.$route.fullPath.includes('?') ? `${this.$route.fullPath}&page=${page}` : `${this.$route.fullPath}?page=${page}`
-            }
-            return this.$route.fullPath.replace(regex, `$1$3${page}`)
+            let query = this.$route.query
+            query.page = page
+
+            return buildURL(this.$route.path, query)
         },
 
         prefixPages(pages) {
