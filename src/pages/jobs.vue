@@ -177,7 +177,7 @@
                                                     filter, index
                                                 ) in displayedFilters"
                                             >
-                                                <g-link :to="filter.href">
+                                                <g-link :to="filter.link">
                                                     {{ filter.display }}
                                                     <span v-if="filter.value">
                                                         ({{ filter.value }})

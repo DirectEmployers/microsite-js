@@ -1,16 +1,16 @@
 const config = {
     buids: [19424],
-    source: "google-talent", //solr or google-talent
+    source: "solr", //solr or google-talent
     s3Folder: "sanfordhealth-jobs",
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
     tenant_uuid: process.env.GRIDSOME_GOOGLE_TALENT_TENANT,
     company_uuids: [process.env.GRIDSOME_GOOGLE_TALENT_COMPANY],
     client_events: true, // Should be extracted to a separate config at some point
     num_items: 2,
-    featured_jobs: {
-        num_items: 10, //number of items per page.
-        solr: "reqid:(" + ["R-33091", "R-25218"].join(" OR ") + ")",
-    },
+    // featured_jobs: {
+    //     num_items: 10, //number of items per page.
+    //     solr: "reqid:(" + ["R-33091", "R-25218"].join(" OR ") + ")",
+    // },
     // force_filters: {
     //     solr:"title_exact:*Sales* OR title_exact:*Retail*"
     // },

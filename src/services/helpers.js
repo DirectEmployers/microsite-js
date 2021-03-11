@@ -64,9 +64,12 @@ const slugify = (string) => (
 
 export function displayLocationFromSlug(string) {
     if (string.indexOf("-") > -1) {
-        return words(toString(string)).reduce((result, word, index, original) => (
-            upperFirst(result + (index !== original.length - 1 ? " " + upperFirst(word) : ", " + word.toUpperCase()))
-        ))
+        return words(toString(string)).reduce(function(result, word, index, original){
+            if( word.length <= 3){
+                return upperFirst(result + (index !== original.length - 1 ? " " + upperFirst(word) : ", " +  word.toUpperCase()))
+            }
+            return upperFirst(`${result} ${upperFirst(word)}`)
+        })
     }
     return upperFirst(string);
 }
