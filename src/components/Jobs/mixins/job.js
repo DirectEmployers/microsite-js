@@ -80,13 +80,12 @@ export default {
             }catch(e){
                 console.error(e);
             }
-            params = omitBy(params, blank)
 
-            if(params[VS_KEY] && this.guidViewSource !== false){
+            if(this.guidViewSource !== false){
                 url = url + this.guidViewSource
             }
 
-            return buildUrl(url, params)
+            return buildUrl(url, omitBy(params, blank))
         },
         description() {
             return this.jobInfo.html_description || this.jobInfo.description

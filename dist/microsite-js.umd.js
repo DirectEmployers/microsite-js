@@ -285,13 +285,11 @@ module.exports.f = function getOwnPropertyNames(it) {
         console.error(e);
       }
 
-      params = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["omitBy"])(params, _services_helpers__WEBPACK_IMPORTED_MODULE_10__[/* blank */ "a"]);
-
-      if (params[_services_storage__WEBPACK_IMPORTED_MODULE_9__[/* VS_KEY */ "d"]] && this.guidViewSource !== false) {
+      if (this.guidViewSource !== false) {
         url = url + this.guidViewSource;
       }
 
-      return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_8___default()(url, params);
+      return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_8___default()(url, Object(lodash__WEBPACK_IMPORTED_MODULE_7__["omitBy"])(params, _services_helpers__WEBPACK_IMPORTED_MODULE_10__[/* blank */ "a"]));
     },
     description: function description() {
       return this.jobInfo.html_description || this.jobInfo.description;
