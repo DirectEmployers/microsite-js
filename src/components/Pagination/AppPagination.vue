@@ -114,10 +114,7 @@ export default {
             if(isNaN(page)){
                 return ""
             }
-            let query = this.$route.query
-            query.page = page
-
-            return buildURL(this.$route.path, query)
+            return buildURL(this.$route.path, {...this.$route.query, page})
         },
 
         prefixPages(pages) {

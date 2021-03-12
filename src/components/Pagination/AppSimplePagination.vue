@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import buildURL from "axios/lib/helpers/buildURL"
+
 export default {
     props: {
         totalPages: {required: true, type: Number},
