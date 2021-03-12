@@ -191,10 +191,8 @@ module.exports.f = function getOwnPropertyNames(it) {
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("30b5");
 /* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _services_search__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("e73b");
-/* harmony import */ var _services_storage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("968c");
-/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("a74a");
-
+/* harmony import */ var _services_storage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("968c");
+/* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("a74a");
 
 
 
@@ -220,6 +218,10 @@ module.exports.f = function getOwnPropertyNames(it) {
     siteConfig: {
       type: Object,
       required: true
+    },
+    guidViewSource: {
+      required: false,
+      default: 10
     },
     input: {
       type: Object,
@@ -256,11 +258,11 @@ module.exports.f = function getOwnPropertyNames(it) {
       return this.jobInfo.country_exact;
     },
     detailUrl: function detailUrl() {
-      var url = Object(_services_helpers__WEBPACK_IMPORTED_MODULE_11__[/* buildJobDetailUrl */ "b"])(this.title, this.location, this.guid);
+      var url = Object(_services_helpers__WEBPACK_IMPORTED_MODULE_10__[/* buildJobDetailUrl */ "b"])(this.title, this.location, this.guid);
       return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_8___default()(url, this.input);
     },
     applyUrl: function applyUrl() {
-      var url = "https://rr.jobsyn.org/" + this.guid;
+      var url = "https://rr.jobsyn.org/".concat(this.guid);
 
       if (!process.isClient) {
         return url;
@@ -272,18 +274,22 @@ module.exports.f = function getOwnPropertyNames(it) {
         var utm_params = {};
 
         try {
-          utm_params = JSON.parse(sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* UTM_KEY */ "c"]));
+          utm_params = JSON.parse(sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_9__[/* UTM_KEY */ "c"]));
         } catch (_unused) {
           utm_params = {};
         }
 
         params = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])({}, this.$route.query), utm_params);
-        params[_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* VS_KEY */ "d"]] = sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_10__[/* VS_KEY */ "d"]);
+        params[_services_storage__WEBPACK_IMPORTED_MODULE_9__[/* VS_KEY */ "d"]] = sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_9__[/* VS_KEY */ "d"]);
       } catch (e) {
         console.error(e);
       }
 
-      return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_8___default()(url, Object(lodash__WEBPACK_IMPORTED_MODULE_7__["omitBy"])(params, _services_helpers__WEBPACK_IMPORTED_MODULE_11__[/* blank */ "a"]));
+      if (this.guidViewSource !== false) {
+        url = url + this.guidViewSource;
+      }
+
+      return axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_8___default()(url, Object(lodash__WEBPACK_IMPORTED_MODULE_7__["omitBy"])(params, _services_helpers__WEBPACK_IMPORTED_MODULE_10__[/* blank */ "a"]));
     },
     description: function description() {
       return this.jobInfo.html_description || this.jobInfo.description;
@@ -292,7 +298,7 @@ module.exports.f = function getOwnPropertyNames(it) {
       var state = this.jobInfo.city_slab_exact;
       state = this.jobInfo.city_slab_exact.split("/")[1];
 
-      if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_11__[/* blank */ "a"])(state) || state == "none") {
+      if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_10__[/* blank */ "a"])(state) || state == "none") {
         return this.jobInfo.state_short_exact;
       }
 
