@@ -1,9 +1,9 @@
 <template>
     <component
-        class="search-filter"
         :is="tag"
-        v-if="isVisible && hasOptions"
         v-bind="$attrs"
+        class="search-filter"
+        v-if="isVisible && hasOptions"
     >
         <h3 v-if="display" class="search-filter-display">
             Filter By {{ display }}
@@ -21,7 +21,7 @@
                     class="search-filter-options-item"
                     v-for="(option, index) in displayedFilters"
                 >
-                    <g-link :to="option.href">
+                    <g-link :to="option.link">
                         {{ option.display }}
                         <span v-if="option.value">({{ option.value }})</span>
                     </g-link>
@@ -32,20 +32,20 @@
                 v-if="shouldShowLess || shouldShowMore"
             >
                 <button
-                    class="search-filter-limiter-more"
+                    rel="nofollow"
                     @click="showMore()"
                     v-if="shouldShowMore"
                     aria-label="Show more filters"
-                    rel="nofollow"
+                    class="search-filter-limiter-more"
                 >
                     More
                 </button>
                 <button
-                    v-if="shouldShowLess"
+                    rel="nofollow"
                     @click="showLess()"
+                    v-if="shouldShowLess"
                     aria-label="Show less filters"
                     class="search-filter-limiter-less"
-                    rel="nofollow"
                 >
                     Less
                 </button>
@@ -84,6 +84,10 @@ export default {
             type: Boolean,
             default: true,
         },
+        preserveQueryParams: {
+            type: Boolean,
+            default: false,
+        },
         options: {
             required: false,
             type: Array,
@@ -111,12 +115,9 @@ export default {
         let value = null
         let filteredOptions = []
         this.givenOptions.forEach((option) => {
-            value = this.optionHasSubmitValue(option)
-                ? option.submit
-                : option.display
-            if (this.input[this.name] != value) {
-                filteredOptions.push(this.buildFilterHref(option))
-            }
+            value = option.display
+            option.link = this.getOptionLink(option)
+            filteredOptions.push(option)
         })
         this.displayedFilters = filteredOptions.slice(0, this.limit)
     },
@@ -138,19 +139,12 @@ export default {
         },
     },
     methods: {
-        optionHasSubmitValue(option) {
-            return Object.prototype.hasOwnProperty.call(option, "submit")
-        },
-        buildFilterHref(option) {
-            let value = this.optionHasSubmitValue(option)
-                ? option.submit
-                : option.display
-            let params = {[this.name]: value}
-            if ("page" in this.$route.query) {
-                params.page = 1
+        getOptionLink(option){
+            if(!this.preserveQueryParams){
+                return option.link
             }
-            option.href = buildUrl("jobs", {...this.input, ...params})
-            return option
+
+            return buildUrl(option.link, {...this.$route.query, ...this.input})
         },
         showMore() {
             const numberOfItemsToAdd = this.limit

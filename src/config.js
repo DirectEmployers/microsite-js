@@ -1,3 +1,3 @@
-const config = require("./configs/sanfordhealth.js")
+const config = require("./configs/boeing.js")
 
 module.exports = config
