@@ -6,7 +6,7 @@ const getOldSeoPaths = require("./src/services/gridsomeOldSeoPaths")
 
 module.exports = function (api, filters) {
     api.loadSource(async store => {
-        store.addMetadata('paginationType', 'page') //possible options ['simple', 'load', 'page']
+        store.addMetadata('paginationType', 'simple') //possible options ['simple', 'load', 'page']
     })
     api.createPages(async ({
         graphql,

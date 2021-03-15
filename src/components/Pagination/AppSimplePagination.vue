@@ -1,28 +1,29 @@
 <template>
     <nav aria-label="pagination" class="simple-pagination">
-        <button
+        <g-link
             class="simple-pagination-button"
             v-if="currentPage > 1"
-            @click.prevent="selectPage(previousPage)"
+            :to="link(previousPage)"
         >
             <slot name="back">Back</slot>
-        </button>
+        </g-link>
         <slot></slot>
-        <button
+        <g-link
             class="simple-pagination-button"
             v-if="currentPage < totalPages"
-            @click.prevent="selectPage(nextPage)"
+            :to="link(nextPage)"
         >
             <slot name="next">Next</slot>
-        </button>
+        </g-link>
     </nav>
 </template>
 
 <script>
+import buildURL from "axios/lib/helpers/buildURL"
+
 export default {
     props: {
         totalPages: {required: true, type: Number},
-        pageLimit: {required: false, type: Number, default: 5},
         currentPage: {required: false, type: Number, default: 1},
     },
     data() {
@@ -43,13 +44,11 @@ export default {
         },
     },
     methods: {
-        selectPage(page) {
-            if (!page || isNaN(page)) {
-                return
+        link(page){
+            if(isNaN(page)){
+                return ""
             }
-            this.current = page
-
-            this.$emit("pageSelected", {page})
+            return buildURL(this.$route.path, {...this.$route.query, page})
         },
     },
 }
