@@ -5,14 +5,8 @@ import {
     startCase
 } from "lodash"
 import buildUrl from "axios/lib/helpers/buildURL"
-import {
-    VS_KEY,
-    UTM_KEY
-} from "../../../services/storage"
-import {
-    buildJobDetailUrl,
-    blank
-} from "../../../services/helpers"
+import {VS_KEY, UTM_KEY} from "../../../services/storage"
+import {buildJobDetailUrl, blank} from "../../../services/helpers"
 
 export default {
     props: {
@@ -28,6 +22,10 @@ export default {
         siteConfig: {
             type: Object,
             required: true,
+        },
+        guidViewSource:{
+            required: false,
+            default: 10
         },
         input: {
             type: Object,
@@ -69,8 +67,7 @@ export default {
             return buildUrl(url, this.input)
         },
         applyUrl() {
-            let url = "https://rr.jobsyn.org/" + this.guid
-
+            let url = `https://rr.jobsyn.org/${this.guid}`
             if (!process.isClient) {
                 return url
             }
@@ -89,6 +86,10 @@ export default {
                 params[VS_KEY] = sessionStorage.getItem(VS_KEY)
             } catch (e) {
                 console.error(e);
+            }
+
+            if(this.guidViewSource !== false){
+                url = url + this.guidViewSource
             }
 
             return buildUrl(url, omitBy(params, blank))
