@@ -73,34 +73,3 @@ export function displayLocationFromSlug(string) {
     }
     return upperFirst(string);
 }
-
-export function serializeToFormData(obj, formData, parentKey) {
-    let resultData = formData || new FormData()
-    let property, formKey
-
-    for (property in obj) {
-        if (!Object.prototype.hasOwnProperty.call(obj, property)) {
-            continue
-        }
-        formKey = property
-        if (parentKey) {
-            formKey = parentKey + '[' + property + ']'
-        }
-
-        if (
-            typeof obj[property] === 'object' &&
-            !(obj[property] instanceof File)
-        ) {
-            resultData = serializeToFormData(
-                obj[property],
-                resultData,
-                property
-            )
-        } else {
-            // if it's a string or a File object
-            resultData.append(formKey, obj[property])
-        }
-    }
-
-    return resultData
-}

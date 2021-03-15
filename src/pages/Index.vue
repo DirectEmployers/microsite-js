@@ -52,6 +52,7 @@
                     </option>
                     <option value="30">Sales</option>
                 </select>
+                <button>Submit</button>
             </template>
 
         </AppAxiosForm>

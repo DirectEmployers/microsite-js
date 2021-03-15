@@ -1,12 +1,11 @@
 <template>
     <form @submit.prevent="submit" ref="form">
-        <slot :data="data" :set="set"></slot>
+        <slot :data="data"></slot>
     </form>
 </template>
 
 <script>
-import { set, get } from 'lodash'
-import { serializeToFormData } from '../../services/helpers'
+import { set } from 'lodash'
 export default {
     props: {
         name: {
@@ -61,36 +60,61 @@ export default {
             withFiles: false,
         }
     },
-    watch: {
-        data: {
-            deep: true,
-            handler(){
-                console.log('The list of colours has changed!');
+    mounted(){
+        this.$el.elements.forEach((input)=>{
+            if(input.name){
+                let defaultValue = input.getAttribute('data-default')
+                if(defaultValue){
+                    defaultValue = JSON.parse(defaultValue)
+                }
+                set(this.data, input.name, defaultValue || "")
             }
-        }
+        })
     },
 
     methods:{
-        set(name, value){
-            if (value instanceof FileList || value instanceof File) {
-                this.withFiles = true
-            }
-            set(this.data, name, value)
-        },
         client() {
             let data = this.data
-            let method = this.method
-            const endpoint = this.endpoint
-            let options = this.options
-            if (this.withFiles) {
+            const headers = this.options.headers || {}
+            // auto serialize to form data if this header is present
+            if (headers.contains('multipart/form-data')){
                 data = this.toFormData()
                 option.headers = option.headers || {}
                 options.headers['Content-Type'] = 'multipart/form-data'
             }
-            return axios[method](endpoint, data, options)
+            return axios[this.method](this.endpoint, data, options)
         },
+
+        serializeToFormData(obj, formData, parentKey) {
+            let resultData = formData || new FormData()
+            let property, formKey
+
+            for (property in obj) {
+                if (!Object.prototype.hasOwnProperty.call(obj, property)) {
+                    continue
+                }
+                formKey = parentKey ?  parentKey + '[' + property + ']' : property
+
+                if (
+                    typeof obj[property] === 'object' &&
+                    !(obj[property] instanceof File)
+                ) {
+                    resultData = this.serializeToFormData(
+                        obj[property],
+                        resultData,
+                        property
+                    )
+                } else {
+                    // if it's a string or a File object
+                    resultData.append(formKey, obj[property])
+                }
+            }
+
+            return resultData
+        },
+
         toFormData() {
-            return serializeToFormData(this.data)
+            return this.serializeToFormData(this.data)
         },
         submit(){
 
