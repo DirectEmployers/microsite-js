@@ -2,25 +2,24 @@
     <nav aria-label="pagination">
         <ul class="pagination" v-if="totalPages > 1">
             <li class="pagination__item">
-                <button
-                    type="button"
+
+                <g-link
                     aria-label="Previous Page"
-                    @click.prevent="selectPage(previousPage)"
                     class="pagination__link"
                     :class="{
                         'pagination__link--hidden': !previousPage,
                     }"
+                    :to="link(previousPage)"
                 >
                     <slot name="previous-text">&laquo;</slot>
-                </button>
+                </g-link>
             </li>
             <li
                 class="pagination__item"
                 v-for="(page, key) in pages"
                 :key="key"
             >
-                <button
-                    type="button"
+                <component :is="page == '...' ? 'span' : 'g-link'"
                     class="pagination__link"
                     :class="{
                         'pagination__link--active': page == current,
@@ -31,33 +30,33 @@
                     :aria-current="page == current"
                     :aria-disabled="disablePage(page)"
                     :disabled="disablePage(page)"
-                    @click.prevent="selectPage(page)"
+                    :to="link(page)"
                 >
                     {{ page }}
-                </button>
+                </component>
             </li>
             <li></li>
             <li class="pagination__item">
-                <button
-                    type="button"
+                <g-link
+                    :to="link(nextPage)"
                     class="pagination__link"
                     aria-label="Next Page"
-                    @click.prevent="selectPage(nextPage)"
                     :class="{
                         'pagination__link--hidden': !nextPage,
                     }"
                 >
                     <slot name="next-text">&raquo;</slot>
-                </button>
+                </g-link>
             </li>
         </ul>
     </nav>
 </template>
 
 <script>
+import buildURL from "axios/lib/helpers/buildURL"
+
 export default {
     props: {
-        totalRecords: {required: true, type: Number},
         totalPages: {required: true, type: Number},
         pageLimit: {required: false, type: Number, default: 5},
         currentPage: {required: false, type: Number, default: 1},
@@ -110,6 +109,14 @@ export default {
                 Math.min(this.current + pageLimit, this.totalPages)
             )
         },
+
+        link(page){
+            if(isNaN(page)){
+                return ""
+            }
+            return buildURL(this.$route.path, {...this.$route.query, page})
+        },
+
         prefixPages(pages) {
             if (!pages.includes(1)) {
                 const fromOne = Math.abs(pages[0] - 1)
@@ -127,13 +134,6 @@ export default {
                 )
             }
             return pages
-        },
-        selectPage(page) {
-            if (!page || isNaN(page)) {
-                return
-            }
-            this.current = page
-            this.$emit("pageSelected", {page: page})
         },
         range(start, end) {
             let i
