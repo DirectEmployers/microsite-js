@@ -208,7 +208,7 @@ module.exports.f = function getOwnPropertyNames(it) {
     },
     siteConfig: {
       type: Object,
-      required: true
+      required: false
     },
     guidViewSource: {
       required: false,
@@ -524,21 +524,21 @@ module.exports = Axios;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5141caf7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=0c106fcd&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h2',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppJobProvider',{key:index,attrs:{"site-config":_vm.siteConfig,"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":jobData.detailUrl}},[_vm._t("default",[_c('h3',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.city)+", "+_vm._s(jobData.state)+" ")])],{"jobData":jobData})],2)],1)]}}],null,true)})}),1)]):_vm._e()}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5141caf7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=0c33a742&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h2',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppSolrJob',{key:index,attrs:{"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":jobData.detailUrl}},[_vm._t("default",[_c('h3',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.city)+", "+_vm._s(jobData.state)+" ")])],{"jobData":jobData})],2)],1)]}}],null,true)})}),1)]):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=0c106fcd&
+// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=0c33a742&
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
-var es_array_filter = __webpack_require__("4de4");
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
+var es_array_concat = __webpack_require__("99af");
 
 // EXTERNAL MODULE: ./src/services/search.js + 2 modules
 var search = __webpack_require__("e73b");
 
-// EXTERNAL MODULE: ./src/components/Jobs/AppJobProvider.vue + 4 modules
-var AppJobProvider = __webpack_require__("1acf");
+// EXTERNAL MODULE: ./src/components/Jobs/AppSolrJob.vue + 4 modules
+var AppSolrJob = __webpack_require__("1a60");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=script&lang=js&
 
@@ -571,7 +571,7 @@ var AppJobProvider = __webpack_require__("1acf");
 //
 //
 //
-//
+
 
 
 /* harmony default export */ var AppSimilarJobsvue_type_script_lang_js_ = ({
@@ -582,7 +582,7 @@ var AppJobProvider = __webpack_require__("1acf");
     };
   },
   components: {
-    AppJobProvider: AppJobProvider["default"]
+    AppSolrJob: AppSolrJob["default"]
   },
   props: {
     title: {
@@ -594,14 +594,17 @@ var AppJobProvider = __webpack_require__("1acf");
       required: false,
       default: ""
     },
+    buids: {
+      type: Array,
+      required: false,
+      default: function _default() {
+        return [];
+      }
+    },
     location: {
       type: String,
       required: false,
       default: ""
-    },
-    siteConfig: {
-      type: Object,
-      required: true
     },
     header: {
       type: String,
@@ -623,20 +626,18 @@ var AppJobProvider = __webpack_require__("1acf");
 
       Object(search["e" /* searchService */])({
         num_items: 10,
-        q: this.title,
+        q: "-guid:".concat(this.guid, " AND ").concat(this.title),
         location: this.location
-      }, this.siteConfig).then(function (response) {
+      }, {
+        source: search["b" /* SOLR */],
+        buids: this.buids,
+        filters: []
+      }).then(function (response) {
         var data = response.data;
         var jobs = data.jobs,
             meta = data.meta;
         _this.meta = meta;
         _this.similarJobs = jobs;
-
-        if (_this.guid) {
-          _this.similarJobs = _this.similarJobs.filter(function (job) {
-            return job.guid != _this.guid;
-          });
-        }
       });
     }
   }

@@ -21,7 +21,7 @@ export default {
         },
         siteConfig: {
             type: Object,
-            required: true,
+            required: false,
         },
         guidViewSource:{
             required: false,
