@@ -24035,12 +24035,12 @@ module.exports = function ($this, dummy, Wrapper) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5141caf7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAxiosForm.vue?vue&type=template&id=dcac0148&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5141caf7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAxiosForm.vue?vue&type=template&id=6ad06052&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{ref:"form",on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_vm._t("default",null,{"data":_vm.data,"failed":_vm.failed,"success":_vm.success,"loading":_vm.loading,"errors":_vm.errors})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Form/AppAxiosForm.vue?vue&type=template&id=dcac0148&
+// CONCATENATED MODULE: ./src/components/Form/AppAxiosForm.vue?vue&type=template&id=6ad06052&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -24113,15 +24113,6 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
       type: String,
       default: "post"
     },
-    onSuccess: {
-      type: Function,
-      required: false,
-      default: function _default() {}
-    },
-    onError: {
-      type: Function,
-      default: function _default() {}
-    },
     options: {
       type: Object,
       required: false,
@@ -24190,14 +24181,15 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
       this.client().then(function (response) {
         _this2.success = true;
 
-        _this2.onSuccess(response);
+        _this2.$emit('success', response);
       }).catch(function (e) {
-        var response = e.response || {}; //extract any errors if they were given in the response
-
-        _this2.errors = response.errors || {};
         _this2.failed = true;
+        var response = e.response || {};
+        var data = response.data || {}; //extract any errors if they were given in the response
 
-        _this2.onError(response);
+        _this2.errors = data.errors || {};
+
+        _this2.$emit('failed', response);
       }).finally(function () {
         _this2.loading = false;
       });

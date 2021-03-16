@@ -106,8 +106,9 @@ export default {
                 .catch(e => {
                     this.failed = true
                     let response = e.response || {}
+                    let data = response.data || {}
                     //extract any errors if they were given in the response
-                    this.errors = response.errors || {}
+                    this.errors = data.errors || {}
                     this.$emit('failed', response)
                 })
                 .finally(() => {
