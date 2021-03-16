@@ -45,7 +45,7 @@ export default {
                 loading: false,
                 error: false,
             },
-            rss: "feed/rss",
+            rss: "/feed/rss",
             jobs: [],
             jobDisplay: [],
             filters: [],
@@ -85,8 +85,8 @@ export default {
             // rss feeds can exist on any page with a search form
             const oldPaths = ["jobs", "new-jobs", "vet-jobs", "jobs-in", "careers"]
             let lastPath = this.$route.path.split("/").pop()
-            if (! oldPaths.includes(lastPath)) {
-                return this.$route.path + "/"
+            if (! oldPaths.includes(lastPath) || this.$route.path == "/jobs") {
+                return this.$route.path
             }
             return ""
         },
