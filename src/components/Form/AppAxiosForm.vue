@@ -1,18 +1,24 @@
 <template>
     <form @submit.prevent="submit" ref="form">
-        <slot :data="data"></slot>
+        <slot
+            :data="data"
+            :failed="failed"
+            :success="success"
+            :loading="loading"
+            :errors="errors"
+        ></slot>
     </form>
 </template>
 
 <script>
-import { set } from 'lodash'
+import axios from "axios"
 export default {
     props: {
         name: {
             type: String,
             required: false,
             default() {
-                return new String(this._uid).toString();
+                return new String(this._uid).toString()
             },
         },
         endpoint: {
@@ -46,79 +52,77 @@ export default {
             },
         },
     },
-    created(){
-        if(this.method == 'get'){
-            throw new Error("AppAxiosForm component is meant for non-get requests, use AppFetch for get requests.")
+    created() {
+        if (this.method.toLowerCase() == "get") {
+            throw new Error(
+                "AppAxiosForm component is meant for non-get requests, use AppFetch for get requests."
+            )
         }
     },
-    data(){
+    data() {
         return {
             data: {...this.initData},
             errors: {},
-            rules: {},
+            failed: false,
+            success: false,
             loading: false,
-            withFiles: false,
         }
     },
-    mounted(){
-        this.$el.elements.forEach((input)=>{
-            if(input.name){
-                let defaultValue = input.getAttribute('data-default')
-                if(defaultValue){
-                    defaultValue = JSON.parse(defaultValue)
-                }
-                set(this.data, input.name, defaultValue || "")
-            }
-        })
-    },
-
-    methods:{
+    methods: {
         client() {
             let data = this.data
             const headers = this.options.headers || {}
             // auto serialize to form data if this header is present
-            if (headers.contains('multipart/form-data')){
-                data = this.toFormData()
-                option.headers = option.headers || {}
-                options.headers['Content-Type'] = 'multipart/form-data'
+            if (headers["Content-Type"] == "multipart/form-data") {
+                data = this.serializeToFormData(this.data)
             }
-            return axios[this.method](this.endpoint, data, options)
+            return axios[this.method](this.endpoint, data, this.options)
         },
 
-        serializeToFormData(obj, formData, parentKey) {
+        serializeToFormData(value, formData, property) {
             let resultData = formData || new FormData()
-            let property, formKey
 
-            for (property in obj) {
-                if (!Object.prototype.hasOwnProperty.call(obj, property)) {
-                    continue
-                }
-                formKey = parentKey ?  parentKey + '[' + property + ']' : property
-
-                if (
-                    typeof obj[property] === 'object' &&
-                    !(obj[property] instanceof File)
-                ) {
-                    resultData = this.serializeToFormData(
-                        obj[property],
+            if (Array.isArray(value) && value.length) {
+                value.forEach(val => {
+                    this.serializeToFormData(val, resultData, property + "[]")
+                })
+            } else if (typeof value == "object" && !(value instanceof File)) {
+                Object.keys(value).forEach(prop => {
+                    this.serializeToFormData(
+                        value[prop],
                         resultData,
-                        property
+                        property ? property + "[" + prop + "]" : prop
                     )
-                } else {
-                    // if it's a string or a File object
-                    resultData.append(formKey, obj[property])
-                }
+                })
+            } else {
+                resultData.append(property, value)
             }
 
             return resultData
         },
 
-        toFormData() {
-            return this.serializeToFormData(this.data)
-        },
-        submit(){
+        submit() {
+            this.errors = {}
+            this.failed = false
+            this.success = false
+            this.loading = true
 
-        }
-    }
+            this.client()
+                .then(response => {
+                    this.success = true
+                    this.onSuccess(response)
+                })
+                .catch(e => {
+                    let response = e.response || {}
+                    //extract any errors if they were given in the response
+                    this.errors = response.errors || {}
+                    this.failed = true
+                    this.onError(response)
+                })
+                .finally(() => {
+                    this.loading = false
+                })
+        },
+    },
 }
 </script>
