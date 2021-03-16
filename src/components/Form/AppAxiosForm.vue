@@ -29,15 +29,6 @@ export default {
             type: String,
             default: "post",
         },
-        onSuccess: {
-            type: Function,
-            required: false,
-            default: () => {},
-        },
-        onError: {
-            type: Function,
-            default: () => {},
-        },
         options: {
             type: Object,
             required: false,
@@ -110,14 +101,14 @@ export default {
             this.client()
                 .then(response => {
                     this.success = true
-                    this.onSuccess(response)
+                    this.$emit('success', response)
                 })
                 .catch(e => {
+                    this.failed = true
                     let response = e.response || {}
                     //extract any errors if they were given in the response
                     this.errors = response.errors || {}
-                    this.failed = true
-                    this.onError(response)
+                    this.$emit('failed', response)
                 })
                 .finally(() => {
                     this.loading = false
