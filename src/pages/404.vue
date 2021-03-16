@@ -13,13 +13,6 @@ export default {
     },
     metaInfo: {
         title: "Not Found",
-        meta: [
-            {
-                key: "description",
-                name: "description",
-                content: "only the best jobs",
-            },
-        ],
     },
 }
 </script>

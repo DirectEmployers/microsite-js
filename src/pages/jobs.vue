@@ -2,6 +2,7 @@
     <Layout>
         <AppGoogleTalentSearchProvider
             :site-config="$siteConfig"
+            :static="$static"
             :is-load-more="$static.metadata.paginationType == 'load'"
         >
             <template
@@ -260,15 +261,10 @@ export default {
         AppSimplePagination: () =>
             import("~/components/Pagination/AppSimplePagination"),
     },
-    metaInfo: {
-        title: "Jobs",
-        meta: [
-            {
-                key: "description",
-                name: "description",
-                content: "only the best jobs",
-            },
-        ],
+    metaInfo() {
+        return {
+            title: "Jobs",
+        }
     },
     methods: {
         toggleCommuteModal() {
