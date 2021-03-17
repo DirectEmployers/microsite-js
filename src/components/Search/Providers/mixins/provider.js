@@ -27,6 +27,13 @@ export default {
             type: Number,
             default: 0,
             required: false,
+        },
+        static: {
+            type: Object,
+            required: false,
+            default: function () {
+                return {}
+            },
         }
     },
     data() {
@@ -38,6 +45,7 @@ export default {
                 loading: false,
                 error: false,
             },
+            rss: "/feed/rss",
             jobs: [],
             jobDisplay: [],
             filters: [],
@@ -54,6 +62,30 @@ export default {
     computed: {
         source() {
             return this.isGoogleTalent ? GOOGLE_TALENT : SOLR
+        },
+        domain() {
+            if (process.isClient) {
+                return `${location.protocol}//${location.host}`
+            }
+            return ""
+        },
+        canonicalHref() {
+            return `${this.domain}${this.canonical}`
+        },
+        rssHref() {
+            return `${this.domain}${this.rssPath}${this.rss}`
+        },
+        rssTitle() {
+            if (this.static?.metadata?.siteName !== undefined) {
+                return `${this.static.metadata.siteName} - Jobs`
+            }
+            return "Jobs"
+        },
+        rssPath() {
+            if (this.shouldIncludeCurrentPath()) {
+                return this.$route.path
+            }
+            return ""
         },
         inputDefinition() {
             return {
@@ -148,7 +180,13 @@ export default {
     metaInfo() {
         return {
             link: [
-                {rel: "canonical", href: this.canonical }
+                {rel: "canonical", href: this.canonicalHref },
+                {
+                    rel: "alternative",
+                    title: this.rssTitle,
+                    type: "application/rss+xml",
+                    href: this.rssHref,
+                }
             ]
         }
     },
@@ -275,6 +313,7 @@ export default {
                         source: SOLR,
                     } //prevents sites from erroring when unable to connect to api
                     this.canonical = data.meta.canonical,
+                    this.rss = data.meta.rss,
                     this.appliedFilters = data.meta.filters || []
                     this.searchCompleted(data)
                     if (!this.isLoadMore){
@@ -338,5 +377,14 @@ export default {
                 })
                 .catch(err => {})
         },
+        shouldIncludeCurrentPath() {
+            const oldPaths = ["jobs", "new-jobs", "vet-jobs", "jobs-in", "careers"]
+            let lastPath = this.$route.path.split("/").pop()
+
+            if (! oldPaths.includes(lastPath) || this.$route.path == "/jobs") {
+                return this.$route.path !== "/" ? true : false
+            }
+            return false
+        }
     },
 }
