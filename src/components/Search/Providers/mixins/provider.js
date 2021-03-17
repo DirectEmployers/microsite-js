@@ -86,7 +86,7 @@ export default {
             const oldPaths = ["jobs", "new-jobs", "vet-jobs", "jobs-in", "careers"]
             let lastPath = this.$route.path.split("/").pop()
             if (! oldPaths.includes(lastPath) || this.$route.path == "/jobs") {
-                return this.$route.path
+                return this.$route.path !== "/" ? this.$route.path : ""
             }
             return ""
         },
