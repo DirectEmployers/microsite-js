@@ -34,3 +34,12 @@ export default {
     },
 }
 </script>
+
+<static-query>
+query {
+    metadata {
+        paginationType,
+        siteName,
+    }
+}
+</static-query>
