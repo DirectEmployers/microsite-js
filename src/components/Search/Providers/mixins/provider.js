@@ -82,11 +82,8 @@ export default {
             return "Jobs"
         },
         rssPath() {
-            // rss feeds can exist on any page with a search form
-            const oldPaths = ["jobs", "new-jobs", "vet-jobs", "jobs-in", "careers"]
-            let lastPath = this.$route.path.split("/").pop()
-            if (! oldPaths.includes(lastPath) || this.$route.path == "/jobs") {
-                return this.$route.path !== "/" ? this.$route.path : ""
+            if (this.shouldIncludeCurrentPath()) {
+                return this.$route.path
             }
             return ""
         },
@@ -380,5 +377,14 @@ export default {
                 })
                 .catch(err => {})
         },
+        shouldIncludeCurrentPath() {
+            const oldPaths = ["jobs", "new-jobs", "vet-jobs", "jobs-in", "careers"]
+            let lastPath = this.$route.path.split("/").pop()
+
+            if (! oldPaths.includes(lastPath) || this.$route.path == "/jobs") {
+                return this.$route.path !== "/" ? true : false
+            }
+            return false
+        }
     },
 }
