@@ -3,9 +3,10 @@
         <slot
             :data="data"
             :failed="failed"
+            :errors="errors"
             :success="success"
             :loading="loading"
-            :errors="errors"
+            :response="response"
         ></slot>
     </form>
 </template>
@@ -54,6 +55,7 @@ export default {
         return {
             data: {...this.initData},
             errors: {},
+            response: {},
             failed: false,
             success: false,
             loading: false,
@@ -101,11 +103,13 @@ export default {
             this.client()
                 .then(response => {
                     this.success = true
+                    this.response = response
                     this.$emit('success', response)
                 })
                 .catch(e => {
                     this.failed = true
                     let response = e.response || {}
+                    this.response = response
                     let data = response.data || {}
                     //extract any errors if they were given in the response
                     this.errors = data.errors || {}
