@@ -55,11 +55,7 @@
 </template>
 
 <script>
-const TAB_KEY_CODE = 9
-const UP_KEY_CODE = 38
-const DOWN_KEY_CODE = 40
-const ESCAPE_KEY_CODE = 27
-const ENTER_KEY_CODE = 13
+import { TAB_KEY_CODE, UP_KEY_CODE, DOWN_KEY_CODE, ESCAPE_KEY_CODE, ENTER_KEY_CODE } from "../constants/keyCodes"
 export default {
     props: {
         id: {
@@ -99,8 +95,8 @@ export default {
         }
     },
     mounted() {
-        this.items = this.$refs['dropdown-content'].querySelectorAll(
-            '[dropdown-item]'
+        this.items = this.$refs["dropdown-content"].querySelectorAll(
+            "[dropdown-item]"
         )
         this.totalItems = this.items.length
     },
@@ -109,13 +105,12 @@ export default {
             return
         }
 
-        document.addEventListener('keyup', this.keyNavigation)
-        document.addEventListener('keydown', this.preventScroll)
+        document.addEventListener("keyup", this.keyNavigation)
+        document.addEventListener("keydown", this.preventScroll)
 
         if (this.isClick) {
-            document.addEventListener('click', this.clickOutOfMenu)
+            document.addEventListener("click", this.clickOutOfMenu)
         }
-
     },
     destroyed() {
         if (!process.isClient) {
@@ -126,9 +121,8 @@ export default {
         document.removeEventListener("keydown", this.preventScroll)
 
         if (this.isClick) {
-            document.removeEventListener('click', this.clickOutOfMenu)
+            document.removeEventListener("click", this.clickOutOfMenu)
         }
-
     },
     methods: {
         clickOutOfMenu(e) {
@@ -174,7 +168,7 @@ export default {
                 this.open()
             }
         },
-        preventScroll(event){
+        preventScroll(event) {
             if (
                 this.toggled &&
                 [UP_KEY_CODE, DOWN_KEY_CODE].includes(event.keyCode)
@@ -182,10 +176,10 @@ export default {
                 event.preventDefault()
             }
         },
-        keyNavigation(e){
+        keyNavigation(e) {
             const code = e.keyCode
 
-            if (code == ENTER_KEY_CODE && e.target == this.$refs['display']) {
+            if (code == ENTER_KEY_CODE && e.target == this.$refs["display"]) {
                 return this.toggle()
             }
 
@@ -193,7 +187,7 @@ export default {
                 return this.close()
             }
 
-            if(this.toggled){
+            if (this.toggled) {
                 if (code == TAB_KEY_CODE) {
                     return this.tab()
                 }
@@ -205,7 +199,7 @@ export default {
                     return this.up()
                 }
             }
-        }
+        },
     },
     computed: {
         isClick() {
@@ -214,8 +208,8 @@ export default {
         eventHandlers() {
             const type = this.interactionType
             switch (type) {
-                case 'click':
-                    return { click: this.toggle}
+                case "click":
+                    return {click: this.toggle}
                     break
                 case "hover":
                     return {mouseover: this.open, mouseleave: this.close}
