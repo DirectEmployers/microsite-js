@@ -120,14 +120,17 @@
                                     </h3>
                                 </template>
                                 <ul>
-                                    <g-link
-                                        :to="sort.sortField(option)"
-                                        class="cursor-pointer"
-                                        :key="index"
+                                    <li
                                         v-for="(option, index) in sort.options"
+                                        :key="index"
+                                        class="cursor-pointer"
                                     >
-                                        {{ option }}
-                                    </g-link>
+                                        <g-link
+                                            :to="sort.sortField(option)"
+                                        >
+                                            {{ option }}
+                                        </g-link>
+                                    </li>
                                 </ul>
                             </AppAccordion>
 
