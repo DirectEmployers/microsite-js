@@ -6,6 +6,8 @@
 
 module.exports = {
     siteName: "Microsite JS",
+    siteUrl: "http://localhost:8080/",
+    siteDescription: "Real jobs from real companies. Updated daily. Only verified, open positions at top companies.",
     outputDir: "build",
     plugins: [
         {

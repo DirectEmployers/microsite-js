@@ -2,9 +2,8 @@
     <section class="similar-jobs" v-if="hasSimilarJobs">
         <h2 class="similar-jobs__title">{{ header }}</h2>
         <div class="similar-jobs__grid">
-            <AppJobProvider
+            <AppSolrJob
                 :key="index"
-                :site-config="siteConfig"
                 :source="meta.source"
                 :job="similarJob"
                 v-for="(similarJob, index) in similarJobs"
@@ -23,15 +22,15 @@
                         </g-link>
                     </section>
                 </template>
-            </AppJobProvider>
+            </AppSolrJob>
         </div>
     </section>
 </template>
 
 <script>
+import { SOLR } from '../services/search'
+import AppSolrJob from "./Jobs/AppSolrJob"
 import {searchService} from "../services/search"
-import AppJobProvider from "./Jobs/AppJobProvider"
-
 export default {
     data() {
         return {
@@ -40,7 +39,7 @@ export default {
         }
     },
     components: {
-        AppJobProvider,
+        AppSolrJob,
     },
     props: {
         title: {
@@ -52,14 +51,15 @@ export default {
             required: false,
             default: "",
         },
+        buids: {
+            type: Array,
+            required: false,
+            default: ()=> []
+        },
         location: {
             type: String,
             required: false,
             default: "",
-        },
-        siteConfig: {
-            type: Object,
-            required: true,
         },
         header: {
             type: String,
@@ -80,21 +80,15 @@ export default {
             searchService(
                 {
                     num_items: 10,
-                    q: this.title,
+                    q: `-guid:${this.guid} AND ${this.title}`,
                     location: this.location,
                 },
-                this.siteConfig
+                { source: SOLR, buids: this.buids, filters: [] }
             ).then((response) => {
                 const data = response.data
                 const {jobs, meta} = data
                 this.meta = meta
                 this.similarJobs = jobs
-
-                if (this.guid) {
-                    this.similarJobs = this.similarJobs.filter((job) => {
-                        return job.guid != this.guid
-                    })
-                }
             })
         },
     },
