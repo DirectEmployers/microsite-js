@@ -1,6 +1,7 @@
 import {omitBy, clone, startCase, uniqBy, map} from "lodash"
 import {blank, displayLocationFromSlug} from "../../../../services/helpers"
 import {searchService, SOLR, GOOGLE_TALENT} from "../../../../services/search"
+import buildURL from "axios/lib/helpers/buildURL"
 
 export default {
     props: {
@@ -101,7 +102,7 @@ export default {
             }
             sort.sortField = field => {
                 this.input.sort = field.toLowerCase()
-                this.newSearch()
+                return buildURL(this.$route.path, {...this.$route.query, "sort":field})
             }
             sort.by = blank(sortMeta) ? "" : startCase(sortMeta.active)
             sort.options = sortMeta.options.map(o => startCase(o))

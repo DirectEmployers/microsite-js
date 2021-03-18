@@ -120,14 +120,14 @@
                                     </h3>
                                 </template>
                                 <ul>
-                                    <li
-                                        @click="sort.sortField(option)"
+                                    <g-link
+                                        :to="sort.sortField(option)"
                                         class="cursor-pointer"
                                         :key="index"
                                         v-for="(option, index) in sort.options"
                                     >
                                         {{ option }}
-                                    </li>
+                                    </g-link>
                                 </ul>
                             </AppAccordion>
 
