@@ -100,10 +100,7 @@ export default {
             if (blank(sortMeta)) {
                 return sort
             }
-            sort.sortField = field => {
-                this.input.sort = field.toLowerCase()
-                return buildURL(this.$route.path, {...this.$route.query, "sort":field})
-            }
+            sort.sortField = field => buildURL(this.$route.path, {...this.$route.query, "sort":field.toLowerCase()})
             sort.by = blank(sortMeta) ? "" : startCase(sortMeta.active)
             sort.options = sortMeta.options.map(o => startCase(o))
             return sort
