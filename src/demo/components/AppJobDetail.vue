@@ -1,5 +1,5 @@
 <template>
-    <AppSolrJob :site-config="$siteConfig" :job="job">
+    <AppSolrJob :job="job">
         <template
             v-slot="{
                 title,
@@ -52,7 +52,7 @@
                 ></div>
 
                 <AppSimilarJobs
-                    :siteConfig="$siteConfig"
+                    :buids="$siteConfig.buids"
                     :guid="guid"
                     :title="title"
                     :location="location"
