@@ -126,7 +126,10 @@
                                         class="cursor-pointer"
                                     >
                                         <g-link
-                                            :to="sort.sortField(option)"
+                                            :to="{
+                                                path: $route.path,
+                                                query: { ...$route.query, sort: option.toLowerCase(), page: 1 }
+                                            }"
                                         >
                                             {{ option }}
                                         </g-link>
