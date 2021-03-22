@@ -14,16 +14,9 @@
 <script>
 import AppFetch from "./AppFetch"
 import {getJob} from "../../services/cdn/job"
-import buildUrl from "axios/lib/helpers/buildURL"
-import {buildJobDetailUrl, blank} from "../../services/helpers"
 
 export default {
     props: {
-        guid: {
-            type: String,
-            required: false,
-            default: null,
-        },
         s3Folder: {
             required: true,
             type: String,
@@ -39,7 +32,6 @@ export default {
     data() {
         return {
             job: null,
-            fromRouteParam: false,
         }
     },
     watch: {
@@ -47,35 +39,10 @@ export default {
             this.$refs["fetch"].request()
         },
     },
-    created() {
-        if (this.guid == null) {
-            this.fromRouteParam = true
-        }
-    },
     methods: {
         fetchJob() {
-            let guid = this.guid
-
-            if (this.fromRouteParam) {
-                guid = this.$route.params.guid
-                this.redirectGuidWithViewSources(guid)
-            }
-
+            let guid = this.$route.params?.guid
             return getJob(guid, this.s3Folder)
-        },
-        redirectGuidWithViewSources(guid) {
-            // rss feed urls are /guid+vs, redirect to job detail.
-            if (guid.length > 32) {
-                let guidOnly = guid.substring(0, 32)
-                let viewSource = guid.split(guidOnly)[1]
-
-                window.location.replace(
-                    buildUrl(`/t/l/${guidOnly}/job`, {
-                        ...this.$route.query,
-                        ...{vs: viewSource},
-                    })
-                )
-            }
         },
         setJob(job, setStatus) {
             this.job = job
@@ -84,24 +51,7 @@ export default {
             })
         },
         resolveJob(job, response, setStatus) {
-            //correct url only if we loaded from route param.
-            if (!this.fromRouteParam) {
-                return this.setJob(job, setStatus)
-            }
-            let routePath = this.$route.path.endsWith("/")
-                ? this.$route.path
-                : `${this.$route.path}/`
-            let url = buildJobDetailUrl(
-                job.title_slug,
-                job.location_exact,
-                job.guid
-            )
-            // check if this is the proper url for the job
-            if (url !== routePath) {
-                window.location.replace(buildUrl(url, this.$route.query))
-            } else {
-                return this.setJob(job, setStatus)
-            }
+            return this.setJob(job, setStatus)
         },
     },
 }
