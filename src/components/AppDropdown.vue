@@ -1,5 +1,5 @@
 <template>
-    <component :is="tag" class="dropdown" v-on="eventHandlers">
+    <component :is="tag" class="dropdown">
         <div
             tabindex="0"
             role="button"
@@ -9,8 +9,12 @@
             class="dropdown__display"
             :id="`dropdown-display-${id}`"
         >
-            <slot name="display">
-                {{ display }}
+            <slot name="display" :eventHandlers="eventHandlers">
+                <span v-on="eventHandlers">
+                    <slot name="display-text">
+                        {{ display }}
+                    </slot>
+                </span>
             </slot>
         </div>
 
