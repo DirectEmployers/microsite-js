@@ -19,14 +19,16 @@
                 </h3>
             </slot>
         </div>
+        <transition :name="transitionName">
         <div
             :id="`accordion-content-${id}`"
             class="accordion__content"
             v-if="active"
             :aria-labelledby="`accordion-header-${id}`"
         >
-            <slot :active="active" />
+            <slot />
         </div>
+        </transition>
     </component>
 </template>
 
@@ -49,6 +51,11 @@ export default {
             default() {
                 return `${this._uid}`
             },
+        },
+        transitionName: {
+            type: String,
+            required: false,
+            default: ""
         },
         display: {
             type: String,
