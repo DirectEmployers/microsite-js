@@ -16,10 +16,6 @@ module.exports = function (api, filters) {
             path: "/:location/:title/:guid/job",
             component: "./src/templates/Job.vue"
         })
-        createPage({
-            path: "/:guid/job",
-            component: "./src/templates/Job.vue"
-        })
 
         let oldSeoPaths = getOldSeoPaths()
         for (let i = 0, len = oldSeoPaths.length; i < len; i++) {
@@ -36,10 +32,6 @@ module.exports = function (api, filters) {
                 component: './src/pages/jobs.vue'
             })
         }
-        createPage({
-            path: "/:guid([a-z0-9A-Z]{32,})",
-            component: "./src/templates/Job.vue"
-        })
     })
 
     api.afterBuild(({
