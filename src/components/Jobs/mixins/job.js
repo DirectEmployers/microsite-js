@@ -21,7 +21,7 @@ export default {
         },
         siteConfig: {
             type: Object,
-            required: true,
+            required: false,
         },
         guidViewSource:{
             required: false,
@@ -151,6 +151,7 @@ export default {
                 description: this.description,
                 dateAdded: this.dateAdded,
                 applyUrl: this.applyUrl,
+                getAttribute: this.getAttribute,
                 clickedViewJob: this.clickedViewJob,
                 clickedApplyJob: this.clickedApplyJob,
             }

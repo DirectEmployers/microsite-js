@@ -73,17 +73,6 @@ export default {
         AppDETracker,
         AppCookieConsent,
     },
-
-    metaInfo: {
-        title: "Home",
-        meta: [
-            {
-                key: "description",
-                name: "description",
-                content: "only the best jobs",
-            },
-        ],
-    },
     created() {
         setViewSourceParameters(this.$route.query)
     },

@@ -3,7 +3,7 @@
         <component :is="tag">
             <slot
                 :data="responseData"
-                :request="this.request"
+                :request="request"
                 :status="{resolved: resolved, error: error, pending: pending}"
             ></slot>
         </component>

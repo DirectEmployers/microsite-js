@@ -1,7 +1,7 @@
 <template>
     <component :is="jobComponent" v-bind="{...$attrs, ...$props}">
         <template v-slot="jobData">
-            <slot v-bind="jobData"></slot>
+            <slot v-bind="{...jobData, ...{isSolr: isSolr, isGoogleTalent:isGoogleTalent}}"></slot>
         </template>
     </component>
 </template>

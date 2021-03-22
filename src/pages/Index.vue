@@ -4,6 +4,7 @@
             class="mt-6"
             :search-on-load="false"
             :site-config="$siteConfig"
+            :static="$static"
             :is-load-more="$static.metadata.paginationType == 'load'"
             v-slot="{input, source, newSearch}"
         >
@@ -29,13 +30,6 @@ export default {
     },
     metaInfo: {
         title: "Home",
-        meta: [
-            {
-                key: "description",
-                name: "description",
-                content: "only the best jobs",
-            },
-        ],
     },
 }
 </script>
