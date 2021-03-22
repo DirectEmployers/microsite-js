@@ -55,7 +55,13 @@
 </template>
 
 <script>
-import { TAB_KEY_CODE, UP_KEY_CODE, DOWN_KEY_CODE, ESCAPE_KEY_CODE, ENTER_KEY_CODE } from "../constants/keyCodes"
+import {
+    TAB_KEY_CODE,
+    UP_KEY_CODE,
+    DOWN_KEY_CODE,
+    ESCAPE_KEY_CODE,
+    ENTER_KEY_CODE,
+} from "../constants/keyCodes"
 export default {
     props: {
         id: {
@@ -189,9 +195,14 @@ export default {
 
             if (this.toggled) {
                 if (code == TAB_KEY_CODE) {
-                    return this.tab()
+                    if (e.shiftKey) {
+                        return this.selectedIndex == 0
+                            ? this.$refs["display"].focus()
+                            : this.up()
+                    } else {
+                        return this.tab()
+                    }
                 }
-
                 if (code == DOWN_KEY_CODE) {
                     return this.down()
                 }
