@@ -9,7 +9,7 @@
             class="dropdown__display"
             :id="`dropdown-display-${id}`"
         >
-            <slot name="display" :toggle="toggle">
+            <slot name="display" :toggle="toggle" :open="open" :close="close">
                 <span v-on="eventHandlers">
                     <slot name="display-text">
                         {{ display }}
@@ -23,6 +23,7 @@
             ref="dropdown-content"
             class="dropdown__content"
             :id="`dropdown-content-${id}`"
+            v-on="interactionType == 'click' ? {}: {'mouseleave': this.close, mouseenter: this.open }"
             :aria-labelledby="`dropdown-display-${id}`"
             :class="{'dropdown__content--active': toggled}"
         >
@@ -197,22 +198,24 @@ export default {
                 return this.close()
             }
 
-            if (this.toggled) {
-                if (code == TAB_KEY_CODE) {
-                    if (e.shiftKey) {
-                        return this.selectedIndex == 0
-                            ? this.$refs["display"].focus()
-                            : this.up()
-                    } else {
-                        return this.tab()
+            if (!this.toggled) {
+                return
+            }
+            if (code == TAB_KEY_CODE) {
+                if (e.shiftKey) {
+                    if(this.selectedIndex == 0){
+                        return this.close()
                     }
-                }
-                if (code == DOWN_KEY_CODE) {
-                    return this.down()
-                }
-                if (code == UP_KEY_CODE) {
                     return this.up()
+                } else {
+                    return this.tab()
                 }
+            }
+            if (code == DOWN_KEY_CODE) {
+                return this.down()
+            }
+            if (code == UP_KEY_CODE) {
+                return this.up()
             }
         },
     },
