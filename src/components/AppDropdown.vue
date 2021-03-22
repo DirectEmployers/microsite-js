@@ -9,7 +9,7 @@
             class="dropdown__display"
             :id="`dropdown-display-${id}`"
         >
-            <slot name="display" :eventHandlers="eventHandlers">
+            <slot name="display" :toggle="toggle">
                 <span v-on="eventHandlers">
                     <slot name="display-text">
                         {{ display }}
