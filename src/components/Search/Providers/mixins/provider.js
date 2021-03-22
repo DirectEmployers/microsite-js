@@ -123,20 +123,17 @@ export default {
         sort() {
             let sort = {
                 options: [],
-                sortField: () => {},
                 by: null,
             }
-
             let sortMeta = clone(this.meta.sort || {})
+
             if (blank(sortMeta)) {
                 return sort
             }
-            sort.sortField = field => {
-                this.input.sort = field.toLowerCase()
-                this.newSearch()
-            }
+
             sort.by = blank(sortMeta) ? "" : startCase(sortMeta.active)
             sort.options = sortMeta.options.map(o => startCase(o))
+
             return sort
         },
         slotData() {

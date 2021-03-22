@@ -20748,11 +20748,8 @@ module.exports = function isCancel(value) {
       return this.siteConfig.filters || [];
     },
     sort: function sort() {
-      var _this2 = this;
-
       var sort = {
         options: [],
-        sortField: function sortField() {},
         by: null
       };
       var sortMeta = Object(lodash__WEBPACK_IMPORTED_MODULE_20__["clone"])(this.meta.sort || {});
@@ -20760,12 +20757,6 @@ module.exports = function isCancel(value) {
       if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_21__[/* blank */ "a"])(sortMeta)) {
         return sort;
       }
-
-      sort.sortField = function (field) {
-        _this2.input.sort = field.toLowerCase();
-
-        _this2.newSearch();
-      };
 
       sort.by = Object(_services_helpers__WEBPACK_IMPORTED_MODULE_21__[/* blank */ "a"])(sortMeta) ? "" : Object(lodash__WEBPACK_IMPORTED_MODULE_20__["startCase"])(sortMeta.active);
       sort.options = sortMeta.options.map(function (o) {
@@ -20920,7 +20911,7 @@ module.exports = function isCancel(value) {
       return Object(lodash__WEBPACK_IMPORTED_MODULE_20__["map"])(Object(lodash__WEBPACK_IMPORTED_MODULE_20__["uniqBy"])(this.siteConfig.filters, "name"), "name");
     },
     search: function search() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.status.loading = true;
       delete this.status.error;
@@ -20932,32 +20923,32 @@ module.exports = function isCancel(value) {
 
       return this.service(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.filterInput(this.input)), this.getExtraData()), this.siteConfig).then(function (resp) {
         var data = resp.data || {};
-        _this3.featuredJobs = data.featured_jobs || [];
-        _this3.pagination = data.pagination || {};
-        _this3.filters = data.filters || {};
-        _this3.jobs = data.jobs || [];
-        _this3.meta = data.meta || {
+        _this2.featuredJobs = data.featured_jobs || [];
+        _this2.pagination = data.pagination || {};
+        _this2.filters = data.filters || {};
+        _this2.jobs = data.jobs || [];
+        _this2.meta = data.meta || {
           source: _services_search__WEBPACK_IMPORTED_MODULE_22__[/* SOLR */ "b"]
         }; //prevents sites from erroring when unable to connect to api
 
-        _this3.canonical = data.meta.canonical, _this3.rss = data.meta.rss, _this3.appliedFilters = data.meta.filters || [];
+        _this2.canonical = data.meta.canonical, _this2.rss = data.meta.rss, _this2.appliedFilters = data.meta.filters || [];
 
-        _this3.searchCompleted(data);
+        _this2.searchCompleted(data);
 
-        if (!_this3.isLoadMore) {
-          _this3.jobDisplay = _this3.jobs;
+        if (!_this2.isLoadMore) {
+          _this2.jobDisplay = _this2.jobs;
         }
 
-        if (_this3.isLoadMore && _this3.isFirstLoad) {
-          _this3.jobDisplay = _this3.jobs.splice(0, _this3.siteConfig.num_items);
+        if (_this2.isLoadMore && _this2.isFirstLoad) {
+          _this2.jobDisplay = _this2.jobs.splice(0, _this2.siteConfig.num_items);
         }
       }).catch(function (err) {
-        _this3.status.error = err;
+        _this2.status.error = err;
       }).finally(function () {
-        _this3.isFirstLoad = false;
+        _this2.isFirstLoad = false;
         setTimeout(function () {
-          _this3.status.loading = false;
-        }, _this3.delayLoadBy);
+          _this2.status.loading = false;
+        }, _this2.delayLoadBy);
       });
     },
     getFilterKey: function getFilterKey(filter) {
