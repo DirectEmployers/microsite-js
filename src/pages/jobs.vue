@@ -122,12 +122,18 @@
                                 </template>
                                 <ul>
                                     <li
-                                        @click="sort.sortField(option)"
-                                        class="cursor-pointer"
-                                        :key="index"
                                         v-for="(option, index) in sort.options"
+                                        :key="index"
+                                        class="cursor-pointer"
                                     >
-                                        {{ option }}
+                                        <g-link
+                                            :to="{
+                                                path: $route.path,
+                                                query: { ...$route.query, sort: option.toLowerCase(), page: 1 }
+                                            }"
+                                        >
+                                            {{ option }}
+                                        </g-link>
                                     </li>
                                 </ul>
                             </AppAccordion>
