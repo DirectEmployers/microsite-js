@@ -26571,19 +26571,22 @@ module.exports = CancelToken;
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("e01a");
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a15b");
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("b0c0");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("ac1f");
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("5319");
-/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("2ef0");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _mixins_job__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("069c");
-/* harmony import */ var _services_search__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("e73b");
-/* harmony import */ var _services_events__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("bdbb");
+/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("99af");
+/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("a15b");
+/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("b0c0");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("ac1f");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("5319");
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("2ef0");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _mixins_job__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("069c");
+/* harmony import */ var _services_search__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("e73b");
+/* harmony import */ var _services_events__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("bdbb");
+
 
 
 
@@ -26601,7 +26604,7 @@ module.exports = CancelToken;
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  mixins: [_mixins_job__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"]],
+  mixins: [_mixins_job__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"]],
   computed: {
     jobInfo: function jobInfo() {
       return this.job.job;
@@ -26625,10 +26628,19 @@ module.exports = CancelToken;
       return this.getAttribute("title");
     },
     location: function location() {
+      if (this.city && this.state) {
+        return "".concat(this.city, ", ").concat(this.state);
+      }
+
+      if (this.city && this.country) {
+        return "".concat(this.city, ", ").concat(this.country);
+      } // not always set.
+
+
       return this.getAttribute("city_admin1_country");
     },
     city: function city() {
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_6__["get"])(this.jobInfo, "derivedInfo.locations[0].postalAddress.locality", "");
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_7__["get"])(this.jobInfo, "derivedInfo.locations[0].postalAddress.locality", "");
     },
     country: function country() {
       return this.getAttribute("country");
@@ -26653,7 +26665,7 @@ module.exports = CancelToken;
   methods: {
     getAttribute: function getAttribute(name) {
       var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
-      var value = Object(lodash__WEBPACK_IMPORTED_MODULE_6__["get"])(this.jobInfo, "customAttributes.".concat(name, ".stringValues"), defaultValue);
+      var value = Object(lodash__WEBPACK_IMPORTED_MODULE_7__["get"])(this.jobInfo, "customAttributes.".concat(name, ".stringValues"), defaultValue);
       return Array.isArray(value) ? value.join(" ") : value;
     },
     clickedApplyJob: function clickedApplyJob(callback) {
@@ -26689,21 +26701,21 @@ module.exports = CancelToken;
         try {
           //try to get the saved request id from the previous event (impression or view depending on what event is calling this method).
           //the service call will do nothing if we werent able to.
-          var lastEvent = JSON.parse(sessionStorage.getItem(_services_search__WEBPACK_IMPORTED_MODULE_8__[/* GOOGLE_TALENT */ "a"])).event;
+          var lastEvent = JSON.parse(sessionStorage.getItem(_services_search__WEBPACK_IMPORTED_MODULE_9__[/* GOOGLE_TALENT */ "a"])).event;
           currentEvent.requestId = lastEvent.requestId;
         } catch (e) {
           this.executeCallback(callback);
           return;
         }
 
-        Object(_services_events__WEBPACK_IMPORTED_MODULE_9__[/* googleTalentEventService */ "a"])(currentEvent, {
+        Object(_services_events__WEBPACK_IMPORTED_MODULE_10__[/* googleTalentEventService */ "a"])(currentEvent, {
           client_events: this.siteConfig.client_events,
           project_id: this.siteConfig.project_id,
           tenant_uuid: this.siteConfig.tenant_uuid,
           company_uuids: this.siteConfig.company_uuids
         }).then(function (response) {
           currentEvent.requestId = (response.data || {}).request_id;
-          sessionStorage.setItem(_services_search__WEBPACK_IMPORTED_MODULE_8__[/* GOOGLE_TALENT */ "a"], JSON.stringify({
+          sessionStorage.setItem(_services_search__WEBPACK_IMPORTED_MODULE_9__[/* GOOGLE_TALENT */ "a"], JSON.stringify({
             event: currentEvent
           }));
 
@@ -26981,12 +26993,12 @@ module.exports = patchedExec;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"567c613a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=b6f88aba&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"567c613a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=28fcd3dd&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,null,_vm.slotData())],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=b6f88aba&
+// CONCATENATED MODULE: ./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=28fcd3dd&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=script&lang=js&
 var AppGoogleTalentJobvue_type_script_lang_js_ = __webpack_require__("8f60");
