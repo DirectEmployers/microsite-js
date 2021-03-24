@@ -35,6 +35,13 @@ export default {
             return this.getAttribute("title")
         },
         location() {
+            if(this.city && this.state){
+                return `${this.city}, ${this.state}`
+            }
+            if(this.city && this.country){
+                return `${this.city}, ${this.country}`
+            }
+            // not always set.
             return this.getAttribute("city_admin1_country")
         },
         city() {
