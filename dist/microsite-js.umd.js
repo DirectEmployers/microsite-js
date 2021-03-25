@@ -25043,12 +25043,12 @@ module.exports = function ($this, dummy, Wrapper) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"567c613a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAxiosForm.vue?vue&type=template&id=4d1866c8&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"567c613a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAxiosForm.vue?vue&type=template&id=e9546f62&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{ref:"form",on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_vm._t("default",null,{"data":_vm.data,"failed":_vm.failed,"errors":_vm.errors,"success":_vm.success,"loading":_vm.loading,"response":_vm.response})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Form/AppAxiosForm.vue?vue&type=template&id=4d1866c8&
+// CONCATENATED MODULE: ./src/components/Form/AppAxiosForm.vue?vue&type=template&id=e9546f62&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -25134,6 +25134,10 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
       default: function _default() {
         return {};
       }
+    },
+    resetData: {
+      type: Boolean,
+      default: false
     }
   },
   created: function created() {
@@ -25191,6 +25195,10 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
       this.client().then(function (response) {
         _this2.success = true;
         _this2.response = response;
+
+        if (_this2.resetData) {
+          _this2.data = Object(objectSpread2["a" /* default */])({}, _this2.initData);
+        }
 
         _this2.$emit('success', response);
       }).catch(function (e) {

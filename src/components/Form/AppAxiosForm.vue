@@ -43,6 +43,10 @@ export default {
                 return {}
             },
         },
+        resetData: {
+            type: Boolean,
+            default: false
+        },
     },
     created() {
         if (this.method.toLowerCase() == "get") {
@@ -104,6 +108,9 @@ export default {
                 .then(response => {
                     this.success = true
                     this.response = response
+                    if(this.resetData){
+                        this.data = {...this.initData}
+                    }
                     this.$emit('success', response)
                 })
                 .catch(e => {
