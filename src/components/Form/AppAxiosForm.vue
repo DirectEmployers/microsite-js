@@ -70,7 +70,8 @@ export default {
             let data = this.data
             const headers = this.options.headers || {}
             // auto serialize to form data if this header is present
-            if (headers["Content-Type"] == "multipart/form-data") {
+            if (headers["Content-Type"] == "multipart/form-data"
+            || headers["content-type"] == "multipart/form-data") {
                 data = this.serializeToFormData(this.data)
             }
             return axios[this.method](this.endpoint, data, this.options)
