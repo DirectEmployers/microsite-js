@@ -190,8 +190,10 @@ export default {
         keyNavigation(e) {
             const code = e.keyCode
 
-            if (code == ENTER_KEY_CODE && e.target == this.$refs["display"]) {
-                return this.toggle()
+            if(e.target == this.$refs["display"]){
+                if (code == ENTER_KEY_CODE || code == TAB_KEY_CODE && this.interactionType == 'hover') {
+                    return this.toggle()
+                }
             }
 
             if (code == ESCAPE_KEY_CODE) {
