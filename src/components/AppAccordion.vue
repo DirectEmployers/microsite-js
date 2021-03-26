@@ -5,7 +5,6 @@
             tabindex="0"
             :id="`accordion-header-${id}`"
             class="accordion__header"
-            :aria-controls="`accordion-content-${id}`"
             :class="{
                 'accordion__header--active': active,
             }"
