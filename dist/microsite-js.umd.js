@@ -2472,8 +2472,17 @@ module.exports = function (options, source) {
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
+  props: {
+    transitionName: {
+      type: String,
+      required: false,
+      default: ""
+    }
+  },
   data: function data() {
     return {
       declined: Object(_services_storage__WEBPACK_IMPORTED_MODULE_0__[/* declinedCookieUse */ "f"])(),
@@ -34031,12 +34040,12 @@ module.exports = function (target, src, options) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"567c613a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppCookieConsent.vue?vue&type=template&id=1b0194e9&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[(!_vm.hasAcknowleged)?_c('section',[_vm._t("default",null,{"acceptCookieUse":_vm.acceptCookieUse,"declineCookieUse":_vm.declineCookieUse,"declined":_vm.declined,"acknowledged":_vm.hasAcknowleged,"accepted":_vm.accepted})],2):_vm._e()])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"567c613a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppCookieConsent.vue?vue&type=template&id=0b692e5e&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[_c('transition',{attrs:{"name":_vm.transitionName}},[(!_vm.hasAcknowleged)?_c('section',[_vm._t("default",null,{"acceptCookieUse":_vm.acceptCookieUse,"declineCookieUse":_vm.declineCookieUse,"declined":_vm.declined,"acknowledged":_vm.hasAcknowleged,"accepted":_vm.accepted})],2):_vm._e()])],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppCookieConsent.vue?vue&type=template&id=1b0194e9&
+// CONCATENATED MODULE: ./src/components/AppCookieConsent.vue?vue&type=template&id=0b692e5e&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppCookieConsent.vue?vue&type=script&lang=js&
 var AppCookieConsentvue_type_script_lang_js_ = __webpack_require__("2414");
