@@ -9,8 +9,14 @@
             class="dropdown__display"
             :id="`dropdown-display-${id}`"
         >
-            <slot name="display" :toggle="toggle" :open="open" :close="close">
-                <span v-on="eventHandlers">
+            <slot
+                name="display"
+                :toggle="toggle"
+                :open="open"
+                :close="close"
+                :toggled="toggled"
+            >
+                <span v-on="eventHandlers" :toggled="toggled">
                     <slot name="display-text">
                         {{ display }}
                     </slot>
@@ -23,7 +29,11 @@
             ref="dropdown-content"
             class="dropdown__content"
             :id="`dropdown-content-${id}`"
-            v-on="interactionType == 'click' ? {}: {'mouseleave': this.close, mouseenter: this.open }"
+            v-on="
+                interactionType == 'click'
+                    ? {}
+                    : {mouseleave: this.close, mouseenter: this.open}
+            "
             :aria-labelledby="`dropdown-display-${id}`"
             :class="{'dropdown__content--active': toggled}"
         >
@@ -190,8 +200,11 @@ export default {
         keyNavigation(e) {
             const code = e.keyCode
 
-            if(e.target == this.$refs["display"]){
-                if (code == ENTER_KEY_CODE || code == TAB_KEY_CODE && this.interactionType == 'hover') {
+            if (e.target == this.$refs["display"]) {
+                if (
+                    code == ENTER_KEY_CODE ||
+                    (code == TAB_KEY_CODE && this.interactionType == "hover")
+                ) {
                     return this.toggle()
                 }
             }
@@ -205,7 +218,7 @@ export default {
             }
             if (code == TAB_KEY_CODE) {
                 if (e.shiftKey) {
-                    if(this.selectedIndex == 0){
+                    if (this.selectedIndex == 0) {
                         return this.close()
                     }
                     return this.up()
