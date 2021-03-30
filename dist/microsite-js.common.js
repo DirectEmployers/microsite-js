@@ -21956,9 +21956,11 @@ module.exports = stackDelete;
         _this2.jobs = data.jobs || [];
         _this2.meta = data.meta || {
           source: _services_search__WEBPACK_IMPORTED_MODULE_22__[/* SOLR */ "b"]
-        } //prevents sites from erroring when unable to connect to api
-        ;
-        _this2.canonical = data.meta.canonical, _this2.rss = data.meta.rss, _this2.appliedFilters = data.meta.filters || [];
+        }; //prevents sites from erroring when unable to connect to api
+
+        _this2.canonical = data.meta.canonical;
+        _this2.rss = data.meta.rss;
+        _this2.appliedFilters = data.meta.filters || [];
 
         _this2.searchCompleted(data);
 

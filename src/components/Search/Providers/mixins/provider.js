@@ -313,9 +313,9 @@ export default {
                     this.meta = data.meta || {
                         source: SOLR,
                     } //prevents sites from erroring when unable to connect to api
-                    ;(this.canonical = data.meta.canonical),
-                        (this.rss = data.meta.rss),
-                        (this.appliedFilters = data.meta.filters || [])
+                    this.canonical = data.meta.canonical
+                    this.rss = data.meta.rss
+                    this.appliedFilters = data.meta.filters || []
                     this.searchCompleted(data)
                     if (!this.isLoadMore) {
                         this.jobDisplay = this.jobs
