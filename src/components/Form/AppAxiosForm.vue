@@ -47,6 +47,10 @@ export default {
             type: Boolean,
             default: false
         },
+        formDataArrayBrackets: {
+            type: Boolean,
+            default: false
+        },
     },
     created() {
         if (this.method.toLowerCase() == "get") {
@@ -82,14 +86,14 @@ export default {
 
             if (Array.isArray(value) && value.length) {
                 value.forEach(val => {
-                    this.serializeToFormData(val, resultData, property + "[]")
+                    this.serializeToFormData(val, resultData, property + this.formDataArrayBrackets ? "[]" : "")
                 })
             } else if (typeof value == "object" && !(value instanceof File)) {
                 Object.keys(value).forEach(prop => {
                     this.serializeToFormData(
                         value[prop],
                         resultData,
-                        property ? property + "[" + prop + "]" : prop
+                        property ? `${property}[${prop}]` : prop
                     )
                 })
             } else {

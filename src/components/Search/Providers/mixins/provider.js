@@ -1,6 +1,11 @@
 import {omitBy, clone, startCase, uniqBy, map} from "lodash"
-import {blank, displayLocationFromSlug} from "../../../../services/helpers"
-import {searchService, SOLR, GOOGLE_TALENT} from "../../../../services/search"
+import {blank} from "../../../../services/helpers"
+import {
+    searchService,
+    SOLR,
+    GOOGLE_TALENT,
+    parseRouteSearchInput,
+} from "../../../../services/search"
 
 export default {
     props: {
@@ -31,10 +36,10 @@ export default {
         static: {
             type: Object,
             required: false,
-            default: function () {
+            default: function() {
                 return {}
             },
-        }
+        },
     },
     data() {
         return {
@@ -97,7 +102,7 @@ export default {
             let defaults = {}
             Object.entries(this.inputDefinition).forEach(entry => {
                 const [name, definition] = entry
-                if (name == 'page' && this.isLoadMore) {
+                if (name == "page" && this.isLoadMore) {
                     return
                 }
                 defaults[name] = definition.default
@@ -161,13 +166,12 @@ export default {
     },
     watch: {
         //any time route changes, update component input and search.
-        "$route"(newval, oldval) {
+        $route(newval, oldval) {
             this.jobDisplay = []
             this.isFirstLoad = true
-            this.input = this.mergeWithDefaultInput({
-                ...this.$route.query,
-                ...this.$route.params,
-            })
+            this.input = this.mergeWithDefaultInput(
+                parseRouteSearchInput(this.$route)
+            )
 
             this.queryChanged()
             this.extraData = this.defaultExtraData()
@@ -177,21 +181,20 @@ export default {
     metaInfo() {
         return {
             link: [
-                {rel: "canonical", href: this.canonicalHref },
+                {rel: "canonical", href: this.canonicalHref},
                 {
                     rel: "alternative",
                     title: this.rssTitle,
                     type: "application/rss+xml",
                     href: this.rssHref,
-                }
-            ]
+                },
+            ],
         }
     },
     created() {
-        this.input = this.mergeWithDefaultInput({
-            ...this.$route.query,
-            ...this.$route.params,
-        })
+        this.input = this.mergeWithDefaultInput(
+            parseRouteSearchInput(this.$route)
+        )
 
         if (this.searchOnLoad) {
             this.search()
@@ -230,7 +233,7 @@ export default {
                 },
                 r: {
                     default: "",
-                    clears: ["coords", "location"]
+                    clears: ["coords", "location"],
                 },
                 location: {
                     default: "",
@@ -260,12 +263,10 @@ export default {
             let input = {
                 ...this.getUrlFiltersObject({
                     ...this.defaultInput,
-                    ...object
+                    ...object,
                 }),
             }
-            if (!blank(input.location)) {
-                input.location = displayLocationFromSlug(input.location)
-            }
+
             return input
         },
         getUrlFiltersObject(object) {
@@ -274,7 +275,7 @@ export default {
             const possibleKeys = defaultInputKeys.concat(filterSlugs)
 
             for (const key in object) {
-                if (! possibleKeys.includes(key) ) {
+                if (!possibleKeys.includes(key)) {
                     delete object[key]
                 }
             }
@@ -299,7 +300,10 @@ export default {
             if (this.isLoadMore) {
                 this.beforeLoadMoreSearch()
             }
-            return this.service({...this.filterInput(this.input), ...this.getExtraData()}, this.siteConfig)
+            return this.service(
+                {...this.filterInput(this.input), ...this.getExtraData()},
+                this.siteConfig
+            )
                 .then(resp => {
                     const data = resp.data || {}
                     this.featuredJobs = data.featured_jobs || []
@@ -309,15 +313,18 @@ export default {
                     this.meta = data.meta || {
                         source: SOLR,
                     } //prevents sites from erroring when unable to connect to api
-                    this.canonical = data.meta.canonical,
-                    this.rss = data.meta.rss,
-                    this.appliedFilters = data.meta.filters || []
+                    ;(this.canonical = data.meta.canonical),
+                        (this.rss = data.meta.rss),
+                        (this.appliedFilters = data.meta.filters || [])
                     this.searchCompleted(data)
-                    if (!this.isLoadMore){
+                    if (!this.isLoadMore) {
                         this.jobDisplay = this.jobs
                     }
                     if (this.isLoadMore && this.isFirstLoad) {
-                        this.jobDisplay = this.jobs.splice(0, this.siteConfig.num_items)
+                        this.jobDisplay = this.jobs.splice(
+                            0,
+                            this.siteConfig.num_items
+                        )
                     }
                 })
                 .catch(err => {
@@ -325,14 +332,14 @@ export default {
                 })
                 .finally(() => {
                     this.isFirstLoad = false
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         this.status.loading = false
                     }, this.delayLoadBy)
                 })
         },
         getFilterKey(filter) {
             let key = filter.key
-            if(typeof key == "object"){
+            if (typeof key == "object") {
                 key = key[this.source]
             }
             return blank(key) ? filter.name : key
@@ -354,7 +361,7 @@ export default {
             if (this.isLoadMore) {
                 return {
                     num_items: this.siteConfig.num_items,
-                    offset: 0
+                    offset: 0,
                 }
             }
             return {}
@@ -375,13 +382,19 @@ export default {
                 .catch(err => {})
         },
         shouldIncludeCurrentPath() {
-            const oldPaths = ["jobs", "new-jobs", "vet-jobs", "jobs-in", "careers"]
+            const oldPaths = [
+                "jobs",
+                "new-jobs",
+                "vet-jobs",
+                "jobs-in",
+                "careers",
+            ]
             let lastPath = this.$route.path.split("/").pop()
 
-            if (! oldPaths.includes(lastPath) || this.$route.path == "/jobs") {
+            if (!oldPaths.includes(lastPath) || this.$route.path == "/jobs") {
                 return this.$route.path !== "/" ? true : false
             }
             return false
-        }
+        },
     },
 }

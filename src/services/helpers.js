@@ -1,11 +1,9 @@
-import {
-    upperFirst,
-    toString,
-    words
-} from "lodash"
-import {
-    removeCountry
-} from "./location"
+import trim from "lodash/trim"
+import words from "lodash/words"
+import toString from "lodash/toString"
+import {removeCountry} from "./location"
+import startCase from "lodash/startCase"
+import upperFirst from "lodash/upperFirst"
 
 /**
  * Check if the given value is "blank".
@@ -47,29 +45,31 @@ export function buildJobDetailUrl(title, location, guid) {
     return `/${locationSlug}/${titleSlug}/${guid}/job/`
 }
 
-export function strAfter(subject, search) {
-    let result = search === "" ? subject : subject.split(search)[1]
+const slugify = string =>
+    words(toString(string).replace(/["\u2019+:+/]/g, ""), /[\w]+/g).reduce(
+        (result, word, index) =>
+            result + (index ? "-" : "") + word.toLowerCase(),
+        ""
+    )
 
-    if (blank(result)) {
-        return null
+export function humanFriendlyLocation(string) {
+    let location = trim(toString(string).toLowerCase())
+
+    if (location.length <= 3) {
+        return location.toUpperCase()
     }
-    return result
-}
 
-const slugify = (string) => (
-    words(toString(string).replace(/["\u2019+:+/]/g, ""), /[\w]+/g).reduce((result, word, index) => (
-        result + (index ? "-" : "") + word.toLowerCase()
-    ), "")
-)
+    let parts = location.split(string.indexOf("-") != -1 ? '-':" ")
 
-export function displayLocationFromSlug(string) {
-    if (string.indexOf("-") > -1) {
-        return words(toString(string)).reduce(function(result, word, index, original){
-            if( word.length <= 3){
-                return upperFirst(result + (index !== original.length - 1 ? " " + upperFirst(word) : ", " +  word.toUpperCase()))
-            }
-            return upperFirst(`${result} ${upperFirst(word)}`)
-        })
+    if(parts.length == 1){
+        return startCase(parts[0])
     }
-    return upperFirst(string);
+
+    return words(parts.join("-")).reduce(function(result, word, index, original) {
+        if (parts.length <=3 && word.length <= 3) {
+            return upperFirst(`${result}, ${word.toUpperCase()}`)
+        }
+        return startCase(`${result} ${word}`)
+    })
+
 }
