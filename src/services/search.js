@@ -1,10 +1,12 @@
 import axios from "axios"
-import {
-    kebabCase
-} from "lodash"
-import {
-    isDevelopment
-} from "./helpers"
+
+import mergeWith from "lodash/mergeWith"
+
+import toString from "lodash/toString"
+import kebabCase from "lodash/kebabCase"
+import clone from "lodash/clone"
+
+import {isDevelopment, blank, humanFriendlyLocation} from "./helpers"
 
 export const SOLR = "solr"
 export const GOOGLE_TALENT = "google_talent"
@@ -30,29 +32,24 @@ export function api() {
 export function searchService(input, siteConfig) {
     const source = kebabCase(siteConfig.source)
 
-    return api().post(
-        `${source}/search`, {
-            data: input,
-            config: siteConfig,
-        }
-    )
+    return api().post(`${source}/search`, {
+        data: input,
+        config: siteConfig,
+    })
 }
 
 export function commuteSearchService(input, siteConfig) {
-    return api().post(
-        `google-talent/commute`, {
-            data: input,
-            config: siteConfig,
-        }
-    )
+    return api().post(`google-talent/commute`, {
+        data: input,
+        config: siteConfig,
+    })
 }
-
 
 export class TitleCompleteService {
     static async get(q, queryParams = {}) {
         let params = {
             q: q,
-            ...queryParams
+            ...queryParams,
         }
 
         try {
@@ -68,7 +65,6 @@ export class TitleCompleteService {
         }
     }
 }
-
 
 export class MOCCompleteService {
     static async get(q) {
@@ -104,4 +100,35 @@ export class LocationCompleteService {
             throw new Error(error)
         }
     }
+}
+
+/**
+ * Parse search url query/route params and format them.
+ */
+export function parseRouteSearchInput(route) {
+    //merge the route data
+    let input = mergeWith(
+        clone(route.query),
+        clone(route.params),
+        (queryValue, paramValue) => {
+            if (Array.isArray(queryValue) && paramValue) {
+                return [paramValue].concat(queryValue)
+            }
+            if (queryValue && paramValue) {
+                return [queryValue, paramValue]
+            }
+        }
+    )
+    // handle old url location.
+    if (blank(input.location)) {
+        input.location = toString(
+            [input.city, input.state, input.country].join(" ")
+        )
+    }
+    if (!Array.isArray(input.location)) {
+        input.location = humanFriendlyLocation(input.location)
+    } else {
+        input.location = input.location.map(loc => humanFriendlyLocation(loc))
+    }
+    return input
 }
