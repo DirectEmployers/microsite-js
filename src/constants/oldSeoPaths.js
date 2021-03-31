@@ -1,11 +1,11 @@
 const oldSeoPaths = [
     [
+        "/:title/jobs-in"
+    ],
+    [
         "/:country/jobs",
         "/:state/:country/jobs",
         "/:city/:state/:country/jobs"
-    ],
-    [
-        "/:title/jobs-in"
     ],
     [
         "/:mocTitle/:moc/:mocBranch/vet-jobs"
