@@ -35,19 +35,19 @@ export default {
             return this.getAttribute("title")
         },
         location() {
-            if(this.city && this.state){
-                return `${this.city}, ${this.state}`
-            }
-            if(this.city && this.country){
-                return `${this.city}, ${this.country}`
-            }
-            // not always set.
-            return this.getAttribute("city_admin1_country")
+            return `${this.city}, ${this.stateShort}`
         },
         city() {
             return get(
                 this.jobInfo,
                 "derivedInfo.locations[0].postalAddress.locality",
+                ""
+            )
+        },
+        stateShort(){
+            return get(
+                this.jobInfo,
+                "derivedInfo.locations[0].postalAddress.administrativeArea",
                 ""
             )
         },

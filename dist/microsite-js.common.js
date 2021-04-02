@@ -392,12 +392,15 @@ module.exports.f = function getOwnPropertyNames(it) {
     description: function description() {
       return this.jobInfo.html_description || this.jobInfo.description;
     },
+    stateShort: function stateShort() {
+      return this.jobInfo.state_short_exact;
+    },
     state: function state() {
       var state = this.jobInfo.city_slab_exact;
       state = this.jobInfo.city_slab_exact.split("/")[1];
 
       if (Object(_services_helpers__WEBPACK_IMPORTED_MODULE_10__[/* blank */ "a"])(state) || state == "none") {
-        return this.jobInfo.state_short_exact;
+        return "";
       }
 
       return Object(lodash__WEBPACK_IMPORTED_MODULE_7__["startCase"])(Object(lodash__WEBPACK_IMPORTED_MODULE_7__["words"])(state).join(" "));
@@ -29791,19 +29794,13 @@ module.exports = copyObject;
       return this.getAttribute("title");
     },
     location: function location() {
-      if (this.city && this.state) {
-        return "".concat(this.city, ", ").concat(this.state);
-      }
-
-      if (this.city && this.country) {
-        return "".concat(this.city, ", ").concat(this.country);
-      } // not always set.
-
-
-      return this.getAttribute("city_admin1_country");
+      return "".concat(this.city, ", ").concat(this.stateShort);
     },
     city: function city() {
       return Object(lodash__WEBPACK_IMPORTED_MODULE_7__["get"])(this.jobInfo, "derivedInfo.locations[0].postalAddress.locality", "");
+    },
+    stateShort: function stateShort() {
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_7__["get"])(this.jobInfo, "derivedInfo.locations[0].postalAddress.regionCode", "");
     },
     country: function country() {
       return this.getAttribute("country");
@@ -30178,12 +30175,12 @@ module.exports = patchedExec;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"567c613a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=28fcd3dd&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"567c613a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=8a9162e8&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,null,_vm.slotData())],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=28fcd3dd&
+// CONCATENATED MODULE: ./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=8a9162e8&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=script&lang=js&
 var AppGoogleTalentJobvue_type_script_lang_js_ = __webpack_require__("8f60");

@@ -97,12 +97,15 @@ export default {
         description() {
             return this.jobInfo.html_description || this.jobInfo.description
         },
+        stateShort(){
+            return this.jobInfo.state_short_exact
+        },
         state() {
             let state = this.jobInfo.city_slab_exact
             state = this.jobInfo.city_slab_exact.split("/")[1]
 
             if (blank(state) || state == "none") {
-                return this.jobInfo.state_short_exact
+                return ""
             }
             return startCase(words(state).join(" "))
         },
@@ -137,21 +140,22 @@ export default {
         },
         slotData() {
             return {
-                reqId: this.reqId,
-                title: this.title,
-                location: this.location,
-                detailUrl: this.detailUrl,
                 guid: this.guid,
                 city: this.city,
+                reqId: this.reqId,
+                title: this.title,
                 state: this.state,
                 country: this.country,
                 company: this.company,
-                hasCommuteInfo: this.hasCommuteInfo,
+                location: this.location,
+                applyUrl: this.applyUrl,
+                detailUrl: this.detailUrl,
+                dateAdded: this.dateAdded,
+                stateShort: this.stateShort,
                 commuteTime: this.commuteTime,
                 description: this.description,
-                dateAdded: this.dateAdded,
-                applyUrl: this.applyUrl,
                 getAttribute: this.getAttribute,
+                hasCommuteInfo: this.hasCommuteInfo,
                 clickedViewJob: this.clickedViewJob,
                 clickedApplyJob: this.clickedApplyJob,
             }
