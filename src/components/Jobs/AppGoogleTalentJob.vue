@@ -48,7 +48,7 @@ export default {
             )
         },
         countryShort(){
-            return this.getAttribute('country')
+            return this.getAttribute('country_short')
         },
         stateShort(){
             return get(
