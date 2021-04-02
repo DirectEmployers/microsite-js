@@ -5,7 +5,7 @@
             role="button"
             ref="display"
             aria-haspopup="true"
-            :aria-expanded="toggled"
+            :aria-expanded="toggled ? 'true' : 'false'"
             class="dropdown__display"
             :id="`dropdown-display-${id}`"
         >
