@@ -35,6 +35,9 @@ export default {
             return this.getAttribute("title")
         },
         location() {
+            if(!this.state){
+                return `${this.city}, ${this.country}`
+            }
             return `${this.city}, ${this.stateShort}`
         },
         city() {
@@ -43,6 +46,9 @@ export default {
                 "derivedInfo.locations[0].postalAddress.locality",
                 ""
             )
+        },
+        countryShort(){
+            return this.getAttribute('country')
         },
         stateShort(){
             return get(

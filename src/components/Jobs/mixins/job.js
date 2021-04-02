@@ -100,6 +100,9 @@ export default {
         stateShort(){
             return this.jobInfo.state_short_exact
         },
+        countryShort(){
+            return this.jobInfo.country_short_exact
+        },
         state() {
             let state = this.jobInfo.city_slab_exact
             state = this.jobInfo.city_slab_exact.split("/")[1]
@@ -154,6 +157,7 @@ export default {
                 stateShort: this.stateShort,
                 commuteTime: this.commuteTime,
                 description: this.description,
+                countryShort: this.countryShort,
                 getAttribute: this.getAttribute,
                 hasCommuteInfo: this.hasCommuteInfo,
                 clickedViewJob: this.clickedViewJob,
