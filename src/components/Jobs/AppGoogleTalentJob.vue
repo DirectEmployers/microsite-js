@@ -48,15 +48,7 @@ export default {
             )
         },
         countryShort(){
-            // once this attribute is available, use this instead
-            // return this.getAttribute('country_short')
-
-            //for now rely on google talents 2 letter derived code.
-            return get(
-                this.jobInfo,
-                "derivedInfo.locations[0].postalAddress.regionCode",
-                ""
-            )
+            return this.getAttribute('country_short')
         },
         stateShort(){
             return get(
