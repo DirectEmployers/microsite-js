@@ -16,7 +16,7 @@
                                     {{ jobData.title }}
                                 </h3>
                                 <p class="similar-jobs__grid-item-location">
-                                    {{ jobData.city }}, {{ jobData.state }}
+                                    {{ jobData.location }}
                                 </p>
                             </slot>
                         </g-link>
