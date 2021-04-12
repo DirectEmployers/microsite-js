@@ -38,6 +38,13 @@ export function searchService(input, siteConfig) {
     })
 }
 
+export function geoService(input, siteConfig) {
+    return api().post('/geolocations', {
+        data: input,
+        config: siteConfig,
+    })
+}
+
 export function commuteSearchService(input, siteConfig) {
     return api().post(`google-talent/commute`, {
         data: input,
