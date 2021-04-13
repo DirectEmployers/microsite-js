@@ -179,10 +179,9 @@ export default {
         },
         getMarkerLabel(job) {
             let count = this.counts[job.location_exact] || 1
+            let jobsLabel = "Jobs"
             if (count == 1) {
                 jobsLabel = "Job"
-            }else{
-                jobsLabel = "Jobs"
             }
             return `${job.location_exact}: ${count} ${jobsLabel}`
         },
