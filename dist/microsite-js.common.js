@@ -31272,12 +31272,12 @@ module.exports = setCacheAdd;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppJobMap.vue?vue&type=template&id=52687abe&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[(!_vm.error)?_c('GmapMap',_vm._b({style:(_vm.mapStyles),attrs:{"center":_vm.positionCenter,"zoom":_vm.positionZoom,"options":_vm.jobMapOptions}},'GmapMap',_vm.$attrs,false),[_c('GmapCluster',_vm._b({},'GmapCluster',_vm.jobClusterOptions,false),[_vm._l((_vm.markers),function(m,index){return _c('GmapMarker',{key:index,attrs:{"clickable":true,"position":m.position},on:{"mouseover":function($event){return _vm.setWindowInfo(m, index)},"mouseout":function($event){_vm.infoWindow.open = false},"click":function($event){return _vm.search(m.job)}}})}),_c('GmapInfoWindow',{attrs:{"options":_vm.infoWindow.options,"position":_vm.infoWindow.position,"opened":_vm.infoWindow.open},on:{"click":function($event){return _vm.search(_vm.infoWindow.job)}}})],2)],1):_vm._e(),_vm._t("footer",null,{"error":_vm.error,"done":_vm.done})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppJobMap.vue?vue&type=template&id=186053d6&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[(!_vm.error)?_c('GmapMap',_vm._b({style:(_vm.mapStyles),attrs:{"zoom":_vm.positionZoom,"center":_vm.positionCenter,"options":_vm.jobMapOptions}},'GmapMap',_vm.$attrs,false),[_c('GmapCluster',_vm._b({},'GmapCluster',_vm.jobClusterOptions,false),[_vm._l((_vm.markers),function(m,index){return _c('GmapMarker',{key:index,attrs:{"clickable":true,"position":m.position},on:{"click":function($event){return _vm.search(m.job)},"mouseout":function($event){_vm.infoWindow.open = false},"mouseover":function($event){return _vm.setWindowInfo(m, index)}}})}),_c('GmapInfoWindow',{attrs:{"opened":_vm.infoWindow.open,"options":_vm.infoWindow.options,"position":_vm.infoWindow.position},on:{"click":function($event){return _vm.search(_vm.infoWindow.job)}}})],2)],1):_vm._e(),_vm._t("footer",null,{"error":_vm.error,"done":_vm.done})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppJobMap.vue?vue&type=template&id=52687abe&
+// CONCATENATED MODULE: ./src/components/Search/AppJobMap.vue?vue&type=template&id=186053d6&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -31468,14 +31468,14 @@ var component = Object(componentNormalizer["a" /* default */])(
     return {
       jobs: [],
       counts: {},
-      google: null,
       done: false,
       markers: [],
-      payload: cloneDeep_default()(this.searchData),
-      positionCenter: this.$attrs.center,
-      positionZoom: this.$attrs.zoom,
+      google: null,
       error: false,
       hasMore: true,
+      positionZoom: this.$attrs.zoom,
+      payload: cloneDeep_default()(this.searchData),
+      positionCenter: this.$attrs.center,
       queryConfig: {
         source: services_search["b" /* SOLR */],
         buids: queryConfig.buids || [],
@@ -31487,7 +31487,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       infoWindow: {
         open: false,
         position: null,
-        currentMidx: null,
+        currentIndex: null,
         options: {
           content: "",
           pixelOffset: {
@@ -31595,7 +31595,7 @@ var component = Object(componentNormalizer["a" /* default */])(
         query: payload
       }).catch(function (err) {});
     },
-    getMarkerLabel: function getMarkerLabel(job) {
+    getJobWindowLabel: function getJobWindowLabel(job) {
       var count = this.counts[job.location_exact] || 1;
       var jobsLabel = "Jobs";
 
@@ -31638,7 +31638,7 @@ var component = Object(componentNormalizer["a" /* default */])(
     },
     setWindowInfo: function setWindowInfo(marker, index) {
       this.infoWindow.position = marker.position;
-      this.infoWindow.options.content = this.getMarkerLabel(marker.job); //check if its the same marker that was selected if yes toggle
+      this.infoWindow.options.content = this.getJobWindowLabel(marker.job); //check if its the same marker that was selected if yes toggle
 
       if (this.infoWindow.currentIndex == index) {
         this.infoWindow.open = !this.infoWindow.open;

@@ -1,27 +1,27 @@
 <template>
     <section>
         <GmapMap
-            v-bind="$attrs"
-            :center="positionCenter"
-            :zoom="positionZoom"
-            :options="jobMapOptions"
-            :style="mapStyles"
             v-if="!error"
+            v-bind="$attrs"
+            :style="mapStyles"
+            :zoom="positionZoom"
+            :center="positionCenter"
+            :options="jobMapOptions"
         >
             <GmapCluster v-bind="jobClusterOptions">
                 <GmapMarker
-                    :clickable="true"
-                    v-for="(m, index) in markers"
                     :key="index"
+                    :clickable="true"
                     :position="m.position"
-                    @mouseover="setWindowInfo(m, index)"
-                    @mouseout="infoWindow.open = false"
                     @click="search(m.job)"
+                    v-for="(m, index) in markers"
+                    @mouseout="infoWindow.open = false"
+                    @mouseover="setWindowInfo(m, index)"
                 ></GmapMarker>
                 <GmapInfoWindow
+                    :opened="infoWindow.open"
                     :options="infoWindow.options"
                     :position="infoWindow.position"
-                    :opened="infoWindow.open"
                     @click="search(infoWindow.job)"
                 ></GmapInfoWindow>
             </GmapCluster>
@@ -89,14 +89,14 @@ export default {
         return {
             jobs: [],
             counts: {},
-            google: null,
             done: false,
             markers: [],
-            payload: clone(this.searchData),
-            positionCenter: this.$attrs.center,
-            positionZoom: this.$attrs.zoom,
+            google: null,
             error: false,
             hasMore: true,
+            positionZoom: this.$attrs.zoom,
+            payload: clone(this.searchData),
+            positionCenter: this.$attrs.center,
             queryConfig: {
                 source: SOLR,
                 buids: queryConfig.buids || [],
@@ -108,7 +108,7 @@ export default {
             infoWindow: {
                 open: false,
                 position: null,
-                currentMidx: null,
+                currentIndex: null,
                 options: {
                     content: "",
                     pixelOffset: {
@@ -140,8 +140,10 @@ export default {
         }
         // if a location was given center to the first available job to give
         // a better center for the current search results ( TODO - find a better way to do this?)
-        if(this.payload.location && this.jobs.length > 0){
-            this.positionCenter = this.parseGeoLocation(this.jobs[0].GeoLocation)
+        if (this.payload.location && this.jobs.length > 0) {
+            this.positionCenter = this.parseGeoLocation(
+                this.jobs[0].GeoLocation
+            )
             this.positionZoom = 5
         }
     },
@@ -177,7 +179,7 @@ export default {
                 })
                 .catch(err => {})
         },
-        getMarkerLabel(job) {
+        getJobWindowLabel(job) {
             let count = this.counts[job.location_exact] || 1
             let jobsLabel = "Jobs"
             if (count == 1) {
@@ -188,10 +190,7 @@ export default {
         makeMarker(job) {
             let coords = this.parseGeoLocation(job.GeoLocation)
             return new google.maps.Marker({
-                position: new google.maps.LatLng(
-                    coords.lat,
-                    coords.lng
-                ),
+                position: new google.maps.LatLng(coords.lat, coords.lng),
                 job: job,
             })
         },
@@ -217,7 +216,7 @@ export default {
         },
         setWindowInfo(marker, index) {
             this.infoWindow.position = marker.position
-            this.infoWindow.options.content = this.getMarkerLabel(marker.job)
+            this.infoWindow.options.content = this.getJobWindowLabel(marker.job)
 
             //check if its the same marker that was selected if yes toggle
             if (this.infoWindow.currentIndex == index) {
