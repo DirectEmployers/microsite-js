@@ -1,13 +1,11 @@
 <template>
-    <ClientOnly>
-        <component :is="tag">
-            <slot
-                :data="responseData"
-                :request="request"
-                :status="{resolved: resolved, error: error, pending: pending}"
-            ></slot>
-        </component>
-    </ClientOnly>
+    <component :is="tag">
+        <slot
+            :data="responseData"
+            :request="request"
+            :status="{resolved: resolved, error: error, pending: pending}"
+        ></slot>
+    </component>
 </template>
 
 <script>
