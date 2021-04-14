@@ -280,15 +280,7 @@
     "destination": "/_country/jobs.html"
   },
   {
-    "source": "/:guid/job",
-    "destination": "/_guid/job.html"
-  },
-  {
     "source": "/:company/careers",
     "destination": "/_company/careers.html"
-  },
-  {
-    "source": "/:guid([a-z0-9A-Z]{32,})",
-    "destination": "/_guid_a_z_0_9_a_z_32.html"
   }
 ]
