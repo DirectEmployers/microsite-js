@@ -2,10 +2,12 @@
     <Layout>
         <AppJobFetch :s3-folder="$siteConfig.s3Folder">
             <template v-slot="{job, status: {error, pending, resolved}}">
-                <AppLoader v-if="pending" />
-                <App404 v-else-if="error && !resolved" />
-                <AppJobExpired v-else-if="isExpired(job)" :job="job" />
-                <AppJobDetail v-else-if="job" :job="job" />
+                <AppLoader v-show="pending" />
+                <ClientOnly>
+                    <App404 v-if="error && !resolved" />
+                    <AppJobExpired v-else-if="isExpired(job)" :job="job" />
+                    <AppJobDetail v-else-if="job" :job="job" />
+                </ClientOnly>
             </template>
         </AppJobFetch>
     </Layout>
