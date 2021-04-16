@@ -195,7 +195,7 @@ export default {
             })
         },
         parseGeoLocation(geolocation) {
-            if (blank(geolocation) || geolocation == ",") {
+            if (blank(geolocation)) {
                 return false
             }
             let coords = geolocation.split(",")
