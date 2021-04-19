@@ -1,10 +1,9 @@
 import trim from "lodash/trim"
 import words from "lodash/words"
 import toString from "lodash/toString"
-import {removeCountry} from "./location"
+import {removeCountry, isLocationCode } from "./location"
 import startCase from "lodash/startCase"
 import upperFirst from "lodash/upperFirst"
-
 /**
  * Check if the given value is "blank".
  */
@@ -66,7 +65,7 @@ export function humanFriendlyLocation(string) {
     }
 
     return words(parts.join("-")).reduce(function(result, word, index, original) {
-        if (parts.length <=3 && word.length <= 3) {
+        if (parts.length <=3 && word.length <= 3 && isLocationCode(word)) {
             return upperFirst(`${result}, ${word.toUpperCase()}`)
         }
         return startCase(`${result} ${word}`)
