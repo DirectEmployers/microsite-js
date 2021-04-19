@@ -33303,6 +33303,28 @@ function fullState(code) {
 
   return result;
 }
+/**
+ * Return true if the given value is a code that exists in ONE of
+ * the location objects at the top of this module.
+ */
+
+function isLocationCode(code) {
+  var result = Object(lodash["trim"])(code.toString());
+
+  if (Object.prototype.hasOwnProperty.call(states, result.toUpperCase())) {
+    return true;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(provinces, result.toUpperCase())) {
+    return true;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(countries, result.toUpperCase())) {
+    return true;
+  }
+
+  return false;
+}
 // EXTERNAL MODULE: ./node_modules/lodash/startCase.js
 var startCase = __webpack_require__("e740");
 var startCase_default = /*#__PURE__*/__webpack_require__.n(startCase);
@@ -33409,7 +33431,7 @@ function humanFriendlyLocation(string) {
   }
 
   return words_default()(parts.join("-")).reduce(function (result, word, index, original) {
-    if (parts.length <= 3 && word.length <= 3) {
+    if (parts.length <= 3 && word.length <= 3 && isLocationCode(word)) {
       return upperFirst_default()("".concat(result, ", ").concat(word.toUpperCase()));
     }
 
