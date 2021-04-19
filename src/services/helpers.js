@@ -52,24 +52,48 @@ const slugify = string =>
         ""
     )
 
+/**
+ * https://stackoverflow.com/questions/39842004/why-use-regular-expressions-to-validate-latitude-and-longitude-in-javascript
+ */
+export function isCoordinates(string) {
+    let value = new String(string).split(",")
+    if (blank(string)) {
+        return false
+    }
+
+    let isLat = isFinite(value[0]) && Math.abs(value[0]) <= 90
+
+    let isLng = isFinite(value[1]) && Math.abs(value[1]) <= 180
+
+    return isLat && isLng
+}
+
 export function humanFriendlyLocation(string) {
+    if (isCoordinates(string)) {
+        return string
+    }
+
     let location = trim(toString(string).toLowerCase())
 
     if (location.length <= 3) {
         return location.toUpperCase()
     }
 
-    let parts = location.split(string.indexOf("-") != -1 ? '-':" ")
+    let parts = location.split(string.indexOf("-") != -1 ? "-" : " ")
 
-    if(parts.length == 1){
+    if (parts.length == 1) {
         return startCase(parts[0])
     }
 
-    return words(parts.join("-")).reduce(function(result, word, index, original) {
-        if (parts.length <=3 && word.length <= 3) {
+    return words(parts.join("-")).reduce(function(
+        result,
+        word,
+        index,
+        original
+    ) {
+        if (parts.length <= 3 && word.length <= 3) {
             return upperFirst(`${result}, ${word.toUpperCase()}`)
         }
         return startCase(`${result} ${word}`)
     })
-
 }

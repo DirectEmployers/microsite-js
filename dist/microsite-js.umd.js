@@ -33089,6 +33089,8 @@ __webpack_require__.d(__webpack_exports__, "d", function() { return /* binding *
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ buildJobDetailUrl; });
 __webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ humanFriendlyLocation; });
 
+// UNUSED EXPORTS: isCoordinates
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
 
@@ -33373,15 +33375,34 @@ var helpers_slugify = function slugify(string) {
     return result + (index ? "-" : "") + word.toLowerCase();
   }, "");
 };
+/**
+ * https://stackoverflow.com/questions/39842004/why-use-regular-expressions-to-validate-latitude-and-longitude-in-javascript
+ */
 
+
+function isCoordinates(string) {
+  var value = new String(string).split(",");
+
+  if (blank(string)) {
+    return false;
+  }
+
+  var isLat = isFinite(value[0]) && Math.abs(value[0]) <= 90;
+  var isLng = isFinite(value[1]) && Math.abs(value[1]) <= 180;
+  return isLat && isLng;
+}
 function humanFriendlyLocation(string) {
+  if (isCoordinates(string)) {
+    return string;
+  }
+
   var location = trim_default()(toString_default()(string).toLowerCase());
 
   if (location.length <= 3) {
     return location.toUpperCase();
   }
 
-  var parts = location.split(string.indexOf("-") != -1 ? '-' : " ");
+  var parts = location.split(string.indexOf("-") != -1 ? "-" : " ");
 
   if (parts.length == 1) {
     return startCase_default()(parts[0]);
