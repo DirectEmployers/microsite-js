@@ -171,7 +171,9 @@ export default {
             let payload = omitBy(this.payload, (v, k) => blank(v))
             payload.page = 1
             payload.location = job.location_exact
-            payload.coords = job.GeoLocation
+            if(payload.r){
+                payload.coords = job.GeoLocation
+            }
             this.$router
                 .push({
                     path: "/jobs",
