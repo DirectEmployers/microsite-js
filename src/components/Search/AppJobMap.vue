@@ -24,6 +24,7 @@
                     :position="infoWindow.position"
                     @click="search(infoWindow.job)"
                 ></GmapInfoWindow>
+                <slot></slot>
             </GmapCluster>
         </GmapMap>
         <slot name="footer" :error="error" :done="done"></slot>
