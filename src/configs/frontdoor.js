@@ -42,7 +42,7 @@ const config = {
         },
         {
             name: "location",
-            key: "city",
+            key: "city_state",
             display: "City",
         },
         {
