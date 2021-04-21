@@ -151,3 +151,24 @@ export function fullState(code) {
 
     return result
 }
+
+/**
+ * Return true if the given value is a code that exists in ONE of
+ * the location objects at the top of this module.
+ */
+ export function isLocationCode(code) {
+    let result = trim(code.toString())
+
+    if (Object.prototype.hasOwnProperty.call(states, result.toUpperCase())) {
+        return true
+    }
+
+    if (Object.prototype.hasOwnProperty.call(provinces, result.toUpperCase())) {
+        return true
+    }
+    if (Object.prototype.hasOwnProperty.call(countries, result.toUpperCase())) {
+        return true
+    }
+
+    return false
+}

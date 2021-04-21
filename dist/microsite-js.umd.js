@@ -2745,12 +2745,12 @@ var component = Object(componentNormalizer["a" /* default */])(
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppFetch.vue?vue&type=template&id=b036ba6c&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[_c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"data":_vm.responseData,"request":_vm.request,"status":{resolved: _vm.resolved, error: _vm.error, pending: _vm.pending}})],2)],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppFetch.vue?vue&type=template&id=5cf2926d&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"data":_vm.responseData,"request":_vm.request,"status":{resolved: _vm.resolved, error: _vm.error, pending: _vm.pending}})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Fetch/AppFetch.vue?vue&type=template&id=b036ba6c&
+// CONCATENATED MODULE: ./src/components/Fetch/AppFetch.vue?vue&type=template&id=5cf2926d&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
 var es_object_to_string = __webpack_require__("d3b7");
@@ -2780,8 +2780,6 @@ var helpers = __webpack_require__("a74a");
 
 
 
-//
-//
 //
 //
 //
@@ -36369,6 +36367,8 @@ __webpack_require__.d(__webpack_exports__, "d", function() { return /* binding *
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ buildJobDetailUrl; });
 __webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ humanFriendlyLocation; });
 
+// UNUSED EXPORTS: isCoordinates
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
 
@@ -36581,6 +36581,28 @@ function fullState(code) {
 
   return result;
 }
+/**
+ * Return true if the given value is a code that exists in ONE of
+ * the location objects at the top of this module.
+ */
+
+function isLocationCode(code) {
+  var result = Object(lodash["trim"])(code.toString());
+
+  if (Object.prototype.hasOwnProperty.call(states, result.toUpperCase())) {
+    return true;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(provinces, result.toUpperCase())) {
+    return true;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(countries, result.toUpperCase())) {
+    return true;
+  }
+
+  return false;
+}
 // EXTERNAL MODULE: ./node_modules/lodash/startCase.js
 var startCase = __webpack_require__("e740");
 var startCase_default = /*#__PURE__*/__webpack_require__.n(startCase);
@@ -36653,22 +36675,41 @@ var helpers_slugify = function slugify(string) {
     return result + (index ? "-" : "") + word.toLowerCase();
   }, "");
 };
+/**
+ * https://stackoverflow.com/questions/39842004/why-use-regular-expressions-to-validate-latitude-and-longitude-in-javascript
+ */
 
+
+function isCoordinates(string) {
+  var value = new String(string).split(",");
+
+  if (blank(string)) {
+    return false;
+  }
+
+  var isLat = isFinite(value[0]) && Math.abs(value[0]) <= 90;
+  var isLng = isFinite(value[1]) && Math.abs(value[1]) <= 180;
+  return isLat && isLng;
+}
 function humanFriendlyLocation(string) {
+  if (isCoordinates(string)) {
+    return string;
+  }
+
   var location = trim_default()(toString_default()(string).toLowerCase());
 
   if (location.length <= 3) {
     return location.toUpperCase();
   }
 
-  var parts = location.split(string.indexOf("-") != -1 ? '-' : " ");
+  var parts = location.split(string.indexOf("-") != -1 ? "-" : " ");
 
   if (parts.length == 1) {
     return startCase_default()(parts[0]);
   }
 
   return words_default()(parts.join("-")).reduce(function (result, word, index, original) {
-    if (parts.length <= 3 && word.length <= 3) {
+    if (parts.length <= 3 && word.length <= 3 && isLocationCode(word)) {
       return upperFirst_default()("".concat(result, ", ").concat(word.toUpperCase()));
     }
 
