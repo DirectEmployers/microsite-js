@@ -84,10 +84,6 @@ export default {
             type: Boolean,
             default: true,
         },
-        preserveQueryParams: {
-            type: Boolean,
-            default: false,
-        },
         options: {
             required: false,
             type: Array,
@@ -140,10 +136,6 @@ export default {
     },
     methods: {
         getOptionLink(option){
-            if(!this.preserveQueryParams){
-                return option.link
-            }
-
             return buildUrl(option.link, {...this.$route.query, ...this.input})
         },
         showMore() {
