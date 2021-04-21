@@ -1188,12 +1188,12 @@ module.exports = ''.repeat || function repeat(count) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=9b202840&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=717025d3&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isVisible && _vm.hasOptions)?_c(_vm.tag,_vm._b({tag:"component",staticClass:"search-filter"},'component',_vm.$attrs,false),[(_vm.display)?_c('h3',{staticClass:"search-filter-display"},[_vm._v(" Filter By "+_vm._s(_vm.display)+" ")]):_vm._e(),_vm._t("default",[_c('ul',{staticClass:"search-filter-options"},_vm._l((_vm.displayedFilters),function(option,index){return _c('li',{key:index,staticClass:"search-filter-options-item"},[_c('g-link',{attrs:{"to":option.link}},[_vm._v(" "+_vm._s(option.display)+" "),(option.value)?_c('span',[_vm._v("("+_vm._s(option.value)+")")]):_vm._e()])],1)}),0),(_vm.shouldShowLess || _vm.shouldShowMore)?_c('section',{staticClass:"search-filter-limiter"},[(_vm.shouldShowMore)?_c('button',{staticClass:"search-filter-limiter-more",attrs:{"rel":"nofollow","aria-label":"Show more filters"},on:{"click":function($event){return _vm.showMore()}}},[_vm._v(" More ")]):_vm._e(),(_vm.shouldShowLess)?_c('button',{staticClass:"search-filter-limiter-less",attrs:{"rel":"nofollow","aria-label":"Show less filters"},on:{"click":function($event){return _vm.showLess()}}},[_vm._v(" Less ")]):_vm._e()]):_vm._e()],{"showLess":_vm.showLess,"showMore":_vm.showMore,"shouldShowLess":_vm.shouldShowLess,"shouldShowMore":_vm.shouldShowMore,"displayedFilters":_vm.displayedFilters})],2):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=9b202840&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=717025d3&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -1311,10 +1311,6 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
       type: Boolean,
       default: true
     },
-    preserveQueryParams: {
-      type: Boolean,
-      default: false
-    },
     options: {
       required: false,
       type: Array,
@@ -1336,7 +1332,12 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
     }
   },
   data: function data() {
+    var input = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, this.$route.query), this.input);
+
+    input.page = 1; // always default filters to page 1.
+
     return {
+      parameters: input,
       displayedFilters: {}
     };
   },
@@ -1371,11 +1372,7 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
   },
   methods: {
     getOptionLink: function getOptionLink(option) {
-      if (!this.preserveQueryParams) {
-        return option.link;
-      }
-
-      return buildURL_default()(option.link, Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, this.$route.query), this.input));
+      return buildURL_default()(option.link, this.parameters);
     },
     showMore: function showMore() {
       var numberOfItemsToAdd = this.limit;

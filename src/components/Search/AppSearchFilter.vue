@@ -84,10 +84,6 @@ export default {
             type: Boolean,
             default: true,
         },
-        preserveQueryParams: {
-            type: Boolean,
-            default: false,
-        },
         options: {
             required: false,
             type: Array,
@@ -107,7 +103,10 @@ export default {
         },
     },
     data() {
+        let input = {...this.$route.query, ...this.input}
+        input.page = 1 // always default filters to page 1.
         return {
+            parameters: input,
             displayedFilters: {},
         }
     },
@@ -140,11 +139,7 @@ export default {
     },
     methods: {
         getOptionLink(option){
-            if(!this.preserveQueryParams){
-                return option.link
-            }
-
-            return buildUrl(option.link, {...this.$route.query, ...this.input})
+            return buildUrl(option.link, this.parameters)
         },
         showMore() {
             const numberOfItemsToAdd = this.limit
