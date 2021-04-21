@@ -24,7 +24,7 @@
                     :position="infoWindow.position"
                     @click="search(infoWindow.job)"
                 ></GmapInfoWindow>
-                <slot></slot>
+                <slot :done="done" :error="error"></slot>
             </GmapCluster>
         </GmapMap>
         <slot name="footer" :error="error" :done="done"></slot>
@@ -92,7 +92,6 @@ export default {
             counts: {},
             done: false,
             markers: [],
-            google: null,
             error: false,
             hasMore: true,
             positionZoom: this.$attrs.zoom,
