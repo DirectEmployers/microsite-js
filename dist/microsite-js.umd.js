@@ -278,6 +278,42 @@ module.exports.f = function getOwnPropertyNames(it) {
 
 /***/ }),
 
+/***/ "0644":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseClone = __webpack_require__("3818");
+
+/** Used to compose bitmasks for cloning. */
+var CLONE_DEEP_FLAG = 1,
+    CLONE_SYMBOLS_FLAG = 4;
+
+/**
+ * This method is like `_.clone` except that it recursively clones `value`.
+ *
+ * @static
+ * @memberOf _
+ * @since 1.0.0
+ * @category Lang
+ * @param {*} value The value to recursively clone.
+ * @returns {*} Returns the deep cloned value.
+ * @see _.clone
+ * @example
+ *
+ * var objects = [{ 'a': 1 }, { 'b': 2 }];
+ *
+ * var deep = _.cloneDeep(objects);
+ * console.log(deep[0] === objects[0]);
+ * // => false
+ */
+function cloneDeep(value) {
+  return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG);
+}
+
+module.exports = cloneDeep;
+
+
+/***/ }),
+
 /***/ "069c":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -591,6 +627,28 @@ module.exports = arrayPush;
 
 /***/ }),
 
+/***/ "08cc":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("1a8c");
+
+/**
+ * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` if suitable for strict
+ *  equality comparisons, else `false`.
+ */
+function isStrictComparable(value) {
+  return value === value && !isObject(value);
+}
+
+module.exports = isStrictComparable;
+
+
+/***/ }),
+
 /***/ "099a":
 /***/ (function(module, exports) {
 
@@ -731,7 +789,7 @@ module.exports = Axios;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=27b03b7e&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=27b03b7e&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h2',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppSolrJob',{key:index,attrs:{"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":jobData.detailUrl}},[_vm._t("default",[_c('h3',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.location)+" ")])],{"jobData":jobData})],2)],1)]}}],null,true)})}),1)]):_vm._e()}
 var staticRenderFns = []
 
@@ -1188,7 +1246,7 @@ module.exports = ''.repeat || function repeat(count) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=717025d3&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=717025d3&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isVisible && _vm.hasOptions)?_c(_vm.tag,_vm._b({tag:"component",staticClass:"search-filter"},'component',_vm.$attrs,false),[(_vm.display)?_c('h3',{staticClass:"search-filter-display"},[_vm._v(" Filter By "+_vm._s(_vm.display)+" ")]):_vm._e(),_vm._t("default",[_c('ul',{staticClass:"search-filter-options"},_vm._l((_vm.displayedFilters),function(option,index){return _c('li',{key:index,staticClass:"search-filter-options-item"},[_c('g-link',{attrs:{"to":option.link}},[_vm._v(" "+_vm._s(option.display)+" "),(option.value)?_c('span',[_vm._v("("+_vm._s(option.value)+")")]):_vm._e()])],1)}),0),(_vm.shouldShowLess || _vm.shouldShowMore)?_c('section',{staticClass:"search-filter-limiter"},[(_vm.shouldShowMore)?_c('button',{staticClass:"search-filter-limiter-more",attrs:{"rel":"nofollow","aria-label":"Show more filters"},on:{"click":function($event){return _vm.showMore()}}},[_vm._v(" More ")]):_vm._e(),(_vm.shouldShowLess)?_c('button',{staticClass:"search-filter-limiter-less",attrs:{"rel":"nofollow","aria-label":"Show less filters"},on:{"click":function($event){return _vm.showLess()}}},[_vm._v(" Less ")]):_vm._e()]):_vm._e()],{"showLess":_vm.showLess,"showMore":_vm.showMore,"shouldShowLess":_vm.shouldShowLess,"shouldShowMore":_vm.shouldShowMore,"displayedFilters":_vm.displayedFilters})],2):_vm._e()}
 var staticRenderFns = []
 
@@ -1743,6 +1801,64 @@ module.exports = function (R, S) {
 
 /***/ }),
 
+/***/ "159a":
+/***/ (function(module, exports, __webpack_require__) {
+
+var assignValue = __webpack_require__("32b3"),
+    castPath = __webpack_require__("e2e4"),
+    isIndex = __webpack_require__("c098"),
+    isObject = __webpack_require__("1a8c"),
+    toKey = __webpack_require__("f4d6");
+
+/**
+ * The base implementation of `_.set`.
+ *
+ * @private
+ * @param {Object} object The object to modify.
+ * @param {Array|string} path The path of the property to set.
+ * @param {*} value The value to set.
+ * @param {Function} [customizer] The function to customize path creation.
+ * @returns {Object} Returns `object`.
+ */
+function baseSet(object, path, value, customizer) {
+  if (!isObject(object)) {
+    return object;
+  }
+  path = castPath(path, object);
+
+  var index = -1,
+      length = path.length,
+      lastIndex = length - 1,
+      nested = object;
+
+  while (nested != null && ++index < length) {
+    var key = toKey(path[index]),
+        newValue = value;
+
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      return object;
+    }
+
+    if (index != lastIndex) {
+      var objValue = nested[key];
+      newValue = customizer ? customizer(objValue, key, nested) : undefined;
+      if (newValue === undefined) {
+        newValue = isObject(objValue)
+          ? objValue
+          : (isIndex(path[index + 1]) ? [] : {});
+      }
+    }
+    assignValue(nested, key, newValue);
+    nested = nested[key];
+  }
+  return object;
+}
+
+module.exports = baseSet;
+
+
+/***/ }),
+
 /***/ "159b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2020,7 +2136,7 @@ exports.stateify = stateify;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Parse/AppJsonToHtml.vue?vue&type=template&id=df6abff6&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Parse/AppJsonToHtml.vue?vue&type=template&id=df6abff6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._l((_vm.json),function(child,index){return [(child.node === 'text')?_c('span',{key:index,domProps:{"innerHTML":_vm._s(child.text)}}):_c('AppJsonToHtml',_vm._b({key:index,attrs:{"tag":child.tag,"json":child.child}},'AppJsonToHtml',child.attr,false))]})],2)}
 var staticRenderFns = []
 
@@ -2116,6 +2232,80 @@ module.exports = (!STRICT_METHOD || !USES_TO_LENGTH) ? function forEach(callback
 
 /***/ }),
 
+/***/ "1838":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsEqual = __webpack_require__("c05f"),
+    get = __webpack_require__("9b02"),
+    hasIn = __webpack_require__("8604"),
+    isKey = __webpack_require__("f608"),
+    isStrictComparable = __webpack_require__("08cc"),
+    matchesStrictComparable = __webpack_require__("20ec"),
+    toKey = __webpack_require__("f4d6");
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/**
+ * The base implementation of `_.matchesProperty` which doesn't clone `srcValue`.
+ *
+ * @private
+ * @param {string} path The path of the property to get.
+ * @param {*} srcValue The value to match.
+ * @returns {Function} Returns the new spec function.
+ */
+function baseMatchesProperty(path, srcValue) {
+  if (isKey(path) && isStrictComparable(srcValue)) {
+    return matchesStrictComparable(toKey(path), srcValue);
+  }
+  return function(object) {
+    var objValue = get(object, path);
+    return (objValue === undefined && objValue === srcValue)
+      ? hasIn(object, path)
+      : baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG);
+  };
+}
+
+module.exports = baseMatchesProperty;
+
+
+/***/ }),
+
+/***/ "18d8":
+/***/ (function(module, exports, __webpack_require__) {
+
+var memoizeCapped = __webpack_require__("234d");
+
+/** Used to match property names within property paths. */
+var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+
+/** Used to match backslashes in property paths. */
+var reEscapeChar = /\\(\\)?/g;
+
+/**
+ * Converts `string` to a property path array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the property path array.
+ */
+var stringToPath = memoizeCapped(function(string) {
+  var result = [];
+  if (string.charCodeAt(0) === 46 /* . */) {
+    result.push('');
+  }
+  string.replace(rePropName, function(match, number, quote, subString) {
+    result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
+  });
+  return result;
+});
+
+module.exports = stringToPath;
+
+
+/***/ }),
+
 /***/ "1901":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2168,7 +2358,7 @@ module.exports = baseIsMap;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppSolrJob.vue?vue&type=template&id=16bd9db6&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppSolrJob.vue?vue&type=template&id=16bd9db6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,null,_vm.slotData())],2)}
 var staticRenderFns = []
 
@@ -2262,7 +2452,7 @@ module.exports = isObject;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppJobProvider.vue?vue&type=template&id=b06a920a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppJobProvider.vue?vue&type=template&id=b06a920a&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.jobComponent,_vm._b({tag:"component",scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_vm._t("default",null,null,Object.assign({}, jobData, {isSolr: _vm.isSolr, isGoogleTalent:_vm.isGoogleTalent}))]}}],null,true)},'component',Object.assign({}, _vm.$attrs, _vm.$props),false))}
 var staticRenderFns = []
 
@@ -2387,6 +2577,125 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "1c3c":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__("9e69"),
+    Uint8Array = __webpack_require__("2474"),
+    eq = __webpack_require__("9638"),
+    equalArrays = __webpack_require__("a2be"),
+    mapToArray = __webpack_require__("edfa"),
+    setToArray = __webpack_require__("ac41");
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/** `Object#toString` result references. */
+var boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    symbolTag = '[object Symbol]';
+
+var arrayBufferTag = '[object ArrayBuffer]',
+    dataViewTag = '[object DataView]';
+
+/** Used to convert symbols to primitives and strings. */
+var symbolProto = Symbol ? Symbol.prototype : undefined,
+    symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
+
+/**
+ * A specialized version of `baseIsEqualDeep` for comparing objects of
+ * the same `toStringTag`.
+ *
+ * **Note:** This function only supports comparing values with tags of
+ * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {string} tag The `toStringTag` of the objects to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
+  switch (tag) {
+    case dataViewTag:
+      if ((object.byteLength != other.byteLength) ||
+          (object.byteOffset != other.byteOffset)) {
+        return false;
+      }
+      object = object.buffer;
+      other = other.buffer;
+
+    case arrayBufferTag:
+      if ((object.byteLength != other.byteLength) ||
+          !equalFunc(new Uint8Array(object), new Uint8Array(other))) {
+        return false;
+      }
+      return true;
+
+    case boolTag:
+    case dateTag:
+    case numberTag:
+      // Coerce booleans to `1` or `0` and dates to milliseconds.
+      // Invalid dates are coerced to `NaN`.
+      return eq(+object, +other);
+
+    case errorTag:
+      return object.name == other.name && object.message == other.message;
+
+    case regexpTag:
+    case stringTag:
+      // Coerce regexes to strings and treat strings, primitives and objects,
+      // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
+      // for more details.
+      return object == (other + '');
+
+    case mapTag:
+      var convert = mapToArray;
+
+    case setTag:
+      var isPartial = bitmask & COMPARE_PARTIAL_FLAG;
+      convert || (convert = setToArray);
+
+      if (object.size != other.size && !isPartial) {
+        return false;
+      }
+      // Assume cyclic values are equal.
+      var stacked = stack.get(object);
+      if (stacked) {
+        return stacked == other;
+      }
+      bitmask |= COMPARE_UNORDERED_FLAG;
+
+      // Recursively compare objects (susceptible to call stack limits).
+      stack.set(object, other);
+      var result = equalArrays(convert(object), convert(other), bitmask, customizer, equalFunc, stack);
+      stack['delete'](object);
+      return result;
+
+    case symbolTag:
+      if (symbolValueOf) {
+        return symbolValueOf.call(object) == symbolValueOf.call(other);
+      }
+  }
+  return false;
+}
+
+module.exports = equalByTag;
+
+
+/***/ }),
+
 /***/ "1c3e":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2394,7 +2703,7 @@ module.exports = function (it) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Icons/AppXIcon.vue?vue&type=template&id=337e5910&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Icons/AppXIcon.vue?vue&type=template&id=337e5910&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 96 96","enable-background":"new 0 0 96 96"}},[_c('polygon',{attrs:{"points":"96,14 82,0 48,34 14,0 0,14 34,48 0,82 14,96 48,62 82,96 96,82 62,48 "}})])}
 var staticRenderFns = []
 
@@ -2433,7 +2742,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppFetch.vue?vue&type=template&id=5cf2926d&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppFetch.vue?vue&type=template&id=5cf2926d&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,{"data":_vm.responseData,"request":_vm.request,"status":{resolved: _vm.resolved, error: _vm.error, pending: _vm.pending}})],2)}
 var staticRenderFns = []
 
@@ -2888,6 +3197,33 @@ module.exports = mapCacheSet;
 
 /***/ }),
 
+/***/ "20ec":
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `matchesProperty` for source values suitable
+ * for strict equality comparisons, i.e. `===`.
+ *
+ * @private
+ * @param {string} key The key of the property to get.
+ * @param {*} srcValue The value to match.
+ * @returns {Function} Returns the new spec function.
+ */
+function matchesStrictComparable(key, srcValue) {
+  return function(object) {
+    if (object == null) {
+      return false;
+    }
+    return object[key] === srcValue &&
+      (srcValue !== undefined || (key in Object(object)));
+  };
+}
+
+module.exports = matchesStrictComparable;
+
+
+/***/ }),
+
 /***/ "2266":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2953,6 +3289,95 @@ module.exports = function (iterable, unboundFunction, options) {
 
 /***/ }),
 
+/***/ "227e":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getPropsValues = getPropsValues;
+exports.bindProps = bindProps;
+
+var _watchPrimitiveProperties = _interopRequireDefault(__webpack_require__("621c"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function getPropsValues(vueInst, props) {
+  return Object.keys(props).reduce(function (acc, prop) {
+    if (vueInst[prop] !== undefined) {
+      acc[prop] = vueInst[prop];
+    }
+
+    return acc;
+  }, {});
+}
+/**
+ * Binds the properties defined in props to the google maps instance.
+ * If the prop is an Object type, and we wish to track the properties
+ * of the object (e.g. the lat and lng of a LatLng), then we do a deep
+ * watch. For deep watch, we also prevent the _changed event from being
+ * emitted if the data source was external.
+ */
+
+
+function bindProps(vueInst, googleMapsInst, props) {
+  Object.keys(props).forEach(function (attribute) {
+    var _props$attribute = props[attribute],
+        twoWay = _props$attribute.twoWay,
+        type = _props$attribute.type,
+        trackProperties = _props$attribute.trackProperties,
+        noBind = _props$attribute.noBind;
+
+    if (!noBind) {
+      var setMethodName = "set".concat(capitalizeFirstLetter(attribute));
+      var getMethodName = "get".concat(capitalizeFirstLetter(attribute));
+      var eventName = "".concat(attribute.toLowerCase(), "_changed");
+      var initialValue = vueInst[attribute];
+
+      if (typeof googleMapsInst[setMethodName] === 'undefined') {
+        throw new Error( // TODO: Analyze all disabled rules in the file
+        // eslint-disable-next-line no-underscore-dangle -- old code should be analyzed
+        "".concat(setMethodName, " is not a method of (the Maps object corresponding to) ").concat(vueInst.$options._componentTag));
+      } // We need to avoid an endless
+      // propChanged -> event emitted -> propChanged -> event emitted loop
+      // although this may really be the user's responsibility
+
+
+      if (type !== Object || !trackProperties) {
+        // Track the object deeply
+        vueInst.$watch(attribute, function () {
+          var attributeValue = vueInst[attribute];
+          googleMapsInst[setMethodName](attributeValue);
+        }, {
+          immediate: typeof initialValue !== 'undefined',
+          deep: type === Object
+        });
+      } else {
+        (0, _watchPrimitiveProperties.default)(vueInst, trackProperties.map(function (prop) {
+          return "".concat(attribute, ".").concat(prop);
+        }), function () {
+          googleMapsInst[setMethodName](vueInst[attribute]);
+        }, vueInst[attribute] !== undefined);
+      }
+
+      if (twoWay && (vueInst.$gmapOptions.autobindAllEvents || vueInst.$listeners[eventName])) {
+        googleMapsInst.addListener(eventName, function () {
+          vueInst.$emit(eventName, googleMapsInst[getMethodName]());
+        });
+      }
+    }
+  });
+}
+
+/***/ }),
+
 /***/ "2286":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2992,6 +3417,39 @@ function overRest(func, start, transform) {
 }
 
 module.exports = overRest;
+
+
+/***/ }),
+
+/***/ "234d":
+/***/ (function(module, exports, __webpack_require__) {
+
+var memoize = __webpack_require__("e380");
+
+/** Used as the maximum memoize cache size. */
+var MAX_MEMOIZE_SIZE = 500;
+
+/**
+ * A specialized version of `_.memoize` which clears the memoized function's
+ * cache when it exceeds `MAX_MEMOIZE_SIZE`.
+ *
+ * @private
+ * @param {Function} func The function to have its output memoized.
+ * @returns {Function} Returns the new memoized function.
+ */
+function memoizeCapped(func) {
+  var result = memoize(func, function(key) {
+    if (cache.size === MAX_MEMOIZE_SIZE) {
+      cache.clear();
+    }
+    return key;
+  });
+
+  var cache = result.cache;
+  return result;
+}
+
+module.exports = memoizeCapped;
 
 
 /***/ }),
@@ -3506,6 +3964,26 @@ module.exports = function (CONSTRUCTOR_NAME) {
 
 /***/ }),
 
+/***/ "26e8":
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.hasIn` without support for deep paths.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {Array|string} key The key to check.
+ * @returns {boolean} Returns `true` if `key` exists, else `false`.
+ */
+function baseHasIn(object, key) {
+  return object != null && key in Object(object);
+}
+
+module.exports = baseHasIn;
+
+
+/***/ }),
+
 /***/ "2877":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3739,7 +4217,7 @@ module.exports = objectToString;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Parse/AppHtmlToJson.vue?vue&type=template&id=7ae45980&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Parse/AppHtmlToJson.vue?vue&type=template&id=7ae45980&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.json)?_c('div',[_vm._l((_vm.json.child),function(json,index){return [(json.attr.class == _vm.lookupClass)?[_vm._t("default"),_c('AppJsonToHtml',_vm._b({key:index,attrs:{"tag":json.tag,"json":json.child}},'AppJsonToHtml',json.attr,false))]:[_c('AppJsonToHtml',_vm._b({key:index,attrs:{"tag":json.tag,"json":json.child}},'AppJsonToHtml',json.attr,false))]]})],2):_vm._e()}
 var staticRenderFns = []
 
@@ -4020,6 +4498,54 @@ $({ target: 'String', proto: true, forced: !MDN_POLYFILL_BUG && !CORRECT_IS_REGE
   }
 });
 
+
+/***/ }),
+
+/***/ "2cb2":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/**
+ * @class MapElementMixin
+ *
+ * Extends components to include the following fields:
+ *
+ * @property $map        The Google map (valid only after the promise returns)
+ *
+ *
+ * */
+var _default = {
+  inject: {
+    $mapPromise: {
+      default: 'abcdef'
+    }
+  },
+  provide: function provide() {
+    var _this = this;
+
+    // Note: although this mixin is not "providing" anything,
+    // components' expect the `$map` property to be present on the component.
+    // In order for that to happen, this mixin must intercept the $mapPromise
+    // .then(() =>) first before its component does so.
+    //
+    // Since a provide() on a mixin is executed before a provide() on the
+    // component, putting this code in provide() ensures that the $map is
+    // already set by the time the
+    // component's provide() is called.
+    this.$mapPromise.then(function (map) {
+      _this.$map = map;
+    });
+    return {};
+  }
+};
+exports.default = _default;
 
 /***/ }),
 
@@ -22343,7 +22869,7 @@ module.exports = assignValue;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppAccordion.vue?vue&type=template&id=b8d4a97e&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppAccordion.vue?vue&type=template&id=b8d4a97e&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component",staticClass:"accordion"},[_c('div',{staticClass:"accordion__header",class:{
             'accordion__header--active': _vm.active,
         },attrs:{"role":"button","tabindex":"0","id":("accordion-header-" + _vm.id),"aria-expanded":_vm.active},on:{"click":function($event){_vm.active = !_vm.active},"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }_vm.active = !_vm.active}}},[_vm._t("display",[(_vm.display)?_c('h3',{staticClass:"accordion__header-text"},[_vm._v(" "+_vm._s(_vm.display)+" ")]):_vm._e()],{"active":_vm.active})],2),_c('transition',{attrs:{"name":_vm.transitionName}},[(_vm.active)?_c('div',{staticClass:"accordion__content",attrs:{"id":("accordion-content-" + _vm.id),"aria-labelledby":("accordion-header-" + _vm.id)}},[_vm._t("default")],2):_vm._e()])],1)}
@@ -22483,6 +23009,1384 @@ var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
 };
 
 module.exports = getSymbols;
+
+
+/***/ }),
+
+/***/ "3400":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Extends an object's prototype by another's.
+ *
+ * @param type1 The Type to be extended.
+ * @param type2 The Type to extend with.
+ * @ignore
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function extend(type1, type2) {
+    // eslint-disable-next-line prefer-const
+    for (let property in type2.prototype) {
+        type1.prototype[property] = type2.prototype[property];
+    }
+}
+/**
+ * @ignore
+ */
+class OverlayViewSafe {
+    constructor() {
+        // MarkerClusterer implements google.maps.OverlayView interface. We use the
+        // extend function to extend MarkerClusterer with google.maps.OverlayView
+        // because it might not always be available when the code is defined so we
+        // look for it at the last possible moment. If it doesn't exist now then
+        // there is no point going ahead :)
+        extend(OverlayViewSafe, google.maps.OverlayView);
+    }
+}
+
+/**
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ *
+ * @hidden
+ */
+function toCssText(styles) {
+    return Object.keys(styles)
+        .reduce((acc, key) => {
+        if (styles[key]) {
+            acc.push(key + ":" + styles[key]);
+        }
+        return acc;
+    }, [])
+        .join(";");
+}
+/**
+ *
+ * @hidden
+ */
+function coercePixels(pixels) {
+    return pixels ? pixels + "px" : undefined;
+}
+/**
+ * A cluster icon.
+ */
+class ClusterIcon extends OverlayViewSafe {
+    /**
+     * @param cluster_ The cluster with which the icon is to be associated.
+     * @param styles_ An array of {@link ClusterIconStyle} defining the cluster icons
+     *  to use for various cluster sizes.
+     */
+    constructor(cluster_, styles_) {
+        super();
+        this.cluster_ = cluster_;
+        this.styles_ = styles_;
+        this.center_ = null;
+        this.div_ = null;
+        this.sums_ = null;
+        this.visible_ = false;
+        this.style = null;
+        this.setMap(cluster_.getMap()); // Note: this causes onAdd to be called
+    }
+    /**
+     * Adds the icon to the DOM.
+     */
+    onAdd() {
+        let cMouseDownInCluster;
+        let cDraggingMapByCluster;
+        const mc = this.cluster_.getMarkerClusterer();
+        const [major, minor] = google.maps.version.split(".");
+        const gmVersion = parseInt(major, 10) * 100 + parseInt(minor, 10);
+        this.div_ = document.createElement("div");
+        if (this.visible_) {
+            this.show();
+        }
+        this.getPanes().overlayMouseTarget.appendChild(this.div_);
+        // Fix for Issue 157
+        this.boundsChangedListener_ = google.maps.event.addListener(this.getMap(), "bounds_changed", function () {
+            cDraggingMapByCluster = cMouseDownInCluster;
+        });
+        google.maps.event.addDomListener(this.div_, "mousedown", () => {
+            cMouseDownInCluster = true;
+            cDraggingMapByCluster = false;
+        });
+        // March 1, 2018: Fix for this 3.32 exp bug, https://issuetracker.google.com/issues/73571522
+        // But it doesn't work with earlier releases so do a version check.
+        if (gmVersion >= 332) {
+            // Ugly version-dependent code
+            google.maps.event.addDomListener(this.div_, "touchstart", e => {
+                e.stopPropagation();
+            });
+        }
+        google.maps.event.addDomListener(this.div_, "click", e => {
+            cMouseDownInCluster = false;
+            if (!cDraggingMapByCluster) {
+                /**
+                 * This event is fired when a cluster marker is clicked.
+                 * @name MarkerClusterer#click
+                 * @param {Cluster} c The cluster that was clicked.
+                 * @event
+                 */
+                google.maps.event.trigger(mc, "click", this.cluster_);
+                google.maps.event.trigger(mc, "clusterclick", this.cluster_); // deprecated name
+                // The default click handler follows. Disable it by setting
+                // the zoomOnClick property to false.
+                if (mc.getZoomOnClick()) {
+                    // Zoom into the cluster.
+                    const mz = mc.getMaxZoom();
+                    const theBounds = this.cluster_.getBounds();
+                    mc.getMap().fitBounds(theBounds);
+                    // There is a fix for Issue 170 here:
+                    setTimeout(function () {
+                        mc.getMap().fitBounds(theBounds);
+                        // Don't zoom beyond the max zoom level
+                        if (mz !== null && mc.getMap().getZoom() > mz) {
+                            mc.getMap().setZoom(mz + 1);
+                        }
+                    }, 100);
+                }
+                // Prevent event propagation to the map:
+                e.cancelBubble = true;
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                }
+            }
+        });
+        google.maps.event.addDomListener(this.div_, "mouseover", () => {
+            /**
+             * This event is fired when the mouse moves over a cluster marker.
+             * @name MarkerClusterer#mouseover
+             * @param {Cluster} c The cluster that the mouse moved over.
+             * @event
+             */
+            google.maps.event.trigger(mc, "mouseover", this.cluster_);
+        });
+        google.maps.event.addDomListener(this.div_, "mouseout", () => {
+            /**
+             * This event is fired when the mouse moves out of a cluster marker.
+             * @name MarkerClusterer#mouseout
+             * @param {Cluster} c The cluster that the mouse moved out of.
+             * @event
+             */
+            google.maps.event.trigger(mc, "mouseout", this.cluster_);
+        });
+    }
+    /**
+     * Removes the icon from the DOM.
+     */
+    onRemove() {
+        if (this.div_ && this.div_.parentNode) {
+            this.hide();
+            google.maps.event.removeListener(this.boundsChangedListener_);
+            google.maps.event.clearInstanceListeners(this.div_);
+            this.div_.parentNode.removeChild(this.div_);
+            this.div_ = null;
+        }
+    }
+    /**
+     * Draws the icon.
+     */
+    draw() {
+        if (this.visible_) {
+            const pos = this.getPosFromLatLng_(this.center_);
+            this.div_.style.top = pos.y + "px";
+            this.div_.style.left = pos.x + "px";
+        }
+    }
+    /**
+     * Hides the icon.
+     */
+    hide() {
+        if (this.div_) {
+            this.div_.style.display = "none";
+        }
+        this.visible_ = false;
+    }
+    /**
+     * Positions and shows the icon.
+     */
+    show() {
+        if (this.div_) {
+            this.div_.className = this.className_;
+            this.div_.style.cssText = this.createCss_(this.getPosFromLatLng_(this.center_));
+            this.div_.innerHTML =
+                (this.style.url ? this.getImageElementHtml() : "") +
+                    this.getLabelDivHtml();
+            if (typeof this.sums_.title === "undefined" || this.sums_.title === "") {
+                this.div_.title = this.cluster_.getMarkerClusterer().getTitle();
+            }
+            else {
+                this.div_.title = this.sums_.title;
+            }
+            this.div_.style.display = "";
+        }
+        this.visible_ = true;
+    }
+    getLabelDivHtml() {
+        const mc = this.cluster_.getMarkerClusterer();
+        const ariaLabel = mc.ariaLabelFn(this.sums_.text);
+        const divStyle = {
+            position: "absolute",
+            top: coercePixels(this.anchorText_[0]),
+            left: coercePixels(this.anchorText_[1]),
+            color: this.style.textColor,
+            "font-size": coercePixels(this.style.textSize),
+            "font-family": this.style.fontFamily,
+            "font-weight": this.style.fontWeight,
+            "font-style": this.style.fontStyle,
+            "text-decoration": this.style.textDecoration,
+            "text-align": "center",
+            width: coercePixels(this.style.width),
+            "line-height": coercePixels(this.style.textLineHeight)
+        };
+        return `
+<div aria-label="${ariaLabel}" style="${toCssText(divStyle)}" tabindex="0">
+  <span aria-hidden="true">${this.sums_.text}</span>
+</div>
+`;
+    }
+    getImageElementHtml() {
+        // NOTE: values must be specified in px units
+        const bp = (this.style.backgroundPosition || "0 0").split(" ");
+        const spriteH = parseInt(bp[0].replace(/^\s+|\s+$/g, ""), 10);
+        const spriteV = parseInt(bp[1].replace(/^\s+|\s+$/g, ""), 10);
+        let dimensions = {};
+        if (this.cluster_.getMarkerClusterer().getEnableRetinaIcons()) {
+            dimensions = {
+                width: coercePixels(this.style.width),
+                height: coercePixels(this.style.height)
+            };
+        }
+        else {
+            const [Y1, X1, Y2, X2] = [
+                -1 * spriteV,
+                -1 * spriteH + this.style.width,
+                -1 * spriteV + this.style.height,
+                -1 * spriteH
+            ];
+            dimensions = {
+                clip: `rect(${Y1}px, ${X1}px, ${Y2}px, ${X2}px)`
+            };
+        }
+        const cssText = toCssText(Object.assign({ position: "absolute", top: coercePixels(spriteV), left: coercePixels(spriteH) }, dimensions));
+        return `<img alt="${this.sums_.text}" aria-hidden="true" src="${this.style.url}" style="${cssText}"/>`;
+    }
+    /**
+     * Sets the icon styles to the appropriate element in the styles array.
+     *
+     * @ignore
+     * @param sums The icon label text and styles index.
+     */
+    useStyle(sums) {
+        this.sums_ = sums;
+        let index = Math.max(0, sums.index - 1);
+        index = Math.min(this.styles_.length - 1, index);
+        this.style = this.styles_[index];
+        this.anchorText_ = this.style.anchorText || [0, 0];
+        this.anchorIcon_ = this.style.anchorIcon || [
+            Math.floor(this.style.height / 2),
+            Math.floor(this.style.width / 2)
+        ];
+        this.className_ =
+            this.cluster_.getMarkerClusterer().getClusterClass() +
+                " " +
+                (this.style.className || "cluster-" + index);
+    }
+    /**
+     * Sets the position at which to center the icon.
+     *
+     * @param center The latlng to set as the center.
+     */
+    setCenter(center) {
+        this.center_ = center;
+    }
+    /**
+     * Creates the `cssText` style parameter based on the position of the icon.
+     *
+     * @param pos The position of the icon.
+     * @return The CSS style text.
+     */
+    createCss_(pos) {
+        return toCssText({
+            "z-index": `${this.cluster_.getMarkerClusterer().getZIndex()}`,
+            top: coercePixels(pos.y),
+            left: coercePixels(pos.x),
+            width: coercePixels(this.style.width),
+            height: coercePixels(this.style.height),
+            cursor: "pointer",
+            position: "absolute",
+            "-webkit-user-select": "none",
+            "-khtml-user-select": "none",
+            "-moz-user-select": "none",
+            "-o-user-select": "none",
+            "user-select": "none"
+        });
+    }
+    /**
+     * Returns the position at which to place the DIV depending on the latlng.
+     *
+     * @param latlng The position in latlng.
+     * @return The position in pixels.
+     */
+    getPosFromLatLng_(latlng) {
+        const pos = this.getProjection().fromLatLngToDivPixel(latlng);
+        pos.x = Math.floor(pos.x - this.anchorIcon_[1]);
+        pos.y = Math.floor(pos.y - this.anchorIcon_[0]);
+        return pos;
+    }
+}
+
+/**
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Creates a single cluster that manages a group of proximate markers.
+ *  Used internally, do not call this constructor directly.
+ */
+class Cluster {
+    /**
+     *
+     * @param markerClusterer_ The `MarkerClusterer` object with which this
+     *  cluster is associated.
+     */
+    constructor(markerClusterer_) {
+        this.markerClusterer_ = markerClusterer_;
+        this.map_ = this.markerClusterer_.getMap();
+        this.minClusterSize_ = this.markerClusterer_.getMinimumClusterSize();
+        this.averageCenter_ = this.markerClusterer_.getAverageCenter();
+        this.markers_ = []; // TODO: type;
+        this.center_ = null;
+        this.bounds_ = null;
+        this.clusterIcon_ = new ClusterIcon(this, this.markerClusterer_.getStyles());
+    }
+    /**
+     * Returns the number of markers managed by the cluster. You can call this from
+     * a `click`, `mouseover`, or `mouseout` event handler for the `MarkerClusterer` object.
+     *
+     * @return The number of markers in the cluster.
+     */
+    getSize() {
+        return this.markers_.length;
+    }
+    /**
+     * Returns the array of markers managed by the cluster. You can call this from
+     * a `click`, `mouseover`, or `mouseout` event handler for the `MarkerClusterer` object.
+     *
+     * @return The array of markers in the cluster.
+     */
+    getMarkers() {
+        return this.markers_;
+    }
+    /**
+     * Returns the center of the cluster. You can call this from
+     * a `click`, `mouseover`, or `mouseout` event handler
+     * for the `MarkerClusterer` object.
+     *
+     * @return The center of the cluster.
+     */
+    getCenter() {
+        return this.center_;
+    }
+    /**
+     * Returns the map with which the cluster is associated.
+     *
+     * @return The map.
+     * @ignore
+     */
+    getMap() {
+        return this.map_;
+    }
+    /**
+     * Returns the `MarkerClusterer` object with which the cluster is associated.
+     *
+     * @return The associated marker clusterer.
+     * @ignore
+     */
+    getMarkerClusterer() {
+        return this.markerClusterer_;
+    }
+    /**
+     * Returns the bounds of the cluster.
+     *
+     * @return the cluster bounds.
+     * @ignore
+     */
+    getBounds() {
+        const bounds = new google.maps.LatLngBounds(this.center_, this.center_);
+        const markers = this.getMarkers();
+        for (let i = 0; i < markers.length; i++) {
+            bounds.extend(markers[i].getPosition());
+        }
+        return bounds;
+    }
+    /**
+     * Removes the cluster from the map.
+     *
+     * @ignore
+     */
+    remove() {
+        this.clusterIcon_.setMap(null);
+        this.markers_ = [];
+        delete this.markers_;
+    }
+    /**
+     * Adds a marker to the cluster.
+     *
+     * @param marker The marker to be added.
+     * @return True if the marker was added.
+     * @ignore
+     */
+    addMarker(marker) {
+        if (this.isMarkerAlreadyAdded_(marker)) {
+            return false;
+        }
+        if (!this.center_) {
+            this.center_ = marker.getPosition();
+            this.calculateBounds_();
+        }
+        else {
+            if (this.averageCenter_) {
+                const l = this.markers_.length + 1;
+                const lat = (this.center_.lat() * (l - 1) + marker.getPosition().lat()) / l;
+                const lng = (this.center_.lng() * (l - 1) + marker.getPosition().lng()) / l;
+                this.center_ = new google.maps.LatLng(lat, lng);
+                this.calculateBounds_();
+            }
+        }
+        marker.isAdded = true;
+        this.markers_.push(marker);
+        const mCount = this.markers_.length;
+        const mz = this.markerClusterer_.getMaxZoom();
+        if (mz !== null && this.map_.getZoom() > mz) {
+            // Zoomed in past max zoom, so show the marker.
+            if (marker.getMap() !== this.map_) {
+                marker.setMap(this.map_);
+            }
+        }
+        else if (mCount < this.minClusterSize_) {
+            // Min cluster size not reached so show the marker.
+            if (marker.getMap() !== this.map_) {
+                marker.setMap(this.map_);
+            }
+        }
+        else if (mCount === this.minClusterSize_) {
+            // Hide the markers that were showing.
+            for (let i = 0; i < mCount; i++) {
+                this.markers_[i].setMap(null);
+            }
+        }
+        else {
+            marker.setMap(null);
+        }
+        return true;
+    }
+    /**
+     * Determines if a marker lies within the cluster's bounds.
+     *
+     * @param marker The marker to check.
+     * @return True if the marker lies in the bounds.
+     * @ignore
+     */
+    isMarkerInClusterBounds(marker) {
+        return this.bounds_.contains(marker.getPosition());
+    }
+    /**
+     * Calculates the extended bounds of the cluster with the grid.
+     */
+    calculateBounds_() {
+        const bounds = new google.maps.LatLngBounds(this.center_, this.center_);
+        this.bounds_ = this.markerClusterer_.getExtendedBounds(bounds);
+    }
+    /**
+     * Updates the cluster icon.
+     */
+    updateIcon() {
+        const mCount = this.markers_.length;
+        const mz = this.markerClusterer_.getMaxZoom();
+        if (mz !== null && this.map_.getZoom() > mz) {
+            this.clusterIcon_.hide();
+            return;
+        }
+        if (mCount < this.minClusterSize_) {
+            // Min cluster size not yet reached.
+            this.clusterIcon_.hide();
+            return;
+        }
+        const numStyles = this.markerClusterer_.getStyles().length;
+        const sums = this.markerClusterer_.getCalculator()(this.markers_, numStyles);
+        this.clusterIcon_.setCenter(this.center_);
+        this.clusterIcon_.useStyle(sums);
+        this.clusterIcon_.show();
+    }
+    /**
+     * Determines if a marker has already been added to the cluster.
+     *
+     * @param marker The marker to check.
+     * @return True if the marker has already been added.
+     */
+    isMarkerAlreadyAdded_(marker) {
+        if (this.markers_.indexOf) {
+            return this.markers_.indexOf(marker) !== -1;
+        }
+        else {
+            for (let i = 0; i < this.markers_.length; i++) {
+                if (marker === this.markers_[i]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+/**
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * @ignore
+ */
+const getOption = (options, prop, def) => {
+    if (options[prop] !== undefined) {
+        return options[prop];
+    }
+    else {
+        return def;
+    }
+};
+class MarkerClusterer extends OverlayViewSafe {
+    /**
+     * Creates a MarkerClusterer object with the options specified in {@link MarkerClustererOptions}.
+     * @param map The Google map to attach to.
+     * @param markers The markers to be added to the cluster.
+     * @param options The optional parameters.
+     */
+    constructor(map, markers = [], options = {}) {
+        super();
+        this.options = options;
+        this.markers_ = [];
+        this.clusters_ = [];
+        this.listeners_ = [];
+        this.activeMap_ = null;
+        this.ready_ = false;
+        this.ariaLabelFn = this.options.ariaLabelFn || (() => "");
+        this.zIndex_ = this.options.zIndex || google.maps.Marker.MAX_ZINDEX + 1;
+        this.gridSize_ = this.options.gridSize || 60;
+        this.minClusterSize_ = this.options.minimumClusterSize || 2;
+        this.maxZoom_ = this.options.maxZoom || null;
+        this.styles_ = this.options.styles || [];
+        this.title_ = this.options.title || "";
+        this.zoomOnClick_ = getOption(this.options, "zoomOnClick", true);
+        this.averageCenter_ = getOption(this.options, "averageCenter", false);
+        this.ignoreHidden_ = getOption(this.options, "ignoreHidden", false);
+        this.enableRetinaIcons_ = getOption(this.options, "enableRetinaIcons", false);
+        this.imagePath_ = this.options.imagePath || MarkerClusterer.IMAGE_PATH;
+        this.imageExtension_ = this.options.imageExtension || MarkerClusterer.IMAGE_EXTENSION;
+        this.imageSizes_ = this.options.imageSizes || MarkerClusterer.IMAGE_SIZES;
+        this.calculator_ = this.options.calculator || MarkerClusterer.CALCULATOR;
+        this.batchSize_ = this.options.batchSize || MarkerClusterer.BATCH_SIZE;
+        this.batchSizeIE_ = this.options.batchSizeIE || MarkerClusterer.BATCH_SIZE_IE;
+        this.clusterClass_ = this.options.clusterClass || "cluster";
+        if (navigator.userAgent.toLowerCase().indexOf("msie") !== -1) {
+            // Try to avoid IE timeout when processing a huge number of markers:
+            this.batchSize_ = this.batchSizeIE_;
+        }
+        this.setupStyles_();
+        this.addMarkers(markers, true);
+        this.setMap(map); // Note: this causes onAdd to be called
+    }
+    /**
+     * Implementation of the onAdd interface method.
+     * @ignore
+     */
+    onAdd() {
+        this.activeMap_ = this.getMap();
+        this.ready_ = true;
+        this.repaint();
+        this.prevZoom_ = this.getMap().getZoom();
+        // Add the map event listeners
+        this.listeners_ = [
+            google.maps.event.addListener(this.getMap(), "zoom_changed", () => {
+                const map = this.getMap(); // eslint-disable-line @typescript-eslint/no-explicit-any
+                // Fix for bug #407
+                // Determines map type and prevents illegal zoom levels
+                const minZoom = map.minZoom || 0;
+                const maxZoom = Math.min(map.maxZoom || 100, map.mapTypes[map.getMapTypeId()].maxZoom);
+                const zoom = Math.min(Math.max(this.getMap().getZoom(), minZoom), maxZoom);
+                if (this.prevZoom_ != zoom) {
+                    this.prevZoom_ = zoom;
+                    this.resetViewport_(false);
+                }
+            }),
+            google.maps.event.addListener(this.getMap(), "idle", () => {
+                this.redraw_();
+            })
+        ];
+    }
+    /**
+     * Implementation of the onRemove interface method.
+     * Removes map event listeners and all cluster icons from the DOM.
+     * All managed markers are also put back on the map.
+     * @ignore
+     */
+    onRemove() {
+        // Put all the managed markers back on the map:
+        for (let i = 0; i < this.markers_.length; i++) {
+            if (this.markers_[i].getMap() !== this.activeMap_) {
+                this.markers_[i].setMap(this.activeMap_);
+            }
+        }
+        // Remove all clusters:
+        for (let i = 0; i < this.clusters_.length; i++) {
+            this.clusters_[i].remove();
+        }
+        this.clusters_ = [];
+        // Remove map event listeners:
+        for (let i = 0; i < this.listeners_.length; i++) {
+            google.maps.event.removeListener(this.listeners_[i]);
+        }
+        this.listeners_ = [];
+        this.activeMap_ = null;
+        this.ready_ = false;
+    }
+    /**
+     * Implementation of the draw interface method.
+     * @ignore
+     */
+    draw() { }
+    /**
+     * Sets up the styles object.
+     */
+    setupStyles_() {
+        if (this.styles_.length > 0) {
+            return;
+        }
+        for (let i = 0; i < this.imageSizes_.length; i++) {
+            const size = this.imageSizes_[i];
+            this.styles_.push(MarkerClusterer.withDefaultStyle({
+                url: this.imagePath_ + (i + 1) + "." + this.imageExtension_,
+                height: size,
+                width: size
+            }));
+        }
+    }
+    /**
+     *  Fits the map to the bounds of the markers managed by the clusterer.
+     */
+    fitMapToMarkers(padding) {
+        const markers = this.getMarkers();
+        const bounds = new google.maps.LatLngBounds();
+        for (let i = 0; i < markers.length; i++) {
+            // March 3, 2018: Bug fix -- honor the ignoreHidden property
+            if (markers[i].getVisible() || !this.getIgnoreHidden()) {
+                bounds.extend(markers[i].getPosition());
+            }
+        }
+        this.getMap().fitBounds(bounds, padding);
+    }
+    /**
+     * Returns the value of the `gridSize` property.
+     *
+     * @return The grid size.
+     */
+    getGridSize() {
+        return this.gridSize_;
+    }
+    /**
+     * Sets the value of the `gridSize` property.
+     *
+     * @param gridSize The grid size.
+     */
+    setGridSize(gridSize) {
+        this.gridSize_ = gridSize;
+    }
+    /**
+     * Returns the value of the `minimumClusterSize` property.
+     *
+     * @return The minimum cluster size.
+     */
+    getMinimumClusterSize() {
+        return this.minClusterSize_;
+    }
+    /**
+     * Sets the value of the `minimumClusterSize` property.
+     *
+     * @param minimumClusterSize The minimum cluster size.
+     */
+    setMinimumClusterSize(minimumClusterSize) {
+        this.minClusterSize_ = minimumClusterSize;
+    }
+    /**
+     *  Returns the value of the `maxZoom` property.
+     *
+     *  @return The maximum zoom level.
+     */
+    getMaxZoom() {
+        return this.maxZoom_;
+    }
+    /**
+     *  Sets the value of the `maxZoom` property.
+     *
+     *  @param maxZoom The maximum zoom level.
+     */
+    setMaxZoom(maxZoom) {
+        this.maxZoom_ = maxZoom;
+    }
+    getZIndex() {
+        return this.zIndex_;
+    }
+    setZIndex(zIndex) {
+        this.zIndex_ = zIndex;
+    }
+    /**
+     *  Returns the value of the `styles` property.
+     *
+     *  @return The array of styles defining the cluster markers to be used.
+     */
+    getStyles() {
+        return this.styles_;
+    }
+    /**
+     *  Sets the value of the `styles` property.
+     *
+     *  @param styles The array of styles to use.
+     */
+    setStyles(styles) {
+        this.styles_ = styles;
+    }
+    /**
+     * Returns the value of the `title` property.
+     *
+     * @return The content of the title text.
+     */
+    getTitle() {
+        return this.title_;
+    }
+    /**
+     *  Sets the value of the `title` property.
+     *
+     *  @param title The value of the title property.
+     */
+    setTitle(title) {
+        this.title_ = title;
+    }
+    /**
+     * Returns the value of the `zoomOnClick` property.
+     *
+     * @return True if zoomOnClick property is set.
+     */
+    getZoomOnClick() {
+        return this.zoomOnClick_;
+    }
+    /**
+     *  Sets the value of the `zoomOnClick` property.
+     *
+     *  @param zoomOnClick The value of the zoomOnClick property.
+     */
+    setZoomOnClick(zoomOnClick) {
+        this.zoomOnClick_ = zoomOnClick;
+    }
+    /**
+     * Returns the value of the `averageCenter` property.
+     *
+     * @return True if averageCenter property is set.
+     */
+    getAverageCenter() {
+        return this.averageCenter_;
+    }
+    /**
+     *  Sets the value of the `averageCenter` property.
+     *
+     *  @param averageCenter The value of the averageCenter property.
+     */
+    setAverageCenter(averageCenter) {
+        this.averageCenter_ = averageCenter;
+    }
+    /**
+     * Returns the value of the `ignoreHidden` property.
+     *
+     * @return True if ignoreHidden property is set.
+     */
+    getIgnoreHidden() {
+        return this.ignoreHidden_;
+    }
+    /**
+     *  Sets the value of the `ignoreHidden` property.
+     *
+     *  @param ignoreHidden The value of the ignoreHidden property.
+     */
+    setIgnoreHidden(ignoreHidden) {
+        this.ignoreHidden_ = ignoreHidden;
+    }
+    /**
+     * Returns the value of the `enableRetinaIcons` property.
+     *
+     * @return True if enableRetinaIcons property is set.
+     */
+    getEnableRetinaIcons() {
+        return this.enableRetinaIcons_;
+    }
+    /**
+     *  Sets the value of the `enableRetinaIcons` property.
+     *
+     *  @param enableRetinaIcons The value of the enableRetinaIcons property.
+     */
+    setEnableRetinaIcons(enableRetinaIcons) {
+        this.enableRetinaIcons_ = enableRetinaIcons;
+    }
+    /**
+     * Returns the value of the `imageExtension` property.
+     *
+     * @return The value of the imageExtension property.
+     */
+    getImageExtension() {
+        return this.imageExtension_;
+    }
+    /**
+     *  Sets the value of the `imageExtension` property.
+     *
+     *  @param imageExtension The value of the imageExtension property.
+     */
+    setImageExtension(imageExtension) {
+        this.imageExtension_ = imageExtension;
+    }
+    /**
+     * Returns the value of the `imagePath` property.
+     *
+     * @return The value of the imagePath property.
+     */
+    getImagePath() {
+        return this.imagePath_;
+    }
+    /**
+     *  Sets the value of the `imagePath` property.
+     *
+     *  @param imagePath The value of the imagePath property.
+     */
+    setImagePath(imagePath) {
+        this.imagePath_ = imagePath;
+    }
+    /**
+     * Returns the value of the `imageSizes` property.
+     *
+     * @return The value of the imageSizes property.
+     */
+    getImageSizes() {
+        return this.imageSizes_;
+    }
+    /**
+     *  Sets the value of the `imageSizes` property.
+     *
+     *  @param imageSizes The value of the imageSizes property.
+     */
+    setImageSizes(imageSizes) {
+        this.imageSizes_ = imageSizes;
+    }
+    /**
+     * Returns the value of the `calculator` property.
+     *
+     * @return the value of the calculator property.
+     */
+    getCalculator() {
+        return this.calculator_;
+    }
+    /**
+     * Sets the value of the `calculator` property.
+     *
+     * @param calculator The value of the calculator property.
+     */
+    setCalculator(calculator) {
+        this.calculator_ = calculator;
+    }
+    /**
+     * Returns the value of the `batchSizeIE` property.
+     *
+     * @return the value of the batchSizeIE property.
+     */
+    getBatchSizeIE() {
+        return this.batchSizeIE_;
+    }
+    /**
+     * Sets the value of the `batchSizeIE` property.
+     *
+     *  @param batchSizeIE The value of the batchSizeIE property.
+     */
+    setBatchSizeIE(batchSizeIE) {
+        this.batchSizeIE_ = batchSizeIE;
+    }
+    /**
+     * Returns the value of the `clusterClass` property.
+     *
+     * @return the value of the clusterClass property.
+     */
+    getClusterClass() {
+        return this.clusterClass_;
+    }
+    /**
+     * Sets the value of the `clusterClass` property.
+     *
+     *  @param clusterClass The value of the clusterClass property.
+     */
+    setClusterClass(clusterClass) {
+        this.clusterClass_ = clusterClass;
+    }
+    /**
+     *  Returns the array of markers managed by the clusterer.
+     *
+     *  @return The array of markers managed by the clusterer.
+     */
+    getMarkers() {
+        return this.markers_;
+    }
+    /**
+     *  Returns the number of markers managed by the clusterer.
+     *
+     *  @return The number of markers.
+     */
+    getTotalMarkers() {
+        return this.markers_.length;
+    }
+    /**
+     * Returns the current array of clusters formed by the clusterer.
+     *
+     * @return The array of clusters formed by the clusterer.
+     */
+    getClusters() {
+        return this.clusters_;
+    }
+    /**
+     * Returns the number of clusters formed by the clusterer.
+     *
+     * @return The number of clusters formed by the clusterer.
+     */
+    getTotalClusters() {
+        return this.clusters_.length;
+    }
+    /**
+     * Adds a marker to the clusterer. The clusters are redrawn unless
+     *  `nodraw` is set to `true`.
+     *
+     * @param marker The marker to add.
+     * @param nodraw Set to `true` to prevent redrawing.
+     */
+    addMarker(marker, nodraw) {
+        this.pushMarkerTo_(marker);
+        if (!nodraw) {
+            this.redraw_();
+        }
+    }
+    /**
+     * Adds an array of markers to the clusterer. The clusters are redrawn unless
+     *  `nodraw` is set to `true`.
+     *
+     * @param markers The markers to add.
+     * @param nodraw Set to `true` to prevent redrawing.
+     */
+    addMarkers(markers, nodraw) {
+        for (const key in markers) {
+            if (Object.prototype.hasOwnProperty.call(markers, key)) {
+                this.pushMarkerTo_(markers[key]);
+            }
+        }
+        if (!nodraw) {
+            this.redraw_();
+        }
+    }
+    /**
+     * Pushes a marker to the clusterer.
+     *
+     * @param marker The marker to add.
+     */
+    pushMarkerTo_(marker) {
+        // If the marker is draggable add a listener so we can update the clusters on the dragend:
+        if (marker.getDraggable()) {
+            google.maps.event.addListener(marker, "dragend", () => {
+                if (this.ready_) {
+                    marker.isAdded = false;
+                    this.repaint();
+                }
+            });
+        }
+        marker.isAdded = false;
+        this.markers_.push(marker);
+    }
+    /**
+     * Removes a marker from the cluster.  The clusters are redrawn unless
+     *  `nodraw` is set to `true`. Returns `true` if the
+     *  marker was removed from the clusterer.
+     *
+     * @param marker The marker to remove.
+     * @param nodraw Set to `true` to prevent redrawing.
+     * @return True if the marker was removed from the clusterer.
+     */
+    removeMarker(marker, nodraw) {
+        const removed = this.removeMarker_(marker);
+        if (!nodraw && removed) {
+            this.repaint();
+        }
+        return removed;
+    }
+    /**
+     * Removes an array of markers from the cluster. The clusters are redrawn unless
+     *  `nodraw` is set to `true`. Returns `true` if markers were removed from the clusterer.
+     *
+     * @param markers The markers to remove.
+     * @param nodraw Set to `true` to prevent redrawing.
+     * @return True if markers were removed from the clusterer.
+     */
+    removeMarkers(markers, nodraw) {
+        let removed = false;
+        for (let i = 0; i < markers.length; i++) {
+            const r = this.removeMarker_(markers[i]);
+            removed = removed || r;
+        }
+        if (!nodraw && removed) {
+            this.repaint();
+        }
+        return removed;
+    }
+    /**
+     * Removes a marker and returns true if removed, false if not.
+     *
+     * @param marker The marker to remove
+     * @return Whether the marker was removed or not
+     */
+    removeMarker_(marker) {
+        let index = -1;
+        if (this.markers_.indexOf) {
+            index = this.markers_.indexOf(marker);
+        }
+        else {
+            for (let i = 0; i < this.markers_.length; i++) {
+                if (marker === this.markers_[i]) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        if (index === -1) {
+            // Marker is not in our list of markers, so do nothing:
+            return false;
+        }
+        marker.setMap(null);
+        this.markers_.splice(index, 1); // Remove the marker from the list of managed markers
+        return true;
+    }
+    /**
+     * Removes all clusters and markers from the map and also removes all markers
+     *  managed by the clusterer.
+     */
+    clearMarkers() {
+        this.resetViewport_(true);
+        this.markers_ = [];
+    }
+    /**
+     * Recalculates and redraws all the marker clusters from scratch.
+     *  Call this after changing any properties.
+     */
+    repaint() {
+        const oldClusters = this.clusters_.slice();
+        this.clusters_ = [];
+        this.resetViewport_(false);
+        this.redraw_();
+        // Remove the old clusters.
+        // Do it in a timeout to prevent blinking effect.
+        setTimeout(function () {
+            for (let i = 0; i < oldClusters.length; i++) {
+                oldClusters[i].remove();
+            }
+        }, 0);
+    }
+    /**
+     * Returns the current bounds extended by the grid size.
+     *
+     * @param bounds The bounds to extend.
+     * @return The extended bounds.
+     * @ignore
+     */
+    getExtendedBounds(bounds) {
+        const projection = this.getProjection();
+        // Turn the bounds into latlng.
+        const tr = new google.maps.LatLng(bounds.getNorthEast().lat(), bounds.getNorthEast().lng());
+        const bl = new google.maps.LatLng(bounds.getSouthWest().lat(), bounds.getSouthWest().lng());
+        // Convert the points to pixels and the extend out by the grid size.
+        const trPix = projection.fromLatLngToDivPixel(tr);
+        trPix.x += this.gridSize_;
+        trPix.y -= this.gridSize_;
+        const blPix = projection.fromLatLngToDivPixel(bl);
+        blPix.x -= this.gridSize_;
+        blPix.y += this.gridSize_;
+        // Convert the pixel points back to LatLng
+        const ne = projection.fromDivPixelToLatLng(trPix);
+        const sw = projection.fromDivPixelToLatLng(blPix);
+        // Extend the bounds to contain the new bounds.
+        bounds.extend(ne);
+        bounds.extend(sw);
+        return bounds;
+    }
+    /**
+     * Redraws all the clusters.
+     */
+    redraw_() {
+        this.createClusters_(0);
+    }
+    /**
+     * Removes all clusters from the map. The markers are also removed from the map
+     *  if `hide` is set to `true`.
+     *
+     * @param hide Set to `true` to also remove the markers from the map.
+     */
+    resetViewport_(hide) {
+        // Remove all the clusters
+        for (let i = 0; i < this.clusters_.length; i++) {
+            this.clusters_[i].remove();
+        }
+        this.clusters_ = [];
+        // Reset the markers to not be added and to be removed from the map.
+        for (let i = 0; i < this.markers_.length; i++) {
+            const marker = this.markers_[i];
+            marker.isAdded = false;
+            if (hide) {
+                marker.setMap(null);
+            }
+        }
+    }
+    /**
+     * Calculates the distance between two latlng locations in km.
+     *
+     * @param p1 The first lat lng point.
+     * @param p2 The second lat lng point.
+     * @return The distance between the two points in km.
+     * @link http://www.movable-type.co.uk/scripts/latlong.html
+     */
+    distanceBetweenPoints_(p1, p2) {
+        const R = 6371; // Radius of the Earth in km
+        const dLat = ((p2.lat() - p1.lat()) * Math.PI) / 180;
+        const dLon = ((p2.lng() - p1.lng()) * Math.PI) / 180;
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos((p1.lat() * Math.PI) / 180) *
+                Math.cos((p2.lat() * Math.PI) / 180) *
+                Math.sin(dLon / 2) *
+                Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+    }
+    /**
+     * Determines if a marker is contained in a bounds.
+     *
+     * @param marker The marker to check.
+     * @param bounds The bounds to check against.
+     * @return True if the marker is in the bounds.
+     */
+    isMarkerInBounds_(marker, bounds) {
+        return bounds.contains(marker.getPosition());
+    }
+    /**
+     * Adds a marker to a cluster, or creates a new cluster.
+     *
+     * @param marker The marker to add.
+     */
+    addToClosestCluster_(marker) {
+        let distance = 40000; // Some large number
+        let clusterToAddTo = null;
+        for (let i = 0; i < this.clusters_.length; i++) {
+            const cluster = this.clusters_[i];
+            const center = cluster.getCenter();
+            if (center) {
+                const d = this.distanceBetweenPoints_(center, marker.getPosition());
+                if (d < distance) {
+                    distance = d;
+                    clusterToAddTo = cluster;
+                }
+            }
+        }
+        if (clusterToAddTo && clusterToAddTo.isMarkerInClusterBounds(marker)) {
+            clusterToAddTo.addMarker(marker);
+        }
+        else {
+            const cluster = new Cluster(this);
+            cluster.addMarker(marker);
+            this.clusters_.push(cluster);
+        }
+    }
+    /**
+     * Creates the clusters. This is done in batches to avoid timeout errors
+     *  in some browsers when there is a huge number of markers.
+     *
+     * @param iFirst The index of the first marker in the batch of
+     *  markers to be added to clusters.
+     */
+    createClusters_(iFirst) {
+        if (!this.ready_) {
+            return;
+        }
+        // Cancel previous batch processing if we're working on the first batch:
+        if (iFirst === 0) {
+            google.maps.event.trigger(this, "clusteringbegin", this);
+            if (typeof this.timerRefStatic !== "undefined") {
+                clearTimeout(this.timerRefStatic);
+                delete this.timerRefStatic;
+            }
+        }
+        // Get our current map view bounds.
+        // Create a new bounds object so we don't affect the map.
+        //
+        // See Comments 9 & 11 on Issue 3651 relating to this workaround for a Google Maps bug:
+        let mapBounds;
+        if (this.getMap().getZoom() > 3) {
+            mapBounds = new google.maps.LatLngBounds(this.getMap().getBounds().getSouthWest(), this.getMap().getBounds().getNorthEast());
+        }
+        else {
+            mapBounds = new google.maps.LatLngBounds(new google.maps.LatLng(85.02070771743472, -178.48388434375), new google.maps.LatLng(-85.08136444384544, 178.00048865625));
+        }
+        const bounds = this.getExtendedBounds(mapBounds);
+        const iLast = Math.min(iFirst + this.batchSize_, this.markers_.length);
+        for (let i = iFirst; i < iLast; i++) {
+            const marker = this.markers_[i];
+            if (!marker.isAdded && this.isMarkerInBounds_(marker, bounds)) {
+                if (!this.ignoreHidden_ ||
+                    (this.ignoreHidden_ && marker.getVisible())) {
+                    this.addToClosestCluster_(marker);
+                }
+            }
+        }
+        if (iLast < this.markers_.length) {
+            this.timerRefStatic = window.setTimeout(() => {
+                this.createClusters_(iLast);
+            }, 0);
+        }
+        else {
+            delete this.timerRefStatic;
+            google.maps.event.trigger(this, "clusteringend", this);
+            for (let i = 0; i < this.clusters_.length; i++) {
+                this.clusters_[i].updateIcon();
+            }
+        }
+    }
+    /**
+     * The default function for determining the label text and style
+     * for a cluster icon.
+     *
+     * @param markers The array of markers represented by the cluster.
+     * @param numStyles The number of marker styles available.
+     * @return The information resource for the cluster.
+     */
+    static CALCULATOR(markers, numStyles) {
+        let index = 0;
+        const count = markers.length;
+        let dv = count;
+        while (dv !== 0) {
+            dv = Math.floor(dv / 10);
+            index++;
+        }
+        index = Math.min(index, numStyles);
+        return {
+            text: count.toString(),
+            index: index,
+            title: ""
+        };
+    }
+    /**
+     * Generates default styles augmented with user passed values.
+     * Useful when you want to override some default values but keep untouched
+     *
+     * @param overrides override default values
+     */
+    static withDefaultStyle(overrides) {
+        return Object.assign({ textColor: "black", textSize: 11, textDecoration: "none", textLineHeight: overrides.height, fontWeight: "bold", fontStyle: "normal", fontFamily: "Arial,sans-serif", backgroundPosition: "0 0" }, overrides);
+    }
+}
+/**
+ * The number of markers to process in one batch.
+ */
+MarkerClusterer.BATCH_SIZE = 2000;
+/**
+ * The number of markers to process in one batch (IE only).
+ */
+MarkerClusterer.BATCH_SIZE_IE = 500;
+/**
+ * The default root name for the marker cluster images.
+ */
+MarkerClusterer.IMAGE_PATH = "../images/m";
+/**
+ * The default extension name for the marker cluster images.
+ */
+MarkerClusterer.IMAGE_EXTENSION = "png";
+/**
+ * The default array of sizes for the marker cluster images.
+ */
+MarkerClusterer.IMAGE_SIZES = [53, 56, 66, 78, 90];
+
+/**
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (MarkerClusterer);
+//# sourceMappingURL=markerclustererplus.esm.js.map
 
 
 /***/ }),
@@ -22689,7 +24593,7 @@ module.exports = DESCRIPTORS ? Object.defineProperties : function defineProperti
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Pagination/AppLoadMore.vue?vue&type=template&id=16d5de30&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Pagination/AppLoadMore.vue?vue&type=template&id=16d5de30&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{staticClass:"load-more-pagination",class:{hidden: !_vm.isVisible}},[_c('button',{staticClass:"load-more-pagination__button",attrs:{"type":"button"},on:{"click":_vm.loadMore}},[_vm._t("default",[_vm._v("Load More")])],2)])}
 var staticRenderFns = []
 
@@ -23180,6 +25084,37 @@ module.exports = defineProperty;
 
 /***/ }),
 
+/***/ "3bb4":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isStrictComparable = __webpack_require__("08cc"),
+    keys = __webpack_require__("ec69");
+
+/**
+ * Gets the property names, values, and compare flags of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the match data of `object`.
+ */
+function getMatchData(object) {
+  var result = keys(object),
+      length = result.length;
+
+  while (length--) {
+    var key = result[length],
+        value = object[key];
+
+    result[length] = [key, value, isStrictComparable(value)];
+  }
+  return result;
+}
+
+module.exports = getMatchData;
+
+
+/***/ }),
+
 /***/ "3bbe":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23614,7 +25549,7 @@ module.exports = baseKeysIn;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppModal.vue?vue&type=template&id=373ad652&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppModal.vue?vue&type=template&id=373ad652&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.toggled)?_c('div',{staticClass:"page--overlay"},[_c('div',{ref:"modal",staticClass:"modal",attrs:{"tabindex":"0"}},[_c('Trap',[_c('div',{staticClass:"modal__header"},[(_vm.title)?_c('h3',{staticClass:"modal__header-title"},[_vm._v(" "+_vm._s(_vm.title)+" ")]):_vm._e(),_vm._t("toggle-icon",[_c('button',{staticClass:"modal__header-close",attrs:{"type":"button"},on:{"click":_vm.toggle}},[_vm._v(" × ")])],{"toggle":_vm.toggle})],2),_c('div',{staticClass:"modal__body"},[_vm._t("default",null,{"toggle":_vm.toggle})],2),_c('div',{staticClass:"modal__footer"},[_vm._t("footer")],2)])],1)]):_vm._e()}
 var staticRenderFns = []
 
@@ -23673,6 +25608,36 @@ function getMapData(map, key) {
 }
 
 module.exports = getMapData;
+
+
+/***/ }),
+
+/***/ "4284":
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.some` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {boolean} Returns `true` if any element passes the predicate check,
+ *  else `false`.
+ */
+function arraySome(array, predicate) {
+  var index = -1,
+      length = array == null ? 0 : array.length;
+
+  while (++index < length) {
+    if (predicate(array[index], index, array)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+module.exports = arraySome;
 
 
 /***/ }),
@@ -24336,7 +26301,7 @@ module.exports = function mergeConfig(config1, config2) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilterChip.vue?vue&type=template&id=1675d5c4&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilterChip.vue?vue&type=template&id=1675d5c4&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"search-filter-chip",attrs:{"tabindex":"0"}},[_c('g-link',{attrs:{"to":_vm.link}},[_vm._t("default",[_vm._v(" "+_vm._s(_vm.text)+" ")])],2)],1)}
 var staticRenderFns = []
 
@@ -24567,7 +26532,7 @@ module.exports = function from(arrayLike /* , mapfn = undefined, thisArg = undef
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Icons/AppHamburgerMenuIcon.vue?vue&type=template&id=64746570&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Icons/AppHamburgerMenuIcon.vue?vue&type=template&id=64746570&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 20 20"}},[_c('title',[_vm._v(_vm._s(_vm.title))]),_c('path',{attrs:{"d":"M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"}})])}
 var staticRenderFns = []
 
@@ -24626,7 +26591,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Icons/AppRadiusIcon.vue?vue&type=template&id=2a494e9f&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Icons/AppRadiusIcon.vue?vue&type=template&id=2a494e9f&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 397.23 485.8"}},[_c('title',[_vm._v("Radius Icon")]),_c('g',[_c('g',[_c('path',{attrs:{"d":"M306.79,167.5c34,30.5,52.44,76.78,52.44,119.69A160.62,160.62,0,0,1,85,400.76,159.59,159.59,0,0,1,38,287.19c0-42.91,18.29-89.69,54.29-119.69l-20-32.93C28.14,171,0,225.48,0,287.19,0,396.88,88.92,485.8,198.62,485.8s198.61-88.92,198.61-198.61a198.18,198.18,0,0,0-71.5-152.62Z"}}),_c('path',{attrs:{"d":"M247.83,237.48c15.47,13.88,23.86,34.94,23.86,54.46a73.08,73.08,0,1,1-146.15,0c0-19.52,8.32-40.81,24.7-54.46l-9.1-15a90.19,90.19,0,1,0,115.31,0Z"}}),_c('path',{attrs:{"d":"M200,0V0h-1.36V0a90.36,90.36,0,0,0-89,90.35c2.18,44,88.74,194.78,89.67,196.39v0c.93-1.61,87.49-152.43,89.67-196.39A90.36,90.36,0,0,0,200,0Z"}})])])])}
 var staticRenderFns = []
 
@@ -24766,7 +26731,7 @@ module.exports = baseMergeDeep;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppNavbar.vue?vue&type=template&id=af86ef94&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppNavbar.vue?vue&type=template&id=af86ef94&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{staticClass:"navbar"},[_c('section',{staticClass:"navbar__brand"},[_vm._t("logo"),_c('span',{staticClass:"navbar__brand-text"},[_vm._t("brand-text")],2)],2),_vm._t("toggler",[_c('button',{staticClass:"navbar__toggler",attrs:{"type":"button","aria-label":"navbar Toggle"},on:{"click":function($event){return _vm.toggle()}}},[(!_vm.toggled)?_c('AppHamburgerMenuIcon',{staticClass:"pointer-events-none"}):_c('AppXIcon',{staticClass:"pointer-events-none"})],1)],{"toggled":_vm.toggled,"toggleNav":_vm.toggle}),_c('ul',{ref:"navBarItems",staticClass:"navbar__items",class:{
             'navbar__items--toggled': _vm.toggled,
         }},_vm._l((_vm.links),function(item,index){return _c('li',{key:index,staticClass:"navbar__item"},[_vm._t(item.key,[_c(_vm.getLinkType(item),_vm._b({tag:"component",staticClass:"navbar__item-link",class:{
@@ -26666,6 +28631,47 @@ module.exports = isPlainObject;
 
 /***/ }),
 
+/***/ "621c":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = watchPrimitiveProperties;
+
+/**
+ * Watch the individual properties of a PoD object, instead of the object
+ * per se. This is different from a deep watch where both the reference
+ * and the individual values are watched.
+ *
+ * In effect, it throttles the multiple $watch to execute at most once per tick.
+ */
+function watchPrimitiveProperties(vueInst, propertiesToTrack, handler) {
+  var immediate = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+  var isHandled = false;
+
+  function requestHandle() {
+    if (!isHandled) {
+      isHandled = true;
+      vueInst.$nextTick(function () {
+        isHandled = false;
+        handler();
+      });
+    }
+  }
+
+  propertiesToTrack.forEach(function (prop) {
+    vueInst.$watch(prop, requestHandle, {
+      immediate: immediate
+    });
+  });
+}
+
+/***/ }),
+
 /***/ "62e4":
 /***/ (function(module, exports) {
 
@@ -26691,6 +28697,35 @@ module.exports = function(module) {
 	}
 	return module;
 };
+
+
+/***/ }),
+
+/***/ "642a":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsMatch = __webpack_require__("966f"),
+    getMatchData = __webpack_require__("3bb4"),
+    matchesStrictComparable = __webpack_require__("20ec");
+
+/**
+ * The base implementation of `_.matches` which doesn't clone `source`.
+ *
+ * @private
+ * @param {Object} source The object of property values to match.
+ * @returns {Function} Returns the new spec function.
+ */
+function baseMatches(source) {
+  var matchData = getMatchData(source);
+  if (matchData.length == 1 && matchData[0][2]) {
+    return matchesStrictComparable(matchData[0][0], matchData[0][1]);
+  }
+  return function(object) {
+    return object === source || baseIsMatch(object, source, matchData);
+  };
+}
+
+module.exports = baseMatches;
 
 
 /***/ }),
@@ -26729,6 +28764,37 @@ module.exports = {
 
 /***/ }),
 
+/***/ "656b":
+/***/ (function(module, exports, __webpack_require__) {
+
+var castPath = __webpack_require__("e2e4"),
+    toKey = __webpack_require__("f4d6");
+
+/**
+ * The base implementation of `_.get` without support for default values.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path of the property to get.
+ * @returns {*} Returns the resolved value.
+ */
+function baseGet(object, path) {
+  path = castPath(path, object);
+
+  var index = 0,
+      length = path.length;
+
+  while (object != null && index < length) {
+    object = object[toKey(path[index++])];
+  }
+  return (index && index == length) ? object : undefined;
+}
+
+module.exports = baseGet;
+
+
+/***/ }),
+
 /***/ "65f0":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26763,7 +28829,7 @@ module.exports = function (originalArray, length) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppYoutube.vue?vue&type=template&id=235f538a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppYoutube.vue?vue&type=template&id=235f538a&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"video"},[_c('iframe',{attrs:{"src":_vm.youtubeUrl,"title":"Youtube Video","frameborder":"0","loading":"lazy","allow":"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture","allowfullscreen":""}})])}
 var staticRenderFns = []
 
@@ -27137,6 +29203,7 @@ var map = {
 	"./Parse/AppJsonToHtml.vue": "1764",
 	"./Search/AppGeoLocation.vue": "bafb",
 	"./Search/AppGooglePlacesAutocomplete.vue": "9381",
+	"./Search/AppJobMap.vue": "7efd",
 	"./Search/AppSearchFilter.vue": "1249",
 	"./Search/AppSearchFilterChip.vue": "4bfa",
 	"./Search/Providers/AppGoogleTalentSearchProvider.vue": "b2eb",
@@ -27463,7 +29530,7 @@ module.exports = function ($this, dummy, Wrapper) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAxiosForm.vue?vue&type=template&id=f0872a66&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAxiosForm.vue?vue&type=template&id=f0872a66&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{ref:"form",on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_vm._t("default",null,{"data":_vm.data,"failed":_vm.failed,"errors":_vm.errors,"success":_vm.success,"loading":_vm.loading,"response":_vm.response})],2)}
 var staticRenderFns = []
 
@@ -28415,6 +30482,50 @@ module.exports = toString;
 
 /***/ }),
 
+/***/ "77c1":
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayMap = __webpack_require__("7948"),
+    baseIteratee = __webpack_require__("badf"),
+    basePickBy = __webpack_require__("89d9"),
+    getAllKeysIn = __webpack_require__("1bac");
+
+/**
+ * Creates an object composed of the `object` properties `predicate` returns
+ * truthy for. The predicate is invoked with two arguments: (value, key).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Object
+ * @param {Object} object The source object.
+ * @param {Function} [predicate=_.identity] The function invoked per property.
+ * @returns {Object} Returns the new object.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': '2', 'c': 3 };
+ *
+ * _.pickBy(object, _.isNumber);
+ * // => { 'a': 1, 'c': 3 }
+ */
+function pickBy(object, predicate) {
+  if (object == null) {
+    return {};
+  }
+  var props = arrayMap(getAllKeysIn(object), function(prop) {
+    return [prop];
+  });
+  predicate = baseIteratee(predicate);
+  return basePickBy(object, props, function(value, path) {
+    return predicate(value, path[0]);
+  });
+}
+
+module.exports = pickBy;
+
+
+/***/ }),
+
 /***/ "7839":
 /***/ (function(module, exports) {
 
@@ -28651,7 +30762,7 @@ module.exports = function (argument) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppSolrSearchProvider.vue?vue&type=template&id=3d4fd792&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppSolrSearchProvider.vue?vue&type=template&id=3d4fd792&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,null,_vm.slotData)],2)}
 var staticRenderFns = []
 
@@ -28744,6 +30855,96 @@ MapCache.prototype.has = mapCacheHas;
 MapCache.prototype.set = mapCacheSet;
 
 module.exports = MapCache;
+
+
+/***/ }),
+
+/***/ "7b97":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Stack = __webpack_require__("7e64"),
+    equalArrays = __webpack_require__("a2be"),
+    equalByTag = __webpack_require__("1c3c"),
+    equalObjects = __webpack_require__("b1e5"),
+    getTag = __webpack_require__("42a2"),
+    isArray = __webpack_require__("6747"),
+    isBuffer = __webpack_require__("0d24"),
+    isTypedArray = __webpack_require__("73ac");
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1;
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    objectTag = '[object Object]';
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * A specialized version of `baseIsEqual` for arrays and objects which performs
+ * deep comparisons and tracks traversed objects enabling objects with circular
+ * references to be compared.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} [stack] Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
+  var objIsArr = isArray(object),
+      othIsArr = isArray(other),
+      objTag = objIsArr ? arrayTag : getTag(object),
+      othTag = othIsArr ? arrayTag : getTag(other);
+
+  objTag = objTag == argsTag ? objectTag : objTag;
+  othTag = othTag == argsTag ? objectTag : othTag;
+
+  var objIsObj = objTag == objectTag,
+      othIsObj = othTag == objectTag,
+      isSameTag = objTag == othTag;
+
+  if (isSameTag && isBuffer(object)) {
+    if (!isBuffer(other)) {
+      return false;
+    }
+    objIsArr = true;
+    objIsObj = false;
+  }
+  if (isSameTag && !objIsObj) {
+    stack || (stack = new Stack);
+    return (objIsArr || isTypedArray(object))
+      ? equalArrays(object, other, bitmask, customizer, equalFunc, stack)
+      : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
+  }
+  if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
+    var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
+        othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+
+    if (objIsWrapped || othIsWrapped) {
+      var objUnwrapped = objIsWrapped ? object.value() : object,
+          othUnwrapped = othIsWrapped ? other.value() : other;
+
+      stack || (stack = new Stack);
+      return equalFunc(objUnwrapped, othUnwrapped, bitmask, customizer, stack);
+    }
+  }
+  if (!isSameTag) {
+    return false;
+  }
+  stack || (stack = new Stack);
+  return equalObjects(object, other, bitmask, customizer, equalFunc, stack);
+}
+
+module.exports = baseIsEqualDeep;
 
 
 /***/ }),
@@ -29042,6 +31243,446 @@ module.exports = hasUnicodeWord;
 
 /***/ }),
 
+/***/ "7ed2":
+/***/ (function(module, exports) {
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/**
+ * Adds `value` to the array cache.
+ *
+ * @private
+ * @name add
+ * @memberOf SetCache
+ * @alias push
+ * @param {*} value The value to cache.
+ * @returns {Object} Returns the cache instance.
+ */
+function setCacheAdd(value) {
+  this.__data__.set(value, HASH_UNDEFINED);
+  return this;
+}
+
+module.exports = setCacheAdd;
+
+
+/***/ }),
+
+/***/ "7efd":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppJobMap.vue?vue&type=template&id=8376cf9a&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[(!_vm.error)?_c('GmapMap',_vm._b({style:(_vm.mapStyles),attrs:{"zoom":_vm.positionZoom,"center":_vm.positionCenter,"options":_vm.jobMapOptions}},'GmapMap',_vm.$attrs,false),[_c('GmapCluster',_vm._b({},'GmapCluster',_vm.jobClusterOptions,false),[_vm._l((_vm.markers),function(m,index){return _c('GmapMarker',{key:index,attrs:{"clickable":true,"position":m.position},on:{"click":function($event){return _vm.search(m.job)},"mouseout":function($event){_vm.infoWindow.open = false},"mouseover":function($event){return _vm.setWindowInfo(m, index)}}})}),_c('GmapInfoWindow',{attrs:{"opened":_vm.infoWindow.open,"options":_vm.infoWindow.options,"position":_vm.infoWindow.position},on:{"click":function($event){return _vm.search(_vm.infoWindow.job)}}})],2)],1):_vm._e(),_vm._t("footer",null,{"error":_vm.error,"done":_vm.done})],2)}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/Search/AppJobMap.vue?vue&type=template&id=8376cf9a&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
+var es_array_concat = __webpack_require__("99af");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
+var es_array_for_each = __webpack_require__("4160");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
+var es_regexp_exec = __webpack_require__("ac1f");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
+var es_string_split = __webpack_require__("1276");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
+var web_dom_collections_for_each = __webpack_require__("159b");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js + 1 modules
+var objectSpread2 = __webpack_require__("5530");
+
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__("96cf");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
+var asyncToGenerator = __webpack_require__("1da1");
+
+// EXTERNAL MODULE: ./node_modules/lodash/omitBy.js
+var omitBy = __webpack_require__("dd65");
+var omitBy_default = /*#__PURE__*/__webpack_require__.n(omitBy);
+
+// EXTERNAL MODULE: ./node_modules/lodash/cloneDeep.js
+var cloneDeep = __webpack_require__("0644");
+var cloneDeep_default = /*#__PURE__*/__webpack_require__.n(cloneDeep);
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 1 modules
+var helpers = __webpack_require__("a74a");
+
+// EXTERNAL MODULE: ./src/services/search.js + 2 modules
+var services_search = __webpack_require__("e73b");
+
+// EXTERNAL MODULE: ./node_modules/gmap-vue/dist/components/cluster.js
+var cluster = __webpack_require__("a3e1");
+var cluster_default = /*#__PURE__*/__webpack_require__.n(cluster);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/gmap-vue/dist/components/info-window.vue?vue&type=template&id=15958383&
+var info_windowvue_type_template_id_15958383_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{ref:"flyaway"},[_vm._t("default")],2)])}
+var info_windowvue_type_template_id_15958383_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./node_modules/gmap-vue/dist/components/info-window.vue?vue&type=template&id=15958383&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/gmap-vue/dist/components/info-window.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var info_windowvue_type_script_lang_js_ = ((function (x) {
+  return x.default || x;
+})( // TODO: this should be analyzed after to find a better way to do this
+// eslint-disable-next-line global-require -- old style
+__webpack_require__("a5d8")));
+// CONCATENATED MODULE: ./node_modules/gmap-vue/dist/components/info-window.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_info_windowvue_type_script_lang_js_ = (info_windowvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./node_modules/gmap-vue/dist/components/info-window.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_info_windowvue_type_script_lang_js_,
+  info_windowvue_type_template_id_15958383_render,
+  info_windowvue_type_template_id_15958383_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var info_window = (component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppJobMap.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ var AppJobMapvue_type_script_lang_js_ = ({
+  props: {
+    searchData: {
+      type: Object,
+      required: false,
+      default: function _default() {
+        return {};
+      }
+    },
+    siteConfig: {
+      type: Object,
+      required: false,
+      default: function _default() {
+        return {};
+      }
+    },
+    mapStyles: {
+      type: [Object, Array, String],
+      required: false,
+      default: function _default() {
+        return {};
+      }
+    },
+    mapOptions: {
+      type: Object,
+      required: false,
+      default: function _default() {
+        return {};
+      }
+    },
+    clusterOptions: {
+      type: Object,
+      required: false,
+      default: function _default() {
+        return {};
+      }
+    }
+  },
+  components: {
+    GmapCluster: cluster_default.a,
+    GmapInfoWindow: info_window
+  },
+  data: function data() {
+    var queryConfig = cloneDeep_default()(this.siteConfig);
+    var filters = cloneDeep_default()(this.siteConfig.filters || []); // mark filters as not visible so search api doesnt calculate the options.
+
+    filters.forEach(function (f) {
+      f["visible"] = false;
+    });
+    return {
+      jobs: [],
+      counts: {},
+      done: false,
+      markers: [],
+      google: null,
+      error: false,
+      hasMore: true,
+      positionZoom: this.$attrs.zoom,
+      payload: cloneDeep_default()(this.searchData),
+      positionCenter: this.$attrs.center,
+      queryConfig: {
+        source: services_search["b" /* SOLR */],
+        buids: queryConfig.buids || [],
+        tenant_uuid: queryConfig.tenant_uuid || null,
+        company_uuids: queryConfig.company_uuids || [],
+        filters: filters,
+        force_filters: queryConfig.force_filters || []
+      },
+      infoWindow: {
+        open: false,
+        position: null,
+        currentIndex: null,
+        options: {
+          content: "",
+          pixelOffset: {
+            width: 0,
+            height: -35
+          }
+        }
+      }
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var data, response, _ref, pagination, jobs;
+
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.$gmapApiPromiseLazy();
+
+            case 2:
+              data = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, _this.payload), {
+                page: 1,
+                num_items: 200
+              });
+
+            case 3:
+              if (!_this.hasMore) {
+                _context.next = 21;
+                break;
+              }
+
+              _context.prev = 4;
+              _context.next = 7;
+              return _this.service(data);
+
+            case 7:
+              response = _context.sent;
+              _ref = response.data || {}, pagination = _ref.pagination, jobs = _ref.jobs;
+
+              _this.addMarkers(jobs || []);
+
+              _this.done = !pagination.has_more_pages;
+              _this.hasMore = !_this.done;
+              data.page += 1;
+              _context.next = 19;
+              break;
+
+            case 15:
+              _context.prev = 15;
+              _context.t0 = _context["catch"](4);
+              _this.done = true;
+              _this.error = _context.t0;
+
+            case 19:
+              _context.next = 3;
+              break;
+
+            case 21:
+              // if a location was given center to the first available job to give
+              // a better center for the current search results ( TODO - find a better way to do this?)
+              if (_this.payload.location && _this.jobs.length > 0) {
+                _this.positionCenter = _this.parseGeoLocation(_this.jobs[0].GeoLocation);
+                _this.positionZoom = 5;
+              }
+
+            case 22:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[4, 15]]);
+    }))();
+  },
+  computed: {
+    jobMapOptions: function jobMapOptions() {
+      return Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, {
+        disableDefaultUI: true
+      }), this.mapOptions);
+    },
+    jobClusterOptions: function jobClusterOptions() {
+      return Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, {
+        "max-zoom": 5,
+        "zoom-on-click": true,
+        "image-path": "https://de-microsites.s3.amazonaws.com/__shared__/images/google-maps/cluster"
+      }), this.clusterOptions);
+    }
+  },
+  methods: {
+    service: function service(data) {
+      return Object(services_search["f" /* searchService */])(data, this.queryConfig);
+    },
+    search: function search(job) {
+      var payload = omitBy_default()(this.payload, function (v, k) {
+        return Object(helpers["a" /* blank */])(v);
+      });
+      payload.page = 1;
+      payload.location = job.location_exact;
+
+      if (payload.r) {
+        payload.coords = job.GeoLocation;
+      }
+
+      this.$router.push({
+        path: "/jobs",
+        query: payload
+      }).catch(function (err) {});
+    },
+    getJobWindowLabel: function getJobWindowLabel(job) {
+      var count = this.counts[job.location_exact] || 1;
+      var jobsLabel = "Jobs";
+
+      if (count == 1) {
+        jobsLabel = "Job";
+      }
+
+      return "".concat(job.location_exact, ": ").concat(count, " ").concat(jobsLabel);
+    },
+    makeMarker: function makeMarker(job) {
+      var coords = this.parseGeoLocation(job.GeoLocation);
+      return new google.maps.Marker({
+        position: new google.maps.LatLng(coords.lat, coords.lng),
+        job: job
+      });
+    },
+    parseGeoLocation: function parseGeoLocation(geolocation) {
+      if (Object(helpers["a" /* blank */])(geolocation)) {
+        return false;
+      }
+
+      var coords = geolocation.split(",");
+      return {
+        lat: parseFloat(coords[0]),
+        lng: parseFloat(coords[1])
+      };
+    },
+    addMarkers: function addMarkers(jobs) {
+      var _this2 = this;
+
+      jobs.forEach(function (job) {
+        if (job.GeoLocation) {
+          _this2.counts[job.location_exact] = (_this2.counts[job.location_exact] || 0) + 1;
+
+          _this2.jobs.push(job);
+
+          _this2.markers.push(_this2.makeMarker(job));
+        }
+      });
+    },
+    setWindowInfo: function setWindowInfo(marker, index) {
+      this.infoWindow.position = marker.position;
+      this.infoWindow.options.content = this.getJobWindowLabel(marker.job); //check if its the same marker that was selected if yes toggle
+
+      if (this.infoWindow.currentIndex == index) {
+        this.infoWindow.open = !this.infoWindow.open;
+      } //if different marker set infowindow to open and reset current marker index
+      else {
+          this.infoWindow.open = true;
+          this.infoWindow.currentIndex = index;
+        }
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/Search/AppJobMap.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Search_AppJobMapvue_type_script_lang_js_ = (AppJobMapvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Search/AppJobMap.vue
+
+
+
+
+
+/* normalize component */
+
+var AppJobMap_component = Object(componentNormalizer["a" /* default */])(
+  Search_AppJobMapvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var AppJobMap = __webpack_exports__["default"] = (AppJobMap_component.exports);
+
+/***/ }),
+
 /***/ "7f9a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29296,6 +31937,47 @@ module.exports = apply;
 
 /***/ }),
 
+/***/ "8604":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseHasIn = __webpack_require__("26e8"),
+    hasPath = __webpack_require__("e2c0");
+
+/**
+ * Checks if `path` is a direct or inherited property of `object`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Object
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path to check.
+ * @returns {boolean} Returns `true` if `path` exists, else `false`.
+ * @example
+ *
+ * var object = _.create({ 'a': _.create({ 'b': 2 }) });
+ *
+ * _.hasIn(object, 'a');
+ * // => true
+ *
+ * _.hasIn(object, 'a.b');
+ * // => true
+ *
+ * _.hasIn(object, ['a', 'b']);
+ * // => true
+ *
+ * _.hasIn(object, 'b');
+ * // => false
+ */
+function hasIn(object, path) {
+  return object != null && hasPath(object, path, baseHasIn);
+}
+
+module.exports = hasIn;
+
+
+/***/ }),
+
 /***/ "861d":
 /***/ (function(module, exports) {
 
@@ -29345,7 +32027,7 @@ module.exports = baseAssignValue;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=50322a84&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=50322a84&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component",staticClass:"dropdown"},[_c('div',{ref:"display",staticClass:"dropdown__display",attrs:{"tabindex":"0","role":"button","aria-haspopup":"true","aria-expanded":_vm.toggled ? 'true' : 'false',"id":("dropdown-display-" + _vm.id)}},[_vm._t("display",[_c('span',_vm._g({attrs:{"toggled":_vm.toggled}},_vm.eventHandlers),[_vm._t("display-text",[_vm._v(" "+_vm._s(_vm.display)+" ")])],2)],{"toggle":_vm.toggle,"open":_vm.open,"close":_vm.close,"toggled":_vm.toggled})],2),_c('div',_vm._g({directives:[{name:"show",rawName:"v-show",value:(_vm.toggled),expression:"toggled"}],ref:"dropdown-content",staticClass:"dropdown__content",class:{'dropdown__content--active': _vm.toggled},attrs:{"id":("dropdown-content-" + _vm.id),"aria-labelledby":("dropdown-display-" + _vm.id)}},
             _vm.interactionType == 'click'
                 ? {}
@@ -29490,6 +32172,43 @@ if (typeof store.inspectSource != 'function') {
 }
 
 module.exports = store.inspectSource;
+
+
+/***/ }),
+
+/***/ "89d9":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGet = __webpack_require__("656b"),
+    baseSet = __webpack_require__("159a"),
+    castPath = __webpack_require__("e2e4");
+
+/**
+ * The base implementation of  `_.pickBy` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Object} object The source object.
+ * @param {string[]} paths The property paths to pick.
+ * @param {Function} predicate The function invoked per property.
+ * @returns {Object} Returns the new object.
+ */
+function basePickBy(object, paths, predicate) {
+  var index = -1,
+      length = paths.length,
+      result = {};
+
+  while (++index < length) {
+    var path = paths[index],
+        value = baseGet(object, path);
+
+    if (predicate(value, path)) {
+      baseSet(result, castPath(path, object), value);
+    }
+  }
+  return result;
+}
+
+module.exports = basePickBy;
 
 
 /***/ }),
@@ -29966,7 +32685,7 @@ module.exports = overArg;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppJobFetch.vue?vue&type=template&id=7e37ea54&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Fetch/AppJobFetch.vue?vue&type=template&id=7e37ea54&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('AppFetch',{ref:"fetch",attrs:{"endpoint":_vm.fetchJob,"tag":_vm.tag,"on-resolve":_vm.resolveJob},scopedSlots:_vm._u([{key:"default",fn:function(ref){
 var status = ref.status;
 return [_vm._t("default",null,{"status":status,"job":_vm.job})]}}],null,true)})}
@@ -30191,7 +32910,7 @@ module.exports = patchedExec;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=23049e34&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=23049e34&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,null,_vm.slotData())],2)}
 var staticRenderFns = []
 
@@ -30236,7 +32955,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGooglePlacesAutocomplete.vue?vue&type=template&id=34d369e1&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGooglePlacesAutocomplete.vue?vue&type=template&id=34d369e1&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('input',_vm._b({ref:"autocompleteInput",attrs:{"type":"text"},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.$emit('input', $event.target.value)}}},'input',_vm.$attrs,false))}
 var staticRenderFns = []
 
@@ -30411,6 +33130,75 @@ function eq(value, other) {
 }
 
 module.exports = eq;
+
+
+/***/ }),
+
+/***/ "966f":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Stack = __webpack_require__("7e64"),
+    baseIsEqual = __webpack_require__("c05f");
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/**
+ * The base implementation of `_.isMatch` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Object} object The object to inspect.
+ * @param {Object} source The object of property values to match.
+ * @param {Array} matchData The property names, values, and compare flags to match.
+ * @param {Function} [customizer] The function to customize comparisons.
+ * @returns {boolean} Returns `true` if `object` is a match, else `false`.
+ */
+function baseIsMatch(object, source, matchData, customizer) {
+  var index = matchData.length,
+      length = index,
+      noCustomizer = !customizer;
+
+  if (object == null) {
+    return !length;
+  }
+  object = Object(object);
+  while (index--) {
+    var data = matchData[index];
+    if ((noCustomizer && data[2])
+          ? data[1] !== object[data[0]]
+          : !(data[0] in object)
+        ) {
+      return false;
+    }
+  }
+  while (++index < length) {
+    data = matchData[index];
+    var key = data[0],
+        objValue = object[key],
+        srcValue = data[1];
+
+    if (noCustomizer && data[2]) {
+      if (objValue === undefined && !(key in object)) {
+        return false;
+      }
+    } else {
+      var stack = new Stack;
+      if (customizer) {
+        var result = customizer(objValue, srcValue, key, object, source, stack);
+      }
+      if (!(result === undefined
+            ? baseIsEqual(srcValue, objValue, COMPARE_PARTIAL_FLAG | COMPARE_UNORDERED_FLAG, customizer, stack)
+            : result
+          )) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+module.exports = baseIsMatch;
 
 
 /***/ }),
@@ -31281,6 +34069,57 @@ try {
 
 /***/ }),
 
+/***/ "9767":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = mappedPropsToVueProps;
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/**
+ * Strips out the extraneous properties we have in our
+ * props definitions
+ * @param {Object} props
+ */
+function mappedPropsToVueProps(mappedProps) {
+  return Object.entries(mappedProps).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        key = _ref2[0],
+        prop = _ref2[1];
+
+    var value = {};
+    if ('type' in prop) value.type = prop.type;
+    if ('default' in prop) value.default = prop.default;
+    if ('required' in prop) value.required = prop.required;
+    return [key, value];
+  }).reduce(function (acc, _ref3) {
+    var _ref4 = _slicedToArray(_ref3, 2),
+        key = _ref4[0],
+        val = _ref4[1];
+
+    acc[key] = val;
+    return acc;
+  }, {});
+}
+
+/***/ }),
+
 /***/ "9911":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31511,6 +34350,46 @@ function isIterateeCall(value, index, object) {
 }
 
 module.exports = isIterateeCall;
+
+
+/***/ }),
+
+/***/ "9b02":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGet = __webpack_require__("656b");
+
+/**
+ * Gets the value at `path` of `object`. If the resolved value is
+ * `undefined`, the `defaultValue` is returned in its place.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.7.0
+ * @category Object
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path of the property to get.
+ * @param {*} [defaultValue] The value returned for `undefined` resolved values.
+ * @returns {*} Returns the resolved value.
+ * @example
+ *
+ * var object = { 'a': [{ 'b': { 'c': 3 } }] };
+ *
+ * _.get(object, 'a[0].b.c');
+ * // => 3
+ *
+ * _.get(object, ['a', '0', 'b', 'c']);
+ * // => 3
+ *
+ * _.get(object, 'a.b.c', 'default');
+ * // => 'default'
+ */
+function get(object, path, defaultValue) {
+  var result = object == null ? undefined : baseGet(object, path);
+  return result === undefined ? defaultValue : result;
+}
+
+module.exports = get;
 
 
 /***/ }),
@@ -32144,6 +35023,53 @@ function tokenize(input, options) {
 
 /***/ }),
 
+/***/ "a0ac":
+/***/ (function(module, exports) {
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a function that negates the result of the predicate `func`. The
+ * `func` predicate is invoked with the `this` binding and arguments of the
+ * created function.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Function
+ * @param {Function} predicate The predicate to negate.
+ * @returns {Function} Returns the new negated function.
+ * @example
+ *
+ * function isEven(n) {
+ *   return n % 2 == 0;
+ * }
+ *
+ * _.filter([1, 2, 3, 4, 5, 6], _.negate(isEven));
+ * // => [1, 3, 5]
+ */
+function negate(predicate) {
+  if (typeof predicate != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  return function() {
+    var args = arguments;
+    switch (args.length) {
+      case 0: return !predicate.call(this);
+      case 1: return !predicate.call(this, args[0]);
+      case 2: return !predicate.call(this, args[0], args[1]);
+      case 3: return !predicate.call(this, args[0], args[1], args[2]);
+    }
+    return !predicate.apply(this, args);
+  };
+}
+
+module.exports = negate;
+
+
+/***/ }),
+
 /***/ "a15b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32170,6 +35096,97 @@ $({ target: 'Array', proto: true, forced: ES3_STRINGS || !STRICT_METHOD }, {
 
 /***/ }),
 
+/***/ "a2be":
+/***/ (function(module, exports, __webpack_require__) {
+
+var SetCache = __webpack_require__("d612"),
+    arraySome = __webpack_require__("4284"),
+    cacheHas = __webpack_require__("c584");
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1,
+    COMPARE_UNORDERED_FLAG = 2;
+
+/**
+ * A specialized version of `baseIsEqualDeep` for arrays with support for
+ * partial deep comparisons.
+ *
+ * @private
+ * @param {Array} array The array to compare.
+ * @param {Array} other The other array to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `array` and `other` objects.
+ * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
+ */
+function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
+  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
+      arrLength = array.length,
+      othLength = other.length;
+
+  if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
+    return false;
+  }
+  // Check that cyclic values are equal.
+  var arrStacked = stack.get(array);
+  var othStacked = stack.get(other);
+  if (arrStacked && othStacked) {
+    return arrStacked == other && othStacked == array;
+  }
+  var index = -1,
+      result = true,
+      seen = (bitmask & COMPARE_UNORDERED_FLAG) ? new SetCache : undefined;
+
+  stack.set(array, other);
+  stack.set(other, array);
+
+  // Ignore non-index properties.
+  while (++index < arrLength) {
+    var arrValue = array[index],
+        othValue = other[index];
+
+    if (customizer) {
+      var compared = isPartial
+        ? customizer(othValue, arrValue, index, other, array, stack)
+        : customizer(arrValue, othValue, index, array, other, stack);
+    }
+    if (compared !== undefined) {
+      if (compared) {
+        continue;
+      }
+      result = false;
+      break;
+    }
+    // Recursively compare arrays (susceptible to call stack limits).
+    if (seen) {
+      if (!arraySome(other, function(othValue, othIndex) {
+            if (!cacheHas(seen, othIndex) &&
+                (arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
+              return seen.push(othIndex);
+            }
+          })) {
+        result = false;
+        break;
+      }
+    } else if (!(
+          arrValue === othValue ||
+            equalFunc(arrValue, othValue, bitmask, customizer, stack)
+        )) {
+      result = false;
+      break;
+    }
+  }
+  stack['delete'](array);
+  stack['delete'](other);
+  return result;
+}
+
+module.exports = equalArrays;
+
+
+/***/ }),
+
 /***/ "a2db":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32192,6 +35209,150 @@ function cloneSymbol(symbol) {
 
 module.exports = cloneSymbol;
 
+
+/***/ }),
+
+/***/ "a3e1":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _markerclustererplus = _interopRequireDefault(__webpack_require__("3400"));
+
+var _mapElement = _interopRequireDefault(__webpack_require__("fd24"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var props = {
+  maxZoom: {
+    type: Number,
+    twoWay: false
+  },
+  batchSizeIE: {
+    type: Number,
+    twoWay: false
+  },
+  calculator: {
+    type: Function,
+    twoWay: false
+  },
+  enableRetinaIcons: {
+    type: Boolean,
+    twoWay: false
+  },
+  gridSize: {
+    type: Number,
+    twoWay: false
+  },
+  averageCenter: {
+    type: Boolean,
+    twoWay: false
+  },
+  ignoreHidden: {
+    type: Boolean,
+    twoWay: false
+  },
+  imageExtension: {
+    type: String,
+    twoWay: false
+  },
+  imagePath: {
+    type: String,
+    twoWay: false
+  },
+  imageSizes: {
+    type: Array,
+    twoWay: false
+  },
+  minimumClusterSize: {
+    type: Number,
+    twoWay: false
+  },
+  clusterClass: {
+    type: String,
+    twoWay: false
+  },
+  styles: {
+    type: Array,
+    twoWay: false
+  },
+  zoomOnClick: {
+    type: Boolean,
+    twoWay: false
+  }
+};
+var events = ['click', 'rightclick', 'dblclick', 'drag', 'dragstart', 'dragend', 'mouseup', 'mousedown', 'mouseover', 'mouseout'];
+
+var _default = (0, _mapElement.default)({
+  mappedProps: props,
+  events: events,
+  name: 'cluster',
+  ctr: function ctr() {
+    if (typeof _markerclustererplus.default === 'undefined') {
+      throw new Error('MarkerClusterer is not installed! require() it or include it from https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js');
+    }
+
+    return _markerclustererplus.default;
+  },
+  ctrArgs: function ctrArgs(_ref) {
+    var map = _ref.map,
+        otherOptions = _objectWithoutProperties(_ref, ["map"]);
+
+    return [map, [], otherOptions];
+  },
+  render: function render(h) {
+    // <div><slot></slot></div>
+    return h('div', this.$slots.default);
+  },
+  afterCreate: function afterCreate(inst) {
+    var _this = this;
+
+    var reinsertMarkers = function () {
+      var oldMarkers = inst.getMarkers();
+      inst.clearMarkers();
+      inst.addMarkers(oldMarkers);
+    };
+
+    Object.keys(props).forEach(function (prop) {
+      if (props[prop].twoWay) {
+        _this.$on("".concat(prop.toLowerCase(), "_changed"), reinsertMarkers);
+      }
+    });
+  },
+  updated: function updated() {
+    if (this.$clusterObject) {
+      this.$clusterObject.repaint();
+    }
+  },
+  beforeDestroy: function beforeDestroy() {
+    var _this2 = this;
+
+    /* Performance optimization when destroying a large number of markers */
+    this.$children.forEach(function (marker) {
+      if (marker.$clusterObject === _this2.$clusterObject) {
+        // TODO: analyze if exists a better way to do this
+        // eslint-disable-next-line no-param-reassign -- needed to clean in a more optimized way
+        marker.$clusterObject = null;
+      }
+    });
+
+    if (this.$clusterObject) {
+      this.$clusterObject.clearMarkers();
+    }
+  }
+});
+
+exports.default = _default;
 
 /***/ }),
 
@@ -32861,6 +36022,123 @@ module.exports = mapCacheHas;
 
 /***/ }),
 
+/***/ "a5d8":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _mapElement = _interopRequireDefault(__webpack_require__("fd24"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var props = {
+  options: {
+    type: Object,
+    required: false,
+    default: function _default() {
+      return {};
+    }
+  },
+  position: {
+    type: Object,
+    twoWay: true
+  },
+  zIndex: {
+    type: Number,
+    twoWay: true
+  }
+};
+var events = ['domready', 'closeclick', 'content_changed'];
+
+var _default = (0, _mapElement.default)({
+  mappedProps: props,
+  events: events,
+  name: 'infoWindow',
+  ctr: function ctr() {
+    return google.maps.InfoWindow;
+  },
+  props: {
+    opened: {
+      type: Boolean,
+      default: true
+    }
+  },
+  inject: {
+    $markerPromise: {
+      default: null
+    }
+  },
+  mounted: function mounted() {
+    var el = this.$refs.flyaway;
+    el.parentNode.removeChild(el);
+  },
+  beforeCreate: function beforeCreate(options) {
+    var _this = this;
+
+    // TODO: Analyze a better way to do this
+    // eslint-disable-next-line no-param-reassign -- needed to add properties to option object
+    options.content = this.$refs.flyaway;
+
+    if (this.$markerPromise) {
+      var _options = options,
+          position = _options.position,
+          cleanedOptions = _objectWithoutProperties(_options, ["position"]); // eslint-disable-next-line no-param-reassign -- needed to add properties to option object
+
+
+      options = cleanedOptions;
+      return this.$markerPromise.then(function (mo) {
+        _this.$markerObject = mo;
+        return mo;
+      });
+    } // this return is to follow the consistent-return rule of eslint, https://eslint.org/docs/rules/consistent-return
+
+
+    return undefined;
+  },
+  methods: {
+    // TODO: we need to analyze the following method name
+    // eslint-disable-next-line no-underscore-dangle -- old code
+    _openInfoWindow: function _openInfoWindow() {
+      if (this.opened) {
+        if (this.$markerObject !== null) {
+          this.$infoWindowObject.open(this.$map, this.$markerObject);
+        } else {
+          this.$infoWindowObject.open(this.$map);
+        }
+      } else {
+        this.$infoWindowObject.close();
+      }
+    }
+  },
+  afterCreate: function afterCreate() {
+    var _this2 = this;
+
+    // TODO: This function names should be analyzed
+
+    /* eslint-disable no-underscore-dangle -- old style */
+    this._openInfoWindow();
+
+    this.$watch('opened', function () {
+      _this2._openInfoWindow();
+    });
+    /* eslint-enable no-underscore-dangle */
+  }
+});
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "a630":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33445,7 +36723,7 @@ function humanFriendlyLocation(string) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Pagination/AppSimplePagination.vue?vue&type=template&id=327dbbc9&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Pagination/AppSimplePagination.vue?vue&type=template&id=327dbbc9&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{staticClass:"simple-pagination",attrs:{"aria-label":"pagination"}},[(_vm.currentPage > 1)?_c('g-link',{staticClass:"simple-pagination-button",attrs:{"to":_vm.link(_vm.previousPage)}},[_vm._t("back",[_vm._v("Back")])],2):_vm._e(),_vm._t("default"),(_vm.currentPage < _vm.totalPages)?_c('g-link',{staticClass:"simple-pagination-button",attrs:{"to":_vm.link(_vm.nextPage)}},[_vm._t("next",[_vm._v("Next")])],2):_vm._e()],2)}
 var staticRenderFns = []
 
@@ -33979,6 +37257,31 @@ $({ target: 'RegExp', proto: true, forced: /./.exec !== exec }, {
 
 /***/ }),
 
+/***/ "ac41":
+/***/ (function(module, exports) {
+
+/**
+ * Converts `set` to an array of its values.
+ *
+ * @private
+ * @param {Object} set The set to convert.
+ * @returns {Array} Returns the values.
+ */
+function setToArray(set) {
+  var index = -1,
+      result = Array(set.size);
+
+  set.forEach(function(value) {
+    result[++index] = value;
+  });
+  return result;
+}
+
+module.exports = setToArray;
+
+
+/***/ }),
+
 /***/ "ad6d":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34173,6 +37476,103 @@ if (DESCRIPTORS && !(NAME in FunctionPrototype)) {
 
 /***/ }),
 
+/***/ "b1e5":
+/***/ (function(module, exports, __webpack_require__) {
+
+var getAllKeys = __webpack_require__("a994");
+
+/** Used to compose bitmasks for value comparisons. */
+var COMPARE_PARTIAL_FLAG = 1;
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * A specialized version of `baseIsEqualDeep` for objects with support for
+ * partial deep comparisons.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
+function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
+  var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
+      objProps = getAllKeys(object),
+      objLength = objProps.length,
+      othProps = getAllKeys(other),
+      othLength = othProps.length;
+
+  if (objLength != othLength && !isPartial) {
+    return false;
+  }
+  var index = objLength;
+  while (index--) {
+    var key = objProps[index];
+    if (!(isPartial ? key in other : hasOwnProperty.call(other, key))) {
+      return false;
+    }
+  }
+  // Check that cyclic values are equal.
+  var objStacked = stack.get(object);
+  var othStacked = stack.get(other);
+  if (objStacked && othStacked) {
+    return objStacked == other && othStacked == object;
+  }
+  var result = true;
+  stack.set(object, other);
+  stack.set(other, object);
+
+  var skipCtor = isPartial;
+  while (++index < objLength) {
+    key = objProps[index];
+    var objValue = object[key],
+        othValue = other[key];
+
+    if (customizer) {
+      var compared = isPartial
+        ? customizer(othValue, objValue, key, other, object, stack)
+        : customizer(objValue, othValue, key, object, other, stack);
+    }
+    // Recursively compare objects (susceptible to call stack limits).
+    if (!(compared === undefined
+          ? (objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack))
+          : compared
+        )) {
+      result = false;
+      break;
+    }
+    skipCtor || (skipCtor = key == 'constructor');
+  }
+  if (result && !skipCtor) {
+    var objCtor = object.constructor,
+        othCtor = other.constructor;
+
+    // Non `Object` object instances with different constructors are not equal.
+    if (objCtor != othCtor &&
+        ('constructor' in object && 'constructor' in other) &&
+        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
+          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
+      result = false;
+    }
+  }
+  stack['delete'](object);
+  stack['delete'](other);
+  return result;
+}
+
+module.exports = equalObjects;
+
+
+/***/ }),
+
 /***/ "b20a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34253,7 +37653,7 @@ module.exports = isLength;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=4e7ecc62&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=4e7ecc62&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,null,_vm.slotData)],2)}
 var staticRenderFns = []
 
@@ -35147,6 +38547,44 @@ module.exports = clone;
 
 /***/ }),
 
+/***/ "badf":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseMatches = __webpack_require__("642a"),
+    baseMatchesProperty = __webpack_require__("1838"),
+    identity = __webpack_require__("cd9d"),
+    isArray = __webpack_require__("6747"),
+    property = __webpack_require__("f9ce");
+
+/**
+ * The base implementation of `_.iteratee`.
+ *
+ * @private
+ * @param {*} [value=_.identity] The value to convert to an iteratee.
+ * @returns {Function} Returns the iteratee.
+ */
+function baseIteratee(value) {
+  // Don't store the `typeof` result in a variable to avoid a JIT bug in Safari 9.
+  // See https://bugs.webkit.org/show_bug.cgi?id=156034 for more details.
+  if (typeof value == 'function') {
+    return value;
+  }
+  if (value == null) {
+    return identity;
+  }
+  if (typeof value == 'object') {
+    return isArray(value)
+      ? baseMatchesProperty(value[0], value[1])
+      : baseMatches(value);
+  }
+  return property(value);
+}
+
+module.exports = baseIteratee;
+
+
+/***/ }),
+
 /***/ "bafb":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -35154,7 +38592,7 @@ module.exports = clone;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGeoLocation.vue?vue&type=template&id=6870e5a6&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppGeoLocation.vue?vue&type=template&id=6870e5a6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[(_vm.isSupported)?_c('button',{staticClass:"geolocation__button",class:{
             hidden: !_vm.isSupported,
         },attrs:{"type":"button","aria-label":"Your location"},on:{"click":_vm.getGeoLocation}},[_vm._t("default",[_c('AppRadiusIcon',{attrs:{"width":"18px"}})])],2):_vm._e()])}
@@ -35517,6 +38955,41 @@ module.exports = function (input, PREFERRED_STRING) {
   if (!PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
   throw TypeError("Can't convert object to primitive value");
 };
+
+
+/***/ }),
+
+/***/ "c05f":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsEqualDeep = __webpack_require__("7b97"),
+    isObjectLike = __webpack_require__("1310");
+
+/**
+ * The base implementation of `_.isEqual` which supports partial comparisons
+ * and tracks traversed objects.
+ *
+ * @private
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @param {boolean} bitmask The bitmask flags.
+ *  1 - Unordered comparison
+ *  2 - Partial comparison
+ * @param {Function} [customizer] The function to customize comparisons.
+ * @param {Object} [stack] Tracks traversed `value` and `other` objects.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ */
+function baseIsEqual(value, other, bitmask, customizer, stack) {
+  if (value === other) {
+    return true;
+  }
+  if (value == null || other == null || (!isObjectLike(value) && !isObjectLike(other))) {
+    return value !== value && other !== other;
+  }
+  return baseIsEqualDeep(value, other, bitmask, customizer, baseIsEqual, stack);
+}
+
+module.exports = baseIsEqual;
 
 
 /***/ }),
@@ -36164,6 +39637,26 @@ module.exports = {
 
 /***/ }),
 
+/***/ "c584":
+/***/ (function(module, exports) {
+
+/**
+ * Checks if a `cache` value for `key` exists.
+ *
+ * @private
+ * @param {Object} cache The cache to query.
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function cacheHas(cache, key) {
+  return cache.has(key);
+}
+
+module.exports = cacheHas;
+
+
+/***/ }),
+
 /***/ "c5b3":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -36171,7 +39664,7 @@ module.exports = {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=034e41ae&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=034e41ae&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"form__autocomplete",attrs:{"role":"combobox","aria-haspopup":"listbox","aria-owns":("form__autocomplete-items-" + _vm.id),"aria-expanded":_vm.isExpanded}},[(_vm.label)?_c('label',{staticClass:"form__label",attrs:{"id":("form__label-" + _vm.id),"for":("form__autocomplete-" + _vm.id)}},[_vm._v(" "+_vm._s(_vm.label)+" ")]):_vm._e(),_c('input',_vm._b({ref:"input",staticClass:"form__input",attrs:{"id":("form__autocomplete-" + _vm.id),"type":"text","aria-autocomplete":"list","aria-haspopup":"listbox","aria-labelledby":("form__label-" + _vm.id),"aria-activedescendant":_vm.activeDescendant},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.changeValue($event.target.value)},"blur":_vm.blur,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.keyEnter($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }return _vm.blur($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }return _vm.keyUp($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }return _vm.keyDown($event)}]}},'input',_vm.$attrs,false)),(_vm.loading)?_c('div',{staticClass:"form__autocomplete--loading spinner spinner--gray"}):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.results.length),expression:"results.length"}],staticClass:"form__autocomplete-results"},[_c('ul',{staticClass:"form__autocomplete-items",attrs:{"id":("form__autocomplete-items-" + _vm.id),"role":"listbox"}},[_vm._l((_vm.results),function(result,index){return [_vm._t("result",[_c('li',{key:index,ref:("option-" + index),refInFor:true,staticClass:"form__autocomplete-item",class:{
                             'form__autocomplete-item--active':
                                 index === _vm.selectedIndex,
@@ -37796,6 +41289,40 @@ module.exports = {
 
 /***/ }),
 
+/***/ "d612":
+/***/ (function(module, exports, __webpack_require__) {
+
+var MapCache = __webpack_require__("7b83"),
+    setCacheAdd = __webpack_require__("7ed2"),
+    setCacheHas = __webpack_require__("dc0f");
+
+/**
+ *
+ * Creates an array cache object to store unique values.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [values] The values to cache.
+ */
+function SetCache(values) {
+  var index = -1,
+      length = values == null ? 0 : values.length;
+
+  this.__data__ = new MapCache;
+  while (++index < length) {
+    this.add(values[index]);
+  }
+}
+
+// Add methods to `SetCache`.
+SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
+SetCache.prototype.has = setCacheHas;
+
+module.exports = SetCache;
+
+
+/***/ }),
+
 /***/ "d669":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -37803,7 +41330,7 @@ module.exports = {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobDescription.vue?vue&type=template&id=d43b5a98&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppJobDescription.vue?vue&type=template&id=d43b5a98&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('AppHtmlToJson',{attrs:{"html":_vm.cleanHtml,"lookupClass":_vm.lookupClass}},[_vm._t("default")],2)],1)}
 var staticRenderFns = []
 
@@ -38179,6 +41706,27 @@ $({ target: 'Object', stat: true, sham: !DESCRIPTORS }, {
 
 /***/ }),
 
+/***/ "dc0f":
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is in the array cache.
+ *
+ * @private
+ * @name has
+ * @memberOf SetCache
+ * @param {*} value The value to search for.
+ * @returns {number} Returns `true` if `value` is found, else `false`.
+ */
+function setCacheHas(value) {
+  return this.__data__.has(value);
+}
+
+module.exports = setCacheHas;
+
+
+/***/ }),
+
 /***/ "dc57":
 /***/ (function(module, exports) {
 
@@ -38248,6 +41796,42 @@ function isArrayLikeObject(value) {
 }
 
 module.exports = isArrayLikeObject;
+
+
+/***/ }),
+
+/***/ "dd65":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIteratee = __webpack_require__("badf"),
+    negate = __webpack_require__("a0ac"),
+    pickBy = __webpack_require__("77c1");
+
+/**
+ * The opposite of `_.pickBy`; this method creates an object composed of
+ * the own and inherited enumerable string keyed properties of `object` that
+ * `predicate` doesn't return truthy for. The predicate is invoked with two
+ * arguments: (value, key).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Object
+ * @param {Object} object The source object.
+ * @param {Function} [predicate=_.identity] The function invoked per property.
+ * @returns {Object} Returns the new object.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': '2', 'c': 3 };
+ *
+ * _.omitBy(object, _.isNumber);
+ * // => { 'b': '2' }
+ */
+function omitBy(object, predicate) {
+  return pickBy(object, negate(baseIteratee(predicate)));
+}
+
+module.exports = omitBy;
 
 
 /***/ }),
@@ -38834,6 +42418,52 @@ addToUnscopables('entries');
 
 /***/ }),
 
+/***/ "e2c0":
+/***/ (function(module, exports, __webpack_require__) {
+
+var castPath = __webpack_require__("e2e4"),
+    isArguments = __webpack_require__("d370"),
+    isArray = __webpack_require__("6747"),
+    isIndex = __webpack_require__("c098"),
+    isLength = __webpack_require__("b218"),
+    toKey = __webpack_require__("f4d6");
+
+/**
+ * Checks if `path` exists on `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path to check.
+ * @param {Function} hasFunc The function to check properties.
+ * @returns {boolean} Returns `true` if `path` exists, else `false`.
+ */
+function hasPath(object, path, hasFunc) {
+  path = castPath(path, object);
+
+  var index = -1,
+      length = path.length,
+      result = false;
+
+  while (++index < length) {
+    var key = toKey(path[index]);
+    if (!(result = object != null && hasFunc(object, key))) {
+      break;
+    }
+    object = object[key];
+  }
+  if (result || ++index != length) {
+    return result;
+  }
+  length = object == null ? 0 : object.length;
+  return !!length && isLength(length) && isIndex(key, length) &&
+    (isArray(object) || isArguments(object));
+}
+
+module.exports = hasPath;
+
+
+/***/ }),
+
 /***/ "e2cc":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38847,6 +42477,34 @@ module.exports = function (target, src, options) {
 
 /***/ }),
 
+/***/ "e2e4":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isArray = __webpack_require__("6747"),
+    isKey = __webpack_require__("f608"),
+    stringToPath = __webpack_require__("18d8"),
+    toString = __webpack_require__("76dd");
+
+/**
+ * Casts `value` to a path array if it's not one.
+ *
+ * @private
+ * @param {*} value The value to inspect.
+ * @param {Object} [object] The object to query keys on.
+ * @returns {Array} Returns the cast property path array.
+ */
+function castPath(value, object) {
+  if (isArray(value)) {
+    return value;
+  }
+  return isKey(value, object) ? [value] : stringToPath(toString(value));
+}
+
+module.exports = castPath;
+
+
+/***/ }),
+
 /***/ "e32e":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -38854,7 +42512,7 @@ module.exports = function (target, src, options) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppCookieConsent.vue?vue&type=template&id=0b692e5e&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppCookieConsent.vue?vue&type=template&id=0b692e5e&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ClientOnly',[_c('transition',{attrs:{"name":_vm.transitionName}},[(!_vm.hasAcknowleged)?_c('section',[_vm._t("default",null,{"acceptCookieUse":_vm.acceptCookieUse,"declineCookieUse":_vm.declineCookieUse,"declined":_vm.declined,"acknowledged":_vm.hasAcknowleged,"accepted":_vm.accepted})],2):_vm._e()])],1)}
 var staticRenderFns = []
 
@@ -38889,6 +42547,109 @@ var component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var AppCookieConsent = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "e380":
+/***/ (function(module, exports, __webpack_require__) {
+
+var MapCache = __webpack_require__("7b83");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a function that memoizes the result of `func`. If `resolver` is
+ * provided, it determines the cache key for storing the result based on the
+ * arguments provided to the memoized function. By default, the first argument
+ * provided to the memoized function is used as the map cache key. The `func`
+ * is invoked with the `this` binding of the memoized function.
+ *
+ * **Note:** The cache is exposed as the `cache` property on the memoized
+ * function. Its creation may be customized by replacing the `_.memoize.Cache`
+ * constructor with one whose instances implement the
+ * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
+ * method interface of `clear`, `delete`, `get`, `has`, and `set`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to have its output memoized.
+ * @param {Function} [resolver] The function to resolve the cache key.
+ * @returns {Function} Returns the new memoized function.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': 2 };
+ * var other = { 'c': 3, 'd': 4 };
+ *
+ * var values = _.memoize(_.values);
+ * values(object);
+ * // => [1, 2]
+ *
+ * values(other);
+ * // => [3, 4]
+ *
+ * object.a = 2;
+ * values(object);
+ * // => [1, 2]
+ *
+ * // Modify the result cache.
+ * values.cache.set(object, ['a', 'b']);
+ * values(object);
+ * // => ['a', 'b']
+ *
+ * // Replace `_.memoize.Cache`.
+ * _.memoize.Cache = WeakMap;
+ */
+function memoize(func, resolver) {
+  if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  var memoized = function() {
+    var args = arguments,
+        key = resolver ? resolver.apply(this, args) : args[0],
+        cache = memoized.cache;
+
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    var result = func.apply(this, args);
+    memoized.cache = cache.set(key, result) || cache;
+    return result;
+  };
+  memoized.cache = new (memoize.Cache || MapCache);
+  return memoized;
+}
+
+// Expose `MapCache`.
+memoize.Cache = MapCache;
+
+module.exports = memoize;
+
+
+/***/ }),
+
+/***/ "e3f8":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGet = __webpack_require__("656b");
+
+/**
+ * A specialized version of `baseProperty` which supports deep paths.
+ *
+ * @private
+ * @param {Array|string} path The path of the property to get.
+ * @returns {Function} Returns the new accessor function.
+ */
+function basePropertyDeep(path) {
+  return function(object) {
+    return baseGet(object, path);
+  };
+}
+
+module.exports = basePropertyDeep;
+
 
 /***/ }),
 
@@ -40232,6 +43993,52 @@ module.exports = nativeKeysIn;
 
 /***/ }),
 
+/***/ "edfa":
+/***/ (function(module, exports) {
+
+/**
+ * Converts `map` to its key-value pairs.
+ *
+ * @private
+ * @param {Object} map The map to convert.
+ * @returns {Array} Returns the key-value pairs.
+ */
+function mapToArray(map) {
+  var index = -1,
+      result = Array(map.size);
+
+  map.forEach(function(value, key) {
+    result[++index] = [key, value];
+  });
+  return result;
+}
+
+module.exports = mapToArray;
+
+
+/***/ }),
+
+/***/ "ef5d":
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.property` without support for deep paths.
+ *
+ * @private
+ * @param {string} key The key of the property to get.
+ * @returns {Function} Returns the new accessor function.
+ */
+function baseProperty(key) {
+  return function(object) {
+    return object == null ? undefined : object[key];
+  };
+}
+
+module.exports = baseProperty;
+
+
+/***/ }),
+
 /***/ "efb6":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40361,6 +44168,57 @@ module.exports = shortOut;
 
 /***/ }),
 
+/***/ "f4c1":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = bindEvents;
+
+function bindEvents(vueInst, googleMapsInst, events) {
+  events.forEach(function (eventName) {
+    if (vueInst.$gmapOptions.autobindAllEvents || vueInst.$listeners[eventName]) {
+      googleMapsInst.addListener(eventName, function (ev) {
+        vueInst.$emit(eventName, ev);
+      });
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "f4d6":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isSymbol = __webpack_require__("ffd6");
+
+/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0;
+
+/**
+ * Converts `value` to a string key if it's not a string or symbol.
+ *
+ * @private
+ * @param {*} value The value to inspect.
+ * @returns {string|symbol} Returns the key.
+ */
+function toKey(value) {
+  if (typeof value == 'string' || isSymbol(value)) {
+    return value;
+  }
+  var result = (value + '');
+  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+}
+
+module.exports = toKey;
+
+
+/***/ }),
+
 /***/ "f4d9":
 /***/ (function(module, exports) {
 
@@ -40470,6 +44328,42 @@ module.exports = TO_STRING_TAG_SUPPORT ? classofRaw : function (it) {
 
 /***/ }),
 
+/***/ "f608":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isArray = __webpack_require__("6747"),
+    isSymbol = __webpack_require__("ffd6");
+
+/** Used to match property names within property paths. */
+var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
+    reIsPlainProp = /^\w*$/;
+
+/**
+ * Checks if `value` is a property name and not a property path.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {Object} [object] The object to query keys on.
+ * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
+ */
+function isKey(value, object) {
+  if (isArray(value)) {
+    return false;
+  }
+  var type = typeof value;
+  if (type == 'number' || type == 'symbol' || type == 'boolean' ||
+      value == null || isSymbol(value)) {
+    return true;
+  }
+  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) ||
+    (object != null && value in Object(object));
+}
+
+module.exports = isKey;
+
+
+/***/ }),
+
 /***/ "f645":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -40477,7 +44371,7 @@ module.exports = TO_STRING_TAG_SUPPORT ? classofRaw : function (it) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bc5a0b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Pagination/AppPagination.vue?vue&type=template&id=4e7df5a2&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Pagination/AppPagination.vue?vue&type=template&id=4e7df5a2&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{attrs:{"aria-label":"pagination"}},[(_vm.totalPages > 1)?_c('ul',{staticClass:"pagination"},[_c('li',{staticClass:"pagination__item"},[_c('g-link',{staticClass:"pagination__link",class:{
                     'pagination__link--hidden': !_vm.previousPage,
                 },attrs:{"aria-label":"Previous Page","to":_vm.link(_vm.previousPage)}},[_vm._t("previous-text",[_vm._v("«")])],2)],1),_vm._l((_vm.pages),function(page,key){return _c('li',{key:key,staticClass:"pagination__item"},[_c(page == '...' ? 'span' : 'g-link',{tag:"component",staticClass:"pagination__link",class:{
@@ -40865,6 +44759,45 @@ module.exports = baseMerge;
 
 /***/ }),
 
+/***/ "f9ce":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseProperty = __webpack_require__("ef5d"),
+    basePropertyDeep = __webpack_require__("e3f8"),
+    isKey = __webpack_require__("f608"),
+    toKey = __webpack_require__("f4d6");
+
+/**
+ * Creates a function that returns the value at `path` of a given object.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Util
+ * @param {Array|string} path The path of the property to get.
+ * @returns {Function} Returns the new accessor function.
+ * @example
+ *
+ * var objects = [
+ *   { 'a': { 'b': 2 } },
+ *   { 'a': { 'b': 1 } }
+ * ];
+ *
+ * _.map(objects, _.property('a.b'));
+ * // => [2, 1]
+ *
+ * _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');
+ * // => [1, 2]
+ */
+function property(path) {
+  return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
+}
+
+module.exports = property;
+
+
+/***/ }),
+
 /***/ "fa21":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41073,6 +45006,187 @@ module.exports = function (it) {
   return IndexedObject(requireObjectCoercible(it));
 };
 
+
+/***/ }),
+
+/***/ "fd24":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = mapElement;
+
+var _bindEvents = _interopRequireDefault(__webpack_require__("f4c1"));
+
+var _bindProps = __webpack_require__("227e");
+
+var _mapElement = _interopRequireDefault(__webpack_require__("2cb2"));
+
+var _mappedPropsToVueProps = _interopRequireDefault(__webpack_require__("9767"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+/**
+ *
+ * @param {Object} options
+ * @param {Object} options.mappedProps - Definitions of props
+ * @param {Object} options.mappedProps.PROP.type - Value type
+ * @param {Boolean} options.mappedProps.PROP.twoWay
+ *  - Whether the prop has a corresponding PROP_changed
+ *   event
+ * @param {Boolean} options.mappedProps.PROP.noBind
+ *  - If true, do not apply the default bindProps / bindEvents.
+ * However it will still be added to the list of component props
+ * @param {Object} options.props - Regular Vue-style props.
+ *  Note: must be in the Object form because it will be
+ *  merged with the `mappedProps`
+ *
+ * @param {Object} options.events - Google Maps API events
+ *  that are not bound to a corresponding prop
+ * @param {String} options.name - e.g. `polyline`
+ * @param {=> String} options.ctr - constructor, e.g.
+ *  `google.maps.Polyline`. However, since this is not
+ *  generally available during library load, this becomes
+ *  a function instead, e.g. () => google.maps.Polyline
+ *  which will be called only after the API has been loaded
+ * @param {(MappedProps, OtherVueProps) => Array} options.ctrArgs -
+ *   If the constructor in `ctr` needs to be called with
+ *   arguments other than a single `options` object, e.g. for
+ *   GroundOverlay, we call `new GroundOverlay(url, bounds, options)`
+ *   then pass in a function that returns the argument list as an array
+ *
+ * Otherwise, the constructor will be called with an `options` object,
+ *   with property and values merged from:
+ *
+ *   1. the `options` property, if any
+ *   2. a `map` property with the Google Maps
+ *   3. all the properties passed to the component in `mappedProps`
+ * @param {Object => Any} options.beforeCreate -
+ *  Hook to modify the options passed to the initializer
+ * @param {(options.ctr, Object) => Any} options.afterCreate -
+ *  Hook called when
+ *
+ */
+
+/**
+ * Custom assert for local validation
+ * */
+// TODO: All disabled eslint rules must be analyzed after
+// eslint-disable-next-line no-underscore-dangle -- old style should be analyzed
+function _assert(v, message) {
+  if (!v) throw new Error(message);
+}
+
+function mapElement(providedOptions) {
+  var mappedProps = providedOptions.mappedProps,
+      name = providedOptions.name,
+      ctr = providedOptions.ctr,
+      ctrArgs = providedOptions.ctrArgs,
+      events = providedOptions.events,
+      beforeCreate = providedOptions.beforeCreate,
+      afterCreate = providedOptions.afterCreate,
+      props = providedOptions.props,
+      rest = _objectWithoutProperties(providedOptions, ["mappedProps", "name", "ctr", "ctrArgs", "events", "beforeCreate", "afterCreate", "props"]);
+
+  var promiseName = "$".concat(name, "Promise");
+  var instanceName = "$".concat(name, "Object");
+
+  _assert(!(rest.props instanceof Array), '`props` should be an object, not Array');
+
+  return _objectSpread({}, typeof GENERATE_DOC !== 'undefined' ? {
+    $vgmOptions: providedOptions
+  } : {}, {
+    mixins: [_mapElement.default],
+    props: _objectSpread({}, props, {}, (0, _mappedPropsToVueProps.default)(mappedProps)),
+    render: function render() {
+      return '';
+    },
+    provide: function provide() {
+      var _this = this;
+
+      var promise = this.$mapPromise.then(function (map) {
+        // Infowindow needs this to be immediately available
+        _this.$map = map; // Initialize the maps with the given options
+
+        var initialOptions = _objectSpread({}, _this.options, {
+          map: map
+        }, (0, _bindProps.getPropsValues)(_this, mappedProps)); // don't use delete keyword in order to create a more predictable code for the engine
+
+
+        var extraOptions = initialOptions.options,
+            finalOptions = _objectWithoutProperties(initialOptions, ["options"]); // delete the extra options
+
+
+        var options = finalOptions;
+
+        if (beforeCreate) {
+          var result = beforeCreate.bind(_this)(options);
+
+          if (result instanceof Promise) {
+            return result.then(function () {
+              return {
+                options: options
+              };
+            });
+          }
+        }
+
+        return {
+          options: options
+        };
+      }).then(function (_ref) {
+        var _Function$prototype$b;
+
+        var options = _ref.options;
+        var ConstructorObject = ctr(); // https://stackoverflow.com/questions/1606797/use-of-apply-with-new-operator-is-this-possible
+
+        _this[instanceName] = ctrArgs ? new ((_Function$prototype$b = Function.prototype.bind).call.apply(_Function$prototype$b, [ConstructorObject, null].concat(_toConsumableArray(ctrArgs(options, (0, _bindProps.getPropsValues)(_this, props || {}))))))() : new ConstructorObject(options);
+        (0, _bindProps.bindProps)(_this, _this[instanceName], mappedProps);
+        (0, _bindEvents.default)(_this, _this[instanceName], events);
+
+        if (afterCreate) {
+          afterCreate.bind(_this)(_this[instanceName]);
+        }
+
+        return _this[instanceName];
+      });
+      this[promiseName] = promise;
+      return _defineProperty({}, promiseName, promise);
+    },
+    destroyed: function destroyed() {
+      // Note: not all Google Maps components support maps
+      if (this[instanceName] && this[instanceName].setMap) {
+        this[instanceName].setMap(null);
+      }
+    }
+  }, rest);
+}
 
 /***/ }),
 
