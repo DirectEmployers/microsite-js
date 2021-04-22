@@ -29,12 +29,11 @@ export function api() {
     })
 }
 
-export function searchService(input, siteConfig) {
-    const source = kebabCase(siteConfig.source)
+export function searchService(input, searchSource) {
+    const source = kebabCase(searchSource)
 
-    return api().post(`${source}/search`, {
-        data: input,
-        config: siteConfig,
+    return api().get(`${source}/search`, {
+        params: input,
     })
 }
 

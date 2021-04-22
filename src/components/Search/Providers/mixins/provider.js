@@ -302,7 +302,7 @@ export default {
             }
             return this.service(
                 {...this.filterInput(this.input), ...this.getExtraData()},
-                this.siteConfig
+                this.siteConfig.source
             )
                 .then(resp => {
                     const data = resp.data || {}
