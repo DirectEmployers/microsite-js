@@ -1,6 +1,7 @@
 <template>
     <section>
         <GmapMap
+            ref="map"
             v-if="!error"
             v-bind="$attrs"
             :style="mapStyles"
@@ -138,13 +139,14 @@ export default {
                 this.error = err
             }
         }
-        // if a location was given center to the first available job to give
-        // a better center for the current search results ( TODO - find a better way to do this?)
-        if (this.payload.location && this.jobs.length > 0) {
-            this.positionCenter = this.parseGeoLocation(
-                this.jobs[0].GeoLocation
+        // if location was given, position map to the first job in the area.
+        if (this.$refs.map && this.payload.location && this.jobs.length > 0) {
+            this.$refs.map.panTo(
+                this.parseGeoLocation(
+                    this.jobs[0].GeoLocation
+                )
             )
-            this.positionZoom = 5
+            this.positionZoom = 6
         }
     },
     computed: {
