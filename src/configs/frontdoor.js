@@ -1,10 +1,10 @@
 const config = {
     buids: [48303],
-    source: "solr", //solr or google-talent
+    source: "google-talent", //solr or google-talent
     s3Folder: "frontdoor-jobs",
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
-    tenant_uuid: "50a2f592-698d-441c-b163-5ad75e3c957a",
-    company_uuids: ["df1a3d01-7456-4083-9f8a-0c4d7bee4e7b"],
+    tenant_uuid: process.env.GRIDSOME_GOOGLE_TALENT_TENANT,
+    company_uuids: [process.env.GRIDSOME_GOOGLE_TALENT_COMPANY],
     client_events: true, // Should be extracted to a separate config at some point
     num_items: 2,
     featured_jobs: {
@@ -42,9 +42,13 @@ const config = {
         },
         {
             name: "location",
-            key: "city_state",
+            key: {
+                solr: "city",
+                google_talent: "city_state"
+            },
             display: "City",
         },
+
         {
             name: "title",
             display: "Job Title",
