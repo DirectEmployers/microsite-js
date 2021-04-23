@@ -1,8 +1,8 @@
 <template>
     <AppJobMap
         :zoom="2"
-        :site-config="queryConfig"
-        :center="{lat:20, lng: 0}"
+        :site-config="$siteConfig"
+        :center="{lat: 20, lng: 0}"
         map-styles="width: 100%; height:500px;"
     >
         <template v-slot:footer="{done, error}">
@@ -17,12 +17,6 @@ import AppJobMap from "~/components/Search/AppJobMap"
 export default {
     components: {
         AppJobMap,
-    },
-    data() {
-        return {
-            queryConfig: {...this.$siteConfig},/*  */
-            currentActiveWindowIndex: null,
-        }
     },
 }
 </script>

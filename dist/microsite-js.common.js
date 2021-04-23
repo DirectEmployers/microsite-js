@@ -31267,18 +31267,21 @@ module.exports = setCacheAdd;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppJobMap.vue?vue&type=template&id=729f3507&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppJobMap.vue?vue&type=template&id=335653d2&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[(!_vm.error)?_c('GmapMap',_vm._b({ref:"map",style:(_vm.mapStyles),attrs:{"zoom":_vm.positionZoom,"center":_vm.positionCenter,"options":_vm.jobMapOptions}},'GmapMap',_vm.$attrs,false),[_c('GmapCluster',_vm._b({},'GmapCluster',_vm.jobClusterOptions,false),[_vm._l((_vm.markers),function(m,index){return _c('GmapMarker',{key:index,attrs:{"clickable":true,"position":m.position},on:{"click":function($event){return _vm.search(m.job)},"mouseout":function($event){_vm.infoWindow.open = false},"mouseover":function($event){return _vm.setWindowInfo(m, index)}}})}),_c('GmapInfoWindow',{attrs:{"opened":_vm.infoWindow.open,"options":_vm.infoWindow.options,"position":_vm.infoWindow.position},on:{"click":function($event){return _vm.search(_vm.infoWindow.job)}}}),_vm._t("default",null,{"done":_vm.done,"error":_vm.error})],2)],1):_vm._e(),_vm._t("footer",null,{"error":_vm.error,"done":_vm.done})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppJobMap.vue?vue&type=template&id=729f3507&
+// CONCATENATED MODULE: ./src/components/Search/AppJobMap.vue?vue&type=template&id=335653d2&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
+var es_array_includes = __webpack_require__("caad");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
@@ -31300,6 +31303,10 @@ var runtime = __webpack_require__("96cf");
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
 var asyncToGenerator = __webpack_require__("1da1");
+
+// EXTERNAL MODULE: ./node_modules/lodash/get.js
+var get = __webpack_require__("9b02");
+var get_default = /*#__PURE__*/__webpack_require__.n(get);
 
 // EXTERNAL MODULE: ./node_modules/lodash/omitBy.js
 var omitBy = __webpack_require__("dd65");
@@ -31378,6 +31385,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 
 
+
 //
 //
 //
@@ -31411,6 +31419,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 //
 //
 //
+
 
 
 
@@ -31467,7 +31476,6 @@ var component = Object(componentNormalizer["a" /* default */])(
       f["visible"] = false;
     });
     return {
-      jobs: [],
       counts: {},
       done: false,
       markers: [],
@@ -31477,7 +31485,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       payload: cloneDeep_default()(this.searchData),
       positionCenter: this.$attrs.center,
       queryConfig: {
-        source: services_search["b" /* SOLR */],
+        source: queryConfig.source,
         buids: queryConfig.buids || [],
         tenant_uuid: queryConfig.tenant_uuid || null,
         company_uuids: queryConfig.company_uuids || [],
@@ -31502,7 +31510,7 @@ var component = Object(componentNormalizer["a" /* default */])(
     var _this = this;
 
     return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var data, response, _ref, pagination, jobs;
+      var data, response, _ref, pagination, jobs, meta;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -31514,7 +31522,7 @@ var component = Object(componentNormalizer["a" /* default */])(
             case 2:
               data = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, _this.payload), {
                 page: 1,
-                num_items: 200
+                num_items: 100
               });
 
             case 3:
@@ -31529,9 +31537,9 @@ var component = Object(componentNormalizer["a" /* default */])(
 
             case 7:
               response = _context.sent;
-              _ref = response.data || {}, pagination = _ref.pagination, jobs = _ref.jobs;
+              _ref = response.data || {}, pagination = _ref.pagination, jobs = _ref.jobs, meta = _ref.meta;
 
-              _this.addMarkers(jobs || []);
+              _this.addMarkers(jobs || [], meta.source);
 
               _this.done = !pagination.has_more_pages;
               _this.hasMore = !_this.done;
@@ -31551,8 +31559,8 @@ var component = Object(componentNormalizer["a" /* default */])(
 
             case 21:
               // if location was given, position map to the first job in the area.
-              if (_this.$refs.map && _this.payload.location && _this.jobs.length > 0) {
-                _this.$refs.map.panTo(_this.parseGeoLocation(_this.jobs[0].GeoLocation));
+              if (_this.$refs.map && _this.payload.location && _this.markers.length > 0) {
+                _this.$refs.map.panTo(_this.markers[0].job.coords);
 
                 _this.positionZoom = 6;
               }
@@ -31588,10 +31596,10 @@ var component = Object(componentNormalizer["a" /* default */])(
         return Object(helpers["a" /* blank */])(v);
       });
       payload.page = 1;
-      payload.location = job.location_exact;
+      payload.location = job.location;
 
       if (payload.r) {
-        payload.coords = job.GeoLocation;
+        payload.coords = job.coords;
       }
 
       this.$router.push({
@@ -31599,24 +31607,23 @@ var component = Object(componentNormalizer["a" /* default */])(
         query: payload
       }).catch(function (err) {});
     },
-    getJobWindowLabel: function getJobWindowLabel(job) {
-      var count = this.counts[job.location_exact] || 1;
+    getJobWindowLabel: function getJobWindowLabel(location) {
+      var count = this.counts[location] || 1;
       var jobsLabel = "Jobs";
 
       if (count == 1) {
         jobsLabel = "Job";
       }
 
-      return "".concat(job.location_exact, ": ").concat(count, " ").concat(jobsLabel);
+      return "".concat(location, ": ").concat(count, " ").concat(jobsLabel);
     },
     makeMarker: function makeMarker(job) {
-      var coords = this.parseGeoLocation(job.GeoLocation);
       return new google.maps.Marker({
-        position: new google.maps.LatLng(coords.lat, coords.lng),
+        position: job.coords,
         job: job
       });
     },
-    parseGeoLocation: function parseGeoLocation(geolocation) {
+    coordinatesStringToObject: function coordinatesStringToObject(geolocation) {
       if (Object(helpers["a" /* blank */])(geolocation)) {
         return false;
       }
@@ -31627,14 +31634,45 @@ var component = Object(componentNormalizer["a" /* default */])(
         lng: parseFloat(coords[1])
       };
     },
-    addMarkers: function addMarkers(jobs) {
+    deriveJobLocation: function deriveJobLocation(job, source) {
+      var location = job.location_exact;
+
+      if (source == services_search["a" /* GOOGLE_TALENT */]) {
+        var locationData = get_default()(job.job, "derivedInfo.locations[0].postalAddress", {});
+        var city = get_default()(locationData, "locality");
+        var state = get_default()(locationData, "administrativeArea");
+        var country = get_default()(job.job, "customAttributes.country_short.stringValues[0]");
+
+        if (["USA", "CAN"].includes(country)) {
+          location = "".concat(city, ", ").concat(state);
+        } else {
+          location = "".concat(city, ", ").concat(country);
+        }
+      }
+
+      return location;
+    },
+    deriveJobCoords: function deriveJobCoords(job, source) {
+      var coords = null;
+
+      if (source == services_search["a" /* GOOGLE_TALENT */]) {
+        coords = get_default()(job.job, "derivedInfo.locations[0].latLng");
+        coords = this.coordinatesStringToObject("".concat(coords["latitude"], ",").concat(coords["longitude"]));
+      } else {
+        coords = this.coordinatesStringToObject(job.GeoLocation);
+      }
+
+      return coords;
+    },
+    addMarkers: function addMarkers(jobs, source) {
       var _this2 = this;
 
       jobs.forEach(function (job) {
-        if (job.GeoLocation) {
-          _this2.counts[job.location_exact] = (_this2.counts[job.location_exact] || 0) + 1;
+        job.coords = _this2.deriveJobCoords(job, source);
 
-          _this2.jobs.push(job);
+        if (job.coords) {
+          job.location = _this2.deriveJobLocation(job, source);
+          _this2.counts[job.location] = (_this2.counts[job.location] || 0) + 1;
 
           _this2.markers.push(_this2.makeMarker(job));
         }
@@ -31642,7 +31680,7 @@ var component = Object(componentNormalizer["a" /* default */])(
     },
     setWindowInfo: function setWindowInfo(marker, index) {
       this.infoWindow.position = marker.position;
-      this.infoWindow.options.content = this.getJobWindowLabel(marker.job); //check if its the same marker that was selected if yes toggle
+      this.infoWindow.options.content = this.getJobWindowLabel(marker.job.location); //check if its the same marker that was selected if yes toggle
 
       if (this.infoWindow.currentIndex == index) {
         this.infoWindow.open = !this.infoWindow.open;
@@ -36504,8 +36542,221 @@ var provinces = {
   YT: "Yukon Territory"
 };
 var countries = {
+  ABW: "Aruba",
+  AFG: "Afghanistan",
+  AGO: "Angola",
+  AIA: "Anguilla",
+  ALB: "Albania",
+  AND: "Andorra",
+  ARE: "United Arab Emirates",
+  ARG: "Argentina",
+  ARM: "Armenia",
+  ASI: "Multiple Asian Countries",
+  ASM: "American Samoa",
+  ATA: "Antartica",
+  ATG: "Antigua and Barbuda",
+  AUS: "Australia",
+  AUT: "Austria",
+  AZE: "Azerbaijan",
+  BDI: "Burundi",
+  BEL: "Belgium",
+  BEN: "Benin",
+  BFA: "Burkina Faso",
+  BGD: "Bangladesh",
+  BGR: "Bulgaria",
+  BHR: "Bahrain",
+  BHS: "Bahamas",
+  BIH: "Bosnia",
+  BLR: "Belarus",
+  BLZ: "Belize",
+  BMU: "Bermuda",
+  BOL: "Bolivia",
+  BRA: "Brazil",
+  BRB: "Barbados",
+  BRN: "Brunei Darussalam",
+  BTN: "Bhutan",
+  BWA: "Botswana",
+  CAF: "Central African Republic",
+  CAN: "Canada",
+  CHE: "Switzerland",
+  CHL: "Chile",
+  CHN: "China",
+  CIV: "Cote D'Ivoire",
+  CMR: "Cameroon",
+  COD: "Congo (The Democratic Republic of the)",
+  COG: "Congo",
+  COK: "Cook Islands",
+  COL: "Colombia",
+  COM: "Comoros",
+  CPV: "Cape Verde",
+  CRI: "Costa Rica",
+  CUB: "Cuba",
+  CYM: "Cayman Islands",
+  CYP: "Cyprus",
+  CZE: "Czech Republic",
+  DEU: "Germany",
+  DJI: "Djibouti",
+  DMA: "Dominica",
+  DNK: "Denmark",
+  DOM: "Dominican Republic",
+  DZA: "Algeria",
+  ECU: "Ecuador",
+  EGY: "Egypt",
+  ERI: "Eritrea",
+  ESH: "Western Sahara",
+  ESP: "Spain",
+  EST: "Estonia",
+  ETH: "Ethiopia",
+  ETM: "East Timor",
+  EUR: "Multiple European Countries",
+  FIN: "Finland",
+  FJI: "Fiji",
+  FLK: "Falkland Islands",
+  FRA: "France",
+  FRO: "Faroe Islands",
+  FSM: "Micronesia",
+  GAB: "Gabon",
+  GBR: "United Kingdom",
+  GEO: "Georgia",
+  GHA: "Ghana",
+  GIB: "Gibraltar",
+  GIN: "Guinea",
+  GLP: "Guadeloupe",
+  GMB: "Gambia",
+  GNB: "Guinea-bissau",
+  GNQ: "Equatorial Guinea",
+  GRC: "Greece",
+  GRD: "Grenada",
+  GRL: "Greenland",
+  GTM: "Guatemala",
+  GUF: "French Guiana",
+  GUY: "Guyana",
+  HKG: "Hong Kong",
+  HND: "Honduras",
+  HRV: "Croatia",
+  HTI: "Haiti",
+  HUN: "Hungary",
+  IDN: "Indonesia",
+  IND: "India",
+  IRL: "Ireland",
+  IRN: "Iran",
+  IRQ: "Iraq",
+  ISL: "Iceland",
+  ISR: "Israel",
+  ITA: "Italy",
+  JAM: "Jamaica",
+  JOR: "Jordan",
+  JPN: "Japan",
+  KAZ: "Kazakhstan",
+  KEN: "Kenya",
+  KGZ: "Kyrgyzstan",
+  KHM: "Cambodia",
+  KNA: "Saint Kitts and Nevis",
+  KOR: "South Korea",
+  KWT: "Kuwait",
+  LAO: "Laos",
+  LBN: "Lebanon",
+  LBR: "Liberia",
+  LBY: "Libyan Arab Jamahiriya",
+  LIE: "Liechtenstein",
+  LKA: "Sri Lanka",
+  LSO: "Lesotho",
+  LTU: "Lithuania",
+  LUX: "Luxembourg ",
+  LVA: "Latvia",
+  MAC: "Macau",
+  MAR: "Morocco",
+  MCO: "Monaco",
+  MDA: "Moldova",
+  MDG: "Madagascar",
+  MDV: "Maldives",
+  MEX: "Mexico",
+  MHL: "Marshall Islands",
+  MKD: "Macedonia",
+  MLI: "Mali",
+  MLT: "Malta",
+  MMR: "Myanmar",
+  MNG: "Mongolia",
+  MNP: "Northern Mariana Islands",
+  MOZ: "Mozambique",
+  MRT: "Mauritania",
+  MSR: "Montserrat",
+  MTQ: "Martinique",
+  MUS: "Mauritius",
+  MWI: "Malawi",
+  MYS: "Malaysia",
+  NAM: "Namibia",
+  NER: "Niger",
+  NGA: "Nigeria",
+  NIC: "Nicaragua",
+  NLD: "Netherlands",
+  NOR: "Norway",
+  NPL: "Nepal",
+  NZL: "New Zealand",
+  OMN: "Oman",
+  PAK: "Pakistan",
+  PAL: "Palestine",
+  PAN: "Panama",
+  PER: "Peru",
+  PHL: "Philippines",
+  PLW: "Palau",
+  PNG: "Papua New Guinea",
+  POL: "Poland",
+  PRK: "North Korea",
+  PRT: "Portugal",
+  PRY: "Paraguay",
+  PYF: "French Polynesia",
+  QAT: "Qatar",
+  REU: "Reunion Island",
+  ROM: "Romania",
+  RUS: "Russia",
+  RWA: "Rwanda",
+  SAU: "Saudi Arabia",
+  SCG: "Serbia and Montenegro",
+  SDN: "Sudan",
+  SEN: "Senegal",
+  SGP: "Singapore",
+  SLE: "Sierra Leone",
+  SLV: "El Salvador",
+  SMR: "San Marino",
+  SOM: "Somalia",
+  STP: "Sao Tome and Principe",
+  SUR: "Suriname",
+  SVK: "Slovak Republic",
+  SVN: "Slovenia",
+  SWE: "Sweden",
+  SWZ: "Swaziland",
+  SYC: "Seychelles",
+  SYR: "Syria",
+  TCA: "Turks and Caicos Islands",
+  TCD: "Chad",
+  TGO: "Togo",
+  THA: "Thailand",
+  TJK: "Tajikistan",
+  TKM: "Turkmenistan",
+  TTO: "Trinidad and Tobago",
+  TUN: "Tunisia",
+  TUR: "Turkey",
+  TUV: "Tuvalu",
+  TWN: "Taiwan",
+  TZA: "Tanzania",
+  UGA: "Uganda",
+  UKR: "Ukraine",
+  UMI: "US Minor Outlying Islands",
+  URY: "Uruguay",
   USA: "United States",
-  CAN: "Canada"
+  UZB: "Uzbekistan",
+  VAT: "The Vatican",
+  VEN: "Venezuela",
+  VGB: "Virgin Islands (British)",
+  VIR: "Virgin Islands (US)",
+  VNM: "Vietnam",
+  WSM: "Samoa",
+  YEM: "Yemen",
+  YUG: "Yugoslavia",
+  ZAF: "South Africa",
+  ZMB: "Zambia",
+  ZWE: "Zimbabwe"
 };
 /**
  * Remove country abbreviation from end of given value.
