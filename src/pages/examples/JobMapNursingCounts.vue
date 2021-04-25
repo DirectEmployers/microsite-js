@@ -1,16 +1,16 @@
 <template>
     <GmapMap
-        :zoom="4"
+        :zoom="6"
         ref="map"
         :site-config="$siteConfig"
         :center="{
-            lat: 39.598888110432426,
-            lng: -100.74267721459391,
+            lat: 44.70875801239996,
+            lng: -96.27652374771256,
         }"
         style="width: 100%; height:500px;"
         :options="{disableDefaultUI: true}"
     >
-        <section :key="place.name" v-for="(place, placeIndex) in places">
+        <section :key="placeIndex" v-for="(place, placeIndex) in places">
             <GmapMarker
                 :clickable="true"
                 :position="place.position"
@@ -51,7 +51,7 @@ export default {
         this.places.forEach(place => {
             searchService(
                 {
-                    jobfunction: place.jobfunction,
+                    jobfunction: "Nursing",
                     location: `${place.position.lat},${place.position.lng}`,
                 },
                 sanfordConfig
@@ -68,7 +68,6 @@ export default {
             currentActiveWindowIndex: null,
             places: [
                 {
-                    jobfunction: "Nursing",
                     name: "Nursing Jobs",
                     position: {
                         lat: 42.7791745407101,
@@ -77,22 +76,39 @@ export default {
                     location: "Vermillion, SD",
                 },
                 {
-                    jobfunction: "Customer Support Services",
-                    name: "Customer Support Services Jobs",
+                    name: "Nursing Jobs",
                     position: {
-                        lat: 32.77556621844668,
-                        lng: -96.80228425924868,
+                        lat: 43.545205221236564,
+                        lng: -96.7365618362979,
                     },
-                    location: "Dallas, TX",
+                    location: "Sioux Falls, SD",
                 },
                 {
-                    jobfunction: "Administrative Support",
-                    name: "Administrative Support Jobs",
+                    jobfunction: "Nursing",
+                    name: "Nursing Jobs",
                     position: {
                         lat: 46.86456446736283,
                         lng: -96.72573763674964,
                     },
                     location: "Fargo, ND",
+                },
+                {
+                    jobfunction: "Nursing",
+                    name: "Nursing Jobs",
+                    position: {
+                        lat: 44.70875801239996,
+                        lng: -96.27652374771256,
+                    },
+                    location: "Canby, MN",
+                },
+                {
+                    jobfunction: "Nursing",
+                    name: "Nursing Jobs",
+                    position: {
+                        lat: 43.18160603394354,
+                        lng: -95.85598582016961,
+                    },
+                    location: "Sheldon, IA",
                 },
             ],
         }
