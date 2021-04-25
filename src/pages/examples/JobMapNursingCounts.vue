@@ -33,7 +33,7 @@
                 <div
                     class="flex flex-col font-bold justify-center items-center"
                 >
-                    {{ place.name }}
+                    Nursing Jobs
                 </div>
                 <p>{{ place.location }}</p>
                 <span class="font-bold" v-if="place.total_near_jobs">
@@ -68,7 +68,6 @@ export default {
             currentActiveWindowIndex: null,
             places: [
                 {
-                    name: "Nursing Jobs",
                     position: {
                         lat: 42.7791745407101,
                         lng: -96.92934467394151,
@@ -76,7 +75,6 @@ export default {
                     location: "Vermillion, SD",
                 },
                 {
-                    name: "Nursing Jobs",
                     position: {
                         lat: 43.545205221236564,
                         lng: -96.7365618362979,
@@ -84,8 +82,6 @@ export default {
                     location: "Sioux Falls, SD",
                 },
                 {
-                    jobfunction: "Nursing",
-                    name: "Nursing Jobs",
                     position: {
                         lat: 46.86456446736283,
                         lng: -96.72573763674964,
@@ -93,8 +89,6 @@ export default {
                     location: "Fargo, ND",
                 },
                 {
-                    jobfunction: "Nursing",
-                    name: "Nursing Jobs",
                     position: {
                         lat: 44.70875801239996,
                         lng: -96.27652374771256,
@@ -102,8 +96,6 @@ export default {
                     location: "Canby, MN",
                 },
                 {
-                    jobfunction: "Nursing",
-                    name: "Nursing Jobs",
                     position: {
                         lat: 43.18160603394354,
                         lng: -95.85598582016961,
