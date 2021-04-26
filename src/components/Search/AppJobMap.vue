@@ -39,6 +39,7 @@ import {blank} from "../../services/helpers"
 import {searchService, GOOGLE_TALENT} from "../../services/search"
 import GmapCluster from "gmap-vue/dist/components/cluster"
 import GmapInfoWindow from "gmap-vue/dist/components/info-window"
+
 export default {
     props: {
         searchData: {
@@ -93,6 +94,7 @@ export default {
             counts: {},
             done: false,
             markers: [],
+            jobs: [],
             error: false,
             hasMore: true,
             positionZoom: this.$attrs.zoom,
@@ -130,7 +132,7 @@ export default {
             try {
                 let response = await this.service(data)
                 let {pagination, jobs, meta} = response.data || {}
-                this.addMarkers(jobs || [], meta.source)
+                this.createMarkers(jobs || [], meta.source)
                 this.done = !pagination.has_more_pages
                 this.hasMore = !this.done
                 data.page += 1
@@ -139,6 +141,7 @@ export default {
                 this.error = err
             }
         }
+        this.displayMarkers()
         // if location was given, position map to the first job in the area.
         if (
             this.$refs.map &&
@@ -241,16 +244,19 @@ export default {
             }
             return coords
         },
-        addMarkers(jobs, source) {
+        createMarkers(jobs, source) {
             jobs.forEach(job => {
                 job.coords = this.deriveJobCoords(job, source)
                 if (job.coords) {
                     job.location = this.deriveJobLocation(job, source)
                     this.counts[job.location] =
                         (this.counts[job.location] || 0) + 1
-                    this.markers.push(this.makeMarker(job))
+                    this.jobs.push(this.makeMarker(job))
                 }
             })
+        },
+        displayMarkers() {
+            this.markers = this.jobs
         },
         setWindowInfo(marker, index) {
             this.infoWindow.position = marker.position
