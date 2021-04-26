@@ -1,6 +1,7 @@
 <template>
     <section>
         <GmapMap
+            ref="map"
             v-if="!error"
             v-bind="$attrs"
             :style="mapStyles"
@@ -24,16 +25,18 @@
                     :position="infoWindow.position"
                     @click="search(infoWindow.job)"
                 ></GmapInfoWindow>
+                <slot :done="done" :error="error"></slot>
             </GmapCluster>
         </GmapMap>
         <slot name="footer" :error="error" :done="done"></slot>
     </section>
 </template>
 <script>
+import get from "lodash/get"
 import omitBy from "lodash/omitBy"
 import clone from "lodash/cloneDeep"
 import {blank} from "../../services/helpers"
-import {searchService, SOLR} from "../../services/search"
+import {searchService, GOOGLE_TALENT} from "../../services/search"
 import GmapCluster from "gmap-vue/dist/components/cluster"
 import GmapInfoWindow from "gmap-vue/dist/components/info-window"
 export default {
@@ -87,18 +90,16 @@ export default {
         })
 
         return {
-            jobs: [],
             counts: {},
             done: false,
             markers: [],
-            google: null,
             error: false,
             hasMore: true,
             positionZoom: this.$attrs.zoom,
             payload: clone(this.searchData),
             positionCenter: this.$attrs.center,
             queryConfig: {
-                source: SOLR,
+                source: queryConfig.source,
                 buids: queryConfig.buids || [],
                 tenant_uuid: queryConfig.tenant_uuid || null,
                 company_uuids: queryConfig.company_uuids || [],
@@ -123,13 +124,13 @@ export default {
         await this.$gmapApiPromiseLazy()
         let data = {
             ...this.payload,
-            ...{page: 1, num_items: 200},
+            ...{page: 1, num_items: 100}, // google only allows 100 jobs at a time.
         }
         while (this.hasMore) {
             try {
                 let response = await this.service(data)
-                let {pagination, jobs} = response.data || {}
-                this.addMarkers(jobs || [])
+                let {pagination, jobs, meta} = response.data || {}
+                this.addMarkers(jobs || [], meta.source)
                 this.done = !pagination.has_more_pages
                 this.hasMore = !this.done
                 data.page += 1
@@ -138,13 +139,14 @@ export default {
                 this.error = err
             }
         }
-        // if a location was given center to the first available job to give
-        // a better center for the current search results ( TODO - find a better way to do this?)
-        if (this.payload.location && this.jobs.length > 0) {
-            this.positionCenter = this.parseGeoLocation(
-                this.jobs[0].GeoLocation
-            )
-            this.positionZoom = 5
+        // if location was given, position map to the first job in the area.
+        if (
+            this.$refs.map &&
+            this.payload.location &&
+            this.markers.length > 0
+        ) {
+            this.$refs.map.panTo(this.markers[0].job.coords)
+            this.positionZoom = 6
         }
     },
     computed: {
@@ -170,9 +172,9 @@ export default {
         search(job) {
             let payload = omitBy(this.payload, (v, k) => blank(v))
             payload.page = 1
-            payload.location = job.location_exact
-            if(payload.r){
-                payload.coords = job.GeoLocation
+            payload.location = job.location
+            if (payload.r) {
+                payload.coords = job.coords
             }
             this.$router
                 .push({
@@ -181,22 +183,21 @@ export default {
                 })
                 .catch(err => {})
         },
-        getJobWindowLabel(job) {
-            let count = this.counts[job.location_exact] || 1
+        getJobWindowLabel(location) {
+            let count = this.counts[location] || 1
             let jobsLabel = "Jobs"
             if (count == 1) {
                 jobsLabel = "Job"
             }
-            return `${job.location_exact}: ${count} ${jobsLabel}`
+            return `${location}: ${count} ${jobsLabel}`
         },
         makeMarker(job) {
-            let coords = this.parseGeoLocation(job.GeoLocation)
             return new google.maps.Marker({
-                position: new google.maps.LatLng(coords.lat, coords.lng),
+                position: job.coords,
                 job: job,
             })
         },
-        parseGeoLocation(geolocation) {
+        coordinatesStringToObject(geolocation) {
             if (blank(geolocation)) {
                 return false
             }
@@ -206,19 +207,56 @@ export default {
                 lng: parseFloat(coords[1]),
             }
         },
-        addMarkers(jobs) {
+        deriveJobLocation(job, source) {
+            let location = job.location_exact
+            if (source == GOOGLE_TALENT) {
+                let locationData = get(
+                    job.job,
+                    "derivedInfo.locations[0].postalAddress",
+                    {}
+                )
+                let city = get(locationData, "locality")
+                let state = get(locationData, "administrativeArea")
+                let country = get(
+                    job.job,
+                    "customAttributes.country_short.stringValues[0]"
+                )
+                if (["USA", "CAN"].includes(country)) {
+                    location = `${city}, ${state}`
+                } else {
+                    location = `${city}, ${country}`
+                }
+            }
+            return location
+        },
+        deriveJobCoords(job, source) {
+            let coords = null
+            if (source == GOOGLE_TALENT) {
+                coords = get(job.job, "derivedInfo.locations[0].latLng")
+                coords = this.coordinatesStringToObject(
+                    `${coords["latitude"]},${coords["longitude"]}`
+                )
+            } else {
+                coords = this.coordinatesStringToObject(job.GeoLocation)
+            }
+            return coords
+        },
+        addMarkers(jobs, source) {
             jobs.forEach(job => {
-                if (job.GeoLocation) {
-                    this.counts[job.location_exact] =
-                        (this.counts[job.location_exact] || 0) + 1
-                    this.jobs.push(job)
+                job.coords = this.deriveJobCoords(job, source)
+                if (job.coords) {
+                    job.location = this.deriveJobLocation(job, source)
+                    this.counts[job.location] =
+                        (this.counts[job.location] || 0) + 1
                     this.markers.push(this.makeMarker(job))
                 }
             })
         },
         setWindowInfo(marker, index) {
             this.infoWindow.position = marker.position
-            this.infoWindow.options.content = this.getJobWindowLabel(marker.job)
+            this.infoWindow.options.content = this.getJobWindowLabel(
+                marker.job.location
+            )
 
             //check if its the same marker that was selected if yes toggle
             if (this.infoWindow.currentIndex == index) {
