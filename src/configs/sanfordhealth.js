@@ -1,11 +1,15 @@
 const config = {
     buids: [19424],
-    source: "solr", //solr or google-talent
+    source: "google_talent", //solr or google-talent
     s3Folder: "sanfordhealth-jobs",
     origin: "sanfordhealth.jobs",
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
-    tenant_uuid: process.env.GRIDSOME_GOOGLE_TALENT_TENANT,
-    company_uuids: [process.env.GRIDSOME_GOOGLE_TALENT_COMPANY],
+    tenant_uuid: "61b075f6-ccba-42da-9584-160278788e97",
+    company_uuids: [
+        "c5cd7a5b-92cf-4460-b73a-196df6723431",
+        "5f967c05-cf6c-4010-9824-0fbb0b3fdbb8",
+        "05156208-9e91-4d1f-bffb-58c5a3de4298",
+    ],
     client_events: true, // Should be extracted to a separate config at some point
     num_items: 2,
     // featured_jobs: {
