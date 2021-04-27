@@ -29,18 +29,28 @@ export function api() {
     })
 }
 
-export function searchService(input, searchSource) {
-    const source = kebabCase(searchSource)
+export function searchService(input, config) {
+    const source = kebabCase(config.source)
+    if (process.isClient) {
+        input.origin = blank(config.origin)
+            ? window.location.hostname
+            : config.origin
+    }
 
     return api().get(`${source}/search`, {
         params: input,
     })
 }
 
-export function commuteSearchService(input, siteConfig) {
-    return api().post(`google-talent/commute`, {
-        data: input,
-        config: siteConfig,
+export function commuteSearchService(input, config) {
+    if (process.isClient) {
+        input.origin = blank(config.origin)
+            ? window.location.hostname
+            : config.origin
+    }
+
+    return api().get("google-talent/commute", {
+        params: input,
     })
 }
 
