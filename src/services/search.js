@@ -31,23 +31,38 @@ export function api() {
 
 export function searchService(input, config) {
     const source = kebabCase(config.source)
+    const endpoint = `${source}/search`
     if (process.isClient) {
-        input.origin = window.location.hostname
+        const origin = window.location.hostname
+        if (isDevelopment() && origin == "localhost") {
+            return api().post(endpoint, {
+                data: input,
+                config: config,
+            })
+        }
+        input.origin = origin
+        return api().get(endpoint, {
+            params: input,
+        })
     }
-
-    return api().get(`${source}/search`, {
-        params: input,
-    })
 }
 
 export function commuteSearchService(input, config) {
-    if (process.isClient) {
-        input.origin = window.location.hostname
-    }
+    const endpoint = "google-talent/commute"
 
-    return api().get("google-talent/commute", {
-        params: input,
-    })
+    if (process.isClient) {
+        const origin = window.location.hostname
+        if (isDevelopment() && origin == "localhost") {
+            return api().post(endpoint, {
+                data: input,
+                config: config,
+            })
+        }
+        input.origin = origin
+        return api().get(endpoint, {
+            params: input,
+        })
+    }
 }
 
 export class TitleCompleteService {
