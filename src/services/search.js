@@ -31,13 +31,8 @@ export function api() {
 
 export function searchService(input, config) {
     const source = kebabCase(config.source)
-    if (isDevelopment() && process.env.GRIDSOME_SKIP_ORIGIN_CHECK_TOKEN) {
-        input.originToken = process.env.GRIDSOME_SKIP_ORIGIN_CHECK_TOKEN
-    }
     if (process.isClient) {
-        input.origin = blank(config.origin)
-            ? window.location.hostname
-            : config.origin
+        input.origin = window.location.hostname
     }
 
     return api().get(`${source}/search`, {
@@ -46,13 +41,8 @@ export function searchService(input, config) {
 }
 
 export function commuteSearchService(input, config) {
-    if (isDevelopment() && process.env.GRIDSOME_SKIP_ORIGIN_CHECK_TOKEN) {
-        input.originToken = process.env.GRIDSOME_SKIP_ORIGIN_CHECK_TOKEN
-    }
     if (process.isClient) {
-        input.origin = blank(config.origin)
-            ? window.location.hostname
-            : config.origin
+        input.origin = window.location.hostname
     }
 
     return api().get("google-talent/commute", {

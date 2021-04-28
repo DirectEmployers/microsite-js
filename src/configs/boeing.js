@@ -1,7 +1,6 @@
 const config = {
     buids: [48224],
     source: "solr", //solr or google-talent
-    origin: "boeingveterans.directemployers.works",
     s3Folder: "boeingveterans-directemployers-works",
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
     tenant_uuid: process.env.GRIDSOME_GOOGLE_TALENT_TENANT,
