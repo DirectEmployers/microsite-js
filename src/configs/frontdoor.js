@@ -45,7 +45,6 @@ const config = {
             key: "city",
             display: "City",
         },
-
         {
             name: "title",
             display: "Job Title",
