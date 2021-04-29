@@ -328,8 +328,8 @@ module.exports = cloneDeep;
 /* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("1276");
 /* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("2909");
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("5530");
+/* harmony import */ var _Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("2909");
+/* harmony import */ var _Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("5530");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("2ef0");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var axios_lib_helpers_buildURL__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("30b5");
@@ -422,7 +422,7 @@ module.exports = cloneDeep;
           utm_params = {};
         }
 
-        params = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])({}, this.$route.query), utm_params);
+        params = Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])(Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])({}, this.$route.query), utm_params);
         params[_services_storage__WEBPACK_IMPORTED_MODULE_9__[/* VS_KEY */ "d"]] = sessionStorage.getItem(_services_storage__WEBPACK_IMPORTED_MODULE_9__[/* VS_KEY */ "d"]);
       } catch (e) {
         console.error(e);
@@ -465,7 +465,7 @@ module.exports = cloneDeep;
       var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
       if (typeof callback == 'function') {
-        callback.apply(void 0, Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(args));
+        callback.apply(void 0, Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(args));
       }
     },
     clickedApplyJob: function clickedApplyJob(callback) {
@@ -22160,9 +22160,9 @@ module.exports = stackDelete;
 /* harmony import */ var core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split_js__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__("159b");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__("53ca");
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__("3835");
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__("5530");
+/* harmony import */ var _Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__("53ca");
+/* harmony import */ var _Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__("3835");
+/* harmony import */ var _Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__("5530");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__("2ef0");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_20__);
 /* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__("a74a");
@@ -22281,14 +22281,14 @@ module.exports = stackDelete;
       return "";
     },
     inputDefinition: function inputDefinition() {
-      return Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.sharedInputDefinition()), this.providerInputDefinition());
+      return Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.sharedInputDefinition()), this.providerInputDefinition());
     },
     defaultInput: function defaultInput() {
       var _this = this;
 
       var defaults = {};
       Object.entries(this.inputDefinition).forEach(function (entry) {
-        var _entry = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_18__[/* default */ "a"])(entry, 2),
+        var _entry = Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_18__[/* default */ "a"])(entry, 2),
             name = _entry[0],
             definition = _entry[1];
 
@@ -22439,12 +22439,12 @@ module.exports = stackDelete;
       };
     },
     getExtraData: function getExtraData() {
-      return Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.extraData), this.getUrlExtraDataObject(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.params)));
+      return Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.extraData), this.getUrlExtraDataObject(Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.params)));
     },
     mergeWithDefaultInput: function mergeWithDefaultInput() {
       var object = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      var input = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.getUrlFiltersObject(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.defaultInput), object)));
+      var input = Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.getUrlFiltersObject(Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.defaultInput), object)));
 
       return input;
     },
@@ -22486,7 +22486,7 @@ module.exports = stackDelete;
         this.beforeLoadMoreSearch();
       }
 
-      return this.service(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.filterInput(this.input)), this.getExtraData()), this.siteConfig).then(function (resp) {
+      return this.service(Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.filterInput(this.input)), this.getExtraData()), this.siteConfig).then(function (resp) {
         var data = resp.data || {};
         _this2.featuredJobs = data.featured_jobs || [];
         _this2.pagination = data.pagination || {};
@@ -22521,7 +22521,7 @@ module.exports = stackDelete;
     getFilterKey: function getFilterKey(filter) {
       var key = filter.key;
 
-      if (Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_17__[/* default */ "a"])(key) == "object") {
+      if (Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_17__[/* default */ "a"])(key) == "object") {
         key = key[this.source];
       }
 
@@ -22533,7 +22533,7 @@ module.exports = stackDelete;
       return options;
     },
     setInput: function setInput(filter) {
-      this.newSearch(this.mergeWithDefaultInput(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.input), filter)));
+      this.newSearch(this.mergeWithDefaultInput(Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.input), filter)));
     },
     defaultExtraData: function defaultExtraData() {
       if (this.isLoadMore) {
@@ -31276,12 +31276,12 @@ module.exports = setCacheAdd;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppJobMap.vue?vue&type=template&id=335653d2&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppJobMap.vue?vue&type=template&id=65504a5a&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[(!_vm.error)?_c('GmapMap',_vm._b({ref:"map",style:(_vm.mapStyles),attrs:{"zoom":_vm.positionZoom,"center":_vm.positionCenter,"options":_vm.jobMapOptions}},'GmapMap',_vm.$attrs,false),[_c('GmapCluster',_vm._b({},'GmapCluster',_vm.jobClusterOptions,false),[_vm._l((_vm.markers),function(m,index){return _c('GmapMarker',{key:index,attrs:{"clickable":true,"position":m.position},on:{"click":function($event){return _vm.search(m.job)},"mouseout":function($event){_vm.infoWindow.open = false},"mouseover":function($event){return _vm.setWindowInfo(m, index)}}})}),_c('GmapInfoWindow',{attrs:{"opened":_vm.infoWindow.open,"options":_vm.infoWindow.options,"position":_vm.infoWindow.position},on:{"click":function($event){return _vm.search(_vm.infoWindow.job)}}}),_vm._t("default",null,{"done":_vm.done,"error":_vm.error})],2)],1):_vm._e(),_vm._t("footer",null,{"error":_vm.error,"done":_vm.done})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppJobMap.vue?vue&type=template&id=335653d2&
+// CONCATENATED MODULE: ./src/components/Search/AppJobMap.vue?vue&type=template&id=65504a5a&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -31488,6 +31488,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       counts: {},
       done: false,
       markers: [],
+      jobs: [],
       error: false,
       hasMore: true,
       positionZoom: this.$attrs.zoom,
@@ -31548,7 +31549,7 @@ var component = Object(componentNormalizer["a" /* default */])(
               response = _context.sent;
               _ref = response.data || {}, pagination = _ref.pagination, jobs = _ref.jobs, meta = _ref.meta;
 
-              _this.addMarkers(jobs || [], meta.source);
+              _this.createMarkers(jobs || [], meta.source);
 
               _this.done = !pagination.has_more_pages;
               _this.hasMore = !_this.done;
@@ -31567,14 +31568,16 @@ var component = Object(componentNormalizer["a" /* default */])(
               break;
 
             case 21:
-              // if location was given, position map to the first job in the area.
+              _this.displayMarkers(); // if location was given, position map to the first job in the area.
+
+
               if (_this.$refs.map && _this.payload.location && _this.markers.length > 0) {
                 _this.$refs.map.panTo(_this.markers[0].job.coords);
 
                 _this.positionZoom = 6;
               }
 
-            case 22:
+            case 23:
             case "end":
               return _context.stop();
           }
@@ -31673,7 +31676,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
       return coords;
     },
-    addMarkers: function addMarkers(jobs, source) {
+    createMarkers: function createMarkers(jobs, source) {
       var _this2 = this;
 
       jobs.forEach(function (job) {
@@ -31683,9 +31686,12 @@ var component = Object(componentNormalizer["a" /* default */])(
           job.location = _this2.deriveJobLocation(job, source);
           _this2.counts[job.location] = (_this2.counts[job.location] || 0) + 1;
 
-          _this2.markers.push(_this2.makeMarker(job));
+          _this2.jobs.push(_this2.makeMarker(job));
         }
       });
+    },
+    displayMarkers: function displayMarkers() {
+      this.markers = this.jobs;
     },
     setWindowInfo: function setWindowInfo(marker, index) {
       this.infoWindow.position = marker.position;
@@ -35975,7 +35981,7 @@ module.exports = mapCacheHas;
 /* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("159b");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("53ca");
+/* harmony import */ var _Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("53ca");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("2ef0");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _services_helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("a74a");
@@ -36009,7 +36015,7 @@ module.exports = mapCacheHas;
       // but since this is SPA, we are ending up with several
       // instances of the tracker on every SPA update, so clear out
       // the instances so we can "simulate" a page change.
-      if ((typeof de_track === "undefined" ? "undefined" : Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(de_track)) == "object") {
+      if ((typeof de_track === "undefined" ? "undefined" : Object(_Users_jeremy_DE_microsite_js_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(de_track)) == "object") {
         de_track.instances = [];
       }
 
