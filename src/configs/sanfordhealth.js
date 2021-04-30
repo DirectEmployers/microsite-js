@@ -333,7 +333,7 @@ const config = {
         },
         // {
         //     name: "location",
-        //     key: "country",
+        //     key: "country_short",
         //     display: "Country",
         // },
         {
