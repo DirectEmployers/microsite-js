@@ -1,4 +1,4 @@
-import {trim, trimEnd} from "lodash"
+import {trim, trimEnd, pick} from "lodash"
 import {blank} from "./helpers"
 
 export let states = {
@@ -301,12 +301,12 @@ export let countries = {
 /**
  * Remove country abbreviation from end of given value.
  */
-export function removeCountry(value) {
+export function removeCountry(value, only = ["USA", "CAN"]) {
     if (blank(value)) {
         return value
     }
     let i
-    let keys = Object.keys(countries)
+    let keys = Object.keys(pick(countries, only))
     let total = keys.length
     let result = trim(value.toString())
 
