@@ -8,6 +8,7 @@
             :aria-expanded="toggled ? 'true' : 'false'"
             class="dropdown__display"
             :id="`dropdown-display-${id}`"
+            v-on="eventHandlers"
         >
             <slot
                 name="display"
@@ -16,10 +17,8 @@
                 :close="close"
                 :toggled="toggled"
             >
-                <span v-on="eventHandlers" :toggled="toggled">
-                    <slot name="display-text">
-                        {{ display }}
-                    </slot>
+                <span ref="display-wrapper">
+                    {{ display }}
                 </span>
             </slot>
         </div>
@@ -154,7 +153,10 @@ export default {
         open() {
             this.toggled = true
         },
-        close() {
+        close(e) {
+            if(this.interactionType == 'hover' && this.$refs['dropdown-content'].contains(e.toElement)){
+                return
+            }
             this.toggled = false
             this.selectedIndex = -1
         },
@@ -243,13 +245,10 @@ export default {
             switch (type) {
                 case "click":
                     return {click: this.toggle}
-                    break
                 case "hover":
                     return {mouseover: this.open, mouseleave: this.close}
-                    break
                 default:
                     throw new Error(`Unsupported interaction type '${type}'`)
-                    break
             }
         },
     },
