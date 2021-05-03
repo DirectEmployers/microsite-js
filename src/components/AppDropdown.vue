@@ -154,7 +154,10 @@ export default {
         open() {
             this.toggled = true
         },
-        close() {
+        close(e) {
+            if(this.interactionType == 'hover' && e && this.$refs['display'].contains(e.target)){
+                return;
+            }
             this.toggled = false
             this.selectedIndex = -1
         },
