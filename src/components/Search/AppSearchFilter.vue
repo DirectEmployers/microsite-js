@@ -139,7 +139,11 @@ export default {
     },
     methods: {
         getOptionLink(option){
-            return buildUrl(option.link, this.parameters)
+            let params = this.parameters
+            //exclude query param for this filter url
+            // TODO : Will need to be refactored for multi value filters.
+            delete params[this.name]
+            return buildUrl(option.link, params)
         },
         showMore() {
             const numberOfItemsToAdd = this.limit
