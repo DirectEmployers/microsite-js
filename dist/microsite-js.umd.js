@@ -36431,6 +36431,7 @@ exports.default = Tokenizer;
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ blank; });
 __webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ isDevelopment; });
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ buildJobDetailUrl; });
+__webpack_require__.d(__webpack_exports__, "e", function() { return /* binding */ slugify; });
 __webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ humanFriendlyLocation; });
 
 // UNUSED EXPORTS: isCoordinates
@@ -36941,8 +36942,8 @@ function isDevelopment() {
  */
 
 function buildJobDetailUrl(title, location, guid) {
-  var locationSlug = helpers_slugify(removeCountry(location));
-  var titleSlug = helpers_slugify(title);
+  var locationSlug = slugify(removeCountry(location));
+  var titleSlug = slugify(title);
 
   if (blank(locationSlug)) {
     locationSlug = "none";
@@ -36950,16 +36951,14 @@ function buildJobDetailUrl(title, location, guid) {
 
   return "/".concat(locationSlug, "/").concat(titleSlug, "/").concat(guid, "/job/");
 }
-
-var helpers_slugify = function slugify(string) {
+function slugify(string) {
   return words_default()(toString_default()(string).replace(/["\u2019+:+/]/g, ""), /[\w]+/g).reduce(function (result, word, index) {
     return result + (index ? "-" : "") + word.toLowerCase();
   }, "");
-};
+}
 /**
  * https://stackoverflow.com/questions/39842004/why-use-regular-expressions-to-validate-latitude-and-longitude-in-javascript
  */
-
 
 function isCoordinates(string) {
   var value = new String(string).split(",");
@@ -44025,12 +44024,12 @@ var search_LocationCompleteService = /*#__PURE__*/function () {
 function parseRouteSearchInput(route) {
   //merge the route data
   var input = mergeWith_default()(clone_default()(route.query), clone_default()(route.params), function (queryValue, paramValue) {
-    if (Array.isArray(queryValue) && paramValue) {
+    if (Array.isArray(queryValue) && paramValue && queryValue) {
       return [paramValue].concat(queryValue);
     }
 
-    if (queryValue && paramValue) {
-      return [queryValue, paramValue];
+    if (queryValue && paramValue && Object(helpers["e" /* slugify */])(queryValue) != Object(helpers["e" /* slugify */])(paramValue)) {
+      return [paramValue, queryValue];
     }
   }); // handle old url location.
 
