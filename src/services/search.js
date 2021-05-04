@@ -111,11 +111,13 @@ export function parseRouteSearchInput(route) {
         clone(route.query),
         clone(route.params),
         (queryValue, paramValue) => {
-            if (Array.isArray(queryValue) && paramValue && queryValue) {
-                return [paramValue].concat(queryValue)
-            }
-            if (queryValue && paramValue && slugify(queryValue) != slugify(paramValue)) {
-                return [paramValue, queryValue]
+            if(paramValue && queryValue){
+                if (Array.isArray(queryValue)) {
+                    return [paramValue].concat(queryValue)
+                }
+                else if (slugify(queryValue) != slugify(paramValue)) {
+                    return [paramValue, queryValue]
+                }
             }
         }
     )

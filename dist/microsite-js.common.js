@@ -44015,12 +44015,12 @@ var search_LocationCompleteService = /*#__PURE__*/function () {
 function parseRouteSearchInput(route) {
   //merge the route data
   var input = mergeWith_default()(clone_default()(route.query), clone_default()(route.params), function (queryValue, paramValue) {
-    if (Array.isArray(queryValue) && paramValue && queryValue) {
-      return [paramValue].concat(queryValue);
-    }
-
-    if (queryValue && paramValue && Object(helpers["e" /* slugify */])(queryValue) != Object(helpers["e" /* slugify */])(paramValue)) {
-      return [paramValue, queryValue];
+    if (paramValue && queryValue) {
+      if (Array.isArray(queryValue)) {
+        return [paramValue].concat(queryValue);
+      } else if (Object(helpers["e" /* slugify */])(queryValue) != Object(helpers["e" /* slugify */])(paramValue)) {
+        return [paramValue, queryValue];
+      }
     }
   }); // handle old url location.
 
