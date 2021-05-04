@@ -6,7 +6,7 @@ import toString from "lodash/toString"
 import kebabCase from "lodash/kebabCase"
 import clone from "lodash/clone"
 
-import {isDevelopment, blank, humanFriendlyLocation} from "./helpers"
+import {isDevelopment, blank, humanFriendlyLocation, slugify } from "./helpers"
 
 export const SOLR = "solr"
 export const GOOGLE_TALENT = "google_talent"
@@ -111,11 +111,11 @@ export function parseRouteSearchInput(route) {
         clone(route.query),
         clone(route.params),
         (queryValue, paramValue) => {
-            if (Array.isArray(queryValue) && paramValue) {
+            if (Array.isArray(queryValue) && paramValue && queryValue) {
                 return [paramValue].concat(queryValue)
             }
-            if (queryValue && paramValue) {
-                return [queryValue, paramValue]
+            if (queryValue && paramValue && slugify(queryValue) != slugify(paramValue)) {
+                return [paramValue, queryValue]
             }
         }
     )

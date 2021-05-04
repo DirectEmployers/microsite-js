@@ -44,12 +44,13 @@ export function buildJobDetailUrl(title, location, guid) {
     return `/${locationSlug}/${titleSlug}/${guid}/job/`
 }
 
-const slugify = string =>
-    words(toString(string).replace(/["\u2019+:+/]/g, ""), /[\w]+/g).reduce(
+export function slugify(string){
+    return words(toString(string).replace(/["\u2019+:+/]/g, ""), /[\w]+/g).reduce(
         (result, word, index) =>
             result + (index ? "-" : "") + word.toLowerCase(),
         ""
     )
+}
 
 /**
  * https://stackoverflow.com/questions/39842004/why-use-regular-expressions-to-validate-latitude-and-longitude-in-javascript
