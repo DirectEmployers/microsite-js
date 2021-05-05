@@ -38,7 +38,9 @@
                     aria-label="Show more filters"
                     class="search-filter-limiter-more"
                 >
-                    More
+                    <slot name="more-text">
+                        More
+                    </slot>
                 </button>
                 <button
                     rel="nofollow"
@@ -47,7 +49,9 @@
                     aria-label="Show less filters"
                     class="search-filter-limiter-less"
                 >
-                    Less
+                    <slot name="less-text">
+                        Less
+                    </slot>
                 </button>
             </section>
         </slot>
