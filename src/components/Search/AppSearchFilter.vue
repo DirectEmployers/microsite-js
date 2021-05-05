@@ -59,7 +59,9 @@
 </template>
 
 <script>
-import {clone} from "lodash"
+import clone from "lodash/clone"
+import omitBy from "lodash/omitBy"
+import { blank } from '../../services/helpers'
 import buildUrl from "axios/lib/helpers/buildURL"
 
 export default {
@@ -143,7 +145,14 @@ export default {
     },
     methods: {
         getOptionLink(option){
-            return buildUrl(option.link, this.parameters)
+            let params = this.parameters
+            //exclude query param for this filter url
+            // TODO : Will need to be refactored for multi value filters.
+            delete params[this.name]
+
+            return buildUrl(option.link, omitBy(params, (v, k) => {
+                return blank(v)
+            }))
         },
         showMore() {
             const numberOfItemsToAdd = this.limit

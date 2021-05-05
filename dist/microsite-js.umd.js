@@ -1246,18 +1246,21 @@ module.exports = ''.repeat || function repeat(count) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=484f710b&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=47afd6ca&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isVisible && _vm.hasOptions)?_c(_vm.tag,_vm._b({tag:"component",staticClass:"search-filter"},'component',_vm.$attrs,false),[(_vm.display)?_c('h3',{staticClass:"search-filter-display"},[_vm._v(" Filter By "+_vm._s(_vm.display)+" ")]):_vm._e(),_vm._t("default",[_c('ul',{staticClass:"search-filter-options"},_vm._l((_vm.displayedFilters),function(option,index){return _c('li',{key:index,staticClass:"search-filter-options-item"},[_c('g-link',{attrs:{"to":option.link}},[_vm._v(" "+_vm._s(option.display)+" "),(option.value)?_c('span',[_vm._v("("+_vm._s(option.value)+")")]):_vm._e()])],1)}),0),(_vm.shouldShowLess || _vm.shouldShowMore)?_c('section',{staticClass:"search-filter-limiter"},[(_vm.shouldShowMore)?_c('button',{staticClass:"search-filter-limiter-more",attrs:{"rel":"nofollow","aria-label":"Show more filters"},on:{"click":function($event){return _vm.showMore()}}},[_vm._t("more-text",[_vm._v(" More ")])],2):_vm._e(),(_vm.shouldShowLess)?_c('button',{staticClass:"search-filter-limiter-less",attrs:{"rel":"nofollow","aria-label":"Show less filters"},on:{"click":function($event){return _vm.showLess()}}},[_vm._t("less-text",[_vm._v(" Less ")])],2):_vm._e()]):_vm._e()],{"showLess":_vm.showLess,"showMore":_vm.showMore,"shouldShowLess":_vm.shouldShowLess,"shouldShowMore":_vm.shouldShowMore,"displayedFilters":_vm.displayedFilters})],2):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=484f710b&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=47afd6ca&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
 var es_array_slice = __webpack_require__("fb6a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
+var es_function_name = __webpack_require__("b0c0");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
 var es_number_constructor = __webpack_require__("a9e3");
@@ -1271,8 +1274,16 @@ var web_dom_collections_for_each = __webpack_require__("159b");
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js + 1 modules
 var objectSpread2 = __webpack_require__("5530");
 
-// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
-var lodash = __webpack_require__("2ef0");
+// EXTERNAL MODULE: ./node_modules/lodash/clone.js
+var clone = __webpack_require__("b8ce");
+var clone_default = /*#__PURE__*/__webpack_require__.n(clone);
+
+// EXTERNAL MODULE: ./node_modules/lodash/omitBy.js
+var omitBy = __webpack_require__("dd65");
+var omitBy_default = /*#__PURE__*/__webpack_require__.n(omitBy);
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 1 modules
+var helpers = __webpack_require__("a74a");
 
 // EXTERNAL MODULE: ./node_modules/axios/lib/helpers/buildURL.js
 var buildURL = __webpack_require__("30b5");
@@ -1285,6 +1296,7 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
 
 
 
+
 //
 //
 //
@@ -1345,6 +1357,8 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
 //
 //
 //
+
+
 
 
 /* harmony default export */ var AppSearchFiltervue_type_script_lang_js_ = ({
@@ -1417,7 +1431,7 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
   },
   computed: {
     givenOptions: function givenOptions() {
-      return Object(lodash["clone"])(this.options || []);
+      return clone_default()(this.options || []);
     },
     hasOptions: function hasOptions() {
       return this.displayedFilters.length > 0;
@@ -1434,7 +1448,13 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
   },
   methods: {
     getOptionLink: function getOptionLink(option) {
-      return buildURL_default()(option.link, this.parameters);
+      var params = this.parameters; //exclude query param for this filter url
+      // TODO : Will need to be refactored for multi value filters.
+
+      delete params[this.name];
+      return buildURL_default()(option.link, omitBy_default()(params, function (v, k) {
+        return Object(helpers["a" /* blank */])(v);
+      }));
     },
     showMore: function showMore() {
       var numberOfItemsToAdd = this.limit;
@@ -36415,6 +36435,7 @@ exports.default = Tokenizer;
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ blank; });
 __webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ isDevelopment; });
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ buildJobDetailUrl; });
+__webpack_require__.d(__webpack_exports__, "e", function() { return /* binding */ slugify; });
 __webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ humanFriendlyLocation; });
 
 // UNUSED EXPORTS: isCoordinates
@@ -36925,8 +36946,8 @@ function isDevelopment() {
  */
 
 function buildJobDetailUrl(title, location, guid) {
-  var locationSlug = helpers_slugify(removeCountry(location));
-  var titleSlug = helpers_slugify(title);
+  var locationSlug = slugify(removeCountry(location));
+  var titleSlug = slugify(title);
 
   if (blank(locationSlug)) {
     locationSlug = "none";
@@ -36934,16 +36955,14 @@ function buildJobDetailUrl(title, location, guid) {
 
   return "/".concat(locationSlug, "/").concat(titleSlug, "/").concat(guid, "/job/");
 }
-
-var helpers_slugify = function slugify(string) {
+function slugify(string) {
   return words_default()(toString_default()(string).replace(/["\u2019+:+/]/g, ""), /[\w]+/g).reduce(function (result, word, index) {
     return result + (index ? "-" : "") + word.toLowerCase();
   }, "");
-};
+}
 /**
  * https://stackoverflow.com/questions/39842004/why-use-regular-expressions-to-validate-latitude-and-longitude-in-javascript
  */
-
 
 function isCoordinates(string) {
   var value = new String(string).split(",");
@@ -44009,12 +44028,12 @@ var search_LocationCompleteService = /*#__PURE__*/function () {
 function parseRouteSearchInput(route) {
   //merge the route data
   var input = mergeWith_default()(clone_default()(route.query), clone_default()(route.params), function (queryValue, paramValue) {
-    if (Array.isArray(queryValue) && paramValue) {
-      return [paramValue].concat(queryValue);
-    }
-
-    if (queryValue && paramValue) {
-      return [queryValue, paramValue];
+    if (paramValue && queryValue) {
+      if (Array.isArray(queryValue)) {
+        return [paramValue].concat(queryValue);
+      } else if (Object(helpers["e" /* slugify */])(queryValue) != Object(helpers["e" /* slugify */])(paramValue)) {
+        return [paramValue, queryValue];
+      }
     }
   }); // handle old url location.
 
