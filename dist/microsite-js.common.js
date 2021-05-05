@@ -32087,7 +32087,7 @@ module.exports = baseAssignValue;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=6ba13254&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=0c4dc346&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component",staticClass:"dropdown"},[_c('div',_vm._g({ref:"display",staticClass:"dropdown__display",attrs:{"tabindex":"0","role":"button","aria-haspopup":"true","aria-expanded":_vm.toggled ? 'true' : 'false',"id":("dropdown-display-" + _vm.id)}},_vm.eventHandlers),[_vm._t("display",[_c('span',{ref:"display-wrapper"},[_vm._v(" "+_vm._s(_vm.display)+" ")])],{"toggle":_vm.toggle,"open":_vm.open,"close":_vm.close,"toggled":_vm.toggled})],2),_c('div',_vm._g({directives:[{name:"show",rawName:"v-show",value:(_vm.toggled),expression:"toggled"}],ref:"dropdown-content",staticClass:"dropdown__content",class:{'dropdown__content--active': _vm.toggled},attrs:{"id":("dropdown-content-" + _vm.id),"aria-labelledby":("dropdown-display-" + _vm.id)}},
             _vm.interactionType == 'click'
                 ? {}
@@ -32099,7 +32099,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=6ba13254&
+// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=0c4dc346&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=script&lang=js&
 var AppDropdownvue_type_script_lang_js_ = __webpack_require__("e433");
@@ -43087,8 +43087,10 @@ module.exports = basePropertyDeep;
       this.toggled = true;
     },
     close: function close(e) {
-      if (this.interactionType == 'hover' && e && this.$refs['dropdown-content'].contains(e.toElement)) {
-        return;
+      if (e && this.interactionType == 'hover') {
+        if (this.$refs['dropdown-content'].contains(e.toElement) || this.$refs['dropdown-display'] == e.target) {
+          return;
+        }
       }
 
       this.toggled = false;
