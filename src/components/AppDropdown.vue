@@ -154,7 +154,7 @@ export default {
             this.toggled = true
         },
         close(e) {
-            if(this.interactionType == 'hover' && this.$refs['dropdown-content'].contains(e.toElement)){
+            if(this.interactionType == 'hover' && e && this.$refs['dropdown-content'].contains(e.toElement)){
                 return
             }
             this.toggled = false
