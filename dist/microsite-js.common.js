@@ -780,12 +780,12 @@ module.exports = Axios;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=0b3a5446&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppSimilarJobs.vue?vue&type=template&id=27b03b7e&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.hasSimilarJobs)?_c('section',{staticClass:"similar-jobs"},[_c('h2',{staticClass:"similar-jobs__title"},[_vm._v(_vm._s(_vm.header))]),_c('div',{staticClass:"similar-jobs__grid"},_vm._l((_vm.similarJobs),function(similarJob,index){return _c('AppSolrJob',{key:index,attrs:{"source":_vm.meta.source,"job":similarJob},scopedSlots:_vm._u([{key:"default",fn:function(jobData){return [_c('section',{staticClass:"similar-jobs__grid-item"},[_c('g-link',{attrs:{"to":jobData.detailUrl}},[_vm._t("default",[_c('h3',{staticClass:"similar-jobs__grid-item-title"},[_vm._v(" "+_vm._s(jobData.title)+" ")]),_c('p',{staticClass:"similar-jobs__grid-item-location"},[_vm._v(" "+_vm._s(jobData.location)+" ")])],{"jobData":jobData})],2)],1)]}}],null,true)})}),1)]):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=0b3a5446&
+// CONCATENATED MODULE: ./src/components/AppSimilarJobs.vue?vue&type=template&id=27b03b7e&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -1237,18 +1237,21 @@ module.exports = ''.repeat || function repeat(count) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=717025d3&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppSearchFilter.vue?vue&type=template&id=0c746dfc&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isVisible && _vm.hasOptions)?_c(_vm.tag,_vm._b({tag:"component",staticClass:"search-filter"},'component',_vm.$attrs,false),[(_vm.display)?_c('h3',{staticClass:"search-filter-display"},[_vm._v(" Filter By "+_vm._s(_vm.display)+" ")]):_vm._e(),_vm._t("default",[_c('ul',{staticClass:"search-filter-options"},_vm._l((_vm.displayedFilters),function(option,index){return _c('li',{key:index,staticClass:"search-filter-options-item"},[_c('g-link',{attrs:{"to":option.link}},[_vm._v(" "+_vm._s(option.display)+" "),(option.value)?_c('span',[_vm._v("("+_vm._s(option.value)+")")]):_vm._e()])],1)}),0),(_vm.shouldShowLess || _vm.shouldShowMore)?_c('section',{staticClass:"search-filter-limiter"},[(_vm.shouldShowMore)?_c('button',{staticClass:"search-filter-limiter-more",attrs:{"rel":"nofollow","aria-label":"Show more filters"},on:{"click":function($event){return _vm.showMore()}}},[_vm._v(" More ")]):_vm._e(),(_vm.shouldShowLess)?_c('button',{staticClass:"search-filter-limiter-less",attrs:{"rel":"nofollow","aria-label":"Show less filters"},on:{"click":function($event){return _vm.showLess()}}},[_vm._v(" Less ")]):_vm._e()]):_vm._e()],{"showLess":_vm.showLess,"showMore":_vm.showMore,"shouldShowLess":_vm.shouldShowLess,"shouldShowMore":_vm.shouldShowMore,"displayedFilters":_vm.displayedFilters})],2):_vm._e()}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=717025d3&
+// CONCATENATED MODULE: ./src/components/Search/AppSearchFilter.vue?vue&type=template&id=0c746dfc&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
 var es_array_slice = __webpack_require__("fb6a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
+var es_function_name = __webpack_require__("b0c0");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
 var es_number_constructor = __webpack_require__("a9e3");
@@ -1262,8 +1265,16 @@ var web_dom_collections_for_each = __webpack_require__("159b");
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js + 1 modules
 var objectSpread2 = __webpack_require__("5530");
 
-// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
-var lodash = __webpack_require__("2ef0");
+// EXTERNAL MODULE: ./node_modules/lodash/clone.js
+var clone = __webpack_require__("b8ce");
+var clone_default = /*#__PURE__*/__webpack_require__.n(clone);
+
+// EXTERNAL MODULE: ./node_modules/lodash/omitBy.js
+var omitBy = __webpack_require__("dd65");
+var omitBy_default = /*#__PURE__*/__webpack_require__.n(omitBy);
+
+// EXTERNAL MODULE: ./src/services/helpers.js + 1 modules
+var helpers = __webpack_require__("a74a");
 
 // EXTERNAL MODULE: ./node_modules/axios/lib/helpers/buildURL.js
 var buildURL = __webpack_require__("30b5");
@@ -1276,6 +1287,7 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
 
 
 
+
 //
 //
 //
@@ -1332,6 +1344,8 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
 //
 //
 //
+
+
 
 
 /* harmony default export */ var AppSearchFiltervue_type_script_lang_js_ = ({
@@ -1404,7 +1418,7 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
   },
   computed: {
     givenOptions: function givenOptions() {
-      return Object(lodash["clone"])(this.options || []);
+      return clone_default()(this.options || []);
     },
     hasOptions: function hasOptions() {
       return this.displayedFilters.length > 0;
@@ -1421,7 +1435,13 @@ var buildURL_default = /*#__PURE__*/__webpack_require__.n(buildURL);
   },
   methods: {
     getOptionLink: function getOptionLink(option) {
-      return buildURL_default()(option.link, this.parameters);
+      var params = this.parameters; //exclude query param for this filter url
+      // TODO : Will need to be refactored for multi value filters.
+
+      delete params[this.name];
+      return buildURL_default()(option.link, omitBy_default()(params, function (v, k) {
+        return Object(helpers["a" /* blank */])(v);
+      }));
     },
     showMore: function showMore() {
       var numberOfItemsToAdd = this.limit;
@@ -31267,12 +31287,12 @@ module.exports = setCacheAdd;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppJobMap.vue?vue&type=template&id=335653d2&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/AppJobMap.vue?vue&type=template&id=65504a5a&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[(!_vm.error)?_c('GmapMap',_vm._b({ref:"map",style:(_vm.mapStyles),attrs:{"zoom":_vm.positionZoom,"center":_vm.positionCenter,"options":_vm.jobMapOptions}},'GmapMap',_vm.$attrs,false),[_c('GmapCluster',_vm._b({},'GmapCluster',_vm.jobClusterOptions,false),[_vm._l((_vm.markers),function(m,index){return _c('GmapMarker',{key:index,attrs:{"clickable":true,"position":m.position},on:{"click":function($event){return _vm.search(m.job)},"mouseout":function($event){_vm.infoWindow.open = false},"mouseover":function($event){return _vm.setWindowInfo(m, index)}}})}),_c('GmapInfoWindow',{attrs:{"opened":_vm.infoWindow.open,"options":_vm.infoWindow.options,"position":_vm.infoWindow.position},on:{"click":function($event){return _vm.search(_vm.infoWindow.job)}}}),_vm._t("default",null,{"done":_vm.done,"error":_vm.error})],2)],1):_vm._e(),_vm._t("footer",null,{"error":_vm.error,"done":_vm.done})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/AppJobMap.vue?vue&type=template&id=335653d2&
+// CONCATENATED MODULE: ./src/components/Search/AppJobMap.vue?vue&type=template&id=65504a5a&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -31479,6 +31499,7 @@ var component = Object(componentNormalizer["a" /* default */])(
       counts: {},
       done: false,
       markers: [],
+      jobs: [],
       error: false,
       hasMore: true,
       positionZoom: this.$attrs.zoom,
@@ -31539,7 +31560,7 @@ var component = Object(componentNormalizer["a" /* default */])(
               response = _context.sent;
               _ref = response.data || {}, pagination = _ref.pagination, jobs = _ref.jobs, meta = _ref.meta;
 
-              _this.addMarkers(jobs || [], meta.source);
+              _this.createMarkers(jobs || [], meta.source);
 
               _this.done = !pagination.has_more_pages;
               _this.hasMore = !_this.done;
@@ -31558,14 +31579,16 @@ var component = Object(componentNormalizer["a" /* default */])(
               break;
 
             case 21:
-              // if location was given, position map to the first job in the area.
+              _this.displayMarkers(); // if location was given, position map to the first job in the area.
+
+
               if (_this.$refs.map && _this.payload.location && _this.markers.length > 0) {
                 _this.$refs.map.panTo(_this.markers[0].job.coords);
 
                 _this.positionZoom = 6;
               }
 
-            case 22:
+            case 23:
             case "end":
               return _context.stop();
           }
@@ -31664,7 +31687,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
       return coords;
     },
-    addMarkers: function addMarkers(jobs, source) {
+    createMarkers: function createMarkers(jobs, source) {
       var _this2 = this;
 
       jobs.forEach(function (job) {
@@ -31674,9 +31697,12 @@ var component = Object(componentNormalizer["a" /* default */])(
           job.location = _this2.deriveJobLocation(job, source);
           _this2.counts[job.location] = (_this2.counts[job.location] || 0) + 1;
 
-          _this2.markers.push(_this2.makeMarker(job));
+          _this2.jobs.push(_this2.makeMarker(job));
         }
       });
+    },
+    displayMarkers: function displayMarkers() {
+      this.markers = this.jobs;
     },
     setWindowInfo: function setWindowInfo(marker, index) {
       this.infoWindow.position = marker.position;
@@ -32061,8 +32087,8 @@ module.exports = baseAssignValue;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=50322a84&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component",staticClass:"dropdown"},[_c('div',{ref:"display",staticClass:"dropdown__display",attrs:{"tabindex":"0","role":"button","aria-haspopup":"true","aria-expanded":_vm.toggled ? 'true' : 'false',"id":("dropdown-display-" + _vm.id)}},[_vm._t("display",[_c('span',_vm._g({attrs:{"toggled":_vm.toggled}},_vm.eventHandlers),[_vm._t("display-text",[_vm._v(" "+_vm._s(_vm.display)+" ")])],2)],{"toggle":_vm.toggle,"open":_vm.open,"close":_vm.close,"toggled":_vm.toggled})],2),_c('div',_vm._g({directives:[{name:"show",rawName:"v-show",value:(_vm.toggled),expression:"toggled"}],ref:"dropdown-content",staticClass:"dropdown__content",class:{'dropdown__content--active': _vm.toggled},attrs:{"id":("dropdown-content-" + _vm.id),"aria-labelledby":("dropdown-display-" + _vm.id)}},
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=template&id=2906bcb3&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component",staticClass:"dropdown"},[_c('div',_vm._g({ref:"display",staticClass:"dropdown__display",attrs:{"tabindex":"0","role":"button","aria-haspopup":"true","aria-expanded":_vm.toggled ? 'true' : 'false',"id":("dropdown-display-" + _vm.id)}},_vm.eventHandlers),[_vm._t("display",[_c('span',{ref:"display-wrapper"},[_vm._v(" "+_vm._s(_vm.display)+" ")])],{"toggle":_vm.toggle,"open":_vm.open,"close":_vm.close,"toggled":_vm.toggled})],2),_c('div',_vm._g({directives:[{name:"show",rawName:"v-show",value:(_vm.toggled),expression:"toggled"}],ref:"dropdown-content",staticClass:"dropdown__content",class:{'dropdown__content--active': _vm.toggled},attrs:{"id":("dropdown-content-" + _vm.id),"aria-labelledby":("dropdown-display-" + _vm.id)}},
             _vm.interactionType == 'click'
                 ? {}
                 : {mouseleave: this.close, mouseenter: this.open}
@@ -32073,7 +32099,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=50322a84&
+// CONCATENATED MODULE: ./src/components/AppDropdown.vue?vue&type=template&id=2906bcb3&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/AppDropdown.vue?vue&type=script&lang=js&
 var AppDropdownvue_type_script_lang_js_ = __webpack_require__("e433");
@@ -36396,6 +36422,7 @@ exports.default = Tokenizer;
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ blank; });
 __webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ isDevelopment; });
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ buildJobDetailUrl; });
+__webpack_require__.d(__webpack_exports__, "e", function() { return /* binding */ slugify; });
 __webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ humanFriendlyLocation; });
 
 // UNUSED EXPORTS: isCoordinates
@@ -36763,12 +36790,14 @@ var countries = {
  */
 
 function removeCountry(value) {
+  var only = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ["USA", "CAN"];
+
   if (blank(value)) {
     return value;
   }
 
   var i;
-  var keys = Object.keys(countries);
+  var keys = Object.keys(Object(lodash["pick"])(countries, only));
   var total = keys.length;
   var result = Object(lodash["trim"])(value.toString());
 
@@ -36904,8 +36933,8 @@ function isDevelopment() {
  */
 
 function buildJobDetailUrl(title, location, guid) {
-  var locationSlug = helpers_slugify(removeCountry(location));
-  var titleSlug = helpers_slugify(title);
+  var locationSlug = slugify(removeCountry(location));
+  var titleSlug = slugify(title);
 
   if (blank(locationSlug)) {
     locationSlug = "none";
@@ -36913,16 +36942,14 @@ function buildJobDetailUrl(title, location, guid) {
 
   return "/".concat(locationSlug, "/").concat(titleSlug, "/").concat(guid, "/job/");
 }
-
-var helpers_slugify = function slugify(string) {
+function slugify(string) {
   return words_default()(toString_default()(string).replace(/["\u2019+:+/]/g, ""), /[\w]+/g).reduce(function (result, word, index) {
     return result + (index ? "-" : "") + word.toLowerCase();
   }, "");
-};
+}
 /**
  * https://stackoverflow.com/questions/39842004/why-use-regular-expressions-to-validate-latitude-and-longitude-in-javascript
  */
-
 
 function isCoordinates(string) {
   var value = new String(string).split(",");
@@ -37900,12 +37927,12 @@ module.exports = isLength;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=c4ffb67e&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=4e7ecc62&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,null,_vm.slotData)],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=c4ffb67e&
+// CONCATENATED MODULE: ./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=template&id=4e7ecc62&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Search/Providers/AppGoogleTalentSearchProvider.vue?vue&type=script&lang=js&
 var AppGoogleTalentSearchProvidervue_type_script_lang_js_ = __webpack_require__("a8ee");
@@ -43017,7 +43044,6 @@ module.exports = basePropertyDeep;
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   props: {
@@ -43096,7 +43122,11 @@ module.exports = basePropertyDeep;
     open: function open() {
       this.toggled = true;
     },
-    close: function close() {
+    close: function close(e) {
+      if (this.interactionType == 'hover' && this.$refs['dropdown-content'].contains(e.toElement)) {
+        return;
+      }
+
       this.toggled = false;
       this.selectedIndex = -1;
     },
@@ -43191,18 +43221,15 @@ module.exports = basePropertyDeep;
           return {
             click: this.toggle
           };
-          break;
 
         case "hover":
           return {
             mouseover: this.open,
             mouseleave: this.close
           };
-          break;
 
         default:
           throw new Error("Unsupported interaction type '".concat(type, "'"));
-          break;
       }
     }
   }
@@ -43784,23 +43811,42 @@ function api() {
 }
 function searchService(input, config) {
   var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_11___default()(config.source);
+  var endpoint = "".concat(source, "/search");
 
   if (process.isClient) {
-    input.origin = window.location.hostname;
-  }
+    var origin = window.location.hostname;
 
-  return api().get("".concat(source, "/search"), {
-    params: input
-  });
+    if (Object(_helpers__WEBPACK_IMPORTED_MODULE_13__[/* isDevelopment */ "d"])() && origin == "localhost") {
+      return api().post(endpoint, {
+        data: input,
+        config: config
+      });
+    }
+
+    input.origin = origin;
+    return api().get(endpoint, {
+      params: input
+    });
+  }
 }
 function commuteSearchService(input, config) {
-  if (process.isClient) {
-    input.origin = window.location.hostname;
-  }
+  var endpoint = "google-talent/commute";
 
-  return api().get("google-talent/commute", {
-    params: input
-  });
+  if (process.isClient) {
+    var origin = window.location.hostname;
+
+    if (Object(_helpers__WEBPACK_IMPORTED_MODULE_13__[/* isDevelopment */ "d"])() && origin == "localhost") {
+      return api().post(endpoint, {
+        data: input,
+        config: config
+      });
+    }
+
+    input.origin = origin;
+    return api().get(endpoint, {
+      params: input
+    });
+  }
 }
 var TitleCompleteService = /*#__PURE__*/function () {
   function TitleCompleteService() {
@@ -43988,12 +44034,12 @@ var LocationCompleteService = /*#__PURE__*/function () {
 function parseRouteSearchInput(route) {
   //merge the route data
   var input = lodash_mergeWith__WEBPACK_IMPORTED_MODULE_9___default()(lodash_clone__WEBPACK_IMPORTED_MODULE_12___default()(route.query), lodash_clone__WEBPACK_IMPORTED_MODULE_12___default()(route.params), function (queryValue, paramValue) {
-    if (Array.isArray(queryValue) && paramValue) {
-      return [paramValue].concat(queryValue);
-    }
-
-    if (queryValue && paramValue) {
-      return [queryValue, paramValue];
+    if (paramValue && queryValue) {
+      if (Array.isArray(queryValue)) {
+        return [paramValue].concat(queryValue);
+      } else if (Object(_helpers__WEBPACK_IMPORTED_MODULE_13__[/* slugify */ "e"])(queryValue) != Object(_helpers__WEBPACK_IMPORTED_MODULE_13__[/* slugify */ "e"])(paramValue)) {
+        return [paramValue, queryValue];
+      }
     }
   }); // handle old url location.
 

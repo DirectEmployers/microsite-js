@@ -1,6 +1,6 @@
 const config = {
     buids: [19424],
-    source: "google_talent", //solr or google-talent
+    source: "solr", //solr or google-talent
     s3Folder: "sanfordhealth-jobs",
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
     tenant_uuid: "61b075f6-ccba-42da-9584-160278788e97",
@@ -469,7 +469,7 @@ const config = {
         },
         // {
         //     name: "location",
-        //     key: "country",
+        //     key: "country_short",
         //     display: "Country",
         // },
         {
