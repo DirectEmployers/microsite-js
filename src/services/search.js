@@ -29,20 +29,40 @@ export function api() {
     })
 }
 
-export function searchService(input, siteConfig) {
-    const source = kebabCase(siteConfig.source)
-
-    return api().post(`${source}/search`, {
-        data: input,
-        config: siteConfig,
-    })
+export function searchService(input, config) {
+    const source = kebabCase(config.source)
+    const endpoint = `${source}/search`
+    if (process.isClient) {
+        const origin = window.location.hostname
+        if (isDevelopment() && origin == "localhost") {
+            return api().post(endpoint, {
+                data: input,
+                config: config,
+            })
+        }
+        input.origin = origin
+        return api().get(endpoint, {
+            params: input,
+        })
+    }
 }
 
-export function commuteSearchService(input, siteConfig) {
-    return api().post(`google-talent/commute`, {
-        data: input,
-        config: siteConfig,
-    })
+export function commuteSearchService(input, config) {
+    const endpoint = "google-talent/commute"
+
+    if (process.isClient) {
+        const origin = window.location.hostname
+        if (isDevelopment() && origin == "localhost") {
+            return api().post(endpoint, {
+                data: input,
+                config: config,
+            })
+        }
+        input.origin = origin
+        return api().get(endpoint, {
+            params: input,
+        })
+    }
 }
 
 export class TitleCompleteService {
