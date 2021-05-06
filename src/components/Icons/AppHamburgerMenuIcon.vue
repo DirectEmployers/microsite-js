@@ -1,7 +1,7 @@
 <template>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
         <title>{{ title }}</title>
-        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+        <path :fill="fill" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
     </svg>
 </template>
 
@@ -10,6 +10,11 @@ export default {
     props: {
         title: {
             default: "Menu",
+            required: false,
+            type: String,
+        },
+        fill: {
+            default: "#000",
             required: false,
             type: String,
         },

@@ -2727,25 +2727,50 @@ module.exports = equalByTag;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Icons/AppXIcon.vue?vue&type=template&id=337e5910&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 96 96","enable-background":"new 0 0 96 96"}},[_c('polygon',{attrs:{"points":"96,14 82,0 48,34 14,0 0,14 34,48 0,82 14,96 48,62 82,96 96,82 62,48 "}})])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Icons/AppXIcon.vue?vue&type=template&id=234da601&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 96 96","enable-background":"new 0 0 96 96"}},[_c('polygon',{attrs:{"fill":_vm.fill,"points":"96,14 82,0 48,34 14,0 0,14 34,48 0,82 14,96 48,62 82,96 96,82 62,48 "}})])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Icons/AppXIcon.vue?vue&type=template&id=337e5910&
+// CONCATENATED MODULE: ./src/components/Icons/AppXIcon.vue?vue&type=template&id=234da601&
 
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Icons/AppXIcon.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var AppXIconvue_type_script_lang_js_ = ({
+  props: {
+    fill: {
+      default: "#000",
+      required: false,
+      type: String
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/Icons/AppXIcon.vue?vue&type=script&lang=js&
+ /* harmony default export */ var Icons_AppXIconvue_type_script_lang_js_ = (AppXIconvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
 
 // CONCATENATED MODULE: ./src/components/Icons/AppXIcon.vue
 
-var script = {}
+
+
 
 
 /* normalize component */
 
 var component = Object(componentNormalizer["a" /* default */])(
-  script,
+  Icons_AppXIconvue_type_script_lang_js_,
   render,
   staticRenderFns,
   false,
@@ -26556,12 +26581,12 @@ module.exports = function from(arrayLike /* , mapfn = undefined, thisArg = undef
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Icons/AppHamburgerMenuIcon.vue?vue&type=template&id=64746570&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 20 20"}},[_c('title',[_vm._v(_vm._s(_vm.title))]),_c('path',{attrs:{"d":"M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"}})])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Icons/AppHamburgerMenuIcon.vue?vue&type=template&id=68572d57&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 20 20"}},[_c('title',[_vm._v(_vm._s(_vm.title))]),_c('path',{attrs:{"fill":_vm.fill,"d":"M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"}})])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Icons/AppHamburgerMenuIcon.vue?vue&type=template&id=64746570&
+// CONCATENATED MODULE: ./src/components/Icons/AppHamburgerMenuIcon.vue?vue&type=template&id=68572d57&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Icons/AppHamburgerMenuIcon.vue?vue&type=script&lang=js&
 //
@@ -26575,6 +26600,11 @@ var staticRenderFns = []
   props: {
     title: {
       default: "Menu",
+      required: false,
+      type: String
+    },
+    fill: {
+      default: "#000",
       required: false,
       type: String
     }
