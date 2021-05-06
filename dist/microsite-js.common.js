@@ -43819,40 +43819,32 @@ function searchService(input, config) {
   var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_11___default()(config.source);
   var endpoint = "".concat(source, "/search");
 
-  if (process.isClient) {
-    var origin = window.location.hostname;
-
-    if (Object(_helpers__WEBPACK_IMPORTED_MODULE_13__[/* isDevelopment */ "d"])() && origin == "localhost") {
-      return api().post(endpoint, {
-        data: input,
-        config: config
-      });
-    }
-
-    input.origin = origin;
-    return api().get(endpoint, {
-      params: input
+  if (!process.isClient || Object(_helpers__WEBPACK_IMPORTED_MODULE_13__[/* isDevelopment */ "d"])() && window.location.hostname == 'localhost') {
+    return api().post(endpoint, {
+      data: input,
+      config: config
     });
   }
+
+  input.origin = window.location.hostname;
+  return api().get(endpoint, {
+    params: input
+  });
 }
 function commuteSearchService(input, config) {
   var endpoint = "google-talent/commute";
 
-  if (process.isClient) {
-    var origin = window.location.hostname;
-
-    if (Object(_helpers__WEBPACK_IMPORTED_MODULE_13__[/* isDevelopment */ "d"])() && origin == "localhost") {
-      return api().post(endpoint, {
-        data: input,
-        config: config
-      });
-    }
-
-    input.origin = origin;
-    return api().get(endpoint, {
-      params: input
+  if (!process.isClient || Object(_helpers__WEBPACK_IMPORTED_MODULE_13__[/* isDevelopment */ "d"])() && window.location.hostname == 'localhost') {
+    return api().post(endpoint, {
+      data: input,
+      config: config
     });
   }
+
+  input.origin = window.location.hostname;
+  return api().get(endpoint, {
+    params: input
+  });
 }
 var TitleCompleteService = /*#__PURE__*/function () {
   function TitleCompleteService() {
