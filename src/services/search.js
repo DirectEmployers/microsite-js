@@ -32,19 +32,12 @@ export function api() {
 function apiService(input, config, path) {
     const source = kebabCase(config.source)
     const endpoint = `${source}/${path}`
-    if (process.isClient) {
-        const origin = window.location.hostname
-        if (isDevelopment() && origin == "localhost") {
+    if (!process.isClient || (isDevelopment()) && window.location.hostname == 'localhost') {
             return api().post(endpoint, {
                 data: input,
                 config: config,
             })
         }
-        input.origin = origin
-        return api().get(endpoint, {
-            params: input,
-        })
-    }
     input.origin = window.location.hostname
     return api().get(endpoint, {
         params: input,
