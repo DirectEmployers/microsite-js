@@ -38,7 +38,7 @@ export function searchService(input, config) {
     ) {
         return api().post(endpoint, {
             data: input,
-            config,
+            config: config,
         })
     }
     input.origin = window.location.hostname
@@ -55,8 +55,8 @@ export function commuteSearchService(input, config) {
         (isDevelopment() && window.location.hostname == "localhost")
     ) {
         return api().post(endpoint, {
-            input,
-            config,
+            data: input,
+            config: config,
         })
     }
     input.origin = window.location.hostname
