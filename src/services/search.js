@@ -38,7 +38,7 @@ export function searchService(input, config) {
     ) {
         return api().post(endpoint, {
             data: input,
-            config: config,
+            config,
         })
     }
     input.origin = window.location.hostname
@@ -67,12 +67,12 @@ export function commuteSearchService(input, config) {
 
 async function autoCompleteService(endpoint, q, queryParams = {}) {
     let params = {
-        q: q,
+        q,
         ...queryParams,
     }
     try {
         const response = await api().get(endpoint, {
-            params: params,
+            params,
         })
         return response
     } catch (error) {
