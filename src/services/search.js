@@ -50,8 +50,8 @@ export function commuteSearchService(input, config) {
 
     if (!process.isClient || (isDevelopment() && window.location.hostname == 'localhost')){
         return api().post(endpoint, {
-            data: input,
-            config: config,
+            input,
+            config,
         })
     }
     input.origin = window.location.hostname
@@ -60,61 +60,39 @@ export function commuteSearchService(input, config) {
     })
 }
 
+async function autoCompleteService(endpoint, q, queryParams={}){
+    let params = {
+        q: q,
+        ...queryParams,
+    }
+    try {
+        const response = await api().get(endpoint, {
+            params: params,
+        })
+        return response
+    } catch (error) {
+        if (Object.prototype.hasOwnProperty.call(error, "response")) {
+            return error
+        }
+        throw new Error(error)
+    }
+}
 
 export class TitleCompleteService {
-    static async get(q, queryParams = {}) {
-        let params = {
-            q: q,
-            ...queryParams,
-        }
-
-        try {
-            const response = await api().get("complete/title", {
-                params: params,
-            })
-            return response
-        } catch (error) {
-            if (Object.prototype.hasOwnProperty.call(error, "response")) {
-                return error
-            }
-            throw new Error(error)
-        }
+    static get(q, queryParams = {}) {
+        return autoCompleteService("complete/title", q, queryParams)
     }
 }
 
 export class MOCCompleteService {
-    static async get(q) {
-        try {
-            const response = await api().get("/complete/moc", {
-                params: {
-                    q: q,
-                },
-            })
-            return response
-        } catch (error) {
-            if (Object.prototype.hasOwnProperty.call(error, "response")) {
-                return error
-            }
-            throw new Error(error)
-        }
+    static get(q) {
+        return autoCompleteService("/complete/moc", q)
     }
 }
 
 export class LocationCompleteService {
-    static async get(q) {
-        try {
-            const response = await api().get("complete/location", {
-                params: {
-                    q: q,
-                },
-            })
-            return response
-        } catch (error) {
-            if (Object.prototype.hasOwnProperty.call(error, "response")) {
-                return error
-            }
-            throw new Error(error)
-        }
+    static get(q) {
+        return autoCompleteService("complete/location", q)
     }
 }
 
