@@ -1,19 +1,19 @@
 const defaultFilters = [
     {
         name: "location",
-        display: "locations"
+        slug: "locations"
     },
     {
         name: "title",
-        display: "job-titles"
+        slug: "job-titles"
     },
     {
         name: "moc",
-        display: "military-codes"
+        slug: "military-codes"
     },
     {
         name:'company',
-        display:'companies'
+        slug:'companies'
     },
 ]
 

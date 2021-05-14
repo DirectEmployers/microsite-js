@@ -42,9 +42,10 @@ function getFilterPaths(filters) {
 
 function getAllFilters(filters) {
     const customFilters = getCustomFilters(filters)
-    const defaultFilterSlugs = filterSlugArray(defaultUrlFilters)
+    const defaultFilters = getDefaultFilters(filters)
     const customFilerSlugs = filterSlugArray(customFilters)
-    return _.union(defaultFilterSlugs, customFilerSlugs)
+
+    return _.union(defaultFilters, customFilerSlugs)
 }
 
 function getCustomFilters(filters) {
@@ -55,24 +56,16 @@ function getCustomFilters(filters) {
     return customFilters.sort(alphabeticalOrder("display"))
 }
 
-function getSubArrays(arr) {
-    if (arr.length === 1) return [arr]
-    else {
-        subarr = getSubArrays(arr.slice(1))
-        return subarr.concat(subarr.map(e => e.concat(arr[0])), [[arr[0]]])
-    }
-}
-
-function getLimitedFilterPaths(filters, maxSize = 3) {
-    let filterPaths = []
-    const customFilters = getCustomFilters(filters)
-    const customFilterArray = getSubArrays(customFilters)
-    const allFilters = getAllFilters(filters)
-
-    for (let index = 0; index < customFilterArray.length; index++) {
-        const filterGroup = customFilterArrays[index];
-
-    }
+function getDefaultFilters(filters) {
+    let defaultFilters = filters
+    defaultFilters = defaultFilters.filter(
+        filter => defaultFilterNames.includes(filter.name)
+    )
+    let activeFilterNames = _.map(defaultFilters, "name")
+    let activeDefaultFilters = defaultUrlFilters.filter(
+        filter => activeFilterNames.includes(filter.name)
+    )
+    return activeDefaultFilters
 }
 
 function filterSlugArray(filters) {
