@@ -10,7 +10,7 @@ function getFilterPaths(filters) {
     const filterGroups = getSubArrays(allFilters.reverse())
 
     for (let i = 0; i < filterGroups.length; i++) {
-        let path = ''
+        let path = ""
         for (let j = 0; j < filterGroups[i].length; j++) {
             const param = filterGroups[i][j][0]
             const slug = filterGroups[i][j][1]
@@ -43,8 +43,8 @@ function getDefaultFilters(filters) {
         defaultFilterNames.includes(filter.name)
     )
     let activeFilterNames = _.map(defaultFilters, "name")
-    let activeDefaultFilters = defaultUrlFilters.filter(
-        filter => activeFilterNames.includes(filter.name)
+    let activeDefaultFilters = defaultUrlFilters.filter(filter =>
+        activeFilterNames.includes(filter.name)
     )
 
     return activeDefaultFilters
