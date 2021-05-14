@@ -6,7 +6,7 @@ import toString from "lodash/toString"
 import kebabCase from "lodash/kebabCase"
 import clone from "lodash/clone"
 
-import {isDevelopment, blank, humanFriendlyLocation, slugify } from "./helpers"
+import {isDevelopment, blank, humanFriendlyLocation, slugify} from "./helpers"
 
 export const SOLR = "solr"
 export const GOOGLE_TALENT = "google_talent"
@@ -29,11 +29,13 @@ export function api() {
     })
 }
 
-
 export function searchService(input, config) {
     const source = kebabCase(config.source)
     const endpoint = `${source}/search`
-    if (!process.isClient || (isDevelopment() && window.location.hostname == 'localhost')){
+    if (
+        !process.isClient ||
+        (isDevelopment() && window.location.hostname == "localhost")
+    ) {
         return api().post(endpoint, {
             data: input,
             config: config,
@@ -48,7 +50,10 @@ export function searchService(input, config) {
 export function commuteSearchService(input, config) {
     const endpoint = "google-talent/commute"
 
-    if (!process.isClient || (isDevelopment() && window.location.hostname == 'localhost')){
+    if (
+        !process.isClient ||
+        (isDevelopment() && window.location.hostname == "localhost")
+    ) {
         return api().post(endpoint, {
             input,
             config,
@@ -60,7 +65,7 @@ export function commuteSearchService(input, config) {
     })
 }
 
-async function autoCompleteService(endpoint, q, queryParams={}){
+async function autoCompleteService(endpoint, q, queryParams = {}) {
     let params = {
         q: q,
         ...queryParams,
@@ -105,11 +110,10 @@ export function parseRouteSearchInput(route) {
         clone(route.query),
         clone(route.params),
         (queryValue, paramValue) => {
-            if(paramValue && queryValue){
+            if (paramValue && queryValue) {
                 if (Array.isArray(queryValue)) {
                     return [paramValue].concat(queryValue)
-                }
-                else if (slugify(queryValue) != slugify(paramValue)) {
+                } else if (slugify(queryValue) != slugify(paramValue)) {
                     return [paramValue, queryValue]
                 }
             }
