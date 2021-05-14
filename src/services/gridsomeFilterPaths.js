@@ -4,48 +4,29 @@ const alphabeticalOrder = require("./alphabeticalOrder")
 const defaultUrlFilters = require("./../constants/defaultFilters.js")
 const defaultFilterNames = _.map(defaultUrlFilters, "name")
 
-function buildFilterPages(
-    filterGroup,
-    filterPaths,
-    prevPath = null,
-    prevParam = null
-) {
-    for (let i = 0, len = filterGroup.length; i < len; i++) {
-        let path = null
-        let param = filterGroup[i].name
-        if (param !== prevParam) {
-            path = `/${filterGroup[i].slug}/:${param}`
-            if (prevPath) {
-                path = `${prevPath}${path}`
-            }
-            filterPaths.push(`${path}/jobs`)
-        }
-        if (path) {
-            buildFilterPages(filterGroup.slice(i), filterPaths, path, param)
-        }
-    }
-    return filterPaths
-}
-
 function getFilterPaths(filters) {
     let filterPaths = []
-    const allFilters = getAllFilters(filters)
+    let allFilters = getAllFilters(filters)
+    const filterGroups = getSubArrays(allFilters.reverse())
 
-    for (let i = 0, len = allFilters.length; i < len; i++) {
-        filterPaths = filterPaths.concat(
-            buildFilterPages(allFilters.slice(i), filterPaths)
-        )
+    for (let i = 0; i < filterGroups.length; i++) {
+        let path = ''
+        for (let j = 0; j < filterGroups[i].length; j++) {
+            const param = filterGroups[i][j][0]
+            const slug = filterGroups[i][j][1]
+            path += `/${slug}/:${param}`
+        }
+        filterPaths.push(`${path}/jobs`)
     }
-
     return filterPaths
 }
 
 function getAllFilters(filters) {
     const customFilters = getCustomFilters(filters)
     const defaultFilters = getDefaultFilters(filters)
-    const customFilerSlugs = filterSlugArray(customFilters)
-
-    return _.union(defaultFilters, customFilerSlugs)
+    const defaultFilterSlugs = filterSlugArray(defaultFilters)
+    const customFilterSlugs = filterSlugArray(customFilters)
+    return _.union(defaultFilterSlugs, customFilterSlugs)
 }
 
 function getCustomFilters(filters) {
@@ -58,22 +39,31 @@ function getCustomFilters(filters) {
 
 function getDefaultFilters(filters) {
     let defaultFilters = filters
-    defaultFilters = defaultFilters.filter(
-        filter => defaultFilterNames.includes(filter.name)
+    defaultFilters = defaultFilters.filter(filter =>
+        defaultFilterNames.includes(filter.name)
     )
     let activeFilterNames = _.map(defaultFilters, "name")
     let activeDefaultFilters = defaultUrlFilters.filter(
         filter => activeFilterNames.includes(filter.name)
     )
+
     return activeDefaultFilters
+}
+
+function getSubArrays(arr) {
+    if (arr.length === 1) {
+        return [arr]
+    }
+    subarr = getSubArrays(arr.slice(1))
+    return subarr.concat(
+        subarr.map(e => e.concat([arr[0]])),
+        [[arr[0]]]
+    )
 }
 
 function filterSlugArray(filters) {
     return filters.map(filter => {
-        return {
-            name: filter.name,
-            slug: slugify(filter.display)
-        }
+        return [filter.name, slugify(filter.display)]
     })
 }
 
