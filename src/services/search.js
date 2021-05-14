@@ -29,10 +29,10 @@ export function api() {
     })
 }
 
-function apiService(input, config, path) {
+function apiService(input, config, path, path_is_endpoint=false) {
     const source = kebabCase(config.source)
-    const endpoint = `${source}/${path}`
-    if (!process.isClient || (isDevelopment()) && window.location.hostname == 'localhost') {
+    const endpoint = path_is_endpoint ? path : `${source}/${path}`
+    if (!process.isClient || (isDevelopment() && window.location.hostname == 'localhost')) {
             return api().post(endpoint, {
                 data: input,
                 config: config,
@@ -55,19 +55,9 @@ export function jobsSearchService(input, config) {
 export function filtersSearchService(input, config) {
     return apiService(input, config, 'filters')
 }
-export function commuteSearchService(input, config) {
-    const endpoint = "google-talent/commute"
 
-    if (!process.isClient || (isDevelopment() && window.location.hostname == 'localhost')){
-        return api().post(endpoint, {
-            data: input,
-            config: config,
-        })
-    }
-    input.origin = window.location.hostname
-    return api().get(endpoint, {
-        params: input,
-    })
+export function commuteSearchService(input, config) {
+    return apiService(input, config, "google-talent/commute", true)
 }
 
 
