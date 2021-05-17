@@ -50,14 +50,14 @@ function getDefaultFilters(filters) {
     return activeDefaultFilters
 }
 
-function getFilterGroups(arr) {
-    if (arr.length === 1) {
-        return [arr]
+function getFilterGroups(group) {
+    if (group.length === 1) {
+        return [group]
     }
-    subarr = getFilterGroups(arr.slice(1))
-    return subarr.concat(
-        subarr.map(e => e.concat([arr[0]])),
-        [[arr[0]]]
+    subGroup = getFilterGroups(group.slice(1))
+    return subGroup.concat(
+        subGroup.map(e => e.concat([group[0]])),
+        [[group[0]]]
     )
 }
 
