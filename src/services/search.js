@@ -30,12 +30,13 @@ export function api() {
 }
 
 function apiService(input, config, endpoint) {
-    if (!process.isClient || (isDevelopment() && window.location.hostname == 'localhost')) {
-            return api().post(endpoint, {
-                data: input,
-                config: config,
-            })
-        }
+    const localHosts = ['localhost', 'minikube']
+    if (!process.isClient || isDevelopment() || localHosts.includes(window.location.hostname)) {
+        return api().post(endpoint, {
+            data: input,
+            config: config,
+        })
+    }
     input.origin = window.location.hostname
     return api().get(endpoint, {
         params: input,
@@ -47,12 +48,12 @@ export function searchService(input, config) {
     return apiService(input, config, `${source}/search`)
 }
 
-export function jobSearchService(input, config) {
+export function jobsSearchService(input, config) {
     const source = kebabCase(config.source)
     return apiService(input, config, `${source}/jobs`)
 }
 
-export function filterSearchService(input, config) {
+export function filtersSearchService(input, config) {
     const source = kebabCase(config.source)
     return apiService(input, config, `${source}/filters`)
 }
