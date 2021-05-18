@@ -29,9 +29,7 @@ export function api() {
     })
 }
 
-function apiService(input, config, path, path_is_endpoint=false) {
-    const source = kebabCase(config.source)
-    const endpoint = path_is_endpoint ? path : `${source}/${path}`
+function apiService(input, config, endpoint) {
     if (!process.isClient || (isDevelopment() && window.location.hostname == 'localhost')) {
             return api().post(endpoint, {
                 data: input,
@@ -45,19 +43,22 @@ function apiService(input, config, path, path_is_endpoint=false) {
 }
 
 export function searchService(input, config) {
-    return apiService(input, config, 'search')
+    const source = kebabCase(config.source)
+    return apiService(input, config, `${source}/search`)
 }
 
-export function jobsSearchService(input, config) {
-    return apiService(input, config, 'jobs')
+export function jobSearchService(input, config) {
+    const source = kebabCase(config.source)
+    return apiService(input, config, `${source}/jobs`)
 }
 
-export function filtersSearchService(input, config) {
-    return apiService(input, config, 'filters')
+export function filterSearchService(input, config) {
+    const source = kebabCase(config.source)
+    return apiService(input, config, `${source}/filters`)
 }
 
 export function commuteSearchService(input, config) {
-    return apiService(input, config, "google-talent/commute", true)
+    return apiService(input, config, "google-talent/commute")
 }
 
 
