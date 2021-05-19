@@ -29,11 +29,9 @@ export function api() {
     })
 }
 
-
-export function searchService(input, config) {
-    const source = kebabCase(config.source)
-    const endpoint = `${source}/search`
-    if (!process.isClient || (isDevelopment() && window.location.hostname == 'localhost')){
+function apiService(input, config, endpoint) {
+    const localHosts = ['localhost', 'minikube']
+    if (!process.isClient || isDevelopment() || localHosts.includes(window.location.hostname)) {
         return api().post(endpoint, {
             data: input,
             config: config,
@@ -45,19 +43,23 @@ export function searchService(input, config) {
     })
 }
 
-export function commuteSearchService(input, config) {
-    const endpoint = "google-talent/commute"
+export function searchService(input, config) {
+    const source = kebabCase(config.source)
+    return apiService(input, config, `${source}/search`)
+}
 
-    if (!process.isClient || (isDevelopment() && window.location.hostname == 'localhost')){
-        return api().post(endpoint, {
-            data: input,
-            config: config,
-        })
-    }
-    input.origin = window.location.hostname
-    return api().get(endpoint, {
-        params: input,
-    })
+export function jobsSearchService(input, config) {
+    const source = kebabCase(config.source)
+    return apiService(input, config, `${source}/jobs`)
+}
+
+export function filtersSearchService(input, config) {
+    const source = kebabCase(config.source)
+    return apiService(input, config, `${source}/filters`)
+}
+
+export function commuteSearchService(input, config) {
+    return apiService(input, config, "google-talent/commute")
 }
 
 
