@@ -1,6 +1,6 @@
 const config = {
     buids: [48303],
-    source: "google-talent", //solr or google-talent
+    source: "solr", //solr or google-talent
     s3Folder: "frontdoor-jobs",
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
     tenant_uuid: process.env.GRIDSOME_GOOGLE_TALENT_TENANT,

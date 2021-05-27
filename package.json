@@ -9,6 +9,7 @@
     "develop": "gridsome develop",
     "explore": "gridsome explore",
     "build": "gridsome build",
+    "build-local": "GRIDSOME_USE_MINIKUBE=true gridsome build",
     "dist": "vue-cli-service build --target lib --name microsite-js ./src/index.js",
     "lint": "vue-cli-service lint",
     "test": "jest --no-cache"
