@@ -86,7 +86,7 @@ export default {
 
             if (Array.isArray(value) && value.length) {
                 value.forEach(val => {
-                    this.serializeToFormData(val, resultData, property + this.formDataArrayBrackets ? "[]" : "")
+                    this.serializeToFormData(val, resultData, property + (this.formDataArrayBrackets ? "[]" : ""))
                 })
             } else if (typeof value == "object" && !(value instanceof File)) {
                 Object.keys(value).forEach(prop => {

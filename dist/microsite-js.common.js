@@ -29545,12 +29545,12 @@ module.exports = function ($this, dummy, Wrapper) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAxiosForm.vue?vue&type=template&id=f0872a66&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAxiosForm.vue?vue&type=template&id=00c99fd8&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('form',{ref:"form",on:{"submit":function($event){$event.preventDefault();return _vm.submit($event)}}},[_vm._t("default",null,{"data":_vm.data,"failed":_vm.failed,"errors":_vm.errors,"success":_vm.success,"loading":_vm.loading,"response":_vm.response})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Form/AppAxiosForm.vue?vue&type=template&id=f0872a66&
+// CONCATENATED MODULE: ./src/components/Form/AppAxiosForm.vue?vue&type=template&id=00c99fd8&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -29683,7 +29683,7 @@ var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 
       if (Array.isArray(value) && value.length) {
         value.forEach(function (val) {
-          _this.serializeToFormData(val, resultData, property + _this.formDataArrayBrackets ? "[]" : "");
+          _this.serializeToFormData(val, resultData, property + (_this.formDataArrayBrackets ? "[]" : ""));
         });
       } else if (Object(esm_typeof["a" /* default */])(value) == "object" && !(value instanceof File)) {
         Object.keys(value).forEach(function (prop) {
