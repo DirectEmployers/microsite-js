@@ -880,7 +880,7 @@ var AppSolrJob = __webpack_require__("1a60");
     getJobs: function getJobs() {
       var _this = this;
 
-      Object(search["f" /* searchService */])({
+      Object(search["e" /* searchService */])({
         num_items: 10,
         q: "-guid:".concat(this.guid, " AND ").concat(this.title),
         location: this.location
@@ -22316,7 +22316,7 @@ module.exports = stackDelete;
       return defaults;
     },
     service: function service() {
-      return _services_search__WEBPACK_IMPORTED_MODULE_22__[/* searchService */ "f"];
+      return _services_search__WEBPACK_IMPORTED_MODULE_22__[/* searchService */ "e"];
     },
     isGoogleTalent: function isGoogleTalent() {
       return this.meta.source == _services_search__WEBPACK_IMPORTED_MODULE_22__[/* GOOGLE_TALENT */ "a"];
@@ -22376,7 +22376,7 @@ module.exports = stackDelete;
     $route: function $route(newval, oldval) {
       this.jobDisplay = [];
       this.isFirstLoad = true;
-      this.input = this.mergeWithDefaultInput(Object(_services_search__WEBPACK_IMPORTED_MODULE_22__[/* parseRouteSearchInput */ "e"])(this.$route));
+      this.input = this.mergeWithDefaultInput(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.params), Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.query));
       this.queryChanged();
       this.extraData = this.defaultExtraData();
       this.search();
@@ -22396,7 +22396,7 @@ module.exports = stackDelete;
     };
   },
   created: function created() {
-    this.input = this.mergeWithDefaultInput(Object(_services_search__WEBPACK_IMPORTED_MODULE_22__[/* parseRouteSearchInput */ "e"])(this.$route));
+    this.input = this.mergeWithDefaultInput(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.params), Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.query));
 
     if (this.searchOnLoad) {
       this.search();
@@ -31616,7 +31616,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   },
   methods: {
     service: function service(data) {
-      return Object(services_search["f" /* searchService */])(data, this.queryConfig);
+      return Object(services_search["e" /* searchService */])(data, this.queryConfig);
     },
     search: function search(job) {
       var payload = omitBy_default()(this.payload, function (v, k) {
@@ -36016,7 +36016,7 @@ module.exports = mapCacheHas;
     }
   },
   created: function created() {
-    if (process.isClient && !Object(_services_storage__WEBPACK_IMPORTED_MODULE_5__[/* declinedCookieUse */ "f"])() && !Object(_services_helpers__WEBPACK_IMPORTED_MODULE_4__[/* isDevelopment */ "d"])()) {
+    if (process.isClient && !Object(_services_storage__WEBPACK_IMPORTED_MODULE_5__[/* declinedCookieUse */ "f"])() && !Object(_services_helpers__WEBPACK_IMPORTED_MODULE_4__[/* isDevelopment */ "c"])()) {
       this.appendTracker();
     }
   },
@@ -36424,12 +36424,10 @@ exports.default = Tokenizer;
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ blank; });
-__webpack_require__.d(__webpack_exports__, "d", function() { return /* binding */ isDevelopment; });
+__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ isDevelopment; });
 __webpack_require__.d(__webpack_exports__, "b", function() { return /* binding */ buildJobDetailUrl; });
-__webpack_require__.d(__webpack_exports__, "e", function() { return /* binding */ slugify; });
-__webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ humanFriendlyLocation; });
 
-// UNUSED EXPORTS: isCoordinates
+// UNUSED EXPORTS: slugify, isCoordinates, humanFriendlyLocation
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -36838,27 +36836,6 @@ function removeState(value) {
   return Object(lodash["trimEnd"])(Object(lodash["trim"])(result), ",");
 }
 /**
- * Expand a code value to full state name.
- */
-
-function fullState(code) {
-  if (blank(code)) {
-    return code;
-  }
-
-  var result = Object(lodash["trim"])(code.toString());
-
-  if (Object.prototype.hasOwnProperty.call(states, result.toUpperCase())) {
-    return states[result.toUpperCase()];
-  }
-
-  if (Object.prototype.hasOwnProperty.call(provinces, result.toUpperCase())) {
-    return provinces[result.toUpperCase()];
-  }
-
-  return result;
-}
-/**
  * Return true if the given value is a code that exists in ONE of
  * the location objects at the top of this module.
  */
@@ -37192,7 +37169,7 @@ if (!IS_PURE && typeof NativePromise == 'function' && !NativePromise.prototype['
   },
   computed: {
     service: function service() {
-      return this.isCommuteSearch ? _services_search__WEBPACK_IMPORTED_MODULE_4__[/* commuteSearchService */ "d"] : _services_search__WEBPACK_IMPORTED_MODULE_4__[/* searchService */ "f"];
+      return this.isCommuteSearch ? _services_search__WEBPACK_IMPORTED_MODULE_4__[/* commuteSearchService */ "d"] : _services_search__WEBPACK_IMPORTED_MODULE_4__[/* searchService */ "e"];
     }
   },
   methods: {
@@ -43752,42 +43729,32 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SOLR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GOOGLE_TALENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return api; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return searchService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return searchService; });
 /* unused harmony export jobsSearchService */
 /* unused harmony export filtersSearchService */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return commuteSearchService; });
 /* unused harmony export TitleCompleteService */
 /* unused harmony export MOCCompleteService */
 /* unused harmony export LocationCompleteService */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return parseRouteSearchInput; });
-/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("99af");
-/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("caad");
-/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a15b");
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("d81d");
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("5530");
-/* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("96cf");
-/* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("1da1");
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("d4ec");
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("bee2");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("bc3a");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var lodash_mergeWith__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("2411");
-/* harmony import */ var lodash_mergeWith__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash_mergeWith__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var lodash_toString__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("76dd");
-/* harmony import */ var lodash_toString__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(lodash_toString__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("375a");
-/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var lodash_clone__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("b8ce");
-/* harmony import */ var lodash_clone__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(lodash_clone__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("a74a");
-
-
-
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("caad");
+/* harmony import */ var core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("5530");
+/* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("96cf");
+/* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("1da1");
+/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("d4ec");
+/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("bee2");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("bc3a");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var lodash_mergeWith__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("2411");
+/* harmony import */ var lodash_mergeWith__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash_mergeWith__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var lodash_toString__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("76dd");
+/* harmony import */ var lodash_toString__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash_toString__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("375a");
+/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var lodash_clone__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("b8ce");
+/* harmony import */ var lodash_clone__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash_clone__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("a74a");
 
 
 
@@ -43806,12 +43773,12 @@ var API_URL = "https://qc-search-api.jobsyn.org/api/v1/";
 
 if (Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_USE_MINIKUBE === "true") {
   API_URL = "http://minikube:35000/api/v1";
-} else if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_14__[/* isDevelopment */ "d"])()) {
+} else if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_11__[/* isDevelopment */ "c"])()) {
   API_URL = "https://prod-search-api.jobsyn.org/api/v1/";
 }
 
 function api() {
-  return axios__WEBPACK_IMPORTED_MODULE_9___default.a.create({
+  return axios__WEBPACK_IMPORTED_MODULE_6___default.a.create({
     baseURL: API_URL,
     withCredentials: false,
     headers: {
@@ -43824,7 +43791,7 @@ function api() {
 function apiService(input, config, endpoint) {
   var localHosts = ['localhost', 'minikube'];
 
-  if (!process.isClient || Object(_helpers__WEBPACK_IMPORTED_MODULE_14__[/* isDevelopment */ "d"])() || localHosts.includes(window.location.hostname)) {
+  if (!process.isClient || Object(_helpers__WEBPACK_IMPORTED_MODULE_11__[/* isDevelopment */ "c"])() || localHosts.includes(window.location.hostname)) {
     return api().post(endpoint, {
       data: input,
       config: config
@@ -43838,15 +43805,15 @@ function apiService(input, config, endpoint) {
 }
 
 function searchService(input, config) {
-  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_12___default()(config.source);
+  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9___default()(config.source);
   return apiService(input, config, "".concat(source, "/search"));
 }
 function jobsSearchService(input, config) {
-  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_12___default()(config.source);
+  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9___default()(config.source);
   return apiService(input, config, "".concat(source, "/jobs"));
 }
 function filtersSearchService(input, config) {
-  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_12___default()(config.source);
+  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9___default()(config.source);
   return apiService(input, config, "".concat(source, "/filters"));
 }
 function commuteSearchService(input, config) {
@@ -43854,13 +43821,13 @@ function commuteSearchService(input, config) {
 }
 var TitleCompleteService = /*#__PURE__*/function () {
   function TitleCompleteService() {
-    Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"])(this, TitleCompleteService);
+    Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(this, TitleCompleteService);
   }
 
-  Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"])(TitleCompleteService, null, [{
+  Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(TitleCompleteService, null, [{
     key: "get",
     value: function () {
-      var _get = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(q) {
+      var _get = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(q) {
         var queryParams,
             params,
             response,
@@ -43870,7 +43837,7 @@ var TitleCompleteService = /*#__PURE__*/function () {
             switch (_context.prev = _context.next) {
               case 0:
                 queryParams = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
-                params = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])({
+                params = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])({
                   q: q
                 }, queryParams);
                 _context.prev = 2;
@@ -43917,13 +43884,13 @@ var TitleCompleteService = /*#__PURE__*/function () {
 }();
 var MOCCompleteService = /*#__PURE__*/function () {
   function MOCCompleteService() {
-    Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"])(this, MOCCompleteService);
+    Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(this, MOCCompleteService);
   }
 
-  Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"])(MOCCompleteService, null, [{
+  Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(MOCCompleteService, null, [{
     key: "get",
     value: function () {
-      var _get2 = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(q) {
+      var _get2 = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(q) {
         var response;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -43975,13 +43942,13 @@ var MOCCompleteService = /*#__PURE__*/function () {
 }();
 var LocationCompleteService = /*#__PURE__*/function () {
   function LocationCompleteService() {
-    Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"])(this, LocationCompleteService);
+    Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(this, LocationCompleteService);
   }
 
-  Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"])(LocationCompleteService, null, [{
+  Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(LocationCompleteService, null, [{
     key: "get",
     value: function () {
-      var _get3 = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(q) {
+      var _get3 = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(q) {
         var response;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -44031,36 +43998,6 @@ var LocationCompleteService = /*#__PURE__*/function () {
 
   return LocationCompleteService;
 }();
-/**
- * Parse search url query/route params and format them.
- */
-
-function parseRouteSearchInput(route) {
-  //merge the route data
-  var input = lodash_mergeWith__WEBPACK_IMPORTED_MODULE_10___default()(lodash_clone__WEBPACK_IMPORTED_MODULE_13___default()(route.query), lodash_clone__WEBPACK_IMPORTED_MODULE_13___default()(route.params), function (queryValue, paramValue) {
-    if (paramValue && queryValue) {
-      if (Array.isArray(queryValue)) {
-        return [paramValue].concat(queryValue);
-      } else if (Object(_helpers__WEBPACK_IMPORTED_MODULE_14__[/* slugify */ "e"])(queryValue) != Object(_helpers__WEBPACK_IMPORTED_MODULE_14__[/* slugify */ "e"])(paramValue)) {
-        return [paramValue, queryValue];
-      }
-    }
-  }); // handle old url location.
-
-  if (Object(_helpers__WEBPACK_IMPORTED_MODULE_14__[/* blank */ "a"])(input.location)) {
-    input.location = lodash_toString__WEBPACK_IMPORTED_MODULE_11___default()([input.city, input.state, input.country].join(" "));
-  }
-
-  if (!Array.isArray(input.location)) {
-    input.location = Object(_helpers__WEBPACK_IMPORTED_MODULE_14__[/* humanFriendlyLocation */ "c"])(input.location);
-  } else {
-    input.location = input.location.map(function (loc) {
-      return Object(_helpers__WEBPACK_IMPORTED_MODULE_14__[/* humanFriendlyLocation */ "c"])(loc);
-    });
-  }
-
-  return input;
-}
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("4362")))
 
 /***/ }),

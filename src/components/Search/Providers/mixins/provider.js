@@ -170,7 +170,8 @@ export default {
             this.jobDisplay = []
             this.isFirstLoad = true
             this.input = this.mergeWithDefaultInput(
-                parseRouteSearchInput(this.$route)
+                {...this.$route.params},
+                {...this.$route.query}
             )
 
             this.queryChanged()
@@ -193,7 +194,8 @@ export default {
     },
     created() {
         this.input = this.mergeWithDefaultInput(
-            parseRouteSearchInput(this.$route)
+            {...this.$route.params},
+            {...this.$route.query}
         )
 
         if (this.searchOnLoad) {
