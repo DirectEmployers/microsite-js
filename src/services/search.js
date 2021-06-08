@@ -58,6 +58,11 @@ export function filtersSearchService(input, config) {
     return apiService(input, config, `${source}/filters`)
 }
 
+export function filterSearchService(input, config, filter='') {
+    const source = kebabCase(config.source)
+    return apiService(input, config, `${source}/filter/${filter}`)
+}
+
 export function commuteSearchService(input, config) {
     return apiService(input, config, "google-talent/commute")
 }
