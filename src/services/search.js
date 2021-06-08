@@ -62,11 +62,7 @@ export function commuteSearchService(input, config) {
     return apiService(input, config, "google-talent/commute")
 }
 
-async function autoCompleteService(endpoint, q, queryParams = {}) {
-    let params = {
-        q,
-        ...queryParams,
-    }
+async function autoCompleteService(endpoint, params) {
     try {
         const response = await api().get(endpoint, {
             params,
@@ -82,7 +78,11 @@ async function autoCompleteService(endpoint, q, queryParams = {}) {
 
 export class TitleCompleteService {
     static get(q, queryParams = {}) {
-        return autoCompleteService("complete/title", q, queryParams)
+        let params = {
+            q,
+            ...queryParams,
+        }
+        return autoCompleteService("complete/title", params)
     }
 }
 
