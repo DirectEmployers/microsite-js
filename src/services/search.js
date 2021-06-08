@@ -124,36 +124,3 @@ export class LocationCompleteService {
         }
     }
 }
-
-/**
- * Parse search url query/route params and format them.
- */
-export function parseRouteSearchInput(route) {
-    //merge the route data
-    let input = mergeWith(
-        clone(route.query),
-        clone(route.params),
-        (queryValue, paramValue) => {
-            if(paramValue && queryValue){
-                if (Array.isArray(queryValue)) {
-                    return [paramValue].concat(queryValue)
-                }
-                else if (slugify(queryValue) != slugify(paramValue)) {
-                    return [paramValue, queryValue]
-                }
-            }
-        }
-    )
-    // handle old url location.
-    if (blank(input.location)) {
-        input.location = toString(
-            [input.city, input.state, input.country].join(" ")
-        )
-    }
-    if (!Array.isArray(input.location)) {
-        input.location = humanFriendlyLocation(input.location)
-    } else {
-        input.location = input.location.map(loc => humanFriendlyLocation(loc))
-    }
-    return input
-}

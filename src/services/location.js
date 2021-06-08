@@ -340,25 +340,6 @@ export function removeState(value) {
     return trimEnd(trim(result), ",")
 }
 
-/**
- * Expand a code value to full state name.
- */
-export function fullState(code) {
-    if (blank(code)) {
-        return code
-    }
-    let result = trim(code.toString())
-
-    if (Object.prototype.hasOwnProperty.call(states, result.toUpperCase())) {
-        return states[result.toUpperCase()]
-    }
-
-    if (Object.prototype.hasOwnProperty.call(provinces, result.toUpperCase())) {
-        return provinces[result.toUpperCase()]
-    }
-
-    return result
-}
 
 /**
  * Return true if the given value is a code that exists in ONE of
