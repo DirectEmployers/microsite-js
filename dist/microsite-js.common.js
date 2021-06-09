@@ -22376,7 +22376,7 @@ module.exports = stackDelete;
     $route: function $route(newval, oldval) {
       this.jobDisplay = [];
       this.isFirstLoad = true;
-      this.input = this.mergeWithDefaultInput(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.params), Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.query));
+      this.input = this.mergeWithDefaultInput(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.params), this.$route.query));
       this.queryChanged();
       this.extraData = this.defaultExtraData();
       this.search();
@@ -22396,7 +22396,7 @@ module.exports = stackDelete;
     };
   },
   created: function created() {
-    this.input = this.mergeWithDefaultInput(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.params), Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.query));
+    this.input = this.mergeWithDefaultInput(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.params), this.$route.query));
 
     if (this.searchOnLoad) {
       this.search();
