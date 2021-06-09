@@ -22385,7 +22385,7 @@ module.exports = stackDelete;
     $route: function $route(newval, oldval) {
       this.jobDisplay = [];
       this.isFirstLoad = true;
-      this.input = this.mergeWithDefaultInput(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.params), Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.query));
+      this.input = this.mergeWithDefaultInput(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.params), this.$route.query));
       this.queryChanged();
       this.extraData = this.defaultExtraData();
       this.search();
@@ -22405,7 +22405,7 @@ module.exports = stackDelete;
     };
   },
   created: function created() {
-    this.input = this.mergeWithDefaultInput(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.params), Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.query));
+    this.input = this.mergeWithDefaultInput(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])(Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"])({}, this.$route.params), this.$route.query));
 
     if (this.searchOnLoad) {
       this.search();
@@ -43741,27 +43741,31 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return searchService; });
 /* unused harmony export jobsSearchService */
 /* unused harmony export filtersSearchService */
+/* unused harmony export filterSearchService */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return commuteSearchService; });
 /* unused harmony export TitleCompleteService */
 /* unused harmony export MOCCompleteService */
 /* unused harmony export LocationCompleteService */
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("5530");
+/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("99af");
+/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("96cf");
 /* harmony import */ var regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("1da1");
+/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("5530");
 /* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("d4ec");
 /* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("bee2");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("bc3a");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var lodash_mergeWith__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("2411");
-/* harmony import */ var lodash_mergeWith__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash_mergeWith__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var lodash_toString__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("76dd");
-/* harmony import */ var lodash_toString__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash_toString__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("375a");
-/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var lodash_clone__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("b8ce");
-/* harmony import */ var lodash_clone__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash_clone__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("a74a");
+/* harmony import */ var _home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("1da1");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("bc3a");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var lodash_mergeWith__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("2411");
+/* harmony import */ var lodash_mergeWith__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash_mergeWith__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var lodash_toString__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("76dd");
+/* harmony import */ var lodash_toString__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash_toString__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("375a");
+/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var lodash_clone__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("b8ce");
+/* harmony import */ var lodash_clone__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash_clone__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("a74a");
+
 
 
 
@@ -43779,12 +43783,12 @@ var API_URL = "https://qc-search-api.jobsyn.org/api/v1/";
 
 if (Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_USE_MINIKUBE === "true") {
   API_URL = "http://minikube:35000/api/v1";
-} else if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_10__[/* isDevelopment */ "c"])()) {
+} else if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_11__[/* isDevelopment */ "c"])()) {
   API_URL = "https://prod-search-api.jobsyn.org/api/v1/";
 }
 
 function api() {
-  return axios__WEBPACK_IMPORTED_MODULE_5___default.a.create({
+  return axios__WEBPACK_IMPORTED_MODULE_6___default.a.create({
     baseURL: API_URL,
     withCredentials: false,
     headers: {
@@ -43795,7 +43799,7 @@ function api() {
 }
 
 function apiService(input, config, endpoint) {
-  var local = Object(_helpers__WEBPACK_IMPORTED_MODULE_10__[/* isDevelopment */ "c"])() || Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_USE_MINIKUBE;
+  var local = Object(_helpers__WEBPACK_IMPORTED_MODULE_11__[/* isDevelopment */ "c"])() || Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_USE_MINIKUBE;
 
   if (local) {
     input.origin = config.s3Folder;
@@ -43809,20 +43813,71 @@ function apiService(input, config, endpoint) {
 }
 
 function searchService(input, config) {
-  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8___default()(config.source);
+  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9___default()(config.source);
   return apiService(input, config, "".concat(source, "/search"));
 }
 function jobsSearchService(input, config) {
-  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8___default()(config.source);
+  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9___default()(config.source);
   return apiService(input, config, "".concat(source, "/jobs"));
 }
 function filtersSearchService(input, config) {
-  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8___default()(config.source);
+  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9___default()(config.source);
   return apiService(input, config, "".concat(source, "/filters"));
+}
+function filterSearchService(input, config) {
+  var filter = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9___default()(config.source);
+  return apiService(input, config, "".concat(source, "/filter/").concat(filter));
 }
 function commuteSearchService(input, config) {
   return apiService(input, config, "google-talent/commute");
 }
+
+function autoCompleteService(_x, _x2) {
+  return _autoCompleteService.apply(this, arguments);
+}
+
+function _autoCompleteService() {
+  _autoCompleteService = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(endpoint, params) {
+    var response;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return api().get(endpoint, {
+              params: params
+            });
+
+          case 3:
+            response = _context.sent;
+            return _context.abrupt("return", response);
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+
+            if (!Object.prototype.hasOwnProperty.call(_context.t0, "response")) {
+              _context.next = 11;
+              break;
+            }
+
+            return _context.abrupt("return", _context.t0);
+
+          case 11:
+            throw new Error(_context.t0);
+
+          case 12:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 7]]);
+  }));
+  return _autoCompleteService.apply(this, arguments);
+}
+
 var TitleCompleteService = /*#__PURE__*/function () {
   function TitleCompleteService() {
     Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(this, TitleCompleteService);
@@ -43830,58 +43885,15 @@ var TitleCompleteService = /*#__PURE__*/function () {
 
   Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(TitleCompleteService, null, [{
     key: "get",
-    value: function () {
-      var _get = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee(q) {
-        var queryParams,
-            params,
-            response,
-            _args = arguments;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                queryParams = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
-                params = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])({
-                  q: q
-                }, queryParams);
-                _context.prev = 2;
-                _context.next = 5;
-                return api().get("complete/title", {
-                  params: params
-                });
+    value: function get(q) {
+      var queryParams = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-              case 5:
-                response = _context.sent;
-                return _context.abrupt("return", response);
+      var params = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])({
+        q: q
+      }, queryParams);
 
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](2);
-
-                if (!Object.prototype.hasOwnProperty.call(_context.t0, "response")) {
-                  _context.next = 13;
-                  break;
-                }
-
-                return _context.abrupt("return", _context.t0);
-
-              case 13:
-                throw new Error(_context.t0);
-
-              case 14:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[2, 9]]);
-      }));
-
-      function get(_x) {
-        return _get.apply(this, arguments);
-      }
-
-      return get;
-    }()
+      return autoCompleteService("complete/title", params);
+    }
   }]);
 
   return TitleCompleteService;
@@ -43893,53 +43905,9 @@ var MOCCompleteService = /*#__PURE__*/function () {
 
   Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(MOCCompleteService, null, [{
     key: "get",
-    value: function () {
-      var _get2 = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(q) {
-        var response;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return api().get("/complete/moc", {
-                  params: {
-                    q: q
-                  }
-                });
-
-              case 3:
-                response = _context2.sent;
-                return _context2.abrupt("return", response);
-
-              case 7:
-                _context2.prev = 7;
-                _context2.t0 = _context2["catch"](0);
-
-                if (!Object.prototype.hasOwnProperty.call(_context2.t0, "response")) {
-                  _context2.next = 11;
-                  break;
-                }
-
-                return _context2.abrupt("return", _context2.t0);
-
-              case 11:
-                throw new Error(_context2.t0);
-
-              case 12:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[0, 7]]);
-      }));
-
-      function get(_x2) {
-        return _get2.apply(this, arguments);
-      }
-
-      return get;
-    }()
+    value: function get(q) {
+      return autoCompleteService("/complete/moc", q);
+    }
   }]);
 
   return MOCCompleteService;
@@ -43951,53 +43919,9 @@ var LocationCompleteService = /*#__PURE__*/function () {
 
   Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(LocationCompleteService, null, [{
     key: "get",
-    value: function () {
-      var _get3 = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(q) {
-        var response;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.prev = 0;
-                _context3.next = 3;
-                return api().get("complete/location", {
-                  params: {
-                    q: q
-                  }
-                });
-
-              case 3:
-                response = _context3.sent;
-                return _context3.abrupt("return", response);
-
-              case 7:
-                _context3.prev = 7;
-                _context3.t0 = _context3["catch"](0);
-
-                if (!Object.prototype.hasOwnProperty.call(_context3.t0, "response")) {
-                  _context3.next = 11;
-                  break;
-                }
-
-                return _context3.abrupt("return", _context3.t0);
-
-              case 11:
-                throw new Error(_context3.t0);
-
-              case 12:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, null, [[0, 7]]);
-      }));
-
-      function get(_x3) {
-        return _get3.apply(this, arguments);
-      }
-
-      return get;
-    }()
+    value: function get(q) {
+      return autoCompleteService("complete/location", q);
+    }
   }]);
 
   return LocationCompleteService;
