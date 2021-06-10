@@ -69,7 +69,6 @@ export function commuteSearchService(input, config) {
 
 async function autoCompleteService(endpoint, params) {
     try {
-        console.log(params)
         const response = await api().get(endpoint, {
             params,
         })
