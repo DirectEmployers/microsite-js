@@ -15,14 +15,6 @@ const config = {
     //     solr:"title_exact:*Sales* OR title_exact:*Retail*"
     // },
     filters: [
-        // {
-        //     name: "militarybases",
-        //     display: "Military Bases",
-        //     solr_queries: {
-        //         "Joint Base Elmendorf-Richardson": "{!geofilt}&sfield=GeoLocation&pt=61.29214089702885,-149.72793543296942&d=40.2336",
-        //         "Joint Base Anacostia-Bolling": "{!geofilt}&sfield=GeoLocation&pt=38.842981875673246,-77.01483923388254&d=40.2336",
-        //     },
-        // },
         {
             name: "jobcategory",
             display: "Career Areas",
