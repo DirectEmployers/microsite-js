@@ -48,7 +48,6 @@ const config = {
             },
             display: "City",
         },
-
         {
             name: "title",
             display: "Job Title",

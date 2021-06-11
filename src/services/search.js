@@ -93,12 +93,12 @@ export class TitleCompleteService {
 
 export class MOCCompleteService {
     static get(q) {
-        return autoCompleteService("/complete/moc", q)
+        return autoCompleteService("/complete/moc", {q})
     }
 }
 
 export class LocationCompleteService {
     static get(q) {
-        return autoCompleteService("complete/location", q)
+        return autoCompleteService("complete/location", {q})
     }
 }
