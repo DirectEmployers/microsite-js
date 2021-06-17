@@ -10,6 +10,7 @@
         <section v-if="loaded">
             <section :key="baseIndex" v-for="(base, baseIndex) in bases">
                 <GmapMarker
+                    v-if="baseLookup[base.name]['count']"
                     :clickable="true"
                     :position="{lat: base.centroid[0], lng: base.centroid[1]}"
                     @mouseout="currentActiveWindowIndex = null"
@@ -18,13 +19,14 @@
                         url: getBranchLogoSrc(base.branch),
                         scaledSize: new google.maps.Size(45,45),
                     }"
-                    @click="clickedBase(base)"
+                    @click="clickedBase(baseLookup[base.name])"
 
 
                 ></GmapMarker>
                 <GmapInfoWindow
+                    v-if="baseLookup[base.name]['count']"
                     :position="{lat: base.centroid[0], lng: base.centroid[1]}"
-                    @click="clickedBase(base)"
+                    @click="clickedBase(baseLookup[base.name])"
                     :opened="currentActiveWindowIndex == baseIndex"
                     :options="{
                         pixelOffset: {
@@ -34,9 +36,9 @@
                     }"
                 >
                     <div
-                        class="flex flex-col font-bold justify-center items-center"
+                        class="flex flex-col font-bold py-4 justify-center items-center"
                     >
-                        {{ base.name }}
+                        {{ base.name }} ({{baseLookup[base.name]['count']}} Jobs)
                     </div>
                 </GmapInfoWindow>
             </section>
@@ -44,16 +46,28 @@
     </GmapMap>
 </template>
 <script>
-import {searchService} from "../../services/search"
-
+import {filtersSearchService} from "../../services/search"
+import militaryExampleConfig from "~/configs/militaryExample"
+import get from 'lodash/get'
 export default {
     async created() {
         await this.$gmapApiPromiseLazy()
+        this.bases.forEach((base)=>{
+            this.baseLookup[base.name] = base
+        })
+        filtersSearchService({}, militaryExampleConfig).then((r)=>{
+            let filterResults = get(r, 'data.filters.militarybases', [])
+            filterResults.forEach(base => {
+                this.baseLookup[base.display]['count'] = base.value
+                this.baseLookup[base.display]['searchLink'] = base.link
 
-        this.loaded = true;
+            });
+            this.loaded = true;
+        })
     },
     data() {
         return {
+            baseLookup: {},
             loaded: false,
             currentActiveWindowIndex: null,
             bases: [
@@ -61,7 +75,7 @@ export default {
                     "id": 76,
                     "name": "NG Bergstrom - (Abia)",
                     "country": "United States",
-                    "state": "Texas",
+                    "state": "Austin, TX",
                     "radius": 10,
                     "coords": [30.1763, -97.6721],
                     "centroid": [30.17532, -97.67164],
@@ -71,7 +85,7 @@ export default {
                     "id": 271,
                     "name": "NG Rio Rancho TS",
                     "country": "United States",
-                    "state": "New Mexico",
+                    "state": "Rio Rancho, NM",
                     "radius": 10,
                     "coords": [35.37306, -106.65191],
                     "centroid": [35.37235, -106.65263],
@@ -81,7 +95,7 @@ export default {
                     "id": 185,
                     "name": "NG Helena Aviation RC- AASF- C12",
                     "country": "United States",
-                    "state": "Montana",
+                    "state": "Helena, MT",
                     "radius": 10,
                     "coords": [46.60847, -111.97104],
                     "centroid": [46.6089, -111.97189],
@@ -91,7 +105,7 @@ export default {
                     "id": 766,
                     "name": "Holston Army Ammunition Plant",
                     "country": "United States",
-                    "state": "Tennessee",
+                    "state": "Hawkins County, TN",
                     "radius": 10,
                     "coords": [36.52388, -82.65755],
                     "centroid": [36.52906, -82.62839],
@@ -101,7 +115,7 @@ export default {
                     "id": 277,
                     "name": "Runkle Stagefield AL",
                     "country": "United States",
-                    "state": "Alabama",
+                    "state": "Coffee County, AL",
                     "radius": 10,
                     "coords": [31.33983, -86.09164],
                     "centroid": [31.33915, -86.09155],
@@ -111,7 +125,7 @@ export default {
                     "id": 437,
                     "name": "Des Moines IAP",
                     "country": "United States",
-                    "state": "Iowa",
+                    "state": "Des Moines, IA",
                     "radius": 10,
                     "coords": [41.54436, -93.66607],
                     "centroid": [41.54527, -93.66506],
@@ -121,7 +135,7 @@ export default {
                     "id": 435,
                     "name": "Forbes Field ANG",
                     "country": "United States",
-                    "state": "Kansas",
+                    "state": "Topeka, KS",
                     "radius": 10,
                     "coords": [38.96152, -95.68096],
                     "centroid": [38.95989, -95.68219],
@@ -131,7 +145,7 @@ export default {
                     "id": 454,
                     "name": "Volk ANGB",
                     "country": "United States",
-                    "state": "Wisconsin",
+                    "state": "Volk Field, WI",
                     "radius": 10,
                     "coords": [43.93591, -90.25158],
                     "centroid": [43.93039, -90.25785],
@@ -141,7 +155,7 @@ export default {
                     "id": 700,
                     "name": "Marine Corps Air Station Beaufort",
                     "country": "United States",
-                    "state": "South Carolina",
+                    "state": "Beaufort, SC",
                     "radius": 10,
                     "coords": [32.49172, -80.72306],
                     "centroid": [32.49944, -80.70182],
@@ -151,7 +165,7 @@ export default {
                     "id": 674,
                     "name": "Syracuse MCRC",
                     "country": "United States",
-                    "state": "New York",
+                    "state": "Syracuse, NY",
                     "radius": 10,
                     "coords": [43.10005, -76.1238],
                     "centroid": [43.09945, -76.12034],
@@ -161,7 +175,7 @@ export default {
                     "id": 511,
                     "name": "NAVPMOSSP Magna Utah",
                     "country": "United States",
-                    "state": "Utah",
+                    "state": "West Valley City, UT",
                     "radius": 10,
                     "coords": [40.67839, -112.0733],
                     "centroid": [40.68011, -112.06336],
@@ -171,7 +185,7 @@ export default {
                     "id": 507,
                     "name": "Holtville Carrier LS",
                     "country": "United States",
-                    "state": "California",
+                    "state": "Imerial County, CA",
                     "radius": 10,
                     "coords": [32.83964, -115.27181],
                     "centroid": [32.83816, -115.26943],
@@ -181,7 +195,7 @@ export default {
                     "id": 767,
                     "name": "Naval Base Kitsap – Keyport",
                     "country": "United States",
-                    "state": "Washington",
+                    "state": "Kitsap County, WA",
                     "radius": 10,
                     "coords": [47.69744, -122.62125],
                     "centroid": [47.69725, -122.62165],
@@ -212,10 +226,7 @@ export default {
         },
         clickedBase(base) {
             this.$router.push({
-                path: '/jobs',
-                query: {
-                    location: base.state
-                }
+                path: base.searchLink,
             })
         },
     },

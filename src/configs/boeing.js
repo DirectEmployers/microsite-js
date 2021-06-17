@@ -67,26 +67,7 @@ const config = {
             name: "title",
             display: "Job Title",
         },
-        {
-            display: "Military Bases",
-            name: "militarybases",
-            key: "militarybases",
-            solr_queries: {
-                "NG Bergstrom - (Abia)": 'state_short_exact:"TX"',
-                "NG Rio Rancho TS": 'state_short_exact:"NM"',
-                "NG Helena Aviation RC- AASF- C12": 'state_short_exact:"MT"',
-                "Holston Army Ammunition Plant": "state_short_exact:TN",
-                "Runkle Stagefield AL": "state_short_exact:AL",
-                "Des Moines IAP": "state_short_exact:IA",
-                "Forbes Field ANG": "state_short_exact:KS",
-                "Volk ANGB": "state_short_exact:WI",
-                "Marine Corps Air Station Beaufort": "state_short_exact:SC",
-                "Syracuse MCRC": "state_short_exact:New NY",
-                "NAVPMOSSP Magna Utah": "state_short_exact:UT",
-                "Holtville Carrier LS": "state_short_exact:CA",
-                "Naval Base Kitsap – Keyport": "state_short_exact:WA"
-            },
-        },
+
     ],
 }
 
