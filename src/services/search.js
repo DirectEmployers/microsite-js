@@ -58,7 +58,7 @@ export function filtersSearchService(input, config) {
     return apiService(input, config, `${source}/filters`)
 }
 
-export function filterSearchService(input, config, filter='') {
+export function filterSearchService(input, config, filter="") {
     const source = kebabCase(config.source)
     return apiService(input, config, `${source}/filter/${filter}`)
 }
@@ -98,7 +98,11 @@ export class MOCCompleteService {
 }
 
 export class LocationCompleteService {
-    static get(q) {
-        return autoCompleteService("complete/location", {q})
+    static get(q, queryParams = {}) {
+        let params = {
+            q,
+            ...queryParams,
+        }
+        return autoCompleteService("complete/location", params)
     }
 }
