@@ -67,6 +67,7 @@ const config = {
             name: "title",
             display: "Job Title",
         },
+
     ],
 }
 
