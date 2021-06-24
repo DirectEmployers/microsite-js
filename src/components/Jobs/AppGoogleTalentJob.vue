@@ -9,7 +9,7 @@ import {get} from "lodash"
 import base from "./mixins/job"
 import {GOOGLE_TALENT} from "../../services/search"
 import {googleTalentEventService} from "../../services/events"
-
+import trim from 'lodash/trim'
 export default {
     mixins: [base],
     computed: {
@@ -36,9 +36,9 @@ export default {
         },
         location() {
             if(!this.state){
-                return `${this.city}, ${this.countryShort}`
+                return trim(trim(`${this.city}, ${this.countryShort}`), ',')
             }
-            return `${this.city}, ${this.stateShort}`
+            return trim(trim(`${this.city}, ${this.stateShort}`), ',')
         },
         city() {
             return get(

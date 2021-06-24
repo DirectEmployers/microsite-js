@@ -108,7 +108,7 @@ export default {
     methods: {
         clickedPlace(place) {
             alert(
-                `You clicked on custom place marker: ${place.name}:${place.address}`
+                `You clicked on custom place marker: ${place.location}`
             )
         },
     },

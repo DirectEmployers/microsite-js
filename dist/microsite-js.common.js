@@ -32544,6 +32544,8 @@ module.exports = copyObject;
 /* harmony import */ var _mixins_job__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("069c");
 /* harmony import */ var _services_search__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("e73b");
 /* harmony import */ var _services_events__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("bdbb");
+/* harmony import */ var lodash_trim__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("66c7");
+/* harmony import */ var lodash_trim__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(lodash_trim__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
@@ -32557,6 +32559,7 @@ module.exports = copyObject;
 //
 //
 //
+
 
 
 
@@ -32587,10 +32590,10 @@ module.exports = copyObject;
     },
     location: function location() {
       if (!this.state) {
-        return "".concat(this.city, ", ").concat(this.countryShort);
+        return lodash_trim__WEBPACK_IMPORTED_MODULE_11___default()(lodash_trim__WEBPACK_IMPORTED_MODULE_11___default()("".concat(this.city, ", ").concat(this.countryShort)), ',');
       }
 
-      return "".concat(this.city, ", ").concat(this.stateShort);
+      return lodash_trim__WEBPACK_IMPORTED_MODULE_11___default()(lodash_trim__WEBPACK_IMPORTED_MODULE_11___default()("".concat(this.city, ", ").concat(this.stateShort)), ',');
     },
     city: function city() {
       return Object(lodash__WEBPACK_IMPORTED_MODULE_7__["get"])(this.jobInfo, "derivedInfo.locations[0].postalAddress.locality", "");
@@ -32974,12 +32977,12 @@ module.exports = patchedExec;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=23049e34&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=1871c62d&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,{tag:"component"},[_vm._t("default",null,null,_vm.slotData())],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=23049e34&
+// CONCATENATED MODULE: ./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=template&id=1871c62d&
 
 // EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Jobs/AppGoogleTalentJob.vue?vue&type=script&lang=js&
 var AppGoogleTalentJobvue_type_script_lang_js_ = __webpack_require__("8f60");
@@ -43773,7 +43776,7 @@ var GOOGLE_TALENT = "google_talent";
 var API_URL = "https://qc-search-api.jobsyn.org/api/v1/";
 
 if (Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_USE_MINIKUBE === "true") {
-  API_URL = "http://minikube:35000/api/v1";
+  API_URL = "http://search-api.microsites.test/api/v1";
 } else if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_11__[/* isDevelopment */ "c"])()) {
   API_URL = "https://prod-search-api.jobsyn.org/api/v1/";
 }
@@ -43816,7 +43819,7 @@ function filtersSearchService(input, config) {
   return apiService(input, config, "".concat(source, "/filters"));
 }
 function filterSearchService(input, config) {
-  var filter = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var filter = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
   var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_9___default()(config.source);
   return apiService(input, config, "".concat(source, "/filter/").concat(filter));
 }
@@ -43897,7 +43900,9 @@ var MOCCompleteService = /*#__PURE__*/function () {
   Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(MOCCompleteService, null, [{
     key: "get",
     value: function get(q) {
-      return autoCompleteService("/complete/moc", q);
+      return autoCompleteService("/complete/moc", {
+        q: q
+      });
     }
   }]);
 
@@ -43911,7 +43916,13 @@ var LocationCompleteService = /*#__PURE__*/function () {
   Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(LocationCompleteService, null, [{
     key: "get",
     value: function get(q) {
-      return autoCompleteService("complete/location", q);
+      var queryParams = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      var params = Object(_home_surgiie_projects_microsite_js_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])({
+        q: q
+      }, queryParams);
+
+      return autoCompleteService("complete/location", params);
     }
   }]);
 
