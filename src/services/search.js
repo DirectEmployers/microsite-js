@@ -34,7 +34,7 @@ function apiService(input, config, endpoint) {
 
     if(local){
         input.origin = config.s3Folder
-    }else if (process.isClient ) {
+    }else if (process.isClient) {
         input.origin = window.location.hostname
     }
 
