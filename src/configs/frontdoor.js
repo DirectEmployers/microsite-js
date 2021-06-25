@@ -1,6 +1,6 @@
 const config = {
     buids: [48303],
-    source: "google-talent", //solr or google-talent
+    source: "solr", //solr or google-talent
     s3Folder: "frontdoor-jobs",
     project_id: process.env.GRIDSOME_GOOGLE_TALENT_PROJECT_ID,
     tenant_uuid: "50a2f592-698d-441c-b163-5ad75e3c957a",
@@ -42,7 +42,7 @@ const config = {
         },
         {
             name: "location",
-            key: "city",
+            key: "city_display",
             display: "City",
         },
         {
