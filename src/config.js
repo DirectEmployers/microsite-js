@@ -1,3 +1,3 @@
-const config = require("./configs/militaryExample.js")
+const config = require("./configs/frontdoor.js")
 
 module.exports = config
