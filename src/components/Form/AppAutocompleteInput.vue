@@ -14,6 +14,9 @@
         >
             {{ label }}
         </label>
+
+        <slot name="icon"></slot>
+
         <input
             :id="`form__autocomplete-${id}`"
             ref="input"
@@ -36,6 +39,8 @@
             v-if="loading"
             class="form__autocomplete--loading spinner spinner--gray"
         ></div>
+
+        <slot name="addon"></slot>
 
         <div v-show="results.length" class="form__autocomplete-results">
             <ul
