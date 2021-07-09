@@ -1,17 +1,23 @@
-const oldSeoPaths = {
-    TITLE: ["/:title/jobs-in"],
-    LOCATION: [
+const oldSeoPaths = [
+    [
+        "/:title/jobs-in"
+    ],
+    [
         "/:country/jobs",
         "/:state/:country/jobs",
         "/:city/:state/:country/jobs"
     ],
-    MOC: ["/:moc/vet-jobs"],
-    FILTERS: [
+    [
+        "/:mocTitle/:moc/:mocBranch/vet-jobs"
+    ],
+    [
         "/:filter0/new-jobs",
         "/:filter0/:filter1/new-jobs",
         "/:filter0/:filter1/:filter2/new-jobs"
     ],
-    COMPANY: ["/:company/careers"]
-}
+    [
+        "/:company/careers"
+    ]
+]
 
 module.exports = oldSeoPaths

@@ -1,25 +1,33 @@
 <template>
     <Layout>
-        <AppGoogleTalentSearchProvider :site-config="$siteConfig">
-            <template v-slot="{
-                jobs,
-                sort,
-                input,
-                source,
-                status,
-                hasJobs,
-                setInput,
-                newSearch,
-                pagination,
-                filteredInput,
-                featuredJobs,
-                removeFilter,
-                appliedFilters,
-                isGoogleTalent,
-                isCommuteSearch,
-                getFilterOptions,
-            }">
-                <AppLoader v-if="status.loading"/>
+        <AppGoogleTalentSearchProvider
+            :site-config="$siteConfig"
+            :static="$static"
+            :is-load-more="$static.metadata.paginationType == 'load'"
+        >
+            <template
+                v-slot="{
+                    jobs,
+                    sort,
+                    input,
+                    source,
+                    status,
+                    hasJobs,
+                    loadMore,
+                    newSearch,
+                    pagination,
+                    filteredInput,
+                    featuredJobs,
+                    appliedFilters,
+                    isGoogleTalent,
+                    isCommuteSearch,
+                    getFilterOptions,
+                }"
+            >
+                <AppLoader v-if="status.loading && !jobs.length" />
+                <section v-else-if="status.error && status.error.response && status.error.response.status == 404">
+                    <App404 />
+                </section>
                 <section v-else>
                     <div class="mx-4">
                         <AppSearchForm
@@ -30,27 +38,46 @@
                         />
                     </div>
                     <section class="flex flex-col lg:flex-row">
-                        <div class="mx-4 w-full lg:w-1/2">
-                            <h3 v-if="status.error && !hasJobs">Unable to load jobs...</h3>
+                        <div class="mb-6 mx-4 w-full lg:w-1/2">
+                            <h3 v-if="status.error && !hasJobs">
+                                Unable to load jobs...
+                            </h3>
                             <AppFeaturedJobs
                                 :featured-jobs="featuredJobs"
                                 :source="source"
                             />
                             <section v-if="jobs.length">
                                 <AppJobSearchResults
+                                    class="mb-4"
                                     :jobs="jobs"
                                     :input="filteredInput"
                                     :source="source"
                                 />
-                                <div class="text-2xl">
-                                    {{ pagination.total }} jobs found
-                                </div>
-                                <AppPagination
-                                    @pageSelected="setInput"
+
+                                <AppLoadMore
+                                    v-if="$static.metadata.paginationType =='load'"
+                                    :totalJobs="pagination.total"
+                                    :currentJobs="jobs.length"
+                                    @loadMore="loadMore"
+                                />
+                                <AppSimplePagination
+                                    v-else-if="$static.metadata.paginationType == 'simple'"
                                     :current-page="pagination.page"
-                                    :total-records="pagination.total"
                                     :total-pages="pagination.total_pages"
                                 />
+                                <AppPagination
+                                    v-else
+                                    :current-page="pagination.page"
+                                    :total-pages="pagination.total_pages"
+                                />
+                                <div
+                                    class="text-sm"
+                                    v-if="$static.metadata.paginationType =='load'"
+                                >
+                                    Showing {{ jobs.length }} of
+                                    {{ pagination.total }}
+                                    {{ jobs.length == 1 ? "job" : "jobs" }}
+                                </div>
                             </section>
                             <h3
                                 class="font-bold text-lg"
@@ -64,23 +91,22 @@
                                 <h3 class="font-bold text-xl">
                                     Current Search Criteria
                                 </h3>
-                                <AppChip
+                                <AppSearchFilterChip
                                     v-for="(filter, index) in appliedFilters"
                                     :key="index"
-                                    :name="filter.parameter"
-                                    @chipClicked="removeFilter"
+                                    :link="filter.link"
+                                    :text="filter.display"
                                     class="cursor-pointer"
                                 >
                                     <AppXIcon class="w-2 inline" />
                                     {{ filter.display }}
-                                </AppChip>
+                                </AppSearchFilterChip>
 
-                                <AppChip
-                                    name="*"
-                                    class="cursor-pointer"
+                                <AppSearchFilterChip
+                                    link="/jobs"
                                     text="Clear All"
-                                    @chipClicked="removeFilter"
-                                ></AppChip>
+                                    class="cursor-pointer"
+                                ></AppSearchFilterChip>
                             </div>
                             <AppAccordion
                                 :open="true"
@@ -96,24 +122,32 @@
                                 </template>
                                 <ul>
                                     <li
-                                        @click="sort.sortField(option)"
-                                        class="cursor-pointer"
-                                        :key="index"
                                         v-for="(option, index) in sort.options"
+                                        :key="index"
+                                        class="cursor-pointer"
                                     >
-                                        {{ option }}
+                                        <g-link
+                                            :to="{
+                                                path: $route.path,
+                                                query: { ...$route.query, sort: option.toLowerCase(), page: 1 }
+                                            }"
+                                        >
+                                            {{ option }}
+                                        </g-link>
                                     </li>
                                 </ul>
                             </AppAccordion>
 
                             <AppSearchFilter
+                                v-for="(
+                                    configFilter, index
+                                ) in $siteConfig.filters"
                                 :key="index"
                                 :input="filteredInput"
                                 :name="configFilter.name"
                                 :key-name="configFilter.key"
                                 :visible="configFilter.visible"
                                 :options="getFilterOptions(configFilter)"
-                                v-for="(configFilter, index) in $siteConfig.filters"
                             >
                                 <template
                                     v-slot="{
@@ -127,14 +161,15 @@
                                     <AppAccordion
                                         :display="`Filter By ${configFilter.display}`"
                                     >
-
                                         <ul class="search-filter-options">
                                             <li
                                                 :key="index"
                                                 class="search-filter-options-item"
-                                                v-for="(filter, index) in displayedFilters"
+                                                v-for="(
+                                                    filter, index
+                                                ) in displayedFilters"
                                             >
-                                                <g-link :to="filter.href">
+                                                <g-link :to="filter.link">
                                                     {{ filter.display }}
                                                     <span v-if="filter.value">
                                                         ({{ filter.value }})
@@ -144,7 +179,9 @@
                                         </ul>
                                         <section
                                             class="search-filter-limiter"
-                                            v-if="shouldShowLess || shouldShowMore"
+                                            v-if="
+                                                shouldShowLess || shouldShowMore
+                                            "
                                         >
                                             <button
                                                 class="search-filter-limiter-more"
@@ -168,6 +205,7 @@
                                     </AppAccordion>
                                 </template>
                             </AppSearchFilter>
+
                             <div class="container">
                                 <button
                                     @click="toggleCommuteModal()"
@@ -195,49 +233,44 @@
         </AppGoogleTalentSearchProvider>
     </Layout>
 </template>
+
 <script>
-import {blank} from "~/services/helpers"
-import AppChip from "~/components/AppChip"
 import AppModal from "~/components/AppModal"
+import App404 from "~/demo/components/App404"
 import AppXIcon from "~/components/Icons/AppXIcon"
 import AppLoader from "~/demo/components/AppLoader"
 import AppAccordion from "~/components/AppAccordion"
-import AppPagination from "~/components/AppPagination"
 import AppSearchForm from "~/demo/components/AppSearchForm"
 import AppFeaturedJobs from "~/demo/components/AppFeaturedJobs"
 import AppSearchFilter from "~/components/Search/AppSearchFilter"
+import AppSearchFilterChip from "~/components/Search/AppSearchFilterChip"
 import AppJobSearchResults from "~/demo/components/AppJobSearchResults"
 import AppCommuteSearchForm from "~/demo/components/AppCommuteSearchForm"
 import AppGoogleTalentSearchProvider from "~/components/Search/Providers/AppGoogleTalentSearchProvider"
+
 export default {
     components: {
-        AppAccordion,
-        AppPagination,
-        AppSearchFilter,
-        AppJobSearchResults,
+        App404,
         AppXIcon,
         AppModal,
-        AppChip,
         AppLoader,
-        AppFeaturedJobs,
+        AppAccordion,
         AppSearchForm,
+        AppSearchFilter,
+        AppFeaturedJobs,
+        AppJobSearchResults,
+        AppSearchFilterChip,
         AppCommuteSearchForm,
         AppGoogleTalentSearchProvider,
+        AppLoadMore: () => import("~/components/Pagination/AppLoadMore"),
+        AppPagination: () => import("~/components/Pagination/AppPagination"),
+        AppSimplePagination: () =>
+            import("~/components/Pagination/AppSimplePagination"),
     },
-    data() {
+    metaInfo() {
         return {
-            AppAccordion,
+            title: "Jobs",
         }
-    },
-    metaInfo: {
-        title: "Jobs",
-        meta: [
-            {
-                key: "description",
-                name: "description",
-                content: "only the best jobs",
-            },
-        ],
     },
     methods: {
         toggleCommuteModal() {
@@ -246,3 +279,12 @@ export default {
     },
 }
 </script>
+
+<static-query>
+query {
+    metadata {
+        paginationType,
+        siteName,
+    }
+}
+</static-query>

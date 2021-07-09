@@ -1,6 +1,9 @@
-import {upperFirst, toString, words} from "lodash"
-import {removeCountry} from "./location"
-
+import trim from "lodash/trim"
+import words from "lodash/words"
+import toString from "lodash/toString"
+import {removeCountry, isLocationCode } from "./location"
+import startCase from "lodash/startCase"
+import upperFirst from "lodash/upperFirst"
 /**
  * Check if the given value is "blank".
  */
@@ -18,31 +21,6 @@ export function blank(value) {
     }
 
     return isBlank
-}
-
-/**
- * Run the given function and keep trying if it fails
- * until the max retries are exceeded and return a promise.
- */
-export function retry(callback, args = [], max = 5, delay = 100) {
-    return new Promise((resolve, reject) => {
-        try {
-            let result = callback(...args)
-            return resolve(result)
-        } catch (e) {
-            if (max > 0) {
-                setTimeout(function() {
-                    return retry(callback, args, --max, delay * 2)
-                        .then(resolve)
-                        .catch(err => {
-                            return reject(err)
-                        })
-                }, delay)
-            } else {
-                return reject(e)
-            }
-        }
-    })
 }
 
 /** Return true if the env is dev. */
@@ -63,32 +41,54 @@ export function buildJobDetailUrl(title, location, guid) {
     if (blank(locationSlug)) {
         locationSlug = "none"
     }
-
     return `/${locationSlug}/${titleSlug}/${guid}/job/`
 }
 
-
-export function strAfter(subject, search) {
-    let result = search === "" ? subject : subject.split(search)[1]
-
-    if(blank(result)){
-        return null
-    }
-
-    return result
+export function slugify(string){
+    return words(toString(string).replace(/["\u2019+:+/]/g, ""), /[\w]+/g).reduce(
+        (result, word, index) =>
+            result + (index ? "-" : "") + word.toLowerCase(),
+        ""
+    )
 }
 
-const slugify = (string) => (
-    words(toString(string).replace(/["\u2019+:+/]/g, ""), /[\w]+/g).reduce((result, word, index) => (
-        result + (index ? "-" : "") + word.toLowerCase()
-    ), "")
-)
-
-export function displayLocationFromSlug(string) {
-    if (string.indexOf("-") > -1) {
-        return words(toString(string)).reduce((result, word, index, original) => (
-            upperFirst(result + (index !== original.length - 1 ? " " + upperFirst(word) : ", " + word.toUpperCase()))
-        ))
+/**
+ * https://stackoverflow.com/questions/39842004/why-use-regular-expressions-to-validate-latitude-and-longitude-in-javascript
+ */
+export function isCoordinates(string) {
+    let value = new String(string).split(",")
+    if (blank(string)) {
+        return false
     }
-    return upperFirst(string);
+
+    let isLat = isFinite(value[0]) && Math.abs(value[0]) <= 90
+
+    let isLng = isFinite(value[1]) && Math.abs(value[1]) <= 180
+
+    return isLat && isLng
+}
+
+export function humanFriendlyLocation(string) {
+    if (isCoordinates(string)) {
+        return string
+    }
+
+    let location = trim(toString(string).toLowerCase())
+
+    if (location.length <= 3) {
+        return location.toUpperCase()
+    }
+
+    let parts = location.split(string.indexOf("-") != -1 ? "-" : " ")
+
+    if (parts.length == 1) {
+        return startCase(parts[0])
+    }
+
+    return words(parts.join("-")).reduce(function(result, word, index, original) {
+        if (parts.length <=3 && word.length <= 3 && isLocationCode(word)) {
+            return upperFirst(`${result}, ${word.toUpperCase()}`)
+        }
+        return startCase(`${result} ${word}`)
+    })
 }

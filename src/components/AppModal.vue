@@ -1,27 +1,37 @@
 <template>
-    <div class="page--overlay" v-if="toggled" @keydown.tab="focusTrap">
-        <div class="modal" ref="modal" tabindex="0">
-            <div class="modal__header">
-                <h3 class="modal__header-title" v-if="title">
-                    {{ title }}
-                </h3>
-                <button class="modal__header-close" @click="toggle" type="button">
-                    &times;
-                </button>
-            </div>
+    <div class="page--overlay" v-if="toggled">
+        <div class="modal" ref="modal" tabindex="0" >
+            <Trap>
+                <div class="modal__header">
+                    <h3 class="modal__header-title" v-if="title">
+                        {{ title }}
+                    </h3>
+                    <slot name="toggle-icon" :toggle="toggle">
+                        <button
+                            class="modal__header-close"
+                            @click="toggle"
+                            type="button"
+                        >
+                            &times;
+                        </button>
+                    </slot>
+                </div>
 
-            <div class="modal__body">
-                <slot></slot>
-            </div>
+                <div class="modal__body">
+                    <slot :toggle="toggle"></slot>
+                </div>
 
-            <div class="modal__footer">
-                <slot name="footer"></slot>
-            </div>
+                <div class="modal__footer">
+                    <slot name="footer"></slot>
+                </div>
+            </Trap>
         </div>
     </div>
 </template>
 
 <script>
+import Trap from 'vue-focus-lock'
+import { ESCAPE_KEY_CODE } from "../constants/keyCodes"
 export default {
     props: {
         title: {
@@ -30,13 +40,15 @@ export default {
             type: String,
         },
     },
+    components:{
+        Trap,
+    },
     created() {
         if (process.isClient) {
             document.addEventListener("click", this.nonModalClick)
             document.addEventListener("keyup", this.exitModal)
         }
     },
-
     destroyed() {
         if (process.isClient) {
             document.removeEventListener("click", this.nonModalClick)
@@ -49,22 +61,24 @@ export default {
         }
     },
     methods: {
-        close(){
+        close() {
             this.toggled = false
-            this.$emit('modalClosed')
+            this.$emit("modalClosed")
         },
-        open(){
+        open() {
             this.toggled = true
+            this.$nextTick(()=>{
+                this.$refs['modal'].focus()
+            })
             this.$emit('modalOpened')
         },
         toggle() {
-            if(this.toggled){
+            if (this.toggled) {
                 this.close()
-            }else{
+            } else {
                 this.open()
             }
         },
-
         nonModalClick(e) {
             const modalWrapper = this.$el.firstChild
 
@@ -77,34 +91,10 @@ export default {
                 this.close()
             }
         },
-
         exitModal(e) {
-            // escape
-            if (this.toggled && e.keyCode === 27) {
+            if (this.toggled && e.keyCode === ESCAPE_KEY_CODE) {
                 this.close()
             }
-        },
-
-        focusTrap(e) {
-            const focusable = this.$refs.modal.querySelectorAll(
-                "button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
-            )
-
-            const firstFocusable = focusable[0]
-
-            const lastFocusable = focusable[focusable.length - 1]
-
-            if (e.shiftKey && document.activeElement === firstFocusable) {
-                lastFocusable.focus()
-                e.preventDefault()
-            }
-
-            if (!e.shiftKey && document.activeElement === lastFocusable) {
-                firstFocusable.focus()
-                e.preventDefault()
-            }
-
-
         },
     },
 }

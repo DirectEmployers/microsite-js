@@ -1,26 +1,22 @@
 <template>
     <component :is="tag">
-        <slot
-            v-bind="slotData"
-        >
-        </slot>
+        <slot v-bind="slotData"></slot>
     </component>
 </template>
 
 <script>
+import base from "./mixins/provider"
 
-import base from './mixins/provider'
-
-export default{
+export default {
     mixins: [base],
     methods: {
-        providerInputDefinition(){
+        providerInputDefinition() {
             return {
                 moc: {
-                    default: ""
-                }
+                    default: "",
+                },
             }
-        }
-    }
+        },
+    },
 }
 </script>

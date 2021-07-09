@@ -10,7 +10,11 @@ const defaultFilters = [
     {
         name: "moc",
         display: "military-codes"
-    }
+    },
+    {
+        name:'company',
+        display:'companies'
+    },
 ]
 
 module.exports = defaultFilters

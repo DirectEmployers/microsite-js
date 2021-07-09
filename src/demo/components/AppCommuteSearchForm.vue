@@ -5,10 +5,11 @@
                 <label for="commuteLocation" class="form__label">
                     Commute From
                 </label>
-                <AppGoogleLocationAutocomplete
+                <AppGooglePlacesAutocomplete
                     :api-key="apiKey"
                     v-model="input.commuteLocation"
                     class="form__input"
+                    @input="input.coords = ''"
                     @locationSelected="googleAutocompleteSelected"
                 />
             </div>
@@ -25,9 +26,7 @@
                     <option value="TRANSIT">Transit</option>
                     <option value="WALKING">Walking</option>
                 </select>
-                <div class="form__down-arrow">
-                    ▼
-                </div>
+                <div class="form__down-arrow">▼</div>
             </div>
             <div class="form__input-group form__input-group--stacked">
                 <label for="travelDuration" class="form__label">
@@ -43,9 +42,7 @@
                     <option value="2700">45 minutes</option>
                     <option value="3600">1 hour</option>
                 </select>
-                <div class="form__down-arrow">
-                    ▼
-                </div>
+                <div class="form__down-arrow">▼</div>
             </div>
             <div class="form__input-group form__input-group--stacked">
                 <label for="roadTraffic" class="form__label">
@@ -59,9 +56,7 @@
                     <option value="TRAFFIC_FREE">Traffic Free</option>
                     <option value="BUSY_HOUR">Busy Hour</option>
                 </select>
-                <div class="form__down-arrow">
-                    ▼
-                </div>
+                <div class="form__down-arrow">▼</div>
             </div>
             <button
                 :class="{
@@ -78,7 +73,8 @@
 </template>
 
 <script>
-import AppGoogleLocationAutocomplete from "~/components/Search/AppGoogleLocationAutocomplete"
+import AppGooglePlacesAutocomplete from "~/components/Search/AppGooglePlacesAutocomplete"
+
 export default {
     name: "CommuteSearchForm",
     props: {
@@ -87,20 +83,20 @@ export default {
             default: () => {},
         },
     },
-    data(){
-        return { apiKey: process.env.GRIDSOME_GOOGLE_MAPS_API_KEY}
+    data() {
+        return {apiKey: process.env.GRIDSOME_GOOGLE_MAPS_API_KEY}
     },
     components: {
-        AppGoogleLocationAutocomplete,
+        AppGooglePlacesAutocomplete,
     },
-    methods:{
-        search(){
-            this.$emit('search')
+    methods: {
+        search() {
+            this.$emit("search")
         },
-        googleAutocompleteSelected(location, coords){
+        googleAutocompleteSelected(location, coords) {
             this.input.commuteLocation = location
             this.input.coords = coords
-        }
-    }
+        },
+    },
 }
 </script>

@@ -1,13 +1,12 @@
 const fs = require("fs")
+const config = require("./src/config.js")
 const getFilterPaths = require("./src/services/gridsomeFilterPaths")
 const getOldSeoPaths = require("./src/services/gridsomeOldSeoPaths")
 
 
 module.exports = function (api, filters) {
-    api.loadSource(({
-        addCollection
-    }) => {
-        // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
+    api.loadSource(async store => {
+        store.addMetadata('paginationType', 'simple') //possible options ['simple', 'load', 'page']
     })
     api.createPages(async ({
         graphql,
@@ -15,10 +14,6 @@ module.exports = function (api, filters) {
     }) => {
         createPage({
             path: "/:location/:title/:guid/job",
-            component: "./src/templates/Job.vue"
-        })
-        createPage({
-            path: "/:guid/job",
             component: "./src/templates/Job.vue"
         })
 
@@ -30,7 +25,7 @@ module.exports = function (api, filters) {
             })
         }
 
-        let filterPaths = getFilterPaths()
+        let filterPaths = getFilterPaths(config.filters)
         for (let i = 0, len = filterPaths.length; i < len; i++) {
             createPage({
                 path: filterPaths[i],

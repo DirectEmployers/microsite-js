@@ -1,11 +1,11 @@
 <template>
-    <AppJobProvider :site-config="$siteConfig" source="solr" :job="job">
+    <AppSolrJob :job="job">
         <template
             v-slot="{
                 title,
                 guid,
                 location,
-                applyLink,
+                applyUrl,
                 clickedApplyJob,
                 description,
             }"
@@ -37,8 +37,8 @@
                             {{ location }}
                         </div>
                         <a
-                            @click="clickedApplyJob"
-                            :href="applyLink"
+                            @click.prevent="clickedApplyJob"
+                            :href="applyUrl"
                             class="w-32 button p-2 bg-black text-white rounded text-center mx-auto"
                         >
                             Apply
@@ -49,11 +49,10 @@
                 <div
                     class="min-h-screen max-w-screen-md mb-8 mx-4 md:mx-auto job-details-content"
                     v-html="description"
-                >
-                </div>
+                ></div>
 
                 <AppSimilarJobs
-                    :siteConfig="$siteConfig"
+                    :buids="$siteConfig.buids"
                     :guid="guid"
                     :title="title"
                     :location="location"
@@ -64,13 +63,15 @@
                 </script>
             </div>
         </template>
-    </AppJobProvider>
+    </AppSolrJob>
 </template>
+
 <script>
 import {blank} from "~/services/helpers"
 import buildUrl from "axios/lib/helpers/buildURL"
 import AppSimilarJobs from "~/components/AppSimilarJobs"
-import AppJobProvider from "~/components/Jobs/AppJobProvider"
+import AppSolrJob from "~/components/Jobs/AppSolrJob"
+
 export default {
     name: "AppJobDetail",
     metaInfo() {
@@ -89,7 +90,7 @@ export default {
         },
     },
     components: {
-        AppJobProvider,
+        AppSolrJob,
         AppSimilarJobs,
     },
     computed: {

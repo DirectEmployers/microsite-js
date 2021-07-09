@@ -8,19 +8,22 @@
     "serve": "node serve-build.js",
     "develop": "gridsome develop",
     "explore": "gridsome explore",
-    "build-gridsome": "gridsome build",
-    "build": "vue-cli-service build --target lib --name microsite-js ./src/index.js",
+    "build": "gridsome build",
+    "build-local": "GRIDSOME_USE_MINIKUBE=true gridsome build",
+    "dist": "vue-cli-service build --target lib --name microsite-js ./src/index.js",
     "lint": "vue-cli-service lint",
     "test": "jest --no-cache"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "gmap-vue": "^1.5.0",
     "html2json": "^1.0.2",
     "linkifyjs": "^2.1.9",
-    "pluralize": "^8.0.0",
+    "lodash": "^4.17.15",
     "tailwindcss": "^1.3.5",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-focus-lock": "^1.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
@@ -37,7 +40,6 @@
     "gridsome": "^0.7.23",
     "gridsome-plugin-tailwindcss": "^2.2.43",
     "jest": "^26.0.1",
-    "lodash": "^4.17.20",
     "node-sass": "^4.14.0",
     "sass-loader": "^8.0.2",
     "serve": "^11.3.2",
@@ -51,6 +53,7 @@
     "dist/microsite-js.css",
     "src/components/*",
     "src/services/*",
+    "src/constants/*",
     "src/scss/*",
     "!dist/*.html"
   ],

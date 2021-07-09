@@ -2,37 +2,35 @@
     <section class="similar-jobs" v-if="hasSimilarJobs">
         <h2 class="similar-jobs__title">{{ header }}</h2>
         <div class="similar-jobs__grid">
-            <AppJobProvider
+            <AppSolrJob
                 :key="index"
-                :site-config="siteConfig"
                 :source="meta.source"
                 :job="similarJob"
                 v-for="(similarJob, index) in similarJobs"
             >
                 <template v-slot="jobData">
                     <section class="similar-jobs__grid-item">
-                        <g-link
-                            :to="jobData.detailUrl"
-                        >
+                        <g-link :to="jobData.detailUrl">
                             <slot :jobData="jobData">
                                 <h3 class="similar-jobs__grid-item-title">
                                     {{ jobData.title }}
                                 </h3>
                                 <p class="similar-jobs__grid-item-location">
-                                    {{ jobData.city }}, {{ jobData.state }}
+                                    {{ jobData.location }}
                                 </p>
                             </slot>
                         </g-link>
                     </section>
                 </template>
-            </AppJobProvider>
+            </AppSolrJob>
         </div>
     </section>
 </template>
 
 <script>
-import { searchService } from "../services/search"
-import AppJobProvider from './Jobs/AppJobProvider'
+import { SOLR } from '../services/search'
+import AppSolrJob from "./Jobs/AppSolrJob"
+import {searchService} from "../services/search"
 export default {
     data() {
         return {
@@ -40,8 +38,8 @@ export default {
             similarJobs: [],
         }
     },
-    components:{
-        AppJobProvider
+    components: {
+        AppSolrJob,
     },
     props: {
         title: {
@@ -51,16 +49,17 @@ export default {
         guid: {
             type: String,
             required: false,
-            default: ""
+            default: "",
+        },
+        buids: {
+            type: Array,
+            required: false,
+            default: ()=> []
         },
         location: {
             type: String,
             required: false,
-            default: ""
-        },
-        siteConfig: {
-            type: Object,
-            required: true,
+            default: "",
         },
         header: {
             type: String,
@@ -77,33 +76,21 @@ export default {
         },
     },
     methods: {
-
         getJobs() {
             searchService(
                 {
                     num_items: 10,
-                    q: this.title,
+                    q: `-guid:${this.guid} AND ${this.title}`,
                     location: this.location,
                 },
-                this.siteConfig
-            ).then(response=>{
-
+                { source: SOLR, buids: this.buids, filters: [] }
+            ).then((response) => {
                 const data = response.data
-
-                const { jobs, meta } = data
-
+                const {jobs, meta} = data
                 this.meta = meta
-
                 this.similarJobs = jobs
-
-                if(this.guid){
-                    this.similarJobs = this.similarJobs.filter((job)=>{
-                        return job.guid != this.guid
-                    })
-                }
             })
-
-        }
+        },
     },
 }
 </script>

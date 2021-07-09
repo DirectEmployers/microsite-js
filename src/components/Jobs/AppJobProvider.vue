@@ -1,19 +1,19 @@
 <template>
     <component :is="jobComponent" v-bind="{...$attrs, ...$props}">
         <template v-slot="jobData">
-            <slot v-bind="jobData"></slot>
+            <slot v-bind="{...jobData, ...{isSolr: isSolr, isGoogleTalent:isGoogleTalent}}"></slot>
         </template>
     </component>
 </template>
 
 <script>
-import SolrJob from './AppSolrJob'
-import GoogleTalentJob  from './AppGoogleTalentJob'
+import SolrJob from "./AppSolrJob"
+import GoogleTalentJob from "./AppGoogleTalentJob"
 import {GOOGLE_TALENT, SOLR} from "../../services/search"
 
 export default {
-    props:{
-        job:{
+    props: {
+        job: {
             type: Object,
             required: true,
         },
@@ -22,16 +22,16 @@ export default {
             required: true,
         },
     },
-    computed:{
+    computed: {
         isSolr() {
             return this.source == SOLR
         },
         isGoogleTalent() {
             return this.source == GOOGLE_TALENT
         },
-        jobComponent(){
-            return this.isGoogleTalent ? GoogleTalentJob: SolrJob
+        jobComponent() {
+            return this.isGoogleTalent ? GoogleTalentJob : SolrJob
         },
-    }
+    },
 }
 </script>

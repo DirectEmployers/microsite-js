@@ -109,7 +109,6 @@ export default {
     methods: {
         doSearch: debounce(async function (value) {
             if (value.length < 2) return
-
             try {
                 this.loading = true
                 const {data} = await this.query.get(value, this.queryConfig)
@@ -131,11 +130,9 @@ export default {
         },
         setValue(result) {
             let value = result[this.display]
-
             if (Object.prototype.hasOwnProperty.call(result, "value")) {
                 value = result.value
             }
-
             this.$emit("input", value)
             this.result = result
             this.$emit("setResult", result)

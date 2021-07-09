@@ -23,6 +23,6 @@ npm run develop
 
 ### Compiles and minifies components for production
 ```
-npm run build
+npm run dist
 ```
 

@@ -8,6 +8,7 @@
 
 <script>
 import AppHtmlToJson from "./Parse/AppHtmlToJson"
+
 export default {
     name: "AppJobDescription",
     props: {
@@ -23,7 +24,6 @@ export default {
     components: {
         AppHtmlToJson,
     },
-
     computed: {
         cleanHtml() {
             return this.html.replace(/(\r\n|\n|\r)/gm, "")

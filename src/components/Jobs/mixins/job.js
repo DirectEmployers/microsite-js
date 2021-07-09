@@ -1,6 +1,10 @@
-import {get, omitBy, words, startCase} from "lodash"
+import {
+    get,
+    omitBy,
+    words,
+    startCase
+} from "lodash"
 import buildUrl from "axios/lib/helpers/buildURL"
-import {GOOGLE_TALENT, SOLR} from "../../../services/search"
 import {VS_KEY, UTM_KEY} from "../../../services/storage"
 import {buildJobDetailUrl, blank} from "../../../services/helpers"
 
@@ -10,10 +14,6 @@ export default {
             type: Object,
             required: true,
         },
-        source: {
-            type: String,
-            required: true,
-        },
         tag: {
             type: String,
             required: false,
@@ -21,7 +21,11 @@ export default {
         },
         siteConfig: {
             type: Object,
-            required: true,
+            required: false,
+        },
+        guidViewSource:{
+            required: false,
+            default: 10
         },
         input: {
             type: Object,
@@ -35,12 +39,6 @@ export default {
         },
         commuteInfo() {
             return {}
-        },
-        isSolr() {
-            return this.source == SOLR
-        },
-        isGoogleTalent() {
-            return this.source == GOOGLE_TALENT
         },
         city() {
             return this.jobInfo.city_exact
@@ -68,34 +66,49 @@ export default {
 
             return buildUrl(url, this.input)
         },
-        applyLink() {
-            let url = "https://rr.jobsyn.org/" + this.guid
-
+        applyUrl() {
+            let url = `https://rr.jobsyn.org/${this.guid}`
             if (!process.isClient) {
                 return url
             }
-
-            let utm_params = {}
+            var params = {}
             try {
-                utm_params = JSON.parse(sessionStorage.getItem(UTM_KEY))
-            } catch {
-                utm_params = {}
+                let utm_params = {}
+                try {
+                    utm_params = JSON.parse(sessionStorage.getItem(UTM_KEY))
+                } catch {
+                    utm_params = {}
+                }
+                params = {
+                    ...this.$route.query,
+                    ...utm_params
+                }
+                params[VS_KEY] = sessionStorage.getItem(VS_KEY)
+            } catch (e) {
+                console.error(e);
             }
 
-            let params = {...this.$route.query, ...utm_params}
-            params[VS_KEY] = sessionStorage.getItem(VS_KEY)
+            if(this.guidViewSource !== false){
+                url = url + this.guidViewSource
+            }
 
             return buildUrl(url, omitBy(params, blank))
         },
         description() {
             return this.jobInfo.html_description || this.jobInfo.description
         },
+        stateShort(){
+            return this.jobInfo.state_short_exact
+        },
+        countryShort(){
+            return this.jobInfo.country_short_exact
+        },
         state() {
             let state = this.jobInfo.city_slab_exact
             state = this.jobInfo.city_slab_exact.split("/")[1]
 
             if (blank(state) || state == "none") {
-                return this.jobInfo.state_short_exact
+                return ""
             }
             return startCase(words(state).join(" "))
         },
@@ -107,27 +120,46 @@ export default {
         },
     },
     methods: {
-        clickedApplyJob() {},
-        clickedViewJob() {},
+        executeCallback(callback, args = []) {
+            if (typeof callback == 'function') {
+                callback(...args)
+            }
+        },
+        clickedApplyJob(callback) {
+            this.executeCallback(callback, [this.jobInfo])
+            let nw = window.open(this.applyUrl, '_blank')
+            nw.focus()
+        },
+        clickedViewJob(callback) {
+            this.executeCallback(callback, [this.jobInfo])
+            this.$router
+                .push({
+                    path: this.detailUrl,
+                })
+                .catch(err => {})
+        },
         getAttribute(name, defaultValue = "") {
             return get(this.jobInfo, name, defaultValue)
         },
         slotData() {
             return {
-                reqId: this.reqId,
-                title: this.title,
-                location: this.location,
-                detailUrl: this.detailUrl,
                 guid: this.guid,
                 city: this.city,
+                reqId: this.reqId,
+                title: this.title,
                 state: this.state,
                 country: this.country,
                 company: this.company,
-                hasCommuteInfo: this.hasCommuteInfo,
+                location: this.location,
+                applyUrl: this.applyUrl,
+                detailUrl: this.detailUrl,
+                dateAdded: this.dateAdded,
+                stateShort: this.stateShort,
                 commuteTime: this.commuteTime,
                 description: this.description,
-                dateAdded: this.dateAdded,
-                applyLink: this.applyLink,
+                countryShort: this.countryShort,
+                getAttribute: this.getAttribute,
+                hasCommuteInfo: this.hasCommuteInfo,
                 clickedViewJob: this.clickedViewJob,
                 clickedApplyJob: this.clickedApplyJob,
             }

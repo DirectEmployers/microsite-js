@@ -1,18 +1,20 @@
 <template>
     <ClientOnly>
-        <section v-if="!hasAcknowleged">
-            <slot
-                :acceptCookieUse="acceptCookieUse"
-                :declineCookieUse="declineCookieUse"
-                :declined="declined"
-                :acknowledged="hasAcknowleged"
-                :accepted="accepted"
-            />
-        </section>
+        <transition :name="transitionName">
+            <section v-if="!hasAcknowleged">
+                <slot
+                    :acceptCookieUse="acceptCookieUse"
+                    :declineCookieUse="declineCookieUse"
+                    :declined="declined"
+                    :acknowledged="hasAcknowleged"
+                    :accepted="accepted"
+                />
+            </section>
+        </transition>
     </ClientOnly>
 </template>
+
 <script>
-import {blank} from "../services/helpers"
 import {
     ACCEPTED_COOKIES_KEY,
     DECLINED_COOKIES_KEY,
@@ -21,6 +23,13 @@ import {
 } from "../services/storage"
 
 export default {
+    props:{
+        transitionName: {
+            type: String,
+            required: false,
+            default: ""
+        },
+    },
     data() {
         return {
             declined: declinedCookieUse(),
@@ -41,7 +50,6 @@ export default {
                 localStorage.setItem(ACCEPTED_COOKIES_KEY, "true")
             }
         },
-
         declineCookieUse() {
             if (process.isClient) {
                 this.accepted = false

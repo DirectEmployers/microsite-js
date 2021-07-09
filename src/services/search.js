@@ -1,14 +1,19 @@
 import axios from "axios"
-import { kebabCase } from "lodash"
-import { isDevelopment } from "./helpers"
+
+import mergeWith from "lodash/mergeWith"
+
+import toString from "lodash/toString"
+import kebabCase from "lodash/kebabCase"
+import clone from "lodash/clone"
+
+import {isDevelopment, blank, humanFriendlyLocation, slugify} from "./helpers"
 
 export const SOLR = "solr"
 export const GOOGLE_TALENT = "google_talent"
-export const TIMEOUT_THRESHOLD = 5000
 let API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
 
 if (process.env.GRIDSOME_USE_MINIKUBE === "true") {
-    API_URL = "http://minikube:35000/api/v1"
+    API_URL = "http://search-api.microsites.test/api/v1"
 } else if (!isDevelopment()) {
     API_URL = "https://prod-search-api.jobsyn.org/api/v1/"
 }
@@ -24,96 +29,80 @@ export function api() {
     })
 }
 
-export function searchService(input, siteConfig){
-    const source = kebabCase(siteConfig.source)
+function apiService(input, config, endpoint) {
+    let local = isDevelopment() || process.env.GRIDSOME_USE_MINIKUBE
 
-    return api().post(
-        `${source}/search`,
-        {
-            data: input,
-            config: siteConfig,
-        },
-        {
-            timeout: TIMEOUT_THRESHOLD
-        }
-    )
+    if(local){
+        input.origin = config.s3Folder
+    }else if (process.isClient) {
+        input.origin = window.location.hostname
+    }
+
+    return api().get(endpoint, {
+        params: input,
+    })
 }
 
-export function commuteSearchService(input, siteConfig){
-    return api().post(
-        `google-talent/commute`,
-        {
-            data: input,
-            config: siteConfig,
-        },
-        {
-            timeout: TIMEOUT_THRESHOLD
-        }
-    )
+export function searchService(input, config) {
+    const source = kebabCase(config.source)
+    return apiService(input, config, `${source}/search`)
 }
 
+export function jobsSearchService(input, config) {
+    const source = kebabCase(config.source)
+    return apiService(input, config, `${source}/jobs`)
+}
 
-export class TitleCompleteService {
-    static async get(q, siteConfig) {
-        const slug = kebabCase(siteConfig.source)
-        let params = {q: q, buids: siteConfig.buids}
+export function filtersSearchService(input, config) {
+    const source = kebabCase(config.source)
+    return apiService(input, config, `${source}/filters`)
+}
 
-        if (siteConfig.source == GOOGLE_TALENT) {
-            params["project_id"] = siteConfig.project_id
-            params["tenant_uuid"] = siteConfig.tenant_uuid
-            params["company_uuids"] = siteConfig.company_uuids
+export function filterSearchService(input, config, filter="") {
+    const source = kebabCase(config.source)
+    return apiService(input, config, `${source}/filter/${filter}`)
+}
+
+export function commuteSearchService(input, config) {
+    return apiService(input, config, "google-talent/commute")
+}
+
+async function autoCompleteService(endpoint, params) {
+    try {
+        const response = await api().get(endpoint, {
+            params,
+        })
+        return response
+    } catch (error) {
+        if (Object.prototype.hasOwnProperty.call(error, "response")) {
+            return error
         }
-
-        try {
-            const response = await api().get(`${slug}/complete/title`, {
-                params: params,
-                timeout: TIMEOUT_THRESHOLD,
-            })
-            return response
-        } catch (error) {
-            if (Object.prototype.hasOwnProperty.call(error, "response")) {
-                return error
-            }
-            throw new Error(error)
-        }
+        throw new Error(error)
     }
 }
 
+export class TitleCompleteService {
+    static get(q, queryParams = {}) {
+        let params = {
+            q,
+            ...queryParams,
+        }
+        return autoCompleteService("complete/title", params)
+    }
+}
 
 export class MOCCompleteService {
-    static async get(q) {
-        try {
-            const response = await api().get("/complete/moc", {
-                params: {
-                    q: q,
-                },
-                timeout: TIMEOUT_THRESHOLD,
-            })
-            return response
-        } catch (error) {
-            if (Object.prototype.hasOwnProperty.call(error, "response")) {
-                return error
-            }
-            throw new Error(error)
-        }
+    static get(q) {
+        return autoCompleteService("/complete/moc", {q})
     }
 }
 
 export class LocationCompleteService {
-    static async get(q) {
-        try {
-            const response = await api().get("/solr/complete/location", {
-                params: {
-                    q: q,
-                },
-                timeout: TIMEOUT_THRESHOLD,
-            })
-            return response
-        } catch (error) {
-            if (Object.prototype.hasOwnProperty.call(error, "response")) {
-                return error
-            }
-            throw new Error(error)
+    static get(q, queryParams = {}) {
+        let params = {
+            q,
+            ...queryParams,
         }
+        return autoCompleteService("complete/location", params)
     }
 }

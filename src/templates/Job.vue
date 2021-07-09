@@ -1,11 +1,13 @@
 <template>
     <Layout>
-        <AppJobFetch s3-folder="sanfordhealth-jobs">
+        <AppJobFetch :s3-folder="$siteConfig.s3Folder">
             <template v-slot="{job, status: {error, pending, resolved}}">
-                <AppLoader v-if="pending" />
-                <App404 v-else-if="error && !resolved" />
-                <AppJobExpired v-else-if="isExpired(job)" :job="job" />
-                <AppJobDetail v-else-if="job" :job="job" />
+                <AppLoader v-show="pending" />
+                <ClientOnly>
+                    <App404 v-if="error && !resolved" />
+                    <AppJobExpired v-else-if="isExpired(job)" :job="job" />
+                    <AppJobDetail v-else-if="job" :job="job" />
+                </ClientOnly>
             </template>
         </AppJobFetch>
     </Layout>
@@ -14,10 +16,11 @@
 <script>
 import {blank} from "~/services/helpers"
 import App404 from "~/demo/components/App404"
-import AppJobFetch from "~/components/AppJobFetch"
+import AppJobFetch from "~/components/Fetch/AppJobFetch"
 import AppLoader from "~/demo/components/AppLoader"
 import AppJobDetail from "~/demo/components/AppJobDetail"
 import AppJobExpired from "~/demo/components/AppJobExpired"
+
 export default {
     components: {
         App404,
@@ -33,3 +36,12 @@ export default {
     },
 }
 </script>
+
+<static-query>
+query {
+    metadata {
+        paginationType,
+        siteName,
+    }
+}
+</static-query>

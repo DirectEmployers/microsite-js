@@ -12,18 +12,23 @@ export const DECLINED_COOKIES_KEY = "declined_cookie_use"
  * Check if a key is stored as a string value.
  */
 export function isStoredAs(key, stored_as, storageType = "localStorage") {
-    if (!process.isClient) {
-        return false
+    if (process.isClient ) {
+        try{
+            return window[storageType].getItem(key) === JSON.stringify(stored_as)
+        }catch (e){
+            console.error(e)
+        }
     }
-
-    return window[storageType].getItem(key) === JSON.stringify(stored_as)
+    return false;
 }
+
 /**
  * Check if storage contains has declined cookie use.
  */
 export function declinedCookieUse() {
     return isStoredAs(DECLINED_COOKIES_KEY, true)
 }
+
 /**
  * Check if storage contains has accepted cookie use.
  */
@@ -51,21 +56,24 @@ export function setViewSourceParameters(query) {
     if (process.isClient) {
         const viewSource = query[VS_KEY]
 
-        if (!blank(viewSource)) {
-            sessionStorage.setItem(VS_KEY, viewSource)
-        }
-
-        let params = {}
-
-        Object.keys(query).forEach(key => {
-            if (key.startsWith("utm_")) {
-                params[key] = query[key]
+        try {
+            if (!blank(viewSource)) {
+                sessionStorage.setItem(VS_KEY, viewSource)
             }
-        })
 
-        if (!blank(params)) {
-            sessionStorage.setItem(UTM_KEY, JSON.stringify(params))
+            let params = {}
+
+            Object.keys(query).forEach(key => {
+                if (key.startsWith("utm_")) {
+                    params[key] = query[key]
+                }
+            })
+
+            if (!blank(params)) {
+                sessionStorage.setItem(UTM_KEY, JSON.stringify(params))
+            }
+        } catch (e) {
+            console.error(e)
         }
     }
 }
-

@@ -7,10 +7,9 @@
 <script>
 import {get} from "lodash"
 import base from "./mixins/job"
-import SolrJob from "./AppSolrJob"
 import {GOOGLE_TALENT} from "../../services/search"
 import {googleTalentEventService} from "../../services/events"
-
+import trim from 'lodash/trim'
 export default {
     mixins: [base],
     computed: {
@@ -36,12 +35,25 @@ export default {
             return this.getAttribute("title")
         },
         location() {
-            return this.getAttribute("city_admin1_country")
+            if(!this.state){
+                return trim(trim(`${this.city}, ${this.countryShort}`), ',')
+            }
+            return trim(trim(`${this.city}, ${this.stateShort}`), ',')
         },
         city() {
             return get(
                 this.jobInfo,
                 "derivedInfo.locations[0].postalAddress.locality",
+                ""
+            )
+        },
+        countryShort(){
+            return this.getAttribute('country_short')
+        },
+        stateShort(){
+            return get(
+                this.jobInfo,
+                "derivedInfo.locations[0].postalAddress.administrativeArea",
                 ""
             )
         },
@@ -65,7 +77,6 @@ export default {
                 this.commuteInfo.travelDuration.replace("s", "")
             )
             const hours = Math.floor(seconds / 60 / 60)
-
             const minutes = Math.floor(seconds / 60) - hours * 60
 
             return minutes == 0 ? "< 1 minute" : minutes + " minutes"
@@ -80,44 +91,62 @@ export default {
             )
             return Array.isArray(value) ? value.join(" ") : value
         },
-        clickedApplyJob() {
-            return this.tryClientEvent('redirect')
+        clickedApplyJob(callback) {
+            this.executeCallback(callback, [this.jobInfo])
+
+            return this.tryClientEvent("redirect", () => {
+                let nw = window.open(this.applyUrl, "_blank")
+                nw.focus()
+            })
         },
-        clickedViewJob() {
-            return this.tryClientEvent('view')
+        clickedViewJob(callback) {
+            this.executeCallback(callback, [this.jobInfo])
+            this.tryClientEvent("view", () => {
+                this.$router
+                    .push({
+                        path: this.detailUrl,
+                    })
+                    .catch((err) => {})
+            })
         },
-        tryClientEvent(type){
-            if (this.isGoogleTalent && process.isClient) {
-                var lastEvent = null;
+        tryClientEvent(type, callback = null) {
+            if (process.isClient) {
                 var currentEvent = {
                     eventType: type,
                     jobs: [this.jobInfo.name],
                 }
-                try{
+                try {
                     //try to get the saved request id from the previous event (impression or view depending on what event is calling this method).
                     //the service call will do nothing if we werent able to.
-                    lastEvent = JSON.parse(sessionStorage.getItem(GOOGLE_TALENT)).event
+                    let lastEvent = JSON.parse(
+                        sessionStorage.getItem(GOOGLE_TALENT)
+                    ).event
                     currentEvent.requestId = lastEvent.requestId
-                }catch(e){
+                } catch (e) {
+                    this.executeCallback(callback)
                     return
                 }
-                googleTalentEventService(
-                    currentEvent,
-                    {
-                        client_events: this.siteConfig.client_events,
-                        project_id: this.siteConfig.project_id,
-                        tenant_uuid: this.siteConfig.tenant_uuid,
-                        company_uuids: this.siteConfig.company_uuids,
-                    }
-                ).then(response => {
-                    currentEvent.requestId = (response.data || {}).request_id
-                    sessionStorage.setItem(
-                        GOOGLE_TALENT,
-                        JSON.stringify({
-                            event: currentEvent,
-                        })
-                    )
-                }).catch(()=>{})
+                googleTalentEventService(currentEvent, {
+                    client_events: this.siteConfig.client_events,
+                    project_id: this.siteConfig.project_id,
+                    tenant_uuid: this.siteConfig.tenant_uuid,
+                    company_uuids: this.siteConfig.company_uuids,
+                })
+                    .then((response) => {
+                        currentEvent.requestId = (
+                            response.data || {}
+                        ).request_id
+                        sessionStorage.setItem(
+                            GOOGLE_TALENT,
+                            JSON.stringify({
+                                event: currentEvent,
+                            })
+                        )
+                        this.executeCallback(callback)
+                    })
+                    .catch(() => {
+                        this.executeCallback(callback)
+                    })
             }
         },
     },

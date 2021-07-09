@@ -1,175 +1,363 @@
 [
   {
-    "source": "/locations/:location/job-titles/:title/military-codes/:moc/business-units/:business-unit/companies/:company/shifts/:shift/jobs",
-    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/business-units/_business_unit/companies/_company/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/military-codes/:moc/business-units/:business-unit/shifts/:shift/jobs",
-    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/business-units/_business_unit/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/shifts/:shift/jobs",
-    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/military-codes/:moc/business-units/:business-unit/companies/:company/shifts/:shift/jobs",
-    "destination": "/locations/_location/military-codes/_moc/business-units/_business_unit/companies/_company/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs/_company/careers.html"
   },
   {
-    "source": "/job-titles/:title/military-codes/:moc/business-units/:business-unit/companies/:company/shifts/:shift/jobs",
-    "destination": "/job-titles/_title/military-codes/_moc/business-units/_business_unit/companies/_company/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/business-units/:business-unit/companies/:company/shifts/:shift/jobs",
-    "destination": "/locations/_location/job-titles/_title/business-units/_business_unit/companies/_company/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/military-codes/:moc/business-units/:business-unit/companies/:company/jobs",
-    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/business-units/_business_unit/companies/_company/jobs.html"
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/military-codes/:moc/shifts/:shift/jobs",
-    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/shifts/_shift/jobs.html"
+    "source": "/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/military-codes/:moc/business-units/:business-unit/shifts/:shift/jobs",
-    "destination": "/locations/_location/military-codes/_moc/business-units/_business_unit/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
   },
   {
-    "source": "/job-titles/:title/military-codes/:moc/business-units/:business-unit/shifts/:shift/jobs",
-    "destination": "/job-titles/_title/military-codes/_moc/business-units/_business_unit/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/military-codes/:moc/companies/:company/shifts/:shift/jobs",
-    "destination": "/locations/_location/military-codes/_moc/companies/_company/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs.html"
   },
   {
-    "source": "/job-titles/:title/military-codes/:moc/companies/:company/shifts/:shift/jobs",
-    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/business-units/:business-unit/shifts/:shift/jobs",
-    "destination": "/locations/_location/job-titles/_title/business-units/_business_unit/shifts/_shift/jobs.html"
+    "source": "/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/companies/:company/shifts/:shift/jobs",
-    "destination": "/locations/_location/job-titles/_title/companies/_company/shifts/_shift/jobs.html"
+    "source": "/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/military-codes/:moc/business-units/:business-unit/jobs",
-    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/business-units/_business_unit/jobs.html"
+    "source": "/:title/jobs-in/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/military-codes/:moc/companies/:company/jobs",
-    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/companies/_company/jobs.html"
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs.html"
   },
   {
-    "source": "/military-codes/:moc/business-units/:business-unit/companies/:company/shifts/:shift/jobs",
-    "destination": "/military-codes/_moc/business-units/_business_unit/companies/_company/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs",
+    "destination": "/_title/jobs-in/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
   },
   {
-    "source": "/locations/:location/business-units/:business-unit/companies/:company/shifts/:shift/jobs",
-    "destination": "/locations/_location/business-units/_business_unit/companies/_company/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs.html"
   },
   {
-    "source": "/job-titles/:title/business-units/:business-unit/companies/:company/shifts/:shift/jobs",
-    "destination": "/job-titles/_title/business-units/_business_unit/companies/_company/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/military-codes/:moc/business-units/:business-unit/companies/:company/jobs",
-    "destination": "/locations/_location/military-codes/_moc/business-units/_business_unit/companies/_company/jobs.html"
+    "source": "/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs/_company/careers.html"
   },
   {
-    "source": "/job-titles/:title/military-codes/:moc/business-units/:business-unit/companies/:company/jobs",
-    "destination": "/job-titles/_title/military-codes/_moc/business-units/_business_unit/companies/_company/jobs.html"
+    "source": "/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/business-units/:business-unit/companies/:company/jobs",
-    "destination": "/locations/_location/job-titles/_title/business-units/_business_unit/companies/_company/jobs.html"
+    "source": "/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs",
+    "destination": "/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs",
+    "destination": "/_title/jobs-in/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:state/:country/jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs",
+    "destination": "/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs.html"
+  },
+  {
+    "source": "/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs",
+    "destination": "/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs",
+    "destination": "/_title/jobs-in/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_filter_0/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:country/jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_country/jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:state/:country/jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs",
+    "destination": "/_title/jobs-in/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
+  },
+  {
+    "source": "/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs",
+    "destination": "/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs.html"
+  },
+  {
+    "source": "/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs",
+    "destination": "/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
+  },
+  {
+    "source": "/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs",
+    "destination": "/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs.html"
+  },
+  {
+    "source": "/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:company/careers",
+    "destination": "/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:filter0/:filter1/:filter2/new-jobs",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
+  },
+  {
+    "source": "/:city/:state/:country/jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_city/_state/_country/jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:country/jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_country/jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:state/:country/jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_filter_0/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs",
+    "destination": "/_title/jobs-in/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs.html"
+  },
+  {
+    "source": "/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs",
+    "destination": "/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs.html"
+  },
+  {
+    "source": "/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs",
+    "destination": "/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs.html"
+  },
+  {
+    "source": "/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:company/careers",
+    "destination": "/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:filter0/:filter1/new-jobs",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_filter_0/_filter_1/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:state/:country/jobs/:filter0/:filter1/:filter2/new-jobs",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
+  },
+  {
+    "source": "/:city/:state/:country/jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_city/_state/_country/jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:state/:country/jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_state/_country/jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:country/jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_country/jobs/_filter_0/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs",
+    "destination": "/_title/jobs-in/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs.html"
+  },
+  {
+    "source": "/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs",
+    "destination": "/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs",
+    "destination": "/_title/jobs-in/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs.html"
+  },
+  {
+    "source": "/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:mocTitle/:moc/:mocBranch/vet-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_moc_title/_moc/_moc_branch/vet-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs/:company/careers",
+    "destination": "/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:filter0/new-jobs",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_filter_0/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:country/jobs/:filter0/:filter1/:filter2/new-jobs",
+    "destination": "/_title/jobs-in/_country/jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:state/:country/jobs/:filter0/:filter1/new-jobs",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_filter_0/_filter_1/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:city/:state/:country/jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_city/_state/_country/jobs/_filter_0/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:country/jobs/:filter0/:filter1/:filter2/new-jobs/:company/careers",
+    "destination": "/_country/jobs/_filter_0/_filter_1/_filter_2/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:state/:country/jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_state/_country/jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:city/:state/:country/jobs/:company/careers",
+    "destination": "/_title/jobs-in/_city/_state/_country/jobs/_company/careers.html"
+  },
+  {
+    "source": "/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/:filter2/new-jobs",
+    "destination": "/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
+  },
+  {
+    "source": "/:city/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs",
+    "destination": "/_city/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs.html"
   },
   {
     "source": "/:city/:state/:country/jobs/:filter0/:filter1/:filter2/new-jobs",
     "destination": "/_city/_state/_country/jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
   },
   {
-    "source": "/locations/:location/military-codes/:moc/shifts/:shift/jobs",
-    "destination": "/locations/_location/military-codes/_moc/shifts/_shift/jobs.html"
+    "source": "/locations/:location/job-titles/:title/career-areas/:jobcategory/jobs",
+    "destination": "/locations/_location/job-titles/_title/career-areas/_jobcategory/jobs.html"
   },
   {
-    "source": "/job-titles/:title/military-codes/:moc/shifts/:shift/jobs",
-    "destination": "/job-titles/_title/military-codes/_moc/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:country/jobs/:filter0/:filter1/new-jobs",
+    "destination": "/_title/jobs-in/_country/jobs/_filter_0/_filter_1/new-jobs.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/shifts/:shift/jobs",
-    "destination": "/locations/_location/job-titles/_title/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:state/:country/jobs/:filter0/new-jobs",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_filter_0/new-jobs.html"
   },
   {
-    "source": "/locations/:location/job-titles/:title/military-codes/:moc/jobs",
-    "destination": "/locations/_location/job-titles/_title/military-codes/_moc/jobs.html"
+    "source": "/:title/jobs-in/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_filter_0/_filter_1/new-jobs/_company/careers.html"
   },
   {
-    "source": "/military-codes/:moc/business-units/:business-unit/shifts/:shift/jobs",
-    "destination": "/military-codes/_moc/business-units/_business_unit/shifts/_shift/jobs.html"
+    "source": "/:country/jobs/:filter0/:filter1/new-jobs/:company/careers",
+    "destination": "/_country/jobs/_filter_0/_filter_1/new-jobs/_company/careers.html"
   },
   {
-    "source": "/military-codes/:moc/companies/:company/shifts/:shift/jobs",
-    "destination": "/military-codes/_moc/companies/_company/shifts/_shift/jobs.html"
+    "source": "/:state/:country/jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_state/_country/jobs/_filter_0/new-jobs/_company/careers.html"
   },
   {
-    "source": "/locations/:location/business-units/:business-unit/shifts/:shift/jobs",
-    "destination": "/locations/_location/business-units/_business_unit/shifts/_shift/jobs.html"
+    "source": "/:title/jobs-in/:state/:country/jobs/:company/careers",
+    "destination": "/_title/jobs-in/_state/_country/jobs/_company/careers.html"
   },
   {
-    "source": "/job-titles/:title/business-units/:business-unit/shifts/:shift/jobs",
-    "destination": "/job-titles/_title/business-units/_business_unit/shifts/_shift/jobs.html"
+    "source": "/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/:filter1/new-jobs",
+    "destination": "/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/_filter_1/new-jobs.html"
   },
   {
-    "source": "/locations/:location/companies/:company/shifts/:shift/jobs",
-    "destination": "/locations/_location/companies/_company/shifts/_shift/jobs.html"
-  },
-  {
-    "source": "/job-titles/:title/companies/:company/shifts/:shift/jobs",
-    "destination": "/job-titles/_title/companies/_company/shifts/_shift/jobs.html"
-  },
-  {
-    "source": "/locations/:location/military-codes/:moc/business-units/:business-unit/jobs",
-    "destination": "/locations/_location/military-codes/_moc/business-units/_business_unit/jobs.html"
-  },
-  {
-    "source": "/job-titles/:title/military-codes/:moc/business-units/:business-unit/jobs",
-    "destination": "/job-titles/_title/military-codes/_moc/business-units/_business_unit/jobs.html"
-  },
-  {
-    "source": "/locations/:location/military-codes/:moc/companies/:company/jobs",
-    "destination": "/locations/_location/military-codes/_moc/companies/_company/jobs.html"
-  },
-  {
-    "source": "/job-titles/:title/military-codes/:moc/companies/:company/jobs",
-    "destination": "/job-titles/_title/military-codes/_moc/companies/_company/jobs.html"
-  },
-  {
-    "source": "/locations/:location/job-titles/:title/business-units/:business-unit/jobs",
-    "destination": "/locations/_location/job-titles/_title/business-units/_business_unit/jobs.html"
-  },
-  {
-    "source": "/business-units/:business-unit/companies/:company/shifts/:shift/jobs",
-    "destination": "/business-units/_business_unit/companies/_company/shifts/_shift/jobs.html"
-  },
-  {
-    "source": "/locations/:location/job-titles/:title/companies/:company/jobs",
-    "destination": "/locations/_location/job-titles/_title/companies/_company/jobs.html"
-  },
-  {
-    "source": "/military-codes/:moc/business-units/:business-unit/companies/:company/jobs",
-    "destination": "/military-codes/_moc/business-units/_business_unit/companies/_company/jobs.html"
-  },
-  {
-    "source": "/locations/:location/business-units/:business-unit/companies/:company/jobs",
-    "destination": "/locations/_location/business-units/_business_unit/companies/_company/jobs.html"
-  },
-  {
-    "source": "/job-titles/:title/business-units/:business-unit/companies/:company/jobs",
-    "destination": "/job-titles/_title/business-units/_business_unit/companies/_company/jobs.html"
+    "source": "/:state/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs",
+    "destination": "/_state/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs.html"
   },
   {
     "source": "/:city/:state/:country/jobs/:filter0/:filter1/new-jobs",
@@ -180,12 +368,36 @@
     "destination": "/_state/_country/jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
   },
   {
-    "source": "/:moc/vet-jobs/:filter0/:filter1/:filter2/new-jobs",
-    "destination": "/_moc/vet-jobs/_filter_0/_filter_1/_filter_2/new-jobs.html"
+    "source": "/:title/jobs-in/:country/jobs/:filter0/new-jobs",
+    "destination": "/_title/jobs-in/_country/jobs/_filter_0/new-jobs.html"
   },
   {
-    "source": "/:city/:state/:country/jobs/:moc/vet-jobs",
-    "destination": "/_city/_state/_country/jobs/_moc/vet-jobs.html"
+    "source": "/:title/jobs-in/:filter0/new-jobs/:company/careers",
+    "destination": "/_title/jobs-in/_filter_0/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:country/jobs/:filter0/new-jobs/:company/careers",
+    "destination": "/_country/jobs/_filter_0/new-jobs/_company/careers.html"
+  },
+  {
+    "source": "/:title/jobs-in/:country/jobs/:company/careers",
+    "destination": "/_title/jobs-in/_country/jobs/_company/careers.html"
+  },
+  {
+    "source": "/:mocTitle/:moc/:mocBranch/vet-jobs/:filter0/new-jobs",
+    "destination": "/_moc_title/_moc/_moc_branch/vet-jobs/_filter_0/new-jobs.html"
+  },
+  {
+    "source": "/:title/jobs-in/:mocTitle/:moc/:mocBranch/vet-jobs",
+    "destination": "/_title/jobs-in/_moc_title/_moc/_moc_branch/vet-jobs.html"
+  },
+  {
+    "source": "/:country/jobs/:mocTitle/:moc/:mocBranch/vet-jobs",
+    "destination": "/_country/jobs/_moc_title/_moc/_moc_branch/vet-jobs.html"
+  },
+  {
+    "source": "/:mocTitle/:moc/:mocBranch/vet-jobs/:company/careers",
+    "destination": "/_moc_title/_moc/_moc_branch/vet-jobs/_company/careers.html"
   },
   {
     "source": "/:title/jobs-in/:filter0/:filter1/:filter2/new-jobs",
@@ -216,72 +428,16 @@
     "destination": "/_city/_state/_country/jobs/_company/careers.html"
   },
   {
-    "source": "/military-codes/:moc/shifts/:shift/jobs",
-    "destination": "/military-codes/_moc/shifts/_shift/jobs.html"
-  },
-  {
-    "source": "/locations/:location/shifts/:shift/jobs",
-    "destination": "/locations/_location/shifts/_shift/jobs.html"
-  },
-  {
-    "source": "/job-titles/:title/shifts/:shift/jobs",
-    "destination": "/job-titles/_title/shifts/_shift/jobs.html"
-  },
-  {
-    "source": "/locations/:location/military-codes/:moc/jobs",
-    "destination": "/locations/_location/military-codes/_moc/jobs.html"
-  },
-  {
-    "source": "/job-titles/:title/military-codes/:moc/jobs",
-    "destination": "/job-titles/_title/military-codes/_moc/jobs.html"
-  },
-  {
-    "source": "/business-units/:business-unit/shifts/:shift/jobs",
-    "destination": "/business-units/_business_unit/shifts/_shift/jobs.html"
-  },
-  {
     "source": "/locations/:location/job-titles/:title/jobs",
     "destination": "/locations/_location/job-titles/_title/jobs.html"
   },
   {
-    "source": "/companies/:company/shifts/:shift/jobs",
-    "destination": "/companies/_company/shifts/_shift/jobs.html"
+    "source": "/locations/:location/career-areas/:jobcategory/jobs",
+    "destination": "/locations/_location/career-areas/_jobcategory/jobs.html"
   },
   {
-    "source": "/military-codes/:moc/business-units/:business-unit/jobs",
-    "destination": "/military-codes/_moc/business-units/_business_unit/jobs.html"
-  },
-  {
-    "source": "/military-codes/:moc/companies/:company/jobs",
-    "destination": "/military-codes/_moc/companies/_company/jobs.html"
-  },
-  {
-    "source": "/locations/:location/business-units/:business-unit/jobs",
-    "destination": "/locations/_location/business-units/_business_unit/jobs.html"
-  },
-  {
-    "source": "/job-titles/:title/business-units/:business-unit/jobs",
-    "destination": "/job-titles/_title/business-units/_business_unit/jobs.html"
-  },
-  {
-    "source": "/locations/:location/companies/:company/jobs",
-    "destination": "/locations/_location/companies/_company/jobs.html"
-  },
-  {
-    "source": "/job-titles/:title/companies/:company/jobs",
-    "destination": "/job-titles/_title/companies/_company/jobs.html"
-  },
-  {
-    "source": "/business-units/:business-unit/companies/:company/jobs",
-    "destination": "/business-units/_business_unit/companies/_company/jobs.html"
-  },
-  {
-    "source": "/:moc/vet-jobs/:filter0/:filter1/new-jobs",
-    "destination": "/_moc/vet-jobs/_filter_0/_filter_1/new-jobs.html"
-  },
-  {
-    "source": "/:state/:country/jobs/:moc/vet-jobs",
-    "destination": "/_state/_country/jobs/_moc/vet-jobs.html"
+    "source": "/job-titles/:title/career-areas/:jobcategory/jobs",
+    "destination": "/job-titles/_title/career-areas/_jobcategory/jobs.html"
   },
   {
     "source": "/:title/jobs-in/:filter0/:filter1/new-jobs",
@@ -308,22 +464,6 @@
     "destination": "/_state/_country/jobs/_company/careers.html"
   },
   {
-    "source": "/:moc/vet-jobs/:filter0/new-jobs",
-    "destination": "/_moc/vet-jobs/_filter_0/new-jobs.html"
-  },
-  {
-    "source": "/:title/jobs-in/:moc/vet-jobs",
-    "destination": "/_title/jobs-in/_moc/vet-jobs.html"
-  },
-  {
-    "source": "/:country/jobs/:moc/vet-jobs",
-    "destination": "/_country/jobs/_moc/vet-jobs.html"
-  },
-  {
-    "source": "/:moc/vet-jobs/:company/careers",
-    "destination": "/_moc/vet-jobs/_company/careers.html"
-  },
-  {
     "source": "/:title/jobs-in/:filter0/new-jobs",
     "destination": "/_title/jobs-in/_filter_0/new-jobs.html"
   },
@@ -348,6 +488,10 @@
     "destination": "/_country/jobs/_company/careers.html"
   },
   {
+    "source": "/:mocTitle/:moc/:mocBranch/vet-jobs",
+    "destination": "/_moc_title/_moc/_moc_branch/vet-jobs.html"
+  },
+  {
     "source": "/:filter0/:filter1/:filter2/new-jobs",
     "destination": "/_filter_0/_filter_1/_filter_2/new-jobs.html"
   },
@@ -360,14 +504,6 @@
     "destination": "/_location/_title/_guid/job.html"
   },
   {
-    "source": "/shifts/:shift/jobs",
-    "destination": "/shifts/_shift/jobs.html"
-  },
-  {
-    "source": "/military-codes/:moc/jobs",
-    "destination": "/military-codes/_moc/jobs.html"
-  },
-  {
     "source": "/locations/:location/jobs",
     "destination": "/locations/_location/jobs.html"
   },
@@ -376,12 +512,8 @@
     "destination": "/job-titles/_title/jobs.html"
   },
   {
-    "source": "/business-units/:business-unit/jobs",
-    "destination": "/business-units/_business_unit/jobs.html"
-  },
-  {
-    "source": "/companies/:company/jobs",
-    "destination": "/companies/_company/jobs.html"
+    "source": "/career-areas/:jobcategory/jobs",
+    "destination": "/career-areas/_jobcategory/jobs.html"
   },
   {
     "source": "/:filter0/:filter1/new-jobs",
@@ -390,10 +522,6 @@
   {
     "source": "/:state/:country/jobs",
     "destination": "/_state/_country/jobs.html"
-  },
-  {
-    "source": "/:moc/vet-jobs",
-    "destination": "/_moc/vet-jobs.html"
   },
   {
     "source": "/:filter0/new-jobs",
@@ -406,10 +534,6 @@
   {
     "source": "/:country/jobs",
     "destination": "/_country/jobs.html"
-  },
-  {
-    "source": "/:guid/job",
-    "destination": "/_guid/job.html"
   },
   {
     "source": "/:company/careers",
