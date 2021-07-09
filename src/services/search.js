@@ -30,14 +30,14 @@ export function api() {
 }
 
 function apiService(input, config, endpoint) {
-    let local = isDevelopment() || process.env.GRIDSOME_USE_MINIKUBE
-
-    if(local){
-        input.origin = config.s3Folder
-    }else if (process.isClient) {
-        input.origin = window.location.hostname
+    const localHosts = ['localhost', 'minikube']
+    if (!process.isClient || isDevelopment() || localHosts.includes(window.location.hostname)) {
+        return api().post(endpoint, {
+            data: input,
+            config: config,
+        })
     }
-
+    input.origin = window.location.hostname
     return api().get(endpoint, {
         params: input,
     })
