@@ -78,7 +78,7 @@
                     placeholder="Enter MOC code"
                     aria-label="Search by MOC code"
                     autocapitalize="off"
-                    :query="MOCCompleteService"
+                    :query="MOCV2CompleteService"
                     @setResult="search"
                 />
             </div>
@@ -94,7 +94,7 @@ import AppAutocompleteInput from "~/components/Form/AppAutocompleteInput"
 import AppGeoLocation from "~/components/Search/AppGeoLocation"
 import {
     TitleCompleteService,
-    MOCCompleteService,
+    MOCV2CompleteService,
     LocationCompleteService,
 } from "~/services/search"
 
@@ -152,7 +152,7 @@ export default {
     data: function () {
         return {
             TitleCompleteService,
-            MOCCompleteService,
+            MOCV2CompleteService,
             LocationCompleteService,
             apiKey: process.env.GRIDSOME_GOOGLE_MAPS_API_KEY,
             form: {
