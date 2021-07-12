@@ -24,12 +24,8 @@ export function api() {
 }
 
 function apiService(input, config, endpoint) {
-    const localHosts = ["localhost", "minikube"]
-    if (
-        !process.isClient ||
-        isDevelopment() ||
-        localHosts.includes(window.location.hostname)
-    ) {
+    const localHosts = ['localhost', 'minikube']
+    if (!process.isClient || isDevelopment() || localHosts.includes(window.location.hostname)) {
         return api().post(endpoint, {
             data: input,
             config: config,
@@ -56,7 +52,7 @@ export function filtersSearchService(input, config) {
     return apiService(input, config, `v1/${source}/filters`)
 }
 
-export function filterSearchService(input, config, filter = "") {
+export function filterSearchService(input, config, filter="") {
     const source = kebabCase(config.source)
     return apiService(input, config, `v1/${source}/filter/${filter}`)
 }
