@@ -1,12 +1,6 @@
 import axios from "axios"
-
-import mergeWith from "lodash/mergeWith"
-
-import toString from "lodash/toString"
 import kebabCase from "lodash/kebabCase"
-import clone from "lodash/clone"
-
-import {isDevelopment, blank, humanFriendlyLocation, slugify} from "./helpers"
+import {isDevelopment} from "./helpers"
 
 export const SOLR = "solr"
 export const GOOGLE_TALENT = "google_talent"
@@ -30,8 +24,12 @@ export function api() {
 }
 
 function apiService(input, config, endpoint) {
-    const localHosts = ['localhost', 'minikube']
-    if (!process.isClient || isDevelopment() || localHosts.includes(window.location.hostname)) {
+    const localHosts = ["localhost", "minikube"]
+    if (
+        !process.isClient ||
+        isDevelopment() ||
+        localHosts.includes(window.location.hostname)
+    ) {
         return api().post(endpoint, {
             data: input,
             config: config,
@@ -58,7 +56,7 @@ export function filtersSearchService(input, config) {
     return apiService(input, config, `v1/${source}/filters`)
 }
 
-export function filterSearchService(input, config, filter="") {
+export function filterSearchService(input, config, filter = "") {
     const source = kebabCase(config.source)
     return apiService(input, config, `v1/${source}/filter/${filter}`)
 }
