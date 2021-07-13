@@ -1161,30 +1161,6 @@ exports.default = HTML5Tokenizer;
 
 /***/ }),
 
-/***/ "100e":
-/***/ (function(module, exports, __webpack_require__) {
-
-var identity = __webpack_require__("cd9d"),
-    overRest = __webpack_require__("2286"),
-    setToString = __webpack_require__("c1c9");
-
-/**
- * The base implementation of `_.rest` which doesn't validate or coerce arguments.
- *
- * @private
- * @param {Function} func The function to apply a rest parameter to.
- * @param {number} [start=func.length-1] The start position of the rest parameter.
- * @returns {Function} Returns the new function.
- */
-function baseRest(func, start) {
-  return setToString(overRest(func, start, identity), func + '');
-}
-
-module.exports = baseRest;
-
-
-/***/ }),
-
 /***/ "1041":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3393,49 +3369,6 @@ function bindProps(vueInst, googleMapsInst, props) {
 
 /***/ }),
 
-/***/ "2286":
-/***/ (function(module, exports, __webpack_require__) {
-
-var apply = __webpack_require__("85e3");
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeMax = Math.max;
-
-/**
- * A specialized version of `baseRest` which transforms the rest array.
- *
- * @private
- * @param {Function} func The function to apply a rest parameter to.
- * @param {number} [start=func.length-1] The start position of the rest parameter.
- * @param {Function} transform The rest array transform.
- * @returns {Function} Returns the new function.
- */
-function overRest(func, start, transform) {
-  start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
-  return function() {
-    var args = arguments,
-        index = -1,
-        length = nativeMax(args.length - start, 0),
-        array = Array(length);
-
-    while (++index < length) {
-      array[index] = args[start + index];
-    }
-    index = -1;
-    var otherArgs = Array(start + 1);
-    while (++index < start) {
-      otherArgs[index] = args[index];
-    }
-    otherArgs[start] = transform(array);
-    return apply(func, this, otherArgs);
-  };
-}
-
-module.exports = overRest;
-
-
-/***/ }),
-
 /***/ "234d":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3545,52 +3478,6 @@ module.exports = function (options, source) {
     redefine(target, key, sourceProperty, options);
   }
 };
-
-
-/***/ }),
-
-/***/ "2411":
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseMerge = __webpack_require__("f909"),
-    createAssigner = __webpack_require__("2ec1");
-
-/**
- * This method is like `_.merge` except that it accepts `customizer` which
- * is invoked to produce the merged values of the destination and source
- * properties. If `customizer` returns `undefined`, merging is handled by the
- * method instead. The `customizer` is invoked with six arguments:
- * (objValue, srcValue, key, object, source, stack).
- *
- * **Note:** This method mutates `object`.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Object
- * @param {Object} object The destination object.
- * @param {...Object} sources The source objects.
- * @param {Function} customizer The function to customize assigned values.
- * @returns {Object} Returns `object`.
- * @example
- *
- * function customizer(objValue, srcValue) {
- *   if (_.isArray(objValue)) {
- *     return objValue.concat(srcValue);
- *   }
- * }
- *
- * var object = { 'a': [1], 'b': [2] };
- * var other = { 'a': [3], 'b': [4] };
- *
- * _.mergeWith(object, other, customizer);
- * // => { 'a': [1, 3], 'b': [2, 4] }
- */
-var mergeWith = createAssigner(function(object, source, srcIndex, customizer) {
-  baseMerge(object, source, srcIndex, customizer);
-});
-
-module.exports = mergeWith;
 
 
 /***/ }),
@@ -4903,50 +4790,6 @@ module.exports = getPrototype;
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
-
-
-/***/ }),
-
-/***/ "2ec1":
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseRest = __webpack_require__("100e"),
-    isIterateeCall = __webpack_require__("9aff");
-
-/**
- * Creates a function like `_.assign`.
- *
- * @private
- * @param {Function} assigner The function to assign values.
- * @returns {Function} Returns the new assigner function.
- */
-function createAssigner(assigner) {
-  return baseRest(function(object, sources) {
-    var index = -1,
-        length = sources.length,
-        customizer = length > 1 ? sources[length - 1] : undefined,
-        guard = length > 2 ? sources[2] : undefined;
-
-    customizer = (assigner.length > 3 && typeof customizer == 'function')
-      ? (length--, customizer)
-      : undefined;
-
-    if (guard && isIterateeCall(sources[0], sources[1], guard)) {
-      customizer = length < 3 ? undefined : customizer;
-      length = 1;
-    }
-    object = Object(object);
-    while (++index < length) {
-      var source = sources[index];
-      if (source) {
-        assigner(object, source, index, customizer);
-      }
-    }
-    return object;
-  });
-}
-
-module.exports = createAssigner;
 
 
 /***/ }),
@@ -26639,107 +26482,6 @@ var component = Object(componentNormalizer["a" /* default */])(
 /***/ }),
 
 /***/ "4f50":
-/***/ (function(module, exports, __webpack_require__) {
-
-var assignMergeValue = __webpack_require__("b760"),
-    cloneBuffer = __webpack_require__("e5383"),
-    cloneTypedArray = __webpack_require__("c8fe"),
-    copyArray = __webpack_require__("4359"),
-    initCloneObject = __webpack_require__("fa21"),
-    isArguments = __webpack_require__("d370"),
-    isArray = __webpack_require__("6747"),
-    isArrayLikeObject = __webpack_require__("dcbe"),
-    isBuffer = __webpack_require__("0d24"),
-    isFunction = __webpack_require__("9520"),
-    isObject = __webpack_require__("1a8c"),
-    isPlainObject = __webpack_require__("60ed"),
-    isTypedArray = __webpack_require__("73ac"),
-    safeGet = __webpack_require__("8adb"),
-    toPlainObject = __webpack_require__("8de2");
-
-/**
- * A specialized version of `baseMerge` for arrays and objects which performs
- * deep merges and tracks traversed objects enabling objects with circular
- * references to be merged.
- *
- * @private
- * @param {Object} object The destination object.
- * @param {Object} source The source object.
- * @param {string} key The key of the value to merge.
- * @param {number} srcIndex The index of `source`.
- * @param {Function} mergeFunc The function to merge values.
- * @param {Function} [customizer] The function to customize assigned values.
- * @param {Object} [stack] Tracks traversed source values and their merged
- *  counterparts.
- */
-function baseMergeDeep(object, source, key, srcIndex, mergeFunc, customizer, stack) {
-  var objValue = safeGet(object, key),
-      srcValue = safeGet(source, key),
-      stacked = stack.get(srcValue);
-
-  if (stacked) {
-    assignMergeValue(object, key, stacked);
-    return;
-  }
-  var newValue = customizer
-    ? customizer(objValue, srcValue, (key + ''), object, source, stack)
-    : undefined;
-
-  var isCommon = newValue === undefined;
-
-  if (isCommon) {
-    var isArr = isArray(srcValue),
-        isBuff = !isArr && isBuffer(srcValue),
-        isTyped = !isArr && !isBuff && isTypedArray(srcValue);
-
-    newValue = srcValue;
-    if (isArr || isBuff || isTyped) {
-      if (isArray(objValue)) {
-        newValue = objValue;
-      }
-      else if (isArrayLikeObject(objValue)) {
-        newValue = copyArray(objValue);
-      }
-      else if (isBuff) {
-        isCommon = false;
-        newValue = cloneBuffer(srcValue, true);
-      }
-      else if (isTyped) {
-        isCommon = false;
-        newValue = cloneTypedArray(srcValue, true);
-      }
-      else {
-        newValue = [];
-      }
-    }
-    else if (isPlainObject(srcValue) || isArguments(srcValue)) {
-      newValue = objValue;
-      if (isArguments(objValue)) {
-        newValue = toPlainObject(objValue);
-      }
-      else if (!isObject(objValue) || isFunction(objValue)) {
-        newValue = initCloneObject(srcValue);
-      }
-    }
-    else {
-      isCommon = false;
-    }
-  }
-  if (isCommon) {
-    // Recursively merge objects and arrays (susceptible to call stack limits).
-    stack.set(srcValue, newValue);
-    mergeFunc(newValue, srcValue, srcIndex, customizer, stack);
-    stack['delete'](srcValue);
-  }
-  assignMergeValue(object, key, newValue);
-}
-
-module.exports = baseMergeDeep;
-
-
-/***/ }),
-
-/***/ "4f500":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28577,75 +28319,6 @@ module.exports = classof(global.process) == 'process';
 
 /***/ }),
 
-/***/ "60ed":
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseGetTag = __webpack_require__("3729"),
-    getPrototype = __webpack_require__("2dcb"),
-    isObjectLike = __webpack_require__("1310");
-
-/** `Object#toString` result references. */
-var objectTag = '[object Object]';
-
-/** Used for built-in method references. */
-var funcProto = Function.prototype,
-    objectProto = Object.prototype;
-
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Used to infer the `Object` constructor. */
-var objectCtorString = funcToString.call(Object);
-
-/**
- * Checks if `value` is a plain object, that is, an object created by the
- * `Object` constructor or one with a `[[Prototype]]` of `null`.
- *
- * @static
- * @memberOf _
- * @since 0.8.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- * }
- *
- * _.isPlainObject(new Foo);
- * // => false
- *
- * _.isPlainObject([1, 2, 3]);
- * // => false
- *
- * _.isPlainObject({ 'x': 0, 'y': 0 });
- * // => true
- *
- * _.isPlainObject(Object.create(null));
- * // => true
- */
-function isPlainObject(value) {
-  if (!isObjectLike(value) || baseGetTag(value) != objectTag) {
-    return false;
-  }
-  var proto = getPrototype(value);
-  if (proto === null) {
-    return true;
-  }
-  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-  return typeof Ctor == 'function' && Ctor instanceof Ctor &&
-    funcToString.call(Ctor) == objectCtorString;
-}
-
-module.exports = isPlainObject;
-
-
-/***/ }),
-
 /***/ "621c":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29198,7 +28871,7 @@ var map = {
 	"./AppDropdown.vue": "884f",
 	"./AppJobDescription.vue": "d669",
 	"./AppModal.vue": "41df",
-	"./AppNavbar.vue": "4f500",
+	"./AppNavbar.vue": "4f50",
 	"./AppSimilarJobs.vue": "0a22",
 	"./AppYoutube.vue": "65f4",
 	"./Fetch/AppFetch.vue": "1c53",
@@ -29779,62 +29452,6 @@ function isAlpha(char) {
 function preprocessInput(input) {
   return input.replace(CRLF, "\n");
 }
-
-/***/ }),
-
-/***/ "72af":
-/***/ (function(module, exports, __webpack_require__) {
-
-var createBaseFor = __webpack_require__("99cd");
-
-/**
- * The base implementation of `baseForOwn` which iterates over `object`
- * properties returned by `keysFunc` and invokes `iteratee` for each property.
- * Iteratee functions may exit iteration early by explicitly returning `false`.
- *
- * @private
- * @param {Object} object The object to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @param {Function} keysFunc The function to get the keys of `object`.
- * @returns {Object} Returns `object`.
- */
-var baseFor = createBaseFor();
-
-module.exports = baseFor;
-
-
-/***/ }),
-
-/***/ "72f0":
-/***/ (function(module, exports) {
-
-/**
- * Creates a function that returns `value`.
- *
- * @static
- * @memberOf _
- * @since 2.4.0
- * @category Util
- * @param {*} value The value to return from the new function.
- * @returns {Function} Returns the new constant function.
- * @example
- *
- * var objects = _.times(2, _.constant({ 'a': 1 }));
- *
- * console.log(objects);
- * // => [{ 'a': 1 }, { 'a': 1 }]
- *
- * console.log(objects[0] === objects[1]);
- * // => true
- */
-function constant(value) {
-  return function() {
-    return value;
-  };
-}
-
-module.exports = constant;
-
 
 /***/ }),
 
@@ -31973,34 +31590,6 @@ module.exports = function (string, tag, attribute, value) {
 
 /***/ }),
 
-/***/ "85e3":
-/***/ (function(module, exports) {
-
-/**
- * A faster alternative to `Function#apply`, this function invokes `func`
- * with the `this` binding of `thisArg` and the arguments of `args`.
- *
- * @private
- * @param {Function} func The function to invoke.
- * @param {*} thisArg The `this` binding of `func`.
- * @param {Array} args The arguments to invoke `func` with.
- * @returns {*} Returns the result of `func`.
- */
-function apply(func, thisArg, args) {
-  switch (args.length) {
-    case 0: return func.call(thisArg);
-    case 1: return func.call(thisArg, args[0]);
-    case 2: return func.call(thisArg, args[0], args[1]);
-    case 3: return func.call(thisArg, args[0], args[1], args[2]);
-  }
-  return func.apply(thisArg, args);
-}
-
-module.exports = apply;
-
-
-/***/ }),
-
 /***/ "8604":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32335,77 +31924,10 @@ module.exports = function (S, index, unicode) {
 
 /***/ }),
 
-/***/ "8adb":
-/***/ (function(module, exports) {
-
-/**
- * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
- *
- * @private
- * @param {Object} object The object to query.
- * @param {string} key The key of the property to get.
- * @returns {*} Returns the property value.
- */
-function safeGet(object, key) {
-  if (key === 'constructor' && typeof object[key] === 'function') {
-    return;
-  }
-
-  if (key == '__proto__') {
-    return;
-  }
-
-  return object[key];
-}
-
-module.exports = safeGet;
-
-
-/***/ }),
-
 /***/ "8bbf":
 /***/ (function(module, exports) {
 
 module.exports = require("vue");
-
-/***/ }),
-
-/***/ "8de2":
-/***/ (function(module, exports, __webpack_require__) {
-
-var copyObject = __webpack_require__("8eeb"),
-    keysIn = __webpack_require__("9934");
-
-/**
- * Converts `value` to a plain object flattening inherited enumerable string
- * keyed properties of `value` to own properties of the plain object.
- *
- * @static
- * @memberOf _
- * @since 3.0.0
- * @category Lang
- * @param {*} value The value to convert.
- * @returns {Object} Returns the converted plain object.
- * @example
- *
- * function Foo() {
- *   this.b = 2;
- * }
- *
- * Foo.prototype.c = 3;
- *
- * _.assign({ 'a': 1 }, new Foo);
- * // => { 'a': 1, 'b': 2 }
- *
- * _.assign({ 'a': 1 }, _.toPlainObject(new Foo));
- * // => { 'a': 1, 'b': 2, 'c': 3 }
- */
-function toPlainObject(value) {
-  return copyObject(value, keysIn(value));
-}
-
-module.exports = toPlainObject;
-
 
 /***/ }),
 
@@ -34314,38 +33836,6 @@ $({ target: 'Array', proto: true, forced: FORCED }, {
 
 /***/ }),
 
-/***/ "99cd":
-/***/ (function(module, exports) {
-
-/**
- * Creates a base function for methods like `_.forIn` and `_.forOwn`.
- *
- * @private
- * @param {boolean} [fromRight] Specify iterating from right to left.
- * @returns {Function} Returns the new base function.
- */
-function createBaseFor(fromRight) {
-  return function(object, iteratee, keysFunc) {
-    var index = -1,
-        iterable = Object(object),
-        props = keysFunc(object),
-        length = props.length;
-
-    while (length--) {
-      var key = props[fromRight ? length : ++index];
-      if (iteratee(iterable[key], key, iterable) === false) {
-        break;
-      }
-    }
-    return object;
-  };
-}
-
-module.exports = createBaseFor;
-
-
-/***/ }),
-
 /***/ "99d3":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34381,43 +33871,6 @@ var nodeUtil = (function() {
 module.exports = nodeUtil;
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("62e4")(module)))
-
-/***/ }),
-
-/***/ "9aff":
-/***/ (function(module, exports, __webpack_require__) {
-
-var eq = __webpack_require__("9638"),
-    isArrayLike = __webpack_require__("30c9"),
-    isIndex = __webpack_require__("c098"),
-    isObject = __webpack_require__("1a8c");
-
-/**
- * Checks if the given arguments are from an iteratee call.
- *
- * @private
- * @param {*} value The potential iteratee value argument.
- * @param {*} index The potential iteratee index or key argument.
- * @param {*} object The potential iteratee object argument.
- * @returns {boolean} Returns `true` if the arguments are from an iteratee call,
- *  else `false`.
- */
-function isIterateeCall(value, index, object) {
-  if (!isObject(object)) {
-    return false;
-  }
-  var type = typeof index;
-  if (type == 'number'
-        ? (isArrayLike(object) && isIndex(index, object.length))
-        : (type == 'string' && index in object)
-      ) {
-    return eq(object[index], value);
-  }
-  return false;
-}
-
-module.exports = isIterateeCall;
-
 
 /***/ }),
 
@@ -35497,35 +34950,6 @@ $({ target: 'Array', proto: true, forced: !HAS_SPECIES_SUPPORT || !USES_TO_LENGT
     return A;
   }
 });
-
-
-/***/ }),
-
-/***/ "a454":
-/***/ (function(module, exports, __webpack_require__) {
-
-var constant = __webpack_require__("72f0"),
-    defineProperty = __webpack_require__("3b4a"),
-    identity = __webpack_require__("cd9d");
-
-/**
- * The base implementation of `setToString` without support for hot loop shorting.
- *
- * @private
- * @param {Function} func The function to modify.
- * @param {Function} string The `toString` result.
- * @returns {Function} Returns `func`.
- */
-var baseSetToString = !defineProperty ? identity : function(func, string) {
-  return defineProperty(func, 'toString', {
-    'configurable': true,
-    'enumerable': false,
-    'value': constant(string),
-    'writable': true
-  });
-};
-
-module.exports = baseSetToString;
 
 
 /***/ }),
@@ -38521,33 +37945,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "b760":
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseAssignValue = __webpack_require__("872a"),
-    eq = __webpack_require__("9638");
-
-/**
- * This function is like `assignValue` except that it doesn't assign
- * `undefined` values.
- *
- * @private
- * @param {Object} object The object to modify.
- * @param {string} key The key of the property to assign.
- * @param {*} value The value to assign.
- */
-function assignMergeValue(object, key, value) {
-  if ((value !== undefined && !eq(object[key], value)) ||
-      (value === undefined && !(key in object))) {
-    baseAssignValue(object, key, value);
-  }
-}
-
-module.exports = assignMergeValue;
-
-
-/***/ }),
-
 /***/ "b789":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39307,27 +38704,6 @@ module.exports = isIndex;
 
 /***/ }),
 
-/***/ "c1c9":
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseSetToString = __webpack_require__("a454"),
-    shortOut = __webpack_require__("f3c1");
-
-/**
- * Sets the `toString` method of `func` to return `string`.
- *
- * @private
- * @param {Function} func The function to modify.
- * @param {Function} string The `toString` result.
- * @returns {Function} Returns `func`.
- */
-var setToString = shortOut(baseSetToString);
-
-module.exports = setToString;
-
-
-/***/ }),
-
 /***/ "c2b6":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39945,7 +39321,7 @@ module.exports = cacheHas;
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=034e41ae&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"185d2848-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=4f20830b&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"form__autocomplete",attrs:{"role":"combobox","aria-haspopup":"listbox","aria-owns":("form__autocomplete-items-" + _vm.id),"aria-expanded":_vm.isExpanded}},[(_vm.label)?_c('label',{staticClass:"form__label",attrs:{"id":("form__label-" + _vm.id),"for":("form__autocomplete-" + _vm.id)}},[_vm._v(" "+_vm._s(_vm.label)+" ")]):_vm._e(),_c('input',_vm._b({ref:"input",staticClass:"form__input",attrs:{"id":("form__autocomplete-" + _vm.id),"type":"text","aria-autocomplete":"list","aria-haspopup":"listbox","aria-labelledby":("form__label-" + _vm.id),"aria-activedescendant":_vm.activeDescendant},domProps:{"value":_vm.value},on:{"input":function($event){return _vm.changeValue($event.target.value)},"blur":_vm.blur,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.keyEnter($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }return _vm.blur($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }return _vm.keyUp($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }return _vm.keyDown($event)}]}},'input',_vm.$attrs,false)),(_vm.loading)?_c('div',{staticClass:"form__autocomplete--loading spinner spinner--gray"}):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.results.length),expression:"results.length"}],staticClass:"form__autocomplete-results"},[_c('ul',{staticClass:"form__autocomplete-items",attrs:{"id":("form__autocomplete-items-" + _vm.id),"role":"listbox"}},[_vm._l((_vm.results),function(result,index){return [_vm._t("result",[_c('li',{key:index,ref:("option-" + index),refInFor:true,staticClass:"form__autocomplete-item",class:{
                             'form__autocomplete-item--active':
                                 index === _vm.selectedIndex,
@@ -39953,7 +39329,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=034e41ae&
+// CONCATENATED MODULE: ./src/components/Form/AppAutocompleteInput.vue?vue&type=template&id=4f20830b&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -39971,6 +39347,7 @@ var lodash = __webpack_require__("2ef0");
 
 
 
+//
 //
 //
 //
@@ -40066,6 +39443,11 @@ var lodash = __webpack_require__("2ef0");
       default: function _default() {
         return {};
       }
+    },
+    exactMatch: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data: function data() {
@@ -40143,6 +39525,10 @@ var lodash = __webpack_require__("2ef0");
     },
     setValue: function setValue(result) {
       var value = result[this.display];
+
+      if (this.exactMatch) {
+        value = "\"".concat(value, "\"");
+      }
 
       if (Object.prototype.hasOwnProperty.call(result, "value")) {
         value = result.value;
@@ -42054,46 +41440,6 @@ module.exports = toSource;
 
 /***/ }),
 
-/***/ "dcbe":
-/***/ (function(module, exports, __webpack_require__) {
-
-var isArrayLike = __webpack_require__("30c9"),
-    isObjectLike = __webpack_require__("1310");
-
-/**
- * This method is like `_.isArrayLike` except that it also checks if `value`
- * is an object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an array-like object,
- *  else `false`.
- * @example
- *
- * _.isArrayLikeObject([1, 2, 3]);
- * // => true
- *
- * _.isArrayLikeObject(document.body.children);
- * // => true
- *
- * _.isArrayLikeObject('abc');
- * // => false
- *
- * _.isArrayLikeObject(_.noop);
- * // => false
- */
-function isArrayLikeObject(value) {
-  return isObjectLike(value) && isArrayLike(value);
-}
-
-module.exports = isArrayLikeObject;
-
-
-/***/ }),
-
 /***/ "dd65":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43739,6 +43085,7 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return commuteSearchService; });
 /* unused harmony export TitleCompleteService */
 /* unused harmony export MOCCompleteService */
+/* unused harmony export MOCV2CompleteService */
 /* unused harmony export LocationCompleteService */
 /* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("99af");
 /* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_0__);
@@ -43752,18 +43099,9 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 /* harmony import */ var _Users_jeremy_DE_m8s_dev_microsite_js_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("1da1");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("bc3a");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var lodash_mergeWith__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("2411");
-/* harmony import */ var lodash_mergeWith__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash_mergeWith__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var lodash_toString__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("76dd");
-/* harmony import */ var lodash_toString__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash_toString__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("375a");
-/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var lodash_clone__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("b8ce");
-/* harmony import */ var lodash_clone__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(lodash_clone__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("a74a");
-
-
-
+/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("375a");
+/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("a74a");
 
 
 
@@ -43776,12 +43114,12 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 
 var SOLR = "solr";
 var GOOGLE_TALENT = "google_talent";
-var API_URL = "https://qc-search-api.jobsyn.org/api/v1/";
+var API_URL = "https://qc-search-api.jobsyn.org/api/";
 
 if (Object({"NODE_ENV":"production","BASE_URL":"/"}).GRIDSOME_USE_MINIKUBE === "true") {
-  API_URL = "http://search-api.microsites.test/api/v1";
-} else if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_12__[/* isDevelopment */ "c"])()) {
-  API_URL = "https://prod-search-api.jobsyn.org/api/v1/";
+  API_URL = "http://search-api.microsites.test/api/";
+} else if (!Object(_helpers__WEBPACK_IMPORTED_MODULE_9__[/* isDevelopment */ "c"])()) {
+  API_URL = "https://prod-search-api.jobsyn.org/api/";
 }
 
 function api() {
@@ -43798,7 +43136,7 @@ function api() {
 function apiService(input, config, endpoint) {
   var localHosts = ['localhost', 'minikube'];
 
-  if (!process.isClient || Object(_helpers__WEBPACK_IMPORTED_MODULE_12__[/* isDevelopment */ "c"])() || localHosts.includes(window.location.hostname)) {
+  if (!process.isClient || Object(_helpers__WEBPACK_IMPORTED_MODULE_9__[/* isDevelopment */ "c"])() || localHosts.includes(window.location.hostname)) {
     return api().post(endpoint, {
       data: input,
       config: config
@@ -43812,24 +43150,24 @@ function apiService(input, config, endpoint) {
 }
 
 function searchService(input, config) {
-  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_10___default()(config.source);
-  return apiService(input, config, "".concat(source, "/search"));
+  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8___default()(config.source);
+  return apiService(input, config, "v1/".concat(source, "/search"));
 }
 function jobsSearchService(input, config) {
-  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_10___default()(config.source);
-  return apiService(input, config, "".concat(source, "/jobs"));
+  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8___default()(config.source);
+  return apiService(input, config, "v1/".concat(source, "/jobs"));
 }
 function filtersSearchService(input, config) {
-  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_10___default()(config.source);
-  return apiService(input, config, "".concat(source, "/filters"));
+  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8___default()(config.source);
+  return apiService(input, config, "v1/".concat(source, "/filters"));
 }
 function filterSearchService(input, config) {
   var filter = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
-  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_10___default()(config.source);
-  return apiService(input, config, "".concat(source, "/filter/").concat(filter));
+  var source = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_8___default()(config.source);
+  return apiService(input, config, "v1/".concat(source, "/filter/").concat(filter));
 }
 function commuteSearchService(input, config) {
-  return apiService(input, config, "google-talent/commute");
+  return apiService(input, config, "v1/google-talent/commute");
 }
 
 function autoCompleteService(_x, _x2) {
@@ -43891,7 +43229,7 @@ var TitleCompleteService = /*#__PURE__*/function () {
         q: q
       }, queryParams);
 
-      return autoCompleteService("complete/title", params);
+      return autoCompleteService("v1/complete/title", params);
     }
   }]);
 
@@ -43905,13 +43243,29 @@ var MOCCompleteService = /*#__PURE__*/function () {
   Object(_Users_jeremy_DE_m8s_dev_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(MOCCompleteService, null, [{
     key: "get",
     value: function get(q) {
-      return autoCompleteService("/complete/moc", {
+      return autoCompleteService("v1/complete/moc", {
         q: q
       });
     }
   }]);
 
   return MOCCompleteService;
+}();
+var MOCV2CompleteService = /*#__PURE__*/function () {
+  function MOCV2CompleteService() {
+    Object(_Users_jeremy_DE_m8s_dev_microsite_js_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(this, MOCV2CompleteService);
+  }
+
+  Object(_Users_jeremy_DE_m8s_dev_microsite_js_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"])(MOCV2CompleteService, null, [{
+    key: "get",
+    value: function get(q) {
+      return autoCompleteService("v2/complete/moc", {
+        q: q
+      });
+    }
+  }]);
+
+  return MOCV2CompleteService;
 }();
 var LocationCompleteService = /*#__PURE__*/function () {
   function LocationCompleteService() {
@@ -43927,7 +43281,7 @@ var LocationCompleteService = /*#__PURE__*/function () {
         q: q
       }, queryParams);
 
-      return autoCompleteService("complete/location", params);
+      return autoCompleteService("v1/complete/location", params);
     }
   }]);
 
@@ -44290,50 +43644,6 @@ var PromiseCapability = function (C) {
 module.exports.f = function (C) {
   return new PromiseCapability(C);
 };
-
-
-/***/ }),
-
-/***/ "f3c1":
-/***/ (function(module, exports) {
-
-/** Used to detect hot functions by number of calls within a span of milliseconds. */
-var HOT_COUNT = 800,
-    HOT_SPAN = 16;
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeNow = Date.now;
-
-/**
- * Creates a function that'll short out and invoke `identity` instead
- * of `func` when it's called `HOT_COUNT` or more times in `HOT_SPAN`
- * milliseconds.
- *
- * @private
- * @param {Function} func The function to restrict.
- * @returns {Function} Returns the new shortable function.
- */
-function shortOut(func) {
-  var count = 0,
-      lastCalled = 0;
-
-  return function() {
-    var stamp = nativeNow(),
-        remaining = HOT_SPAN - (stamp - lastCalled);
-
-    lastCalled = stamp;
-    if (remaining > 0) {
-      if (++count >= HOT_COUNT) {
-        return arguments[0];
-      }
-    } else {
-      count = 0;
-    }
-    return func.apply(undefined, arguments);
-  };
-}
-
-module.exports = shortOut;
 
 
 /***/ }),
@@ -44876,55 +44186,6 @@ function cloneArrayBuffer(arrayBuffer) {
 }
 
 module.exports = cloneArrayBuffer;
-
-
-/***/ }),
-
-/***/ "f909":
-/***/ (function(module, exports, __webpack_require__) {
-
-var Stack = __webpack_require__("7e64"),
-    assignMergeValue = __webpack_require__("b760"),
-    baseFor = __webpack_require__("72af"),
-    baseMergeDeep = __webpack_require__("4f50"),
-    isObject = __webpack_require__("1a8c"),
-    keysIn = __webpack_require__("9934"),
-    safeGet = __webpack_require__("8adb");
-
-/**
- * The base implementation of `_.merge` without support for multiple sources.
- *
- * @private
- * @param {Object} object The destination object.
- * @param {Object} source The source object.
- * @param {number} srcIndex The index of `source`.
- * @param {Function} [customizer] The function to customize merged values.
- * @param {Object} [stack] Tracks traversed source values and their merged
- *  counterparts.
- */
-function baseMerge(object, source, srcIndex, customizer, stack) {
-  if (object === source) {
-    return;
-  }
-  baseFor(source, function(srcValue, key) {
-    stack || (stack = new Stack);
-    if (isObject(srcValue)) {
-      baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
-    }
-    else {
-      var newValue = customizer
-        ? customizer(safeGet(object, key), srcValue, (key + ''), object, source, stack)
-        : undefined;
-
-      if (newValue === undefined) {
-        newValue = srcValue;
-      }
-      assignMergeValue(object, key, newValue);
-    }
-  }, keysIn);
-}
-
-module.exports = baseMerge;
 
 
 /***/ }),

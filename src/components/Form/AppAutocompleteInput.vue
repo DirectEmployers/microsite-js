@@ -14,6 +14,7 @@
         >
             {{ label }}
         </label>
+
         <input
             :id="`form__autocomplete-${id}`"
             ref="input"
@@ -96,6 +97,11 @@ export default {
                 return {}
             },
         },
+        exactMatch: {
+            type: Boolean,
+            required: false,
+            default: false,
+        }
     },
     data() {
         return {
@@ -130,6 +136,11 @@ export default {
         },
         setValue(result) {
             let value = result[this.display]
+
+            if (this.exactMatch) {
+                value = `"${value}"`
+            }
+
             if (Object.prototype.hasOwnProperty.call(result, "value")) {
                 value = result.value
             }
