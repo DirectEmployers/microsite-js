@@ -138,7 +138,6 @@ export default {
             let value = result[this.display]
 
             if (this.exactMatch) {
-                // wrap string in quotes query
                 value = `"${value}"`
             }
 
