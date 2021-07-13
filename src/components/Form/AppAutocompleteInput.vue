@@ -15,8 +15,6 @@
             {{ label }}
         </label>
 
-        <slot name="icon"></slot>
-
         <input
             :id="`form__autocomplete-${id}`"
             ref="input"
@@ -39,8 +37,6 @@
             v-if="loading"
             class="form__autocomplete--loading spinner spinner--gray"
         ></div>
-
-        <slot name="addon"></slot>
 
         <div v-show="results.length" class="form__autocomplete-results">
             <ul
@@ -101,6 +97,11 @@ export default {
                 return {}
             },
         },
+        exactMatch: {
+            type: Boolean,
+            required: false,
+            default: false,
+        }
     },
     data() {
         return {
@@ -135,6 +136,12 @@ export default {
         },
         setValue(result) {
             let value = result[this.display]
+
+            if (this.exactMatch) {
+                // wrap string in quotes query
+                value = `"${value}"`
+            }
+
             if (Object.prototype.hasOwnProperty.call(result, "value")) {
                 value = result.value
             }

@@ -9,13 +9,10 @@
                     placeholder="Enter keywords"
                     aria-label="Search by keyword"
                     autocapitalize="off"
+                    :exactMatch="true"
                     :query="TitleCompleteService"
                     :queryConfig="{
-                        source: $siteConfig.source,
                         buids: $siteConfig.buids,
-                        project_id: $siteConfig.project_id,
-                        tenant_uuid: $siteConfig.tenant_uuid,
-                        company_uuids: $siteConfig.company_uuids,
                     }"
                     @setResult="search"
                 />
