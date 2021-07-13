@@ -4,12 +4,10 @@ import {isDevelopment} from "./helpers"
 
 export const SOLR = "solr"
 export const GOOGLE_TALENT = "google_talent"
-let API_URL = "https://qc-search-api.jobsyn.org/api/"
+let API_URL = "https://prod-search-api.jobsyn.org/api/"
 
 if (process.env.GRIDSOME_USE_MINIKUBE === "true") {
     API_URL = "http://search-api.microsites.test/api/"
-} else if (!isDevelopment()) {
-    API_URL = "https://prod-search-api.jobsyn.org/api/"
 }
 
 export function api() {
