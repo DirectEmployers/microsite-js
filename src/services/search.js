@@ -1,21 +1,15 @@
 import axios from "axios"
-
-import mergeWith from "lodash/mergeWith"
-
-import toString from "lodash/toString"
 import kebabCase from "lodash/kebabCase"
-import clone from "lodash/clone"
-
-import {isDevelopment, blank, humanFriendlyLocation, slugify} from "./helpers"
+import {isDevelopment} from "./helpers"
 
 export const SOLR = "solr"
 export const GOOGLE_TALENT = "google_talent"
-let API_URL = "https://qc-search-api.jobsyn.org/api/v1/"
+let API_URL = "https://qc-search-api.jobsyn.org/api/"
 
 if (process.env.GRIDSOME_USE_MINIKUBE === "true") {
-    API_URL = "http://search-api.microsites.test/api/v1"
+    API_URL = "http://search-api.microsites.test/api/"
 } else if (!isDevelopment()) {
-    API_URL = "https://prod-search-api.jobsyn.org/api/v1/"
+    API_URL = "https://prod-search-api.jobsyn.org/api/"
 }
 
 export function api() {
@@ -30,14 +24,14 @@ export function api() {
 }
 
 function apiService(input, config, endpoint) {
-    let local = isDevelopment() || process.env.GRIDSOME_USE_MINIKUBE
-
-    if(local){
-        input.origin = config.s3Folder
-    }else if (process.isClient) {
-        input.origin = window.location.hostname
+    const localHosts = ['localhost', 'minikube']
+    if (!process.isClient || isDevelopment() || localHosts.includes(window.location.hostname)) {
+        return api().post(endpoint, {
+            data: input,
+            config: config,
+        })
     }
-
+    input.origin = window.location.hostname
     return api().get(endpoint, {
         params: input,
     })
@@ -45,26 +39,26 @@ function apiService(input, config, endpoint) {
 
 export function searchService(input, config) {
     const source = kebabCase(config.source)
-    return apiService(input, config, `${source}/search`)
+    return apiService(input, config, `v1/${source}/search`)
 }
 
 export function jobsSearchService(input, config) {
     const source = kebabCase(config.source)
-    return apiService(input, config, `${source}/jobs`)
+    return apiService(input, config, `v1/${source}/jobs`)
 }
 
 export function filtersSearchService(input, config) {
     const source = kebabCase(config.source)
-    return apiService(input, config, `${source}/filters`)
+    return apiService(input, config, `v1/${source}/filters`)
 }
 
 export function filterSearchService(input, config, filter="") {
     const source = kebabCase(config.source)
-    return apiService(input, config, `${source}/filter/${filter}`)
+    return apiService(input, config, `v1/${source}/filter/${filter}`)
 }
 
 export function commuteSearchService(input, config) {
-    return apiService(input, config, "google-talent/commute")
+    return apiService(input, config, "v1/google-talent/commute")
 }
 
 async function autoCompleteService(endpoint, params) {
@@ -87,13 +81,19 @@ export class TitleCompleteService {
             q,
             ...queryParams,
         }
-        return autoCompleteService("complete/title", params)
+        return autoCompleteService("v1/complete/title", params)
     }
 }
 
 export class MOCCompleteService {
     static get(q) {
-        return autoCompleteService("/complete/moc", {q})
+        return autoCompleteService("v1/complete/moc", {q})
+    }
+}
+
+export class MOCV2CompleteService {
+    static get(q) {
+        return autoCompleteService("v2/complete/moc", {q})
     }
 }
 
@@ -103,6 +103,6 @@ export class LocationCompleteService {
             q,
             ...queryParams,
         }
-        return autoCompleteService("complete/location", params)
+        return autoCompleteService("v1/complete/location", params)
     }
 }
