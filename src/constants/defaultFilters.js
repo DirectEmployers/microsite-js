@@ -15,6 +15,10 @@ const defaultFilters = [
         name:'company',
         display:'companies'
     },
+    {
+        name: "militaybase",
+        display: "militay-bases"
+    },
 ]
 
 module.exports = defaultFilters

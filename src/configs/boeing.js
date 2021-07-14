@@ -19,6 +19,10 @@ const config = {
             name: "moc",
             display: "MOC",
         },
+        {
+            name: "militarybase",
+            display: "Military Bases",
+        },
         // {
         //     name: "company",
         //     display: "Company",
@@ -60,7 +64,7 @@ const config = {
         },
         {
             name: "location",
-            key: "country_short",
+            key: "country",
             display: "Country",
         },
         {

@@ -1,7 +1,11 @@
 const config = {
-    buids: [],
+    buids: [48224],
     source: "solr",
     filters:[
+        {
+            name: "moc",
+            display: "MOC",
+        },
         {
             key: "militarybases",
             display: "Military Bases",

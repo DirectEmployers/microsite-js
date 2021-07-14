@@ -59,6 +59,10 @@ export function commuteSearchService(input, config) {
     return apiService(input, config, "v1/google-talent/commute")
 }
 
+export function militaryMapService(input, config) {
+    return apiService(input, config, "v1/map/military")
+}
+
 async function autoCompleteService(endpoint, params) {
     try {
         const response = await api().get(endpoint, {
